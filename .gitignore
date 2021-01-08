@@ -2,7 +2,13 @@
 __3D-World
 __Notes
 __Sound-Files
-__Sprites
+__Sprites/Menu
+__Sprites/NPCs
+__Sprites/Obsolete
+__Sprites/Wiki
+
+# Sprites
+__Sprites/Enemies/*old*
 
 # Ignore standard dev kit files
 Binaries
@@ -23,3 +29,4 @@ Development/Src/WinDrv
 
 # Ignore links to legacy installers
 *.lnk
+*trash*

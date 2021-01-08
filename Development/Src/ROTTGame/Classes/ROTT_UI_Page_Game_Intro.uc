@@ -204,7 +204,7 @@ defaultProperties
 		alignX=CENTER
 		alignY=TOP
 		fontStyle=DEFAULT_LARGE_TAN
-		labelText="Bramble Gate Studios will be recruiting !"
+		labelText="Bramble Gate Studios will be recruiting now!"
 	end object
 	componentList.add(P2_Label)
 	begin object class=UI_Label Name=P3_Label
