@@ -11,9 +11,9 @@ ROTT attempts to be a 'pot' that any ideas may be stirred into.  In our efforts 
 ## IDE Template ##
 Here are some of the recommended highlight settings for writing code in unrealscript. <br />
 
-__Instruction Words__: <pre>super self begin end none foreach until </pre>
-__Typewords__: <pre>byte string protectedwrite privatewrite event exec delegate defaultProperties function object final editinline 
-instanced local abstract var optional extends out structdefaultproperties coerce simulated</pre>
+__Instruction Words__: super self begin end none foreach until <br />
+__Typewords__: byte string protectedwrite privatewrite event exec delegate defaultProperties function object final editinline 
+instanced local abstract var optional extends out structdefaultproperties coerce simulated
 
 These settings help with viewing some of the quirky parts of unrealscripts "Default Properties", analagous to the concept of constructors.
 
