@@ -54,4 +54,4 @@ __Create the commit package (-m for in prompt message)__
 <pre>git commit -m</pre>
 
 __Push the changes to github__
-<pre>git push origin <branch (e.g. master)></pre>
+<pre>git push origin \<branch (e.g. master)\></pre>
