@@ -11,7 +11,7 @@ ROTT attempts to be a 'pot' that any ideas may be stirred into.  In our efforts 
 ## IDE Template ##
 Here are some of the recommended highlight settings for writing code in unrealscript. <br />
 
-__Instruction Words__: <pre>super self begin end none foreach until </pre><br />
+__Instruction Words__: <pre>super self begin end none foreach until </pre>
 __Typewords__: <pre>byte string protectedwrite privatewrite event exec delegate defaultProperties function object final editinline 
 instanced local abstract var optional extends out structdefaultproperties coerce simulated</pre>
 
