@@ -1,0 +1,166 @@
+/*=============================================================================
+ * ROTT_UI_Displayer_Cost
+ *
+ * Author: Otay
+ * Bramble Gate Studios (All rights reserved)
+ *
+ * Used to display cost for a single currency.
+ *===========================================================================*/
+
+class ROTT_UI_Displayer_Cost extends ROTT_UI_Displayer;
+
+// Display settings
+var privatewrite class<ROTT_Inventory_Item> currencyType;
+var privatewrite string costDescriptionText;
+var public int costValue;
+
+// Item graphics
+var private ROTT_UI_Displayer_Item itemGraphics;
+
+// Cost label
+var private UI_Label costDescription;
+var private UI_Label costQuantity;
+
+/*============================================================================= 
+ * initializeComponent
+ *
+ * This is called as the UI is loaded.  Our initial scene is drawn here.
+ *===========================================================================*/
+public function initializeComponent(optional string newTag = "") {
+  super.initializeComponent(newTag);
+  
+  // Internal references
+  itemGraphics = ROTT_UI_Displayer_Item(findComp("Player_Inventory_Slot"));
+  costDescription = findLabel("Cost_Description_Label");
+  costQuantity = findLabel("Cost_Quantity");
+}
+
+/*=============================================================================
+ * elapseTimer()
+ *
+ * Time is passed to non-actors through the scene that contains them
+ *===========================================================================*/
+public function elapseTimer(float deltaTime, float gameSpeedOverride) {
+  super.elapseTimer(deltaTime, gameSpeedOverride);
+  
+  
+}
+
+/*=============================================================================
+ * refresh()
+ *
+ * Called to update the gold and gems
+ *===========================================================================*/
+public function refresh() {
+  // Set the cost description
+  costDescription.setText(costDescriptionText);
+  
+  // Set the cost value label
+  costQuantity.setText(costValue);
+  
+  // Set font colors for insufficient funds
+  if (gameInfo.getInventoryCount(currencyType) < costValue) {
+    costQuantity.setFont(DEFAULT_LARGE_RED);
+  } else { 
+    costQuantity.setFont(DEFAULT_LARGE_WHITE);
+  }
+  
+  // Show player inventory
+  refreshItem();
+  
+}
+
+/*============================================================================= 
+ * refreshItem()
+ *
+ * Called during a refresh to update item displayer from inventory info
+ *===========================================================================*/
+private function refreshItem() {
+  local ROTT_Inventory_Item itemInfo;
+  
+  // Setup an item
+  itemInfo = new currencyType;
+  itemInfo.initialize();
+  
+  // Set quantity from profile
+  itemInfo.setQuantity(gameInfo.getInventoryCount(currencyType));
+  
+  // Show item in displayer
+  itemGraphics.updateDisplay(itemInfo);
+}
+
+/*=============================================================================
+ * Default Properties
+ *===========================================================================*/
+defaultProperties
+{
+  bDrawRelative=true
+  
+  // Displayer info
+  currencyType=class'ROTT_Inventory_Item_Gold'
+  costDescriptionText="Gold cost per point:"
+  costValue=100
+  
+  // Textures
+	begin object class=UI_Texture_Info Name=Inventory_Slot_Texture
+    componentTextures.add(Texture2D'GUI.Cost_Inventory_Slot')
+  end object
+  
+  // Inventory slot background
+  begin object class=UI_Sprite Name=Inventory_Slot_Sprite
+		tag="Inventory_Slot_Sprite"
+		posX=431
+		posY=-10
+    images(0)=Inventory_Slot_Texture
+	end object
+	componentList.add(Inventory_Slot_Sprite)
+	
+  // Inventory slot
+  begin object class=ROTT_UI_Displayer_Item Name=Player_Inventory_Slot
+		tag="Player_Inventory_Slot"
+    bShowIfSingular=true
+		posX=443
+		posY=0
+	end object
+	componentList.add(Player_Inventory_Slot)
+	
+  // Cost description label
+	begin object class=UI_Label Name=Cost_Description_Label
+		tag="Cost_Description_Label"
+		posX=144
+		posY=34
+		posYEnd=64
+    fontStyle=DEFAULT_SMALL_TAN
+		AlignX=LEFT
+		AlignY=CENTER
+		labelText="Gold cost per point:"
+	end object
+	componentList.add(Cost_Description_Label)
+	
+  // Cost display value
+	begin object class=UI_Label Name=Cost_Quantity
+		tag="Cost_Quantity"
+		posX=174
+		posY=86
+		posYEnd=116
+		AlignX=LEFT
+		AlignY=CENTER
+		labelText="100"
+	end object
+	componentList.add(Cost_Quantity)
+	
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+

@@ -1,0 +1,25 @@
+# Ignore until assets are cleaned up
+__3D-World
+__Notes
+__Sound-Files
+__Sprites
+
+# Ignore standard dev kit files
+Binaries
+Engine
+UDKGame
+Development/Flash
+Development/Src/Core
+Development/Src/Engine
+Development/Src/GameFramework
+Development/Src/GFx*
+Development/Src/IpDrv
+Development/Src/MyMod
+Development/Src/Online*
+Development/Src/Substance*
+Development/Src/UDK*
+Development/Src/UnrealEd
+Development/Src/WinDrv
+
+# Ignore links to legacy installers
+*.lnk

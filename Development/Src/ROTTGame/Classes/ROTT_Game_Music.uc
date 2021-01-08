@@ -1,0 +1,386 @@
+/*=============================================================================
+ * ROTT_Game_Music
+ *
+ * Author: Otay
+ * Bramble Gate Studios (All rights reserved)
+ *
+ * Description: This object may be instantiated to play songs from the
+ * Realm of the Tempest original soundtrack
+ *
+ * Each world has a default soundtrack, and may override that soundtrack with
+ * other miscellaneous songs.
+ *===========================================================================*/
+
+class ROTT_Game_Music extends ROTTObject
+dependsOn(ROTT_Game_Info);
+
+// Default Soundtracks for each World
+var private AudioComponent worldSoundtracks[MapNameEnum];
+
+// Soundtracks that interrupt default music
+enum OverrideOSTs {
+  // Towns
+  MUSIC_VICTORY,
+  MUSIC_CHARACTER_CREATION
+};
+
+// Soundtracks that may override default music
+var private AudioComponent overrideSoundtracks[OverrideOSTs];
+
+// Active themes
+var private AudioComponent worldMusic;
+var private AudioComponent overrideMusic;
+
+// Music delay timers
+var public ROTTTimer overrideDelay; 
+
+// Queue'd Fade controller
+var privatewrite float fadeInTime; 
+
+/*=============================================================================
+ * initialize()
+ *
+ * This should be called as soon as the object is created
+ *===========================================================================*/
+public function initialize() {
+  linkReferences();
+}
+
+/*=============================================================================
+ * setVolume()
+ *
+ * Changes the music volume.
+ *===========================================================================*/
+public function setVolume(float newVolume) {
+  // Store the option information
+  gameInfo.optionsCookie.musicVolume = newVolume;
+  
+  // Change the music
+  worldMusic.adjustVolume(0, newVolume);
+  if (overrideMusic != none) overrideMusic.adjustVolume(0, newVolume);
+}
+
+/*=============================================================================
+ * loadMusic()
+ *
+ * This function assigns OST selections by map name, and optionally sets fade
+ * parameters.
+ *===========================================================================*/
+public function loadMusic(MapNameEnum map) {
+  // Assign soundtrack from map enumeration
+  worldMusic = worldSoundtracks[map];
+  
+  // Fade in settings for the given map
+  switch (map) {
+    case MAP_VALIMOR_CITADEL:
+    case MAP_KALROTH_WILDERNESS:
+    case MAP_VALIMOR_WILDERNESS:
+      fadeIn(4);
+      break;
+      
+    case MAP_ETZLAND_OUTSKIRTS:
+      fadeIn(8);
+      break;
+      
+    default:
+      worldMusic.stop();
+      worldMusic.adjustVolume(0, 1); 
+      worldMusic.play();
+      setVolume(getMusicVolume());
+      break;
+    
+  }
+}
+
+/*=============================================================================
+ * overrideSoundtrack()
+ *
+ * This function overrides the active theme with a song that isnt assigned to
+ * the map by default.
+ *===========================================================================*/
+public function overrideSoundtrack
+(
+  OverrideOSTs songSelection, 
+  optional float delay = 0,
+  optional float fadeTime = 0
+) 
+{
+  // Prepare song for play
+  overrideMusic = overrideSoundtracks[songSelection];
+  overrideMusic.stop();
+  fadeInTime = fadeTime;
+  
+  if (delay == 0) {
+    // Play immediate
+    overrideMusic.play();
+    overrideMusic.adjustVolume(0, 1); ///getMusicVolume()
+    setVolume(getMusicVolume());
+  } else {
+    // Play delay
+    if (overrideDelay != none) overrideDelay.destroy();
+    overrideDelay = gameInfo.spawn(class'ROTTTimer');
+    overrideDelay.makeTimer(delay, LOOP_OFF, overridePlay);
+  }
+}
+
+/*=============================================================================
+ * fadeIn()
+ *
+ * Fades in the active theme music
+ *
+ * Parameters: time - Length in seconds for fade duration
+ *===========================================================================*/
+public function fadeIn(float time, optional bool targetOverride = false) {
+  if (targetOverride) { 
+    overrideMusic.stop();
+    overrideMusic.fadeIn(time, 1);
+    setVolume(getMusicVolume());
+  } else {
+    worldMusic.stop();
+    worldMusic.fadeIn(time, 1);
+    setVolume(getMusicVolume());
+  }
+}
+
+/*=============================================================================
+ * fadeOut()
+ *
+ * Description: Fades out active theme music. 
+ *
+ * Parameters: time - Length in seconds for fade duration
+ *===========================================================================*/
+public function fadeOut(int time, optional bool targetOverride = false) {
+  if (targetOverride) {
+    overrideMusic.fadein(time, 0);
+  } else {
+    worldMusic.fadeOut(time, 0);
+  }
+}
+
+/*=============================================================================
+ * getMusicVolume()
+ *
+ * Description: Retrieves music volume from player profile
+ *===========================================================================*/
+public function float getMusicVolume() {
+  return gameInfo.optionsCookie.musicVolume;
+}
+
+/*=============================================================================
+ * overridePlay()
+ *
+ * Called by a timer to play override music after a delay
+ *===========================================================================*/
+private function overridePlay() {
+  // Play music
+  if (fadeInTime == 0) {
+    overrideMusic.play();
+    overrideMusic.adjustVolume(0, 1); ///getMusicVolume()
+    setVolume(getMusicVolume());
+  } else {
+    fadeIn(fadeInTime, true);
+  }
+  
+  // Remove timer
+  overrideDelay.destroy();
+}
+
+/*=============================================================================
+ * Default Properties
+ *===========================================================================*/
+defaultProperties
+{
+  /** Original Soundtracks (Engine ties) **/
+  // Tiny Mirror
+  begin object class=AudioComponent Name=Tiny_Mirror_OST_Cue
+    SoundCue=SoundCue'ROTT_Music_Disc_2.ROTT-Cue-Tiny_Mirror'
+  end object
+  
+  // Violet Cape
+  begin object class=AudioComponent Name=The_Violet_Cape_OST_Cue
+    SoundCue=SoundCue'ROTT_Music_Disc_2.ROTT-Cue-The_Violet_Cape'
+  end object
+  
+  // Swing of the Meadow
+  begin object class=AudioComponent Name=Swing_Of_The_Meadow_OST_Cue
+    SoundCue=SoundCue'ROTT_Music_Disc_1.ROTT-Cue-Swing_Of_The_Meadow'
+  end object
+  
+  // Ethereal Tide
+  begin object class=AudioComponent Name=Ethereal_Tide_OST_Cue
+    SoundCue=SoundCue'ROTT_Music_Disc_1.ROTT-Cue-Ethereal_Tide'
+  end object
+  
+  // Lachyrmal Static
+  begin object class=AudioComponent Name=Lachrymal_Static_OST_Cue
+    SoundCue=SoundCue'ROTT_Music_Disc_1.ROTT-Cue-Lachrymal_Static'
+  end object
+  
+  // Tame Haze
+  begin object class=AudioComponent Name=Tame_Haze_OST_Cue
+    SoundCue=SoundCue'ROTT_Music_Disc_1.ROTT-Cue-Tame_Haze'
+  end object
+  
+  // Concomitance
+  begin object class=AudioComponent Name=Concomitance_OST_Cue
+    SoundCue=SoundCue'ROTT_Music_Disc_2.ROTT-Cue-Concomitance'
+  end object
+  
+  // Unicursal Immolation
+  begin object class=AudioComponent Name=Unicursal_Immolation_OST_Cue
+    SoundCue=SoundCue'ROTT_Music_Disc_2.ROTT-Cue-Unicursal_Immolation'
+  end object
+  
+  // Stone Soaked Shrine
+  begin object class=AudioComponent Name=Stone_Soaked_Shrine_OST_Cue
+    SoundCue=SoundCue'ROTT_Music_Disc_1.ROTT-Cue-Stone_Soaked_Shrine'
+  end object
+  
+  // Cult of Dreamfire
+  begin object class=AudioComponent Name=Cult_of_Dreamfire_OST_Cue
+    SoundCue=SoundCue'ROTT_Music_Disc_1.ROTT-Cue-Cult_of_Dreamfire'
+  end object
+  
+  // Weak Prayer
+  begin object class=AudioComponent Name=Weak_Prayer_OST_Cue
+    SoundCue=SoundCue'ROTT_Music_Disc_2.ROTT-Cue-Weak_Prayer'
+  end object
+  
+  // Weak Prayer
+  begin object class=AudioComponent Name=Of_The_Earth_OST_Cue
+    SoundCue=SoundCue'ROTT_Music_Disc_2.ROTT-Cue-Of_The_Earth'
+  end object
+  
+  // Sorrow Sky
+  begin object class=AudioComponent Name=Sorrow_Sky_OST_Cue
+    SoundCue=SoundCue'ROTT_Music_Disc_2.ROTT-Cue-Sorrow_Sky'
+  end object
+  
+  // The Path Within
+  begin object class=AudioComponent Name=The_Path_Within_OST_Cue
+    SoundCue=SoundCue'ROTT_Music_Disc_3.ROTT-Cue-The_Path_Within'
+  end object
+
+  // Neutrality The Toy
+  begin object class=AudioComponent Name=Neutrality_The_Toy_OST_Cue
+    SoundCue=SoundCue'ROTT_Music_Disc_3.ROTT-Cue-Neutrality_The_Toy'
+  end object
+  
+  // The Sky is a Mountain Tamer
+  begin object class=AudioComponent Name=The_Sky_is_a_Mountain_Tamer_OST_Cue
+    SoundCue=SoundCue'ROTT_Music_Disc_3.ROTT-Cue-The_Sky_is_a_Mountain_Tamer'
+  end object
+  
+  // A Storm is a Serpent
+  begin object class=AudioComponent Name=A_Storm_is_a_Serpent_OST_Cue
+    SoundCue=SoundCue'ROTT_Music_Disc_2.ROTT-Cue-A_Storm_is_a_Serpent'
+  end object
+  
+  // Heights
+  begin object class=AudioComponent Name=Heights_OST_Cue
+    SoundCue=SoundCue'ROTT_Music_Disc_3.ROTT-Cue-Heights'
+  end object
+  
+  // Live For Never
+  begin object class=AudioComponent Name=Live_for_Never_OST_Cue
+    SoundCue=SoundCue'ROTT_Music_Disc_1.ROTT-Cue-Live_for_Never'
+  end object
+  
+  // The Missive
+  begin object class=AudioComponent Name=The_Missive_OST_Cue
+    SoundCue=SoundCue'ROTT_Music_Disc_1.ROTT-Cue-The_Missive'
+  end object
+  
+  // OMEV AGRE
+  begin object class=AudioComponent Name=OMEV_AGRE_OST_Cue
+    SoundCue=SoundCue'ROTT_Music_Disc_1.ROTT-Cue-OMEV_AGRE'
+  end object
+  
+  // Lexical Toil
+  begin object class=AudioComponent Name=Lexical_Toil_OST_Cue
+    SoundCue=SoundCue'ROTT_Music_Disc_3.ROTT-Cue-Lexical_Toil'
+  end object
+  
+  // Placeholder music
+  begin object class=AudioComponent Name=Placeholder_OST_Cue
+    SoundCue=SoundCue'ROTT_Sound_Effects.ROTT-SFXCUE-Ambient_Ominous'
+  end object
+  
+  /** Default world music **/
+  // UI Scenes
+  worldSoundtracks[MAP_UI_TITLE_MENU]=Live_for_Never_OST_Cue
+  ///MAP_UI_CREDITS,
+  worldSoundtracks[MAP_UI_GAME_OVER]=OMEV_AGRE_OST_Cue
+  
+  // Talonovia
+  worldSoundtracks[MAP_TALONOVIA_TOWN]=Tiny_Mirror_OST_Cue
+  worldSoundtracks[MAP_TALONOVIA_SHRINE]=Stone_Soaked_Shrine_OST_Cue
+  worldSoundtracks[MAP_TALONOVIA_BACKLANDS]=Of_The_Earth_OST_Cue
+  worldSoundtracks[MAP_TALONOVIA_OUTSKIRTS]=Heights_OST_Cue
+  
+  // Rhunia
+  worldSoundtracks[MAP_RHUNIA_CITADEL]=Ethereal_Tide_OST_Cue
+  worldSoundtracks[MAP_RHUNIA_WILDERNESS]=The_Violet_Cape_OST_Cue
+  worldSoundtracks[MAP_RHUNIA_BACKLANDS]=Placeholder_OST_Cue
+  worldSoundtracks[MAP_RHUNIA_OUTSKIRTS]=Sorrow_Sky_OST_Cue
+  
+  // Etzland
+  worldSoundtracks[MAP_ETZLAND_CITADEL]=Unicursal_Immolation_OST_Cue
+  worldSoundtracks[MAP_ETZLAND_WILDERNESS]=Swing_Of_The_Meadow_OST_Cue
+  worldSoundtracks[MAP_ETZLAND_BACKLANDS]=Placeholder_OST_Cue
+  worldSoundtracks[MAP_ETZLAND_OUTSKIRTS]=The_Path_Within_OST_Cue
+  
+  // Haxlyn
+  worldSoundtracks[MAP_HAXLYN_CITADEL]=Weak_Prayer_OST_Cue
+  worldSoundtracks[MAP_HAXLYN_WILDERNESS]=Concomitance_OST_Cue
+  worldSoundtracks[MAP_HAXLYN_BACKLANDS]=Placeholder_OST_Cue // 11 sins with your teeth
+  worldSoundtracks[MAP_HAXLYN_OUTSKIRTS]=A_Storm_is_a_Serpent_OST_Cue
+  
+  // Valimor
+  worldSoundtracks[MAP_VALIMOR_CITADEL]=Cult_of_Dreamfire_OST_Cue
+  worldSoundtracks[MAP_VALIMOR_WILDERNESS]=Lexical_Toil_OST_Cue
+  worldSoundtracks[MAP_VALIMOR_BACKLANDS]=Placeholder_OST_Cue // Mira Monstrosity ?
+  worldSoundtracks[MAP_VALIMOR_OUTSKIRTS]=Placeholder_OST_Cue
+  
+  // Kalroth
+  worldSoundtracks[MAP_KALROTH_CITADEL]=Tame_Haze_OST_Cue /// Gears and gadgets, or something
+  worldSoundtracks[MAP_KALROTH_WILDERNESS]=Tame_Haze_OST_Cue
+  worldSoundtracks[MAP_KALROTH_BACKLANDS]=Placeholder_OST_Cue // Basalt sanctuary?
+  worldSoundtracks[MAP_KALROTH_OUTSKIRTS]=Placeholder_OST_Cue
+  
+  // Caves
+  worldSoundtracks[MAP_KYRIN_CAVERN]=Lachrymal_Static_OST_Cue
+  
+  // Misc: The land between the tempests
+  worldSoundtracks[MAP_AKSALOM_SKYGATE]=The_Sky_is_a_Mountain_Tamer_OST_Cue
+  worldSoundtracks[MAP_AKSALOM_GROVE]=Placeholder_OST_Cue
+  worldSoundtracks[MAP_AKSALOM_STORMLANDS]=Placeholder_OST_Cue
+  worldSoundtracks[MAP_MYSTERY_PATH]=Placeholder_OST_Cue
+  worldSoundtracks[MAP_MOUNTAIN_SHRINE]=Neutrality_The_Toy_OST_Cue
+  
+  // Override Soundtracks
+  overrideSoundtracks[MUSIC_CHARACTER_CREATION]=The_Missive_OST_Cue;
+  
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
