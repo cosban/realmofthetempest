@@ -12,7 +12,8 @@ ROTT attempts to be a 'pot' that any ideas may be stirred into.  In our efforts 
 Here are some of the recommended highlight settings for writing code in unrealscript. <br />
 
 __Instruction Words__: super self begin end none foreach until <br />
-__Typewords__: byte string protectedwrite privatewrite event exec delegate defaultProperties function object final editinline instanced local abstract var optional extends out structdefaultproperties coerce simulated
+__Typewords__: byte string protectedwrite privatewrite event exec delegate defaultProperties function object final editinline 
+instanced local abstract var optional extends out structdefaultproperties coerce simulated
 
 These settings help with viewing some of the quirky parts of unrealscripts "Default Properties", analagous to the concept of constructors.
 
@@ -40,4 +41,17 @@ x = x + 1;
 
 // Keep count of the fish
 fishCounter.count();
-</pre>
+</pre><br/ >
+
+## Git commands ##
+__To see changes in git (-p for prompt)__
+<pre>git add -p</pre>
+
+__View stage changes__
+<pre>git status</pre>
+
+__Create the commit package (-m for in prompt message)__
+<pre>git commit -m</pre>
+
+__Push the changes to github__
+<pre>git push origin <branch (e.g. master)></pre>
