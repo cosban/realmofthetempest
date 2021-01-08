@@ -40,4 +40,17 @@ x = x + 1;
 
 // Keep count of the fish
 fishCounter.count();
-</pre>
+</pre><br/ >
+
+## Git commands ##
+>__To see changes in git (-p for prompt)__
+<pre>git add -p</pre>
+
+>__View stage changes__
+<pre>git status</pre>
+
+>__Create the commit package (-m for in prompt message)__
+<pre>git commit -m</pre>
+
+>__Push the changes to github__
+<pre>git push origin <branch (e.g. master)></pre>
