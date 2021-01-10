@@ -159,7 +159,8 @@ function bool onInputKey
 /*============================================================================= 
  * updateSelection()
  *
- * This function is the interface the selectors use to send their updates to us
+ * This function is the interface the selectors use to send their updates out.
+ * Return value used for sound effects.
  *===========================================================================*/
 public function bool updateSelection
 (
@@ -179,7 +180,9 @@ public function bool updateSelection
         return true;
       } else {
         // Remove selection
-        parentScene.removeObjectSelection(selectionType);
+        if (gameInfo.playerProfile.partySystem.getParty(selectionIndex) == none) {
+          parentScene.removeObjectSelection(selectionType);
+        }
       }
       break;
     case class'ROTT_Combat_Hero':
@@ -189,7 +192,9 @@ public function bool updateSelection
         return true;
       } else {
         // Remove selection
-        parentScene.removeObjectSelection(selectionType);
+        if (gameInfo.getActiveParty().getHero(selectionIndex) == none) {
+          parentScene.removeObjectSelection(selectionType);
+        }
       }
       break;
   }

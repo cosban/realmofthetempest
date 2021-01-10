@@ -77,6 +77,7 @@ public function bool updateDisplay() {
   
   // Health mask
   healthGlobe.setVerticalMask(globeRatio);
+  discCap.setEnabled (!(globeRatio > 0.92));
   
   // Scaling horizontal
   r = 56;
@@ -116,6 +117,7 @@ defaultProperties
   end object
 	begin object class=UI_Texture_Info Name=Health_Globe
     componentTextures.add(Texture2D'GUI.Health_Globe')
+    bFlipVerticalMask=true
   end object
 	begin object class=UI_Texture_Info Name=Health_Globe_Cover
     componentTextures.add(Texture2D'GUI.Health_Globe_Cover')

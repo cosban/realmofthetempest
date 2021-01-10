@@ -9,6 +9,8 @@
  
 class ROTT_UI_Page_Game_Intro extends ROTT_UI_Page;
 
+const BLACK_BAR_COUNT = 60;
+
 // Track time this page has been up
 var private float elapsedTime;
 
@@ -17,7 +19,7 @@ var private float elapsedEffectTime;
 var private bool bTransitionOut;
 
 // Internal references
-var private UI_Sprite blackBars[60];
+var private UI_Sprite blackBars[BLACK_BAR_COUNT];
 
 /*============================================================================= 
  * initializeComponent
@@ -26,21 +28,30 @@ var private UI_Sprite blackBars[60];
  *===========================================================================*/
 public function initializeComponent(optional string newTag = "") {
   local int i;
+  local UI_Texture_Info texture;
+  texture = new class'UI_Texture_Info';
+  texture.componentTextures.addItem(Texture2D'GUI.Stat_Tube_Black_Cover');
   
   super.initializeComponent(newTag);
   
   // Column iteration
-  for (i = 0; i < 60; i++) {
+  for (i = 0; i < BLACK_BAR_COUNT; i++) {
     // Create sprites
     blackBars[i] = new class'UI_Sprite';
     blackBars[i].images.addItem(new class'UI_Texture_Info');
-    blackBars[i].addTexture(Texture2D'GUI.Black_Square');
+    blackBars[i].modifyTexture(texture);
     componentList.addItem(blackBars[i]);
     blackBars[i].bMandatoryScaleToWindow = true;
     
-    // Set position
-    blackBars[i].updatePosition(0, i * 15, 1440, (i+1) * 15);
+    // Position black bar sprites across the screen for retro fading effect
+    blackBars[i].updatePosition(
+      0, 
+      i * NATIVE_HEIGHT / BLACK_BAR_COUNT, 
+      NATIVE_WIDTH, 
+      (i+1) * NATIVE_HEIGHT / BLACK_BAR_COUNT
+    );
     blackBars[i].setEnabled(false);
+    blackBars[i].drawLayer=TOP_LAYER;
     blackBars[i].initializeComponent();
   }
 }
@@ -88,8 +99,6 @@ event onFocusMenu() {
  * Ticks every frame.  Used to check for joystick navigation.
  *===========================================================================*/
 public function elapseTimers(float deltaTime) {
-  local int i;
-  
   super.elapseTimers(deltaTime);
   
   // Track time that this page has been up
@@ -97,14 +106,14 @@ public function elapseTimers(float deltaTime) {
   
   // Column iteration
   if (bTransitionOut) {
+    // Track elapsed time for the fading black bars effect
     elapsedEffectTime += deltaTime;
-    for (i = 0; i < 60; i++) {
-      blackBars[i].setEnabled(true);
-      blackBars[i].setVerticalMask(elapsedEffectTime);
-    }
+    
+    // Adjust the vertical mask over time
+    blackBars[0].setVerticalMask(elapsedEffectTime * 1.2);
     
     // Start new game after effect
-    if (elapsedEffectTime > 1.5) {
+    if (elapsedEffectTime > 1.35) {
       // Set up a new player profile
       gameInfo.newGameSetup();
       
@@ -135,7 +144,7 @@ protected function startTransitionOut() {
   local int i;
   
   // Column iteration
-  for (i = 0; i < 60; i++) {
+  for (i = 0; i < BLACK_BAR_COUNT; i++) {
     blackBars[i].setEnabled(true);
   }
   

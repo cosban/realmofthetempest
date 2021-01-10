@@ -100,6 +100,7 @@ defaultProperties
   end object
 	begin object class=UI_Texture_Info Name=Mana_Globe
     componentTextures.add(Texture2D'GUI.Mana_Globe')
+    bFlipVerticalMask=true
   end object
 	begin object class=UI_Texture_Info Name=Mana_Globe_Cover
     componentTextures.add(Texture2D'GUI.Mana_Globe_Cover')

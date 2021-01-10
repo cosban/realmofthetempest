@@ -30,3 +30,4 @@ Development/Src/WinDrv
 # Ignore links to legacy installers
 *.lnk
 *trash*
+ROTT-Alpha-*

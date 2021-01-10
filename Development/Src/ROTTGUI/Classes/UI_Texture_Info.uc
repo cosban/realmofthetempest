@@ -31,6 +31,9 @@ var public float horizontalRatio;
 // Mirrors texture horizontally when true
 var public bool bMirroredHorizontal;
 
+// Flips the vertical mask direction when true
+var public bool bFlipVerticalMask;
+
 /*===========================================================================*/
 
 `include(ROTTColorLogs.h)
@@ -128,7 +131,7 @@ public function randomizeTexture() {
  * Randomly selects an orientation (left or right)
  *============================================================================*/
 public function randomizeOrientation() {
-  bMirroredHorizontal = rand(2521) % 2 == 1;
+  bMirroredHorizontal = rand(3) % 2 != 1;
 }
 
 /*============================================================================= 
@@ -145,26 +148,39 @@ public function drawTexture
 ) 
 {
   local Rotator r;
+  local float width;
+  local float height;
+  
+  width = abs(bottomRight.x - topLeft.x);
+  height = abs(bottomRight.y - topLeft.y);
   
   // Check for a texture to draw
   if (componentTextures.length == 0) return;
   if (componentTextures[textureIndex] == none) return;
   
-  // Modify coordinates for vertical and horizontal masking
-  topLeft.Y += (bottomRight.Y - topLeft.Y) * (1.0 - vertRatio);
-  bottomRight.X -= (bottomRight.X - topLeft.X) * (1.0 - horizontalRatio);
+  // Setup color info
+  c.setDrawColorStruct(
+    class'UI_Component'.static.multiplyColors(parentColor, drawColor)
+  );
   
-  // Set coordinate positioning
-  if (bMirroredHorizontal) {
-    c.setPos(2 * topLeft.X - bottomRight.X, topLeft.Y); /// incorrect top left info? goodluck
+  // Modify coordinates for vertical and horizontal masking
+  if (bFlipVerticalMask) {
+    topLeft.Y += height * (1.0 - vertRatio);
+  }
+  
+  // Set starting coordinates
+  if (bMirroredHorizontal || bFlipVerticalMask) {
+    // Start from top right
+    c.setPos(topLeft.X - width, topLeft.Y);
+    
+    // Stretch width to draw the mirror image
+    width *= 2;
   } else {
     c.setPos(topLeft.X, topLeft.Y);
   }
   
-  c.setDrawColorStruct(class'UI_Component'.static.multiplyColors(parentColor, drawColor));
-  
   // Modify coordinates for mirroring
-  if (bMirroredHorizontal) {
+  if (bMirroredHorizontal || bFlipVerticalMask) {
     // Draw texture mirrored
     r.yaw = 0;
     r.roll = 0;
@@ -172,14 +188,15 @@ public function drawTexture
     c.drawRotatedTile(
       componentTextures[textureIndex], 
       r,
-      (bottomRight.X - topLeft.X) * 2, 
-      bottomRight.Y - topLeft.Y,
+        
+      width * horizontalRatio, 
+      height * vertRatio,
+      0, /// subUVStart.X + subUVEnd.X * (1.0 - horizontalRatio)
+      subUVStart.Y + subUVEnd.Y * (1.0 - vertRatio),
+      2 * subUVEnd.X * (horizontalRatio), 
+      subUVEnd.Y * (vertRatio),
       
-      subUVStart.X,
-      subUVStart.Y,
-      subUVEnd.X * 2, 
-      subUVEnd.Y,
-      
+      // Reflection pivot point
       0.5,
       0.5
     );
@@ -188,14 +205,13 @@ public function drawTexture
     // Draw texture standard
     c.drawTile(
       componentTextures[textureIndex], 
-      bottomRight.X - topLeft.X, 
-      bottomRight.Y - topLeft.Y,
-      subUVStart.X,
-      subUVStart.Y + subUVEnd.Y * (1.0 - vertRatio),
-      subUVEnd.X * (horizontalRatio), 
-      subUVEnd.Y * (vertRatio)
+      width * horizontalRatio, // Width
+      height * vertRatio,     // Height
+      subUVStart.X,                                  // x1 (Left)
+      subUVStart.Y,// * (1.0 - vertRatio) + subUVEnd.Y, // y1 (Top)
+      subUVEnd.X * (horizontalRatio),                // UV Stretch, Width
+      subUVEnd.Y * (vertRatio)                       // UV Stretch, Height
     );
-    
   }
 }
 

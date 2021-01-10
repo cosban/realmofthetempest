@@ -27,11 +27,11 @@ dependsOn(ROTT_NPC_Container);
 ///};
 
 // Version info
-const MAJOR = 1;  const MINOR = 3;  const REVISION = 0;  const PATCH = 'd';  
+const MAJOR = 1;  const MINOR = 5;  const REVISION = 0;  const PATCH = 'a';  
 const PHASE_INFO = "III";
 
 // Publishing settings
-const bDevMode = true;     
+const bDevMode = false;     
 const bQaMode = true;     
 
 // Parameters used in ROTTTimers:

@@ -55,3 +55,7 @@ __Create the commit package (-m for in prompt message)__
 
 __Push the changes to github__
 <pre>git push origin < branch (e.g. master) ></pre>
+
+
+## Contributor Guide ##
+Create a fork of this repository, then submit a pull request!

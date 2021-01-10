@@ -49,6 +49,7 @@ public function initializeComponent(optional string newTag = "") {
  * This event is called every time the page is pushed.
  *===========================================================================*/
 event onPushPageEvent() {
+  violetLog("When does this happen?");
   updateSelection(class'ROTT_Combat_Hero', heroSelector.getSelection());
 }
 
@@ -87,6 +88,7 @@ public function setNavMode(NavigationMode newNavMode) {
  * Selects next non empty hero slot
  *===========================================================================*/
 public function previousAvailableHero() {
+  violetLog("~~~~~Is this happening?");
   // Ignore party size of 1
   if (gameInfo.getActiveParty().getPartySize() == 1) return;
   
@@ -97,6 +99,9 @@ public function previousAvailableHero() {
   do {
     heroSelector.forcePreviousSelection();
   } until (parentScene.getSelectedHero() != none);
+  
+  // Call for selection update
+  onNavigateLeft();
 }
 
 /*============================================================================= 
@@ -115,6 +120,9 @@ public function nextAvailableHero() {
   do {
     heroSelector.forceNextSelection();
   } until (parentScene.getSelectedHero() != none);
+  
+  // Call for selection update
+  onNavigateRight();
 }
 
 /*============================================================================= 
@@ -151,8 +159,13 @@ public function navToNewStats() {
 /*============================================================================= 
  * D-Pad controls
  *===========================================================================*/
-public function onNavigateLeft() { updateSelection(class'ROTT_Combat_Hero', heroSelector.getSelection()); }
-public function onNavigateRight() { updateSelection(class'ROTT_Combat_Hero', heroSelector.getSelection()); }
+public function onNavigateLeft() { 
+  updateSelection(class'ROTT_Combat_Hero', heroSelector.getSelection()); 
+}
+
+public function onNavigateRight() {
+  updateSelection(class'ROTT_Combat_Hero', heroSelector.getSelection()); 
+}
 
 /*============================================================================= 
  * Button inputs

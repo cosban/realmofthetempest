@@ -155,6 +155,7 @@ public function bool removeObjectSelection(class<object> searchType) {
   local int i;
   
   `log("Removing: " $ searchType);
+  scripttrace();
   for (i = 0; i < selectedObjects.length; i++) {
     if (selectedObjects[i].class == searchType) {
       // Remove selected object
@@ -168,7 +169,7 @@ public function bool removeObjectSelection(class<object> searchType) {
 /*=============================================================================
  * selectObject()
  *
- * Marks a component as selected in the scene.
+ * Marks a component as selected in the scene.  Return value used for sound.
  *===========================================================================*/
 final public function bool selectObject(object target) {
   // Check if selection exists
@@ -177,8 +178,12 @@ final public function bool selectObject(object target) {
   `log("Preparing to sSelectz: " $ target.class);
   
   /// Check if already selected?
-  if (selectedObjects.length > 0)
-    if (target == selectedObjects[0]) return false;
+  //if (selectedObjects.length > 0) {
+  //  if (target == selectedObjects[0]) {
+  //    scriptTrace();
+  //    return false;
+  //  }
+  //}
   
   // Remove selection to preserve single selection invariant
   //removeObjectSelection(target.class);
