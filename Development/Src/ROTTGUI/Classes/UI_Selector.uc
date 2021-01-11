@@ -64,6 +64,9 @@ var private IntPair selectionCoords;
 // Select a sfx for navigation
 var private SoundEffectsEnum navSound;      
 
+// Limit selection range to the given values
+var private bool bLimitSelectionRange;
+var private array<bool> limitedValueRange;
 
 
 
@@ -184,6 +187,79 @@ public function resetSelection() {
 }
 
 /*=============================================================================
+ * resetLimitedValueRange()
+ *
+ * Turns off limited selection range feature
+ *===========================================================================*/
+public function resetLimitedValueRange() {
+  bLimitSelectionRange = false;
+}
+
+/*=============================================================================
+ * setLimitedValueRange()
+ *
+ * Enables limited range selection feature
+ *===========================================================================*/
+public function setLimitedValueRange(array<bool> limitedRange) {
+  bLimitSelectionRange = true;
+  limitedValueRange = limitedRange;
+}
+
+/*=============================================================================
+ * previousValidSelection()
+ *
+ * Selects backward, toward the first valid entry
+ *===========================================================================*/
+public function previousValidSelection() {
+  local int i, k;
+  k = 0;
+  
+  // Loop through the number of selections
+  for (i = getSelection(); k <= numberOfMenuOptions; k++) {
+    // Iterate index of inspection
+    i--;
+    
+    // Loop around
+    if (i < 0) i = numberOfMenuOptions - 1;
+    
+    // Check the selection index is valid
+    if (limitedValueRange[i] == true) {
+      // Select the index
+      forceSelection(i);
+      return;
+    }
+  }
+  yellowLog("Warning (!) Attempt to select previous valid entry failed");
+}
+
+/*=============================================================================
+ * nextValidSelection()
+ *
+ * Selects forward, toward the first valid entry
+ *===========================================================================*/
+public function nextValidSelection() {
+  local int i, k;
+  k = 0;
+  
+  // Loop through the number of selections
+  for (i = getSelection(); k <= numberOfMenuOptions; k++) {
+    // Iterate index of inspection
+    i++;
+    
+    // Loop around
+    if (i >= numberOfMenuOptions) i = 0;
+    
+    // Check the selection index is valid
+    if (limitedValueRange[i] == true) {
+      // Select the index
+      forceSelection(i);
+      return;
+    }
+  }
+  yellowLog("Warning (!) Attempt to select previous valid entry failed");
+}
+
+/*=============================================================================
  * forceSelection()
  *
  * Selects the given index
@@ -238,7 +314,7 @@ public function forcePreviousSelection() {
  *===========================================================================*/
 public function nextSelection() {
   if (!bActive) return;
-  
+                                          scripttrace();
   forceNextSelection();
 }
 

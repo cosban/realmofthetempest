@@ -223,7 +223,6 @@ public function onNavigateUp() {
 }
 
 public function onNavigateLeft() {
-      violetLog("enchantmentSelection: " $ enchantmentSelection);
   switch (menuState) {
     case SELECT_ENCHANTMENT:
       // Select enchantment left

@@ -970,8 +970,6 @@ public function byte getSelectedtree() {
  * Called after a new selection has been made.
  *===========================================================================*/
 protected function onSelectObject(object selectedObject) {
-  violetLog(" IS THIS HAPPENING?");
-  scripttrace();
   switch (selectedObject.class) {
     case class'ROTT_Party':
       selectedParty = ROTT_Party(selectedObject);
