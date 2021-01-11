@@ -113,7 +113,7 @@ defaultProperties
   end object
 	begin object class=UI_Texture_Info Name=Enemy_Portrait_Minotaur_Violet_240
     componentTextures.add(Texture2D'Monsters.Enemy_Portrait_Minotaur_Violet_Black_240')
-    componentTextures.add(Texture2D'Monsters.Enemy_Portrait_Minotaur_Cyan_Purple_240')
+    componentTextures.add(Texture2D'Monsters.Enemy_Portrait_Minotaur_Cyan_Yellow_240')
   end object
 	begin object class=UI_Texture_Info Name=Enemy_Portrait_Minotaur_Purple_240
     componentTextures.add(Texture2D'Monsters.Enemy_Portrait_Minotaur_Purple_Yellow_240')
@@ -167,7 +167,7 @@ defaultProperties
   end object
 	begin object class=UI_Texture_Info Name=Enemy_Portrait_Minotaur_Violet_360
     componentTextures.add(Texture2D'Monsters.Enemy_Portrait_Minotaur_Violet_Black_360')
-    componentTextures.add(Texture2D'Monsters.Enemy_Portrait_Minotaur_Cyan_Purple_360')
+    componentTextures.add(Texture2D'Monsters.Enemy_Portrait_Minotaur_Cyan_Yellow_360')
   end object
 	begin object class=UI_Texture_Info Name=Enemy_Portrait_Minotaur_Purple_360
     componentTextures.add(Texture2D'Monsters.Enemy_Portrait_Minotaur_Purple_Yellow_360')

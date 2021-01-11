@@ -295,6 +295,7 @@ public function setNumberOfMenuOptions(int optionCount) {
  * Changes menu selection to next item
  *===========================================================================*/
 public function forceNextSelection() {
+                                          scripttrace();
   (navigationType == SELECTION_VERTICAL) ? selectDown() : selectRight();
 }
 
@@ -314,7 +315,6 @@ public function forcePreviousSelection() {
  *===========================================================================*/
 public function nextSelection() {
   if (!bActive) return;
-                                          scripttrace();
   forceNextSelection();
 }
 
@@ -337,6 +337,9 @@ public function previousSelection() {
 protected function bool selectDown() {
   local int distance;
   distance = (isNavSkipped(NAV_DOWN) == true) ? 2 : 1;
+  
+  // Reset joy state
+  joyStateY = JOY_MID;
   
   if (selectionCoords.y == gridSize.y - 1) {
     if (bWrapAround) {
@@ -362,6 +365,9 @@ protected function bool selectRight() {
   local int distance;
   distance = (isNavSkipped(NAV_RIGHT) == true) ? 2 : 1;
   
+  // Reset joy state
+  joyStateX = JOY_MID;
+  
   if (selectionCoords.x == gridSize.x - 1) {
     if (bWrapAround) {
       selectionCoords.x = 0;
@@ -386,6 +392,9 @@ protected function bool selectUp() {
   local int distance;
   distance = (isNavSkipped(NAV_UP) == true) ? 2 : 1;
   
+  // Reset joy state
+  joyStateY = JOY_MID;
+  
   if (selectionCoords.y == 0) {
     if (bWrapAround) {
       selectionCoords.y = gridSize.y - 1;
@@ -408,6 +417,9 @@ protected function bool selectUp() {
 protected function bool selectLeft() {
   local int distance;
   distance = (isNavSkipped(NAV_LEFT) == true) ? 2 : 1;
+  
+  // Reset joy state
+  joyStateX = JOY_MID;
   
   if (selectionCoords.x == 0) {
     if (bWrapAround) {
