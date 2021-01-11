@@ -78,7 +78,7 @@ defaultProperties
   // Sprite options
 	begin object class=UI_Texture_Storage Name=Enemy_Sprite_Container
 		tag="Enemy_Sprite_Container"
-		images(Boss_Etzland)=Enemy_Portrait_Bone_Mage_Green_240
+		images(CLAN_GREEN)=Enemy_Portrait_Bone_Mage_Green_240
 	end object
   enemySprites=Enemy_Sprite_Container
 	
@@ -90,7 +90,7 @@ defaultProperties
   // Sprite options
 	begin object class=UI_Texture_Storage Name=Champ_Sprite_Container
 		tag="Champ_Sprite_Container"
-		images(Boss_Etzland)=Enemy_Portrait_Bone_Mage_Green_360
+		images(CLAN_GREEN)=Enemy_Portrait_Bone_Mage_Green_360
 	end object
   champSprites=Champ_Sprite_Container
 	

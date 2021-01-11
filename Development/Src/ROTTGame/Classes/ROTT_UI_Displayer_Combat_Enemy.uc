@@ -476,9 +476,13 @@ protected function UI_Label makeLabel
  * Called from a timer to animate a skill
  *===========================================================================*/
 public function nextSkillFrame() {
-  //if (skillAnimation.copySprite(spriteSheet, animatorIndex, NO_RESIZE)) {
-  if (skillAnimation.drawNextFrame()) {
-    animatorIndex++;
+  if (skillAnimation.copySprite(spriteSheet, animatorIndex, NO_RESIZE)) {
+    //if (skillAnimation.drawNextFrame()) {
+      animatorIndex++;
+    //} else {
+    //  animatorIndex = 0;
+    //  animationTimer.destroy();
+    //}
   } else {
     animatorIndex = 0;
     animationTimer.destroy();

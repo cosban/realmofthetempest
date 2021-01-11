@@ -56,7 +56,7 @@ public function bool updateDisplay() {
   manaGlobe.setVerticalMask(hero.getManaRatio());
   
   // Hide disc at the top (when it looks buggy)
-  discCap.setEnabled(hero.getManaRatio() < 0.84);
+  discCap.setEnabled(hero.getManaRatio() < 0.84 && hero.getManaRatio() > 0.1);
   if (hero.getManaRatio() >= 0.84) { 
     return true;
   }

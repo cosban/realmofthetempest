@@ -12,26 +12,12 @@ dependsOn(ROTT_Worlds_Encounter_Info)
 dependsOn(ROTT_UI_Scene_Manager)
 dependsOn(ROTT_NPC_Container);
  
-// Clan Colors
-///enum ClanColors {
-///  BLUE_CLAN,
-///  CYAN_CLAN,
-///  GREEN_CLAN,
-///  GOLD_CLAN,
-///  ORANGE_CLAN,
-///  RED_CLAN,
-///  VIOLET_CLAN,
-///  PURPLE_CLAN,
-///  BLACK_CLAN, 
-///  WHITE_CLAN,
-///};
-
 // Version info
-const MAJOR = 1;  const MINOR = 5;  const REVISION = 0;  const PATCH = 'a';  
+const MAJOR = 1;  const MINOR = 5;  const REVISION = 0;  const PATCH = 'c';  
 const PHASE_INFO = "III";
 
 // Publishing settings
-const bDevMode = false;     
+const bDevMode = false;      
 const bQaMode = true;     
 
 // Parameters used in ROTTTimers:

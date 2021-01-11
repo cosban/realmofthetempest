@@ -79,7 +79,7 @@ defaultProperties
   // Sprite options
 	begin object class=UI_Texture_Storage Name=Enemy_Sprite_Container
 		tag="Enemy_Sprite_Container"
-		images(Boss_Rhunia)=Enemy_Portrait_Wasp_Red_240
+		images(CLAN_RED)=Enemy_Portrait_Wasp_Red_240
 	end object
   enemySprites=Enemy_Sprite_Container
 	
@@ -91,7 +91,7 @@ defaultProperties
   // Sprite options
 	begin object class=UI_Texture_Storage Name=Champ_Sprite_Container
 		tag="Champ_Sprite_Container"
-		images(Boss_Rhunia)=Enemy_Portrait_Wasp_Red_360
+		images(CLAN_RED)=Enemy_Portrait_Wasp_Red_360
 	end object
   champSprites=Champ_Sprite_Container
 	

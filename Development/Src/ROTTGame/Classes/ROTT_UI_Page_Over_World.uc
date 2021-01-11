@@ -515,9 +515,9 @@ defaultProperties
 	begin object class=UI_Texture_Info Name=Black_Texture
 		componentTextures.add(Texture2D'GUI.Stat_Tube_Black_Cover')
 	end object
-	begin object class=UI_Texture_Info Name=Conflict_Notification_Bar_Texture
-		componentTextures.add(Texture2D'GUI.Conflict_Notification_Bar')
-	end object
+	///begin object class=UI_Texture_Info Name=Quest_Info_Notification_Bar_Texture
+	///	componentTextures.add(Texture2D'GUI.Quest_Info_Notification_Bar')
+	///end object
   
   // Player Activity Icons
 	begin object class=UI_Texture_Info Name=World_HUD_Praying
@@ -625,57 +625,15 @@ defaultProperties
 	end object
 	componentList.add(Over_World_HUD_Praying_Graphic)
 	
-	// Approaching Conflict Notification
-	begin object class=UI_Sprite Name=Conflict_Notification_Bar
-    /* to do ... */
-    
-    
-		tag="Conflict_Notification_Bar"
-		posX=0
-		posY=0
-		posXEnd=NATIVE_WIDTH
-		posYEnd=NATIVE_HEIGHT
-		images(0)=None
-		images(1)=Conflict_Notification_Bar_Texture
-	end object
-	componentList.add(Conflict_Notification_Bar)
-	/**
-	// Approaching Conflict Text #1
-	begin object class=UI_Label Name=Conflict_Approaching_Text1
-  ///to do ...
-    
-    
-		tag="Conflict_Approaching_Text1"
-		//posX=0
-		//posY=0.62444444444444
-		//posXEnd=NATIVE_WIDTH
-		//posYEnd=.68
-		alignX=CENTER
-		alignY=TOP
-		fontStyle=DEFAULT_MEDIUM_WHITE
-		labelText=""
-	end object
-	componentList.add(Conflict_Approaching_Text1)
-	
-	// Approaching Conflict Text #2
-	begin object class=UI_Label Name=Conflict_Approaching_Text2
-    /// to do ...
-    
-    
-		tag="Conflict_Approaching_Text2"
-		//posX=0
-		//posY=0.66666666666666
-		//posXEnd=NATIVE_WIDTH
-		//posYEnd=.69
-		alignX=CENTER
-		alignY=TOP
-		fontStyle=DEFAULT_MEDIUM_WHITE
-		//stringInfo[1]=WhiteStringInfo_2X
-		//stringInfo[2]=GrayStringInfo_2X
-		labelText=""
-	end object
-	componentList.add(Conflict_Approaching_Text2)
-	**/
+	// Approaching Quest Info Notification
+	///begin object class=UI_Sprite Name=Quest_Info_Notification_Bar
+	///	tag="Quest_Info_Notification_Bar"
+	///	posX=0
+	///	posY=537
+	///	images(0)=Quest_Info_Notification_Bar_Texture
+	///end object
+	///componentList.add(Quest_Info_Notification_Bar)
+  
 	// Fader 
 	begin object class=UI_Sprite Name=World_Fade_Component
 		tag="World_Fade_Component"
