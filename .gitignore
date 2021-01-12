@@ -2,13 +2,14 @@
 __3D-World
 __Notes
 __Sound-Files
-__Sprites/Menu
+#__Sprites/Menu
 __Sprites/NPCs
 __Sprites/Obsolete
 __Sprites/Wiki
 
 # Sprites
 __Sprites/Enemies/*old*
+__Sprites/Menu/SCENE_WORLD_MAP/World_Map.psd
 
 # Ignore standard dev kit files
 Binaries
@@ -31,3 +32,4 @@ Development/Src/WinDrv
 *.lnk
 *trash*
 ROTT-Alpha-*
+bfg-1.13.1.jar

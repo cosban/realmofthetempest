@@ -50,6 +50,7 @@ public function initializeComponent(optional string newTag = "") {
  *===========================================================================*/
 event onFocusMenu() {
   UI_Selector(findComp("Input_Listener")).setActive(true);
+  UI_Selector(findComp("Input_Listener")).initJoyStick();
 }
 
 /*=============================================================================

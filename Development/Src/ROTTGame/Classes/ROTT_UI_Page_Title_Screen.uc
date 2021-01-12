@@ -353,7 +353,7 @@ defaultProperties
     componentTextures.add(Texture2D'GUI.Title_Menu_Buttons_Disabled')
   end object
 	begin object class=UI_Texture_Info Name=Black_Texture
-		componentTextures.add(Texture2D'GUI.Stat_Tube_Black_Cover')
+		componentTextures.add(Texture2D'GUI.Black_Square')
 	end object
 	begin object class=UI_Texture_Info Name=Restart_Required_Texture
 		componentTextures.add(Texture2D'GUI.RestartRequired')

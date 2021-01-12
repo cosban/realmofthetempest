@@ -215,7 +215,7 @@ defaultProperties
 	begin object class=UI_Sprite Name=Game_Fade_In
     // Texture
     begin object class=UI_Texture_Info Name=Black_Texture
-      componentTextures.add(Texture2D'GUI.Stat_Tube_Black_Cover')
+      componentTextures.add(Texture2D'GUI.Black_Square')
     end object
     
 		tag="Game_Fade_In"

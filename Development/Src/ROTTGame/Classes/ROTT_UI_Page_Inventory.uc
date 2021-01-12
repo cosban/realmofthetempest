@@ -283,8 +283,8 @@ defaultProperties
 	componentList.add(Item_Name_Label)
 	
   // Page navigation arrows
-  begin object class=UI_Texture_Info Name=Page_Navigation_Arrows
-    componentTextures.add(Texture2D'GUI.Page_Navigation_Arrows')
+  begin object class=UI_Texture_Info Name=Menu_Navigation_Arrows_LR
+    componentTextures.add(Texture2D'GUI.Menu_Navigation_Arrows_LR')
   end object
   
   // Page Navigation Graphics
@@ -293,7 +293,7 @@ defaultProperties
     bEnabled=true
     posX=755
     posY=826
-    images(0)=Page_Navigation_Arrows
+    images(0)=Menu_Navigation_Arrows_LR
     
     // Alpha Effects
     activeEffects.add((effectType = EFFECT_ALPHA_CYCLE, lifeTime = -1, elapsedTime = 0, intervalTime = 0.6, min = 200, max = 255))

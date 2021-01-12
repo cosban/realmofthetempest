@@ -93,6 +93,42 @@ public function initialize(int index) {
 }
 
 /*=============================================================================
+ * getUnspentHeroesRange()
+ *
+ * Returns an array of valid selection indices
+ *===========================================================================*/
+public function array<bool> getUnspentHeroesRange() {
+  local array<bool> bArray;
+  local int i;
+  
+  bArray.length = 3;
+  
+  for (i = 0; i < getPartySize(); i++) {
+    bArray[i] = getHero(i).hasUnspentPoints();
+  }
+  
+  return bArray;
+}
+
+/*=============================================================================
+ * getValidHeroesRange()
+ *
+ * Returns an array of valid selection indices
+ *===========================================================================*/
+public function array<bool> getValidHeroesRange() {
+  local array<bool> bArray;
+  local int i;
+  
+  bArray.length = 3;
+  
+  for (i = 0; i < getPartySize(); i++) {
+    bArray[i] = true;
+  }
+  
+  return bArray;
+}
+
+/*=============================================================================
  * getSpiritualProwess()
  *
  * Returns spiritual prowess rating

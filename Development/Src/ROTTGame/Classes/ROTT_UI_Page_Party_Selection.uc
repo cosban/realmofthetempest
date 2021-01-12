@@ -49,7 +49,6 @@ public function initializeComponent(optional string newTag = "") {
  * This event is called every time the page is pushed.
  *===========================================================================*/
 event onPushPageEvent() {
-  violetLog("When does this happen?");
   updateSelection(class'ROTT_Combat_Hero', heroSelector.getSelection());
 }
 
@@ -88,7 +87,6 @@ public function setNavMode(NavigationMode newNavMode) {
  * Selects next non empty hero slot
  *===========================================================================*/
 public function previousAvailableHero() {
-  violetLog("~~~~~Is this happening?");
   // Ignore party size of 1
   if (gameInfo.getActiveParty().getPartySize() == 1) return;
   
@@ -96,9 +94,9 @@ public function previousAvailableHero() {
   sfxBox.playSFX(SFX_MENU_NAVIGATE);
   
   // Find previous non-empty hero
-  do {
-    heroSelector.forcePreviousSelection();
-  } until (parentScene.getSelectedHero() != none);
+  heroSelector.setLimitedValueRange(gameInfo.getActiveParty().getValidHeroesRange());
+  heroSelector.previousValidSelection();
+  heroSelector.resetLimitedValueRange();
   
   // Call for selection update
   onNavigateLeft();
@@ -117,9 +115,9 @@ public function nextAvailableHero() {
   sfxBox.playSFX(SFX_MENU_NAVIGATE);
   
   // Find next non-empty hero
-  do {
-    heroSelector.forceNextSelection();
-  } until (parentScene.getSelectedHero() != none);
+  heroSelector.setLimitedValueRange(gameInfo.getActiveParty().getValidHeroesRange());
+  heroSelector.nextValidSelection();
+  heroSelector.resetLimitedValueRange();
   
   // Call for selection update
   onNavigateRight();
@@ -131,17 +129,15 @@ public function nextAvailableHero() {
  * Used to automatically select the first hero with unspent stats
  *===========================================================================*/
 public function navToNewStats() {
-  local int i;
+  // Move selector to first hero with unspent points
+  heroSelector.resetSelection();
+  heroSelector.setLimitedValueRange(gameInfo.getActiveParty().getUnspentHeroesRange());
+  heroSelector.nextValidSelection();
+  heroSelector.resetLimitedValueRange();
   
-  // Look through heroes 
-  for (i = 0; i < gameInfo.getActiveParty().getPartySize(); i++) {
-    // Check if stats or skills are unspent
-    if (!parentScene.getSelectedHero().hasUnspentPoints()) {
-      heroSelector.nextSelection();
-    } else {
-      return;
-    }
-  }
+  // Select hero at new index
+  updateSelection(class'ROTT_Combat_Hero', heroSelector.getSelection());
+  
 }
 
 /*============================================================================= 

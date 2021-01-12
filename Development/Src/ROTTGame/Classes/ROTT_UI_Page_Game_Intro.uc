@@ -30,7 +30,7 @@ public function initializeComponent(optional string newTag = "") {
   local int i;
   local UI_Texture_Info texture;
   texture = new class'UI_Texture_Info';
-  texture.componentTextures.addItem(Texture2D'GUI.Stat_Tube_Black_Cover');
+  texture.componentTextures.addItem(Texture2D'GUI.Black_Square');
   
   super.initializeComponent(newTag);
   
@@ -306,7 +306,7 @@ defaultProperties
 
   // Black Texture
   begin object class=UI_Texture_Info Name=Black_Texture
-    componentTextures.add(Texture2D'GUI.Stat_Tube_Black_Cover')
+    componentTextures.add(Texture2D'GUI.Black_Square')
   end object
   
   // Fade effects

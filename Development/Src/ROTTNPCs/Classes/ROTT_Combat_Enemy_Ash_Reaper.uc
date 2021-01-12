@@ -111,6 +111,10 @@ defaultProperties
     componentTextures.add(Texture2D'Monsters.Enemy_Portrait_Ash_Reaper_Gold_Black_240')
     componentTextures.add(Texture2D'Monsters.Enemy_Portrait_Ash_Reaper_Gold_Pale_240')
   end object
+	begin object class=UI_Texture_Info Name=Enemy_Portrait_Ash_Reaper_Orange_240
+    componentTextures.add(Texture2D'Monsters.Enemy_Portrait_Ash_Reaper_Orange_Black_240')
+    componentTextures.add(Texture2D'Monsters.Enemy_Portrait_Ash_Reaper_Orange_Pale_240')
+  end object
 	begin object class=UI_Texture_Info Name=Enemy_Portrait_Ash_Reaper_Red_240
     componentTextures.add(Texture2D'Monsters.Enemy_Portrait_Ash_Reaper_Red_Black_240')
     componentTextures.add(Texture2D'Monsters.Enemy_Portrait_Ash_Reaper_Red_Pale_240')
@@ -137,7 +141,7 @@ defaultProperties
 		images(CLAN_CYAN)=Enemy_Portrait_Ash_Reaper_Cyan_240
 		images(CLAN_GREEN)=Enemy_Portrait_Ash_Reaper_Green_240
 		images(CLAN_GOLD)=Enemy_Portrait_Ash_Reaper_Gold_240
-		///images(CLAN_ORANGE)=Enemy_Portrait_Ash_Reaper_Orange_240
+		images(CLAN_ORANGE)=Enemy_Portrait_Ash_Reaper_Orange_240
 		images(CLAN_RED)=Enemy_Portrait_Ash_Reaper_Red_240
 		images(CLAN_VIOLET)=Enemy_Portrait_Ash_Reaper_Violet_240
 		images(CLAN_PURPLE)=Enemy_Portrait_Ash_Reaper_Purple_240
@@ -162,6 +166,10 @@ defaultProperties
 	begin object class=UI_Texture_Info Name=Enemy_Portrait_Ash_Reaper_Gold_360
     componentTextures.add(Texture2D'Monsters.Enemy_Portrait_Ash_Reaper_Gold_Black_360')
     componentTextures.add(Texture2D'Monsters.Enemy_Portrait_Ash_Reaper_Gold_Pale_360')
+  end object
+	begin object class=UI_Texture_Info Name=Enemy_Portrait_Ash_Reaper_Orange_360
+    componentTextures.add(Texture2D'Monsters.Enemy_Portrait_Ash_Reaper_Orange_Black_360')
+    componentTextures.add(Texture2D'Monsters.Enemy_Portrait_Ash_Reaper_Orange_Pale_360')
   end object
 	begin object class=UI_Texture_Info Name=Enemy_Portrait_Ash_Reaper_Red_360
     componentTextures.add(Texture2D'Monsters.Enemy_Portrait_Ash_Reaper_Red_Black_360')
@@ -190,7 +198,7 @@ defaultProperties
 		images(CLAN_CYAN)=Enemy_Portrait_Ash_Reaper_Cyan_360
 		images(CLAN_GREEN)=Enemy_Portrait_Ash_Reaper_Green_360
 		images(CLAN_GOLD)=Enemy_Portrait_Ash_Reaper_Gold_360
-		///images(CLAN_ORANGE)=Enemy_Portrait_Ash_Reaper_Orange_360
+		images(CLAN_ORANGE)=Enemy_Portrait_Ash_Reaper_Orange_360
 		images(CLAN_RED)=Enemy_Portrait_Ash_Reaper_Red_360
 		images(CLAN_VIOLET)=Enemy_Portrait_Ash_Reaper_Violet_360
 		images(CLAN_PURPLE)=Enemy_Portrait_Ash_Reaper_Purple_360

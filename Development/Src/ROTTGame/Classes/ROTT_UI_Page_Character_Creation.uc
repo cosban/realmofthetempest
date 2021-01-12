@@ -406,7 +406,7 @@ defaultProperties
     
     // Selection arrows
     begin object class=UI_Texture_Info Name=Selection_Arrows_Texture
-      componentTextures.add(Texture2D'GUI.NewGuidancePageArrows')
+      componentTextures.add(Texture2D'GUI.Class_Selection_Arrows')
     end object
     
     // Selector sprite

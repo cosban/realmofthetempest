@@ -64,6 +64,9 @@ var private IntPair selectionCoords;
 // Select a sfx for navigation
 var private SoundEffectsEnum navSound;      
 
+// Limit selection range to the given values
+var private bool bLimitSelectionRange;
+var private array<bool> limitedValueRange;
 
 
 
@@ -184,6 +187,79 @@ public function resetSelection() {
 }
 
 /*=============================================================================
+ * resetLimitedValueRange()
+ *
+ * Turns off limited selection range feature
+ *===========================================================================*/
+public function resetLimitedValueRange() {
+  bLimitSelectionRange = false;
+}
+
+/*=============================================================================
+ * setLimitedValueRange()
+ *
+ * Enables limited range selection feature
+ *===========================================================================*/
+public function setLimitedValueRange(array<bool> limitedRange) {
+  bLimitSelectionRange = true;
+  limitedValueRange = limitedRange;
+}
+
+/*=============================================================================
+ * previousValidSelection()
+ *
+ * Selects backward, toward the first valid entry
+ *===========================================================================*/
+public function previousValidSelection() {
+  local int i, k;
+  k = 0;
+  
+  // Loop through the number of selections
+  for (i = getSelection(); k <= numberOfMenuOptions; k++) {
+    // Iterate index of inspection
+    i--;
+    
+    // Loop around
+    if (i < 0) i = numberOfMenuOptions - 1;
+    
+    // Check the selection index is valid
+    if (limitedValueRange[i] == true) {
+      // Select the index
+      forceSelection(i);
+      return;
+    }
+  }
+  yellowLog("Warning (!) Attempt to select previous valid entry failed");
+}
+
+/*=============================================================================
+ * nextValidSelection()
+ *
+ * Selects forward, toward the first valid entry
+ *===========================================================================*/
+public function nextValidSelection() {
+  local int i, k;
+  k = 0;
+  
+  // Loop through the number of selections
+  for (i = getSelection(); k <= numberOfMenuOptions; k++) {
+    // Iterate index of inspection
+    i++;
+    
+    // Loop around
+    if (i >= numberOfMenuOptions) i = 0;
+    
+    // Check the selection index is valid
+    if (limitedValueRange[i] == true) {
+      // Select the index
+      forceSelection(i);
+      return;
+    }
+  }
+  yellowLog("Warning (!) Attempt to select previous valid entry failed");
+}
+
+/*=============================================================================
  * forceSelection()
  *
  * Selects the given index
@@ -219,6 +295,7 @@ public function setNumberOfMenuOptions(int optionCount) {
  * Changes menu selection to next item
  *===========================================================================*/
 public function forceNextSelection() {
+                                          scripttrace();
   (navigationType == SELECTION_VERTICAL) ? selectDown() : selectRight();
 }
 
@@ -238,7 +315,6 @@ public function forcePreviousSelection() {
  *===========================================================================*/
 public function nextSelection() {
   if (!bActive) return;
-  
   forceNextSelection();
 }
 
@@ -261,6 +337,9 @@ public function previousSelection() {
 protected function bool selectDown() {
   local int distance;
   distance = (isNavSkipped(NAV_DOWN) == true) ? 2 : 1;
+  
+  // Reset joy state
+  joyStateY = JOY_MID;
   
   if (selectionCoords.y == gridSize.y - 1) {
     if (bWrapAround) {
@@ -286,6 +365,9 @@ protected function bool selectRight() {
   local int distance;
   distance = (isNavSkipped(NAV_RIGHT) == true) ? 2 : 1;
   
+  // Reset joy state
+  joyStateX = JOY_MID;
+  
   if (selectionCoords.x == gridSize.x - 1) {
     if (bWrapAround) {
       selectionCoords.x = 0;
@@ -310,6 +392,9 @@ protected function bool selectUp() {
   local int distance;
   distance = (isNavSkipped(NAV_UP) == true) ? 2 : 1;
   
+  // Reset joy state
+  joyStateY = JOY_MID;
+  
   if (selectionCoords.y == 0) {
     if (bWrapAround) {
       selectionCoords.y = gridSize.y - 1;
@@ -332,6 +417,9 @@ protected function bool selectUp() {
 protected function bool selectLeft() {
   local int distance;
   distance = (isNavSkipped(NAV_LEFT) == true) ? 2 : 1;
+  
+  // Reset joy state
+  joyStateX = JOY_MID;
   
   if (selectionCoords.x == 0) {
     if (bWrapAround) {

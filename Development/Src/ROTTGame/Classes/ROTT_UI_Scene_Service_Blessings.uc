@@ -85,7 +85,7 @@ defaultProperties
     
     // Rightside background
     begin object class=UI_Texture_Info Name=Menu_Background_Texture
-      componentTextures.add(Texture2D'GUI.Menu_Background'
+      componentTextures.add(Texture2D'GUI.Game_Menu_Right_Side_Cover'
     end object
     
     /** ===== UI Components ===== **/

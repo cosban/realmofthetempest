@@ -263,12 +263,14 @@ public function bool preNavigateDown() {
 }
 
 public function onNavigateLeft() {
+  scripttrace();
   switch (controlState) {
     case VIEW_MODE:
       // Change view to master tree
       someScene.switchPage(MASTERY_SKILLTREE);
       break;
   }
+  ///UI_Selector(findComp("Input_Listener")).reset joystate;
 }
 
 public function onNavigateRight() {

@@ -56,6 +56,10 @@ protected function onDeath() {
     MILESTONE_KHOMAT, 
     MILESTONE_JUST_COMPLETED
   );
+  
+  // Temp?
+  gameInfo.playerProfile.setPortalUnlocked(MAP_VALIMOR_WILDERNESS);
+  gameInfo.playerProfile.setPortalUnlocked(MAP_KALROTH_WILDERNESS);
 }
 
 /*=============================================================================
