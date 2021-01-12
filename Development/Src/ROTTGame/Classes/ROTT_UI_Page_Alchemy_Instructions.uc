@@ -76,7 +76,7 @@ defaultProperties
   
   // Black layer
 	begin object class=UI_Texture_Info Name=Black_Texture
-		componentTextures.add(Texture2D'GUI.Stat_Tube_Black_Cover')
+		componentTextures.add(Texture2D'GUI.Black_Square')
 	end object
   
   // Fade effects
