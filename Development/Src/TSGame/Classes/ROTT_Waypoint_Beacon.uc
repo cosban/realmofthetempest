@@ -124,7 +124,7 @@ defaultproperties
   
   // Static Mesh
 	Begin Object class=StaticMeshComponent name=Beacon_Mesh
-		StaticMesh=StaticMesh'MyPackage.Portal_Beacon'
+		StaticMesh=StaticMesh'ROTT_Utilities.SM_Portal_Beacon'
     bForceDirectLightMap=True
     bUsePrecomputedShadows=True
     LightingChannels=(bInitialized=True,Static=True)

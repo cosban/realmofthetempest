@@ -34,14 +34,14 @@ defaultproperties
 {
 	// Candle skeletal mesh
 	Begin Object Class=SkeletalMeshComponent Name=Candle_Skeletal_Mesh
-    SkeletalMesh=SkeletalMesh'MyPackage.Candle_1B'
+    SkeletalMesh=SkeletalMesh'ROTT_Decorations.Candles.SK_Candle_1B'
 	End Object
 	candleSkeleton=Candle_Skeletal_Mesh
   components.add(Candle_Skeletal_Mesh)
   
   // Flame
 	Begin Object Class=ParticleSystemComponent Name=PSC_Candle_Light
-    Template=ParticleSystem'MyPackage.CandleLight_1A'
+    Template=ParticleSystem'ROTT_Decorations.Candles.PS_CandleLight_1A'
 	End Object
 	candleLight=PSC_Candle_Light
   components.add(PSC_Candle_Light)

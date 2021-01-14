@@ -308,7 +308,7 @@ event onPushPageEvent() {
   
   // Set effect timer
   if (effectConfig == PORTAL_TRANSITION) {
-    gameinfo.SetGameSpeed(1);
+    gameInfo.setGameSpeed(1);
   }
   tileCount = 0;
   colorTileCount = 0;
@@ -406,11 +406,16 @@ function bool onInputKey(
   float AmountDepressed = 1.f, 
   bool bGamepad = false) 
 {
+  `log("Event: " $ Event @ " ~ Key: " $ Key);
   switch (Key) {
     // Button inputs
     case 'XboxTypeS_LeftTrigger':
-    return false;
       super.onInputKey(ControllerId, Key, Event, AmountDepressed, bGamepad);
+      
+      // Always accept input from speed change only for releases
+      if (Event == IE_Released) gameinfo.SetGameSpeed(1);
+      
+      // Otherwise, exclude input on portal transitions
       return (effectConfig == PORTAL_TRANSITION);
       
     case 'XBoxTypeS_Start':

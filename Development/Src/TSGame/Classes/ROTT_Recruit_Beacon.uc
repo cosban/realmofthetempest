@@ -128,11 +128,11 @@ defaultproperties
     BlockActors=false
   end object
   components.Add(CylinderComp)
-  CollisionComponent=CylinderComp  
+  CollisionComponent=CylinderComp
   
   // Static Mesh
 	begin object class=StaticMeshComponent name=Beacon_Mesh
-		StaticMesh=StaticMesh'MyPackage.Recruit_Beacon'
+		StaticMesh=StaticMesh'ROTT_Utilities.SM_Portal_Beacon'
     bForceDirectLightMap=True
     bUsePrecomputedShadows=True
     LightingChannels=(bInitialized=True,Static=True)

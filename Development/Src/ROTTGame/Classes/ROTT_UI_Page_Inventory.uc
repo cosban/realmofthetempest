@@ -328,7 +328,7 @@ defaultProperties
     componentList.add(Selector_Sprite)
     
   end object
-  componentList.add(Inventory_Selector_Box)
+  componentList.add(Inventory_Selector_Box) 
   
 }
 
