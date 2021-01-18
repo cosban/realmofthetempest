@@ -406,7 +406,6 @@ function bool onInputKey(
   float AmountDepressed = 1.f, 
   bool bGamepad = false) 
 {
-  `log("Event: " $ Event @ " ~ Key: " $ Key);
   switch (Key) {
     // Button inputs
     case 'XboxTypeS_LeftTrigger':

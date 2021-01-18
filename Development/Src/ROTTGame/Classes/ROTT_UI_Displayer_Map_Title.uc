@@ -31,6 +31,7 @@ enum SubRegions {
   SUBREGION_CAVES,        // Red
   SUBREGION_BACKLANDS,    // Purple
   SUBREGION_OUTSKIRTS,    // Gray
+  SUBREGION_MOUNTAIN_SHRINE,
 };
 
 // Internal references
@@ -92,6 +93,7 @@ private function setRegionSprite() {
 		case MAP_RHUNIA_WILDERNESS:
 		case MAP_RHUNIA_BACKLANDS:
 		case MAP_RHUNIA_OUTSKIRTS:
+		case MAP_MOUNTAIN_SHRINE:
 			mapTitle.setDrawIndex(REGION_RHUNIA); 
 			break;
 		case MAP_ETZLAND_CITADEL:
@@ -141,8 +143,11 @@ private function setSubregionSprite() {
   	case MAP_AKSALOM_GROVE:
   	case MAP_AKSALOM_STORMLANDS:
   	case MAP_MYSTERY_PATH:
-  	case MAP_MOUNTAIN_SHRINE:
       // Not applicable
+			areaSubregion.setEnabled(false);
+			break;
+  	case MAP_MOUNTAIN_SHRINE:
+			areaSubregion.setDrawIndex(SUBREGION_MOUNTAIN_SHRINE); 
 			break;
 		case MAP_TALONOVIA_TOWN:
 			areaSubregion.setDrawIndex(SUBREGION_TOWN); 
@@ -248,6 +253,9 @@ defaultProperties
   begin object class=UI_Texture_Info Name=Subregion_Outskirts_Texture
     componentTextures.add(Texture2D'GUI_Overworld.SubRegions.Subregion_Label_Outskirts')
   end object
+  begin object class=UI_Texture_Info Name=Subregion_Mountain_Shrine_Texture
+    componentTextures.add(Texture2D'GUI_Overworld.SubRegions.Subregion_Label_Mountain_Shrine')
+  end object
   
   // Area Subregion Sprite
   begin object class=UI_Sprite Name=Subregion_Sprite
@@ -261,6 +269,7 @@ defaultProperties
     images(SUBREGION_CAVES)=Subregion_Caves_Texture
     images(SUBREGION_BACKLANDS)=Subregion_Backlands_Texture
     images(SUBREGION_OUTSKIRTS)=Subregion_Outskirts_Texture
+    images(SUBREGION_MOUNTAIN_SHRINE)=Subregion_Mountain_Shrine_Texture
   end object
   componentList.add(Subregion_Sprite)
   
