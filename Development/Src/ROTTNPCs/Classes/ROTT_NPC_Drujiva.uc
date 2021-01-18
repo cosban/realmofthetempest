@@ -26,9 +26,39 @@ class ROTT_NPC_Drujiva extends ROTT_NPC_Container;
 public function initDialogue() {
   super.initDialogue();
   
-	// Greeting
-	`NEW_NODE(GREETING, NUETRAL)
-    "I am Drujiva, the druid sage.", ///temp
+	// Introduction
+	`NEW_NODE(INTRODUCTION, NUETRAL)
+    "Drujiva speaking, I'm the druid sage of this", 
+    "mountain shrine"
+  `ENDNODE
+  
+	`NEW_NODE(INTRODUCTION, NUETRAL)
+    "Heal beneath this four spirit house, as the", 
+    "queen of this mountain peak shines holy light down for us."
+  `ENDNODE
+  
+	`NEW_NODE(INTRODUCTION, NUETRAL)
+    "Won't you. . . will you help recover this shrine?", 
+    "Our only need is to retrieve the golden ornaments."
+  `ENDNODE
+  
+	`NEW_NODE(INTRODUCTION, NUETRAL)
+    "The golden ornaments have become sprawled out,", 
+    "now in the hands of evil, in the chaos of this. . ."
+  `ENDNODE
+  
+	`NEW_NODE(INTRODUCTION, NUETRAL)
+    "this. . . black magic tragedy.", 
+    ""
+  `ENDNODE
+  
+	`NEW_NODE(INTRODUCTION, NUETRAL)
+    "Retrieve the golden ornaments of chaos from the fallen citadels", 
+    "of Rhunia, Etzland, Haxlyn, Valimor, and Kalroth."
+  `ENDNODE
+  
+	`NEW_NODE(INTRODUCTION, NUETRAL)
+    "Then shall we. . . find hope in order.", 
     ""
   `ENDNODE
   
@@ -38,12 +68,17 @@ public function initDialogue() {
     "",
     "",
     
-    BEHAVIOR_FORCE_ENCOUNTER,
+    BEHAVIOR_GOODBYE,
     BEHAVIOR_NONE,
     BEHAVIOR_NONE,
     BEHAVIOR_NONE
   );
   
+  // Greeting
+	`NEW_NODE(GREETING, NUETRAL)
+    "From the form of each branch of the Sister's Oak, stems hope.", 
+    "Let's find this hope together."
+  `ENDNODE
   
   /**
   "I sense you have brought the keys to our salvation."
