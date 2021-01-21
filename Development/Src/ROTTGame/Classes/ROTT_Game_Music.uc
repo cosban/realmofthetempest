@@ -74,7 +74,7 @@ public function loadMusic(MapNameEnum map) {
   switch (map) {
     case MAP_VALIMOR_CITADEL:
     case MAP_KALROTH_WILDERNESS:
-    case MAP_VALIMOR_WILDERNESS:
+    case MAP_VALIMOR_BACKLANDS:
       fadeIn(4);
       break;
       
@@ -311,9 +311,29 @@ defaultProperties
     SoundCue=SoundCue'ROTT_Music_Disc_3.ROTT-Cue-Lexical_Toil'
   end object
   
+  // Yellow Petals
+  begin object class=AudioComponent Name=Yellow_Petals_OST_Cue
+    SoundCue=SoundCue'ROTT_Music_Disc_4.ROTT-Cue-Yellow_Petals'
+  end object
+  
+  // Gears and Gadgets
+  begin object class=AudioComponent Name=Gears_and_Gadgets_OST_Cue
+    SoundCue=SoundCue'ROTT_Music_Disc_3.ROTT-Cue-Gears_and_Gadgets'
+  end object
+  
   // Empty Myriads
   begin object class=AudioComponent Name=Empty_Myriads_OST_Cue
     SoundCue=SoundCue'ROTT_Music_Disc_3.ROTT-Cue-Empty_Myriads'
+  end object
+  
+  // Blue Harps
+  begin object class=AudioComponent Name=Blue_Harps_OST_Cue
+    SoundCue=SoundCue'ROTT_Music_Disc_4.ROTT-Cue-Blue_Harps'
+  end object
+  
+  // Black Magic
+  begin object class=AudioComponent Name=Black_Magic_OST_Cue
+    SoundCue=SoundCue'ROTT_Music_Disc_4.ROTT-Cue-Black_Magic'
   end object
   
   // Placeholder music
@@ -342,25 +362,25 @@ defaultProperties
   // Etzland
   worldSoundtracks[MAP_ETZLAND_CITADEL]=Unicursal_Immolation_OST_Cue
   worldSoundtracks[MAP_ETZLAND_WILDERNESS]=Swing_Of_The_Meadow_OST_Cue
-  worldSoundtracks[MAP_ETZLAND_BACKLANDS]=Placeholder_OST_Cue
+  worldSoundtracks[MAP_ETZLAND_BACKLANDS]=Gears_and_Gadgets_OST_Cue
   worldSoundtracks[MAP_ETZLAND_OUTSKIRTS]=The_Path_Within_OST_Cue
   
   // Haxlyn
   worldSoundtracks[MAP_HAXLYN_CITADEL]=Lexical_Wind_OST_Cue
   worldSoundtracks[MAP_HAXLYN_WILDERNESS]=Spiritual_Concomitance_OST_Cue
-  worldSoundtracks[MAP_HAXLYN_BACKLANDS]=Placeholder_OST_Cue // cute harps
+  worldSoundtracks[MAP_HAXLYN_BACKLANDS]=Black_Magic_OST_Cue /// Change
   worldSoundtracks[MAP_HAXLYN_OUTSKIRTS]=A_Storm_is_a_Serpent_OST_Cue
   
   // Valimor
   worldSoundtracks[MAP_VALIMOR_CITADEL]=Cult_of_Dreamfire_OST_Cue
-  worldSoundtracks[MAP_VALIMOR_WILDERNESS]=Basalt_Sanctuary_OST_Cue
+  worldSoundtracks[MAP_VALIMOR_WILDERNESS]=Blue_Harps_OST_Cue
   worldSoundtracks[MAP_VALIMOR_BACKLANDS]=Lexical_Toil_OST_Cue
-  worldSoundtracks[MAP_VALIMOR_OUTSKIRTS]=Empty_Myriads_OST_Cue
+  worldSoundtracks[MAP_VALIMOR_OUTSKIRTS]=Mira_Monstrosity_OST_Cue
   
   // Kalroth
-  worldSoundtracks[MAP_KALROTH_CITADEL]=Hex_Wrought_Haze_OST_Cue /// Gears and gadgets, or something
-  worldSoundtracks[MAP_KALROTH_WILDERNESS]=Mira_Monstrosity_OST_Cue
-  worldSoundtracks[MAP_KALROTH_BACKLANDS]=Placeholder_OST_Cue
+  worldSoundtracks[MAP_KALROTH_CITADEL]=Hex_Wrought_Haze_OST_Cue
+  worldSoundtracks[MAP_KALROTH_WILDERNESS]=Empty_Myriads_OST_Cue
+  worldSoundtracks[MAP_KALROTH_BACKLANDS]=Yellow_Petals_OST_Cue
   worldSoundtracks[MAP_KALROTH_OUTSKIRTS]=Placeholder_OST_Cue 
   
   // Caves
@@ -368,8 +388,8 @@ defaultProperties
   
   // Misc: The land between the tempests
   worldSoundtracks[MAP_AKSALOM_SKYGATE]=The_Sky_is_a_Mountain_Tamer_OST_Cue
-  worldSoundtracks[MAP_AKSALOM_GROVE]=Placeholder_OST_Cue /// Calming song
-  worldSoundtracks[MAP_AKSALOM_STORMLANDS]=Placeholder_OST_Cue
+  worldSoundtracks[MAP_AKSALOM_GROVE]=Placeholder_OST_Cue
+  worldSoundtracks[MAP_AKSALOM_STORMLANDS]=Basalt_Sanctuary_OST_Cue
   worldSoundtracks[MAP_MYSTERY_PATH]=Placeholder_OST_Cue
   worldSoundtracks[MAP_MOUNTAIN_SHRINE]=Lexical_Synergy_OST_Cue
   
