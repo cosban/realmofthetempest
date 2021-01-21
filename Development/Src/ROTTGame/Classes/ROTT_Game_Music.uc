@@ -197,8 +197,8 @@ defaultProperties
   end object
   
   // Violet Cape
-  begin object class=AudioComponent Name=The_Violet_Cape_OST_Cue
-    SoundCue=SoundCue'ROTT_Music_Disc_2.ROTT-Cue-The_Violet_Cape'
+  begin object class=AudioComponent Name=The_Violet_Clasp_OST_Cue
+    SoundCue=SoundCue'ROTT_Music_Disc_2.ROTT-Cue-The_Violet_Clasp'
   end object
   
   // Swing of the Meadow
@@ -217,13 +217,13 @@ defaultProperties
   end object
   
   // Tame Haze
-  begin object class=AudioComponent Name=Tame_Haze_OST_Cue
-    SoundCue=SoundCue'ROTT_Music_Disc_1.ROTT-Cue-Tame_Haze'
+  begin object class=AudioComponent Name=Hex_Wrought_Haze_OST_Cue
+    SoundCue=SoundCue'ROTT_Music_Disc_1.ROTT-Cue-Hex_Wrought_Haze'
   end object
   
-  // Concomitance
-  begin object class=AudioComponent Name=Concomitance_OST_Cue
-    SoundCue=SoundCue'ROTT_Music_Disc_2.ROTT-Cue-Concomitance'
+  // Spiritual_Concomitance
+  begin object class=AudioComponent Name=Spiritual_Concomitance_OST_Cue
+    SoundCue=SoundCue'ROTT_Music_Disc_2.ROTT-Cue-Spiritual_Concomitance'
   end object
   
   // Unicursal Immolation
@@ -242,8 +242,8 @@ defaultProperties
   end object
   
   // Weak Prayer
-  begin object class=AudioComponent Name=Weak_Prayer_OST_Cue
-    SoundCue=SoundCue'ROTT_Music_Disc_2.ROTT-Cue-Weak_Prayer'
+  begin object class=AudioComponent Name=Lexical_Wind_OST_Cue
+    SoundCue=SoundCue'ROTT_Music_Disc_2.ROTT-Cue-Lexical_Wind'
   end object
   
   // Weak Prayer
@@ -262,8 +262,8 @@ defaultProperties
   end object
 
   // Neutrality The Toy
-  begin object class=AudioComponent Name=Neutrality_The_Toy_OST_Cue
-    SoundCue=SoundCue'ROTT_Music_Disc_3.ROTT-Cue-Neutrality_The_Toy'
+  begin object class=AudioComponent Name=Lexical_Synergy_OST_Cue
+    SoundCue=SoundCue'ROTT_Music_Disc_3.ROTT-Cue-Lexical_Synergy'
   end object
   
   // The Sky is a Mountain Tamer
@@ -274,6 +274,11 @@ defaultProperties
   // A Storm is a Serpent
   begin object class=AudioComponent Name=A_Storm_is_a_Serpent_OST_Cue
     SoundCue=SoundCue'ROTT_Music_Disc_2.ROTT-Cue-A_Storm_is_a_Serpent'
+  end object
+  
+  // Basalt Sanctuary
+  begin object class=AudioComponent Name=Basalt_Sanctuary_OST_Cue
+    SoundCue=SoundCue'ROTT_Music_Disc_3.ROTT-Cue-Basalt_Sanctuary'
   end object
   
   // Heights
@@ -296,9 +301,19 @@ defaultProperties
     SoundCue=SoundCue'ROTT_Music_Disc_1.ROTT-Cue-OMEV_AGRE'
   end object
   
+  // Mira Monstrosity
+  begin object class=AudioComponent Name=Mira_Monstrosity_OST_Cue
+    SoundCue=SoundCue'ROTT_Music_Disc_4.ROTT-Cue-Mira_Monstrosity'
+  end object
+  
   // Lexical Toil
   begin object class=AudioComponent Name=Lexical_Toil_OST_Cue
     SoundCue=SoundCue'ROTT_Music_Disc_3.ROTT-Cue-Lexical_Toil'
+  end object
+  
+  // Empty Myriads
+  begin object class=AudioComponent Name=Empty_Myriads_OST_Cue
+    SoundCue=SoundCue'ROTT_Music_Disc_3.ROTT-Cue-Empty_Myriads'
   end object
   
   // Placeholder music
@@ -320,7 +335,7 @@ defaultProperties
   
   // Rhunia
   worldSoundtracks[MAP_RHUNIA_CITADEL]=Ethereal_Tide_OST_Cue
-  worldSoundtracks[MAP_RHUNIA_WILDERNESS]=The_Violet_Cape_OST_Cue
+  worldSoundtracks[MAP_RHUNIA_WILDERNESS]=The_Violet_Clasp_OST_Cue
   worldSoundtracks[MAP_RHUNIA_BACKLANDS]=Placeholder_OST_Cue
   worldSoundtracks[MAP_RHUNIA_OUTSKIRTS]=Sorrow_Sky_OST_Cue
   
@@ -331,32 +346,32 @@ defaultProperties
   worldSoundtracks[MAP_ETZLAND_OUTSKIRTS]=The_Path_Within_OST_Cue
   
   // Haxlyn
-  worldSoundtracks[MAP_HAXLYN_CITADEL]=Weak_Prayer_OST_Cue
-  worldSoundtracks[MAP_HAXLYN_WILDERNESS]=Concomitance_OST_Cue
-  worldSoundtracks[MAP_HAXLYN_BACKLANDS]=Placeholder_OST_Cue // 11 sins with your teeth
+  worldSoundtracks[MAP_HAXLYN_CITADEL]=Lexical_Wind_OST_Cue
+  worldSoundtracks[MAP_HAXLYN_WILDERNESS]=Spiritual_Concomitance_OST_Cue
+  worldSoundtracks[MAP_HAXLYN_BACKLANDS]=Placeholder_OST_Cue // cute harps
   worldSoundtracks[MAP_HAXLYN_OUTSKIRTS]=A_Storm_is_a_Serpent_OST_Cue
   
   // Valimor
   worldSoundtracks[MAP_VALIMOR_CITADEL]=Cult_of_Dreamfire_OST_Cue
-  worldSoundtracks[MAP_VALIMOR_WILDERNESS]=Lexical_Toil_OST_Cue
-  worldSoundtracks[MAP_VALIMOR_BACKLANDS]=Placeholder_OST_Cue // Mira Monstrosity ?
-  worldSoundtracks[MAP_VALIMOR_OUTSKIRTS]=Placeholder_OST_Cue
+  worldSoundtracks[MAP_VALIMOR_WILDERNESS]=Basalt_Sanctuary_OST_Cue
+  worldSoundtracks[MAP_VALIMOR_BACKLANDS]=Lexical_Toil_OST_Cue
+  worldSoundtracks[MAP_VALIMOR_OUTSKIRTS]=Empty_Myriads_OST_Cue
   
   // Kalroth
-  worldSoundtracks[MAP_KALROTH_CITADEL]=Tame_Haze_OST_Cue /// Gears and gadgets, or something
-  worldSoundtracks[MAP_KALROTH_WILDERNESS]=Tame_Haze_OST_Cue
-  worldSoundtracks[MAP_KALROTH_BACKLANDS]=Placeholder_OST_Cue // Basalt sanctuary?
-  worldSoundtracks[MAP_KALROTH_OUTSKIRTS]=Placeholder_OST_Cue
+  worldSoundtracks[MAP_KALROTH_CITADEL]=Hex_Wrought_Haze_OST_Cue /// Gears and gadgets, or something
+  worldSoundtracks[MAP_KALROTH_WILDERNESS]=Mira_Monstrosity_OST_Cue
+  worldSoundtracks[MAP_KALROTH_BACKLANDS]=Placeholder_OST_Cue
+  worldSoundtracks[MAP_KALROTH_OUTSKIRTS]=Placeholder_OST_Cue 
   
   // Caves
   worldSoundtracks[MAP_KYRIN_CAVERN]=Lachrymal_Static_OST_Cue
   
   // Misc: The land between the tempests
   worldSoundtracks[MAP_AKSALOM_SKYGATE]=The_Sky_is_a_Mountain_Tamer_OST_Cue
-  worldSoundtracks[MAP_AKSALOM_GROVE]=Placeholder_OST_Cue
+  worldSoundtracks[MAP_AKSALOM_GROVE]=Placeholder_OST_Cue /// Calming song
   worldSoundtracks[MAP_AKSALOM_STORMLANDS]=Placeholder_OST_Cue
   worldSoundtracks[MAP_MYSTERY_PATH]=Placeholder_OST_Cue
-  worldSoundtracks[MAP_MOUNTAIN_SHRINE]=Neutrality_The_Toy_OST_Cue
+  worldSoundtracks[MAP_MOUNTAIN_SHRINE]=Lexical_Synergy_OST_Cue
   
   // Override Soundtracks
   overrideSoundtracks[MUSIC_CHARACTER_CREATION]=The_Missive_OST_Cue;
