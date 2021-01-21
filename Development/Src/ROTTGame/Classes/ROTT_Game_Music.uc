@@ -206,9 +206,9 @@ defaultProperties
     SoundCue=SoundCue'ROTT_Music_Disc_1.ROTT-Cue-Swing_Of_The_Meadow'
   end object
   
-  // Ethereal Tide
-  begin object class=AudioComponent Name=Ethereal_Tide_OST_Cue
-    SoundCue=SoundCue'ROTT_Music_Disc_1.ROTT-Cue-Ethereal_Tide'
+  // Ethereal Ocean
+  begin object class=AudioComponent Name=Ethereal_Ocean_OST_Cue
+    SoundCue=SoundCue'ROTT_Music_Disc_1.ROTT-Cue-Ethereal_Ocean'
   end object
   
   // Lachyrmal Static
@@ -216,7 +216,7 @@ defaultProperties
     SoundCue=SoundCue'ROTT_Music_Disc_1.ROTT-Cue-Lachrymal_Static'
   end object
   
-  // Tame Haze
+  // Hex Wrought Haze
   begin object class=AudioComponent Name=Hex_Wrought_Haze_OST_Cue
     SoundCue=SoundCue'ROTT_Music_Disc_1.ROTT-Cue-Hex_Wrought_Haze'
   end object
@@ -354,7 +354,7 @@ defaultProperties
   worldSoundtracks[MAP_TALONOVIA_OUTSKIRTS]=Heights_OST_Cue
   
   // Rhunia
-  worldSoundtracks[MAP_RHUNIA_CITADEL]=Ethereal_Tide_OST_Cue
+  worldSoundtracks[MAP_RHUNIA_CITADEL]=Ethereal_Ocean_OST_Cue
   worldSoundtracks[MAP_RHUNIA_WILDERNESS]=The_Violet_Clasp_OST_Cue
   worldSoundtracks[MAP_RHUNIA_BACKLANDS]=Placeholder_OST_Cue
   worldSoundtracks[MAP_RHUNIA_OUTSKIRTS]=Sorrow_Sky_OST_Cue

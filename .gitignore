@@ -1,13 +1,18 @@
 # Ignore until assets are cleaned up
 __3D-World
 __Notes
-__Sound-Files
 #__Sprites/Menu
 #__Sprites/NPCs
 __Sprites/NPCs/__Reference
 __Sprites/NPCs/_old
 __Sprites/Obsolete
 __Sprites/Wiki
+
+# Sound files
+__Sound-Files/φ *
+__Sound-Files/*/*/*.wav
+__Sound-Files/*/*/old*
+__Sound-Files/*/*/src*
 
 # Sprites
 __Sprites/Enemies/*old*
