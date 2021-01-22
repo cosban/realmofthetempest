@@ -129,6 +129,38 @@ public function array<bool> getValidHeroesRange() {
 }
 
 /*=============================================================================
+ * getTotalBossesSlain()
+ *
+ *
+ *===========================================================================*/
+public function int getTotalBossesSlain() {
+  local int slayCount;
+  local int i;
+  
+  for (i = 0; i < getPartySize(); i++) {
+    slayCount += getHero(i).persistentStatistics[TRACK_BOSSES_SLAIN];
+  }
+  
+  return slayCount;
+}
+  
+/*=============================================================================
+ * getTotalMonsersSlain()
+ *
+ *
+ *===========================================================================*/
+public function int getTotalMonsersSlain() {
+  local int slayCount;
+  local int i;
+  
+  for (i = 0; i < getPartySize(); i++) {
+    slayCount += getHero(i).persistentStatistics[TRACK_MONSTERS_SLAIN];
+  }
+  
+  return slayCount;
+}
+  
+/*=============================================================================
  * getSpiritualProwess()
  *
  * Returns spiritual prowess rating
@@ -319,7 +351,8 @@ public function battlePrep() {
     heroUnits[i].battleInit();
   }
   
-  violetLog(" $ " $ heroUnits[1].statBoosts[ADD_ATTACK_TIME_PERCENT]);
+  /// Earthquake debug
+  ///violetLog(" $ " $ heroUnits[1].statBoosts[ADD_ATTACK_TIME_PERCENT]);
   
   // Tuna ratios
   ratios.addItem(0.25);

@@ -295,7 +295,6 @@ public function setNumberOfMenuOptions(int optionCount) {
  * Changes menu selection to next item
  *===========================================================================*/
 public function forceNextSelection() {
-                                          scripttrace();
   (navigationType == SELECTION_VERTICAL) ? selectDown() : selectRight();
 }
 

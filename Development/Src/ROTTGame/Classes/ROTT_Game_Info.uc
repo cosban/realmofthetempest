@@ -201,6 +201,11 @@ event initGame(string options, out string errorMessage) {
   milestoneCookie = new class'ROTT_Milestone_Cookie';
   milestoneCookie.linkReferences();
   
+  // Attempt to load speedrun info
+  if (class'Engine'.static.basicLoadObject(milestoneCookie, "Save\\milestones.bin", true, 0)) {
+    cyanLog("Speedrun info loaded");
+  }
+  
   // Load gameplay based on map name
   switch (getCurrentMap()) {
 		case MAP_UI_TITLE_MENU:
@@ -240,8 +245,8 @@ event postBeginPlay() {
  *
  * Called when the player is ready
  *===========================================================================*/
-public function PostLogin(PlayerController newPlayer) {
-  super.PostLogin(newPlayer);
+public function postLogin(PlayerController newPlayer) {
+  super.postLogin(newPlayer);
   
   whitelog("--+-- ROTT_Game_Info: PostLogin()      --+--");
   
@@ -281,7 +286,7 @@ public function bool saveFileExist() {
   // Initialize a player profile
   profile = new class'ROTT_Game_Player_Profile';
   
-	if (class'Engine'.static.BasicLoadObject(profile, path, true, 0)) {
+	if (class'Engine'.static.basicLoadObject(profile, path, true, 0)) {
     return true;
   }
   return false;
@@ -309,12 +314,15 @@ public function bool loadSavedGame(optional bool transitionMode = false) {
   // Initialize a player profile
   playerProfile = new(self) class'ROTT_Game_Player_Profile';
   
+  // Attempt to load profile
   darkcyanlog("Loading profile: ..." $ path, DEBUG_DATA_STRUCTURE);
 	if (class'Engine'.static.basicLoadObject(playerProfile, path, true, 0)) {
+    // Upon successful profile load, continue loading and setup profile
     playerProfile.loadGame(transitionMode);
     playerProfile.linkReferences();
     return true;
   } else {
+    // Failed to load
     playerProfile = none;
     return false;
   }
@@ -325,17 +333,17 @@ public function bool loadSavedGame(optional bool transitionMode = false) {
  *
  * Called when 'new game' is selected, before fading into the intro dialog.
  *===========================================================================*/
-public function newGameSetup() {
+public function newGameSetup(byte gameMode) {
   // Initialize a player profile
   playerProfile = new class'ROTT_Game_Player_Profile';
   playerProfile.linkReferences();
   
   // Start timer
-  whiteLog("--- Starting Timer ---");
-  playerProfile.bTrackTime = true;
+  ///whiteLog("--- Starting Timer ---");
+  ///playerProfile.bTrackTime = true;
   
   // Set up a new game
-  playerProfile.newGameSetup();
+  playerProfile.newGameSetup(gameMode);
   saveGame(TRANSITION_SAVE);    
 }
 
@@ -464,6 +472,10 @@ public function respawnTransitionIn() {
   // Reset falling trap status
   bPlayerFalling = false;
   
+  // Skip if in tour or cheating
+  if (playerProfile.gameMode == MODE_TOUR) { unpauseGame(false); return; }
+  if (playerProfile.cheatNoEncounters) { unpauseGame(false); return; }
+  
   // Attempt to create a mob from the active zones
   if (rollRandomMob()) {
     // Mark encounter pending to prevent menu operations
@@ -493,6 +505,7 @@ public function startCombatTransition(optional float delay = 0.f) {
   }
   
   whiteLog("--+-- StartCombatTransition --+--");
+  playerProfile.encounterCount++;
   
   // Check if combat is already taking place
   if (bEncounterActive) return;
@@ -945,7 +958,14 @@ public function tick(float deltaTime) {
   super.tick(deltaTime);
   
   // Give time to profile
-  if (playerProfile != none) playerProfile.elapseTime(deltaTime);
+  if (playerProfile != none) {
+    playerProfile.elapseTime(deltaTime);
+    
+    // Track temporal usage
+    if (gameSpeed != 1) {
+      playerProfile.timeTemporallyAccelerated += deltaTime / gameSpeed;
+    }
+  }
 }
 
 /*=============================================================================
@@ -957,6 +977,7 @@ public function addEncounterTick() {
   local float frequencyAmp;
   
   // Check for enemy population
+  if (playerProfile.gameMode == MODE_TOUR) return;
   if (playerProfile.cheatNoEncounters) return;
   if (safetyMode) return;
   if (!isHostileArea()) return;
@@ -1506,6 +1527,7 @@ public function ROTT_Inventory_Package generateLoot
   local int i, j;
   
   lootPackage = new class'ROTT_Inventory_Package';
+  lootPackage.linkReferences();
   
   // Iterate through all possible item drops
   for (i = 0; i < lootTypes.length && lootPackage.count() < 8; i++) {

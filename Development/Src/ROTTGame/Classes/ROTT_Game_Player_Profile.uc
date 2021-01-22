@@ -15,7 +15,17 @@ dependsOn(ROTT_Descriptor_Enchantment_List);
 // Username, name of the profile
 var privatewrite string username;
 
+// Game modes
+enum GameModes {
+  MODE_CASUAL,
+  MODE_HARDCORE,
+  MODE_TOUR,
+};
+
 // Username, name of the profile
+var privatewrite GameModes gameMode;
+
+// Elapsed game time (excluding load times)
 var privatewrite float elapsedPlayTime;
 
 // Milestones for speedruns
@@ -23,6 +33,8 @@ enum SpeedRunMilestones {
   MILESTONE_AZRA_KOTH,
   MILESTONE_HYRIX,
   MILESTONE_KHOMAT,
+  MILESTONE_VILIROTH,
+  MILESTONE_TYTHIZERUS,
 };
 
 // Status for tracking milestone progress
@@ -54,7 +66,7 @@ var public byte activePartyIndex;
 var privatewrite ROTT_Party_System partySystem;   
 
 // Players items (inventory items)
-var privatewrite ROTT_Inventory_Package playerInventory;   
+var privatewrite ROTT_Inventory_Package_Player playerInventory;   
 var privatewrite int savedItemCount;   
 var privatewrite class<ROTT_Inventory_Item> firstSavedItemType;   /// head of linked list, the rest is in each item
 
@@ -63,6 +75,12 @@ var privatewrite PortalState mapLocks[MapNameEnum];
 
 // Enchantment levels from minigames
 var public int enchantmentLevels[EnchantmentEnum];  
+
+// Profile data
+var public int totalGoldEarned;
+var public int totalGemsEarned;
+var public int encounterCount;
+var public float timeTemporallyAccelerated;
 
 // Enchantment data
 ///var privatewrite ROTT_Descriptor_Enchantment_List enchantmentData;
@@ -139,19 +157,46 @@ var public bool cheatInvincibility;
  * 
  * Description: This function is called for new games
  *===========================================================================*/
-public function newGameSetup() {
+public function newGameSetup(byte newGameMode) {
   // Make party System
   partySystem = new(self) class'ROTT_Party_System';
   partySystem.initSystem();
   
   // Make inventory
-  playerInventory = new(self) class'ROTT_Inventory_Package';
+  playerInventory = new(self) class'ROTT_Inventory_Package_Player';
+  playerInventory.linkReferences();
   
   // Portal system
   initNewGamePortals();
   
   // Set initial event progress (enables NPC greetings)
   activateTopic(INTRODUCTION);
+  
+  // Set game mode
+  setGameMode(GameModes(newGameMode));
+}
+
+/*=============================================================================
+ * setGameMode()
+ *
+ * Sets a game mode, should remain unchanged.
+ *===========================================================================*/
+public function setGameMode(GameModes newGameMode) {
+  gameMode = newGameMode;
+  
+  switch (gameMode) {
+    case MODE_CASUAL:
+      break;
+    case MODE_HARDCORE:
+      // Add luck boost
+      enchantmentLevels[OMNI_SEEKER] = 10;
+      break;
+    case MODE_TOUR:
+      // Disable encounters
+      /// Feature implemented through game mode
+      break;
+  }
+  
 }
 
 /*=============================================================================
@@ -183,28 +228,13 @@ private function formatMilestoneTime
   float milestoneTime
 ) 
 {
-  local float time;
-  local int h2, h1, m2, m1, s2, s1, ms2, ms1;
-  local string formattedTime;
+  local string formatted;
   
-  // Slice time into components
-  time = milestoneTime;
-  h2 = int(time / 60 / 60 / 10);
-  h1 = int(time / 60 / 60) % 10;
-  m2 = int(time / 60 / 10) % 6;
-  m1 = int(time / 60) % 10;
-  s2 = int(time / 10) % 6;
-  s1 = int(time) % 10;
-  ms2 = int(time * 10) % 10;
-  ms1 = int(time * 100) % 10;
-
-  // Format time
-  formattedTime = m2 $ m1 $ ":" $ s2 $ s1 $ "." $ ms2 $ ms1;
-  if (h2 != 0 || h1 != 0) {
-    formattedTime = h2 $ h1 $ ":" $ formattedTime;
-  }
+  // Get formatted time from milestone cookie
+  formatted = gameInfo.milestoneCookie.formatMilestoneTime(milestoneTime);
   
-  milestoneList[milestoneIndex].milestoneTimeFormatted = formattedTime;
+  // Store time
+  milestoneList[milestoneIndex].milestoneTimeFormatted = formatted;
 }
 
 /*=============================================================================
@@ -225,7 +255,6 @@ public function updateMilestone
     
     // Record time for completion
     if (progress == MILESTONE_FINISHED) {
-  cyanLog("Milestone Finished");
       milestoneList[mileStoneIndex].milestoneTime = elapsedPlayTime;
       formatMilestoneTime(mileStoneIndex, elapsedPlayTime);
       
@@ -431,7 +460,8 @@ public function loadGame(optional bool transitionMode = false) {
   folder = (transitionMode == true) ? "temp" : "save";
   
   // Reset player inventory
-  playerInventory = new class'ROTT_Inventory_Package';
+  playerInventory = new(self) class'ROTT_Inventory_Package_Player';
+  playerInventory.linkReferences();
   
   // Load player items
   for (i = 0; i < savedItemCount; i++) {
@@ -446,7 +476,7 @@ public function loadGame(optional bool transitionMode = false) {
     tempItem.initialize();
     
     // Store item to inventory
-    playerInventory.addItem(tempItem);
+    playerInventory.loadItem(tempItem);
   }
   
   // Load party system 
@@ -563,6 +593,78 @@ public function healActiveParty() {
   partySystem.getActiveParty().restoreAll();
   sfxBox.playSFX(SFX_WORLD_SHRINE);
   gameInfo.showGameplayNotification("You have been healed");
+}
+
+/*=============================================================================
+ * getHeroCount()
+ *
+ * Returns the number of heros
+ *===========================================================================*/
+public function int getHeroCount() {
+  local int i, heroCount;
+  
+  for (i = 0; i < partySystem.getNumberOfParties(); i++) {
+    heroCount += partySystem.getParty(i).getPartySize();
+  }
+  
+  return heroCount;
+}
+
+/*=============================================================================
+ * getTotalBossesSlain()
+ *
+ * 
+ *===========================================================================*/
+public function int getTotalBossesSlain() {
+  local int i, slayCount;
+  
+  for (i = 0; i < partySystem.getNumberOfParties(); i++) {
+    slayCount += partySystem.getParty(i).getTotalBossesSlain();
+  }
+  
+  return slayCount;
+}
+
+/*=============================================================================
+ * getTotalMonstersSlain()
+ *
+ * 
+ *===========================================================================*/
+public function int getTotalMonstersSlain() {
+  local int i, slayCount;
+  
+  for (i = 0; i < partySystem.getNumberOfParties(); i++) {
+    slayCount += partySystem.getParty(i).getTotalMonsersSlain();
+  }
+  
+  return slayCount;
+}
+
+/*=============================================================================
+ * getEncounterCount()
+ *
+ * 
+ *===========================================================================*/
+public function int getEncounterCount() {
+  return encounterCount;
+}
+
+/*=============================================================================
+ * getTotalGemsEarned()
+ *
+ * 
+ *===========================================================================*/
+public function int getTotalGemsEarned() {
+  return totalGemsEarned;
+}
+
+/*=============================================================================
+ * getTotalGoldEarned()
+ *
+ * 
+ *===========================================================================*/
+public function int getTotalGoldEarned() {
+  return totalGoldEarned;
 }
 
 /*=============================================================================
@@ -745,6 +847,8 @@ defaultProperties
   milestoneList(MILESTONE_AZRA_KOTH)=(milestoneDescription="Az'ra Koth defeated")
   milestoneList(MILESTONE_HYRIX)=(milestoneDescription="Hyrix defeated")
   milestoneList(MILESTONE_KHOMAT)=(milestoneDescription="Khomat defeated")
+  milestoneList(MILESTONE_VILIROTH)=(milestoneDescription="Viliroth defeated")
+  milestoneList(MILESTONE_TYTHIZERUS)=(milestoneDescription="Tythizerus defeated")
 }
 
 

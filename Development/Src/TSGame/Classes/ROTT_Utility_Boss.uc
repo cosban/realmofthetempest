@@ -76,6 +76,14 @@ simulated event touch
     deactivationTimer = gameInfo.spawn(class'ROTTTimer');
     deactivationTimer.makeTimer(3.00, LOOP_OFF, disableBeacon);
     
+    // Door sound
+    gameInfo.sfxBox.playSfx(SFX_WORLD_DOOR);
+    
+    // Skip combat
+    if (gameInfo.playerProfile.gameMode == MODE_TOUR) return;
+    if (gameInfo.playerProfile.cheatNoEncounters) return;
+    
+    // Check for NPC prelude
     if (npcPrelude != none) {
       // Display npc interface
       gameInfo.sceneManager.sceneOverWorld.npcPreludeTransition();
@@ -88,9 +96,6 @@ simulated event touch
       // Start combat
       gameInfo.forceEncounter(mobInfo);
     }
-    
-    // Door sound
-    gameInfo.sfxBox.playSfx(SFX_WORLD_DOOR);
   }
 }
 

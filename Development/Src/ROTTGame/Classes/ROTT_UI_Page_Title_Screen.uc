@@ -14,7 +14,8 @@ class ROTT_UI_Page_Title_Screen extends ROTT_UI_Page;
 enum UISceneStates {
   
   MENU_HIDDEN,
-  MENU_VISIBLE,
+  GAMEPLAY_MENU_VISIBLE,
+  GAMEMODE_MENU_VISIBLE,
   
   STOP_ALL_INPUT,
   
@@ -42,6 +43,7 @@ const REQUIREMENTS_FAIL = true;
 var private UI_Selector menuSelector;
 var private UI_Label gameVersionText;
 var private UI_Sprite titleMenuOptions;
+var private UI_Sprite gameModeMenuOptions;
 var private UI_Sprite restartRequiredNotification;
 
 // Timers
@@ -62,6 +64,7 @@ public function initializeComponent(optional string newTag = "") {
   // Internal references
   menuSelector = UI_Selector(findComp("Title_Menu_Selector"));
   gameVersionText = findLabel("Game_Version_Text");
+  gameModeMenuOptions = findSprite("Game_Mode_Menu_Options");
   titleMenuOptions = findSprite("Title_Menu_Options");
   restartRequiredNotification = findSprite("Restart_Required_Notification");
   
@@ -162,8 +165,9 @@ private function hideControllerNotification() {
  *===========================================================================*/
 protected function navigationRoutineA() {
 	switch (currentUIScene) {
-    case MENU_HIDDEN:   showMenu();    break;
-    case MENU_VISIBLE:  menuSelect();  break;
+    case MENU_HIDDEN:            showMenu();        break;
+    case GAMEPLAY_MENU_VISIBLE:  menuSelect();      break;
+    case GAMEMODE_MENU_VISIBLE:  modeMenuSelect();  break;
   }
   hideControllerNotification();
 }
@@ -183,7 +187,20 @@ protected function bool requirementRoutineA() {
   return true;
 }
 
-protected function navigationRoutineB();
+protected function navigationRoutineB() {
+  // Back out of game mode selection
+  if (currentUIScene == GAMEMODE_MENU_VISIBLE) {
+    // Back out of scene
+    currentUIScene = GAMEPLAY_MENU_VISIBLE;
+    // Hide this menu
+    titleMenuOptions.setEnabled(true);
+    // Show game mode menu
+    gameModeMenuOptions.setEnabled(false);
+  
+    // Sfx
+    gameInfo.sfxBox.playSfx(SFX_MENU_BACK);
+  }
+}
 
 /*=============================================================================
  * showMenu()
@@ -192,7 +209,7 @@ protected function navigationRoutineB();
  *===========================================================================*/
 private function showMenu() {
   // Update scene info
-  currentUIScene = MENU_VISIBLE;
+  currentUIScene = GAMEPLAY_MENU_VISIBLE;
   menuSelector.setActive(true);
   
   // Render menu scene
@@ -210,46 +227,73 @@ private function showMenu() {
 }
 
 /*=============================================================================
+ * modeMenuSelect()
+ *
+ * This function selects an option from the game mode menu
+ *===========================================================================*/
+private function modeMenuSelect() {
+  whitelog("--+ New Game +--");
+  
+  // initiate fade out
+  addEffectToComponent(FADE_IN, "Title_Fade_Component", 0.75);
+  
+  // Set new scene controls
+  currentUIScene = STOP_ALL_INPUT; 
+  
+  // Audio controls
+  gameinfo.sfxBox.playSFX(SFX_MENU_ACCEPT);
+  jukebox.fadeOut(1);
+  
+  // Wait to launch new game
+  newGameTimer = gameInfo.Spawn(class'ROTTTimer');
+  newGameTimer.makeTimer(1.0, LOOP_OFF, showIntroPage);
+  
+  // Deactivate selector
+  menuSelector.setActive(false);
+  
+  // Set game mode
+  gameInfo.newGameSetup(GameModes(menuSelector.getSelection()));
+  
+}
+
+/*=============================================================================
  * menuSelect()
  *
- * This function selects an option from the menu
+ * This function selects an option from the gameplay menu
  *===========================================================================*/
 private function menuSelect() {
   switch (menuSelector.getSelection()) {
     case NEW_GAME:
-      whitelog("--+ New Game +--");
+      // Hide this menu
+      titleMenuOptions.setEnabled(true);
+      // Show game mode menu
+      gameModeMenuOptions.setEnabled(true);
       
-      // initiate fade out
-      addEffectToComponent(FADE_IN, "Title_Fade_Component", 0.75);
+      // Update viewmode data for this menu
+      currentUIScene = GAMEMODE_MENU_VISIBLE;
       
-      // Set new scene controls
-      currentUIScene = STOP_ALL_INPUT; 
+      // Reset selector
+      menuSelector.resetSelection();
+      menuSelector.setNumberOfMenuOptions(3);
       
-      // Audio controls
+      // Play audio
       gameinfo.sfxBox.playSFX(SFX_MENU_ACCEPT);
-      jukebox.FadeOut(1);
-      
-      // Wait to launch new game
-      newGameTimer = gameInfo.Spawn(class'ROTTTimer');
-      newGameTimer.makeTimer(1.0, LOOP_OFF, showIntroPage);
-      
-      // Deactivate selector
-      menuSelector.setActive(false);
       break;
       
     case CONTINUE_GAME:
       whitelog("--+ Continue Game +--");
+      // Attempt to load game
       if (gameInfo.loadSavedGame()) {
-        // We actually need to transition save before we load the town
-        gameInfo.saveGame(true); /// transition
+        // If loaded successfully, save for transition
+        gameInfo.saveGame(true);
         
-        // Transition
+        // Queue transition
         gameInfo.sceneManager.sceneTitleScreen.transitionContinue();
         
         // Deactivate selector
         menuSelector.setActive(false);
       } else {
-        // save file does not exist
+        // Save file does not exist, play sound
         gameinfo.sfxBox.playSFX(SFX_MENU_INSUFFICIENT); 
         redlog("Save file does not exist");
       }
@@ -342,15 +386,24 @@ defaultProperties
 	end object
   inputList.add(Input_A)
   
+	begin object class=ROTT_Input_Handler Name=Input_B
+    inputName="XBoxTypeS_B"
+		buttonComponent=none
+	end object
+  inputList.add(Input_B)
+  
 	/** ===== Textures ===== **/
 	begin object class=UI_Texture_Info Name=Title_Image_Texture
     componentTextures.add(Texture2D'GUI.Tempest_Stronghold_Title')
   end object
-	begin object class=UI_Texture_Info Name=Menu_Options_Texture
+	begin object class=UI_Texture_Info Name=Title_Menu_Buttons_Texture
     componentTextures.add(Texture2D'GUI.Title_Menu_Buttons')
   end object
-	begin object class=UI_Texture_Info Name=Menu_Options_Disabled_Texture
+	begin object class=UI_Texture_Info Name=Title_Menu_Buttons_Disabled_Texture
     componentTextures.add(Texture2D'GUI.Title_Menu_Buttons_Disabled')
+  end object
+	begin object class=UI_Texture_Info Name=Game_Mode_Menu_Buttons_Texture
+    componentTextures.add(Texture2D'GUI.Game_Mode_Menu_Buttons')
   end object
 	begin object class=UI_Texture_Info Name=Black_Texture
 		componentTextures.add(Texture2D'GUI.Black_Square')
@@ -370,16 +423,26 @@ defaultProperties
 	end object
 	componentList.add(Game_Title_Image)
   
-  // Options backgrouns
+  // Game Play Options
 	begin object class=UI_Sprite Name=Title_Menu_Options
 		tag="Title_Menu_Options"
     bEnabled=false
 		posX=539
 		posY=547
-		images(0)=Menu_Options_Texture
-		images(1)=Menu_Options_Disabled_Texture
+		images(0)=Title_Menu_Buttons_Texture
+		images(1)=Title_Menu_Buttons_Disabled_Texture
 	end object
 	componentList.add(Title_Menu_Options)
+	
+  // Game Mode Options
+	begin object class=UI_Sprite Name=Game_Mode_Menu_Options
+		tag="Game_Mode_Menu_Options"
+    bEnabled=false
+		posX=539
+		posY=547
+		images(0)=Game_Mode_Menu_Buttons_Texture
+	end object
+	componentList.add(Game_Mode_Menu_Options)
 	
   // Selector
 	begin object class=UI_Selector Name=Title_Menu_Selector

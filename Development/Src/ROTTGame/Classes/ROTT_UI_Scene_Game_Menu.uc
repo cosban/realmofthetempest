@@ -33,7 +33,10 @@ enum GameMenuPages {
   REINVEST_SKILL_MENU,
   HYPER_SKILLTREE,
   
-  ARTIFACT_COLLECTION
+  ARTIFACT_COLLECTION,
+  
+  PROFILE_SCREEN,
+  GUIDE_SCREEN,
 };
 
 /** ============================== **/
@@ -63,6 +66,9 @@ var private ROTT_UI_Page_Reset_Skill_Preview resetSkillPreview;
 var private ROTT_UI_Page_Hyper_Skilltree hyperSkilltree;
 
 var private ROTT_UI_Page_Enchantments enchantmentsPage;
+
+var private ROTT_UI_Page_Profile profilePage;
+var private ROTT_UI_Page_Guide guidePage;
 
 // Additional navigation graphics
 var private UI_Sprite pageNavigationArrows;
@@ -101,6 +107,9 @@ event initScene() {
   hyperSkilltree = ROTT_UI_Page_Hyper_Skilltree(findComp("Hyper_Skilltree_UI"));
   
   enchantmentsPage = ROTT_UI_Page_Enchantments(findComp("Page_Enchantment_Collection"));
+  
+  profilePage = ROTT_UI_Page_Profile(findComp("Page_Profile"));
+  guidePage = ROTT_UI_Page_Guide(findComp("Page_Guide"));
   
   // Navigation assets
   pageNavigationArrows = UI_Sprite(findComp("Page_Navigation_Arrow_Sprite"));
@@ -222,6 +231,8 @@ public function pushMenu(GameMenuPages menu) {
     case MASTERY_SKILLTREE:   pushPage(masterySkilltree);    break;
     
     case INVENTORY_MENU:      pushPage(inventoryScreen);     break;
+    case PROFILE_SCREEN:      pushPage(profilePage);         break;
+    case GUIDE_SCREEN:        pushPage(guidePage);           break;
     
     // Push without focus
     case MGMT_WINDOW_STATS:   pushPage(mgmtWindowStats, false);     break;
@@ -334,7 +345,7 @@ public function transitionToHeroStats() {
 /*============================================================================= 
  * Assets
  *===========================================================================*/
-defaultproperties
+defaultProperties
 {
   // Scene frame
   begin object class=ROTT_UI_Screen_Frame Name=Screen_Frame
@@ -472,6 +483,18 @@ defaultproperties
     tag="Page_Enchantment_Collection"
   end object
   pageComponents.add(Page_Enchantment_Collection)
+
+  // Profile
+  begin object class=ROTT_UI_Page_Profile Name=Page_Profile
+    tag="Page_Profile"
+  end object
+  pageComponents.add(Page_Profile)
+
+  // Guide
+  begin object class=ROTT_UI_Page_Guide Name=Page_Guide
+    tag="Page_Guide"
+  end object
+  pageComponents.add(Page_Guide)
 
   /** ===== UI Components ===== **/
   // Page Navigation Graphics

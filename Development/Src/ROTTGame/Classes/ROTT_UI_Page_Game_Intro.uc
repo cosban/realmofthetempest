@@ -114,12 +114,12 @@ public function elapseTimers(float deltaTime) {
     
     // Start new game after effect
     if (elapsedEffectTime > 1.35) {
-      // Set up a new player profile
-      gameInfo.newGameSetup();
-      
       // Load the NPC intro
       gameInfo.openNPCDialog(class'ROTT_NPC_Aliskus');
       gameInfo.sfxBox.playSfx(SFX_AMBIENT_OMINOUS);
+      
+      // Start speedrun timer
+      gameInfo.playerProfile.bTrackTime = true;
     }
   }
 }

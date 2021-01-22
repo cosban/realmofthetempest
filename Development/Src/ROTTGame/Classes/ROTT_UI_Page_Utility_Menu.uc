@@ -77,7 +77,11 @@ event onUnfocusMenu() {
 protected function navigationRoutineA() {
   switch (UtilityMenuItems(utilitySelector.getSelection())) {
     case UTILITY_PROFILE:
+      // Sfx
+      gameInfo.sfxBox.playSfx(SFX_MENU_ACCEPT);
       
+      // Push profile
+      parentScene.pushPageByTag("Page_Profile");
       break;
     case UTILITY_TEAM_MANAGER:
       if (gameInfo.isInTown()) {
@@ -109,7 +113,11 @@ protected function navigationRoutineA() {
       gameInfo.sfxBox.playSfx(SFX_MENU_ACCEPT);
       break;
     case UTILITY_GUIDE:
+      // Sfx
+      gameInfo.sfxBox.playSfx(SFX_MENU_ACCEPT);
       
+      // Push Guide Page
+      parentScene.pushPageByTag("Page_Guide");
       break;
     case UTILITY_HYPER_GLYPHS:
       if (gameInfo.playerProfile.hyperUnlocked) {
