@@ -29,6 +29,17 @@ var privatewrite int saveInfoPartySize;
 // Party index corresponds to this party's position in the parent data structure
 var privatewrite int partyIndex;
 
+// Persistent statistic tracking (These stats are never reset)
+enum PersistentStatEnum {
+  TRACK_MONSTERS_SLAIN,  
+  TRACK_CHAMPIONS_SLAIN, 
+  TRACK_MINIBOSSES_SLAIN,
+  TRACK_BOSSES_SLAIN,    
+};
+
+// Persistent statistics that are never reset
+var public float persistentStatistics[PersistentStatEnum];
+
 enum PartyStatusModes {
   PARTY_ACTIVE,           // Green  - Party currently controlled by player
   PARTY_IDLE,             // Tan
@@ -93,6 +104,37 @@ public function initialize(int index) {
 }
 
 /*=============================================================================
+ * updateSlayTracking()
+ *
+ * Tracks the slain monster types for the player's profile information.
+ *===========================================================================*/
+public function updateSlayTracking(ROTT_Mob mob) {
+  local int i;
+  
+  for (i = 0; i < mob.getMaxMobSize(); i++) {
+    // Check if monster exists
+    if (mob.getEnemy(i) != none) {
+      // Count monster kill in advance
+      persistentStatistics[TRACK_MONSTERS_SLAIN] += 1;
+      
+      // Count special mob kills
+      switch (mob.getEnemy(i).spawnType) {
+        case SPAWN_BOSS:
+          persistentStatistics[TRACK_BOSSES_SLAIN] += 1;
+          break;
+        case SPAWN_MINIBOSS:
+          persistentStatistics[TRACK_MINIBOSSES_SLAIN] += 1;
+          break;
+        case SPAWN_CHAMPION:
+          persistentStatistics[TRACK_CHAMPIONS_SLAIN] += 1;
+          break;
+      }
+    }
+  }
+}
+
+
+/*=============================================================================
  * getUnspentHeroesRange()
  *
  * Returns an array of valid selection indices
@@ -146,34 +188,16 @@ public function int getHardcoreOmniBonus() {
   
 /*=============================================================================
  * getTotalBossesSlain()
- *
- *
  *===========================================================================*/
 public function int getTotalBossesSlain() {
-  local int slayCount;
-  local int i;
-  
-  for (i = 0; i < getPartySize(); i++) {
-    slayCount += getHero(i).persistentStatistics[TRACK_BOSSES_SLAIN];
-  }
-  
-  return slayCount;
+  return persistentStatistics[TRACK_BOSSES_SLAIN];
 }
   
 /*=============================================================================
  * getTotalMonsersSlain()
- *
- *
  *===========================================================================*/
 public function int getTotalMonsersSlain() {
-  local int slayCount;
-  local int i;
-  
-  for (i = 0; i < getPartySize(); i++) {
-    slayCount += getHero(i).persistentStatistics[TRACK_MONSTERS_SLAIN];
-  }
-  
-  return slayCount;
+  return persistentStatistics[TRACK_MONSTERS_SLAIN];
 }
   
 /*=============================================================================
@@ -361,16 +385,18 @@ public function battlePrep() {
   local int index;
   local int i;
   
+  whitelog("--- Battle Prep ---");
+  
+  // Track slaying info
+  updateSlayTracking(gameInfo.enemyEncounter);
+  
   // Clear hero information
   for (i = 0; i < heroUnits.length; i++) {
     heroUnits[i].skillReset();
     heroUnits[i].battleInit();
   }
   
-  /// Earthquake debug
-  ///violetLog(" $ " $ heroUnits[1].statBoosts[ADD_ATTACK_TIME_PERCENT]);
-  
-  // Tuna ratios
+  // Initial TUNA ratios
   ratios.addItem(0.25);
   ratios.addItem(0.50);
   ratios.addItem(0.75);
@@ -382,8 +408,6 @@ public function battlePrep() {
     
     ratios.remove(index, 1);
   }
-  
-  violetLog(" $2 " $ heroUnits[1].statBoosts[ADD_ATTACK_TIME_PERCENT]);
   
   // Clear ready units
   readyUnits.length = 0;
@@ -397,8 +421,6 @@ public function battlePrep() {
   for (i = 0; i < heroUnits.length; i++) {
     heroUnits[i].battlePrep();
   }
-  violetLog(" $3 " $ heroUnits[1].statBoosts[ADD_ATTACK_TIME_PERCENT]);
-  
 }
 
 /*=============================================================================

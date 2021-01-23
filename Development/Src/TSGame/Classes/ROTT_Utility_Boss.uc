@@ -133,7 +133,7 @@ private function disableBeacon() {
 /*=============================================================================
  * Default properties
  *===========================================================================*/
-defaultproperties
+defaultProperties
 {
   // Beacon settings
   bEnabled=true
@@ -143,23 +143,23 @@ defaultproperties
 	CollisionType=COLLIDE_TouchAll
 	
   // Collision Mesh
-	Begin Object Class=CylinderComponent Name=CylinderComp
+	begin object Class=CylinderComponent Name=CylinderComp
     CollisionRadius=128
     CollisionHeight=480
     CollideActors=true        
     BlockActors=false
-  End Object
-  Components.Add(CylinderComp)
+  end object
+  components.add(CylinderComp)
   CollisionComponent=CylinderComp  
   
   // Static Mesh
-	Begin Object class=StaticMeshComponent name=Beacon_Mesh
+	begin object class=StaticMeshComponent name=Beacon_Mesh
 		StaticMesh=StaticMesh'ROTT_Utilities.Beacons.Boss_Beacon'
     bForceDirectLightMap=True
     bUsePrecomputedShadows=True
     LightingChannels=(bInitialized=True,Static=True)
-	End Object
-	Components.Add(Beacon_Mesh);
+	end object
+	components.Add(Beacon_Mesh);
 	beaconMesh=Beacon_Mesh
 	StaticMeshComponent=Beacon_Mesh
 

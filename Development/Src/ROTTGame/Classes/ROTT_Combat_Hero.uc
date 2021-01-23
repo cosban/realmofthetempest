@@ -120,20 +120,14 @@ enum StatisticEnum {
 var public float battleStatistics[StatisticEnum];
 
 // Persistent statistic tracking (These stats are never reset)
-enum PersistentStatEnum {
-  TRACK_MONSTERS_SLAIN,            ///
-  TRACK_CHAMPIONS_SLAIN,           ///
-  TRACK_MINIBOSSES_SLAIN,          ///
-  TRACK_BOSSES_SLAIN,              ///
-  
+enum PersistentHeroEnum {
   TRACK_PHYSICAL_DAMAGE,           ///
   TRACK_ELEMENTAL_DAMAGE,          ///
   TRACK_ATMOSPHERIC_DAMAGE,        ///
-  
 };
 
 // Persistent statistics that are never reset
-var public float persistentStatistics[PersistentStatEnum];
+var public float persistentStatistics[PersistentHeroEnum];
 
 // Held Item reference
 /* to do ... */
