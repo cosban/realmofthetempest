@@ -175,7 +175,13 @@ public function setMasteryHighlights(ROTT_Combat_Hero hero) {
   getSkillColor(3, MASTERY_ARMOR, MASTERY_TREE, hero);
   getSkillColor(4, MASTERY_DAMAGE, MASTERY_TREE, hero);
   getSkillColor(5, -1, -1, hero);
-  getSkillColor(6, MASTERY_RESURRECT, MASTERY_TREE, hero);
+  
+  if (ROTT_Game_Info(class'WorldInfo'.static.getWorldInfo().game).playerProfile.gameMode == MODE_HARDCORE) {
+    getSkillColor(6, MASTERY_OMNI_SEEKER, MASTERY_TREE, hero);
+  } else {
+    getSkillColor(6, MASTERY_RESURRECT, MASTERY_TREE, hero);
+  }
+  
   getSkillColor(7, MASTERY_MANA, MASTERY_TREE, hero);
   getSkillColor(8, MASTERY_SPEED, MASTERY_TREE, hero);
   getSkillColor(9, MASTERY_DODGE, MASTERY_TREE, hero);

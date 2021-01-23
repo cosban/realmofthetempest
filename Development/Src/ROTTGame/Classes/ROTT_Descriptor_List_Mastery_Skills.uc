@@ -23,6 +23,7 @@ enum MasterySkills {
   MASTERY_DODGE,
   MASTERY_ACCURACY,
   MASTERY_RESURRECT,
+  MASTERY_OMNI_SEEKER,
 };
 
 /*=============================================================================
@@ -40,6 +41,7 @@ defaultProperties
   scriptClasses(MASTERY_DODGE)=class'ROTT_Descriptor_Skill_Mastery_Dodge'
   scriptClasses(MASTERY_ACCURACY)=class'ROTT_Descriptor_Skill_Mastery_Accuracy'
   scriptClasses(MASTERY_RESURRECT)=class'ROTT_Descriptor_Skill_Mastery_Resurrect'
+  scriptClasses(MASTERY_OMNI_SEEKER)=class'ROTT_Descriptor_Skill_Mastery_Omni_Seeker'
   
   /** ================================================================
   Do not attach static objects here, they need to know gameInfo, which

@@ -129,6 +129,22 @@ public function array<bool> getValidHeroesRange() {
 }
 
 /*=============================================================================
+ * getHardcoreOmniBonus()
+ *
+ *
+ *===========================================================================*/
+public function int getHardcoreOmniBonus() {
+  local int omniLevel;
+  local int i;
+  
+  for (i = 0; i < getPartySize(); i++) {
+    omniLevel += getHero(i).getMasteryLevel(MASTERY_OMNI_SEEKER);
+  }
+  
+  return omniLevel;
+}
+  
+/*=============================================================================
  * getTotalBossesSlain()
  *
  *

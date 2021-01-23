@@ -611,6 +611,21 @@ public function int getHeroCount() {
 }
 
 /*=============================================================================
+ * getHardcoreOmniBonus()
+ *
+ * 
+ *===========================================================================*/
+public function int getHardcoreOmniBonus() {
+  local int i, omniBoost;
+  
+  for (i = 0; i < partySystem.getNumberOfParties(); i++) {
+    omniBoost += partySystem.getParty(i).getHardcoreOmniBonus();
+  }
+  
+  return omniBoost;
+}
+
+/*=============================================================================
  * getTotalBossesSlain()
  *
  * 
@@ -765,7 +780,19 @@ public function bool toggleEventStatus(TopicList targetTopic) {
 public function int getEnchantBoost(coerce byte enchantmentIndex) {
   local int bonus;
   
+  // Get hard stat point level
   bonus = enchantmentLevels[enchantmentIndex];
+  
+  // Catch additional bonuses
+  switch(enchantmentIndex) {
+    case OMNI_SEEKER:
+      if (gameInfo.playerProfile.gameMode == MODE_HARDCORE) {
+        bonus += getHardcoreOmniBonus();
+      }
+      break;
+  }
+  
+  // Multiply by bonus per level, as stated in the descriptors
   bonus *= class'ROTT_Descriptor_Enchantment_List'.static.getEnchantment(enchantmentIndex).bonusPerLevel;
   
   return bonus;

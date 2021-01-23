@@ -366,7 +366,7 @@ private function byte getMasteryID() {
     case 4: return MASTERY_DAMAGE;
     case 5: return MASTERY_SPEED;
     case 6: return MASTERY_ACCURACY;
-    case 7: return MASTERY_RESURRECT;
+    case 7: return (gameInfo.playerProfile.gameMode == MODE_HARDCORE) ? MASTERY_OMNI_SEEKER : MASTERY_RESURRECT;
     case 8: return MASTERY_DODGE;
   }
 }

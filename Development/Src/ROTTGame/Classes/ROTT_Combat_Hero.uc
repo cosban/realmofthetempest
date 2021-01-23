@@ -889,6 +889,9 @@ public function int getNextLvlExp() {
  * Adds experience to the hero
  *===========================================================================*/
 public function addExp(int addedExp) {
+  // Ignore on  hardcore mode
+  if (bDead && gameInfo.playerProfile.gameMode == MODE_HARDCORE) return;
+  
   // Exp animation
   pendingExp = addedExp;
   animatedExp = experience;

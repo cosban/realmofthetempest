@@ -1512,7 +1512,10 @@ public function int moraleRoll(coerce int range) {
  * This function restores both health and mana
  *===========================================================================*/
 public function restore() {
+  // Ignore on  hardcore mode
+  if (bDead && gameInfo.playerProfile.gameMode == MODE_HARDCORE) return;
   
+  // Revert death state
   bDead = false;
   
   // Update all stats (e.g. health and mana)

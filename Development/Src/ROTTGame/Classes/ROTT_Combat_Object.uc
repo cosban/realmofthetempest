@@ -135,6 +135,7 @@ enum MechanicTypes {
   
   ADD_MIN_PHYS_DAMAGE,
   ADD_MAX_PHYS_DAMAGE,
+  
 };
  
 // A list of all skills in the glyph tree
