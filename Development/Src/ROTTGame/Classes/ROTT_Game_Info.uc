@@ -13,11 +13,11 @@ dependsOn(ROTT_UI_Scene_Manager)
 dependsOn(ROTT_NPC_Container);
  
 // Version info
-const MAJOR = 1;  const MINOR = 5;  const REVISION = 1;  const PATCH = 'f';  
+const MAJOR = 1;  const MINOR = 5;  const REVISION = 1;  const PATCH = 'g';  
 const PHASE_INFO = "III";
 
 // Publishing settings
-const bDevMode = false;      
+const bDevMode = true;      
 const bQaMode = true;     
 
 // Parameters used in ROTTTimers:
