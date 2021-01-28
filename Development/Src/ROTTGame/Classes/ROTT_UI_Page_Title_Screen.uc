@@ -196,7 +196,10 @@ protected function navigationRoutineB() {
     titleMenuOptions.setEnabled(true);
     // Show game mode menu
     gameModeMenuOptions.setEnabled(false);
-  
+    // Set number of options
+    menuSelector.setNumberOfMenuOptions(2);
+    menuSelector.resetSelection();
+    
     // Sfx
     gameInfo.sfxBox.playSfx(SFX_MENU_BACK);
   }
