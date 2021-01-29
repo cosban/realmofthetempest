@@ -10,6 +10,7 @@
  
 class ROTT_Combat_Unit extends ROTT_Combat_Object
 dependsOn(ROTT_Descriptor_Hero_Skill)
+dependsOn(ROTT_Descriptor_Rituals)
 abstract;
 
 // Some constants for reporting mana
@@ -52,6 +53,9 @@ enum SubStatTypes {
   RESURRECTION_CURRENT,
   RESURRECTION_LIMIT,
   
+  HEALTH_REGEN,
+  MANA_REGEN,
+  
   ARMOR_RATING
 };
 
@@ -78,6 +82,9 @@ var protectedwrite AffinityEnum statAffinities[StatTypes];
 
 // Stores sub stats resulting from primary stats
 var protectedwrite float subStats[SubStatTypes]; 
+
+// Store count of rituals player performs
+var protectedwrite float ritualStatBoosts[RitualTypes];
 
 // Stores a copy of the current interval, so changes in speed rating dont effect the current bar
 var protectedwrite float currentAtkInterval; 
@@ -1143,6 +1150,9 @@ public function updateSubStats() {
   }
   if (subStats[ARMOR_RATING] < 0) subStats[ARMOR_RATING] = 0;
   
+  // Add ritual boosts
+  addRitualBoosts();
+
   // Clamp health, mana, tuna
   if (subStats[CURRENT_HEALTH] > subStats[MAX_HEALTH]) {
     subStats[CURRENT_HEALTH] = subStats[MAX_HEALTH];
@@ -1186,7 +1196,13 @@ public function updateSubStats() {
     setStatusDemoralized(false);
   }
 }
-
+/*============================================================================= 
+ * addRitualBoosts()
+ *
+ * Provides boosts from rituals
+ *===========================================================================*/
+public function addRitualBoosts();
+  
 /*=============================================================================
  * addStatus()
  *

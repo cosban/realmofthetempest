@@ -189,7 +189,7 @@ private function renderHeroData(ROTT_Combat_Hero hero) {
   statisticValues.renderHeroData(hero);
   expInfo.attachDisplayer(hero);
   
-  // Icon boosts
+  // Icon boosts for profile wide enchantments
   for (i = 0; i < class'ROTT_Descriptor_Enchantment_List'.static.countEnchantmentEnum(); i++) {
     enchantIcon = UI_Container(findComp("Enchant_Icons_" $ string(GetEnum(enum'EnchantmentEnum', i))));
     // Show or hide each enchantment boost
@@ -201,6 +201,18 @@ private function renderHeroData(ROTT_Combat_Hero hero) {
       }
     }
   }
+  
+  // Check for individual hero ritual boosts
+  if (hero.subStats[MANA_REGEN] > 0)
+    UI_Container(findComp("Enchant_Icons_ETERNAL_SPELLSTONE")).setEnabled(true);
+  if (hero.subStats[HEALTH_REGEN] > 0)
+    UI_Container(findComp("Enchant_Icons_ROSEWOOD_PENDANT")).setEnabled(true);
+  
+  if (hero.getRitualAmp(RITUAL_HEALTH_BOOST) > 0)
+    UI_Container(findComp("Enchant_Icons_ARCANE_BLOODPRISM")).setEnabled(true);
+  if (hero.getRitualAmp(RITUAL_MANA_BOOST) > 0)
+    UI_Container(findComp("Enchant_Icons_MYSTIC_MARBLE")).setEnabled(true);
+  
 }
 
 /*============================================================================= 

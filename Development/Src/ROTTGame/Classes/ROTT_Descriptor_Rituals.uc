@@ -8,6 +8,7 @@
  *===========================================================================*/
   
 class ROTT_Descriptor_Rituals extends ROTTObject
+dependsOn(ROTT_Game_Info)
 abstract;
 
 enum RitualTypes {
@@ -17,7 +18,7 @@ enum RitualTypes {
   RITUAL_MANA_BOOST,
   RITUAL_HEALTH_REGEN,
   RITUAL_HEALTH_BOOST,
-  
+  RITUAL_ARMOR,
 };
   
 /*=============================================================================
@@ -72,6 +73,27 @@ public static function array<ItemCost> getRitualCost(RitualTypes ritualType) {
   
   // Return list
   return costList;
+}
+
+/*=============================================================================
+ * getRitualBoost()
+ * 
+ * returns the amplitude of the boost per ritual performance
+ *===========================================================================*/
+public static function float getRitualBoost(RitualTypes ritualType) {
+  // Return amp by ritual type
+  switch (ritualType) {
+    case RITUAL_EXPERIENCE_BOOST:  return 1;
+    case RITUAL_PHYSICAL_DAMAGE:   return 1;
+    case RITUAL_MANA_BOOST:        return 1;
+    case RITUAL_MANA_REGEN:        return 1;
+    case RITUAL_HEALTH_BOOST:      return 1;
+    case RITUAL_HEALTH_REGEN:      return 1;
+    case RITUAL_ARMOR:             return 1;
+  }
+  
+  yellowLog("Warning (!) Unhandled ritual type: " $ ritualType);
+  return 1;
 }
 
 /*=============================================================================

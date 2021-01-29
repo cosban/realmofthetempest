@@ -14,12 +14,16 @@ class ROTT_Kismet_Event_Shrine_Use extends SequenceEvent;
 // Include colored debug logs
 `include(ROTTColorLogs.h)
 
+var(Shrine) protectedwrite RitualTypes donationType;
+
+/// # Add output links for each ritual type
+
 /*=============================================================================
  * activated()
  *
  * Called when the kismet node is called from the player
  *===========================================================================*/
-event Activated()
+event activated()
 {
   darkgreenlog("Executing shrine event operations");
 }
@@ -27,7 +31,7 @@ event Activated()
 /*=============================================================================
  * Default properties
  *===========================================================================*/
-defaultproperties
+defaultProperties
 {
 	objName="ShrineEvent"
 	objCategory="ROTT" 

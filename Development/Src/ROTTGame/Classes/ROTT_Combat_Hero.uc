@@ -122,9 +122,9 @@ var public float battleStatistics[StatisticEnum];
 
 // Persistent statistic tracking (These stats are never reset)
 enum PersistentHeroEnum {
-  TRACK_PHYSICAL_DAMAGE,           ///
-  TRACK_ELEMENTAL_DAMAGE,          ///
-  TRACK_ATMOSPHERIC_DAMAGE,        ///
+  TRACK_PHYSICAL_DAMAGE,    
+  TRACK_ELEMENTAL_DAMAGE,   
+  TRACK_ATMOSPHERIC_DAMAGE, 
 };
 
 // Persistent statistics that are never reset
@@ -343,7 +343,6 @@ public function onAnalysisComplete() {
   super.onAnalysisComplete();
   
   // Heal
-  ///if (!bDead) restore();
   restore();
   
   // Reset selection
@@ -495,6 +494,43 @@ public function int getMasteryLevel(int index) {
  *===========================================================================*/
 public function int getPrimaryStat(StatTypes statType) {
   return super.getPrimaryStat(statType);
+}
+
+/*============================================================================= 
+ * addRitualBoosts()
+ *
+ * Provides boosts from rituals, shrine donations
+ *===========================================================================*/
+public function addRitualBoosts() {
+  // Max health
+	subStats[MAX_HEALTH] += getRitualAmp(RITUAL_HEALTH_BOOST);
+  
+  // Max Mana
+	subStats[MAX_MANA] += getRitualAmp(RITUAL_MANA_BOOST);
+  
+  // Regen enchantments and rituals
+  subStats[HEALTH_REGEN] = gameInfo.playerProfile.getEnchantBoost(ROSEWOOD_PENDANT);
+  subStats[MANA_REGEN] = gameInfo.playerProfile.getEnchantBoost(ETERNAL_SPELLSTONE);
+  
+  subStats[HEALTH_REGEN] += getRitualAmp(RITUAL_HEALTH_REGEN);
+  subStats[MANA_REGEN] += getRitualAmp(RITUAL_MANA_REGEN);
+  
+	subStats[MIN_PHYSICAL_DAMAGE] *= 1 + getRitualAmp(RITUAL_PHYSICAL_DAMAGE) / 100.f;
+	subStats[MAX_PHYSICAL_DAMAGE] *= 1 + getRitualAmp(RITUAL_PHYSICAL_DAMAGE) / 100.f;
+  
+  // Armor
+  subStats[ARMOR_RATING] += getRitualAmp(RITUAL_ARMOR);
+}
+
+/*============================================================================= 
+ * getRitualAmp()
+ *
+ * Returns the full amplitude as the product of ritual level and boost level.
+ *===========================================================================*/
+public function float getRitualAmp(RitualTypes ritualType) {
+  local int lvl; lvl = ritualStatBoosts[ritualType];
+  
+	return lvl * class'ROTT_Descriptor_Rituals'.static.getRitualBoost(ritualType);
 }
 
 /**============================================================================= 
@@ -1119,7 +1155,10 @@ public function bool shrineRitual(RitualTypes ritualType) {
     return false;
   }
   
-  // Provide ritual stat boost
+  // Count ritual
+  ritualStatBoosts[ritualType] += 1;
+  
+  // Provide permanent boost
   switch (ritualType) {
     case RITUAL_EXPERIENCE_BOOST:
       addExpByPercent(1 / 16.f);
@@ -1585,11 +1624,11 @@ public function elapseTime(float deltaTime) {
   masterySkillSet.onTick(self, deltaTime); 
   
   // Enchanted mana regen
-  m = gameInfo.playerProfile.getEnchantBoost(ETERNAL_SPELLSTONE) * deltaTime;
+  m = subStats[MANA_REGEN] * deltaTime;
   recoverMana(m, false, true);
   
   // Enchanted health regen
-  m = gameInfo.playerProfile.getEnchantBoost(ROSEWOOD_PENDANT) * deltaTime;
+  m = subStats[HEALTH_REGEN] * deltaTime;
   d = subStats[MAX_HEALTH] - subStats[CURRENT_HEALTH];
   if (m > d) m = d;
   subStats[CURRENT_HEALTH] += m;

@@ -39,7 +39,7 @@ event activated() {
 /*=============================================================================
  * Default Properties
  *===========================================================================*/
-defaultproperties
+defaultProperties
 {
 	ObjName="Open_Interface_Sequence"
 	ObjCategory="ROTT"
