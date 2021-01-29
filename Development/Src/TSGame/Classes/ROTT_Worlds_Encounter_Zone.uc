@@ -96,7 +96,7 @@ simulated event postBeginPlay() {
   enemyClasses[Orcus]=class'ROTT_Combat_Enemy_Orcus';
   
   // Overlord
-  ///enemyClasses[Overlord]=class'ROTT_Combat_Enemy_Overlord';
+  enemyClasses[Overlord]=class'ROTT_Combat_Enemy_Overlord';
   
   // Phantom Brute 
   enemyClasses[Phantom_Brute]=class'ROTT_Combat_Enemy_Phantom_Brute';

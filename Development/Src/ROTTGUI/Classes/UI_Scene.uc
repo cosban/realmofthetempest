@@ -154,8 +154,6 @@ public function object findSelectedObject(class<object> searchType) {
 public function bool removeObjectSelection(class<object> searchType) {
   local int i;
   
-  `log("Removing: " $ searchType);
-  scripttrace();
   for (i = 0; i < selectedObjects.length; i++) {
     if (selectedObjects[i].class == searchType) {
       // Remove selected object
@@ -174,8 +172,6 @@ public function bool removeObjectSelection(class<object> searchType) {
 final public function bool selectObject(object target) {
   // Check if selection exists
   if (target == none) return false;
-  
-  `log("Preparing to sSelectz: " $ target.class);
   
   /// Check if already selected?
   //if (selectedObjects.length > 0) {

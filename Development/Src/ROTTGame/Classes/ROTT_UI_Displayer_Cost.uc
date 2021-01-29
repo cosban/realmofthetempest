@@ -47,11 +47,64 @@ public function elapseTimer(float deltaTime, float gameSpeedOverride) {
 }
 
 /*=============================================================================
+ * setDonationCost()
+ *
+ * Sets costs specifically for a shrine donation
+ *===========================================================================*/
+public function setDonationCost(ItemCost costInfo) {
+  currencyType = costInfo.currencyType;
+  costValue = costInfo.quantity;
+  
+  switch(currencyType) {
+    case class'ROTT_Inventory_Item_Gold':
+      costDescriptionText = "Gold donation:";
+      break;
+    case class'ROTT_Inventory_Item_Gem':
+      costDescriptionText = "Gem donation:";
+      break;
+      
+    case class'ROTT_Inventory_Item_Herb':
+      costDescriptionText = "Herb donation:";
+      break;
+      
+    case class'ROTT_Inventory_Item_Bottle_Nettle_Roots':
+      costDescriptionText = "Bottle donation:";
+      break;
+    case class'ROTT_Inventory_Item_Bottle_Harrier_Claws':
+      costDescriptionText = "Bottle donation:";
+      break;
+    case class'ROTT_Inventory_Item_Bottle_Faerie_Bones':
+      costDescriptionText = "Bottle donation:";
+      break;
+    case class'ROTT_Inventory_Item_Bottle_Swamp_Husks':
+      costDescriptionText = "Bottle donation:";
+      break;
+      
+    case class'ROTT_Inventory_Item_Charm_Kamita':
+      costDescriptionText = "Charm donation:";
+      break;
+    case class'ROTT_Inventory_Item_Charm_Eluvi':
+      costDescriptionText = "Charm donation:";
+      break;
+    case class'ROTT_Inventory_Item_Charm_Bayuta':
+      costDescriptionText = "Charm donation:";
+      break;
+      
+    default:
+      costDescriptionText = "Unhandled type " $ costInfo.currencyType;
+      break;
+  }
+}
+
+/*=============================================================================
  * refresh()
  *
  * Called to update the gold and gems
  *===========================================================================*/
 public function refresh() {
+  // Hide or show based on existing cost value
+  setEnabled(!(costValue == 0));
+  
   // Set the cost description
   costDescription.setText(costDescriptionText);
   

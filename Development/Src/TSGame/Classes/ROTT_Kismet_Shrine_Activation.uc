@@ -7,17 +7,12 @@
  * Description: This kismet event is triggered through using the shrine.
  *===========================================================================*/
 
-class ROTT_Kismet_Shrine_Activation extends SequenceAction;
+class ROTT_Kismet_Shrine_Activation extends SequenceAction
+dependsOn(ROTT_Descriptor_Rituals);
 
 enum ShrineRituals {
   // Item shrines
-  RITUAL_HERB,
-  RITUAL_FEATHER,
-  RITUAL_FANG,
-  RITUAL_POTION,
-  RITUAL_TOME,
-  RITUAL_ELIXIR,
-  RITUAL_RUNE,
+  RITUAL_DONATION,
   
   // Monument shrines
   RITUAL_OBELISK,
@@ -27,6 +22,7 @@ enum ShrineRituals {
 
 // Selected in kismet to specify shrine operations
 var(Shrine) protectedwrite ShrineRituals shrineType;
+var(Shrine) protectedwrite RitualTypes donationType;
 
 // References
 var private ROTT_Game_Info gameInfo;
@@ -47,9 +43,10 @@ event activated() {
   
   // Execute shrine behavior
   switch (shrineType) {
-    case RITUAL_HERB:
+    case RITUAL_DONATION:
       // Open shrine offerings
       gameInfo.sceneManager.switchScene(SCENE_SERVICE_SHRINE);
+      gameInfo.sceneManager.sceneServiceShrine.launchShrine(donationType);
       break;
       
     case RITUAL_OBELISK:

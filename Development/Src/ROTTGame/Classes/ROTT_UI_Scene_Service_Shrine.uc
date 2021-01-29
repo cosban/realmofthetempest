@@ -13,6 +13,9 @@ class ROTT_UI_Scene_Service_Shrine extends ROTT_UI_Scene;
 var privatewrite ROTT_UI_Page_Party_Selection partySelection;
 var privatewrite ROTT_UI_Page_Stats_Inspection statsInspection;
 var privatewrite ROTT_UI_Page_Mgmt_Window_Shrine_Offering shrineMgmt;
+var privatewrite ROTT_UI_Page serviceInfoShrine;
+var privatewrite UI_Label donationInfo1;
+var privatewrite UI_Label donationInfo2;
 
 // Party
 var private ROTT_UI_Party_Display partyDisplayer;
@@ -31,7 +34,50 @@ event initScene() {
   shrineMgmt = ROTT_UI_Page_Mgmt_Window_Shrine_Offering(findComp("Shrine_Management_UI"));
   
   // References
-  partyDisplayer = ROTT_UI_Party_Display(ROTT_UI_Page(findComp("Service_Info_Herb_Shrine")).findComp("Party_Displayer"));
+  serviceInfoShrine = ROTT_UI_Page(findComp("Service_Info_Shrine"));
+  partyDisplayer = ROTT_UI_Party_Display(serviceInfoShrine.findComp("Party_Displayer"));
+  donationInfo1 = UI_Label(serviceInfoShrine.findComp("Item_Donation_Info_Line_1"));
+  donationInfo2 = UI_Label(serviceInfoShrine.findComp("Item_Donation_Info_Line_2"));
+  
+}
+
+/*=============================================================================
+ * launchShrine()
+ *
+ * Used to set the donation parameters
+ *===========================================================================*/
+public function launchShrine(RitualTypes donationType) {
+  // Set donation process information
+  switch (donationType) {
+    case RITUAL_EXPERIENCE_BOOST:
+      donationInfo1.setText("Donating herbs at this shrine provides");
+      donationInfo2.setText("experience to the character chosen.");
+      break;
+    case RITUAL_MANA_REGEN:
+      donationInfo1.setText("Donating at this shrine provides");
+      donationInfo2.setText("mana regen to the character chosen.");
+      break;
+    case RITUAL_MANA_BOOST:
+      donationInfo1.setText("Donating at this shrine provides higher");
+      donationInfo2.setText("mana to the character chosen.");
+      break;
+    case RITUAL_PHYSICAL_DAMAGE:
+      donationInfo1.setText("Donating at this shrine provides higher");
+      donationInfo2.setText("physical damage to the character chosen.");
+      break;
+    case RITUAL_HEALTH_BOOST:
+      donationInfo1.setText("Donating at this shrine provides higher");
+      donationInfo2.setText("health to the character chosen.");
+      break;
+    case RITUAL_HEALTH_REGEN:
+      donationInfo1.setText("Donating at this shrine provides");
+      donationInfo2.setText("health regen to the character chosen.");
+      break;
+  }
+  
+  // Set donation cost parameters
+  shrineMgmt.setRitualType(donationType);
+  refresh();
 }
 
 /*=============================================================================
@@ -129,8 +175,8 @@ defaultProperties
 	pageComponents.add(Shrine_Management_UI)
   
   // Service info
-	begin object class=ROTT_UI_Page Name=Service_Info_Herb_Shrine
-		tag="Service_Info_Herb_Shrine"
+	begin object class=ROTT_UI_Page Name=Service_Info_Shrine
+		tag="Service_Info_Shrine"
     bInitialPage=true
     
     // Half size window
@@ -163,8 +209,8 @@ defaultProperties
       
     /** Test description stuff? **/
     // Mgmt Window - Title Label
-    begin object class=UI_Label Name=Mgmt_Window_Label_0
-      tag="Mgmt_Window_Label_0"
+    begin object class=UI_Label Name=Sub_Header_Label
+      tag="Sub_Header_Label"
       posX=0
       posY=112
       posXEnd=720
@@ -174,11 +220,11 @@ defaultProperties
       labelText="(Shrine service)"
       fontStyle=DEFAULT_SMALL_GRAY
     end object
-    componentList.add(Mgmt_Window_Label_0)
+    componentList.add(Sub_Header_Label)
     
     // Mgmt Window - Description Labels
-    begin object class=UI_Label Name=Mgmt_Window_Label_1
-      tag="Mgmt_Window_Label_1"
+    begin object class=UI_Label Name=Shrine_Party_Selection_Info
+      tag="Shrine_Party_Selection_Info"
       posX=0
       posY=151
       posXEnd=720
@@ -187,10 +233,10 @@ defaultProperties
       AlignY=TOP
       labelText="Select a character."
     end object
-    componentList.add(Mgmt_Window_Label_1)
+    componentList.add(Shrine_Party_Selection_Info)
     
-    begin object class=UI_Label Name=Mgmt_Window_Label_2
-      tag="Mgmt_Window_Label_2"
+    begin object class=UI_Label Name=Item_Donation_Info_Line_1
+      tag="Item_Donation_Info_Line_1"
       posX=0
       posY=189
       posXEnd=720
@@ -199,10 +245,10 @@ defaultProperties
       AlignY=TOP
       labelText="Donating herbs at this shrine provides"
     end object
-    componentList.add(Mgmt_Window_Label_2)
+    componentList.add(Item_Donation_Info_Line_1)
     
-    begin object class=UI_Label Name=Mgmt_Window_Label_3
-      tag="Mgmt_Window_Label_3"
+    begin object class=UI_Label Name=Item_Donation_Info_Line_2
+      tag="Item_Donation_Info_Line_2"
       posX=0
       posY=216
       posXEnd=720
@@ -211,57 +257,7 @@ defaultProperties
       AlignY=TOP
       labelText="experience to the character chosen."
     end object
-    componentList.add(Mgmt_Window_Label_3)
-    
-    /*
-    begin object class=UI_Label Name=Mgmt_Window_Label_4
-      tag="Mgmt_Window_Label_4"
-      posX=0
-      posY=243
-      posXEnd=720
-      posYEnd=NATIVE_HEIGHT
-      AlignX=CENTER
-      AlignY=TOP
-      labelText=""
-    end object
-    componentList.add(Mgmt_Window_Label_4)
-    
-    begin object class=UI_Label Name=Mgmt_Window_Label_5
-      tag="Mgmt_Window_Label_5"
-      posX=0
-      posY=297
-      posXEnd=720
-      posYEnd=NATIVE_HEIGHT
-      AlignX=CENTER
-      AlignY=TOP
-      labelText=""
-    end object
-    componentList.add(Mgmt_Window_Label_5)
-    
-    begin object class=UI_Label Name=Mgmt_Window_Label_6
-      tag="Mgmt_Window_Label_6"
-      posX=0
-      posY=324
-      posXEnd=720
-      posYEnd=NATIVE_HEIGHT
-      AlignX=CENTER
-      AlignY=TOP
-      labelText=""
-    end object
-    componentList.add(Mgmt_Window_Label_6)
-    
-    begin object class=UI_Label Name=Mgmt_Window_Label_7
-      tag="Mgmt_Window_Label_7"
-      posX=0
-      posY=351
-      posXEnd=720
-      posYEnd=NATIVE_HEIGHT
-      AlignX=CENTER
-      AlignY=TOP
-      labelText=""
-    end object
-    componentList.add(Mgmt_Window_Label_7)
-    */
+    componentList.add(Item_Donation_Info_Line_2)
     
     // Party Displayer
     begin object class=ROTT_UI_Party_Display Name=Party_Displayer
@@ -275,7 +271,7 @@ defaultProperties
     componentList.add(Party_Displayer)
     
 	end object
-	pageComponents.add(Service_Info_Herb_Shrine)
+	pageComponents.add(Service_Info_Shrine)
   
   // Party selection Menu
 	begin object class=ROTT_UI_Page_Party_Selection Name=Party_Selection_UI

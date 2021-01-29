@@ -249,6 +249,35 @@ public function clearTempUI() {
 }
 
 /*=============================================================================
+ * setDonationCosts()
+ *
+ * Called to update donation costs, in order, dynamically
+ *===========================================================================*/
+public function setDonationCosts(array<ItemCost> costList) {
+  local ROTT_UI_Displayer_Cost costDisplayer;
+  local int i, k;
+  k = 0;
+  
+  // Iterate through the displayers
+  for (i = 0; i < componentList.length; i++) {
+    // Cast to cost displayer
+    costDisplayer = ROTT_UI_Displayer_Cost(componentList[i]);
+  
+    // Check for valid displayer
+    if (costDisplayer != none) {
+      if (k < costList.length) {
+        // Update cost info
+        costDisplayer.setEnabled(true);
+        costDisplayer.setDonationCost(costList[k]);
+        k++;
+      } else {
+        costDisplayer.setEnabled(false);
+      }
+    }
+  }
+}
+
+/*=============================================================================
  * setCostValues()
  *
  * Called to update all the cost displayers
@@ -285,6 +314,7 @@ public function setCostValues(array<ItemCost> costList) {
       yellowLog("Warning (!) Cost not found in UI for " $ costList[i].currencyType $ " on " $ self);
     }
   }
+  
 }
 
 /*============================================================================= 

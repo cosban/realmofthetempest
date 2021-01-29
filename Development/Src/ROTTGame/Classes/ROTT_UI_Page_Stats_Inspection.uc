@@ -263,6 +263,7 @@ public function bool preNavigateDown() {
 }
 
 public function onNavigateLeft() {
+  if (someScene == none) return;
   switch (controlState) {
     case VIEW_MODE:
       // Change view to master tree
@@ -272,6 +273,7 @@ public function onNavigateLeft() {
 }
 
 public function onNavigateRight() {
+  if (someScene == none) return;
   switch (controlState) {
     case VIEW_MODE:
       // Change view to class tree

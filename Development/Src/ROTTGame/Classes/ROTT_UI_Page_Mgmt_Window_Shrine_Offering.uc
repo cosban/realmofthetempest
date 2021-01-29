@@ -19,6 +19,13 @@ enum StatsMenuOptions {
 // Selector
 var private UI_Selector selectionBox;
 
+// Donation Costs
+var private ROTT_UI_Displayer_Cost donationCost1;
+var private ROTT_UI_Displayer_Cost donationCost2;
+
+// Selected donation type
+var privatewrite RitualTypes ritualType;
+
 /*=============================================================================
  * Initialize Component
  *
@@ -28,7 +35,21 @@ var private UI_Selector selectionBox;
 public function initializeComponent(optional string newTag = "") {
   super.initializeComponent(newTag);
   
+  // References
   selectionBox = UI_Selector(findComp("Selector"));
+  
+  donationCost1 = ROTT_UI_Displayer_Cost(findComp("Donation_Cost_1"));
+  donationCost2 = ROTT_UI_Displayer_Cost(findComp("Donation_Cost_2"));
+}
+
+/*=============================================================================
+ * setRitualType()
+ *
+ * Sets the donation parameters
+ *===========================================================================*/
+public function setRitualType(RitualTypes newRitual) {
+  ritualType = newRitual;
+  refresh();
 }
 
 /*=============================================================================
@@ -39,8 +60,15 @@ public function initializeComponent(optional string newTag = "") {
 public function refresh() {
   local int i;
   
-  // Set Blessing price tag
-  setCostValues(class'ROTT_Descriptor_Rituals'.static.getRitualCost(RITUAL_EXPERIENCE_BOOST));
+  // Reset costs
+  for (i = 0; i < componentList.length; i++) {
+    if (ROTT_UI_Displayer_Cost(componentList[i]) != none) {
+      ROTT_UI_Displayer_Cost(componentList[i]).costValue = 0;
+    }
+  }
+  
+  // Set donation price tags
+  setDonationCosts(class'ROTT_Descriptor_Rituals'.static.getRitualCost(ritualType));
   
   // Refresh costs
   for (i = 0; i < componentList.length; i++) {
@@ -103,24 +131,25 @@ protected function navigationRoutineA() {
       break;
   }
   
-  // Blessings
+  // Shrine donations
   for (i = 0; i < shrineOfferings || bMaxOffering; i++) {
-    // Attempt to bless
-    if (hero.shrineRitual()) {
+    // Attempt to donate
+    if (hero.shrineRitual(ritualType)) {
       bOfferSuccess = true;
     } else {
-      // Stop when blessing fails
+      // Stop when donation fails
       break;
     }
   }
   
-  // Attempt to invest stat points
+  // Play sound for player feedback
   if (bOfferSuccess) {
     sfxBox.playSFX(SFX_MENU_BLESS_STAT);
   } else {
     sfxBox.playSFX(SFX_MENU_INSUFFICIENT);
   }
   
+  // Refresh UI display
   parentScene.refresh();
 }
 
@@ -181,16 +210,27 @@ defaultProperties
 	end object
 	componentList.add(Header_Label)
   
-  // Gold Cost Displayer
-	begin object class=ROTT_UI_Displayer_Cost Name=Herb_Cost
-		tag="Herb_Cost"
+  // Donation Cost Displayer #1
+	begin object class=ROTT_UI_Displayer_Cost Name=Donation_Cost_1
+		tag="Donation_Cost_1"
 		posX=0
 		posY=130
     currencyType=class'ROTT_Inventory_Item_Herb'
     costDescriptionText="Herbs needed:"
     costValue=1
 	end object 
-	componentList.add(Herb_Cost)
+	componentList.add(Donation_Cost_1)
+	
+  // Donation Cost Displayer #2
+	begin object class=ROTT_UI_Displayer_Cost Name=Donation_Cost_2
+		tag="Donation_Cost_2"
+		posX=0
+		posY=272
+    currencyType=class'ROTT_Inventory_Item_Gem'
+    costDescriptionText="Gems needed:"
+    costValue=0
+	end object 
+	componentList.add(Donation_Cost_2)
 	
   // Button textures
 	begin object class=UI_Texture_Info Name=Button_Offering_1x

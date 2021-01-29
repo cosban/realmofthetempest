@@ -9,6 +9,7 @@
 
 class ROTT_Combat_Hero extends ROTT_Combat_Unit
 dependsOn(ROTT_Descriptor_List_Glyph_Skills)
+dependsOn(ROTT_Descriptor_Rituals)
 abstract;
   
 // Design Constant
@@ -1103,11 +1104,11 @@ public function int blessStat(StatTypes statType) {
  *
  * Performs a ritual that exchanges items for stat boosts. 
  *===========================================================================*/
-public function bool shrineRitual() {
+public function bool shrineRitual(RitualTypes ritualType) {
   local array<ItemCost> shrineCost;
   
   // Get shrine cost
-  shrineCost = class'ROTT_Descriptor_Rituals'.static.getRitualCost(RITUAL_EXPERIENCE_BOOST);
+  shrineCost = class'ROTT_Descriptor_Rituals'.static.getRitualCost(ritualType);
   
   // Check for sufficient ritual items
   if (gameInfo.canDeductCosts(shrineCost)) {
@@ -1119,7 +1120,11 @@ public function bool shrineRitual() {
   }
   
   // Provide ritual stat boost
-  addExpByPercent(1 / 16.f);
+  switch (ritualType) {
+    case RITUAL_EXPERIENCE_BOOST:
+      addExpByPercent(1 / 16.f);
+      break;
+  }
   
   // Update substats
   updateSubStats();
