@@ -1674,6 +1674,13 @@ defaultProperties
   lootTypes.add(class'ROTT_Inventory_Item_Gem')
   
   lootTypes.add(class'ROTT_Inventory_Item_Herb')
+  lootTypes.add(class'ROTT_Inventory_Item_Herb_Unjah')
+  lootTypes.add(class'ROTT_Inventory_Item_Herb_Saripine')
+  lootTypes.add(class'ROTT_Inventory_Item_Herb_Koshta')
+  lootTypes.add(class'ROTT_Inventory_Item_Herb_Xuvi')
+  lootTypes.add(class'ROTT_Inventory_Item_Herb_Zeltsi')
+  lootTypes.add(class'ROTT_Inventory_Item_Herb_Aquifinie')
+  lootTypes.add(class'ROTT_Inventory_Item_Herb_Jengsu')
   
   lootTypes.add(class'ROTT_Inventory_Item_Charm_Bayuta')
   lootTypes.add(class'ROTT_Inventory_Item_Charm_Kamita')
@@ -1688,6 +1695,7 @@ defaultProperties
   lootTypes.add(class'ROTT_Inventory_Item_Bottle_Harrier_Claws')
   lootTypes.add(class'ROTT_Inventory_Item_Bottle_Nettle_Roots')
   lootTypes.add(class'ROTT_Inventory_Item_Bottle_Faerie_Bones')
+  lootTypes.add(class'ROTT_Inventory_Item_Bottle_Yinras_Ore')
   
 }
 

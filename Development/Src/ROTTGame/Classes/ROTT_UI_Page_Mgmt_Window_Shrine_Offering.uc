@@ -232,6 +232,17 @@ defaultProperties
 	end object 
 	componentList.add(Donation_Cost_2)
 	
+  // Donation Cost Displayer #3
+	begin object class=ROTT_UI_Displayer_Cost Name=Donation_Cost_3
+		tag="Donation_Cost_3"
+		posX=0
+		posY=414
+    currencyType=class'ROTT_Inventory_Item_Bottle_Swamp_Husks'
+    costDescriptionText="Bottles needed:"
+    costValue=0
+	end object 
+	componentList.add(Donation_Cost_3)
+	
   // Button textures
 	begin object class=UI_Texture_Info Name=Button_Offering_1x
     componentTextures.add(Texture2D'GUI.Button_Offer_1')

@@ -289,7 +289,15 @@ public function bool parseDevCheat(string message) {
       // Add currency
       gameInfo.playerProfile.addCurrency(class'ROTT_Inventory_Item_Gold', 100000);
       gameInfo.playerProfile.addCurrency(class'ROTT_Inventory_Item_Gem', 100000);
+      
       gameInfo.playerProfile.addCurrency(class'ROTT_Inventory_Item_Herb', 25);
+      gameInfo.playerProfile.addCurrency(class'ROTT_Inventory_Item_Herb_Unjah', 25);
+      gameInfo.playerProfile.addCurrency(class'ROTT_Inventory_Item_Herb_Saripine', 25);
+      gameInfo.playerProfile.addCurrency(class'ROTT_Inventory_Item_Herb_Koshta', 25);
+      gameInfo.playerProfile.addCurrency(class'ROTT_Inventory_Item_Herb_Xuvi', 25);
+      gameInfo.playerProfile.addCurrency(class'ROTT_Inventory_Item_Herb_Zeltsi', 25);
+      gameInfo.playerProfile.addCurrency(class'ROTT_Inventory_Item_Herb_Aquifinie', 25);
+      gameInfo.playerProfile.addCurrency(class'ROTT_Inventory_Item_Herb_Jengsu', 25);
       gameInfo.playerProfile.addCurrency(class'ROTT_Inventory_Item_Charm_Myroka', 25);
       gameInfo.playerProfile.addCurrency(class'ROTT_Inventory_Item_Charm_Shukisu', 25);
       gameInfo.playerProfile.addCurrency(class'ROTT_Inventory_Item_Charm_Erazi', 25);
@@ -300,6 +308,7 @@ public function bool parseDevCheat(string message) {
       gameInfo.playerProfile.addCurrency(class'ROTT_Inventory_Item_Bottle_Faerie_Bones', 10);
       gameInfo.playerProfile.addCurrency(class'ROTT_Inventory_Item_Bottle_Swamp_Husks', 10);
       gameInfo.playerProfile.addCurrency(class'ROTT_Inventory_Item_Bottle_Harrier_Claws', 10);
+      gameInfo.playerProfile.addCurrency(class'ROTT_Inventory_Item_Bottle_Yinras_ore', 10);
       gameInfo.playerProfile.addCurrency(class'ROTT_Inventory_Item_Bottle_Nettle_Roots', 1);
       gameInfo.playerProfile.addCurrency(class'ROTT_Inventory_Item_Charm_Zogis_Anchor', 1);
       return true;

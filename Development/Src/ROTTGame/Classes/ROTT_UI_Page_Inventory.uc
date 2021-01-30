@@ -9,6 +9,8 @@
  
 class ROTT_UI_Page_Inventory extends ROTT_UI_Page;
 
+const INVENTORY_SLOT_COUNT = 16;
+
 // Internal references
 var private UI_Sprite inventoryBackground;
 var private UI_Label inventoryPageLabel;
@@ -16,10 +18,10 @@ var private UI_Label itemLabel;
 var private UI_Selector inventorySelector;
 
 // Inventory Navigation
-var private byte pageIndex;
+var private int pageIndex;
 
 // Item slot graphics
-var privatewrite ROTT_UI_Displayer_Item inventorySlots[16];
+var privatewrite ROTT_UI_Displayer_Item inventorySlots[INVENTORY_SLOT_COUNT];
 
 /*=============================================================================
  * Initialize Component
@@ -79,7 +81,7 @@ public function refresh() {
   super.refresh();
   
   // Get selected item
-  index = inventorySelector.getSelection() + pageIndex * 16;
+  index = inventorySelector.getSelection() + pageIndex * INVENTORY_SLOT_COUNT;
   selectedItem = getItem(index);
   
   // Show name of item
@@ -91,9 +93,12 @@ public function refresh() {
   }
   
   // Show a page of the player's inventory
-  for (i = 0; i < 16; i++) {
-    inventorySlots[i].updateDisplay(getItem(i + pageIndex * 16));
+  for (i = 0; i < INVENTORY_SLOT_COUNT; i++) {
+    inventorySlots[i].updateDisplay(getItem(i + pageIndex * INVENTORY_SLOT_COUNT));
   }
+  
+  // Footer page numbers
+  inventoryPageLabel.setText("Page " $ pageIndex+1 $ " of " $ getPageCount());
 }
 
 /*=============================================================================
@@ -117,7 +122,6 @@ event onFocusMenu() {
   // Changes to graphics
   inventoryBackground.setEnabled(true);
   inventorySelector.setEnabled(true);
-  inventoryPageLabel.setText("Page " $ pageIndex+1 $ " of " $ getPageCount());
   
   // Show items
   refresh();
@@ -155,16 +159,28 @@ public function onNavigateRight() {
 /*=============================================================================
  * Bumper inputs
  *===========================================================================*/
-protected function navigationRoutineRB() {
-  // Navigate to next page
-  
-}
-
 protected function navigationRoutineLB() {
-  // Navigate to previous page
+  // Navigate to next page
+  pageIndex--;
   
+  // Loop around
+  if (pageIndex < 0) pageIndex = getPageCount() - 1;
+  
+  // Update visuals
+  refresh();
 }
  
+protected function navigationRoutineRB() {
+  // Navigate to previous page
+  pageIndex++;
+  
+  // Loop around
+  if (pageIndex >= getPageCount()) pageIndex = 0;
+  
+  // Update visuals
+  refresh();
+}
+
 /*=============================================================================
  * Button inputs
  *===========================================================================*/
@@ -189,7 +205,11 @@ protected function navigationRoutineB() {
  * Returns the index of the last page with items on it. 
  *===========================================================================*/
 private function byte getPageCount() {
-  return 1; //temp
+  `log(gameInfo.playerProfile.playerInventory.itemList.length);
+  `log(INVENTORY_SLOT_COUNT);
+  `log(gameInfo.playerProfile.playerInventory.itemList.length / INVENTORY_SLOT_COUNT);
+  
+  return gameInfo.playerProfile.playerInventory.itemList.length / INVENTORY_SLOT_COUNT + 1;
 }
 
 /*=============================================================================
@@ -209,6 +229,18 @@ defaultProperties
     buttonComponent=none
 	end object
   inputList.add(Input_B)
+  
+	begin object class=ROTT_Input_Handler Name=Input_LB
+    inputName="XboxTypeS_LeftShoulder"
+		buttonComponent=none
+	end object
+  inputList.add(Input_LB)
+  
+	begin object class=ROTT_Input_Handler Name=Input_RB
+    inputName="XboxTypeS_RightShoulder"
+		buttonComponent=none
+	end object
+  inputList.add(Input_RB)
   
   /** ===== Cache ===== **/
 	///begin object class=UI_Texture_Info Name=Item_Bottle_Blue

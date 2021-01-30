@@ -77,6 +77,10 @@ public function launchShrine(RitualTypes donationType) {
       donationInfo1.setText("Donating at this shrine provides");
       donationInfo2.setText("armor to the character chosen.");
       break;
+    case RITUAL_SKILL_POINT:
+      donationInfo1.setText("Donating at this shrine provides a");
+      donationInfo2.setText("skill point to the character chosen.");
+      break;
   }
   
   // Set donation cost parameters

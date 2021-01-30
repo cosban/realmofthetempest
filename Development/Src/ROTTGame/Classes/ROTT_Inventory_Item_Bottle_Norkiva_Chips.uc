@@ -1,5 +1,5 @@
 /*============================================================================= 
- * ROTT_Inventory_Item_Bottle_Swamp_Husks
+ * ROTT_Inventory_Item_Bottle_Norkiva_Chips
  *
  * Author: Otay
  * Bramble Gate Studios (All rights reserved)
@@ -7,7 +7,10 @@
  * Recipe ingredient.
  *===========================================================================*/
  
-class ROTT_Inventory_Item_Bottle_Swamp_Husks extends ROTT_Inventory_Item;
+class ROTT_Inventory_Item_Bottle_Norkiva_Chips extends ROTT_Inventory_Item;
+
+/// +60 accuracy
+/// +60% physical damage
 
 /*=============================================================================
  * getDropChance()
@@ -15,7 +18,8 @@ class ROTT_Inventory_Item_Bottle_Swamp_Husks extends ROTT_Inventory_Item;
  * Implemented in each item subclsas
  *===========================================================================*/
 protected function float getDropChance(int dropLevel) {
-  return 5.f;
+  if (dropLevel < 10) return 0;
+  return 0.5f + (dropLevel * 0.05f);
 }
 
 /*=============================================================================
@@ -42,16 +46,16 @@ protected function float getMaxQuantity(int dropLevel) {
 defaultProperties
 {
   // Item categories
-  category=ITEM_CATEGORY_CONSUMABLE
+  category=ITEM_CATEGORY_EQUIPABLE
   
   // Display name
-  itemName="Swamp Husks"
+  itemName="Norkiva Chips"
   
   // Item texture
-	itemTexture=Texture2D'ROTT_Items.Bottles.Item_Bottle_Purple'
+	itemTexture=Texture2D'ROTT_Items.Bottles.Item_Bottle_Gold'
   
   // Item text color
-  itemFont=DEFAULT_SMALL_ORANGE
+  itemFont=DEFAULT_SMALL_CYAN
 }
 
 

@@ -1,5 +1,5 @@
 /*============================================================================= 
- * ROTT_Inventory_Item_Bottle_Swamp_Husks
+ * ROTT_Inventory_Item_Bottle_Yinras_Ore
  *
  * Author: Otay
  * Bramble Gate Studios (All rights reserved)
@@ -7,7 +7,7 @@
  * Recipe ingredient.
  *===========================================================================*/
  
-class ROTT_Inventory_Item_Bottle_Swamp_Husks extends ROTT_Inventory_Item;
+class ROTT_Inventory_Item_Bottle_Yinras_Ore extends ROTT_Inventory_Item;
 
 /*=============================================================================
  * getDropChance()
@@ -15,7 +15,7 @@ class ROTT_Inventory_Item_Bottle_Swamp_Husks extends ROTT_Inventory_Item;
  * Implemented in each item subclsas
  *===========================================================================*/
 protected function float getDropChance(int dropLevel) {
-  return 5.f;
+  return 1.f;
 }
 
 /*=============================================================================
@@ -45,10 +45,10 @@ defaultProperties
   category=ITEM_CATEGORY_CONSUMABLE
   
   // Display name
-  itemName="Swamp Husks"
+  itemName="Yinras Ore"
   
   // Item texture
-	itemTexture=Texture2D'ROTT_Items.Bottles.Item_Bottle_Purple'
+	itemTexture=Texture2D'ROTT_Items.Bottles.Item_Bottle_Gold'
   
   // Item text color
   itemFont=DEFAULT_SMALL_ORANGE

@@ -64,40 +64,30 @@ public function setDonationCost(ItemCost costInfo) {
       break;
       
     case class'ROTT_Inventory_Item_Herb':
+    case class'ROTT_Inventory_Item_Herb_Unjah':
+    case class'ROTT_Inventory_Item_Herb_Saripine':
+    case class'ROTT_Inventory_Item_Herb_Koshta':
+    case class'ROTT_Inventory_Item_Herb_Xuvi':
+    case class'ROTT_Inventory_Item_Herb_Zeltsi':
+    case class'ROTT_Inventory_Item_Herb_Aquifinie':
+    case class'ROTT_Inventory_Item_Herb_Jengsu':
       costDescriptionText = "Herb donation:";
       break;
       
     case class'ROTT_Inventory_Item_Bottle_Nettle_Roots':
-      costDescriptionText = "Bottle donation:";
-      break;
     case class'ROTT_Inventory_Item_Bottle_Harrier_Claws':
-      costDescriptionText = "Bottle donation:";
-      break;
     case class'ROTT_Inventory_Item_Bottle_Faerie_Bones':
-      costDescriptionText = "Bottle donation:";
-      break;
     case class'ROTT_Inventory_Item_Bottle_Swamp_Husks':
+    case class'ROTT_Inventory_Item_Bottle_Yinras_Ore':
       costDescriptionText = "Bottle donation:";
       break;
       
     case class'ROTT_Inventory_Item_Charm_Myroka':
-      costDescriptionText = "Charm donation:";
-      break;
     case class'ROTT_Inventory_Item_Charm_Shukisu':
-      costDescriptionText = "Charm donation:";
-      break;
     case class'ROTT_Inventory_Item_Charm_Erazi':
-      costDescriptionText = "Charm donation:";
-      break;
     case class'ROTT_Inventory_Item_Charm_Bayuta':
-      costDescriptionText = "Charm donation:";
-      break;
     case class'ROTT_Inventory_Item_Charm_Eluvi':
-      costDescriptionText = "Charm donation:";
-      break;
     case class'ROTT_Inventory_Item_Charm_Kamita':
-      costDescriptionText = "Charm donation:";
-      break;
     case class'ROTT_Inventory_Item_Charm_Cerok':
       costDescriptionText = "Charm donation:";
       break;

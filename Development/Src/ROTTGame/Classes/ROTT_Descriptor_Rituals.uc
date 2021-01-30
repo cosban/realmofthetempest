@@ -19,6 +19,7 @@ enum RitualTypes {
   RITUAL_HEALTH_REGEN,
   RITUAL_HEALTH_BOOST,
   RITUAL_ARMOR,
+  RITUAL_SKILL_POINT,
 };
   
 /*=============================================================================
@@ -129,6 +130,28 @@ public static function array<ItemCost> getRitualCost(RitualTypes ritualType) {
       // Add to list
       costList.addItem(costInfo);
       break;
+    case RITUAL_SKILL_POINT:
+      // Set cost
+      costInfo.currencyType = class'ROTT_Inventory_Item_Bottle_Yinras_ore';
+      costInfo.quantity = 1;
+      
+      // Add to list
+      costList.addItem(costInfo);
+      
+      // Set cost
+      costInfo.currencyType = class'ROTT_Inventory_Item_Charm_Erazi';
+      costInfo.quantity = 1;
+      
+      // Add to list
+      costList.addItem(costInfo);
+      
+      // Set cost
+      costInfo.currencyType = class'ROTT_Inventory_Item_Herb_Zeltsi';
+      costInfo.quantity = 1;
+      
+      // Add to list
+      costList.addItem(costInfo);
+      break;
   }
   
   // Return list
@@ -150,6 +173,7 @@ public static function float getRitualBoost(RitualTypes ritualType) {
     case RITUAL_HEALTH_BOOST:      return 10;
     case RITUAL_HEALTH_REGEN:      return 1;
     case RITUAL_ARMOR:             return 1;
+    case RITUAL_SKILL_POINT:       return 1;
   }
   
   yellowLog("Warning (!) Unhandled ritual type: " $ ritualType);

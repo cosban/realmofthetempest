@@ -1,13 +1,13 @@
 /*============================================================================= 
- * ROTT_Inventory_Item_Bottle_Swamp_Husks
+ * ROTT_Inventory_Item_Herb_Koshta
  *
  * Author: Otay
  * Bramble Gate Studios (All rights reserved)
  *
- * Recipe ingredient.
+ * Consumed at the Etzland shrine for experience
  *===========================================================================*/
  
-class ROTT_Inventory_Item_Bottle_Swamp_Husks extends ROTT_Inventory_Item;
+class ROTT_Inventory_Item_Herb_Koshta extends ROTT_Inventory_Item;
 
 /*=============================================================================
  * getDropChance()
@@ -45,10 +45,10 @@ defaultProperties
   category=ITEM_CATEGORY_CONSUMABLE
   
   // Display name
-  itemName="Swamp Husks"
+  itemName="Koshta Petal"
   
   // Item texture
-	itemTexture=Texture2D'ROTT_Items.Bottles.Item_Bottle_Purple'
+	itemTexture=Texture2D'ROTT_Items.Herbs.Item_Herb_Violet'
   
   // Item text color
   itemFont=DEFAULT_SMALL_ORANGE

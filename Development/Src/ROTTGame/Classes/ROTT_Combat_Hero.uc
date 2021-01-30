@@ -1163,6 +1163,9 @@ public function bool shrineRitual(RitualTypes ritualType) {
     case RITUAL_EXPERIENCE_BOOST:
       addExpByPercent(1 / 16.f);
       break;
+    case RITUAL_SKILL_POINT:
+      unspentSkillPoints++;
+      break;
   }
   
   // Update substats
