@@ -9,6 +9,8 @@
 
 class ROTT_Open_Interface_Sequence extends SequenceAction;
  
+var(Shrine) protectedwrite RitualTypes donationType;
+
 // Interface arguments
 var(Interface) string interfaceTextLine1;
 var(Interface) string interfaceTextLine2;
@@ -30,6 +32,10 @@ event activated() {
       interfaceTextLine1,
       interfaceTextLine2
     );
+    
+    // Store ritual info
+    gameInfo.queuedRitual = donationType;
+    
   } else {    
     // Hide interface
     gameInfo.sceneManager.sceneOverWorld.disableMonumentInterface();

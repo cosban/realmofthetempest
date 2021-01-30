@@ -44,6 +44,9 @@ event activated() {
   // Execute shrine behavior
   switch (shrineType) {
     case RITUAL_DONATION:
+      // Filter unrelated shrines
+      if (gameInfo.queuedRitual != donationType) return;
+      
       // Open shrine offerings
       gameInfo.sceneManager.switchScene(SCENE_SERVICE_SHRINE);
       gameInfo.sceneManager.sceneServiceShrine.launchShrine(donationType);
@@ -92,7 +95,7 @@ public function updateShrineGraphics(bool bMonumentIsActive) {
 /*=============================================================================
  * Default properties
  *===========================================================================*/
-defaultproperties
+defaultProperties
 {
 	ObjName="ShrineActivation"
 	ObjCategory="ROTT" 

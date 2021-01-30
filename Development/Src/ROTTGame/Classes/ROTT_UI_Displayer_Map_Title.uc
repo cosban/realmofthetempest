@@ -153,6 +153,7 @@ private function setSubregionSprite() {
 			areaSubregion.setDrawIndex(SUBREGION_TOWN); 
 			break;
 		case MAP_KYRIN_CAVERN:
+		case MAP_KAUFINAZ_CAVERN:
 			areaSubregion.setDrawIndex(SUBREGION_CAVES);  
 			break;
 		case MAP_ETZLAND_CITADEL:

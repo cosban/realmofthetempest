@@ -1,16 +1,13 @@
 /*============================================================================= 
- * ROTT_Inventory_Item_Charm_Zogis_Anchor
+ * ROTT_Inventory_Item_Charm_Erazi
  *
  * Author: Otay
  * Bramble Gate Studios (All rights reserved)
  *
- * Rare equipable item
+ * Recipe ingredient.
  *===========================================================================*/
  
-class ROTT_Inventory_Item_Charm_Zogis_Anchor extends ROTT_Inventory_Item;
-
-/// +75% mana
-/// +10 HP Regen
+class ROTT_Inventory_Item_Charm_Erazi extends ROTT_Inventory_Item;
 
 /*=============================================================================
  * getDropChance()
@@ -18,8 +15,7 @@ class ROTT_Inventory_Item_Charm_Zogis_Anchor extends ROTT_Inventory_Item;
  * Implemented in each item subclsas
  *===========================================================================*/
 protected function float getDropChance(int dropLevel) {
-  if (dropLevel < 25) return 0;
-  return 0.05f + (dropLevel * 0.001f);
+  return 5.f;
 }
 
 /*=============================================================================
@@ -46,16 +42,16 @@ protected function float getMaxQuantity(int dropLevel) {
 defaultProperties
 {
   // Item categories
-  category=ITEM_CATEGORY_EQUIPABLE
+  category=ITEM_CATEGORY_CONSUMABLE
   
   // Display name
-  itemName="Zogi's Anchor"
+  itemName="Erazi Charm"
   
   // Item texture
-	itemTexture=Texture2D'ROTT_Items.Charms.Item_Charm_Pink'
+	itemTexture=Texture2D'ROTT_Items.Charms.Item_Charm_Gold'
   
   // Item text color
-  itemFont=DEFAULT_SMALL_CYAN
+  itemFont=DEFAULT_SMALL_ORANGE
 }
 
 

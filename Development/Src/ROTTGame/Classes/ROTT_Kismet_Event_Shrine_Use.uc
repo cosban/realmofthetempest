@@ -14,10 +14,6 @@ class ROTT_Kismet_Event_Shrine_Use extends SequenceEvent;
 // Include colored debug logs
 `include(ROTTColorLogs.h)
 
-var(Shrine) protectedwrite RitualTypes donationType;
-
-/// # Add output links for each ritual type
-
 /*=============================================================================
  * activated()
  *

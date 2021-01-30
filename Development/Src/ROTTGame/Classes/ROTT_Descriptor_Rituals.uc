@@ -69,6 +69,66 @@ public static function array<ItemCost> getRitualCost(RitualTypes ritualType) {
       // Add to list
       costList.addItem(costInfo);
       break;
+    case RITUAL_HEALTH_BOOST:
+      // Set cost
+      costInfo.currencyType = class'ROTT_Inventory_Item_Charm_Cerok';
+      costInfo.quantity = 2;
+      
+      // Add to list
+      costList.addItem(costInfo);
+      
+      // Set cost
+      ///costInfo.currencyType = class'ROTT_Inventory_Item_Gold';
+      ///costInfo.quantity = 1000;
+      ///
+      ///// Add to list
+      ///costList.addItem(costInfo);
+      break;
+    case RITUAL_HEALTH_REGEN:
+      // Set cost
+      costInfo.currencyType = class'ROTT_Inventory_Item_Bottle_Faerie_Bones';
+      costInfo.quantity = 1;
+      
+      // Add to list
+      costList.addItem(costInfo);
+      
+      // Set cost
+      costInfo.currencyType = class'ROTT_Inventory_Item_Charm_Shukisu';
+      costInfo.quantity = 1;
+      
+      // Add to list
+      costList.addItem(costInfo);
+      break;
+    case RITUAL_MANA_BOOST:
+      // Set cost
+      costInfo.currencyType = class'ROTT_Inventory_Item_Charm_Myroka';
+      costInfo.quantity = 1;
+      
+      // Add to list
+      costList.addItem(costInfo);
+      
+      // Set cost
+      costInfo.currencyType = class'ROTT_Inventory_Item_Charm_Eluvi';
+      costInfo.quantity = 1;
+      
+      // Add to list
+      costList.addItem(costInfo);
+      break;
+    case RITUAL_ARMOR:
+      // Set cost
+      costInfo.currencyType = class'ROTT_Inventory_Item_Charm_Cerok';
+      costInfo.quantity = 1;
+      
+      // Add to list
+      costList.addItem(costInfo);
+      
+      // Set cost
+      costInfo.currencyType = class'ROTT_Inventory_Item_Gem';
+      costInfo.quantity = 5;
+      
+      // Add to list
+      costList.addItem(costInfo);
+      break;
   }
   
   // Return list
@@ -85,15 +145,24 @@ public static function float getRitualBoost(RitualTypes ritualType) {
   switch (ritualType) {
     case RITUAL_EXPERIENCE_BOOST:  return 1;
     case RITUAL_PHYSICAL_DAMAGE:   return 1;
-    case RITUAL_MANA_BOOST:        return 1;
+    case RITUAL_MANA_BOOST:        return 15;
     case RITUAL_MANA_REGEN:        return 1;
-    case RITUAL_HEALTH_BOOST:      return 1;
+    case RITUAL_HEALTH_BOOST:      return 10;
     case RITUAL_HEALTH_REGEN:      return 1;
     case RITUAL_ARMOR:             return 1;
   }
   
   yellowLog("Warning (!) Unhandled ritual type: " $ ritualType);
   return 1;
+}
+
+/*=============================================================================
+ * getRitualCount()
+ * 
+ * returns the number of rituals
+ *===========================================================================*/
+public static function int getRitualCount() {
+  return RitualTypes.enumCount;
 }
 
 /*=============================================================================

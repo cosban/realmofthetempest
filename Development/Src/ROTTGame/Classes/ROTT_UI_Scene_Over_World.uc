@@ -290,6 +290,10 @@ public function bool parseDevCheat(string message) {
       gameInfo.playerProfile.addCurrency(class'ROTT_Inventory_Item_Gold', 100000);
       gameInfo.playerProfile.addCurrency(class'ROTT_Inventory_Item_Gem', 100000);
       gameInfo.playerProfile.addCurrency(class'ROTT_Inventory_Item_Herb', 25);
+      gameInfo.playerProfile.addCurrency(class'ROTT_Inventory_Item_Charm_Myroka', 25);
+      gameInfo.playerProfile.addCurrency(class'ROTT_Inventory_Item_Charm_Shukisu', 25);
+      gameInfo.playerProfile.addCurrency(class'ROTT_Inventory_Item_Charm_Erazi', 25);
+      gameInfo.playerProfile.addCurrency(class'ROTT_Inventory_Item_Charm_Cerok', 25);
       gameInfo.playerProfile.addCurrency(class'ROTT_Inventory_Item_Charm_Bayuta', 25);
       gameInfo.playerProfile.addCurrency(class'ROTT_Inventory_Item_Charm_Eluvi', 25);
       gameInfo.playerProfile.addCurrency(class'ROTT_Inventory_Item_Charm_Kamita', 25);

@@ -48,7 +48,7 @@ defaultProperties
   itemName="Eluvi Charm"
   
   // Item texture
-	itemTexture=Texture2D'ROTT_Items.Item_Charm_Orange'
+	itemTexture=Texture2D'ROTT_Items.Charms.Item_Charm_Orange'
   
   // Item text color
   itemFont=DEFAULT_SMALL_ORANGE

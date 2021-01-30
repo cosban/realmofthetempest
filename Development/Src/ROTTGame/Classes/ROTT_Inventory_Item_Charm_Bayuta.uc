@@ -48,7 +48,7 @@ defaultProperties
   itemName="Bayuta Charm"
   
   // Item texture
-	itemTexture=Texture2D'ROTT_Items.Item_Charm_Purple'
+	itemTexture=Texture2D'ROTT_Items.Charms.Item_Charm_Purple'
   
   // Item text color
   itemFont=DEFAULT_SMALL_ORANGE

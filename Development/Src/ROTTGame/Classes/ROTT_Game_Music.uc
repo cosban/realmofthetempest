@@ -385,6 +385,7 @@ defaultProperties
   
   // Caves
   worldSoundtracks[MAP_KYRIN_CAVERN]=Lachrymal_Static_OST_Cue
+  worldSoundtracks[MAP_KAUFINAZ_CAVERN]=Stone_Soaked_Shrine_OST_Cue
   
   // Misc: The land between the tempests
   worldSoundtracks[MAP_AKSALOM_SKYGATE]=The_Sky_is_a_Mountain_Tamer_OST_Cue

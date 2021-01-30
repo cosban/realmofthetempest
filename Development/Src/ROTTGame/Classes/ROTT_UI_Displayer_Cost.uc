@@ -80,13 +80,25 @@ public function setDonationCost(ItemCost costInfo) {
       costDescriptionText = "Bottle donation:";
       break;
       
-    case class'ROTT_Inventory_Item_Charm_Kamita':
+    case class'ROTT_Inventory_Item_Charm_Myroka':
+      costDescriptionText = "Charm donation:";
+      break;
+    case class'ROTT_Inventory_Item_Charm_Shukisu':
+      costDescriptionText = "Charm donation:";
+      break;
+    case class'ROTT_Inventory_Item_Charm_Erazi':
+      costDescriptionText = "Charm donation:";
+      break;
+    case class'ROTT_Inventory_Item_Charm_Bayuta':
       costDescriptionText = "Charm donation:";
       break;
     case class'ROTT_Inventory_Item_Charm_Eluvi':
       costDescriptionText = "Charm donation:";
       break;
-    case class'ROTT_Inventory_Item_Charm_Bayuta':
+    case class'ROTT_Inventory_Item_Charm_Kamita':
+      costDescriptionText = "Charm donation:";
+      break;
+    case class'ROTT_Inventory_Item_Charm_Cerok':
       costDescriptionText = "Charm donation:";
       break;
       

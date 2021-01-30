@@ -105,6 +105,7 @@ enum MapNameEnum {
   
   // Caves
   MAP_KYRIN_CAVERN,
+  MAP_KAUFINAZ_CAVERN,
   
   // Misc: The land between the tempests
   MAP_AKSALOM_SKYGATE,
@@ -177,6 +178,8 @@ struct ItemDropMod {
     quantityAmp = 1.f
   }
 };
+
+var public byte queuedRitual;
 
 // Plain stub for a function that will launch an npc dialog
 delegate npcDelegate();
@@ -719,6 +722,7 @@ public function string getMapFileName(coerce byte mapName) {
     
     // Caves
     case MAP_KYRIN_CAVERN:        return "ROTT-Kyrin_Cavern"; 
+    case MAP_KAUFINAZ_CAVERN:     return "ROTT-Kaufinaz_Cavern"; 
     
     // The land between the tempests
     case MAP_AKSALOM_SKYGATE:     return "ROTT-Aksalom_Skygate";      
@@ -790,6 +794,7 @@ public function MapNameEnum getCurrentMap() {
     
     // Caves
     case "Kyrin_Cavern":   return MAP_KYRIN_CAVERN; 
+    case "Kaufinaz_Cavern":   return MAP_KAUFINAZ_CAVERN; 
     
     // The land between the tempests
     case "Aksalom_Skygate":     return MAP_AKSALOM_SKYGATE;
@@ -1662,7 +1667,7 @@ defaultProperties
   PlayerControllerClass=class'ROTT_Player_Controller'
   
   // Encounter limit default
-  encounterLimit=2800
+  encounterLimit=3000 ///2800
   
   // Loot types
   lootTypes.add(class'ROTT_Inventory_Item_Gold')
@@ -1673,6 +1678,10 @@ defaultProperties
   lootTypes.add(class'ROTT_Inventory_Item_Charm_Bayuta')
   lootTypes.add(class'ROTT_Inventory_Item_Charm_Kamita')
   lootTypes.add(class'ROTT_Inventory_Item_Charm_Eluvi')
+  lootTypes.add(class'ROTT_Inventory_Item_Charm_Myroka')
+  lootTypes.add(class'ROTT_Inventory_Item_Charm_Shukisu')
+  lootTypes.add(class'ROTT_Inventory_Item_Charm_Erazi')
+  lootTypes.add(class'ROTT_Inventory_Item_Charm_Cerok')
   lootTypes.add(class'ROTT_Inventory_Item_Charm_Zogis_Anchor')
   
   lootTypes.add(class'ROTT_Inventory_Item_Bottle_Swamp_Husks')
