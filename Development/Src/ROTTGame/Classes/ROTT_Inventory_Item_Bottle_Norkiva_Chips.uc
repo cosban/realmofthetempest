@@ -18,8 +18,8 @@ class ROTT_Inventory_Item_Bottle_Norkiva_Chips extends ROTT_Inventory_Item;
  * Implemented in each item subclsas
  *===========================================================================*/
 protected function float getDropChance(int dropLevel) {
-  if (dropLevel < 10) return 0;
-  return 0.5f + (dropLevel * 0.05f);
+  if (dropLevel < 5) return 0.25f - dropLevel * 0.05f;
+  return 0.25f;
 }
 
 /*=============================================================================
@@ -46,7 +46,7 @@ protected function float getMaxQuantity(int dropLevel) {
 defaultProperties
 {
   // Item categories
-  category=ITEM_CATEGORY_EQUIPABLE
+  category=ITEM_CATEGORY_CONSUMABLE
   
   // Display name
   itemName="Norkiva Chips"

@@ -15,7 +15,8 @@ class ROTT_Inventory_Item_Bottle_Yinras_Ore extends ROTT_Inventory_Item;
  * Implemented in each item subclsas
  *===========================================================================*/
 protected function float getDropChance(int dropLevel) {
-  return 1.f;
+  if (dropLevel < 5) return 0.25f - dropLevel * 0.05f;
+  return 0.25f;
 }
 
 /*=============================================================================

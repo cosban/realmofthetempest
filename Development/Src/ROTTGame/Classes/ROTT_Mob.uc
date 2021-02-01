@@ -163,6 +163,9 @@ public function generateBounty() {
       )
     );
   }
+  
+  // Cull the total inventory for 8 slot limit
+  itemPackage.cullInventory();
 }
 
 /*=============================================================================

@@ -15,7 +15,8 @@ class ROTT_Inventory_Item_Bottle_Faerie_Bones extends ROTT_Inventory_Item;
  * Implemented in each item subclsas
  *===========================================================================*/
 protected function float getDropChance(int dropLevel) {
-  return 4.f;
+  if (dropLevel < 5) return 0.5f - dropLevel * 0.05f;
+  return 0.5f;
 }
 
 /*=============================================================================

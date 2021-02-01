@@ -13,11 +13,11 @@ dependsOn(ROTT_UI_Scene_Manager)
 dependsOn(ROTT_NPC_Container);
  
 // Version info
-const MAJOR = 1;  const MINOR = 5;  const REVISION = 1;  const PATCH = 'g';  
+const MAJOR = 1;  const MINOR = 5;  const REVISION = 2;  const PATCH = 'a';  
 const PHASE_INFO = "III";
 
 // Publishing settings
-const bDevMode = true;      
+const bDevMode = false;      
 const bQaMode = true;     
 
 // Parameters used in ROTTTimers:
@@ -1567,7 +1567,11 @@ public function ROTT_Inventory_Package generateLoot
         lootPackage.addItem(newItem);
       }
     }
+    
   }
+  
+  // Cull item count, removes items for 8 slot limit
+  lootPackage.cullInventory();
   
   return lootPackage;
 }

@@ -147,12 +147,31 @@ public function sort() {
   // Set up order preferences (Currencies, then shrine items)
   orderedTypes.addItem(class'ROTT_Inventory_Item_Gold');
   orderedTypes.addItem(class'ROTT_Inventory_Item_Gem');
+  
   orderedTypes.addItem(class'ROTT_Inventory_Item_Herb');
-  orderedTypes.addItem(class'ROTT_Inventory_Item_Charm_Eluvi');
-  orderedTypes.addItem(class'ROTT_Inventory_Item_Charm_Kamita');
+  orderedTypes.addItem(class'ROTT_Inventory_Item_Herb_Zeltsi');
+  orderedTypes.addItem(class'ROTT_Inventory_Item_Herb_Jengsu');
+  orderedTypes.addItem(class'ROTT_Inventory_Item_Herb_Xuvi');
+  orderedTypes.addItem(class'ROTT_Inventory_Item_Herb_Koshta');
+  orderedTypes.addItem(class'ROTT_Inventory_Item_Herb_Aquifinie');
+  orderedTypes.addItem(class'ROTT_Inventory_Item_Herb_Unjah');
+  orderedTypes.addItem(class'ROTT_Inventory_Item_Herb_Saripine');
+  
   orderedTypes.addItem(class'ROTT_Inventory_Item_Charm_Bayuta');
+  orderedTypes.addItem(class'ROTT_Inventory_Item_Charm_Myroka');
+  orderedTypes.addItem(class'ROTT_Inventory_Item_Charm_Kamita');
+  orderedTypes.addItem(class'ROTT_Inventory_Item_Charm_Shukisu');
+  orderedTypes.addItem(class'ROTT_Inventory_Item_Charm_Erazi');
+  orderedTypes.addItem(class'ROTT_Inventory_Item_Charm_Eluvi');
+  orderedTypes.addItem(class'ROTT_Inventory_Item_Charm_Cerok');
+  
   orderedTypes.addItem(class'ROTT_Inventory_Item_Bottle_Faerie_Bones');
+  orderedTypes.addItem(class'ROTT_Inventory_Item_Bottle_Yinras_Ore');
+  orderedTypes.addItem(class'ROTT_Inventory_Item_Bottle_Harrier_Claws');
   orderedTypes.addItem(class'ROTT_Inventory_Item_Bottle_Swamp_Husks');
+  
+  orderedTypes.addItem(class'ROTT_Inventory_Item_Charm_Zogis_Anchor');
+  orderedTypes.addItem(class'ROTT_Inventory_Item_Bottle_Nettle_Roots');
   
   // Organize inventory for each ordered type
   for (i = 0; i < orderedTypes.length; i++) {
@@ -167,6 +186,41 @@ public function sort() {
       // Increment to next index
       targetIndex++;
     }
+  }
+}
+
+/*=============================================================================
+ * cullInventory()
+ *
+ * Removes items for 8 slot limit
+ *===========================================================================*/
+public function cullInventory() {
+  local array<ROTT_Inventory_Item> ritualItems;
+  local int i, k;
+  
+  // Scan through inventory 
+  for (i = itemList.length - 1; i >= 0; i--) {
+    if (itemList[i].category == ITEM_CATEGORY_CONSUMABLE) {
+      // Move item to ritual list
+      ritualItems.addItem(itemList[i]);
+      itemList.remove(i, 1);
+    }
+  }
+  
+  // Cull randomly until suitable length
+  while (ritualItems.length > 4) {
+    // Generate random index
+    k = rand(ritualItems.length);
+    
+    // Remove item
+    ritualItems.remove(k, 1);
+  }
+  
+  // Restock ritual items 
+  for (i = ritualItems.length - 1; i >= 0; i--) {
+    // Move item to ritual list
+    addItem(ritualItems[i]);
+    ritualItems.remove(i, 1);
   }
 }
 

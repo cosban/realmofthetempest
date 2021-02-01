@@ -15,7 +15,8 @@ class ROTT_Inventory_Item_Charm_Kamita extends ROTT_Inventory_Item;
  * Implemented in each item subclsas
  *===========================================================================*/
 protected function float getDropChance(int dropLevel) {
-  return 8.f;
+  if (dropLevel < 5) return 1.f - dropLevel * 0.05f;
+  return 1.f;
 }
 
 /*=============================================================================

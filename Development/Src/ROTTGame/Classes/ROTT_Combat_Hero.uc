@@ -175,8 +175,10 @@ public function initialize() {
   // Link skills, if weve loaded skills
   updateSkillScripts();
   
+  // Prevent dead state
+  if (!bDead) subStats[CURRENT_HEALTH] = 1; 
+  
   // Calculate initial substats
-  subStats[CURRENT_HEALTH] = 1; // Prevent dead state
   updateSubStats();
   
   // Initial stat info

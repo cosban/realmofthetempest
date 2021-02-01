@@ -15,7 +15,8 @@ class ROTT_Inventory_Item_Herb_Unjah extends ROTT_Inventory_Item;
  * Implemented in each item subclsas
  *===========================================================================*/
 protected function float getDropChance(int dropLevel) {
-  return 5.f;
+  if (dropLevel < 5) return 1.0f - dropLevel * 0.05f;
+  return 1.f;
 }
 
 /*=============================================================================
