@@ -166,7 +166,7 @@ public static function EnchantmentDescriptor getEnchantment
 			  "New Total: +%total Accuracy, +%total Dodge"
       );
       setGoldGemCost(script, 5000, 25);
-      setBonus(script, 5);
+      setBonus(script, 10);
       
       return script;
       
