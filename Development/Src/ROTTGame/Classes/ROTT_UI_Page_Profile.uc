@@ -179,204 +179,204 @@ defaultProperties
   posX=0
   
   /** ===== Input ===== **/
-	begin object class=ROTT_Input_Handler Name=Input_B
+  begin object class=ROTT_Input_Handler Name=Input_B
     inputName="XBoxTypeS_B"
     buttonComponent=none
-	end object
+  end object
   inputList.add(Input_B)
   
   /** ===== Textures ===== **/
   // Profile Background
-	begin object class=UI_Texture_Info Name=Profile_Background
+  begin object class=UI_Texture_Info Name=Profile_Background
     componentTextures.add(Texture2D'GUI.Profile_Background')
   end object
   
   /** ===== UI Components ===== **/
   // Background
-	begin object class=UI_Sprite Name=Background
-		tag="Background"
-		posX=0
-		posY=0
-		images(0)=Profile_Background
-	end object
-	componentList.add(Background)
+  begin object class=UI_Sprite Name=Background
+    tag="Background"
+    posX=0
+    posY=0
+    images(0)=Profile_Background
+  end object
+  componentList.add(Background)
 
   // Statistic Labels
-	begin object class=UI_Label Name=Profile_Info_Labels0
-		tag="Profile_Info_Labels0"
-		posX=333
-		posY=75
+  begin object class=UI_Label Name=Profile_Info_Labels0
+    tag="Profile_Info_Labels0"
+    posX=333
+    posY=75
     AlignX=Left
     AlignY=Top
-		fontStyle=DEFAULT_LARGE_GREEN
-		labelText="Name:"
-	end object
-	componentList.add(Profile_Info_Labels0)
+    fontStyle=DEFAULT_LARGE_GREEN
+    labelText="Name:"
+  end object
+  componentList.add(Profile_Info_Labels0)
   
-	begin object class=UI_Label Name=Profile_Info_Labels00
-		tag="Profile_Info_Labels00"
-		posX=333
-		posY=151
+  begin object class=UI_Label Name=Profile_Info_Labels00
+    tag="Profile_Info_Labels00"
+    posX=333
+    posY=151
     AlignX=Left
     AlignY=Top
-		fontStyle=DEFAULT_SMALL_TAN
-		labelText="Mode:"
-	end object
-	componentList.add(Profile_Info_Labels00)
+    fontStyle=DEFAULT_SMALL_TAN
+    labelText="Mode:"
+  end object
+  componentList.add(Profile_Info_Labels00)
   
-	begin object class=UI_Label Name=Profile_Info_Labels1
-		tag="Profile_Info_Labels1"
-		posX=60
-		posY=151
+  begin object class=UI_Label Name=Profile_Info_Labels1
+    tag="Profile_Info_Labels1"
+    posX=60
+    posY=151
     AlignX=Left
     AlignY=Top
-		fontStyle=DEFAULT_SMALL_TAN
-		labelText="Heroes:"
-	end object
-	componentList.add(Profile_Info_Labels1)
+    fontStyle=DEFAULT_SMALL_TAN
+    labelText="Heroes:"
+  end object
+  componentList.add(Profile_Info_Labels1)
   
-	begin object class=UI_Label Name=Profile_Info_Labels2
-		tag="Profile_Info_Labels2"
-		posX=60
-		posY=201
+  begin object class=UI_Label Name=Profile_Info_Labels2
+    tag="Profile_Info_Labels2"
+    posX=60
+    posY=201
     AlignX=Left
     AlignY=Top
-		fontStyle=DEFAULT_SMALL_TAN
-		labelText="Parties:"
-	end object
-	componentList.add(Profile_Info_Labels2)
+    fontStyle=DEFAULT_SMALL_TAN
+    labelText="Parties:"
+  end object
+  componentList.add(Profile_Info_Labels2)
   
-	begin object class=UI_Label Name=Profile_Info_Labels3
-		tag="Profile_Info_Labels3"
-		posX=60
-		posY=251
+  begin object class=UI_Label Name=Profile_Info_Labels3
+    tag="Profile_Info_Labels3"
+    posX=60
+    posY=251
     AlignX=Left
     AlignY=Top
-		fontStyle=DEFAULT_SMALL_TAN
-		labelText="Gold Earned:"
-	end object
-	componentList.add(Profile_Info_Labels3)
+    fontStyle=DEFAULT_SMALL_TAN
+    labelText="Gold Earned:"
+  end object
+  componentList.add(Profile_Info_Labels3)
   
-	begin object class=UI_Label Name=Profile_Info_Labels4
-		tag="Profile_Info_Labels4"
-		posX=60
-		posY=301
+  begin object class=UI_Label Name=Profile_Info_Labels4
+    tag="Profile_Info_Labels4"
+    posX=60
+    posY=301
     AlignX=Left
     AlignY=Top
-		fontStyle=DEFAULT_SMALL_TAN
-		labelText="Gems Earned:"
-	end object
-	componentList.add(Profile_Info_Labels4)
+    fontStyle=DEFAULT_SMALL_TAN
+    labelText="Gems Earned:"
+  end object
+  componentList.add(Profile_Info_Labels4)
   
-	begin object class=UI_Label Name=Profile_Info_Labels5
-		tag="Profile_Info_Labels5"
-		posX=60
-		posY=351
+  begin object class=UI_Label Name=Profile_Info_Labels5
+    tag="Profile_Info_Labels5"
+    posX=60
+    posY=351
     AlignX=Left
     AlignY=Top
-		fontStyle=DEFAULT_SMALL_TAN
-		labelText="Encounters:"
-	end object
-	componentList.add(Profile_Info_Labels5)
+    fontStyle=DEFAULT_SMALL_TAN
+    labelText="Encounters:"
+  end object
+  componentList.add(Profile_Info_Labels5)
   
-	begin object class=UI_Label Name=Profile_Info_Labels6
-		tag="Profile_Info_Labels6"
-		posX=60
-		posY=401
+  begin object class=UI_Label Name=Profile_Info_Labels6
+    tag="Profile_Info_Labels6"
+    posX=60
+    posY=401
     AlignX=Left
     AlignY=Top
-		fontStyle=DEFAULT_SMALL_TAN
-		labelText="Monsters Slain:"
-	end object
-	componentList.add(Profile_Info_Labels6)
+    fontStyle=DEFAULT_SMALL_TAN
+    labelText="Monsters Slain:"
+  end object
+  componentList.add(Profile_Info_Labels6)
   
-	begin object class=UI_Label Name=Profile_Info_Labels7
-		tag="Profile_Info_Labels7"
-		posX=60
-		posY=451
+  begin object class=UI_Label Name=Profile_Info_Labels7
+    tag="Profile_Info_Labels7"
+    posX=60
+    posY=451
     AlignX=Left
     AlignY=Top
-		fontStyle=DEFAULT_SMALL_TAN
-		labelText="Bosses Slain:"
-	end object
-	componentList.add(Profile_Info_Labels7)
+    fontStyle=DEFAULT_SMALL_TAN
+    labelText="Bosses Slain:"
+  end object
+  componentList.add(Profile_Info_Labels7)
   
-	begin object class=UI_Label Name=Profile_Info_Labels8
-		tag="Profile_Info_Labels8"
-		posX=60
-		posY=501
+  begin object class=UI_Label Name=Profile_Info_Labels8
+    tag="Profile_Info_Labels8"
+    posX=60
+    posY=501
     AlignX=Left
     AlignY=Top
-		fontStyle=DEFAULT_SMALL_TAN
-		labelText="Temporal Use:"
-	end object
-	componentList.add(Profile_Info_Labels8)
+    fontStyle=DEFAULT_SMALL_TAN
+    labelText="Temporal Use:"
+  end object
+  componentList.add(Profile_Info_Labels8)
   
-	begin object class=UI_Label Name=Profile_Info_Labels9
-		tag="Profile_Info_Labels9"
-		posX=60
-		posY=551
+  begin object class=UI_Label Name=Profile_Info_Labels9
+    tag="Profile_Info_Labels9"
+    posX=60
+    posY=551
     AlignX=Left
     AlignY=Top
-		fontStyle=DEFAULT_SMALL_TAN
-		labelText="Time Saved:"
-	end object
-	componentList.add(Profile_Info_Labels9)
+    fontStyle=DEFAULT_SMALL_TAN
+    labelText="Time Saved:"
+  end object
+  componentList.add(Profile_Info_Labels9)
   
-	begin object class=UI_Label Name=Profile_Info_Labels10
-		tag="Profile_Info_Labels10"
-		posX=60
-		posY=601
+  begin object class=UI_Label Name=Profile_Info_Labels10
+    tag="Profile_Info_Labels10"
+    posX=60
+    posY=601
     AlignX=Left
     AlignY=Top
-		fontStyle=DEFAULT_SMALL_CYAN
-		labelText="Az'ra Time:"
-	end object
-	componentList.add(Profile_Info_Labels10)
+    fontStyle=DEFAULT_SMALL_CYAN
+    labelText="Az'ra Time:"
+  end object
+  componentList.add(Profile_Info_Labels10)
   
-	begin object class=UI_Label Name=Profile_Info_Labels11
-		tag="Profile_Info_Labels11"
-		posX=60
-		posY=651
+  begin object class=UI_Label Name=Profile_Info_Labels11
+    tag="Profile_Info_Labels11"
+    posX=60
+    posY=651
     AlignX=Left
     AlignY=Top
-		fontStyle=DEFAULT_SMALL_CYAN
-		labelText="Hyrix Time:"
-	end object
-	componentList.add(Profile_Info_Labels11)
+    fontStyle=DEFAULT_SMALL_CYAN
+    labelText="Hyrix Time:"
+  end object
+  componentList.add(Profile_Info_Labels11)
   
-	begin object class=UI_Label Name=Profile_Info_Labels12
-		tag="Profile_Info_Labels12"
-		posX=60
-		posY=701
+  begin object class=UI_Label Name=Profile_Info_Labels12
+    tag="Profile_Info_Labels12"
+    posX=60
+    posY=701
     AlignX=Left
     AlignY=Top
-		fontStyle=DEFAULT_SMALL_CYAN
-		labelText="Khomat Time:"
-	end object
-	componentList.add(Profile_Info_Labels12)
+    fontStyle=DEFAULT_SMALL_CYAN
+    labelText="Khomat Time:"
+  end object
+  componentList.add(Profile_Info_Labels12)
   
-	begin object class=UI_Label Name=Profile_Info_Labels13
-		tag="Profile_Info_Labels13"
-		posX=60
-		posY=751
+  begin object class=UI_Label Name=Profile_Info_Labels13
+    tag="Profile_Info_Labels13"
+    posX=60
+    posY=751
     AlignX=Left
     AlignY=Top
-		fontStyle=DEFAULT_SMALL_CYAN
-		labelText="Viliroth Time:"
-	end object
-	componentList.add(Profile_Info_Labels13)
+    fontStyle=DEFAULT_SMALL_CYAN
+    labelText="Viliroth Time:"
+  end object
+  componentList.add(Profile_Info_Labels13)
   
-	begin object class=UI_Label Name=Profile_Info_Labels14
-		tag="Profile_Info_Labels14"
-		posX=60
-		posY=801
+  begin object class=UI_Label Name=Profile_Info_Labels14
+    tag="Profile_Info_Labels14"
+    posX=60
+    posY=801
     AlignX=Left
     AlignY=Top
-		fontStyle=DEFAULT_SMALL_CYAN
-		labelText="Tythizerus Time:"
-	end object
-	componentList.add(Profile_Info_Labels14)
+    fontStyle=DEFAULT_SMALL_CYAN
+    labelText="Tythizerus Time:"
+  end object
+  componentList.add(Profile_Info_Labels14)
       
     begin object class=UI_Label Name=Profile_Info_Labels15
       tag="Profile_Info_Labels15"
@@ -434,255 +434,255 @@ defaultProperties
     componentList.add(Profile_Info_Labels19)
     
   // Statistic Values - Profile name
-	begin object class=UI_Label Name=Profile_Value_Hero_Name
-		tag="Profile_Value_Hero_Name"
-		posX=463
-		posY=75
+  begin object class=UI_Label Name=Profile_Value_Hero_Name
+    tag="Profile_Value_Hero_Name"
+    posX=463
+    posY=75
     AlignX=Left
     AlignY=Top
-		fontStyle=DEFAULT_LARGE_WHITE
-		labelText="#n"
-	end object
-	componentList.add(Profile_Value_Hero_Name)
+    fontStyle=DEFAULT_LARGE_WHITE
+    labelText="#n"
+  end object
+  componentList.add(Profile_Value_Hero_Name)
   
-	begin object class=UI_Label Name=Profile_Value_Profile_Mode
-		tag="Profile_Value_Profile_Mode"
-		posX=419
-		posY=151
+  begin object class=UI_Label Name=Profile_Value_Profile_Mode
+    tag="Profile_Value_Profile_Mode"
+    posX=419
+    posY=151
     AlignX=Left
     AlignY=Top
-		fontStyle=DEFAULT_SMALL_WHITE
-		labelText=""
-	end object
-	componentList.add(Profile_Value_Profile_Mode)
+    fontStyle=DEFAULT_SMALL_WHITE
+    labelText=""
+  end object
+  componentList.add(Profile_Value_Profile_Mode)
   
   // Statistic Values - Hero count
-	begin object class=UI_Label Name=Profile_Value_Hero_Count
-		tag="Profile_Value_Hero_Count"
-		posY=151
-		posX=172
+  begin object class=UI_Label Name=Profile_Value_Hero_Count
+    tag="Profile_Value_Hero_Count"
+    posY=151
+    posX=172
     AlignX=Left
     AlignY=Top
-		fontStyle=DEFAULT_SMALL_WHITE
-		labelText="#h"
-	end object
-	componentList.add(Profile_Value_Hero_Count)
+    fontStyle=DEFAULT_SMALL_WHITE
+    labelText="#h"
+  end object
+  componentList.add(Profile_Value_Hero_Count)
   
   // Statistic Values - Party count
-	begin object class=UI_Label Name=Profile_Value_Party_Count
-		tag="Profile_Value_Party_Count"
-		posY=201
-		posX=172
+  begin object class=UI_Label Name=Profile_Value_Party_Count
+    tag="Profile_Value_Party_Count"
+    posY=201
+    posX=172
     AlignX=Left
     AlignY=Top
-		fontStyle=DEFAULT_SMALL_WHITE
-		labelText="#p"
-	end object
-	componentList.add(Profile_Value_Party_Count)
+    fontStyle=DEFAULT_SMALL_WHITE
+    labelText="#p"
+  end object
+  componentList.add(Profile_Value_Party_Count)
   
   // Statistic Values - Gold
-	begin object class=UI_Label Name=Profile_Value_Total_Gold
-		tag="Profile_Value_Total_Gold"
-		posY=251
-		posX=248
+  begin object class=UI_Label Name=Profile_Value_Total_Gold
+    tag="Profile_Value_Total_Gold"
+    posY=251
+    posX=248
     AlignX=Left
     AlignY=Top
-		fontStyle=DEFAULT_SMALL_WHITE
-		labelText="#g1"
-	end object
-	componentList.add(Profile_Value_Total_Gold)
+    fontStyle=DEFAULT_SMALL_WHITE
+    labelText="#g1"
+  end object
+  componentList.add(Profile_Value_Total_Gold)
   
   // Statistic Values - Gems
-	begin object class=UI_Label Name=Profile_Value_Total_Gems
-		tag="Profile_Value_Total_Gems"
-		posY=301
-		posX=244
+  begin object class=UI_Label Name=Profile_Value_Total_Gems
+    tag="Profile_Value_Total_Gems"
+    posY=301
+    posX=244
     AlignX=Left
     AlignY=Top
-		fontStyle=DEFAULT_SMALL_WHITE
-		labelText="#g2"
-	end object
-	componentList.add(Profile_Value_Total_Gems)
+    fontStyle=DEFAULT_SMALL_WHITE
+    labelText="#g2"
+  end object
+  componentList.add(Profile_Value_Total_Gems)
   
   // Statistic Values - Encounters
-	begin object class=UI_Label Name=Profile_Value_Total_Encounters
-		tag="Profile_Value_Total_Encounters"
-		posY=351
-		posX=233
+  begin object class=UI_Label Name=Profile_Value_Total_Encounters
+    tag="Profile_Value_Total_Encounters"
+    posY=351
+    posX=233
     AlignX=Left
     AlignY=Top
-		fontStyle=DEFAULT_SMALL_WHITE
-		labelText="#e"
-	end object
-	componentList.add(Profile_Value_Total_Encounters)
+    fontStyle=DEFAULT_SMALL_WHITE
+    labelText="#e"
+  end object
+  componentList.add(Profile_Value_Total_Encounters)
   
   // Statistic Values - Slain count
-	begin object class=UI_Label Name=Profile_Value_Monsers_Slain
-		tag="Profile_Value_Monsers_Slain"
-		posY=401
-		posX=273
+  begin object class=UI_Label Name=Profile_Value_Monsers_Slain
+    tag="Profile_Value_Monsers_Slain"
+    posY=401
+    posX=273
     AlignX=Left
     AlignY=Top
-		fontStyle=DEFAULT_SMALL_WHITE
-		labelText="#m"
-	end object
-	componentList.add(Profile_Value_Monsers_Slain)
+    fontStyle=DEFAULT_SMALL_WHITE
+    labelText="#m"
+  end object
+  componentList.add(Profile_Value_Monsers_Slain)
   
-	begin object class=UI_Label Name=Profile_Value_Bosses_Slain
-		tag="Profile_Value_Bosses_Slain"
-		posY=451
-		posX=223
+  begin object class=UI_Label Name=Profile_Value_Bosses_Slain
+    tag="Profile_Value_Bosses_Slain"
+    posY=451
+    posX=223
     AlignX=Left
     AlignY=Top
-		fontStyle=DEFAULT_SMALL_WHITE
-		labelText="#b"
-	end object
-	componentList.add(Profile_Value_Bosses_Slain)
+    fontStyle=DEFAULT_SMALL_WHITE
+    labelText="#b"
+  end object
+  componentList.add(Profile_Value_Bosses_Slain)
   
-	begin object class=UI_Label Name=Profile_Value_Temporal_Use
-		tag="Profile_Value_Temporal_Use"
-		posY=501
-		posX=249
+  begin object class=UI_Label Name=Profile_Value_Temporal_Use
+    tag="Profile_Value_Temporal_Use"
+    posY=501
+    posX=249
     AlignX=Left
     AlignY=Top
-		fontStyle=DEFAULT_SMALL_WHITE
-		labelText="#t1"
-	end object
-	componentList.add(Profile_Value_Temporal_Use)
+    fontStyle=DEFAULT_SMALL_WHITE
+    labelText="#t1"
+  end object
+  componentList.add(Profile_Value_Temporal_Use)
   
-	begin object class=UI_Label Name=Profile_Value_Time_Saved
-		tag="Profile_Value_Time_Saved"
-		posY=551
-		posX=213
+  begin object class=UI_Label Name=Profile_Value_Time_Saved
+    tag="Profile_Value_Time_Saved"
+    posY=551
+    posX=213
     AlignX=Left
     AlignY=Top
-		fontStyle=DEFAULT_SMALL_WHITE
-		labelText="#t2"
-	end object
-	componentList.add(Profile_Value_Time_Saved)
+    fontStyle=DEFAULT_SMALL_WHITE
+    labelText="#t2"
+  end object
+  componentList.add(Profile_Value_Time_Saved)
   
-  
-  // Speedruns
-	begin object class=UI_Label Name=Profile_Value_Azra
-		tag="Profile_Value_Azra"
-		posY=601
-		posX=214
-    AlignX=Left
-    AlignY=Top
-		fontStyle=DEFAULT_SMALL_WHITE
-		labelText="N/A"
-	end object
-	componentList.add(Profile_Value_Azra)
   
   // Speedruns
-	begin object class=UI_Label Name=Profile_Value_Hyrix
-		tag="Profile_Value_Hyrix"
-		posY=651
-		posX=219
+  begin object class=UI_Label Name=Profile_Value_Azra
+    tag="Profile_Value_Azra"
+    posY=601
+    posX=214
     AlignX=Left
     AlignY=Top
-		fontStyle=DEFAULT_SMALL_WHITE
-		labelText="N/A"
-	end object
-	componentList.add(Profile_Value_Hyrix)
+    fontStyle=DEFAULT_SMALL_WHITE
+    labelText="N/A"
+  end object
+  componentList.add(Profile_Value_Azra)
   
   // Speedruns
-	begin object class=UI_Label Name=Profile_Value_Khomat
-		tag="Profile_Value_Khomat"
-		posY=701
-		posX=247
+  begin object class=UI_Label Name=Profile_Value_Hyrix
+    tag="Profile_Value_Hyrix"
+    posY=651
+    posX=219
     AlignX=Left
     AlignY=Top
-		fontStyle=DEFAULT_SMALL_WHITE
-		labelText="N/A"
-	end object
-	componentList.add(Profile_Value_Khomat)
+    fontStyle=DEFAULT_SMALL_WHITE
+    labelText="N/A"
+  end object
+  componentList.add(Profile_Value_Hyrix)
   
   // Speedruns
-	begin object class=UI_Label Name=Profile_Value_Viliroth
-		tag="Profile_Value_Viliroth"
-		posY=751
-		posX=254
+  begin object class=UI_Label Name=Profile_Value_Khomat
+    tag="Profile_Value_Khomat"
+    posY=701
+    posX=247
     AlignX=Left
     AlignY=Top
-		fontStyle=DEFAULT_SMALL_WHITE
-		labelText="N/A"
-	end object
-	componentList.add(Profile_Value_Viliroth)
+    fontStyle=DEFAULT_SMALL_WHITE
+    labelText="N/A"
+  end object
+  componentList.add(Profile_Value_Khomat)
   
   // Speedruns
-	begin object class=UI_Label Name=Profile_Value_Tythizerus
-		tag="Profile_Value_Tythizerus"
-		posY=801
-		posX=280
+  begin object class=UI_Label Name=Profile_Value_Viliroth
+    tag="Profile_Value_Viliroth"
+    posY=751
+    posX=254
     AlignX=Left
     AlignY=Top
-		fontStyle=DEFAULT_SMALL_WHITE
-		labelText="N/A"
-	end object
-	componentList.add(Profile_Value_Tythizerus)
+    fontStyle=DEFAULT_SMALL_WHITE
+    labelText="N/A"
+  end object
+  componentList.add(Profile_Value_Viliroth)
+  
+  // Speedruns
+  begin object class=UI_Label Name=Profile_Value_Tythizerus
+    tag="Profile_Value_Tythizerus"
+    posY=801
+    posX=280
+    AlignX=Left
+    AlignY=Top
+    fontStyle=DEFAULT_SMALL_WHITE
+    labelText="N/A"
+  end object
+  componentList.add(Profile_Value_Tythizerus)
   
   
   
   // Best speedruns
-	begin object class=UI_Label Name=Profile_Value_Azra_Best
-		tag="Profile_Value_Azra_Best"
-		posY=601
-		posX=475
+  begin object class=UI_Label Name=Profile_Value_Azra_Best
+    tag="Profile_Value_Azra_Best"
+    posY=601
+    posX=475
     AlignX=Left
     AlignY=Top
-		fontStyle=DEFAULT_SMALL_WHITE
-		labelText="N/A"
-	end object
-	componentList.add(Profile_Value_Azra_Best)
+    fontStyle=DEFAULT_SMALL_WHITE
+    labelText="N/A"
+  end object
+  componentList.add(Profile_Value_Azra_Best)
   
   // Best speedruns
-	begin object class=UI_Label Name=Profile_Value_Hyrix_Best
-		tag="Profile_Value_Hyrix_Best"
-		posY=651
-		posX=475
+  begin object class=UI_Label Name=Profile_Value_Hyrix_Best
+    tag="Profile_Value_Hyrix_Best"
+    posY=651
+    posX=475
     AlignX=Left
     AlignY=Top
-		fontStyle=DEFAULT_SMALL_WHITE
-		labelText="N/A"
-	end object
-	componentList.add(Profile_Value_Hyrix_Best)
+    fontStyle=DEFAULT_SMALL_WHITE
+    labelText="N/A"
+  end object
+  componentList.add(Profile_Value_Hyrix_Best)
   
   // Best speedruns
-	begin object class=UI_Label Name=Profile_Value_Khomat_Best
-		tag="Profile_Value_Khomat_Best"
-		posY=701
-		posX=475
+  begin object class=UI_Label Name=Profile_Value_Khomat_Best
+    tag="Profile_Value_Khomat_Best"
+    posY=701
+    posX=475
     AlignX=Left
     AlignY=Top
-		fontStyle=DEFAULT_SMALL_WHITE
-		labelText="N/A"
-	end object
-	componentList.add(Profile_Value_Khomat_Best)
+    fontStyle=DEFAULT_SMALL_WHITE
+    labelText="N/A"
+  end object
+  componentList.add(Profile_Value_Khomat_Best)
   
   // Best speedruns
-	begin object class=UI_Label Name=Profile_Value_Viliroth_Best
-		tag="Profile_Value_Viliroth_Best"
-		posY=751
-		posX=475
+  begin object class=UI_Label Name=Profile_Value_Viliroth_Best
+    tag="Profile_Value_Viliroth_Best"
+    posY=751
+    posX=475
     AlignX=Left
     AlignY=Top
-		fontStyle=DEFAULT_SMALL_WHITE
-		labelText="N/A"
-	end object
-	componentList.add(Profile_Value_Viliroth_Best)
+    fontStyle=DEFAULT_SMALL_WHITE
+    labelText="N/A"
+  end object
+  componentList.add(Profile_Value_Viliroth_Best)
   
   // Best speedruns
-	begin object class=UI_Label Name=Profile_Value_Tythizerus_Best
-		tag="Profile_Value_Tythizerus_Best"
-		posY=801
-		posX=475
+  begin object class=UI_Label Name=Profile_Value_Tythizerus_Best
+    tag="Profile_Value_Tythizerus_Best"
+    posY=801
+    posX=475
     AlignX=Left
     AlignY=Top
-		fontStyle=DEFAULT_SMALL_WHITE
-		labelText="N/A"
-	end object
-	componentList.add(Profile_Value_Tythizerus_Best)
+    fontStyle=DEFAULT_SMALL_WHITE
+    labelText="N/A"
+  end object
+  componentList.add(Profile_Value_Tythizerus_Best)
   
 }
 

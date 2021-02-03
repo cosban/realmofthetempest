@@ -96,7 +96,7 @@ simulated event touch
 )
 {
   // ignore irrelevant events
-	if (ROTT_Player_Pawn(other) == none) return;
+  if (ROTT_Player_Pawn(other) == none) return;
   
   bPlayerInTrap = true;
   
@@ -118,7 +118,7 @@ simulated event touch
  *===========================================================================*/
 simulated event untouch(Actor other) {
   // ignore irrelevant events
-	if (ROTT_Player_Pawn(other) == none) return;
+  if (ROTT_Player_Pawn(other) == none) return;
   
   bPlayerInTrap = false;
 }
@@ -202,38 +202,38 @@ private function activateTrap() {
 /*=============================================================================
  * Default Properties
  *===========================================================================*/
-defaultproperties
+defaultProperties
 {
-	// Default checkpoint
+  // Default checkpoint
   respawnCheckpoint=-1
   
   // Actor settings
   bStatic=false
   
   // Collision mode
-	CollisionType=COLLIDE_TouchAll
+  CollisionType=COLLIDE_TouchAll
 
   // Collision mesh
-	Begin Object class=StaticMeshComponent name=Collision_Mesh
+  begin object class=StaticMeshComponent name=Collision_Mesh
     HiddenGame=true
     HiddenEditor=true // Can disable for proper collision placement
-		StaticMesh=StaticMesh'EditorMeshes.TexPropCube'
-		Translation=(X=0.0, Y=0, Z=182)
+    StaticMesh=StaticMesh'EditorMeshes.TexPropCube'
+    Translation=(X=0.0, Y=0, Z=182)
     Scale3D=(X=1.52,Y=1.52,Z=3.0)
-	End Object
-	components.Add(Collision_Mesh)
-	collisionComponent=Collision_Mesh
+  end object
+  components.Add(Collision_Mesh)
+  collisionComponent=Collision_Mesh
   
   // Trap particles
-	Begin Object class=ParticleSystemComponent name=Trap_Particle_System
-		bAutoActivate=true 
-		Scale=1.1
-		Template=ParticleSystem'ROTT_Utilities.Traps.Trap_Lightning_Orange_1A'
-		Translation=(X=0.0, Y=0, Z=182)
-		SecondsBeforeInactive=1.0f		
-	End Object
-	trapGraphic=Trap_Particle_System
-	components.Add(Trap_Particle_System)
-	
+  begin object class=ParticleSystemComponent name=Trap_Particle_System
+    bAutoActivate=true 
+    Scale=1.1
+    Template=ParticleSystem'ROTT_Utilities.Traps.Trap_Lightning_Orange_1A'
+    Translation=(X=0.0, Y=0, Z=182)
+    SecondsBeforeInactive=1.0f    
+  end object
+  trapGraphic=Trap_Particle_System
+  components.Add(Trap_Particle_System)
+  
 
 }

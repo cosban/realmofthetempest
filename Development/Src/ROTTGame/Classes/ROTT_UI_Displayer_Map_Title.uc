@@ -49,8 +49,8 @@ public function initializeComponent(optional string newTag = "") {
   super.initializeComponent(newTag);
   
   // Link to sprites
-	mapTitle = findSprite("Map_Title_Sprite");
-	areaSubregion = findSprite("Subregion_Sprite");
+  mapTitle = findSprite("Map_Title_Sprite");
+  areaSubregion = findSprite("Subregion_Sprite");
   
   // Plug in the region display information
   setRegionSprite();
@@ -77,54 +77,54 @@ public function initializeComponent(optional string newTag = "") {
  *===========================================================================*/
 private function setRegionSprite() {
   // Area title
-	switch (gameInfo.getCurrentMap()) {
-		case MAP_UI_TITLE_MENU:
-		case MAP_UI_CREDITS:
-		case MAP_UI_GAME_OVER:
+  switch (gameInfo.getCurrentMap()) {
+    case MAP_UI_TITLE_MENU:
+    case MAP_UI_CREDITS:
+    case MAP_UI_GAME_OVER:
       // No area title
-			break;
-		case MAP_TALONOVIA_TOWN:
-		case MAP_TALONOVIA_OUTSKIRTS:
-		case MAP_TALONOVIA_BACKLANDS:
-		case MAP_TALONOVIA_SHRINE:
-			mapTitle.setDrawIndex(REGION_TALONOVIA); 
-			break;
-		case MAP_RHUNIA_CITADEL:
-		case MAP_RHUNIA_WILDERNESS:
-		case MAP_RHUNIA_BACKLANDS:
-		case MAP_RHUNIA_OUTSKIRTS:
-		case MAP_MOUNTAIN_SHRINE:
-			mapTitle.setDrawIndex(REGION_RHUNIA); 
-			break;
-		case MAP_ETZLAND_CITADEL:
-		case MAP_ETZLAND_WILDERNESS:
-		case MAP_ETZLAND_BACKLANDS:
-		case MAP_ETZLAND_OUTSKIRTS:
-			mapTitle.setDrawIndex(REGION_ETZLAND);  
-			break;
-		case MAP_HAXLYN_CITADEL:
-		case MAP_HAXLYN_WILDERNESS:
-		case MAP_HAXLYN_BACKLANDS:
-		case MAP_HAXLYN_OUTSKIRTS:
-			mapTitle.setDrawIndex(REGION_HAXLYN);  
-			break;
-		case MAP_VALIMOR_CITADEL:
-		case MAP_VALIMOR_WILDERNESS:
-		case MAP_VALIMOR_BACKLANDS:
-		case MAP_VALIMOR_OUTSKIRTS:
-			mapTitle.setDrawIndex(REGION_VALIMOR);  
-			break;
-		case MAP_KALROTH_CITADEL:
-		case MAP_KALROTH_WILDERNESS:
-		case MAP_KALROTH_BACKLANDS:
-		case MAP_KALROTH_OUTSKIRTS:
-			mapTitle.setDrawIndex(REGION_KALROTH);  
-			break;
-		
-		default:
-			mapTitle.setEnabled(false); /// put "Unknown" here instead w.i.p.
-			break;
-	}
+      break;
+    case MAP_TALONOVIA_TOWN:
+    case MAP_TALONOVIA_OUTSKIRTS:
+    case MAP_TALONOVIA_BACKLANDS:
+    case MAP_TALONOVIA_SHRINE:
+      mapTitle.setDrawIndex(REGION_TALONOVIA); 
+      break;
+    case MAP_RHUNIA_CITADEL:
+    case MAP_RHUNIA_WILDERNESS:
+    case MAP_RHUNIA_BACKLANDS:
+    case MAP_RHUNIA_OUTSKIRTS:
+    case MAP_MOUNTAIN_SHRINE:
+      mapTitle.setDrawIndex(REGION_RHUNIA); 
+      break;
+    case MAP_ETZLAND_CITADEL:
+    case MAP_ETZLAND_WILDERNESS:
+    case MAP_ETZLAND_BACKLANDS:
+    case MAP_ETZLAND_OUTSKIRTS:
+      mapTitle.setDrawIndex(REGION_ETZLAND);  
+      break;
+    case MAP_HAXLYN_CITADEL:
+    case MAP_HAXLYN_WILDERNESS:
+    case MAP_HAXLYN_BACKLANDS:
+    case MAP_HAXLYN_OUTSKIRTS:
+      mapTitle.setDrawIndex(REGION_HAXLYN);  
+      break;
+    case MAP_VALIMOR_CITADEL:
+    case MAP_VALIMOR_WILDERNESS:
+    case MAP_VALIMOR_BACKLANDS:
+    case MAP_VALIMOR_OUTSKIRTS:
+      mapTitle.setDrawIndex(REGION_VALIMOR);  
+      break;
+    case MAP_KALROTH_CITADEL:
+    case MAP_KALROTH_WILDERNESS:
+    case MAP_KALROTH_BACKLANDS:
+    case MAP_KALROTH_OUTSKIRTS:
+      mapTitle.setDrawIndex(REGION_KALROTH);  
+      break;
+    
+    default:
+      mapTitle.setEnabled(false); /// put "Unknown" here instead w.i.p.
+      break;
+  }
 }
 
 /*=============================================================================
@@ -134,63 +134,63 @@ private function setRegionSprite() {
  *===========================================================================*/
 private function setSubregionSprite() {
   // Area title
-	switch (gameInfo.getCurrentMap()) {
-		case MAP_UI_TITLE_MENU:
-		case MAP_UI_CREDITS:
-		case MAP_UI_GAME_OVER:
-		case MAP_TALONOVIA_SHRINE:
-  	case MAP_AKSALOM_SKYGATE:
-  	case MAP_AKSALOM_GROVE:
-  	case MAP_AKSALOM_STORMLANDS:
-  	case MAP_MYSTERY_PATH:
+  switch (gameInfo.getCurrentMap()) {
+    case MAP_UI_TITLE_MENU:
+    case MAP_UI_CREDITS:
+    case MAP_UI_GAME_OVER:
+    case MAP_TALONOVIA_SHRINE:
+    case MAP_AKSALOM_SKYGATE:
+    case MAP_AKSALOM_GROVE:
+    case MAP_AKSALOM_STORMLANDS:
+    case MAP_MYSTERY_PATH:
       // Not applicable
-			areaSubregion.setEnabled(false);
-			break;
-  	case MAP_MOUNTAIN_SHRINE:
-			areaSubregion.setDrawIndex(SUBREGION_MOUNTAIN_SHRINE); 
-			break;
-		case MAP_TALONOVIA_TOWN:
-			areaSubregion.setDrawIndex(SUBREGION_TOWN); 
-			break;
-		case MAP_KYRIN_CAVERN:
-		case MAP_KAUFINAZ_CAVERN:
-			areaSubregion.setDrawIndex(SUBREGION_CAVES);  
-			break;
-		case MAP_ETZLAND_CITADEL:
-		case MAP_RHUNIA_CITADEL:
-		case MAP_HAXLYN_CITADEL:
-		case MAP_VALIMOR_CITADEL:
-		case MAP_KALROTH_CITADEL:
-			areaSubregion.setDrawIndex(SUBREGION_CITADEL); 
-			break;
-		case MAP_RHUNIA_WILDERNESS:
-		case MAP_ETZLAND_WILDERNESS:
-		case MAP_HAXLYN_WILDERNESS:
-		case MAP_VALIMOR_WILDERNESS:
-		case MAP_KALROTH_WILDERNESS:
-			areaSubregion.setDrawIndex(SUBREGION_WILDERNESS);  
-			break;
-		case MAP_TALONOVIA_BACKLANDS:
-		case MAP_RHUNIA_BACKLANDS:
-		case MAP_ETZLAND_BACKLANDS:
-		case MAP_HAXLYN_BACKLANDS:
-		case MAP_VALIMOR_BACKLANDS:
-		case MAP_KALROTH_BACKLANDS:
-			areaSubregion.setDrawIndex(SUBREGION_BACKLANDS);  
-			break;
-		case MAP_TALONOVIA_OUTSKIRTS:
-		case MAP_RHUNIA_OUTSKIRTS:
-		case MAP_ETZLAND_OUTSKIRTS:
-		case MAP_HAXLYN_OUTSKIRTS:
-		case MAP_VALIMOR_OUTSKIRTS:
-		case MAP_KALROTH_OUTSKIRTS:
-			areaSubregion.setDrawIndex(SUBREGION_OUTSKIRTS);  
-			break;
-		
-		default:
-			areaSubregion.setEnabled(false); /// put "Unknown" here instead
-			break;
-	}
+      areaSubregion.setEnabled(false);
+      break;
+    case MAP_MOUNTAIN_SHRINE:
+      areaSubregion.setDrawIndex(SUBREGION_MOUNTAIN_SHRINE); 
+      break;
+    case MAP_TALONOVIA_TOWN:
+      areaSubregion.setDrawIndex(SUBREGION_TOWN); 
+      break;
+    case MAP_KYRIN_CAVERN:
+    case MAP_KAUFINAZ_CAVERN:
+      areaSubregion.setDrawIndex(SUBREGION_CAVES);  
+      break;
+    case MAP_ETZLAND_CITADEL:
+    case MAP_RHUNIA_CITADEL:
+    case MAP_HAXLYN_CITADEL:
+    case MAP_VALIMOR_CITADEL:
+    case MAP_KALROTH_CITADEL:
+      areaSubregion.setDrawIndex(SUBREGION_CITADEL); 
+      break;
+    case MAP_RHUNIA_WILDERNESS:
+    case MAP_ETZLAND_WILDERNESS:
+    case MAP_HAXLYN_WILDERNESS:
+    case MAP_VALIMOR_WILDERNESS:
+    case MAP_KALROTH_WILDERNESS:
+      areaSubregion.setDrawIndex(SUBREGION_WILDERNESS);  
+      break;
+    case MAP_TALONOVIA_BACKLANDS:
+    case MAP_RHUNIA_BACKLANDS:
+    case MAP_ETZLAND_BACKLANDS:
+    case MAP_HAXLYN_BACKLANDS:
+    case MAP_VALIMOR_BACKLANDS:
+    case MAP_KALROTH_BACKLANDS:
+      areaSubregion.setDrawIndex(SUBREGION_BACKLANDS);  
+      break;
+    case MAP_TALONOVIA_OUTSKIRTS:
+    case MAP_RHUNIA_OUTSKIRTS:
+    case MAP_ETZLAND_OUTSKIRTS:
+    case MAP_HAXLYN_OUTSKIRTS:
+    case MAP_VALIMOR_OUTSKIRTS:
+    case MAP_KALROTH_OUTSKIRTS:
+      areaSubregion.setDrawIndex(SUBREGION_OUTSKIRTS);  
+      break;
+    
+    default:
+      areaSubregion.setEnabled(false); /// put "Unknown" here instead
+      break;
+  }
 }
 
 

@@ -72,49 +72,49 @@ protected function float attributeInfo
  * getStats()
  *===========================================================================*/
 function int getStats(string StatType, int SkillLevel) {
-	local int iArmor, iReq, i, j, k;
-	
-	if (SkillLevel == 0)
-	{
-		return 0;
-	}
-	
-	iArmor = 0;
-	iReq = 10;
-	i = SkillLevel;
-	j = 16;
-	k = 19;
-	
-	do
-	{
-		//Do %SkillLEvel times
-		i = i - 1;
-		
-		k = k + 3;
-		iReq = iReq + k;
-		
-		if (iReq % 5 != 0 && iReq%2 != 0 )
-		{
-			Do
-			{
-				iReq = iReq + 1;
-				k = k + 1;				
-			} until (iReq%5 == 0 || iReq%2 == 0);
-		}
-		
-		iArmor = iArmor + j;
-		j = j + 8;
-		
-	} until (i <= 0);
-	
-	// Return type 
-	switch (StatType)
-	{
-		case "Stat":
-			return iArmor;
-		case "Req":
-			return iReq;
-	}
+  local int iArmor, iReq, i, j, k;
+  
+  if (SkillLevel == 0)
+  {
+    return 0;
+  }
+  
+  iArmor = 0;
+  iReq = 10;
+  i = SkillLevel;
+  j = 16;
+  k = 19;
+  
+  do
+  {
+    //Do %SkillLEvel times
+    i = i - 1;
+    
+    k = k + 3;
+    iReq = iReq + k;
+    
+    if (iReq % 5 != 0 && iReq%2 != 0 )
+    {
+      Do
+      {
+        iReq = iReq + 1;
+        k = k + 1;        
+      } until (iReq%5 == 0 || iReq%2 == 0);
+    }
+    
+    iArmor = iArmor + j;
+    j = j + 8;
+    
+  } until (i <= 0);
+  
+  // Return type 
+  switch (StatType)
+  {
+    case "Stat":
+      return iArmor;
+    case "Req":
+      return iReq;
+  }
 }
 
 /*=============================================================================
@@ -137,49 +137,49 @@ defaultProperties
 function int GetUniArmor(string StatType, int SkillLevel)
 {
 
-	local int iArmor, iReq, i, j, k;
-	
-	if (SkillLevel == 0)
-	{
-		return 0;
-	}
-	
-	iArmor = 0;
-	iReq = 10;
-	i = SkillLevel;
-	j = 16;
-	k = 19;
-	
-	do
-	{
-		//Do %SkillLEvel times
-		i = i - 1;
-		
-		k = k + 3;
-		iReq = iReq + k;
-		
-		if (iReq % 5 != 0 && iReq%2 != 0 )
-		{
-			Do
-			{
-				iReq = iReq + 1;
-				k = k + 1;				
-			} until (iReq%5 == 0 || iReq%2 == 0);
-		}
-		
-		iArmor = iArmor + j;
-		j = j + 8;
-		
-	} until (i <= 0);
-	
-	// Return type 
-	switch (StatType)
-	{
-		case "Stat":
-			return iArmor;
-		case "Req":
-			return iReq;
-	}
+  local int iArmor, iReq, i, j, k;
+  
+  if (SkillLevel == 0)
+  {
+    return 0;
+  }
+  
+  iArmor = 0;
+  iReq = 10;
+  i = SkillLevel;
+  j = 16;
+  k = 19;
+  
+  do
+  {
+    //Do %SkillLEvel times
+    i = i - 1;
+    
+    k = k + 3;
+    iReq = iReq + k;
+    
+    if (iReq % 5 != 0 && iReq%2 != 0 )
+    {
+      Do
+      {
+        iReq = iReq + 1;
+        k = k + 1;        
+      } until (iReq%5 == 0 || iReq%2 == 0);
+    }
+    
+    iArmor = iArmor + j;
+    j = j + 8;
+    
+  } until (i <= 0);
+  
+  // Return type 
+  switch (StatType)
+  {
+    case "Stat":
+      return iArmor;
+    case "Req":
+      return iReq;
+  }
 }
 
 */

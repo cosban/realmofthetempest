@@ -133,21 +133,21 @@ event initSceneManager() {
 public function setInitScene() {
   whiteLog("--+-- ROTT_UI_Scene_Manager : setInitScene() --+--");
   
-	// Set camera control by map info
-	switch (gameInfo.getCurrentMap()) {
-		case MAP_UI_TITLE_MENU:
+  // Set camera control by map info
+  switch (gameInfo.getCurrentMap()) {
+    case MAP_UI_TITLE_MENU:
       switchScene(SCENE_TITLE_SCREEN);
-			break; 
-		case MAP_UI_CREDITS:
+      break; 
+    case MAP_UI_CREDITS:
       switchScene(SCENE_CREDITS);
-			break; 
-		case MAP_UI_GAME_OVER:
+      break; 
+    case MAP_UI_GAME_OVER:
       switchScene(SCENE_GAME_OVER);
-			break; 
+      break; 
     default:
       switchScene(SCENE_OVER_WORLD);
-			break;
-	}
+      break;
+  }
 }
 
 /*=============================================================================
@@ -227,7 +227,7 @@ public function debugDataStructure() {
  * deleteSceneManager()
  *===========================================================================*/
 public function deleteSceneManager() {
-	local int i;
+  local int i;
   
   // Delete all scenes
   for (i = 0; i < uiScenes.length; i++) {

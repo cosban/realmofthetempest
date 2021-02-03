@@ -132,13 +132,13 @@ public function reset() {
  * Returns a scalar to 
  *===========================================================================*/
 private function float getSpeedAmp() {
-	switch (alchemyManager.level)	{
-		case 1:  return 1.0;	
-		case 2:  return 0.6;	
-		case 3:	 return 0.4;	
-		case 4:	 return 0.3;	
-		default: return 0.25;
-	}
+  switch (alchemyManager.level)  {
+    case 1:  return 1.0;  
+    case 2:  return 0.6;  
+    case 3:   return 0.4;  
+    case 4:   return 0.3;  
+    default: return 0.25;
+  }
 }
 
 /*=============================================================================

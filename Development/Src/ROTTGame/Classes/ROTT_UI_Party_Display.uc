@@ -162,63 +162,63 @@ defaultProperties
   yOffset=0
   
   // Menu Portraits
-	begin object class=UI_Texture_Storage Name=Menu_Portraits
-		tag="Menu_Portraits"
-		images(VALKYRIE)=Menu_Portrait_Valkyrie
-		images(WIZARD)=Menu_Portrait_Wizard
-		images(GOLIATH)=Menu_Portrait_Goliath
-		images(TITAN)=Menu_Portrait_Titan
+  begin object class=UI_Texture_Storage Name=Menu_Portraits
+    tag="Menu_Portraits"
+    images(VALKYRIE)=Menu_Portrait_Valkyrie
+    images(WIZARD)=Menu_Portrait_Wizard
+    images(GOLIATH)=Menu_Portrait_Goliath
+    images(TITAN)=Menu_Portrait_Titan
     textureWidth=200
     textureHeight=300
-	end object
-	componentList.add(Menu_Portraits)
+  end object
+  componentList.add(Menu_Portraits)
   
   // Manager Portraits
-	begin object class=UI_Texture_Storage Name=Manager_Portraits
-		tag="Manager_Portraits"
-		images(VALKYRIE)=Manager_Portrait_Valkyrie
-		images(WIZARD)=Manager_Portrait_Wizard
-		images(GOLIATH)=Manager_Portrait_Goliath
-		images(TITAN)=Manager_Portrait_Titan
+  begin object class=UI_Texture_Storage Name=Manager_Portraits
+    tag="Manager_Portraits"
+    images(VALKYRIE)=Manager_Portrait_Valkyrie
+    images(WIZARD)=Manager_Portrait_Wizard
+    images(GOLIATH)=Manager_Portrait_Goliath
+    images(TITAN)=Manager_Portrait_Titan
     textureWidth=200
     textureHeight=240
-	end object
-	componentList.add(Manager_Portraits)
+  end object
+  componentList.add(Manager_Portraits)
   
   // Victory Portraits
-	begin object class=UI_Texture_Storage Name=Victory_Portraits
-		tag="Victory_Portraits"
-		images(VALKYRIE)=Manager_Portrait_Valkyrie
-		images(WIZARD)=Manager_Portrait_Wizard
-		images(GOLIATH)=Manager_Portrait_Goliath
-		images(TITAN)=Manager_Portrait_Titan
-	end object
-	componentList.add(Victory_Portraits)
+  begin object class=UI_Texture_Storage Name=Victory_Portraits
+    tag="Victory_Portraits"
+    images(VALKYRIE)=Manager_Portrait_Valkyrie
+    images(WIZARD)=Manager_Portrait_Wizard
+    images(GOLIATH)=Manager_Portrait_Goliath
+    images(TITAN)=Manager_Portrait_Titan
+  end object
+  componentList.add(Victory_Portraits)
   
   // Portraits
-	begin object class=UI_Sprite Name=Party_Portrait_1
-		tag="Party_Portrait_1"
+  begin object class=UI_Sprite Name=Party_Portrait_1
+    tag="Party_Portrait_1"
     bEnabled=true
-		images(0)=Menu_Portrait_Wizard
-	end object
-	componentList.add(Party_Portrait_1)
-	
+    images(0)=Menu_Portrait_Wizard
+  end object
+  componentList.add(Party_Portrait_1)
+  
   // Portraits
-	begin object class=UI_Sprite Name=Party_Portrait_2
-		tag="Party_Portrait_2"
+  begin object class=UI_Sprite Name=Party_Portrait_2
+    tag="Party_Portrait_2"
     bEnabled=true
-		images(0)=Menu_Portrait_Wizard
-	end object
-	componentList.add(Party_Portrait_2)
-	
+    images(0)=Menu_Portrait_Wizard
+  end object
+  componentList.add(Party_Portrait_2)
+  
   // Portraits
-	begin object class=UI_Sprite Name=Party_Portrait_3
-		tag="Party_Portrait_3"
+  begin object class=UI_Sprite Name=Party_Portrait_3
+    tag="Party_Portrait_3"
     bEnabled=true
-		images(0)=Menu_Portrait_Wizard
-	end object
-	componentList.add(Party_Portrait_3)
-	
+    images(0)=Menu_Portrait_Wizard
+  end object
+  componentList.add(Party_Portrait_3)
+  
   // Unspent Icons
   begin object class=UI_Texture_Info Name=Unspent_Points_Icon_F1
     componentTextures.add(Texture2D'GUI.Unspent_Points_Icon_F1')
@@ -228,12 +228,12 @@ defaultProperties
   end object
   
   // Unspent points
-	begin object class=UI_Sprite Name=Unspent_Icon_1
-		tag="Unspent_Icon_1"
+  begin object class=UI_Sprite Name=Unspent_Icon_1
+    tag="Unspent_Icon_1"
     posX=130
     posY=8
-		images(0)=Unspent_Points_Icon_F1
-		images(1)=Unspent_Points_Icon_F2
+    images(0)=Unspent_Points_Icon_F1
+    images(1)=Unspent_Points_Icon_F2
     
     // Alpha Effects
     activeEffects.add((effectType = EFFECT_ALPHA_CYCLE, lifeTime = -1, elapsedTime = 0, intervalTime = 0.5, min = 158, max = 245))
@@ -241,15 +241,15 @@ defaultProperties
     // Flipbook Effects
     activeEffects.add((effectType = EFFECT_FLIPBOOK, lifeTime = -1, elapsedTime = 0, intervalTime = 0.06, min = 0, max = 255))
     
-	end object
-	componentList.add(Unspent_Icon_1)
-	
-	begin object class=UI_Sprite Name=Unspent_Icon_2
-		tag="Unspent_Icon_2"
+  end object
+  componentList.add(Unspent_Icon_1)
+  
+  begin object class=UI_Sprite Name=Unspent_Icon_2
+    tag="Unspent_Icon_2"
     posX=130
     posY=8
-		images(0)=Unspent_Points_Icon_F1
-		images(1)=Unspent_Points_Icon_F2
+    images(0)=Unspent_Points_Icon_F1
+    images(1)=Unspent_Points_Icon_F2
     
     // Alpha Effects
     activeEffects.add((effectType = EFFECT_ALPHA_CYCLE, lifeTime = -1, elapsedTime = 0, intervalTime = 0.5, min = 158, max = 245))
@@ -257,15 +257,15 @@ defaultProperties
     // Flipbook Effects
     activeEffects.add((effectType = EFFECT_FLIPBOOK, lifeTime = -1, elapsedTime = 0, intervalTime = 0.06, min = 0, max = 255))
     
-	end object
-	componentList.add(Unspent_Icon_2)
-	
-	begin object class=UI_Sprite Name=Unspent_Icon_3
-		tag="Unspent_Icon_3"
+  end object
+  componentList.add(Unspent_Icon_2)
+  
+  begin object class=UI_Sprite Name=Unspent_Icon_3
+    tag="Unspent_Icon_3"
     posX=130
     posY=8
-		images(0)=Unspent_Points_Icon_F1
-		images(1)=Unspent_Points_Icon_F2
+    images(0)=Unspent_Points_Icon_F1
+    images(1)=Unspent_Points_Icon_F2
     
     // Alpha Effects
     activeEffects.add((effectType = EFFECT_ALPHA_CYCLE, lifeTime = -1, elapsedTime = 0, intervalTime = 0.6, min = 158, max = 245))
@@ -273,9 +273,9 @@ defaultProperties
     // Flipbook Effects
     activeEffects.add((effectType = EFFECT_FLIPBOOK, lifeTime = -1, elapsedTime = 0, intervalTime = 0.06, min = 0, max = 255))
     
-	end object
-	componentList.add(Unspent_Icon_3)
-	
+  end object
+  componentList.add(Unspent_Icon_3)
+  
   
 }
 

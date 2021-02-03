@@ -244,18 +244,18 @@ protected function navigationRoutineB() {
  * Assets
  *===========================================================================*/
 defaultProperties
-{	
-	/** ===== Input ===== **/
-	begin object class=ROTT_Input_Handler Name=Input_A
+{  
+  /** ===== Input ===== **/
+  begin object class=ROTT_Input_Handler Name=Input_A
     inputName="XBoxTypeS_A"
-		buttonComponent=none
-	end object
+    buttonComponent=none
+  end object
   inputList.add(Input_A)
   
-	begin object class=ROTT_Input_Handler Name=Input_B
+  begin object class=ROTT_Input_Handler Name=Input_B
     inputName="XBoxTypeS_B"
     buttonComponent=none
-	end object
+  end object
   inputList.add(Input_B)
   
   /** ===== Textures ===== **/
@@ -263,7 +263,7 @@ defaultProperties
   begin object class=UI_Texture_Info Name=Menu_Background_Left_Confirm
     componentTextures.add(Texture2D'GUI.Menu_Background_Left_Confirm')
   end object
-	begin object class=UI_Texture_Info Name=Menu_Background_Left_Texture
+  begin object class=UI_Texture_Info Name=Menu_Background_Left_Texture
     componentTextures.add(Texture2D'GUI.Menu_Background_Left')
   end object
   
@@ -274,36 +274,36 @@ defaultProperties
   
   /** ===== UI Components ===== **/
   // Left background
-	begin object class=UI_Sprite Name=Menu_Background_Left
-		tag="Menu_Background_Left"
+  begin object class=UI_Sprite Name=Menu_Background_Left
+    tag="Menu_Background_Left"
     bEnabled=true
-		posX=0
-		posY=0
-		posXEnd=720
-		posYEnd=NATIVE_HEIGHT
-		images(MENU_DEFAULT_GRAPHIC)=Menu_Background_Left_Texture
-		images(MENU_CONFIRM_GRAPHIC)=Menu_Background_Left_Confirm
-	end object
-	componentList.add(Menu_Background_Left)
+    posX=0
+    posY=0
+    posXEnd=720
+    posYEnd=NATIVE_HEIGHT
+    images(MENU_DEFAULT_GRAPHIC)=Menu_Background_Left_Texture
+    images(MENU_CONFIRM_GRAPHIC)=Menu_Background_Left_Confirm
+  end object
+  componentList.add(Menu_Background_Left)
   
   // Right background
-	begin object class=UI_Sprite Name=Menu_Background_Right
-		tag="Menu_Background_Right"
+  begin object class=UI_Sprite Name=Menu_Background_Right
+    tag="Menu_Background_Right"
     bEnabled=true
-		posX=720
-		posY=0
-		posXEnd=NATIVE_WIDTH
-		posYEnd=NATIVE_HEIGHT
-		images(0)=Menu_Background_Texture
-	end object
-	componentList.add(Menu_Background_Right)
+    posX=720
+    posY=0
+    posXEnd=NATIVE_WIDTH
+    posYEnd=NATIVE_HEIGHT
+    images(0)=Menu_Background_Texture
+  end object
+  componentList.add(Menu_Background_Right)
   
   // Selection box
-	begin object class=UI_Selector Name=Game_Menu_Selector
-		tag="Game_Menu_Selector"
+  begin object class=UI_Selector Name=Game_Menu_Selector
+    tag="Game_Menu_Selector"
     bEnabled=true
-		posX=17
-		posY=50
+    posX=17
+    posY=50
     selectionOffset=(x=0,y=100)
     numberOfMenuOptions=4
     
@@ -333,20 +333,20 @@ defaultProperties
     end object
     componentList.add(Inactive_Selector_Sprite)
     
-	end object
-	componentList.add(Game_Menu_Selector)
-	
+  end object
+  componentList.add(Game_Menu_Selector)
+  
   // Party Displayer
-	begin object class=ROTT_UI_Party_Display Name=Party_Displayer
-		tag="Party_Displayer"
+  begin object class=ROTT_UI_Party_Display Name=Party_Displayer
+    tag="Party_Displayer"
     bEnabled=true
     posX=60
     posY=544
     XOffset=200
     YOffset=0
-	end object
-	componentList.add(Party_Displayer)
-	
+  end object
+  componentList.add(Party_Displayer)
+  
   
 }
 

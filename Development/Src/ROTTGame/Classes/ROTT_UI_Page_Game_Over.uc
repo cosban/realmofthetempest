@@ -87,48 +87,48 @@ private function allowInput() {
  *===========================================================================*/
 defaultProperties
 {
-	/** ===== Input ===== **/
-	begin object class=ROTT_Input_Handler Name=Input_A
+  /** ===== Input ===== **/
+  begin object class=ROTT_Input_Handler Name=Input_A
     inputName="XBoxTypeS_A"
-		buttonComponent=none
-	end object
+    buttonComponent=none
+  end object
   inputList.add(Input_A)
   
-	begin object class=ROTT_Input_Handler Name=Input_B
+  begin object class=ROTT_Input_Handler Name=Input_B
     inputName="XBoxTypeS_B"
     buttonComponent=none
-	end object
+  end object
   inputList.add(Input_B)
   
   /** ===== Textures ===== **/
   begin object class=UI_Texture_Info Name=Game_Over_Title
     componentTextures.add(Texture2D'GUI.Game_Over_Title')
   end object
-	begin object class=UI_Texture_Info Name=Black_Texture
-		componentTextures.add(Texture2D'GUI.Black_Square')
-	end object
+  begin object class=UI_Texture_Info Name=Black_Texture
+    componentTextures.add(Texture2D'GUI.Black_Square')
+  end object
   
-	/** ===== UI Components ===== **/
+  /** ===== UI Components ===== **/
   // Game Over Title
   begin object class=UI_Sprite Name=Game_Over_Title_Sprite
-		tag="Game_Over_Title_Sprite"
+    tag="Game_Over_Title_Sprite"
     posX=0
     posY=90
-		images(0)=Game_Over_Title
-	end object
-	componentList.add(Game_Over_Title_Sprite)
-	
+    images(0)=Game_Over_Title
+  end object
+  componentList.add(Game_Over_Title_Sprite)
+  
   // Fade
-	begin object class=UI_Sprite Name=Screen_Fade_Component
-		tag="Screen_Fade_Component"
-		posX=0
-		posY=0
-		posXEnd=NATIVE_WIDTH
-		posYEnd=NATIVE_HEIGHT
-		images(0)=Black_Texture
+  begin object class=UI_Sprite Name=Screen_Fade_Component
+    tag="Screen_Fade_Component"
+    posX=0
+    posY=0
+    posXEnd=NATIVE_WIDTH
+    posYEnd=NATIVE_HEIGHT
+    images(0)=Black_Texture
     bMandatoryScaleToWindow=true
-	end object
-	componentList.add(Screen_Fade_Component)
+  end object
+  componentList.add(Screen_Fade_Component)
   
   
 }

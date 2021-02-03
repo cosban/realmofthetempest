@@ -49,7 +49,7 @@ defaultProperties
   itemName="Unjah Petal"
   
   // Item texture
-	itemTexture=Texture2D'ROTT_Items.Herbs.Item_Herb_Cyan'
+  itemTexture=Texture2D'ROTT_Items.Herbs.Item_Herb_Cyan'
   
   // Item text color
   itemFont=DEFAULT_SMALL_ORANGE

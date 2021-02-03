@@ -296,15 +296,15 @@ private function allowInput() {
  * Assets
  *===========================================================================*/
 defaultProperties
-{	
+{  
   // Available hero list
   characterClasses=(VALKYRIE, GOLIATH, WIZARD, TITAN) // ASSASSIN
   
-	/** ===== Input ===== **/
-	begin object class=ROTT_Input_Handler Name=Input_A
+  /** ===== Input ===== **/
+  begin object class=ROTT_Input_Handler Name=Input_A
     inputName="XBoxTypeS_A"
-		buttonComponent=none
-	end object
+    buttonComponent=none
+  end object
   inputList.add(Input_A)
   
   /** ===== Textures ===== **/
@@ -337,72 +337,72 @@ defaultProperties
   
   /** ===== UI Components ===== **/
   // Background
-	begin object class=UI_Sprite Name=Background_Sprite
-		tag="Background_Sprite"
+  begin object class=UI_Sprite Name=Background_Sprite
+    tag="Background_Sprite"
     bEnabled=true
-		posX=0
-		posY=0
-		posXEnd=NATIVE_WIDTH
-		posYEnd=NATIVE_HEIGHT
-		images(0)=Character_Selection_Background
-	end object
-	componentList.add(Background_Sprite)
+    posX=0
+    posY=0
+    posXEnd=NATIVE_WIDTH
+    posYEnd=NATIVE_HEIGHT
+    images(0)=Character_Selection_Background
+  end object
+  componentList.add(Background_Sprite)
   
   // Header: Select class label
   begin object class=UI_Sprite Name=Selection_Header
     tag="Selection_Header"
     bEnabled=true
-		posX=428
-		posY=44
-		images(0)=Select_A_Class
+    posX=428
+    posY=44
+    images(0)=Select_A_Class
   end object
   componentList.add(Selection_Header)
   
   // Selection Portraits
   // Valkyrie
-	begin object class=UI_Sprite Name=Selection_Portrait_Valkyrie
-		tag="Selection_Portrait_Valkyrie"
+  begin object class=UI_Sprite Name=Selection_Portrait_Valkyrie
+    tag="Selection_Portrait_Valkyrie"
     bEnabled=true
-		posX=520
-		posY=150
-		images(0)=Character_Portrait_Valkyrie
-	end object
-	componentList.add(Selection_Portrait_Valkyrie)
+    posX=520
+    posY=150
+    images(0)=Character_Portrait_Valkyrie
+  end object
+  componentList.add(Selection_Portrait_Valkyrie)
   
-	begin object class=UI_Sprite Name=Selection_Portrait_Goliath
-		tag="Selection_Portrait_Goliath"
+  begin object class=UI_Sprite Name=Selection_Portrait_Goliath
+    tag="Selection_Portrait_Goliath"
     bEnabled=true
-		posX=520
-		posY=150
-		images(0)=Character_Portrait_Goliath
-	end object
-	componentList.add(Selection_Portrait_Goliath)
+    posX=520
+    posY=150
+    images(0)=Character_Portrait_Goliath
+  end object
+  componentList.add(Selection_Portrait_Goliath)
   
-	begin object class=UI_Sprite Name=Selection_Portrait_Wizard
-		tag="Selection_Portrait_Wizard"
+  begin object class=UI_Sprite Name=Selection_Portrait_Wizard
+    tag="Selection_Portrait_Wizard"
     bEnabled=true
-		posX=520
-		posY=150
-		images(0)=Character_Portrait_Wizard
-	end object
-	componentList.add(Selection_Portrait_Wizard)
+    posX=520
+    posY=150
+    images(0)=Character_Portrait_Wizard
+  end object
+  componentList.add(Selection_Portrait_Wizard)
   
-	begin object class=UI_Sprite Name=Selection_Portrait_Titan
-		tag="Selection_Portrait_Titan"
+  begin object class=UI_Sprite Name=Selection_Portrait_Titan
+    tag="Selection_Portrait_Titan"
     bEnabled=true
-		posX=520
-		posY=150
-		images(0)=Character_Portrait_Titan
-	end object
-	componentList.add(Selection_Portrait_Titan)
+    posX=520
+    posY=150
+    images(0)=Character_Portrait_Titan
+  end object
+  componentList.add(Selection_Portrait_Titan)
   
   // Selection arrows
   begin object class=UI_Selector Name=Class_Selection_Arrows
     tag="Class_Selection_Arrows"
     navigationType=SELECTION_HORIZONTAL
     bEnabled=true
-		posX=380
-		posY=396
+    posX=380
+    posY=396
     
     // Selection arrows
     begin object class=UI_Texture_Info Name=Selection_Arrows_Texture
@@ -435,8 +435,8 @@ defaultProperties
     posY=210
     posXEnd=826
     posYEnd=255
-		alignX=LEFT
-		alignY=CENTER
+    alignX=LEFT
+    alignY=CENTER
     fontStyle=DEFAULT_MEDIUM_WHITE
     labelText="Vitality\n \n\nStrength\n \n\nCourage\n \n\nFocus"
   end object
@@ -451,8 +451,8 @@ defaultProperties
     posY=246
     posXEnd=1366
     posYEnd=291
-		alignX=LEFT
-		alignY=CENTER
+    alignX=LEFT
+    alignY=CENTER
     fontStyle=DEFAULT_MEDIUM_GREEN
     labelText="Major Affinity"
   end object
@@ -463,8 +463,8 @@ defaultProperties
     posY=352
     posXEnd=1366
     posYEnd=397
-		alignX=LEFT
-		alignY=CENTER
+    alignX=LEFT
+    alignY=CENTER
     fontStyle=DEFAULT_MEDIUM_YELLOW
     labelText="Minor Affinity"
   end object
@@ -475,8 +475,8 @@ defaultProperties
     posY=458
     posXEnd=1366
     posYEnd=503
-		alignX=LEFT
-		alignY=CENTER
+    alignX=LEFT
+    alignY=CENTER
     fontStyle=DEFAULT_MEDIUM_GREEN
     labelText="Major Affinity"
   end object
@@ -487,8 +487,8 @@ defaultProperties
     posY=564
     posXEnd=1366
     posYEnd=609
-		alignX=LEFT
-		alignY=CENTER
+    alignX=LEFT
+    alignY=CENTER
     fontStyle=DEFAULT_MEDIUM_CYAN
     labelText="Average Affinity"
   end object

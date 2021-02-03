@@ -24,8 +24,8 @@ class ROTT_NPC_Rhunia_Wild_B extends ROTT_NPC_Container;
 public function initDialogue() {
   super.initDialogue();
   
-	// Intro
-	`NEW_NODE(GREETING, NUETRAL)
+  // Intro
+  `NEW_NODE(GREETING, NUETRAL)
     "Chaos mocks our fickle fate, while order takes us to it.",
     ""
   `ENDNODE
@@ -55,27 +55,27 @@ defaultProperties
   npcName=GENERIC
   
   // Background
-	begin object class=UI_Texture_Info Name=NPC_Background_Texture
-		componentTextures.add(Texture2D'GUI_NPC_Dialog.NPC_Background_Dark_Gray')
-	end object
-	
+  begin object class=UI_Texture_Info Name=NPC_Background_Texture
+    componentTextures.add(Texture2D'GUI_NPC_Dialog.NPC_Background_Dark_Gray')
+  end object
+  
   // Sprite container for transfer
-	begin object class=UI_Texture_Storage Name=NPC_Background
-		tag="NPC_Background"
-		images(0)=NPC_Background_Texture
-	end object
+  begin object class=UI_Texture_Storage Name=NPC_Background
+    tag="NPC_Background"
+    images(0)=NPC_Background_Texture
+  end object
   npcBackground=NPC_Background
   
   // NPC Texture
-	begin object class=UI_Texture_Info Name=NPC_Gatekeeper
+  begin object class=UI_Texture_Info Name=NPC_Gatekeeper
     componentTextures.add(Texture2D'NPCs.Witches.NPC_Portrait_Witch_Red_360')
   end object
-	
+  
   // Sprite container for transfer
-	begin object class=UI_Texture_Storage Name=NPC_Sprites
-		tag="NPC_Sprites"
-		images(0)=NPC_Gatekeeper
-	end object
+  begin object class=UI_Texture_Storage Name=NPC_Sprites
+    tag="NPC_Sprites"
+    images(0)=NPC_Gatekeeper
+  end object
   npcSprites=NPC_Sprites
 }
 

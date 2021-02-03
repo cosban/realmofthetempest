@@ -218,26 +218,26 @@ protected function navigationRoutineB() {
  *===========================================================================*/
 defaultProperties
 {
-	/** ===== Input ===== **/
-	begin object class=ROTT_Input_Handler Name=Input_A
+  /** ===== Input ===== **/
+  begin object class=ROTT_Input_Handler Name=Input_A
     inputName="XBoxTypeS_A"
-		buttonComponent=none
-	end object
+    buttonComponent=none
+  end object
   inputList.add(Input_A)
   
-	begin object class=ROTT_Input_Handler Name=Input_B
+  begin object class=ROTT_Input_Handler Name=Input_B
     inputName="XBoxTypeS_B"
     buttonComponent=none
-	end object
+  end object
   inputList.add(Input_B)
   
   /** ===== UI Components ===== **/
   // Party Selection Box
-	begin object class=UI_Selector Name=Hero_Selection_Box
-		tag="Hero_Selection_Box"
+  begin object class=UI_Selector Name=Hero_Selection_Box
+    tag="Hero_Selection_Box"
     bEnabled=true
-		posX=61
-		posY=541
+    posX=61
+    posY=541
     navigationType=SELECTION_HORIZONTAL
     selectionOffset=(x=200,y=0)
     numberOfMenuOptions=3
@@ -270,9 +270,9 @@ defaultProperties
     end object
     componentList.add(Inactive_Selector_Sprite)
     
-	end object
-	componentList.add(Hero_Selection_Box)
-	
+  end object
+  componentList.add(Hero_Selection_Box)
+  
 }
 
 

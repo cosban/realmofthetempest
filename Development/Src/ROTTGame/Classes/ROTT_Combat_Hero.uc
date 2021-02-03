@@ -245,8 +245,8 @@ public function int getHuntingProwess() {
   prowess += 25 * glyphSkillPts[GLYPH_TREE_DAMAGE];
   
   prowess += 0.02 * persistentStatistics[TRACK_PHYSICAL_DAMAGE];
-  prowess += 1 * persistentStatistics[TRACK_MONSTERS_SLAIN];
-  prowess += 100 * persistentStatistics[TRACK_BOSSES_SLAIN];
+  prowess += 1 * ROTT_Party(outer).persistentStatistics[TRACK_MONSTERS_SLAIN];
+  prowess += 100 * ROTT_Party(outer).persistentStatistics[TRACK_BOSSES_SLAIN];
   
   prowess += 2 * hardStats[PRIMARY_STRENGTH];
   
@@ -505,10 +505,10 @@ public function int getPrimaryStat(StatTypes statType) {
  *===========================================================================*/
 public function addRitualBoosts() {
   // Max health
-	subStats[MAX_HEALTH] += getRitualAmp(RITUAL_HEALTH_BOOST);
+  subStats[MAX_HEALTH] += getRitualAmp(RITUAL_HEALTH_BOOST);
   
   // Max Mana
-	subStats[MAX_MANA] += getRitualAmp(RITUAL_MANA_BOOST);
+  subStats[MAX_MANA] += getRitualAmp(RITUAL_MANA_BOOST);
   
   // Regen enchantments and rituals
   subStats[HEALTH_REGEN] = gameInfo.playerProfile.getEnchantBoost(ROSEWOOD_PENDANT);
@@ -517,8 +517,8 @@ public function addRitualBoosts() {
   subStats[HEALTH_REGEN] += getRitualAmp(RITUAL_HEALTH_REGEN);
   subStats[MANA_REGEN] += getRitualAmp(RITUAL_MANA_REGEN);
   
-	subStats[MIN_PHYSICAL_DAMAGE] *= 1 + getRitualAmp(RITUAL_PHYSICAL_DAMAGE) / 100.f;
-	subStats[MAX_PHYSICAL_DAMAGE] *= 1 + getRitualAmp(RITUAL_PHYSICAL_DAMAGE) / 100.f;
+  subStats[MIN_PHYSICAL_DAMAGE] *= 1 + getRitualAmp(RITUAL_PHYSICAL_DAMAGE) / 100.f;
+  subStats[MAX_PHYSICAL_DAMAGE] *= 1 + getRitualAmp(RITUAL_PHYSICAL_DAMAGE) / 100.f;
   
   // Armor
   subStats[ARMOR_RATING] += getRitualAmp(RITUAL_ARMOR);
@@ -532,7 +532,7 @@ public function addRitualBoosts() {
 public function float getRitualAmp(RitualTypes ritualType) {
   local int lvl; lvl = ritualStatBoosts[ritualType];
   
-	return lvl * class'ROTT_Descriptor_Rituals'.static.getRitualBoost(ritualType);
+  return lvl * class'ROTT_Descriptor_Rituals'.static.getRitualBoost(ritualType);
 }
 
 /**============================================================================= 
@@ -888,14 +888,14 @@ public function int getExpForLevel(int lvl) {
   // Approximate exp equation
   exp = int(FCeil(1.5 ** (lvl ** 0.9)) + (lvl ** 4.2) + (300 * lvl) - 521);
   
-	// Round by 5:
-	exp /= 5.0;
-	exp = FCeil(exp);
-	exp *= 5.0;
-	
-	// Not sure if this equation is intentionally truncating 
+  // Round by 5:
+  exp /= 5.0;
+  exp = FCeil(exp);
+  exp *= 5.0;
+  
+  // Not sure if this equation is intentionally truncating 
   // with integer casts or not, im leaving it as it was designed
-	return exp;
+  return exp;
 }
 
 /*=============================================================================
@@ -904,7 +904,7 @@ public function int getExpForLevel(int lvl) {
  * Returns the exp needed for previous level
  *===========================================================================*/
 public function int getPreviousLvlExp() {
-	return getExpForLevel(level);
+  return getExpForLevel(level);
 }
 
 /*=============================================================================
@@ -913,7 +913,7 @@ public function int getPreviousLvlExp() {
  * Returns the exp needed for next level, includign animation factors
  *===========================================================================*/
 public function int getNextLvlExp() {
-	return getExpForLevel(level + 1);
+  return getExpForLevel(level + 1);
 }
 
 /*=============================================================================
@@ -1343,7 +1343,7 @@ private function bool levelUp() {
   unspentStatPoints += STATS_PER_LEVEL;
   unspentSkillPoints += SKILL_POINTS_PER_LEVEL;
   level++;
-	nextLvlExp = getExpForLevel(level + 1);
+  nextLvlExp = getExpForLevel(level + 1);
   
   // Calculate the resulting substats
   updateSubStats();

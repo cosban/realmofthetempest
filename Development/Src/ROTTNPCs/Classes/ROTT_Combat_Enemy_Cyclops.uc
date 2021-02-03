@@ -85,107 +85,107 @@ defaultProperties
   // N/A
   
   // Sprites 240x240
-	begin object class=UI_Texture_Info Name=Enemy_Portrait_Cyclops_Blue_240
+  begin object class=UI_Texture_Info Name=Enemy_Portrait_Cyclops_Blue_240
     componentTextures.add(Texture2D'Monsters.Enemy_Portrait_Cyclops_Blue_240')
     componentTextures.add(Texture2D'Monsters.Enemy_Portrait_Cyclops_Dark_Blue_240')
   end object
-	begin object class=UI_Texture_Info Name=Enemy_Portrait_Cyclops_Cyan_240
+  begin object class=UI_Texture_Info Name=Enemy_Portrait_Cyclops_Cyan_240
     // Oh no! I'm missing :( 
   end object
-	begin object class=UI_Texture_Info Name=Enemy_Portrait_Cyclops_Green_240
+  begin object class=UI_Texture_Info Name=Enemy_Portrait_Cyclops_Green_240
     componentTextures.add(Texture2D'Monsters.Enemy_Portrait_Cyclops_Green_240')
     componentTextures.add(Texture2D'Monsters.Enemy_Portrait_Cyclops_Green_Black_240')
     componentTextures.add(Texture2D'Monsters.Enemy_Portrait_Cyclops_Gold_Green_240')
   end object
-	begin object class=UI_Texture_Info Name=Enemy_Portrait_Cyclops_Gold_240
+  begin object class=UI_Texture_Info Name=Enemy_Portrait_Cyclops_Gold_240
     componentTextures.add(Texture2D'Monsters.Enemy_Portrait_Cyclops_Gold_240')
   end object
-	begin object class=UI_Texture_Info Name=Enemy_Portrait_Cyclops_Orange_240
+  begin object class=UI_Texture_Info Name=Enemy_Portrait_Cyclops_Orange_240
     // Oh no! I'm missing :( 
   end object
-	begin object class=UI_Texture_Info Name=Enemy_Portrait_Cyclops_Red_240
+  begin object class=UI_Texture_Info Name=Enemy_Portrait_Cyclops_Red_240
     componentTextures.add(Texture2D'Monsters.Enemy_Portrait_Cyclops_Red_Black_240')
   end object
-	begin object class=UI_Texture_Info Name=Enemy_Portrait_Cyclops_Violet_240
+  begin object class=UI_Texture_Info Name=Enemy_Portrait_Cyclops_Violet_240
     componentTextures.add(Texture2D'Monsters.Enemy_Portrait_Cyclops_Violet_Black_240')
   end object
-	begin object class=UI_Texture_Info Name=Enemy_Portrait_Cyclops_Purple_240
+  begin object class=UI_Texture_Info Name=Enemy_Portrait_Cyclops_Purple_240
     componentTextures.add(Texture2D'Monsters.Enemy_Portrait_Cyclops_Purple_240')
   end object
-	begin object class=UI_Texture_Info Name=Enemy_Portrait_Cyclops_Black_240
+  begin object class=UI_Texture_Info Name=Enemy_Portrait_Cyclops_Black_240
     componentTextures.add(Texture2D'Monsters.Enemy_Portrait_Cyclops_Black_Tan_240')
   end object
-	begin object class=UI_Texture_Info Name=Enemy_Portrait_Cyclops_White_240
+  begin object class=UI_Texture_Info Name=Enemy_Portrait_Cyclops_White_240
     // Oh no! I'm missing :( 
   end object
   
   // Sprite options
-	begin object class=UI_Texture_Storage Name=Enemy_Sprite_Container
-		tag="Enemy_Sprite_Container"
-		images(CLAN_BLUE)=Enemy_Portrait_Cyclops_Blue_240
-		images(CLAN_CYAN)=Enemy_Portrait_Cyclops_Cyan_240
-		images(CLAN_GREEN)=Enemy_Portrait_Cyclops_Green_240
-		images(CLAN_GOLD)=Enemy_Portrait_Cyclops_Gold_240
-		images(CLAN_ORANGE)=Enemy_Portrait_Cyclops_Orange_240
-		images(CLAN_RED)=Enemy_Portrait_Cyclops_Red_240
-		images(CLAN_VIOLET)=Enemy_Portrait_Cyclops_Violet_240
-		images(CLAN_PURPLE)=Enemy_Portrait_Cyclops_Purple_240
-		images(CLAN_BLACK)=Enemy_Portrait_Cyclops_Black_240
-		images(CLAN_WHITE)=Enemy_Portrait_Cyclops_White_240
-	end object
+  begin object class=UI_Texture_Storage Name=Enemy_Sprite_Container
+    tag="Enemy_Sprite_Container"
+    images(CLAN_BLUE)=Enemy_Portrait_Cyclops_Blue_240
+    images(CLAN_CYAN)=Enemy_Portrait_Cyclops_Cyan_240
+    images(CLAN_GREEN)=Enemy_Portrait_Cyclops_Green_240
+    images(CLAN_GOLD)=Enemy_Portrait_Cyclops_Gold_240
+    images(CLAN_ORANGE)=Enemy_Portrait_Cyclops_Orange_240
+    images(CLAN_RED)=Enemy_Portrait_Cyclops_Red_240
+    images(CLAN_VIOLET)=Enemy_Portrait_Cyclops_Violet_240
+    images(CLAN_PURPLE)=Enemy_Portrait_Cyclops_Purple_240
+    images(CLAN_BLACK)=Enemy_Portrait_Cyclops_Black_240
+    images(CLAN_WHITE)=Enemy_Portrait_Cyclops_White_240
+  end object
   enemySprites=Enemy_Sprite_Container
-	
+  
   // Sprites 360x360
-	begin object class=UI_Texture_Info Name=Enemy_Portrait_Cyclops_Blue_360
+  begin object class=UI_Texture_Info Name=Enemy_Portrait_Cyclops_Blue_360
     componentTextures.add(Texture2D'Monsters.Enemy_Portrait_Cyclops_Blue_360')
     componentTextures.add(Texture2D'Monsters.Enemy_Portrait_Cyclops_Dark_Blue_360')
   end object
-	begin object class=UI_Texture_Info Name=Enemy_Portrait_Cyclops_Cyan_360
+  begin object class=UI_Texture_Info Name=Enemy_Portrait_Cyclops_Cyan_360
     // Oh no! I'm missing :( 
   end object
-	begin object class=UI_Texture_Info Name=Enemy_Portrait_Cyclops_Green_360
+  begin object class=UI_Texture_Info Name=Enemy_Portrait_Cyclops_Green_360
     componentTextures.add(Texture2D'Monsters.Enemy_Portrait_Cyclops_Green_360')
     componentTextures.add(Texture2D'Monsters.Enemy_Portrait_Cyclops_Green_Black_360')
     componentTextures.add(Texture2D'Monsters.Enemy_Portrait_Cyclops_Gold_Green_360')
   end object
-	begin object class=UI_Texture_Info Name=Enemy_Portrait_Cyclops_Gold_360
+  begin object class=UI_Texture_Info Name=Enemy_Portrait_Cyclops_Gold_360
     componentTextures.add(Texture2D'Monsters.Enemy_Portrait_Cyclops_Gold_360')
   end object
-	begin object class=UI_Texture_Info Name=Enemy_Portrait_Cyclops_Orange_360
+  begin object class=UI_Texture_Info Name=Enemy_Portrait_Cyclops_Orange_360
     // Oh no! I'm missing :( 
   end object
-	begin object class=UI_Texture_Info Name=Enemy_Portrait_Cyclops_Red_360
+  begin object class=UI_Texture_Info Name=Enemy_Portrait_Cyclops_Red_360
     componentTextures.add(Texture2D'Monsters.Enemy_Portrait_Cyclops_Red_Black_360')
   end object
-	begin object class=UI_Texture_Info Name=Enemy_Portrait_Cyclops_Violet_360
+  begin object class=UI_Texture_Info Name=Enemy_Portrait_Cyclops_Violet_360
     componentTextures.add(Texture2D'Monsters.Enemy_Portrait_Cyclops_Violet_Black_360')
   end object
-	begin object class=UI_Texture_Info Name=Enemy_Portrait_Cyclops_Purple_360
+  begin object class=UI_Texture_Info Name=Enemy_Portrait_Cyclops_Purple_360
     componentTextures.add(Texture2D'Monsters.Enemy_Portrait_Cyclops_Purple_360')
   end object
-	begin object class=UI_Texture_Info Name=Enemy_Portrait_Cyclops_Black_360
+  begin object class=UI_Texture_Info Name=Enemy_Portrait_Cyclops_Black_360
     componentTextures.add(Texture2D'Monsters.Enemy_Portrait_Cyclops_Black_Tan_360')
   end object
-	begin object class=UI_Texture_Info Name=Enemy_Portrait_Cyclops_White_360
+  begin object class=UI_Texture_Info Name=Enemy_Portrait_Cyclops_White_360
     // Oh no! I'm missing :( 
   end object
   
   // Sprite options
-	begin object class=UI_Texture_Storage Name=Champ_Sprite_Container
-		tag="Champ_Sprite_Container"
-		images(CLAN_BLUE)=Enemy_Portrait_Cyclops_Blue_360
-		images(CLAN_CYAN)=Enemy_Portrait_Cyclops_Cyan_360
-		images(CLAN_GREEN)=Enemy_Portrait_Cyclops_Green_360
-		images(CLAN_GOLD)=Enemy_Portrait_Cyclops_Gold_360
-		images(CLAN_ORANGE)=Enemy_Portrait_Cyclops_Orange_360
-		images(CLAN_RED)=Enemy_Portrait_Cyclops_Red_360
-		images(CLAN_VIOLET)=Enemy_Portrait_Cyclops_Violet_360
-		images(CLAN_PURPLE)=Enemy_Portrait_Cyclops_Purple_360
-		images(CLAN_BLACK)=Enemy_Portrait_Cyclops_Black_360
-		images(CLAN_WHITE)=Enemy_Portrait_Cyclops_White_360
-	end object
+  begin object class=UI_Texture_Storage Name=Champ_Sprite_Container
+    tag="Champ_Sprite_Container"
+    images(CLAN_BLUE)=Enemy_Portrait_Cyclops_Blue_360
+    images(CLAN_CYAN)=Enemy_Portrait_Cyclops_Cyan_360
+    images(CLAN_GREEN)=Enemy_Portrait_Cyclops_Green_360
+    images(CLAN_GOLD)=Enemy_Portrait_Cyclops_Gold_360
+    images(CLAN_ORANGE)=Enemy_Portrait_Cyclops_Orange_360
+    images(CLAN_RED)=Enemy_Portrait_Cyclops_Red_360
+    images(CLAN_VIOLET)=Enemy_Portrait_Cyclops_Violet_360
+    images(CLAN_PURPLE)=Enemy_Portrait_Cyclops_Purple_360
+    images(CLAN_BLACK)=Enemy_Portrait_Cyclops_Black_360
+    images(CLAN_WHITE)=Enemy_Portrait_Cyclops_White_360
+  end object
   champSprites=Champ_Sprite_Container
-	
+  
 }
 
 

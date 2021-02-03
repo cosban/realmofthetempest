@@ -74,7 +74,7 @@ protected function navigationRoutineA() {
   
   selection = WarningOptions(warningSelectionBox.getSelection());
   
-	switch (selection) {
+  switch (selection) {
     case WARNING_RESPONSE_NO:
       closeWarningWindowDelegate();
       // Sfx
@@ -98,19 +98,19 @@ protected function navigationRoutineB() {
  *===========================================================================*/
 defaultProperties
 {
-	/** ===== Input ===== **/
-	begin object class=ROTT_Input_Handler Name=Input_A
+  /** ===== Input ===== **/
+  begin object class=ROTT_Input_Handler Name=Input_A
     inputName="XBoxTypeS_A"
-		buttonComponent=none
-	end object
+    buttonComponent=none
+  end object
   inputList.add(Input_A)
   
-	begin object class=ROTT_Input_Handler Name=Input_B
+  begin object class=ROTT_Input_Handler Name=Input_B
     inputName="XBoxTypeS_B"
     
     // Clickable sprite for this input
-		buttonComponent=none
-	end object
+    buttonComponent=none
+  end object
   inputList.add(Input_B)
   
   /** ===== Textures ===== **/
@@ -123,81 +123,81 @@ defaultProperties
   end object
   
   /** ===== UI Components ===== **/
-	// Fade Layer
-	begin object class=UI_Sprite Name=Fade_Layer
-		tag="Fade_Layer"
+  // Fade Layer
+  begin object class=UI_Sprite Name=Fade_Layer
+    tag="Fade_Layer"
     bMandatoryScaleToWindow=true
     bEnabled=true
     //bStretch=true
-		posX=0
-		posY=0
-		posXEnd=NATIVE_WIDTH
-		posYEnd=NATIVE_HEIGHT
-		images(0)=Black_Square
+    posX=0
+    posY=0
+    posXEnd=NATIVE_WIDTH
+    posYEnd=NATIVE_HEIGHT
+    images(0)=Black_Square
     drawColor=(R=0,G=0,B=0,A=79)
-	end object
-	componentList.add(Fade_Layer)
-	
-	// Warning Window
-	begin object class=UI_Sprite Name=Warning_Window_Background
-		tag="Warning_Window_Background"
+  end object
+  componentList.add(Fade_Layer)
+  
+  // Warning Window
+  begin object class=UI_Sprite Name=Warning_Window_Background
+    tag="Warning_Window_Background"
     bEnabled=true
-		posX=420
-		posY=150
-		images(0)=Warning_Window_YES_NO
-	end object
-	componentList.add(Warning_Window_Background)
-	
-	// Warning components
-	begin object class=UI_Label Name=Warning_Header
-		tag="Warning_Header"
+    posX=420
+    posY=150
+    images(0)=Warning_Window_YES_NO
+  end object
+  componentList.add(Warning_Window_Background)
+  
+  // Warning components
+  begin object class=UI_Label Name=Warning_Header
+    tag="Warning_Header"
     bEnabled=true
-		posX=0
-		posY=225
-		posXEnd=NATIVE_WIDTH
-		posYEnd=280
-		AlignX=CENTER
-		AlignY=CENTER
-		fontStyle=DEFAULT_LARGE_WHITE
-		labelText=""
-	end object
-	componentList.add(Warning_Header)
-	
-	// Warning Window
-	begin object class=UI_Label Name=Warning_Message_Line_1
-		tag="Warning_Message_Line_1"
+    posX=0
+    posY=225
+    posXEnd=NATIVE_WIDTH
+    posYEnd=280
+    AlignX=CENTER
+    AlignY=CENTER
+    fontStyle=DEFAULT_LARGE_WHITE
+    labelText=""
+  end object
+  componentList.add(Warning_Header)
+  
+  // Warning Window
+  begin object class=UI_Label Name=Warning_Message_Line_1
+    tag="Warning_Message_Line_1"
     bEnabled=true
-		posX=0
-		posY=320
-		posXEnd=NATIVE_WIDTH
-		posYEnd=360
-		AlignX=CENTER
-		AlignY=CENTER
-		fontStyle=DEFAULT_SMALL_WHITE
-		labelText=""
-	end object
-	componentList.add(Warning_Message_Line_1)
-	
-	begin object class=UI_Label Name=Warning_Message_Line_2
-		tag="Warning_Message_Line_2"
+    posX=0
+    posY=320
+    posXEnd=NATIVE_WIDTH
+    posYEnd=360
+    AlignX=CENTER
+    AlignY=CENTER
+    fontStyle=DEFAULT_SMALL_WHITE
+    labelText=""
+  end object
+  componentList.add(Warning_Message_Line_1)
+  
+  begin object class=UI_Label Name=Warning_Message_Line_2
+    tag="Warning_Message_Line_2"
     bEnabled=true
-		posX=0
-		posY=348
-		posXEnd=NATIVE_WIDTH
-		posYEnd=388
-		AlignX=CENTER
-		AlignY=CENTER
-		fontStyle=DEFAULT_SMALL_WHITE
-		labelText=""
-	end object
-	componentList.add(Warning_Message_Line_2)
-	
-	// Selection Box
-	begin object class=UI_Selector Name=Warning_Selection_Box
-		tag="Warning_Selection_Box"
+    posX=0
+    posY=348
+    posXEnd=NATIVE_WIDTH
+    posYEnd=388
+    AlignX=CENTER
+    AlignY=CENTER
+    fontStyle=DEFAULT_SMALL_WHITE
+    labelText=""
+  end object
+  componentList.add(Warning_Message_Line_2)
+  
+  // Selection Box
+  begin object class=UI_Selector Name=Warning_Selection_Box
+    tag="Warning_Selection_Box"
     bEnabled=true
-		posX=502
-		posY=540
+    posX=502
+    posY=540
     selectionOffset=(x=0,y=70)
     numberOfMenuOptions=2
     
@@ -214,8 +214,8 @@ defaultProperties
     end object
     componentList.add(Selector_Sprite)
     
-	end object
-	componentList.add(Warning_Selection_Box)
+  end object
+  componentList.add(Warning_Selection_Box)
 }
 
 

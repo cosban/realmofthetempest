@@ -7,15 +7,15 @@
  * This is a particle system whose appearance is based on an event status
  *===========================================================================*/
 class ROTT_Conflict_Emitter extends InterpActor
-	ClassGroup(ROTT_Objects)
-	placeable;
+  ClassGroup(ROTT_Objects)
+  placeable;
 
 // Event info
 var() private TopicList eventTopic;
 
 // Event actor appearance information
-var()	const	ParticleSystemComponent activeParticles;
-var()	const	ParticleSystemComponent inactiveParticles;
+var()  const  ParticleSystemComponent activeParticles;
+var()  const  ParticleSystemComponent inactiveParticles;
 
 // References
 var private ROTT_Game_Info gameInfo;
@@ -66,18 +66,18 @@ public function setAppearance(bool bEventActive) {
 defaultProperties
 {
   // Inactive particle system 
-	Begin Object Class=ParticleSystemComponent Name=Inactive_Particles
-		SecondsBeforeInactive=1
-	End Object
-	inactiveParticles=Inactive_Particles
-	Components.Add(Inactive_Particles)
-	
+  begin object Class=ParticleSystemComponent Name=Inactive_Particles
+    SecondsBeforeInactive=1
+  end object
+  inactiveParticles=Inactive_Particles
+  Components.Add(Inactive_Particles)
+  
   // Active particle system 
-	Begin Object Class=ParticleSystemComponent Name=Active_Particles
-		SecondsBeforeInactive=1
-	End Object
-	activeParticles=Active_Particles
-	Components.Add(Active_Particles)
+  begin object Class=ParticleSystemComponent Name=Active_Particles
+    SecondsBeforeInactive=1
+  end object
+  activeParticles=Active_Particles
+  Components.Add(Active_Particles)
   
 }
 

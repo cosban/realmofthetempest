@@ -115,19 +115,19 @@ defaultProperties
   skillAttributes.add((attributeSet=TAKE_DAMAGE_SET,mechanicType=TARGET_CASTER,tag="%target",font=DEFAULT_SMALL_WHITE,returnType=DECIMAL));
   
   // Skill Icon
-	begin object class=UI_Texture_Info Name=Encounter_Skill_Icon_Retaliation
+  begin object class=UI_Texture_Info Name=Encounter_Skill_Icon_Retaliation
     componentTextures.add(Texture2D'GUI_Skills.Encounter_Skill_Icon_Retaliation')
   end object
   
   // Skill Icon Container
-	begin object class=UI_Texture_Storage Name=Skill_Icon_Container
-		tag="Skill_Icon_Container"
+  begin object class=UI_Texture_Storage Name=Skill_Icon_Container
+    tag="Skill_Icon_Container"
     textureWidth=108
     textureHeight=108
-		images(0)=Encounter_Skill_Icon_Retaliation
-	end object
+    images(0)=Encounter_Skill_Icon_Retaliation
+  end object
   skillIcon=Skill_Icon_Container
-	
+  
 }
 
 

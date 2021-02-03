@@ -59,23 +59,23 @@ protected function navigationRoutineB();
 defaultProperties
 {
   // Culling
-	cullTags.add("Game_Menu_Selector")
+  cullTags.add("Game_Menu_Selector")
   
-	/** ===== Textures ===== **/
+  /** ===== Textures ===== **/
   // Reset panel
-	begin object class=UI_Texture_Info Name=Reset_Cost_Window
+  begin object class=UI_Texture_Info Name=Reset_Cost_Window
     componentTextures.add(Texture2D'GUI.Reset_Cost_Window')
   end object
   
   /** ===== UI Components ===== **/
   // Reset panel
-	begin object class=UI_Sprite Name=Reset_Cost_Panel
-		tag="Reset_Cost_Panel"
-		posX=0
-		posY=0
-		images(0)=Reset_Cost_Window
-	end object
-	componentList.add(Reset_Cost_Panel)
+  begin object class=UI_Sprite Name=Reset_Cost_Panel
+    tag="Reset_Cost_Panel"
+    posX=0
+    posY=0
+    images(0)=Reset_Cost_Window
+  end object
+  componentList.add(Reset_Cost_Panel)
   
   // Header label
   begin object class=UI_Label Name=Header_Label

@@ -49,7 +49,7 @@ defaultProperties
   itemName="Shukisu Charm"
   
   // Item texture
-	itemTexture=Texture2D'ROTT_Items.Charms.Item_Charm_Green'
+  itemTexture=Texture2D'ROTT_Items.Charms.Item_Charm_Green'
   
   // Item text color
   itemFont=DEFAULT_SMALL_ORANGE

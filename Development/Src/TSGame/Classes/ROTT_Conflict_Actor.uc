@@ -7,8 +7,8 @@
  * This is an actor whose appearance is based on an event status
  *===========================================================================*/
 class ROTT_Conflict_Actor extends InterpActor
-	ClassGroup(ROTT_Objects)
-	placeable;
+  ClassGroup(ROTT_Objects)
+  placeable;
 
 // Event info
 var() private TopicList eventTopic;

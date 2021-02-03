@@ -39,10 +39,10 @@ event activated() {
 /*=============================================================================
  * Default properties
  *===========================================================================*/
-defaultproperties
+defaultProperties
 {
-	ObjName="OpenChest"
-	ObjCategory="ROTT" 
-	
-	bCallHandler=false
+  ObjName="OpenChest"
+  ObjCategory="ROTT" 
+  
+  bCallHandler=false
 }

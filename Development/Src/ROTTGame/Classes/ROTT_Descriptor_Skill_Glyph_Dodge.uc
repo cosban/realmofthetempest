@@ -89,35 +89,35 @@ defaultProperties
 
 function int GetDodge(string StatType, int SkillLevel)
 {
-	local int i, j, iDodge, iChance;
-	//(Rand(Max - Min) + Min)
-	
-	i = 0;
-	j = 2;
-	iDodge = 4;
-	iChance = 40;
-	do
-	{
-		iDodge = iDodge + 2 + j;
-		
-		if (i%2 == 0 && i != 0)
-		{
-			j = j + 6;
-		} else {
-			j = j + 4;
-		}
-		
-		i++;
-	} until (i >= SkillLevel);
-	
-	// Return type 
-	switch (StatType)
-	{
-		case "Stat":
-			return iDodge;
-		case "Chance":
-			return iChance;
-	}
+  local int i, j, iDodge, iChance;
+  //(Rand(Max - Min) + Min)
+  
+  i = 0;
+  j = 2;
+  iDodge = 4;
+  iChance = 40;
+  do
+  {
+    iDodge = iDodge + 2 + j;
+    
+    if (i%2 == 0 && i != 0)
+    {
+      j = j + 6;
+    } else {
+      j = j + 4;
+    }
+    
+    i++;
+  } until (i >= SkillLevel);
+  
+  // Return type 
+  switch (StatType)
+  {
+    case "Stat":
+      return iDodge;
+    case "Chance":
+      return iChance;
+  }
 }
 
 **/

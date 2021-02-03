@@ -161,6 +161,7 @@ public function newGameSetup(byte newGameMode) {
   // Make party System
   partySystem = new(self) class'ROTT_Party_System';
   partySystem.initSystem();
+  partySystem.linkReferences();
   
   // Make inventory
   playerInventory = new(self) class'ROTT_Inventory_Package_Player';
@@ -481,6 +482,7 @@ public function loadGame(optional bool transitionMode = false) {
   
   // Load party system 
   partySystem = new(self) class'ROTT_Party_System';
+  partySystem.linkReferences();
   
   // Load all parties
   for (i = 0; i < numberOfParties; i++) { 

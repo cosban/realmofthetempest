@@ -214,18 +214,18 @@ exec function playerPray() {
  *===========================================================================*/
 public function setInitialControls() {
   // Set camera control based on map
-	switch (gameInfo.getCurrentMap()) {
+  switch (gameInfo.getCurrentMap()) {
     // Locked camera scenes
-		case MAP_UI_TITLE_MENU: 
-		case MAP_UI_CREDITS:
-		case MAP_UI_GAME_OVER:
-			//tempestPawn.overrideCamera();
-			break;
+    case MAP_UI_TITLE_MENU: 
+    case MAP_UI_CREDITS:
+    case MAP_UI_GAME_OVER:
+      //tempestPawn.overrideCamera();
+      break;
     // Over World maps
-		default:
-			tempestPawn.releaseCamera();
-			break;
-	}
+    default:
+      tempestPawn.releaseCamera();
+      break;
+  }
   
   // Freeze controls until a level is loaded
   enablePlayerControls(false);
@@ -256,32 +256,32 @@ public function enablePlayerControls(bool bEnabled) {
  * Player controller function for rotating the pawn camera 
  *===========================================================================*/
 public function updateRotation(float deltaTime) {
-	local Rotator	deltaRot, newRotation, viewRotation;
+  local Rotator  deltaRot, newRotation, viewRotation;
   
   // Rotation control lock
   if (bRotationLock == LOCKED) return;
   
   super.updateRotation(deltaTime);
   
-	viewRotation = rotation;
-	if (tempestPawn != none)	{
-		tempestPawn.setDesiredRotation(viewRotation);
-	}
+  viewRotation = rotation;
+  if (tempestPawn != none)  {
+    tempestPawn.setDesiredRotation(viewRotation);
+  }
   
-	// Calculate Delta to be applied on viewRotation
-	deltaRot.Pitch = PlayerInput.aLookUp;
+  // Calculate Delta to be applied on viewRotation
+  deltaRot.Pitch = PlayerInput.aLookUp;
   deltaRot.Yaw = PlayerInput.aTurn / 2;
   
-	processviewRotation(deltaTime, viewRotation, deltaRot);
-	setRotation(viewRotation);
+  processviewRotation(deltaTime, viewRotation, deltaRot);
+  setRotation(viewRotation);
 
-	viewShake(deltaTime);
+  viewShake(deltaTime);
 
-	newRotation = viewRotation;
-	newRotation.roll = rotation.roll;
-	
-	if (tempestPawn != none) {
-		tempestPawn.faceRotation(NewRotation, deltatime);
+  newRotation = viewRotation;
+  newRotation.roll = rotation.roll;
+  
+  if (tempestPawn != none) {
+    tempestPawn.faceRotation(NewRotation, deltatime);
   }
 }
 
@@ -293,8 +293,8 @@ private function int getGroundSpeed() {
 }
 
 exec function SetMinMax(optional float _fMin, optional float _fMax) {
-	class'Engine'.static.GetEngine().MinSmoothedFrameRate = FMax(30,_fMin);
-	class'Engine'.static.GetEngine().MaxSmoothedFrameRate = FMax(_fMin, _fMax);
+  class'Engine'.static.GetEngine().MinSmoothedFrameRate = FMax(30,_fMin);
+  class'Engine'.static.GetEngine().MaxSmoothedFrameRate = FMax(_fMin, _fMax);
 }
 
 /*=============================================================================

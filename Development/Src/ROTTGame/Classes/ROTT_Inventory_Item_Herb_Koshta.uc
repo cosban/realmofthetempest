@@ -49,7 +49,7 @@ defaultProperties
   itemName="Koshta Petal"
   
   // Item texture
-	itemTexture=Texture2D'ROTT_Items.Herbs.Item_Herb_Violet'
+  itemTexture=Texture2D'ROTT_Items.Herbs.Item_Herb_Violet'
   
   // Item text color
   itemFont=DEFAULT_SMALL_ORANGE

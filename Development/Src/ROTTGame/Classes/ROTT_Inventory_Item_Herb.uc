@@ -49,7 +49,7 @@ defaultProperties
   itemName="Herb"
   
   // Item texture
-	itemTexture=Texture2D'ROTT_Items.Herbs.Item_Herb_Green'
+  itemTexture=Texture2D'ROTT_Items.Herbs.Item_Herb_Green'
   
   // Item text color
   itemFont=DEFAULT_SMALL_ORANGE

@@ -72,29 +72,29 @@ defaultProperties
   itemDropRates.add((dropType=class'ROTT_Inventory_Item_Gem',chanceOverride=100,minOverride=,maxOverride=,chanceAmp=,quantityAmp=))
   
   // Sprites 240x240
-	begin object class=UI_Texture_Info Name=Enemy_Portrait_Wasp_Red_240
+  begin object class=UI_Texture_Info Name=Enemy_Portrait_Wasp_Red_240
     componentTextures.add(Texture2D'Monsters_Disc_2.Enemy_Portrait_Wasp_Red_240')
   end object
   
   // Sprite options
-	begin object class=UI_Texture_Storage Name=Enemy_Sprite_Container
-		tag="Enemy_Sprite_Container"
-		images(CLAN_RED)=Enemy_Portrait_Wasp_Red_240
-	end object
+  begin object class=UI_Texture_Storage Name=Enemy_Sprite_Container
+    tag="Enemy_Sprite_Container"
+    images(CLAN_RED)=Enemy_Portrait_Wasp_Red_240
+  end object
   enemySprites=Enemy_Sprite_Container
-	
+  
   // Sprites 360x360
-	begin object class=UI_Texture_Info Name=Enemy_Portrait_Wasp_Red_360
+  begin object class=UI_Texture_Info Name=Enemy_Portrait_Wasp_Red_360
     componentTextures.add(Texture2D'Monsters_Disc_2.Enemy_Portrait_Wasp_Red_360')
   end object
   
   // Sprite options
-	begin object class=UI_Texture_Storage Name=Champ_Sprite_Container
-		tag="Champ_Sprite_Container"
-		images(CLAN_RED)=Enemy_Portrait_Wasp_Red_360
-	end object
+  begin object class=UI_Texture_Storage Name=Champ_Sprite_Container
+    tag="Champ_Sprite_Container"
+    images(CLAN_RED)=Enemy_Portrait_Wasp_Red_360
+  end object
   champSprites=Champ_Sprite_Container
-	
+  
 }
 
 

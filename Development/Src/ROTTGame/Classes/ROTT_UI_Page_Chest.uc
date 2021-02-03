@@ -59,7 +59,7 @@ public function initializeComponent(optional string newTag = "") {
   selectTakeAll = findSprite("Chest_Selection_Take");
   selectClose = findSprite("Chest_Selection_Close");
   itemNameLabel = findLabel("Item_Name_Label");
-	
+  
   // Setup inventory slots
   for (i = 0; i < 8; i++) {
     chestSlot[i] = new class'ROTT_UI_Displayer_Item';
@@ -405,51 +405,51 @@ defaultProperties
 {
   bPauseGameWhenUp=true
   
-	/** ===== Input ===== **/
-	begin object class=ROTT_Input_Handler Name=Input_A
+  /** ===== Input ===== **/
+  begin object class=ROTT_Input_Handler Name=Input_A
     inputName="XBoxTypeS_A"
-		buttonComponent=none
-	end object
+    buttonComponent=none
+  end object
   inputList.add(Input_A)
   
-	/** ===== Textures ===== **/
+  /** ===== Textures ===== **/
   // Chest background
-	begin object class=UI_Texture_Info Name=Chest_Interface
-		componentTextures.add(Texture2D'GUI.Chest_Interface')
-	end object
+  begin object class=UI_Texture_Info Name=Chest_Interface
+    componentTextures.add(Texture2D'GUI.Chest_Interface')
+  end object
   
-	// Chest background 
-	begin object class=UI_Sprite Name=Chest_Background
-		tag="Chest_Background"
-		posX=0
-		posY=0
-		posXEnd=NATIVE_WIDTH
-		posYEnd=NATIVE_HEIGHT
-		images(0)=Chest_Interface
-	end object
-	componentList.add(Chest_Background)
+  // Chest background 
+  begin object class=UI_Sprite Name=Chest_Background
+    tag="Chest_Background"
+    posX=0
+    posY=0
+    posXEnd=NATIVE_WIDTH
+    posYEnd=NATIVE_HEIGHT
+    images(0)=Chest_Interface
+  end object
+  componentList.add(Chest_Background)
   
   // Item name label
-	begin object class=UI_Label Name=Item_Name_Label
-		tag="Item_Name_Label"
-		posX=513
-		posY=186
-		posXEnd=959
-		posYEnd=241
-		AlignX=CENTER
-		AlignY=CENTER
-		labelText=""
-	end object
-	componentList.add(Item_Name_Label)
-	
+  begin object class=UI_Label Name=Item_Name_Label
+    tag="Item_Name_Label"
+    posX=513
+    posY=186
+    posXEnd=959
+    posYEnd=241
+    AlignX=CENTER
+    AlignY=CENTER
+    labelText=""
+  end object
+  componentList.add(Item_Name_Label)
+  
   // Inventory Selector
-	begin object class=UI_Selector Name=Chest_Selection_Box
-		tag="Chest_Selection_Box"
+  begin object class=UI_Selector Name=Chest_Selection_Box
+    tag="Chest_Selection_Box"
     bEnabled=true
     bActive=false
     bWrapAround=false
-		posX=415
-		posY=264
+    posX=415
+    posY=264
     navigationType=SELECTION_2D
     selectionOffset=(x=157,y=157)  // Distance from neighboring spaces
     gridSize=(x=4,y=3)             // Total size of 2d selection space
@@ -474,37 +474,37 @@ defaultProperties
     end object
     componentList.add(Selector_Sprite)
     
-	end object
-	componentList.add(Chest_Selection_Box)
-	
-  // Large selector
-	begin object class=UI_Texture_Info Name=Chest_Selector_Large
-		componentTextures.add(Texture2D'GUI.Chest_Selector_Large')
-	end object
-	
-	// Take all selector 
-	begin object class=UI_Sprite Name=Chest_Selection_Take
-		tag="Chest_Selection_Take"
-		posX=420
-		posY=582
-		images(0)=Chest_Selector_Large
-    
-    // Alpha Effects
-    activeEffects.add((effectType = EFFECT_ALPHA_CYCLE, lifeTime = -1, elapsedTime = 0, intervalTime = 0.4, min = 170, max = 255))
-	end object
-	componentList.add(Chest_Selection_Take)
+  end object
+  componentList.add(Chest_Selection_Box)
   
-	// Take all selector 
-	begin object class=UI_Sprite Name=Chest_Selection_Close
-		tag="Chest_Selection_Close"
-		posX=734
-		posY=582
-		images(0)=Chest_Selector_Large
+  // Large selector
+  begin object class=UI_Texture_Info Name=Chest_Selector_Large
+    componentTextures.add(Texture2D'GUI.Chest_Selector_Large')
+  end object
+  
+  // Take all selector 
+  begin object class=UI_Sprite Name=Chest_Selection_Take
+    tag="Chest_Selection_Take"
+    posX=420
+    posY=582
+    images(0)=Chest_Selector_Large
     
     // Alpha Effects
     activeEffects.add((effectType = EFFECT_ALPHA_CYCLE, lifeTime = -1, elapsedTime = 0, intervalTime = 0.4, min = 170, max = 255))
-	end object
-	componentList.add(Chest_Selection_Close)
+  end object
+  componentList.add(Chest_Selection_Take)
+  
+  // Take all selector 
+  begin object class=UI_Sprite Name=Chest_Selection_Close
+    tag="Chest_Selection_Close"
+    posX=734
+    posY=582
+    images(0)=Chest_Selector_Large
+    
+    // Alpha Effects
+    activeEffects.add((effectType = EFFECT_ALPHA_CYCLE, lifeTime = -1, elapsedTime = 0, intervalTime = 0.4, min = 170, max = 255))
+  end object
+  componentList.add(Chest_Selection_Close)
   
   
 }

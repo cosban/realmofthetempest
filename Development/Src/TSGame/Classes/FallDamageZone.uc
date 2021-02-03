@@ -8,7 +8,7 @@
  *===========================================================================*/
 
 class FallDamageZone extends Volume
-	placeable; 
+  placeable; 
 
 // Checkpoint overrid
 var() bool bOverrideCheckpoint;
@@ -27,7 +27,7 @@ simulated event touch
   vector hitNormal
 )
 {
-	// Filter out non-player objects
+  // Filter out non-player objects
   if (ROTT_Player_Pawn(Other) == none) return;
   
   // Activate falling status
@@ -42,15 +42,15 @@ simulated event touch
 /*=============================================================================
  * Default properties
  *===========================================================================*/
-defaultproperties
+defaultProperties
 {
-	bOverrideCheckpoint=false
-	checkpointIndex=0
+  bOverrideCheckpoint=false
+  checkpointIndex=0
   
   // Editor Appearance
-	bColored=true
-	BrushColor=(R=255,G=30,B=200,A=255)
-	
+  bColored=true
+  BrushColor=(R=255,G=30,B=200,A=255)
+  
 }
 
 

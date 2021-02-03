@@ -78,29 +78,29 @@ defaultProperties
   bShowIfSingular=false
   
   // Item graphic
-	begin object class=UI_Sprite Name=Item_Sprite
-		tag="Item_Sprite"
-		posX=0
-		posY=0
-		posXEnd=128
-		posYEnd=128
-	end object
-	componentList.add(Item_Sprite)
-  
-  // Quantity label
-	begin object class=UI_Label Name=Item_Quantity_Label
-		tag="Item_Quantity_Label"
+  begin object class=UI_Sprite Name=Item_Sprite
+    tag="Item_Sprite"
     posX=0
     posY=0
-		posXEnd=125
-		posYEnd=127
-		AlignX=RIGHT
-		AlignY=BOTTOM
+    posXEnd=128
+    posYEnd=128
+  end object
+  componentList.add(Item_Sprite)
+  
+  // Quantity label
+  begin object class=UI_Label Name=Item_Quantity_Label
+    tag="Item_Quantity_Label"
+    posX=0
+    posY=0
+    posXEnd=125
+    posYEnd=127
+    AlignX=RIGHT
+    AlignY=BOTTOM
     fontStyle=DEFAULT_LARGE_WHITE
-		labelText=""
-	end object
-	componentList.add(Item_Quantity_Label)
-	
+    labelText=""
+  end object
+  componentList.add(Item_Quantity_Label)
+  
 }
 
 

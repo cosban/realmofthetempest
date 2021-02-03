@@ -9,14 +9,14 @@
  *===========================================================================*/
 
 class ROTT_Worlds_Encounter_Zone extends ROTT_Worlds_Encounter_Info
-	placeable;
+  placeable;
 
 /*=============================================================================
  * PostBeginPlay()
  *
  *===========================================================================*/
 simulated event postBeginPlay() {
-	super.postBeginPlay();
+  super.postBeginPlay();
   
   // Bosses
   enemyClasses[Boss_Rhunia]=class'ROTT_Combat_Enemy_Boss_Rhunia';

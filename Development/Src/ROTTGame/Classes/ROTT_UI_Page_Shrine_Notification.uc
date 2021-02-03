@@ -167,55 +167,55 @@ defaultProperties
   bPauseGameWhenUp=false
   bMandatoryScaleToWindow=true
   
-	/** ===== Input ===== **/
-	begin object class=ROTT_Input_Handler Name=Input_X
+  /** ===== Input ===== **/
+  begin object class=ROTT_Input_Handler Name=Input_X
     inputName="XBoxTypeS_X"
-		buttonComponent=none
-	end object
+    buttonComponent=none
+  end object
   inputList.add(Input_X)
   
-	/** ===== Textures ===== **/
+  /** ===== Textures ===== **/
   // Chest interface
-	begin object class=UI_Texture_Info Name=Over_World_Text_Bar
-		componentTextures.add(Texture2D'GUI.Over_World_Text_Bar')
-	end object
+  begin object class=UI_Texture_Info Name=Over_World_Text_Bar
+    componentTextures.add(Texture2D'GUI.Over_World_Text_Bar')
+  end object
   
-	// Fader 
-	begin object class=UI_Sprite Name=Text_Bar
-		tag="Text_Bar"
-		posX=0
-		posY=544
-		images(0)=Over_World_Text_Bar
-	end object
-	componentList.add(Text_Bar)
+  // Fader 
+  begin object class=UI_Sprite Name=Text_Bar
+    tag="Text_Bar"
+    posX=0
+    posY=544
+    images(0)=Over_World_Text_Bar
+  end object
+  componentList.add(Text_Bar)
   
   // Interface text
-	begin object class=UI_Label Name=Interface_Text_Line_1
-		tag="Interface_Text_Line_1"
-		posX=0
-		posY=562
-		posXEnd=NATIVE_WIDTH
-		posYEnd=612
-		alignX=CENTER
-		alignY=TOP
-		fontStyle=DEFAULT_MEDIUM_ORANGE
-		labelText="The Obelisk shrine awaits your prayers."
-	end object
-	componentList.add(Interface_Text_Line_1)
-	
-	begin object class=UI_Label Name=Interface_Text_Line_2
-		tag="Interface_Text_Line_2"
-		posX=0
-		posY=600
-		posXEnd=NATIVE_WIDTH
-		posYEnd=621
-		alignX=CENTER
-		alignY=TOP
-		fontStyle=DEFAULT_MEDIUM_ORANGE
-		labelText="The Obelisk shrine awaits your prayers."
-	end object
-	componentList.add(Interface_Text_Line_2)
-	
+  begin object class=UI_Label Name=Interface_Text_Line_1
+    tag="Interface_Text_Line_1"
+    posX=0
+    posY=562
+    posXEnd=NATIVE_WIDTH
+    posYEnd=612
+    alignX=CENTER
+    alignY=TOP
+    fontStyle=DEFAULT_MEDIUM_ORANGE
+    labelText="The Obelisk shrine awaits your prayers."
+  end object
+  componentList.add(Interface_Text_Line_1)
+  
+  begin object class=UI_Label Name=Interface_Text_Line_2
+    tag="Interface_Text_Line_2"
+    posX=0
+    posY=600
+    posXEnd=NATIVE_WIDTH
+    posYEnd=621
+    alignX=CENTER
+    alignY=TOP
+    fontStyle=DEFAULT_MEDIUM_ORANGE
+    labelText="The Obelisk shrine awaits your prayers."
+  end object
+  componentList.add(Interface_Text_Line_2)
+  
 }
 
 

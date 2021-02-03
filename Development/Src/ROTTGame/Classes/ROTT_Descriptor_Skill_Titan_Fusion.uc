@@ -183,19 +183,19 @@ defaultProperties
   skillAttributes.add((attributeSet=COMBAT_ACTION_SET,mechanicType=INCREASE_MAX_HEALTH_MAX_MANA,tag="%boost",font=DEFAULT_SMALL_GREEN,returnType=INTEGER));
   
   // Skill Icon
-	begin object class=UI_Texture_Info Name=Encounter_Skill_Icon_Fusion
+  begin object class=UI_Texture_Info Name=Encounter_Skill_Icon_Fusion
     componentTextures.add(Texture2D'GUI_Skills.Encounter_Skill_Icon_Fusion')
   end object
   
   // Skill Icon Container
-	begin object class=UI_Texture_Storage Name=Skill_Icon_Container
-		tag="Skill_Icon_Container"
+  begin object class=UI_Texture_Storage Name=Skill_Icon_Container
+    tag="Skill_Icon_Container"
     textureWidth=108
     textureHeight=108
-		images(0)=Encounter_Skill_Icon_Fusion
-	end object
+    images(0)=Encounter_Skill_Icon_Fusion
+  end object
   skillIcon=Skill_Icon_Container
-	
+  
 }
 
 

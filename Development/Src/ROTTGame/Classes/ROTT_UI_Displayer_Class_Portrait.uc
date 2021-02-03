@@ -61,11 +61,11 @@ defaultProperties
   
   /** ===== UI Components ===== **/
   // Class Portrait Sprite
-	begin object class=UI_Sprite Name=Class_Portrait_Sprite
-		tag="Class_Portrait_Sprite"
+  begin object class=UI_Sprite Name=Class_Portrait_Sprite
+    tag="Class_Portrait_Sprite"
     bEnabled=true
-	end object
-	componentList.add(Class_Portrait_Sprite)
+  end object
+  componentList.add(Class_Portrait_Sprite)
 }
 
 

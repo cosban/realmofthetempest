@@ -108,50 +108,50 @@ defaultProperties
   skillAttributes.add((attributeSet=ADD_STANCE_SET,mechanicType=ATTACK_TIME_AMPLIFIER,tag="%atb",font=DEFAULT_SMALL_WHITE,returnType=DECIMAL));
   
   // Skill Icon
-	begin object class=UI_Texture_Info Name=Encounter_Skill_Icon_Demolition
+  begin object class=UI_Texture_Info Name=Encounter_Skill_Icon_Demolition
     componentTextures.add(Texture2D'GUI_Skills.Encounter_Skill_Icon_Demolition'
   end object
   
   // Skill Icon Container
-	begin object class=UI_Texture_Storage Name=Skill_Icon_Container
-		tag="Skill_Icon_Container"
+  begin object class=UI_Texture_Storage Name=Skill_Icon_Container
+    tag="Skill_Icon_Container"
     textureWidth=108
     textureHeight=108
-		images(0)=Encounter_Skill_Icon_Demolition
-	end object
+    images(0)=Encounter_Skill_Icon_Demolition
+  end object
   skillIcon=Skill_Icon_Container
-	
+  
   
   // Skill Animation
-	begin object class=UI_Texture_Info Name=SkillAnim_Demolish_F1
+  begin object class=UI_Texture_Info Name=SkillAnim_Demolish_F1
     componentTextures.add(Texture2D'GUI_Skills.SkillAnim_Demolish_F1')
   end object
-	begin object class=UI_Texture_Info Name=SkillAnim_Demolish_F2
+  begin object class=UI_Texture_Info Name=SkillAnim_Demolish_F2
     componentTextures.add(Texture2D'GUI_Skills.SkillAnim_Demolish_F2')
   end object
-	begin object class=UI_Texture_Info Name=SkillAnim_Demolish_F3
+  begin object class=UI_Texture_Info Name=SkillAnim_Demolish_F3
     componentTextures.add(Texture2D'GUI_Skills.SkillAnim_Demolish_F3')
   end object
-	begin object class=UI_Texture_Info Name=SkillAnim_Demolish_F4
+  begin object class=UI_Texture_Info Name=SkillAnim_Demolish_F4
     componentTextures.add(Texture2D'GUI_Skills.SkillAnim_Demolish_F4')
   end object
-	begin object class=UI_Texture_Info Name=SkillAnim_Demolish_F5
+  begin object class=UI_Texture_Info Name=SkillAnim_Demolish_F5
     componentTextures.add(Texture2D'GUI_Skills.SkillAnim_Demolish_F5')
   end object
   
   // Skill Animation Container
-	begin object class=UI_Texture_Storage Name=Skill_Animation_Container
-		tag="Skill_Animation_Container"
+  begin object class=UI_Texture_Storage Name=Skill_Animation_Container
+    tag="Skill_Animation_Container"
     textureWidth=240
     textureHeight=240
-		images(0)=SkillAnim_Demolish_F1
-		images(1)=SkillAnim_Demolish_F2
-		images(2)=SkillAnim_Demolish_F3
-		images(3)=SkillAnim_Demolish_F4
-		images(4)=SkillAnim_Demolish_F5
-	end object
+    images(0)=SkillAnim_Demolish_F1
+    images(1)=SkillAnim_Demolish_F2
+    images(2)=SkillAnim_Demolish_F3
+    images(3)=SkillAnim_Demolish_F4
+    images(4)=SkillAnim_Demolish_F5
+  end object
   skillAnim=Skill_Animation_Container
-	
+  
 }
 
 

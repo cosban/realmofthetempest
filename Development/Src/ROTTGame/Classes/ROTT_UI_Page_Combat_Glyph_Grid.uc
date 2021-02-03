@@ -334,38 +334,38 @@ event deleteComp() {
  *===========================================================================*/
 defaultProperties
 {
-	/** ===== Input ===== **/
-	begin object class=ROTT_Input_Handler Name=Input_A
+  /** ===== Input ===== **/
+  begin object class=ROTT_Input_Handler Name=Input_A
     inputName="XBoxTypeS_A"
-		buttonComponent=none
-	end object
+    buttonComponent=none
+  end object
   inputList.add(Input_A)
   
-	/** ===== Textures ===== **/
+  /** ===== Textures ===== **/
   // Waiting panel
-	begin object class=UI_Texture_Info Name=Combat_Waiting_Panel
+  begin object class=UI_Texture_Info Name=Combat_Waiting_Panel
     componentTextures.add(Texture2D'GUI.Combat_Waiting_Panel')
   end object
   
   // Glyph grid background
-	begin object class=UI_Texture_Info Name=Combat_Glyph_Grid
+  begin object class=UI_Texture_Info Name=Combat_Glyph_Grid
     componentTextures.add(Texture2D'GUI.Combat_Glyph_Grid')
   end object
   
   // Glyph
-	begin object class=UI_Texture_Info Name=Combat_Glyph_Health
+  begin object class=UI_Texture_Info Name=Combat_Glyph_Health
     componentTextures.add(Texture2D'GUI.Glyph_Health')
   end object
-	begin object class=UI_Texture_Info Name=Combat_Glyph_Mana
+  begin object class=UI_Texture_Info Name=Combat_Glyph_Mana
     componentTextures.add(Texture2D'GUI.Glyph_Mana')
   end object
-	begin object class=UI_Texture_Info Name=Combat_Glyph_Armor
+  begin object class=UI_Texture_Info Name=Combat_Glyph_Armor
     componentTextures.add(Texture2D'GUI.GLYPH_ARMOR')
   end object
-	begin object class=UI_Texture_Info Name=Combat_Glyph_Mana_Regen
+  begin object class=UI_Texture_Info Name=Combat_Glyph_Mana_Regen
     componentTextures.add(Texture2D'GUI.GLYPH_MANA_REGEN')
   end object
-	begin object class=UI_Texture_Info Name=Combat_Glyph_Speed
+  begin object class=UI_Texture_Info Name=Combat_Glyph_Speed
     componentTextures.add(Texture2D'GUI.GLYPH_SPEED')
   end object
   begin object class=UI_Texture_Info Name=Combat_Glyph_Dodge
@@ -402,78 +402,78 @@ defaultProperties
     componentTextures.add(Texture2D'GUI.Glyph_Selector')
   end object
   
-	/** ===== UI Components ===== **/
+  /** ===== UI Components ===== **/
   // Waiting Panel
-	begin object class=UI_Sprite Name=Action_Waiting_Panel
-		tag="Action_Waiting_Panel"
+  begin object class=UI_Sprite Name=Action_Waiting_Panel
+    tag="Action_Waiting_Panel"
     bEnabled=true
     posX=33
     posY=604
-		images(0)=Combat_Waiting_Panel
-	end object
-	componentList.add(Action_Waiting_Panel)
+    images(0)=Combat_Waiting_Panel
+  end object
+  componentList.add(Action_Waiting_Panel)
   
   // Glyph Grid Background
-	begin object class=UI_Sprite Name=Glyph_Grid_Background
-		tag="Glyph_Grid_Background"
+  begin object class=UI_Sprite Name=Glyph_Grid_Background
+    tag="Glyph_Grid_Background"
     posX=403
     posY=601
-		images(0)=Combat_Glyph_Grid
-	end object
-	componentList.add(Glyph_Grid_Background)
-	
+    images(0)=Combat_Glyph_Grid
+  end object
+  componentList.add(Glyph_Grid_Background)
+  
   
   
   // Glyph Icons
-	begin object class=UI_Texture_Storage Name=Glyph_Icon_Container
-		tag="Glyph_Icon_Container"
+  begin object class=UI_Texture_Storage Name=Glyph_Icon_Container
+    tag="Glyph_Icon_Container"
     textureWidth=64
     textureHeight=64
-		images(GLYPH_HEALTH)=Combat_Glyph_Health
-		images(GLYPH_MANA)=Combat_Glyph_Mana
-		images(GLYPH_ARMOR)=Combat_Glyph_Armor
-		images(GLYPH_MANA_REGAIN)=Combat_Glyph_Mana_Regen
-		images(GLYPH_SPEED)=Combat_Glyph_Speed
-		images(GLYPH_DODGE)=Combat_Glyph_Dodge
-		images(GLYPH_ACCURACY)=Combat_Glyph_Accuracy
-		images(GLYPH_DAMAGE)=Combat_Glyph_Damage
+    images(GLYPH_HEALTH)=Combat_Glyph_Health
+    images(GLYPH_MANA)=Combat_Glyph_Mana
+    images(GLYPH_ARMOR)=Combat_Glyph_Armor
+    images(GLYPH_MANA_REGAIN)=Combat_Glyph_Mana_Regen
+    images(GLYPH_SPEED)=Combat_Glyph_Speed
+    images(GLYPH_DODGE)=Combat_Glyph_Dodge
+    images(GLYPH_ACCURACY)=Combat_Glyph_Accuracy
+    images(GLYPH_DAMAGE)=Combat_Glyph_Damage
     
-		images(GLYPH_VALKYRIE_RETALIATION)=Combat_Glyph_Retaliation
-		images(GLYPH_GOLIATH_COUNTER)=Combat_Glyph_Counter
-		images(GLYPH_WIZARD_SPECTRAL_SURGE)=Combat_Glyph_Spectral_Surge
-		images(GLYPH_TITAN_STORM)=Combat_Glyph_Storm
-	end object
-	componentList.add(Glyph_Icon_Container)
-	
+    images(GLYPH_VALKYRIE_RETALIATION)=Combat_Glyph_Retaliation
+    images(GLYPH_GOLIATH_COUNTER)=Combat_Glyph_Counter
+    images(GLYPH_WIZARD_SPECTRAL_SURGE)=Combat_Glyph_Spectral_Surge
+    images(GLYPH_TITAN_STORM)=Combat_Glyph_Storm
+  end object
+  componentList.add(Glyph_Icon_Container)
+  
   // Glyph Tile Pressed
-	begin object class=UI_Selector_2D Name=Glyph_Tile_Pressed_Sprite
-		tag="Glyph_Tile_Pressed_Sprite"
+  begin object class=UI_Selector_2D Name=Glyph_Tile_Pressed_Sprite
+    tag="Glyph_Tile_Pressed_Sprite"
     bEnabled=false
     posX=421
     posY=618
-		images(0)=Glyph_Tile_Pressed
+    images(0)=Glyph_Tile_Pressed
     wrapSelection=true
     
     selectOffset=(x=60,y=60)  // Distance from neighboring spaces
     gridSize=(x=4,y=4)        // Total size of 2d selection space
     
-	end object
-	componentList.add(Glyph_Tile_Pressed_Sprite)
-	
+  end object
+  componentList.add(Glyph_Tile_Pressed_Sprite)
+  
   // Glyph Selector
-	begin object class=UI_Selector Name=Input_Listener
-		tag="Input_Listener"
+  begin object class=UI_Selector Name=Input_Listener
+    tag="Input_Listener"
     navigationType=SELECTION_2D
     gridSize=(x=4,y=4)          // Total size of 2d selection space
     bEnabled=true
     bActive=true
   end object
-	componentList.add(Input_Listener)
-	begin object class=UI_Selector_2D Name=Combat_Glyph_Selector
-		tag="Combat_Glyph_Selector"
+  componentList.add(Input_Listener)
+  begin object class=UI_Selector_2D Name=Combat_Glyph_Selector
+    tag="Combat_Glyph_Selector"
     posX=411
     posY=608
-		images(0)=Glyph_Selector
+    images(0)=Glyph_Selector
     wrapSelection=true
     
     selectOffset=(x=60,y=60)  // Distance from neighboring spaces
@@ -482,9 +482,9 @@ defaultProperties
     // Mild glow
     activeEffects.add((effectType = EFFECT_ALPHA_CYCLE, lifeTime = -1, elapsedTime = 0, intervalTime = 0.8, min = 205, max = 255))
     
-	end object
-	componentList.add(Combat_Glyph_Selector)
-	
+  end object
+  componentList.add(Combat_Glyph_Selector)
+  
 }
 
 

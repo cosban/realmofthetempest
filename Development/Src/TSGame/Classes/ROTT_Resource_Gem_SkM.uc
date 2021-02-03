@@ -14,15 +14,15 @@ var private skeletalMeshComponent gemSkeleton;
 var private ParticleSystemComponent gemSparkle;
 
 function postBeginPlay() {
-	super.postBeginPlay();
+  super.postBeginPlay();
   
-	gemSkeleton.attachComponentToSocket(gemSparkle, 'Sparkle_Socket');
+  gemSkeleton.attachComponentToSocket(gemSparkle, 'Sparkle_Socket');
   
-	gemSparkle.activateSystem();
+  gemSparkle.activateSystem();
 }
 
 simulated function tick(float deltaTime) {
-	setRotation(
+  setRotation(
     RInterpTo(
       rotation, 
       rotation + rot(0, 30000, 0), 
@@ -35,21 +35,21 @@ simulated function tick(float deltaTime) {
 /*============================================================================= 
  * Default Properties
  *===========================================================================*/
-defaultproperties
+defaultProperties
 {
   // Gem skeletal mesh
-	Begin Object Class=SkeletalMeshComponent Name=Gem_Skeletal_Mesh
-		SkeletalMesh=SkeletalMesh'ROTT_Resources.Resource_Gem'
-		LightingChannels=(Cinematic_8=True)
-	End Object
-	gemSkeleton=Gem_Skeletal_Mesh
+  begin object Class=SkeletalMeshComponent Name=Gem_Skeletal_Mesh
+    SkeletalMesh=SkeletalMesh'ROTT_Resources.Resource_Gem'
+    LightingChannels=(Cinematic_8=True)
+  end object
+  gemSkeleton=Gem_Skeletal_Mesh
   components.add(Gem_Skeletal_Mesh)
-	
+  
   // Gem sparkle
-	Begin Object Class=ParticleSystemComponent Name=PSC_Gem_Sparkle
+  begin object Class=ParticleSystemComponent Name=PSC_Gem_Sparkle
     Template=ParticleSystem'ROTT_Resources.PS_Resource_Gold'
-	End Object
-	gemSparkle=PSC_Gem_Sparkle
+  end object
+  gemSparkle=PSC_Gem_Sparkle
   components.add(PSC_Gem_Sparkle)
   
 }

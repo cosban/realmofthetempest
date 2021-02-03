@@ -26,38 +26,38 @@ class ROTT_NPC_Drujiva extends ROTT_NPC_Container;
 public function initDialogue() {
   super.initDialogue();
   
-	// Introduction
-	`NEW_NODE(INTRODUCTION, NUETRAL)
+  // Introduction
+  `NEW_NODE(INTRODUCTION, NUETRAL)
     "Drujiva speaking, I'm the druid sage of this", 
     "mountain shrine"
   `ENDNODE
   
-	`NEW_NODE(INTRODUCTION, NUETRAL)
+  `NEW_NODE(INTRODUCTION, NUETRAL)
     "Heal beneath this four spirit house, as the", 
     "queen of this mountain peak shines holy light down for us."
   `ENDNODE
   
-	`NEW_NODE(INTRODUCTION, NUETRAL)
+  `NEW_NODE(INTRODUCTION, NUETRAL)
     "Won't you. . . will you help recover this shrine?", 
     "Our only need is to retrieve the golden ornaments."
   `ENDNODE
   
-	`NEW_NODE(INTRODUCTION, NUETRAL)
+  `NEW_NODE(INTRODUCTION, NUETRAL)
     "The golden ornaments have become sprawled out,", 
     "now in the hands of evil, in the chaos of this. . ."
   `ENDNODE
   
-	`NEW_NODE(INTRODUCTION, NUETRAL)
+  `NEW_NODE(INTRODUCTION, NUETRAL)
     "this. . . black magic tragedy.", 
     ""
   `ENDNODE
   
-	`NEW_NODE(INTRODUCTION, NUETRAL)
+  `NEW_NODE(INTRODUCTION, NUETRAL)
     "Retrieve the golden ornaments of chaos from the fallen citadels", 
     "of Rhunia, Etzland, Haxlyn, Valimor, and Kalroth."
   `ENDNODE
   
-	`NEW_NODE(INTRODUCTION, NUETRAL)
+  `NEW_NODE(INTRODUCTION, NUETRAL)
     "Then shall we. . . find hope in order.", 
     ""
   `ENDNODE
@@ -75,7 +75,7 @@ public function initDialogue() {
   );
   
   // Greeting
-	`NEW_NODE(GREETING, NUETRAL)
+  `NEW_NODE(GREETING, NUETRAL)
     "From the form of each branch of the Sister's Oak, stems hope.", 
     "Let's find this hope together."
   `ENDNODE
@@ -197,27 +197,27 @@ defaultProperties
   npcName=GENERIC
   
   // Background
-	begin object class=UI_Texture_Info Name=NPC_Background_Dark_Gray
-		componentTextures.add(Texture2D'GUI_NPC_Dialog.NPC_Background_Dark_Gray'
-	end object
-	
+  begin object class=UI_Texture_Info Name=NPC_Background_Dark_Gray
+    componentTextures.add(Texture2D'GUI_NPC_Dialog.NPC_Background_Dark_Gray'
+  end object
+  
   // Sprite container for transfer
-	begin object class=UI_Texture_Storage Name=NPC_Background
-		tag="NPC_Background"
-		images(0)=NPC_Background_Dark_Gray
-	end object
+  begin object class=UI_Texture_Storage Name=NPC_Background
+    tag="NPC_Background"
+    images(0)=NPC_Background_Dark_Gray
+  end object
   npcBackground=NPC_Background
   
   // NPC Texture
-	begin object class=UI_Texture_Info Name=NPC_Black_Gatekeeper
+  begin object class=UI_Texture_Info Name=NPC_Black_Gatekeeper
     componentTextures.add(Texture2D'Monsters.Enemy_Portrait_Lycanthrox_Orange_360')
   end object
-	
+  
   // Sprite container for transfer
-	begin object class=UI_Texture_Storage Name=NPC_Sprites
-		tag="NPC_Sprites"
-		images(0)=NPC_Black_Gatekeeper
-	end object
+  begin object class=UI_Texture_Storage Name=NPC_Sprites
+    tag="NPC_Sprites"
+    images(0)=NPC_Black_Gatekeeper
+  end object
   npcSprites=NPC_Sprites
 }
 

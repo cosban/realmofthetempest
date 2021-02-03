@@ -156,61 +156,61 @@ public function onNavigateRight();
  * Assets
  *===========================================================================*/
 defaultproperties
-{	
+{  
   /** ===== Input ===== **/
-	begin object class=ROTT_Input_Handler Name=Input_A
+  begin object class=ROTT_Input_Handler Name=Input_A
     inputName="XBoxTypeS_A"
-		buttonComponent=none
-	end object
+    buttonComponent=none
+  end object
   inputList.add(Input_A)
   
-	begin object class=ROTT_Input_Handler Name=Input_B
+  begin object class=ROTT_Input_Handler Name=Input_B
     inputName="XBoxTypeS_B"
     buttonComponent=none
-	end object
+  end object
   inputList.add(Input_B)
   
-	/** ===== Textures ===== **/
-	// Background
-	begin object class=UI_Texture_Info Name=Party_Manager_Background
+  /** ===== Textures ===== **/
+  // Background
+  begin object class=UI_Texture_Info Name=Party_Manager_Background
     componentTextures.add(Texture2D'GUI.Party_Manager_Background')
   end object
-	
+  
   // Border
-	begin object class=UI_Texture_Info Name=Party_Manager_Border
+  begin object class=UI_Texture_Info Name=Party_Manager_Border
     componentTextures.add(Texture2D'GUI.Party_Manager_Border')
   end object
-	
-	/** Visual Page Setup **/
-	tag="Party_MGR_Page"
-	posX=0
-	posY=0
-	posXEnd=NATIVE_WIDTH
-	posYEnd=NATIVE_HEIGHT
-	
-  // Party Management Background
-	begin object class=UI_Sprite Name=Party_Mgmt_Background
-		tag="Party_Mgmt_Background"
-		posX=0
-		posY=0
-		posXEnd=NATIVE_WIDTH
-		posYEnd=NATIVE_HEIGHT
-		images(0)=Party_Manager_Background
-	end object
-	componentList.add(Party_Mgmt_Background)
-	
-  // Party Management - Container List
-	begin object class=ROTT_UI_Party_Manager_Container_List Name=Party_Manager_Container_List
-		tag="Party_Manager_Container_List" 
-	end object
-	componentList.add(Party_Manager_Container_List)
   
-	// Selector
-	begin object class=UI_Selector Name=Party_Mgmt_Selector
-		tag="Party_Mgmt_Selector"
+  /** Visual Page Setup **/
+  tag="Party_MGR_Page"
+  posX=0
+  posY=0
+  posXEnd=NATIVE_WIDTH
+  posYEnd=NATIVE_HEIGHT
+  
+  // Party Management Background
+  begin object class=UI_Sprite Name=Party_Mgmt_Background
+    tag="Party_Mgmt_Background"
+    posX=0
+    posY=0
+    posXEnd=NATIVE_WIDTH
+    posYEnd=NATIVE_HEIGHT
+    images(0)=Party_Manager_Background
+  end object
+  componentList.add(Party_Mgmt_Background)
+  
+  // Party Management - Container List
+  begin object class=ROTT_UI_Party_Manager_Container_List Name=Party_Manager_Container_List
+    tag="Party_Manager_Container_List" 
+  end object
+  componentList.add(Party_Manager_Container_List)
+  
+  // Selector
+  begin object class=UI_Selector Name=Party_Mgmt_Selector
+    tag="Party_Mgmt_Selector"
     bActive=true
-		posX=53
-		posY=39
+    posX=53
+    posY=39
     selectionOffset=(x=0,y=280)
     numberOfMenuOptions=3
     
@@ -242,20 +242,20 @@ defaultproperties
     end object
     componentList.add(Inactive_Selector_Sprite)
     
-	end object
-	componentList.add(Party_Mgmt_Selector)
-	
+  end object
+  componentList.add(Party_Mgmt_Selector)
+  
   // Party Management Border
-	begin object class=UI_Sprite Name=Party_Mgmt_Border
-		tag="Party_Mgmt_Border"
-		posX=0
-		posY=0
-		posXEnd=NATIVE_WIDTH
-		posYEnd=NATIVE_HEIGHT
-		images(0)=Party_Manager_Border
-	end object
-	componentList.add(Party_Mgmt_Border)
-	
+  begin object class=UI_Sprite Name=Party_Mgmt_Border
+    tag="Party_Mgmt_Border"
+    posX=0
+    posY=0
+    posXEnd=NATIVE_WIDTH
+    posYEnd=NATIVE_HEIGHT
+    images(0)=Party_Manager_Border
+  end object
+  componentList.add(Party_Mgmt_Border)
+  
   
   
 }

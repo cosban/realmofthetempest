@@ -49,7 +49,7 @@ defaultProperties
   itemName="Zeltsi Leaf"
   
   // Item texture
-	itemTexture=Texture2D'ROTT_Items.Herbs.Item_Herb_Gold'
+  itemTexture=Texture2D'ROTT_Items.Herbs.Item_Herb_Gold'
   
   // Item text color
   itemFont=DEFAULT_SMALL_ORANGE

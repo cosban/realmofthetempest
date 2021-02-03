@@ -52,7 +52,7 @@ defaultProperties
   itemName="Zogi's Anchor"
   
   // Item texture
-	itemTexture=Texture2D'ROTT_Items.Charms.Item_Charm_Pink'
+  itemTexture=Texture2D'ROTT_Items.Charms.Item_Charm_Pink'
   
   // Item text color
   itemFont=DEFAULT_SMALL_CYAN

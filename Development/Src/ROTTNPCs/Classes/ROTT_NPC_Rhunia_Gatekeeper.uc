@@ -24,16 +24,16 @@ class ROTT_NPC_Rhunia_Gatekeeper extends ROTT_NPC_Container;
 public function initDialogue() {
   super.initDialogue();
   
-	// Greeting
-	`NEW_NODE(GREETING, NUETRAL)
+  // Greeting
+  `NEW_NODE(GREETING, NUETRAL)
     "The frigid clasp of the ice tome breaks only here,",
     "in the heart of this forsaken temple."
   `ENDNODE
   
-	`NEW_NODE(GREETING, NUETRAL)
+  `NEW_NODE(GREETING, NUETRAL)
     "Rhunia, goddess of nature's cruelty,",
     "obey desire as your birthright and devour my soul."
-	`ENDNODE
+  `ENDNODE
   
   setInquiry(
     "Goodnight",
@@ -58,27 +58,27 @@ defaultProperties
   npcName=GENERIC
   
   // Background
-	begin object class=UI_Texture_Info Name=NPC_Background_Red
-		componentTextures.add(Texture2D'GUI_NPC_Dialog.NPC_Background_Red'
-	end object
-	
+  begin object class=UI_Texture_Info Name=NPC_Background_Red
+    componentTextures.add(Texture2D'GUI_NPC_Dialog.NPC_Background_Red'
+  end object
+  
   // Sprite container for transfer
-	begin object class=UI_Texture_Storage Name=NPC_Background
-		tag="NPC_Background"
-		images(0)=NPC_Background_Red
-	end object
+  begin object class=UI_Texture_Storage Name=NPC_Background
+    tag="NPC_Background"
+    images(0)=NPC_Background_Red
+  end object
   npcBackground=NPC_Background
   
   // NPC Texture
-	begin object class=UI_Texture_Info Name=NPC_Red_Gatekeeper
+  begin object class=UI_Texture_Info Name=NPC_Red_Gatekeeper
     componentTextures.add(Texture2D'Monsters.Enemy_Portrait_Gatekeeper_Red_360')
   end object
-	
+  
   // Sprite container for transfer
-	begin object class=UI_Texture_Storage Name=NPC_Sprites
-		tag="NPC_Sprites"
-		images(0)=NPC_Red_Gatekeeper
-	end object
+  begin object class=UI_Texture_Storage Name=NPC_Sprites
+    tag="NPC_Sprites"
+    images(0)=NPC_Red_Gatekeeper
+  end object
   npcSprites=NPC_Sprites
 }
 

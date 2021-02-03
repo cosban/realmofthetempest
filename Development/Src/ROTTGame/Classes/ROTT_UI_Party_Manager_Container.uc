@@ -164,40 +164,40 @@ defaultProperties
   
   /** ===== Textures ===== **/
   // Party backdrop
-	begin object class=UI_Texture_Info Name=Party_Member_Backdrops
+  begin object class=UI_Texture_Info Name=Party_Member_Backdrops
     componentTextures.add(Texture2D'GUI.Party_Manager_Party_Member_Backdrops')
   end object
   
   // Info sprites
-	begin object class=UI_Texture_Info Name=Party_Mgmt_Data_Component
+  begin object class=UI_Texture_Info Name=Party_Mgmt_Data_Component
     componentTextures.add(Texture2D'GUI.Team_Manager.Team_Info_Window_Background')
   end object
-	begin object class=UI_Texture_Info Name=Party_Mgmt_Activity_Component
+  begin object class=UI_Texture_Info Name=Party_Mgmt_Activity_Component
     componentTextures.add(Texture2D'GUI.PartyMGR_Raid_Component')
   end object
   
   /** ===== Components ===== **/
   // Backdrops
-	begin object class=UI_Sprite Name=Party_Backdrop
-		tag="Party_Backdrop"
+  begin object class=UI_Sprite Name=Party_Backdrop
+    tag="Party_Backdrop"
     posX=-705
-		posY=3
-		images(0)=Party_Member_Backdrops
-	end object
-	componentList.add(Party_Backdrop)
+    posY=3
+    images(0)=Party_Member_Backdrops
+  end object
+  componentList.add(Party_Backdrop)
   
   // Party Portraits Displayer
-	begin object class=ROTT_UI_Party_Display Name=Party_Displayer
-		tag="Party_Displayer" 
+  begin object class=ROTT_UI_Party_Display Name=Party_Displayer
+    tag="Party_Displayer" 
     xOffset=204
     posX=-701
     posY=3
     displayMode=MANAGER_PORTRAITS
-	end object
-	componentList.add(Party_Displayer)
+  end object
+  componentList.add(Party_Displayer)
   
-	begin object class=UI_Container Name=Party_Info_Container
-		tag="Party_Info_Container"
+  begin object class=UI_Container Name=Party_Info_Container
+    tag="Party_Info_Container"
     
     // Party info container background
     begin object class=UI_Sprite Name=Party_Mgmt_Data_Background
@@ -374,4 +374,4 @@ defaultProperties
   end object
   componentList.add(Party_Info_Container)
 }
-	
+  

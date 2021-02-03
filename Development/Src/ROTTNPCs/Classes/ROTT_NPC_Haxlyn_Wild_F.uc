@@ -24,33 +24,33 @@ class ROTT_NPC_Haxlyn_Wild_F extends ROTT_NPC_Container;
 public function initDialogue() {
   super.initDialogue();
   
-	// Intro
-	`NEW_NODE(GREETING, NUETRAL)
+  // Intro
+  `NEW_NODE(GREETING, NUETRAL)
     "I have been starving myself for six days,",
     "just as the locksmith did in Lesser Oblivion."
   `ENDNODE
   
-	`NEW_NODE(GREETING, NUETRAL)
+  `NEW_NODE(GREETING, NUETRAL)
     "The soul suffers separation sickness, while",
     "my shell laments for the loss of clarity."
   `ENDNODE
   
-	`NEW_NODE(GREETING, NUETRAL)
+  `NEW_NODE(GREETING, NUETRAL)
     "But now, when my mind's eye wanders,",
     "images appear."
   `ENDNODE
   
-	`NEW_NODE(GREETING, NUETRAL)
+  `NEW_NODE(GREETING, NUETRAL)
     ". . . Seemingly separate from my own cognition.",
     ""
   `ENDNODE
   
-	`NEW_NODE(GREETING, NUETRAL)
+  `NEW_NODE(GREETING, NUETRAL)
     "And when these images appear. . .",
     ""
   `ENDNODE
   
-	`NEW_NODE(GREETING, NUETRAL)
+  `NEW_NODE(GREETING, NUETRAL)
     "I pray.",
     ""
   `ENDNODE
@@ -80,27 +80,27 @@ defaultProperties
   npcName=GENERIC
   
   // Background
-	begin object class=UI_Texture_Info Name=NPC_Background_Texture
-		componentTextures.add(Texture2D'GUI_NPC_Dialog.NPC_Background_Dark_Gray'
-	end object
-	
+  begin object class=UI_Texture_Info Name=NPC_Background_Texture
+    componentTextures.add(Texture2D'GUI_NPC_Dialog.NPC_Background_Dark_Gray'
+  end object
+  
   // Sprite container for transfer
-	begin object class=UI_Texture_Storage Name=NPC_Background
-		tag="NPC_Background"
-		images(0)=NPC_Background_Texture
-	end object
+  begin object class=UI_Texture_Storage Name=NPC_Background
+    tag="NPC_Background"
+    images(0)=NPC_Background_Texture
+  end object
   npcBackground=NPC_Background
   
   // NPC Texture
-	begin object class=UI_Texture_Info Name=NPC_Sprite_Texture
+  begin object class=UI_Texture_Info Name=NPC_Sprite_Texture
     componentTextures.add(Texture2D'Monsters_Disc_2.Enemy_Portrait_Zombie_Black_360')
   end object
-	
+  
   // Sprite container for transfer
-	begin object class=UI_Texture_Storage Name=NPC_Sprites
-		tag="NPC_Sprites"
-		images(0)=NPC_Sprite_Texture
-	end object
+  begin object class=UI_Texture_Storage Name=NPC_Sprites
+    tag="NPC_Sprites"
+    images(0)=NPC_Sprite_Texture
+  end object
   npcSprites=NPC_Sprites
 }
 

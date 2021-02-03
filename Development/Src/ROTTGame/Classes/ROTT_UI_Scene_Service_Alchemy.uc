@@ -82,29 +82,29 @@ defaultProperties
   
   /** ===== Pages ===== **/
   // Alchemy Instructions
-	begin object class=ROTT_UI_Page_Alchemy_Instructions Name=Page_Alchemy_Instructions
-		tag="Page_Alchemy_Instructions"
+  begin object class=ROTT_UI_Page_Alchemy_Instructions Name=Page_Alchemy_Instructions
+    tag="Page_Alchemy_Instructions"
     bInitialPage=true
-	end object
-	pageComponents.add(Page_Alchemy_Instructions)
+  end object
+  pageComponents.add(Page_Alchemy_Instructions)
   
   // Alchemy Menu
-	begin object class=ROTT_UI_Page_Alchemy_Menu Name=Page_Alchemy_Menu
-		tag="Page_Alchemy_Menu"
-	end object
-	pageComponents.add(Page_Alchemy_Menu)
+  begin object class=ROTT_UI_Page_Alchemy_Menu Name=Page_Alchemy_Menu
+    tag="Page_Alchemy_Menu"
+  end object
+  pageComponents.add(Page_Alchemy_Menu)
   
   // Alchemy Game
-	begin object class=ROTT_UI_Page_Alchemy_Game Name=Page_Alchemy_Game
-		tag="Page_Alchemy_Game"
-	end object
-	pageComponents.add(Page_Alchemy_Game)
+  begin object class=ROTT_UI_Page_Alchemy_Game Name=Page_Alchemy_Game
+    tag="Page_Alchemy_Game"
+  end object
+  pageComponents.add(Page_Alchemy_Game)
   
   // Alchemy Game Over
-	begin object class=ROTT_UI_Page_Alchemy_Game_Over Name=Page_Alchemy_Game_Over
-		tag="Page_Alchemy_Game_Over"
-	end object
-	pageComponents.add(Page_Alchemy_Game_Over)
+  begin object class=ROTT_UI_Page_Alchemy_Game_Over Name=Page_Alchemy_Game_Over
+    tag="Page_Alchemy_Game_Over"
+  end object
+  pageComponents.add(Page_Alchemy_Game_Over)
   
 }
 

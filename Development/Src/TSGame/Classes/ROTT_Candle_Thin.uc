@@ -9,41 +9,41 @@
  *===========================================================================*/
 
 class ROTT_Candle_Thin extends Actor
-	ClassGroup(ROTT_Objects)
-	placeable;
+  ClassGroup(ROTT_Objects)
+  placeable;
 
 var private SkeletalMeshComponent candleSkeleton;
 var private ParticleSystemComponent candleLight;
 
 function postBeginPlay() {
-	super.postBeginPlay();
+  super.postBeginPlay();
   
-	activateEmitter();
+  activateEmitter();
 }
 
 function activateEmitter() {
-	candleSkeleton.attachComponentToSocket(candleLight, 'Flame_Socket');
+  candleSkeleton.attachComponentToSocket(candleLight, 'Flame_Socket');
   
-	candleLight.activateSystem();
+  candleLight.activateSystem();
 }
 
 /*============================================================================= 
  * Default Properties
  *===========================================================================*/
-defaultproperties
+defaultProperties
 {
-	// Candle skeletal mesh
-	Begin Object Class=SkeletalMeshComponent Name=Candle_Skeletal_Mesh
+  // Candle skeletal mesh
+  begin object Class=SkeletalMeshComponent Name=Candle_Skeletal_Mesh
     SkeletalMesh=SkeletalMesh'ROTT_Decorations.Candles.SK_Candle_1B'
-	End Object
-	candleSkeleton=Candle_Skeletal_Mesh
+  end object
+  candleSkeleton=Candle_Skeletal_Mesh
   components.add(Candle_Skeletal_Mesh)
   
   // Flame
-	Begin Object Class=ParticleSystemComponent Name=PSC_Candle_Light
+  begin object Class=ParticleSystemComponent Name=PSC_Candle_Light
     Template=ParticleSystem'ROTT_Decorations.Candles.PS_CandleLight_1A'
-	End Object
-	candleLight=PSC_Candle_Light
+  end object
+  candleLight=PSC_Candle_Light
   components.add(PSC_Candle_Light)
   
 }

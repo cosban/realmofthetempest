@@ -60,7 +60,7 @@ defaultProperties
   itemName="Gems"
   
   // Item texture
-	itemTexture=Texture2D'GUI.Item_Currency_Gem'
+  itemTexture=Texture2D'GUI.Item_Currency_Gem'
   
   // Item text color
   itemFont=DEFAULT_SMALL_TAN

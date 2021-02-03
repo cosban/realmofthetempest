@@ -369,115 +369,115 @@ defaultProperties
   pageComponents.add(Page_Game_Menu)
   
   // Utility Menu
-	begin object class=ROTT_UI_Page_Utility_Menu Name=Utility_Menu_UI
-		tag="Utility_Menu_UI"
-	end object
-	pageComponents.add(Utility_Menu_UI)
+  begin object class=ROTT_UI_Page_Utility_Menu Name=Utility_Menu_UI
+    tag="Utility_Menu_UI"
+  end object
+  pageComponents.add(Utility_Menu_UI)
   
   // Party selection Menu
-	begin object class=ROTT_UI_Page_Party_Selection Name=Party_Selection_UI
-		tag="Party_Selection_UI"
-	end object
-	pageComponents.add(Party_Selection_UI)
+  begin object class=ROTT_UI_Page_Party_Selection Name=Party_Selection_UI
+    tag="Party_Selection_UI"
+  end object
+  pageComponents.add(Party_Selection_UI)
   
   // Stats Inspection Menu
-	begin object class=ROTT_UI_Page_Stats_Inspection Name=Stats_Inspection_UI
-		tag="Stats_Inspection_UI"
-	end object
-	pageComponents.add(Stats_Inspection_UI)
+  begin object class=ROTT_UI_Page_Stats_Inspection Name=Stats_Inspection_UI
+    tag="Stats_Inspection_UI"
+  end object
+  pageComponents.add(Stats_Inspection_UI)
   
   // Class Skilltree UI
-	begin object class=ROTT_UI_Page_Class_Skilltree Name=Class_Skilltree_UI
-		tag="Class_Skilltree_UI"
-	end object
-	pageComponents.add(Class_Skilltree_UI)
+  begin object class=ROTT_UI_Page_Class_Skilltree Name=Class_Skilltree_UI
+    tag="Class_Skilltree_UI"
+  end object
+  pageComponents.add(Class_Skilltree_UI)
   
   // Glyph Skilltree UI
-	begin object class=ROTT_UI_Page_Glyph_Skilltree Name=Glyph_Skilltree_UI
-		tag="Glyph_Skilltree_UI"
-	end object
-	pageComponents.add(Glyph_Skilltree_UI)
+  begin object class=ROTT_UI_Page_Glyph_Skilltree Name=Glyph_Skilltree_UI
+    tag="Glyph_Skilltree_UI"
+  end object
+  pageComponents.add(Glyph_Skilltree_UI)
   
   // Mastery Skilltree UI
-	begin object class=ROTT_UI_Page_Mastery_Skilltree Name=Mastery_Skilltree_UI
-		tag="Mastery_Skilltree_UI"
-	end object
-	pageComponents.add(Mastery_Skilltree_UI)
+  begin object class=ROTT_UI_Page_Mastery_Skilltree Name=Mastery_Skilltree_UI
+    tag="Mastery_Skilltree_UI"
+  end object
+  pageComponents.add(Mastery_Skilltree_UI)
   
   // Inventory UI
-	begin object class=ROTT_UI_Page_Inventory Name=Inventory_UI
-		tag="Inventory_UI"
-	end object
-	pageComponents.add(Inventory_UI)
+  begin object class=ROTT_UI_Page_Inventory Name=Inventory_UI
+    tag="Inventory_UI"
+  end object
+  pageComponents.add(Inventory_UI)
   
   // Reinvest Stat UI
-	begin object class=ROTT_UI_Page_Reset_Stat Name=Reinvest_Stat_UI
-		tag="Reinvest_Stat_UI"
-	end object
-	pageComponents.add(Reinvest_Stat_UI)
+  begin object class=ROTT_UI_Page_Reset_Stat Name=Reinvest_Stat_UI
+    tag="Reinvest_Stat_UI"
+  end object
+  pageComponents.add(Reinvest_Stat_UI)
   
   // Reinvest Stat UI
-	begin object class=ROTT_UI_Page_Mgmt_Window_Reset_Stats Name=Reset_Stat_Manager_UI
-		tag="Reset_Stat_Manager_UI"
-	end object
-	pageComponents.add(Reset_Stat_Manager_UI)
+  begin object class=ROTT_UI_Page_Mgmt_Window_Reset_Stats Name=Reset_Stat_Manager_UI
+    tag="Reset_Stat_Manager_UI"
+  end object
+  pageComponents.add(Reset_Stat_Manager_UI)
   
   // Reinvest Skill UI
-	begin object class=ROTT_UI_Page_Reset_Skill Name=Reinvest_Skill_UI
-		tag="Reinvest_Skill_UI"
-	end object
-	pageComponents.add(Reinvest_Skill_UI)
+  begin object class=ROTT_UI_Page_Reset_Skill Name=Reinvest_Skill_UI
+    tag="Reinvest_Skill_UI"
+  end object
+  pageComponents.add(Reinvest_Skill_UI)
   
   // Reinvest Skill Manager UI
-	begin object class=ROTT_UI_Page_Mgmt_Window_Reset_Skills Name=Reset_Skill_Manager_UI
-		tag="Reset_Skill_Manager_UI"
-	end object
-	pageComponents.add(Reset_Skill_Manager_UI)
+  begin object class=ROTT_UI_Page_Mgmt_Window_Reset_Skills Name=Reset_Skill_Manager_UI
+    tag="Reset_Skill_Manager_UI"
+  end object
+  pageComponents.add(Reset_Skill_Manager_UI)
   
   // Reinvest Skill Preview UI
-	begin object class=ROTT_UI_Page_Reset_Skill_Preview Name=Reset_Skill_Preview_UI
-		tag="Reset_Skill_Preview_UI"
+  begin object class=ROTT_UI_Page_Reset_Skill_Preview Name=Reset_Skill_Preview_UI
+    tag="Reset_Skill_Preview_UI"
     bDrawRelative=true
     posx=720
-	end object
-	pageComponents.add(Reset_Skill_Preview_UI)
+  end object
+  pageComponents.add(Reset_Skill_Preview_UI)
   
   // Hyper Skilltree UI
-	begin object class=ROTT_UI_Page_Hyper_Skilltree Name=Hyper_Skilltree_UI
-		tag="Hyper_Skilltree_UI"
-	end object
-	pageComponents.add(Hyper_Skilltree_UI)
+  begin object class=ROTT_UI_Page_Hyper_Skilltree Name=Hyper_Skilltree_UI
+    tag="Hyper_Skilltree_UI"
+  end object
+  pageComponents.add(Hyper_Skilltree_UI)
   
   // Stat Management Window
-	begin object class=ROTT_UI_Page_Mgmt_Window_Stats Name=Mgmt_Window_Stats
-		tag="Mgmt_Window_Stats"
-	end object
-	pageComponents.add(Mgmt_Window_Stats)
-	
+  begin object class=ROTT_UI_Page_Mgmt_Window_Stats Name=Mgmt_Window_Stats
+    tag="Mgmt_Window_Stats"
+  end object
+  pageComponents.add(Mgmt_Window_Stats)
+  
   // Skill Management Window
-	begin object class=ROTT_UI_Page_Mgmt_Window_Skills Name=Mgmt_Window_Skills
-		tag="Mgmt_Window_Skills"
-	end object
-	pageComponents.add(Mgmt_Window_Skills)
-	
+  begin object class=ROTT_UI_Page_Mgmt_Window_Skills Name=Mgmt_Window_Skills
+    tag="Mgmt_Window_Skills"
+  end object
+  pageComponents.add(Mgmt_Window_Skills)
+  
   // Skill Management Window (Passive)
-	begin object class=ROTT_UI_Page_Mgmt_Window_Passive Name=Mgmt_Window_Passive
-		tag="Mgmt_Window_Passive"
-	end object
-	pageComponents.add(Mgmt_Window_Passive)
-	
+  begin object class=ROTT_UI_Page_Mgmt_Window_Passive Name=Mgmt_Window_Passive
+    tag="Mgmt_Window_Passive"
+  end object
+  pageComponents.add(Mgmt_Window_Passive)
+  
   // Skill Management Window (Collectible)
-	begin object class=ROTT_UI_Page_Mgmt_Window_Collectible Name=Mgmt_Window_Collect
-		tag="Mgmt_Window_Collect"
-	end object
-	pageComponents.add(Mgmt_Window_Collect)
-	
+  begin object class=ROTT_UI_Page_Mgmt_Window_Collectible Name=Mgmt_Window_Collect
+    tag="Mgmt_Window_Collect"
+  end object
+  pageComponents.add(Mgmt_Window_Collect)
+  
   // Blank Management Window
-	begin object class=ROTT_UI_Page_Mgmt_Window_Blank Name=Mgmt_Window_Blank
-		tag="Mgmt_Window_Blank"
-	end object
-	pageComponents.add(Mgmt_Window_Blank)
-	
+  begin object class=ROTT_UI_Page_Mgmt_Window_Blank Name=Mgmt_Window_Blank
+    tag="Mgmt_Window_Blank"
+  end object
+  pageComponents.add(Mgmt_Window_Blank)
+  
   // Enchantments Page
   begin object class=ROTT_UI_Page_Enchantments Name=Page_Enchantment_Collection
     tag="Page_Enchantment_Collection"
@@ -512,11 +512,11 @@ defaultProperties
   uiComponents.add(Page_Navigation_Arrow_Sprite)
   
   // Skill Animation Container
-	begin object class=UI_Texture_Storage Name=Item_Cacher
-		tag="Item_Cacher"
-	end object
+  begin object class=UI_Texture_Storage Name=Item_Cacher
+    tag="Item_Cacher"
+  end object
   uiComponents.add(Item_Cacher)
-	
+  
 }
 
 

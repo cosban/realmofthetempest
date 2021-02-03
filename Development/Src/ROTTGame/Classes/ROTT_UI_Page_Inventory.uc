@@ -205,10 +205,6 @@ protected function navigationRoutineB() {
  * Returns the index of the last page with items on it. 
  *===========================================================================*/
 private function byte getPageCount() {
-  `log(gameInfo.playerProfile.playerInventory.itemList.length);
-  `log(INVENTORY_SLOT_COUNT);
-  `log(gameInfo.playerProfile.playerInventory.itemList.length / INVENTORY_SLOT_COUNT);
-  
   return gameInfo.playerProfile.playerInventory.itemList.length / INVENTORY_SLOT_COUNT + 1;
 }
 
@@ -217,75 +213,75 @@ private function byte getPageCount() {
  *===========================================================================*/
 defaultProperties
 {
-	/** ===== Input ===== **/
-	begin object class=ROTT_Input_Handler Name=Input_A
+  /** ===== Input ===== **/
+  begin object class=ROTT_Input_Handler Name=Input_A
     inputName="XBoxTypeS_A"
-		buttonComponent=none
-	end object
+    buttonComponent=none
+  end object
   inputList.add(Input_A)
   
-	begin object class=ROTT_Input_Handler Name=Input_B
+  begin object class=ROTT_Input_Handler Name=Input_B
     inputName="XBoxTypeS_B"
     buttonComponent=none
-	end object
+  end object
   inputList.add(Input_B)
   
-	begin object class=ROTT_Input_Handler Name=Input_LB
+  begin object class=ROTT_Input_Handler Name=Input_LB
     inputName="XboxTypeS_LeftShoulder"
-		buttonComponent=none
-	end object
+    buttonComponent=none
+  end object
   inputList.add(Input_LB)
   
-	begin object class=ROTT_Input_Handler Name=Input_RB
+  begin object class=ROTT_Input_Handler Name=Input_RB
     inputName="XboxTypeS_RightShoulder"
-		buttonComponent=none
-	end object
+    buttonComponent=none
+  end object
   inputList.add(Input_RB)
   
   /** ===== Cache ===== **/
-	///begin object class=UI_Texture_Info Name=Item_Bottle_Blue
+  ///begin object class=UI_Texture_Info Name=Item_Bottle_Blue
   ///  componentTextures.add(Texture2D'ROTT_Items.Item_Bottle_Blue')
   ///end object
-	///begin object class=UI_Texture_Info Name=Item_Bottle_Pink
+  ///begin object class=UI_Texture_Info Name=Item_Bottle_Pink
   ///  componentTextures.add(Texture2D'ROTT_Items.Item_Bottle_Pink')
   ///end object
-	///begin object class=UI_Texture_Info Name=Item_Bottle_Purple
+  ///begin object class=UI_Texture_Info Name=Item_Bottle_Purple
   ///  componentTextures.add(Texture2D'ROTT_Items.Item_Bottle_Purple')
   ///end object
-	///begin object class=UI_Texture_Info Name=Item_Bottle_Green
+  ///begin object class=UI_Texture_Info Name=Item_Bottle_Green
   ///  componentTextures.add(Texture2D'ROTT_Items.Item_Bottle_Green')
   ///end object
   ///
   ///// Item Cache Container
-	///begin object class=UI_Texture_Storage Name=Item_Cache
-	///	tag="Item_Cache"
+  ///begin object class=UI_Texture_Storage Name=Item_Cache
+  ///  tag="Item_Cache"
   ///  textureWidth=240
   ///  textureHeight=240
-	///	images(0)=Item_Bottle_Blue
-	///	images(1)=Item_Bottle_Pink
-	///	images(2)=Item_Bottle_Purple
-	///	images(3)=Item_Bottle_Green
-	///end object
+  ///  images(0)=Item_Bottle_Blue
+  ///  images(1)=Item_Bottle_Pink
+  ///  images(2)=Item_Bottle_Purple
+  ///  images(3)=Item_Bottle_Green
+  ///end object
   ///componentList.add(Item_Cache);
-	
+  
   /** ===== Textures ===== **/
   // Inventory Background
-	begin object class=UI_Texture_Info Name=Inventory_Page
+  begin object class=UI_Texture_Info Name=Inventory_Page
     componentTextures.add(Texture2D'GUI.Inventory_Page')
   end object
   
   /** ===== UI Components ===== **/
   // Inventory Background
-	begin object class=UI_Sprite Name=Inventory_Background
-		tag="Inventory_Background"
+  begin object class=UI_Sprite Name=Inventory_Background
+    tag="Inventory_Background"
     bEnabled=false
-		posX=720
-		posY=0
-		posXEnd=NATIVE_WIDTH
-		posYEnd=NATIVE_HEIGHT
-		images(0)=Inventory_Page
-	end object
-	componentList.add(Inventory_Background)
+    posX=720
+    posY=0
+    posXEnd=NATIVE_WIDTH
+    posYEnd=NATIVE_HEIGHT
+    images(0)=Inventory_Page
+  end object
+  componentList.add(Inventory_Background)
   
   // Page Label
   begin object class=UI_Label Name=Inventory_Page_Label
@@ -302,18 +298,18 @@ defaultProperties
   componentList.add(Inventory_Page_Label)
   
   // Item name label
-	begin object class=UI_Label Name=Item_Name_Label
-		tag="Item_Name_Label"
-		posX=720
-		posY=58
-		posXEnd=NATIVE_WIDTH
-		posYEnd=124
-		AlignX=CENTER
-		AlignY=CENTER
-		labelText="Empty"
-	end object
-	componentList.add(Item_Name_Label)
-	
+  begin object class=UI_Label Name=Item_Name_Label
+    tag="Item_Name_Label"
+    posX=720
+    posY=58
+    posXEnd=NATIVE_WIDTH
+    posYEnd=124
+    AlignX=CENTER
+    AlignY=CENTER
+    labelText="Empty"
+  end object
+  componentList.add(Item_Name_Label)
+  
   // Page navigation arrows
   begin object class=UI_Texture_Info Name=Menu_Navigation_Arrows_LR
     componentTextures.add(Texture2D'GUI.Menu_Navigation_Arrows_LR')

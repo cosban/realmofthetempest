@@ -85,26 +85,26 @@ protected function navigationRoutineB();
 defaultProperties
 {
   // Culling
-	cullTags.add("Game_Menu_Selector")
+  cullTags.add("Game_Menu_Selector")
   
-	/** ===== Textures ===== **/
+  /** ===== Textures ===== **/
   // Reset panel
-	begin object class=UI_Texture_Info Name=Reset_Cost_Window
+  begin object class=UI_Texture_Info Name=Reset_Cost_Window
     componentTextures.add(Texture2D'GUI.Reset_Cost_Window')
   end object
-	begin object class=UI_Texture_Info Name=Reset_Cost_Window_With_Skill
+  begin object class=UI_Texture_Info Name=Reset_Cost_Window_With_Skill
     componentTextures.add(Texture2D'GUI.Reset_Cost_Window_With_Skill')
   end object
   
   /** ===== UI Components ===== **/
   // Reset panel
-	begin object class=UI_Sprite Name=Reset_Cost_Panel
-		tag="Reset_Cost_Panel"
-		posX=0
-		posY=0
-		images(0)=Reset_Cost_Window
-	end object
-	componentList.add(Reset_Cost_Panel)
+  begin object class=UI_Sprite Name=Reset_Cost_Panel
+    tag="Reset_Cost_Panel"
+    posX=0
+    posY=0
+    images(0)=Reset_Cost_Window
+  end object
+  componentList.add(Reset_Cost_Panel)
   
   // Header label
   begin object class=UI_Label Name=Header_Label
@@ -116,7 +116,7 @@ defaultProperties
     fontStyle=DEFAULT_LARGE_TAN
     AlignX=CENTER
     AlignY=TOP
-		labelText="Reset Skill Service"
+    labelText="Reset Skill Service"
   end object
   componentList.add(Header_Label)
   
@@ -174,39 +174,39 @@ defaultProperties
   /**
   
   // Header label
-	begin object class=UI_Label Name=Header_Label
-		tag="Header_Label"
-		posX=0
-		posY=74
-		posXEnd=720
-		posYEnd=NATIVE_HEIGHT
+  begin object class=UI_Label Name=Header_Label
+    tag="Header_Label"
+    posX=0
+    posY=74
+    posXEnd=720
+    posYEnd=NATIVE_HEIGHT
     fontStyle=DEFAULT_LARGE_WHITE
-		AlignX=CENTER
-		AlignY=TOP
-		labelText="Reset A Skill Point"
-	end object
-	componentList.add(Header_Label)
+    AlignX=CENTER
+    AlignY=TOP
+    labelText="Reset A Skill Point"
+  end object
+  componentList.add(Header_Label)
   
   // Gold Gost Displayer
-	begin object class=ROTT_UI_Displayer_Cost Name=Gold_Cost
-		tag="Gold_Cost"
-		posX=0
-		posY=130
+  begin object class=ROTT_UI_Displayer_Cost Name=Gold_Cost
+    tag="Gold_Cost"
+    posX=0
+    posY=130
     currencyType=class'ROTT_Inventory_Item_Gold'
     costDescriptionText="Gold cost per point:"
     costValue=100
-	end object
-	componentList.add(Gold_Cost)
-	
+  end object
+  componentList.add(Gold_Cost)
+  
   */
   
   /*
   // Skill Previewer
-	begin object class=ROTT_UI_Displayer_Skill_Preview Name=Skill_Previewer
-		tag="Skill_Previewer"
-	end object
-	componentList.add(Skill_Previewer)
-	*/
+  begin object class=ROTT_UI_Displayer_Skill_Preview Name=Skill_Previewer
+    tag="Skill_Previewer"
+  end object
+  componentList.add(Skill_Previewer)
+  */
 }
 
 

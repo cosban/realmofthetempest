@@ -9,8 +9,8 @@
  *===========================================================================*/
 
 class ROTT_Recruit_Beacon extends StaticMeshActor 
-	ClassGroup(ROTT_Utilities)
-	placeable;
+  ClassGroup(ROTT_Utilities)
+  placeable;
 
 // Hero slots
 enum HeroSlots {
@@ -76,10 +76,10 @@ simulated event Touch
 )
 {
   // Ignore non-player colliders
-	if (ROTT_Player_Pawn(other) == none) return;
+  if (ROTT_Player_Pawn(other) == none) return;
   
   // Ignore disabled beacon collision
-	if (bEnabled == false) return;
+  if (bEnabled == false) return;
   
   // Push class selection menu
   gameInfo.playerProfile.sceneManager.switchScene(SCENE_CHARACTER_CREATION);
@@ -87,7 +87,7 @@ simulated event Touch
   // Disable beacon
   bEnabled = false;
   setGraphics(bEnabled);
-	
+  
 }
 
 /*=============================================================================
@@ -112,16 +112,16 @@ simulated event untouch(Actor Other);
 /*=============================================================================
  * Default Properties
  *===========================================================================*/
-defaultproperties
+defaultProperties
 {
-	bStatic=false
+  bStatic=false
   
   // Collision
-	bCollideActors=true
-	CollisionType=COLLIDE_TouchAll
-	
+  bCollideActors=true
+  CollisionType=COLLIDE_TouchAll
+  
   // Collision Mesh
-	begin object Class=CylinderComponent Name=CylinderComp
+  begin object Class=CylinderComponent Name=CylinderComp
     CollisionRadius=128
     CollisionHeight=480
     CollideActors=true        
@@ -131,28 +131,28 @@ defaultproperties
   CollisionComponent=CylinderComp
   
   // Static Mesh
-	begin object class=StaticMeshComponent name=Beacon_Mesh
-		StaticMesh=StaticMesh'ROTT_Utilities.SM_Portal_Beacon'
+  begin object class=StaticMeshComponent name=Beacon_Mesh
+    StaticMesh=StaticMesh'ROTT_Utilities.SM_Portal_Beacon'
     bForceDirectLightMap=True
     bUsePrecomputedShadows=True
     LightingChannels=(bInitialized=True,Static=True)
-	end object
-	components.Add(Beacon_Mesh);
-	beaconMesh=Beacon_Mesh
-	StaticMeshComponent=Beacon_Mesh
+  end object
+  components.Add(Beacon_Mesh);
+  beaconMesh=Beacon_Mesh
+  StaticMeshComponent=Beacon_Mesh
   
   // Particles
   begin object Class=ParticleSystemComponent Name=Beacon_Particles
     bAutoActivate=true
     Template=ParticleSystem'MyPackage.Recruit_Beacon_Stars_1A'
-		SecondsBeforeInactive=1
-	end object
-	beaconParticles=Beacon_Particles
-	components.Add(Beacon_Particles)
-	
+    SecondsBeforeInactive=1
+  end object
+  beaconParticles=Beacon_Particles
+  components.Add(Beacon_Particles)
+  
   // Recruitment properties
-	designatedHeroIndex=FIRST_HERO_SLOT
-	
+  designatedHeroIndex=FIRST_HERO_SLOT
+  
 }
 
 

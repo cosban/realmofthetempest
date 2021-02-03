@@ -73,8 +73,8 @@ defaultProperties
   
   /** ===== Pages ===== **/
   // Scene Background Page
-	begin object class=ROTT_UI_Page Name=Scene_Background_Page
-		tag="Scene_Background_Page"
+  begin object class=ROTT_UI_Page Name=Scene_Background_Page
+    tag="Scene_Background_Page"
     bInitialPage=true
     
     /** ===== Textures ===== **/
@@ -113,24 +113,24 @@ defaultProperties
     end object
     componentList.add(Menu_Background_Right)
     
-	end object
-	pageComponents.add(Scene_Background_Page)
+  end object
+  pageComponents.add(Scene_Background_Page)
   
   // Stats Inspection Menu
-	begin object class=ROTT_UI_Page_Stats_Inspection Name=Stats_Inspection_UI
-		tag="Stats_Inspection_UI"
-	end object
-	pageComponents.add(Stats_Inspection_UI)
+  begin object class=ROTT_UI_Page_Stats_Inspection Name=Stats_Inspection_UI
+    tag="Stats_Inspection_UI"
+  end object
+  pageComponents.add(Stats_Inspection_UI)
   
   // Blessing Management Window
-	begin object class=ROTT_UI_Page_Mgmt_Window_Blessings Name=Blessing_Management_UI
-		tag="Blessing_Management_UI"
-	end object
-	pageComponents.add(Blessing_Management_UI)
+  begin object class=ROTT_UI_Page_Mgmt_Window_Blessings Name=Blessing_Management_UI
+    tag="Blessing_Management_UI"
+  end object
+  pageComponents.add(Blessing_Management_UI)
   
   // Service info
-	begin object class=ROTT_UI_Page Name=Service_Info_Blessings
-		tag="Service_Info_Blessings"
+  begin object class=ROTT_UI_Page Name=Service_Info_Blessings
+    tag="Service_Info_Blessings"
     bInitialPage=true
     
     // Half size window
@@ -274,12 +274,12 @@ defaultProperties
     end object
     componentList.add(Party_Displayer)
     
-	end object
-	pageComponents.add(Service_Info_Blessings)
+  end object
+  pageComponents.add(Service_Info_Blessings)
   
   // Party selection Menu
-	begin object class=ROTT_UI_Page_Party_Selection Name=Party_Selection_UI
-		tag="Party_Selection_UI"
+  begin object class=ROTT_UI_Page_Party_Selection Name=Party_Selection_UI
+    tag="Party_Selection_UI"
     bInitialPage=true
     
     navMode=BLESS_STAT_NAVIGATION
@@ -289,8 +289,8 @@ defaultProperties
     ///nextScene=NO_SCENE
     ///backScene=NO_SCENE
     
-	end object
-	pageComponents.add(Party_Selection_UI)
+  end object
+  pageComponents.add(Party_Selection_UI)
   
 }
 

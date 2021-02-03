@@ -167,7 +167,7 @@ public function startEvent() {
   forEach class'WorldInfo'.static.GetWorldInfo().AllControllers(
     class'GamePlayerController', 
     pc
-  )	{
+  )  {
     if (pc != none) hud = UI_HUD(pc.myHUD);
   }
   
@@ -984,10 +984,10 @@ defaultProperties
   bAnchor=false
   
   // Positioning
-	posX=0
-	posY=0
-	posXEnd=NATIVE_WIDTH
-	posYEnd=NATIVE_HEIGHT
+  posX=0
+  posY=0
+  posXEnd=NATIVE_WIDTH
+  posYEnd=NATIVE_HEIGHT
   bRelativeEnd=false
   
   // Default linear interpolation movement info

@@ -7,20 +7,20 @@ var() float MidPointMultiplier;
  
 function Activated()
 {
-	//RotatedVector=Normal(EndPos.Location - StartPos.Location);   
+  //RotatedVector=Normal(EndPos.Location - StartPos.Location);   
  
-	//targetActor.SetLocation(vector(((StartPos.Location.X + EndPos.Location.X) / 2.0) ((StartPos.Location.Y + EndPos.Location.Y) / 2.0) ((StartPos.Location.Z + EndPos.Location.Z) / 2.0)));
+  //targetActor.SetLocation(vector(((StartPos.Location.X + EndPos.Location.X) / 2.0) ((StartPos.Location.Y + EndPos.Location.Y) / 2.0) ((StartPos.Location.Z + EndPos.Location.Z) / 2.0)));
 
-	targetActor.SetLocation(((EndPos - targetActor.Location) / MidPointMultiplier) + (targetActor.Location));
+  targetActor.SetLocation(((EndPos - targetActor.Location) / MidPointMultiplier) + (targetActor.Location));
 
 }
  
 static event int GetObjClassVersion()
 {
-	return Super.GetObjClassVersion() + 1;
+  return Super.GetObjClassVersion() + 1;
 }
 
-defaultproperties
+defaultProperties
 {
   bCallHandler=false
 

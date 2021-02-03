@@ -52,7 +52,7 @@ defaultProperties
   itemName="Norkiva Chips"
   
   // Item texture
-	itemTexture=Texture2D'ROTT_Items.Bottles.Item_Bottle_Gold'
+  itemTexture=Texture2D'ROTT_Items.Bottles.Item_Bottle_Gold'
   
   // Item text color
   itemFont=DEFAULT_SMALL_CYAN

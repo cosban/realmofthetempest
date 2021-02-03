@@ -49,7 +49,7 @@ defaultProperties
   itemName="Faerie Bones"
   
   // Item texture
-	itemTexture=Texture2D'ROTT_Items.Bottles.Item_Bottle_Pink'
+  itemTexture=Texture2D'ROTT_Items.Bottles.Item_Bottle_Pink'
   
   // Item text color
   itemFont=DEFAULT_SMALL_ORANGE

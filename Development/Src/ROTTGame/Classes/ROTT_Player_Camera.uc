@@ -18,7 +18,7 @@ function UpdateViewTarget(out TViewTarget OutVT, float DeltaTime) {
 
 defaultproperties
 {
-	mCustomFOV=80 // in version [1.0.5] this was 75
+  mCustomFOV=80 // in version [1.0.5] this was 75
 }
 
  

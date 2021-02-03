@@ -449,7 +449,7 @@ public function int getMonsterExp() {
   for (i = 0; i < 4; i++) {
     exp += (statAffinities[i] + 3) * (hardStats[i] + 2.5);
   }
-	
+  
   // Amplify enchantment boost
   enchantmentAmp = gameInfo.playerProfile.getEnchantBoost(SOLAR_CHARM);
   exp *= 1.f + (enchantmentAmp / 100.f);
@@ -582,9 +582,9 @@ private function destroyUnit() {
 private function string generateMonsterName() {
   local string title, prefix, suffix;
   
-	title = string(GetEnum(enum'TitleEnum', rand(TitleEnum.EnumCount)));
-	prefix = string(GetEnum(enum'PrefixEnum', rand(PrefixEnum.EnumCount)));
-	suffix = string(GetEnum(enum'SuffixEnum', rand(SuffixEnum.EnumCount)));
+  title = string(GetEnum(enum'TitleEnum', rand(TitleEnum.EnumCount)));
+  prefix = string(GetEnum(enum'PrefixEnum', rand(PrefixEnum.EnumCount)));
+  suffix = string(GetEnum(enum'SuffixEnum', rand(SuffixEnum.EnumCount)));
   
   return title @ prefix @ suffix;
 }

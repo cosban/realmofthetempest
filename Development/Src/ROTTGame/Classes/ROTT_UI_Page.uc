@@ -326,7 +326,7 @@ static function digitCycleTrick(int trueValue, out int displayValue) {
   local int onesTrick;    // Used to visually cycle up the digits
   local int difference;   // The difference between displayed and true currency
   
-	onesTrick = 111111111;
+  onesTrick = 111111111;
   difference = trueValue - displayValue;
   
   if (difference == 0) return;
@@ -501,29 +501,29 @@ event deleteComp() {
  *===========================================================================*/
 defaultProperties
 {
-	/** ===== Input ===== **/
-	begin object class=ROTT_Input_Handler Name=Input_Left
+  /** ===== Input ===== **/
+  begin object class=ROTT_Input_Handler Name=Input_Left
     inputName="XBoxTypeS_DPad_Left"
-		buttonComponent=none
-	end object
+    buttonComponent=none
+  end object
   inputList.add(Input_Left)
   
-	begin object class=ROTT_Input_Handler Name=Input_Right
+  begin object class=ROTT_Input_Handler Name=Input_Right
     inputName="XBoxTypeS_DPad_Right"
     buttonComponent=none
-	end object
+  end object
   inputList.add(Input_Right)
   
-	begin object class=ROTT_Input_Handler Name=Input_Up
+  begin object class=ROTT_Input_Handler Name=Input_Up
     inputName="XBoxTypeS_DPad_Up"
-		buttonComponent=none
-	end object
+    buttonComponent=none
+  end object
   inputList.add(Input_Up)
   
-	begin object class=ROTT_Input_Handler Name=Input_Down
+  begin object class=ROTT_Input_Handler Name=Input_Down
     inputName="XBoxTypeS_DPad_Down"
     buttonComponent=none
-	end object
+  end object
   inputList.add(Input_Down)
   
   // Navigation destination tags

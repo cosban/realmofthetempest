@@ -45,10 +45,10 @@ defaultProperties
   selectOptionsCount=1
   
   /** ===== Input ===== **/
-	begin object class=ROTT_Input_Handler Name=Input_A
+  begin object class=ROTT_Input_Handler Name=Input_A
     inputName="XBoxTypeS_A"
-		buttonComponent=none
-	end object
+    buttonComponent=none
+  end object
   inputList.add(Input_A)
   
   /** ===== Textures ===== **/
@@ -62,22 +62,22 @@ defaultProperties
   
   /** ===== UI Components ===== **/
   // Buttons
-	begin object class=UI_Sprite Name=Button_Invest_1_Sprite
-		tag="Button_Invest_1_Sprite"
-		posX=132
-		posY=544
+  begin object class=UI_Sprite Name=Button_Invest_1_Sprite
+    tag="Button_Invest_1_Sprite"
+    posX=132
+    posY=544
     images(0)=Button_Invest_1
-	end object
-	componentList.add(Button_Invest_1_Sprite)
+  end object
+  componentList.add(Button_Invest_1_Sprite)
   
   // Info button - Collectible
-	begin object class=UI_Sprite Name=Info_Button_Sprite
-		tag="Info_Button_Sprite"
-		posX=132
-		posY=624
+  begin object class=UI_Sprite Name=Info_Button_Sprite
+    tag="Info_Button_Sprite"
+    posX=132
+    posY=624
     images(0)=Info_Button_Collectible
-	end object
-	componentList.add(Info_Button_Sprite)
+  end object
+  componentList.add(Info_Button_Sprite)
 }
   
   

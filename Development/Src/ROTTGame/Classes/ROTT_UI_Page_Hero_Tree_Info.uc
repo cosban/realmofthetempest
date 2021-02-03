@@ -549,16 +549,16 @@ protected function navigationRoutineLB() {
 defaultProperties
 {
   /** ===== Input ===== **/
-	begin object class=ROTT_Input_Handler Name=Input_A
+  begin object class=ROTT_Input_Handler Name=Input_A
     inputName="XBoxTypeS_A"
-		buttonComponent=none
-	end object
+    buttonComponent=none
+  end object
   inputList.add(Input_A)
   
-	begin object class=ROTT_Input_Handler Name=Input_B
+  begin object class=ROTT_Input_Handler Name=Input_B
     inputName="XBoxTypeS_B"
     buttonComponent=none
-	end object
+  end object
   inputList.add(Input_B)
 }
 

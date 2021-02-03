@@ -52,7 +52,7 @@ defaultProperties
   itemName="Nettle Roots"
   
   // Item texture
-	itemTexture=Texture2D'ROTT_Items.Bottles.Item_Bottle_Green'
+  itemTexture=Texture2D'ROTT_Items.Bottles.Item_Bottle_Green'
   
   // Item text color
   itemFont=DEFAULT_SMALL_CYAN

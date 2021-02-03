@@ -75,37 +75,37 @@ protected function float attributeInfo
  * getStats()
  *===========================================================================*/
 function int getStats(string StatType, int SkillLevel) {
-	local int iReq1, iReq2; ///iStat
-	
-	// Level 0 does not exist 
-	if (SkillLevel == 0)
-		return 0;
-	
-	
-	// Strength Requirement 
-	iReq1 = (SkillLevel*11) + (SkillLevel * (SkillLevel-1)) + 1;
-	if (iReq1 % 5 != 0 && iReq1%2 != 0 )
-		iReq1++;
-	
-	// Focus Requirement 
-	iReq2 = (SkillLevel*21) + (SkillLevel * 2 * (SkillLevel-1)) + 4;
-	if (iReq2 % 5 != 0 && iReq2%2 != 0 )
-		iReq2++;
-	
-	// Accuracy 
-	///iStat = (SkillLevel*27) + (SkillLevel * 3 * (SkillLevel-1)) + 1;
-	///if (iStat % 5 != 0 && iStat%2 != 0 )
-	///	iStat++;
-		
-	switch (StatType)
-	{
-		///case "Stat":
-		///	return iStat;
-		case "Req1":
-			return iReq1;
-		case "Req2":
-			return iReq2;
-	}
+  local int iReq1, iReq2; ///iStat
+  
+  // Level 0 does not exist 
+  if (SkillLevel == 0)
+    return 0;
+  
+  
+  // Strength Requirement 
+  iReq1 = (SkillLevel*11) + (SkillLevel * (SkillLevel-1)) + 1;
+  if (iReq1 % 5 != 0 && iReq1%2 != 0 )
+    iReq1++;
+  
+  // Focus Requirement 
+  iReq2 = (SkillLevel*21) + (SkillLevel * 2 * (SkillLevel-1)) + 4;
+  if (iReq2 % 5 != 0 && iReq2%2 != 0 )
+    iReq2++;
+  
+  // Accuracy 
+  ///iStat = (SkillLevel*27) + (SkillLevel * 3 * (SkillLevel-1)) + 1;
+  ///if (iStat % 5 != 0 && iStat%2 != 0 )
+  ///  iStat++;
+    
+  switch (StatType)
+  {
+    ///case "Stat":
+    ///  return iStat;
+    case "Req1":
+      return iReq1;
+    case "Req2":
+      return iReq2;
+  }
 }
 
 /*=============================================================================

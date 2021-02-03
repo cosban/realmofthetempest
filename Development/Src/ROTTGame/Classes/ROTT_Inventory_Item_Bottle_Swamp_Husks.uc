@@ -49,7 +49,7 @@ defaultProperties
   itemName="Swamp Husks"
   
   // Item texture
-	itemTexture=Texture2D'ROTT_Items.Bottles.Item_Bottle_Purple'
+  itemTexture=Texture2D'ROTT_Items.Bottles.Item_Bottle_Purple'
   
   // Item text color
   itemFont=DEFAULT_SMALL_ORANGE

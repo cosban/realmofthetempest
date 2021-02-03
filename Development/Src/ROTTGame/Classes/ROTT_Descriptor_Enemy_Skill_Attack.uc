@@ -70,7 +70,7 @@ public function bool skillAction
   // Check validity of target
   if (target == none) { 
     yellowLog("Warning (!) Empty target on attack");
-		return false;
+    return false;
   }
   
   mechanicList = new class'ROTT_Combat_Mechanics';

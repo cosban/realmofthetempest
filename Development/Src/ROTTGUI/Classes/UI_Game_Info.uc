@@ -41,7 +41,7 @@ event initGame(string options, out string errorMessage) {
     
   // Load options
   optionsCookie = new(self) class'Cookie_Options';
-	if (class'Engine'.static.basicLoadObject(optionsCookie, "Save\\options_cookie.bin", true, 0)) {
+  if (class'Engine'.static.basicLoadObject(optionsCookie, "Save\\options_cookie.bin", true, 0)) {
     graylog("Option settings loaded successfully");
   } else {
     graylog("No option settings found, loading defaults.");

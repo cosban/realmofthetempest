@@ -7,7 +7,7 @@
  *  Description: Heals active party when touched by player.
  *===========================================================================*/
 class HealVolume extends Volume
-	placeable;
+  placeable;
 
 simulated event Touch(Actor Other, PrimitiveComponent OtherComp, 
   vector HitLocation, vector HitNormal) 
@@ -20,9 +20,9 @@ simulated event Touch(Actor Other, PrimitiveComponent OtherComp,
   ///ROTT_Game_Info(WorldInfo.Game).playerProfile.healActiveParty();
 }
 
-defaultproperties
+defaultProperties
 {
-	bStatic = false;
-	bCollideActors=true
-	CollisionType = COLLIDE_TouchAll
+  bStatic = false;
+  bCollideActors=true
+  CollisionType = COLLIDE_TouchAll
 }

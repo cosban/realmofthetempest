@@ -49,7 +49,7 @@ defaultProperties
   itemName="Saripine Petal"
   
   // Item texture
-	itemTexture=Texture2D'ROTT_Items.Herbs.Item_Herb_Purple'
+  itemTexture=Texture2D'ROTT_Items.Herbs.Item_Herb_Purple'
   
   // Item text color
   itemFont=DEFAULT_SMALL_ORANGE

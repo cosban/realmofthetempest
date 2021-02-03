@@ -785,32 +785,32 @@ defaultProperties
   // Tile color
   tileColor=(R=0,G=187,B=255,A=130)
   
-	/** ===== Textures ===== **/
+  /** ===== Textures ===== **/
   // Tile sprite
-	begin object class=UI_Texture_Info Name=Black_Square
-		componentTextures.add(Texture2D'GUI.Black_Square')
-	end object
-	begin object class=UI_Texture_Info Name=White_Square
-		componentTextures.add(Texture2D'MyPackage.Materials.White')
-	end object
+  begin object class=UI_Texture_Info Name=Black_Square
+    componentTextures.add(Texture2D'GUI.Black_Square')
+  end object
+  begin object class=UI_Texture_Info Name=White_Square
+    componentTextures.add(Texture2D'MyPackage.Materials.White')
+  end object
   
-	/** ===== UI Components ===== **/
-	tag="Over_World_Page"
-	posX=0
-	posY=0
-	posXEnd=NATIVE_WIDTH
-	posYEnd=NATIVE_HEIGHT
-	
+  /** ===== UI Components ===== **/
+  tag="Over_World_Page"
+  posX=0
+  posY=0
+  posXEnd=NATIVE_WIDTH
+  posYEnd=NATIVE_HEIGHT
+  
   // Black tile texture
-	begin object class=UI_Texture_Storage Name=Tile_Sprites
-		tag="Tile_Sprites"
+  begin object class=UI_Texture_Storage Name=Tile_Sprites
+    tag="Tile_Sprites"
     textureWidth=60
     textureHeight=60
-		images(0)=Black_Square
-		images(1)=White_Square
-	end object
-	componentList.add(Tile_Sprites)
-	
+    images(0)=Black_Square
+    images(1)=White_Square
+  end object
+  componentList.add(Tile_Sprites)
+  
 }
 
 

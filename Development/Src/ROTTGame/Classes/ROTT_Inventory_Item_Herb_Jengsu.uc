@@ -49,7 +49,7 @@ defaultProperties
   itemName="Jengsu Leaf"
   
   // Item texture
-	itemTexture=Texture2D'ROTT_Items.Herbs.Item_Herb_Orange'
+  itemTexture=Texture2D'ROTT_Items.Herbs.Item_Herb_Orange'
   
   // Item text color
   itemFont=DEFAULT_SMALL_ORANGE

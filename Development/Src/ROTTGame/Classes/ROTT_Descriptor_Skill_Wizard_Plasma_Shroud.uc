@@ -103,19 +103,19 @@ defaultProperties
   skillAttributes.add((attributeSet=ADD_STANCE_SET,mechanicType=MANA_SHIELD_PERCENT,tag="%shield",font=DEFAULT_SMALL_BLUE,returnType=INTEGER));
   
   // Skill Icon
-	begin object class=UI_Texture_Info Name=Encounter_Skill_Icon_Plasma_Barrier
+  begin object class=UI_Texture_Info Name=Encounter_Skill_Icon_Plasma_Barrier
     componentTextures.add(Texture2D'GUI_Skills.Encounter_Skill_Icon_Plasma_Barrier')
   end object
   
   // Skill Icon Container
-	begin object class=UI_Texture_Storage Name=Skill_Icon_Container
-		tag="Skill_Icon_Container"
+  begin object class=UI_Texture_Storage Name=Skill_Icon_Container
+    tag="Skill_Icon_Container"
     textureWidth=108
     textureHeight=108
-		images(0)=Encounter_Skill_Icon_Plasma_Barrier
-	end object
+    images(0)=Encounter_Skill_Icon_Plasma_Barrier
+  end object
   skillIcon=Skill_Icon_Container
-	
+  
   
 }
 

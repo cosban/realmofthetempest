@@ -249,16 +249,16 @@ simulated event tick(float deltaTime) {
   }
   
   // Exponentially cuts down velocity (without delta time)
-	if (velocity.Z > 0) cutVelocity(deltaTime); // Hacky! 
+  if (velocity.Z > 0) cutVelocity(deltaTime); // Hacky! 
   
   // Ground pound physics
-	if (rottController.bStomping) { 
+  if (rottController.bStomping) { 
     if (velocity.z > 0) velocity.Z = 0;
     if (Physics == PHYS_Falling) velocity.z += 10 * deltaTime * velocity.z;
   }
   
   // Glide physics
-	if (rottController.bGliding) { 
+  if (rottController.bGliding) { 
     if (velocity.z > 0) velocity.Z = 0;
     
     // Modify gravity
@@ -354,15 +354,15 @@ public function onCrouchRelease() {
  *===========================================================================*/
 private function cutVelocity(float deltaTime) {
   // Critical issue - this doesnt scale well with lagg its not real time
-	if (velocity.Z > MAX_Z_SPEED)	{
-		velocity.Z /= 1.5;
-	}
-	
-	if (bAccelerateJump) {
-		velocity.Z = jumpAcceleration;
-		velocity.X *= speedAmp;
-		velocity.Y *= speedAmp;
-	}
+  if (velocity.Z > MAX_Z_SPEED)  {
+    velocity.Z /= 1.5;
+  }
+  
+  if (bAccelerateJump) {
+    velocity.Z = jumpAcceleration;
+    velocity.X *= speedAmp;
+    velocity.Y *= speedAmp;
+  }
   
 }
 
@@ -389,16 +389,16 @@ simulated function bool calcCamera
   out float out_FOV
 ) 
 {
-	if (bOverrideCam)	{
+  if (bOverrideCam)  {
     // Override camera placement
-		out_CamLoc = overrideCamLoc;
-		out_CamRot = overrideCamRot;
-	} else {
+    out_CamLoc = overrideCamLoc;
+    out_CamRot = overrideCamRot;
+  } else {
     // By default place the camera at the Pawn's eyes
-		GetActorEyesViewPoint(out_CamLoc, out_CamRot);
+    GetActorEyesViewPoint(out_CamLoc, out_CamRot);
   }
-	
-	return true; // no idea what the return value does
+  
+  return true; // no idea what the return value does
 }
 
 /*=============================================================================
@@ -407,16 +407,16 @@ simulated function bool calcCamera
  * This function is a hacky solution to triggering initial touch() events
  *===========================================================================*/
 public function forceTouchEvents() {
-	local vector tempReturnLoc;
-	
-  // Store current location
-	tempReturnLoc = location;
-	
-	// Move to nowhere
-	setLocation(`NOWHERE_VECTOR);
+  local vector tempReturnLoc;
   
-	// Return
-	setLocation(tempReturnLoc);
+  // Store current location
+  tempReturnLoc = location;
+  
+  // Move to nowhere
+  setLocation(`NOWHERE_VECTOR);
+  
+  // Return
+  setLocation(tempReturnLoc);
 }
 
 /*=============================================================================
@@ -424,47 +424,47 @@ public function forceTouchEvents() {
  *===========================================================================*/
 defaultProperties
 {
-	jumpZ=1620//420
-	airControl=0.45
-	groundSpeed=0 // See: ROTTPlayerController
-	airSpeed=150
-	
-	baseEyeHeight=140.0
-	eyeHeight=96.0
-	
-	accelRate=2248.0
-	maxFallSpeed=5000
+  jumpZ=1620//420
+  airControl=0.45
+  groundSpeed=0 // See: ROTTPlayerController
+  airSpeed=150
   
-	maxStepHeight=12
-	walkableFloorZ=0.01
-	
+  baseEyeHeight=140.0
+  eyeHeight=96.0
+  
+  accelRate=2248.0
+  maxFallSpeed=5000
+  
+  maxStepHeight=12
+  walkableFloorZ=0.01
+  
   bAccelerateJump=false
   speedAmp=1.0f
   
   spawnPointIndex=-1
   
-	//WorldViewLoc=(X=249122, Y=-143140, Z=30)
-	//WorldViewRot=(Pitch=-72000, Yaw=-169500, Roll=-130500)
+  //WorldViewLoc=(X=249122, Y=-143140, Z=30)
+  //WorldViewRot=(Pitch=-72000, Yaw=-169500, Roll=-130500)
   
   
   // Glide particles
   begin object class=ParticleSystemComponent Name=Glide_Particles
     bAutoActivate=false
     Template=ParticleSystem'ROTT_Utilities.Player_Abilities.PS_Player_Glide_Effect'
-		SecondsBeforeInactive=1
-	end object
-	components.Add(Glide_Particles)
-	glideParticles=Glide_Particles
-	
+    SecondsBeforeInactive=1
+  end object
+  components.Add(Glide_Particles)
+  glideParticles=Glide_Particles
+  
   // Stomp particles
   begin object class=ParticleSystemComponent Name=Stomp_Particles
     bAutoActivate=false
     Template=ParticleSystem'ROTT_Utilities.Player_Abilities.PS_Player_Stomp_Effect'
-		SecondsBeforeInactive=1
-	end object
-	components.Add(Stomp_Particles)
-	stompParticles=Stomp_Particles
-	
+    SecondsBeforeInactive=1
+  end object
+  components.Add(Stomp_Particles)
+  stompParticles=Stomp_Particles
+  
 }
 
 

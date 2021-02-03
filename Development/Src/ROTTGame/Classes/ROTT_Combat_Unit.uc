@@ -1081,25 +1081,25 @@ public function updateSubStats() {
   oldMaxMP = subStats[MAX_MANA];
   
   // Calculate max health
-	subStats[MAX_HEALTH] = baseHealth + vit * hpAmp;
-	subStats[RESURRECTION_LIMIT] = subStats[MAX_HEALTH]; // Copy max res limit before enhancements
-	subStats[MAX_HEALTH] += statBoosts[ADD_MAX_HEALTH];
-	subStats[MAX_HEALTH] += getPassiveBoost(PASSIVE_HEALTH_BOOST);
+  subStats[MAX_HEALTH] = baseHealth + vit * hpAmp;
+  subStats[RESURRECTION_LIMIT] = subStats[MAX_HEALTH]; // Copy max res limit before enhancements
+  subStats[MAX_HEALTH] += statBoosts[ADD_MAX_HEALTH];
+  subStats[MAX_HEALTH] += getPassiveBoost(PASSIVE_HEALTH_BOOST);
   
   // Apply enchantment related health increase
   if (ROTT_Combat_Hero(self) != none) {
     subStats[MAX_HEALTH] += subStats[MAX_HEALTH] * gameInfo.playerProfile.getEnchantBoost(ARCANE_BLOODPRISM) / 100.f;
-	}
+  }
   
   // Calculate max mana
-	subStats[MAX_MANA] = baseMana + foc * mpAmp;
-	subStats[MAX_MANA] += statBoosts[ADD_MAX_MANA];
-	subStats[MAX_MANA] += getPassiveBoost(PASSIVE_MANA_BOOST);
+  subStats[MAX_MANA] = baseMana + foc * mpAmp;
+  subStats[MAX_MANA] += statBoosts[ADD_MAX_MANA];
+  subStats[MAX_MANA] += getPassiveBoost(PASSIVE_MANA_BOOST);
   
   // Apply enchantment related mana increase
   if (ROTT_Combat_Hero(self) != none) {
     subStats[MAX_MANA] += subStats[MAX_MANA] * gameInfo.playerProfile.getEnchantBoost(MYSTIC_MARBLE) / 100.f;
-	}
+  }
   
   // Calculate attack interval
   subStats[TOTAL_ATK_INTERVAL] = getAtkInterval(crg, speedAmp);
@@ -1135,7 +1135,7 @@ public function updateSubStats() {
   if (subStats[DODGE_RATING] < 5) {
     subStats[DODGE_RATING] = 5;
   }
-	
+  
   // Calculate morale threshold
   subStats[MORALE_THRESHOLD] = 500 / (5 + 10 ** (4 / (3 + level) + (foc * moraleAmp / 3) / (3 + level)));
   
@@ -1352,8 +1352,8 @@ private function float getAtkInterval(float crg, float affinityAmp, optional boo
   if (speedPoints < 2) speedPoints = 2;
   
   // Double horizontal asymptote equation bound from 2 to 10 seconds
-	atkInterval = (1.0 / (level + 3));
-	atkInterval *= (speedPoints - ((level + 3) * 4.0));
+  atkInterval = (1.0 / (level + 3));
+  atkInterval *= (speedPoints - ((level + 3) * 4.0));
   atkInterval += 2;
   atkInterval = 2 ** atkInterval;
   atkInterval += 1;
@@ -1390,20 +1390,20 @@ public function float getSpeedImprovement() {
 public function bool getChanceToHit(ROTT_Combat_Unit target) {
   local float roll, hitChance;
   local float dodge, accuracy;
-	
-	roll = Rand(100);
-	
+  
+  roll = Rand(100);
+  
   // Get accuracy and dodge
   accuracy = subStats[ACCURACY_RATING];
   dodge = target.subStats[DODGE_RATING];
   
   // Hit chance equation
-	hitChance = 1.0 / (1.0 + (10.0 ** ((dodge - accuracy) / dodge - 0.35)));
-	hitChance *= 0.80;
-	hitChance += 0.20;
-	hitChance *= 100;
-	
-	return (roll < hitChance);
+  hitChance = 1.0 / (1.0 + (10.0 ** ((dodge - accuracy) / dodge - 0.35)));
+  hitChance *= 0.80;
+  hitChance += 0.20;
+  hitChance *= 100;
+  
+  return (roll < hitChance);
 }
 
 /*=============================================================================

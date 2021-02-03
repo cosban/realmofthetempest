@@ -67,7 +67,7 @@ protected function navigationRoutineA() {
   
   selection = GameMgmtOptions(gameMgmtSelector.getSelection());
   
-	switch (selection) {
+  switch (selection) {
     case GAME_MGMT_OPTIONS:
       // Show options page
       parentScene.pushPageByTag("Page_Game_Options");
@@ -109,16 +109,16 @@ defaultProperties
   bMandatoryScaleToWindow=true
   
   /** ===== Input ===== **/
-	begin object class=ROTT_Input_Handler Name=Input_A
+  begin object class=ROTT_Input_Handler Name=Input_A
     inputName="XBoxTypeS_A"
-		buttonComponent=none
-	end object
+    buttonComponent=none
+  end object
   inputList.add(Input_A)
   
-	begin object class=ROTT_Input_Handler Name=Input_B
+  begin object class=ROTT_Input_Handler Name=Input_B
     inputName="XBoxTypeS_B"
     buttonComponent=none
-	end object
+  end object
   inputList.add(Input_B)
   
   /** ===== Textures ===== **/
@@ -127,30 +127,30 @@ defaultProperties
     componentTextures.add(Texture2D'GUI.Main_Menu_Page')
   end object
   
-	/** Visual Page Setup **/
-	tag="Game_Management_Page"
-	posX=0
-	posY=0
-	posXEnd=NATIVE_WIDTH
-	posYEnd=NATIVE_HEIGHT
-	
+  /** Visual Page Setup **/
+  tag="Game_Management_Page"
+  posX=0
+  posY=0
+  posXEnd=NATIVE_WIDTH
+  posYEnd=NATIVE_HEIGHT
+  
   /** ===== UI Components ===== **/
   // Game Mgmt background
-	begin object class=UI_Sprite Name=Main_Menu_Background
-		tag="Main_Menu_Background"
-		posX=0
-		posY=0
-		posXEnd=NATIVE_WIDTH
-		posYEnd=NATIVE_HEIGHT
-		images(0)=Game_Management_Background
-	end object
-	componentList.add(Main_Menu_Background)
-	
+  begin object class=UI_Sprite Name=Main_Menu_Background
+    tag="Main_Menu_Background"
+    posX=0
+    posY=0
+    posXEnd=NATIVE_WIDTH
+    posYEnd=NATIVE_HEIGHT
+    images(0)=Game_Management_Background
+  end object
+  componentList.add(Main_Menu_Background)
+  
   // Game Mgmt selection box
-	begin object class=UI_Selector Name=Game_Mgmt_Selection_Box
-		tag="Game_Mgmt_Selection_Box"
-		posX=444
-		posY=54
+  begin object class=UI_Selector Name=Game_Mgmt_Selection_Box
+    tag="Game_Mgmt_Selection_Box"
+    posX=444
+    posY=54
     selectionOffset=(x=0,y=96)
     numberOfMenuOptions=3
     
@@ -167,9 +167,9 @@ defaultProperties
     end object
     componentList.add(Selector_Sprite)
     
-	end object
-	componentList.add(Game_Mgmt_Selection_Box)
-	
+  end object
+  componentList.add(Game_Mgmt_Selection_Box)
+  
 }
 
 

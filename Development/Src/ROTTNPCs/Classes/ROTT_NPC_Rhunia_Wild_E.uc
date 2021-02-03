@@ -24,28 +24,28 @@ class ROTT_NPC_Rhunia_Wild_E extends ROTT_NPC_Container;
 public function initDialogue() {
   super.initDialogue();
   
-	// Intro
-	`NEW_NODE(GREETING, NUETRAL)
+  // Intro
+  `NEW_NODE(GREETING, NUETRAL)
     "I have no place here in these woods.",
     ""
   `ENDNODE
   
-	`NEW_NODE(GREETING, NUETRAL)
+  `NEW_NODE(GREETING, NUETRAL)
     "But in my loneliness, I am reminded that how \"different\" you feel",
     "in a society is a predetermined result that comes. . ."
   `ENDNODE
   
-	`NEW_NODE(GREETING, NUETRAL)
+  `NEW_NODE(GREETING, NUETRAL)
     ". . . from the ambition of your soul.",
     ""
   `ENDNODE
   
-	`NEW_NODE(GREETING, NUETRAL)
+  `NEW_NODE(GREETING, NUETRAL)
     "So even though lives like mine are not sustained here,",
     "where the common evil thrives. . ."
   `ENDNODE
   
-	`NEW_NODE(GREETING, NUETRAL)
+  `NEW_NODE(GREETING, NUETRAL)
     "I will one day rest in heaven.",
     ""
   `ENDNODE
@@ -75,27 +75,27 @@ defaultProperties
   npcName=GENERIC
   
   // Background
-	begin object class=UI_Texture_Info Name=NPC_Background_Texture
-		componentTextures.add(Texture2D'GUI_NPC_Dialog.NPC_Background_Dark_Gray')
-	end object
-	
+  begin object class=UI_Texture_Info Name=NPC_Background_Texture
+    componentTextures.add(Texture2D'GUI_NPC_Dialog.NPC_Background_Dark_Gray')
+  end object
+  
   // Sprite container for transfer
-	begin object class=UI_Texture_Storage Name=NPC_Background
-		tag="NPC_Background"
-		images(0)=NPC_Background_Texture
-	end object
+  begin object class=UI_Texture_Storage Name=NPC_Background
+    tag="NPC_Background"
+    images(0)=NPC_Background_Texture
+  end object
   npcBackground=NPC_Background
   
   // NPC Texture
-	begin object class=UI_Texture_Info Name=NPC_Tan_Gatekeeper
+  begin object class=UI_Texture_Info Name=NPC_Tan_Gatekeeper
     componentTextures.add(Texture2D'Monsters.Enemy_Portrait_Gatekeeper_Orange_360')
   end object
-	
+  
   // Sprite container for transfer
-	begin object class=UI_Texture_Storage Name=NPC_Sprites
-		tag="NPC_Sprites"
-		images(0)=NPC_Tan_Gatekeeper
-	end object
+  begin object class=UI_Texture_Storage Name=NPC_Sprites
+    tag="NPC_Sprites"
+    images(0)=NPC_Tan_Gatekeeper
+  end object
   npcSprites=NPC_Sprites
 }
 

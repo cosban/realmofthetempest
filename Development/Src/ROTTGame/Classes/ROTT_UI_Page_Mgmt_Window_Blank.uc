@@ -37,13 +37,13 @@ defaultProperties
   
   /** ===== UI Components ===== **/
   // Window backgrounds
-	///begin object class=UI_Texture_Storage Name=Menu_Portraits
-	///	tag="Background_Container"
-	///	images(0)=Mgmt_Window_Default
+  ///begin object class=UI_Texture_Storage Name=Menu_Portraits
+  ///  tag="Background_Container"
+  ///  images(0)=Mgmt_Window_Default
   ///  textureWidth=720
   ///  textureHeight=900
-	///end object
-	///componentList.add(Menu_Portraits)
+  ///end object
+  ///componentList.add(Menu_Portraits)
   
 }
   

@@ -153,69 +153,69 @@ defaultProperties
   skillAttributes.add((attributeSet=INACTIVE_SET,mechanicType=MANA_DRAIN_ATMOSPHERIC_DAMAGE,tag="%dmg",font=DEFAULT_SMALL_ORANGE,returnType=DECIMAL));
   
   // Skill Icon
-	begin object class=UI_Texture_Info Name=Encounter_Skill_Icon_Black_Hole
+  begin object class=UI_Texture_Info Name=Encounter_Skill_Icon_Black_Hole
     componentTextures.add(Texture2D'GUI_Skills.Encounter_Skill_Icon_Black_Hole')
   end object
   
   // Skill Icon Container
-	begin object class=UI_Texture_Storage Name=Skill_Icon_Container
-		tag="Skill_Icon_Container"
+  begin object class=UI_Texture_Storage Name=Skill_Icon_Container
+    tag="Skill_Icon_Container"
     textureWidth=108
     textureHeight=108
-		images(0)=Encounter_Skill_Icon_Black_Hole
-	end object
+    images(0)=Encounter_Skill_Icon_Black_Hole
+  end object
   skillIcon=Skill_Icon_Container
-	
+  
   // Skill Animation
-	begin object class=UI_Texture_Info Name=SkillAnim_triple_strike_Pu_1
+  begin object class=UI_Texture_Info Name=SkillAnim_triple_strike_Pu_1
     componentTextures.add(Texture2D'GUI_Skills.SkillAnim_triple_strike_Pu_1')
   end object
-	begin object class=UI_Texture_Info Name=SkillAnim_triple_strike_Pu_2
+  begin object class=UI_Texture_Info Name=SkillAnim_triple_strike_Pu_2
     componentTextures.add(Texture2D'GUI_Skills.SkillAnim_triple_strike_Pu_2')
   end object
-	begin object class=UI_Texture_Info Name=SkillAnim_triple_strike_Pu_3
+  begin object class=UI_Texture_Info Name=SkillAnim_triple_strike_Pu_3
     componentTextures.add(Texture2D'GUI_Skills.SkillAnim_triple_strike_Pu_3')
   end object
-	begin object class=UI_Texture_Info Name=SkillAnim_triple_strike_Pu_4
+  begin object class=UI_Texture_Info Name=SkillAnim_triple_strike_Pu_4
     componentTextures.add(Texture2D'GUI_Skills.SkillAnim_triple_strike_Pu_4')
   end object
-	begin object class=UI_Texture_Info Name=SkillAnim_triple_strike_Pu_5
+  begin object class=UI_Texture_Info Name=SkillAnim_triple_strike_Pu_5
     componentTextures.add(Texture2D'GUI_Skills.SkillAnim_triple_strike_Pu_5')
   end object
-	begin object class=UI_Texture_Info Name=SkillAnim_triple_strike_Pu_6
+  begin object class=UI_Texture_Info Name=SkillAnim_triple_strike_Pu_6
     componentTextures.add(Texture2D'GUI_Skills.SkillAnim_triple_strike_Pu_6')
   end object
-	begin object class=UI_Texture_Info Name=SkillAnim_triple_strike_Pu_7
+  begin object class=UI_Texture_Info Name=SkillAnim_triple_strike_Pu_7
     componentTextures.add(Texture2D'GUI_Skills.SkillAnim_triple_strike_Pu_7')
   end object
-	begin object class=UI_Texture_Info Name=SkillAnim_triple_strike_Pu_8
+  begin object class=UI_Texture_Info Name=SkillAnim_triple_strike_Pu_8
     componentTextures.add(Texture2D'GUI_Skills.SkillAnim_triple_strike_Pu_8')
   end object
-	begin object class=UI_Texture_Info Name=SkillAnim_triple_strike_Pu_9
+  begin object class=UI_Texture_Info Name=SkillAnim_triple_strike_Pu_9
     componentTextures.add(Texture2D'GUI_Skills.SkillAnim_triple_strike_Pu_9')
   end object
-	begin object class=UI_Texture_Info Name=SkillAnim_triple_strike_Pu_10
+  begin object class=UI_Texture_Info Name=SkillAnim_triple_strike_Pu_10
     componentTextures.add(Texture2D'GUI_Skills.SkillAnim_triple_strike_Pu_10')
   end object
   
   // Skill Animation Container
-	begin object class=UI_Texture_Storage Name=Skill_Animation_Container
-		tag="Skill_Animation_Container"
+  begin object class=UI_Texture_Storage Name=Skill_Animation_Container
+    tag="Skill_Animation_Container"
     textureWidth=240
     textureHeight=240
-		images(0)=SkillAnim_triple_strike_Pu_1
-		images(1)=SkillAnim_triple_strike_Pu_2
-		images(2)=SkillAnim_triple_strike_Pu_3
-		images(3)=SkillAnim_triple_strike_Pu_4
-		images(4)=SkillAnim_triple_strike_Pu_5
-		images(5)=SkillAnim_triple_strike_Pu_6
-		images(6)=SkillAnim_triple_strike_Pu_7
-		images(7)=SkillAnim_triple_strike_Pu_8
-		images(8)=SkillAnim_triple_strike_Pu_9
-		images(9)=SkillAnim_triple_strike_Pu_10
-	end object
+    images(0)=SkillAnim_triple_strike_Pu_1
+    images(1)=SkillAnim_triple_strike_Pu_2
+    images(2)=SkillAnim_triple_strike_Pu_3
+    images(3)=SkillAnim_triple_strike_Pu_4
+    images(4)=SkillAnim_triple_strike_Pu_5
+    images(5)=SkillAnim_triple_strike_Pu_6
+    images(6)=SkillAnim_triple_strike_Pu_7
+    images(7)=SkillAnim_triple_strike_Pu_8
+    images(8)=SkillAnim_triple_strike_Pu_9
+    images(9)=SkillAnim_triple_strike_Pu_10
+  end object
   skillAnim=Skill_Animation_Container
-	
+  
 }
 
 

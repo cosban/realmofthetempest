@@ -58,10 +58,10 @@ public function initializeComponent(optional string newTag = "") {
   
   // UI references
   partyComponent = ROTT_UI_Displayer_Party(findComp("World_HUD_Party_Container"));
-	gameplayNotification = findLabel("Gameplay_Notification_Label");
-	speedrunNotification = findLabel("Speedrun_Notification_Label");
-	mapTitle = ROTT_UI_Displayer_Map_Title(findComp("Displayer_Map_Title"));
-	worldFade = findSprite("World_Fade_Component");
+  gameplayNotification = findLabel("Gameplay_Notification_Label");
+  speedrunNotification = findLabel("Speedrun_Notification_Label");
+  mapTitle = ROTT_UI_Displayer_Map_Title(findComp("Displayer_Map_Title"));
+  worldFade = findSprite("World_Fade_Component");
   prayingGraphic = UI_Container(findComp("Over_World_HUD_Praying_Graphic"));
   singingGraphic = UI_Container(findComp("Over_World_HUD_Singing_Graphic"));
   currencyPanel = ROTT_UI_Displayer_Currencies(findComp("Over_World_HUD_Currency"));
@@ -288,55 +288,55 @@ public function updateDisplayedCurrency() {
 /// private function displayWelcomeMsg() {
 ///   
 ///   // Area title
-/// 	switch (gameInfo.getCurrentMap()) {
-/// 		case MAP_UI_TITLE_MENU:
-/// 		case MAP_UI_CREDITS:
-/// 		case MAP_UI_GAME_OVER:
+///   switch (gameInfo.getCurrentMap()) {
+///     case MAP_UI_TITLE_MENU:
+///     case MAP_UI_CREDITS:
+///     case MAP_UI_GAME_OVER:
 ///       // No area title
-/// 			break;
-/// 		case MAP_TALONOVIA_TOWN:
-/// 		case MAP_TALONOVIA_OUTSKIRTS:
-/// 		case MAP_TALONOVIA_BACKLANDS:
-/// 		case MAP_TALONOVIA_SHRINE:
-/// 			mapTitle.setDrawIndex(MAP_TALONOVIA_TOWN); 
-/// 			break;
-/// 		case MAP_RHUNIA_CITADEL:
-/// 		case MAP_RHUNIA_WILDERNESS:
-/// 		case MAP_RHUNIA_BACKLANDS:
-/// 		case MAP_RHUNIA_OUTSKIRTS:
-/// 			mapTitle.setDrawIndex(MAP_RHUNIA_CITADEL); 
-/// 			break;
-/// 		case MAP_ETZLAND_CITADEL:
-/// 		case MAP_ETZLAND_WILDERNESS:
-/// 		case MAP_ETZLAND_BACKLANDS:
-/// 		case MAP_ETZLAND_OUTSKIRTS:
-/// 			mapTitle.setDrawIndex(MAP_ETZLAND_CITADEL);  
-/// 			break;
-/// 		case MAP_HAXLYN_CITADEL:
-/// 		case MAP_HAXLYN_WILDERNESS:
-/// 		case MAP_HAXLYN_BACKLANDS:
-/// 		case MAP_HAXLYN_OUTSKIRTS:
-/// 			mapTitle.setDrawIndex(MAP_HAXLYN_CITADEL);  
-/// 			break;
-/// 		case MAP_VALIMOR_CITADEL:
-/// 		case MAP_VALIMOR_WILDERNESS:
-/// 		case MAP_VALIMOR_BACKLANDS:
-/// 		case MAP_VALIMOR_OUTSKIRTS:
-/// 			mapTitle.setDrawIndex(MAP_VALIMOR_CITADEL);  
-/// 			break;
-/// 		case MAP_KALROTH_CITADEL:
-/// 		case MAP_KALROTH_WILDERNESS:
-/// 		case MAP_KALROTH_BACKLANDS:
-/// 		case MAP_KALROTH_OUTSKIRTS:
-/// 			mapTitle.setDrawIndex(MAP_KALROTH_CITADEL);  
-/// 			break;
-/// 		
-/// 		default:
-/// 			mapTitle.setEnabled(false); /// put "Unknown" here instead
-/// 			break;
-/// 		
-/// 	}
-/// 	
+///       break;
+///     case MAP_TALONOVIA_TOWN:
+///     case MAP_TALONOVIA_OUTSKIRTS:
+///     case MAP_TALONOVIA_BACKLANDS:
+///     case MAP_TALONOVIA_SHRINE:
+///       mapTitle.setDrawIndex(MAP_TALONOVIA_TOWN); 
+///       break;
+///     case MAP_RHUNIA_CITADEL:
+///     case MAP_RHUNIA_WILDERNESS:
+///     case MAP_RHUNIA_BACKLANDS:
+///     case MAP_RHUNIA_OUTSKIRTS:
+///       mapTitle.setDrawIndex(MAP_RHUNIA_CITADEL); 
+///       break;
+///     case MAP_ETZLAND_CITADEL:
+///     case MAP_ETZLAND_WILDERNESS:
+///     case MAP_ETZLAND_BACKLANDS:
+///     case MAP_ETZLAND_OUTSKIRTS:
+///       mapTitle.setDrawIndex(MAP_ETZLAND_CITADEL);  
+///       break;
+///     case MAP_HAXLYN_CITADEL:
+///     case MAP_HAXLYN_WILDERNESS:
+///     case MAP_HAXLYN_BACKLANDS:
+///     case MAP_HAXLYN_OUTSKIRTS:
+///       mapTitle.setDrawIndex(MAP_HAXLYN_CITADEL);  
+///       break;
+///     case MAP_VALIMOR_CITADEL:
+///     case MAP_VALIMOR_WILDERNESS:
+///     case MAP_VALIMOR_BACKLANDS:
+///     case MAP_VALIMOR_OUTSKIRTS:
+///       mapTitle.setDrawIndex(MAP_VALIMOR_CITADEL);  
+///       break;
+///     case MAP_KALROTH_CITADEL:
+///     case MAP_KALROTH_WILDERNESS:
+///     case MAP_KALROTH_BACKLANDS:
+///     case MAP_KALROTH_OUTSKIRTS:
+///       mapTitle.setDrawIndex(MAP_KALROTH_CITADEL);  
+///       break;
+///     
+///     default:
+///       mapTitle.setEnabled(false); /// put "Unknown" here instead
+///       break;
+///     
+///   }
+///   
 ///   // Check for milestone progress, and display it if found
 ///   checkMilestoneProgress();
 /// }
@@ -402,7 +402,7 @@ public function showGameplayNotification(string message) {
   local IntPoint destination;
   
   // Set message
-	gameplayNotification.setText(message);
+  gameplayNotification.setText(message);
   
   // Set home posiiton
   origin.x = gameplayNotification.homePos.x;
@@ -511,64 +511,64 @@ defaultProperties
 {
   bMandatoryScaleToWindow=true
   
-	/** ===== Textures ===== **/
-	begin object class=UI_Texture_Info Name=Black_Texture
-		componentTextures.add(Texture2D'GUI.Black_Square')
-	end object
-	///begin object class=UI_Texture_Info Name=Quest_Info_Notification_Bar_Texture
-	///	componentTextures.add(Texture2D'GUI.Quest_Info_Notification_Bar')
-	///end object
+  /** ===== Textures ===== **/
+  begin object class=UI_Texture_Info Name=Black_Texture
+    componentTextures.add(Texture2D'GUI.Black_Square')
+  end object
+  ///begin object class=UI_Texture_Info Name=Quest_Info_Notification_Bar_Texture
+  ///  componentTextures.add(Texture2D'GUI.Quest_Info_Notification_Bar')
+  ///end object
   
   // Player Activity Icons
-	begin object class=UI_Texture_Info Name=World_HUD_Praying
+  begin object class=UI_Texture_Info Name=World_HUD_Praying
     componentTextures.add(Texture2D'GUI_Overworld.World_HUD_Praying')
   end object
-	begin object class=UI_Texture_Info Name=World_HUD_Singing
+  begin object class=UI_Texture_Info Name=World_HUD_Singing
     componentTextures.add(Texture2D'GUI_Overworld.World_HUD_Singing')
   end object
   
-	/** ===== UI Components ===== **/
-	tag="Over_World_Page"
-	posX=0
-	posY=0
-	posXEnd=NATIVE_WIDTH
-	posYEnd=NATIVE_HEIGHT
-	
+  /** ===== UI Components ===== **/
+  tag="Over_World_Page"
+  posX=0
+  posY=0
+  posXEnd=NATIVE_WIDTH
+  posYEnd=NATIVE_HEIGHT
+  
   // Notification for gameplay
-	begin object class=UI_Label Name=Gameplay_Notification_Label
-		tag="Gameplay_Notification_Label"
+  begin object class=UI_Label Name=Gameplay_Notification_Label
+    tag="Gameplay_Notification_Label"
     homePos=(x=0,y=945)
     homeDim=(width=NATIVE_WIDTH,height=90)
-		posX=0
-		posY=945
-		posXEnd=NATIVE_WIDTH
-		posYEnd=1035
-		fontStyle=DEFAULT_MEDIUM_WHITE
-		labelText="Gold +10"
-		alignX=CENTER
-		alignY=CENTER
-	end object
-	componentList.add(Gameplay_Notification_Label)
+    posX=0
+    posY=945
+    posXEnd=NATIVE_WIDTH
+    posYEnd=1035
+    fontStyle=DEFAULT_MEDIUM_WHITE
+    labelText="Gold +10"
+    alignX=CENTER
+    alignY=CENTER
+  end object
+  componentList.add(Gameplay_Notification_Label)
   
-	// Hero Data Container
-	begin object class=ROTT_UI_Displayer_Party Name=World_HUD_Party_Container
+  // Hero Data Container
+  begin object class=ROTT_UI_Displayer_Party Name=World_HUD_Party_Container
     tag="World_HUD_Party_Container"
     posX=361
     posY=-125
     xSeparator=238
     ySeparator=0
     displayerClass=class'ROTT_UI_Displayer_Hero_Over_World'
-	end object
-	componentList.add(World_HUD_Party_Container)
+  end object
+  componentList.add(World_HUD_Party_Container)
   
   // Currency
-	begin object class=ROTT_UI_Displayer_Currencies Name=Over_World_HUD_Currency
+  begin object class=ROTT_UI_Displayer_Currencies Name=Over_World_HUD_Currency
     tag="Over_World_HUD_Currency"
-	end object
-	componentList.add(Over_World_HUD_Currency)
+  end object
+  componentList.add(Over_World_HUD_Currency)
   
   // Player activity - Singing
-	begin object class=UI_Container Name=Over_World_HUD_Singing_Graphic
+  begin object class=UI_Container Name=Over_World_HUD_Singing_Graphic
     tag="Over_World_HUD_Singing_Graphic"
     bEnabled=false
     
@@ -593,11 +593,11 @@ defaultProperties
     end object
     componentList.add(Over_World_HUD_Singing_Label)
     
-	end object
-	componentList.add(Over_World_HUD_Singing_Graphic)
-	
+  end object
+  componentList.add(Over_World_HUD_Singing_Graphic)
+  
   // Player activity - Praying
-	begin object class=UI_Container Name=Over_World_HUD_Praying_Graphic
+  begin object class=UI_Container Name=Over_World_HUD_Praying_Graphic
     tag="Over_World_HUD_Praying_Graphic"
     bEnabled=false
     
@@ -622,100 +622,100 @@ defaultProperties
     end object
     componentList.add(Over_World_HUD_Praying_Label)
     
-	end object
-	componentList.add(Over_World_HUD_Praying_Graphic)
-	
-	// Approaching Quest Info Notification
-	///begin object class=UI_Sprite Name=Quest_Info_Notification_Bar
-	///	tag="Quest_Info_Notification_Bar"
-	///	posX=0
-	///	posY=537
-	///	images(0)=Quest_Info_Notification_Bar_Texture
-	///end object
-	///componentList.add(Quest_Info_Notification_Bar)
+  end object
+  componentList.add(Over_World_HUD_Praying_Graphic)
   
-	// Fader 
-	begin object class=UI_Sprite Name=World_Fade_Component
-		tag="World_Fade_Component"
-		posX=0
-		posY=0
-		posXEnd=NATIVE_WIDTH
-		posYEnd=NATIVE_HEIGHT
-		images(0)=Black_Texture
+  // Approaching Quest Info Notification
+  ///begin object class=UI_Sprite Name=Quest_Info_Notification_Bar
+  ///  tag="Quest_Info_Notification_Bar"
+  ///  posX=0
+  ///  posY=537
+  ///  images(0)=Quest_Info_Notification_Bar_Texture
+  ///end object
+  ///componentList.add(Quest_Info_Notification_Bar)
+  
+  // Fader 
+  begin object class=UI_Sprite Name=World_Fade_Component
+    tag="World_Fade_Component"
+    posX=0
+    posY=0
+    posXEnd=NATIVE_WIDTH
+    posYEnd=NATIVE_HEIGHT
+    images(0)=Black_Texture
     bMandatoryScaleToWindow=true
-	end object
-	componentList.add(World_Fade_Component)
-	
-	// Flicker Effect
-	begin object class=UI_Sprite Name=WorldFlickerTexture
-		tag="WorldFlickerTexture"
-    bEnabled=false
-		posX=0
-		posY=0
-		posXEnd=NATIVE_WIDTH
-		posYEnd=NATIVE_HEIGHT
-		images(0)=Black_Texture
-	end object
-	componentList.add(WorldFlickerTexture)
+  end object
+  componentList.add(World_Fade_Component)
   
-	// Displayer Map Title
-	begin object class=ROTT_UI_Displayer_Map_Title Name=Displayer_Map_Title
-		tag="Displayer_Map_Title"
-	end object
-	componentList.add(Displayer_Map_Title)
-	
-  // Notification for speedrun milestones
-	begin object class=UI_Label Name=Speedrun_Notification_Label_Shadow
-		tag="Speedrun_Notification_Label_Shadow"
+  // Flicker Effect
+  begin object class=UI_Sprite Name=WorldFlickerTexture
+    tag="WorldFlickerTexture"
     bEnabled=false
-		posX=0
-		posY=500
-		posXEnd=NATIVE_WIDTH
-		posYEnd=550
+    posX=0
+    posY=0
+    posXEnd=NATIVE_WIDTH
+    posYEnd=NATIVE_HEIGHT
+    images(0)=Black_Texture
+  end object
+  componentList.add(WorldFlickerTexture)
+  
+  // Displayer Map Title
+  begin object class=ROTT_UI_Displayer_Map_Title Name=Displayer_Map_Title
+    tag="Displayer_Map_Title"
+  end object
+  componentList.add(Displayer_Map_Title)
+  
+  // Notification for speedrun milestones
+  begin object class=UI_Label Name=Speedrun_Notification_Label_Shadow
+    tag="Speedrun_Notification_Label_Shadow"
+    bEnabled=false
+    posX=0
+    posY=500
+    posXEnd=NATIVE_WIDTH
+    posYEnd=550
     padding=(top=1, left=13, right=11, bottom=7)
-		fontStyle=DEFAULT_LARGE_ORANGE
-		labelText="Defeated Khomat in 34:56.23"
+    fontStyle=DEFAULT_LARGE_ORANGE
+    labelText="Defeated Khomat in 34:56.23"
     activeEffects.add((effectType=EFFECT_ALPHA_CYCLE, lifeTime=-1, elapsedTime=0, intervalTime=0.4, min=220, max=255))
-		alignX=CENTER
-		alignY=CENTER
-	end object
-	componentList.add(Speedrun_Notification_Label_Shadow)
+    alignX=CENTER
+    alignY=CENTER
+  end object
+  componentList.add(Speedrun_Notification_Label_Shadow)
   
   // Notification for speedrun milestones
-	begin object class=UI_Label Name=Speedrun_Notification_Label
-		tag="Speedrun_Notification_Label"
+  begin object class=UI_Label Name=Speedrun_Notification_Label
+    tag="Speedrun_Notification_Label"
     bEnabled=false
-		posX=0
-		posY=500
-		posXEnd=NATIVE_WIDTH
-		posYEnd=550
-		fontStyle=DEFAULT_LARGE_ORANGE
-		labelText="Defeated Khomat in 34:56.23"
+    posX=0
+    posY=500
+    posXEnd=NATIVE_WIDTH
+    posYEnd=550
+    fontStyle=DEFAULT_LARGE_ORANGE
+    labelText="Defeated Khomat in 34:56.23"
     activeEffects.add((effectType=EFFECT_ALPHA_CYCLE, lifeTime=-1, elapsedTime=0, intervalTime=0.4, min=200, max=255))
     activeEffects.add((effectType=EFFECT_FLIPBOOK, lifeTime=-1, elapsedTime=0, intervalTime=0.10, min=0, max=255))
     cycleStyles=(DEFAULT_LARGE_GOLD, DEFAULT_LARGE_ORANGE)
     ///activeEffects.add((effectType=EFFECT_FLICKER, lifeTime=-1, elapsedTime=0, intervalTime=0.30, min=127, max=255))
     ///activeEffects.add((effectType=EFFECT_HUE_SHIFT, lifeTime=-1, elapsedTime=0, intervalTime=1.0, min=0, max=255))
-		alignX=CENTER
-		alignY=CENTER
-	end object
-	componentList.add(Speedrun_Notification_Label)
+    alignX=CENTER
+    alignY=CENTER
+  end object
+  componentList.add(Speedrun_Notification_Label)
   
   // Personal best label
-	begin object class=UI_Label Name=Personal_Best_Label
-		tag="Personal_Best_Label"
+  begin object class=UI_Label Name=Personal_Best_Label
+    tag="Personal_Best_Label"
     bEnabled=false
-		posX=0
-		posY=550
-		posXEnd=NATIVE_WIDTH
-		posYEnd=600
-		fontStyle=DEFAULT_SMALL_TAN
-		labelText="~ Personal Best! ~"
+    posX=0
+    posY=550
+    posXEnd=NATIVE_WIDTH
+    posYEnd=600
+    fontStyle=DEFAULT_SMALL_TAN
+    labelText="~ Personal Best! ~"
     activeEffects.add((effectType=EFFECT_HUE_SHIFT, lifeTime=-1, elapsedTime=1.50, intervalTime=2.0, min=120, max=255))
-		alignX=CENTER
-		alignY=CENTER
-	end object
-	componentList.add(Personal_Best_Label)
+    alignX=CENTER
+    alignY=CENTER
+  end object
+  componentList.add(Personal_Best_Label)
   
 }
 

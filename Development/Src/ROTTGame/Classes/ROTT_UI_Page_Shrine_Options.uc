@@ -148,40 +148,40 @@ defaultProperties
   bPauseGameWhenUp=true
   bMandatoryScaleToWindow=true
   
-	/** ===== Input ===== **/
-	begin object class=ROTT_Input_Handler Name=Input_A
+  /** ===== Input ===== **/
+  begin object class=ROTT_Input_Handler Name=Input_A
     inputName="XBoxTypeS_A"
-		buttonComponent=none
-	end object
+    buttonComponent=none
+  end object
   inputList.add(Input_A)
   
-	begin object class=ROTT_Input_Handler Name=Input_B
+  begin object class=ROTT_Input_Handler Name=Input_B
     inputName="XBoxTypeS_B"
-		buttonComponent=none
-	end object
+    buttonComponent=none
+  end object
   inputList.add(Input_B)
   
-	/** ===== Textures ===== **/
-	// Shrine options 
-	begin object class=UI_Texture_Info Name=Shrine_Options_Texture
-		componentTextures.add(Texture2D'GUI.Monument_Interface_Options')
-	end object
+  /** ===== Textures ===== **/
+  // Shrine options 
+  begin object class=UI_Texture_Info Name=Shrine_Options_Texture
+    componentTextures.add(Texture2D'GUI.Monument_Interface_Options')
+  end object
   
   /** ===== UI Components ===== **/
-	// Shrine options 
-	begin object class=UI_Sprite Name=Shrine_Options_Background
-		tag="Shrine_Options_Background"
-		posX=0
-		posY=664
-		images(0)=Shrine_Options_Texture
-	end object
-	componentList.add(Shrine_Options_Background)
+  // Shrine options 
+  begin object class=UI_Sprite Name=Shrine_Options_Background
+    tag="Shrine_Options_Background"
+    posX=0
+    posY=664
+    images(0)=Shrine_Options_Texture
+  end object
+  componentList.add(Shrine_Options_Background)
   
   // NPC Dialogue Options
-	begin object class=UI_Dialogue_Options Name=Shrine_Options
-		tag="Shrine_Options"
-	end object
-	componentList.add(Shrine_Options)
+  begin object class=UI_Dialogue_Options Name=Shrine_Options
+    tag="Shrine_Options"
+  end object
+  componentList.add(Shrine_Options)
   
 }
 

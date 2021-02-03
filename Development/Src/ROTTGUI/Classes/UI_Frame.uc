@@ -150,8 +150,8 @@ public function update() {
  *============================================================================*/
 ///protected function drawComponent(Canvas c) {
 ///  // Check if component is enabled
-///	if (!bEnabled) return;
-///	if (uiGameInfo.optionsCookie.scaleModeType == STRETCH_SCALE) return;
+///  if (!bEnabled) return;
+///  if (uiGameInfo.optionsCookie.scaleModeType == STRETCH_SCALE) return;
 ///  
 ///  // Check for out of bounds draw index
 ///  if (drawIndex >= images.length) return;

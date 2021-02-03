@@ -29,7 +29,7 @@ public function initializeComponent(optional string newTag = "") {
   someScene = ROTT_UI_Scene_Over_World(outer);
   
   // UI references
-	playerMessageLabel = findLabel("Player_Input_Message_Label");
+  playerMessageLabel = findLabel("Player_Input_Message_Label");
 }
 
 /*============================================================================= 
@@ -88,32 +88,32 @@ defaultProperties
 {
   bMandatoryScaleToWindow=true
   
-	/** ===== UI Components ===== **/
-	// Message Label
-	begin object class=UI_Label Name=Message_Label
-		tag="Message_Label"
+  /** ===== UI Components ===== **/
+  // Message Label
+  begin object class=UI_Label Name=Message_Label
+    tag="Message_Label"
     posX=328
     posY=810
     posYend=874
-		alignX=LEFT
+    alignX=LEFT
     alignY=CENTER
-		fontStyle=DEFAULT_MEDIUM_WHITE
-		labelText="Message:"
-	end object
-	componentList.add(Message_Label)
-	
-	// Player Input Message Label
-	begin object class=UI_Label Name=Player_Input_Message_Label
-		tag="Player_Input_Message_Label"
+    fontStyle=DEFAULT_MEDIUM_WHITE
+    labelText="Message:"
+  end object
+  componentList.add(Message_Label)
+  
+  // Player Input Message Label
+  begin object class=UI_Label Name=Player_Input_Message_Label
+    tag="Player_Input_Message_Label"
     posX=488
     posY=810
     posXEnd=NATIVE_WIDTH
     posYend=874
-		alignX=LEFT
+    alignX=LEFT
     alignY=CENTER
-		fontStyle=DEFAULT_MEDIUM_WHITE
-		labelText="This is the players message"
-	end object
-	componentList.add(Player_Input_Message_Label)
-	
+    fontStyle=DEFAULT_MEDIUM_WHITE
+    labelText="This is the players message"
+  end object
+  componentList.add(Player_Input_Message_Label)
+  
 }

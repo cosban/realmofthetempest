@@ -89,112 +89,112 @@ defaultProperties
   itemDropRates.add((dropType=class'ROTT_Inventory_Item_Gem',chanceOverride=0,minOverride=,maxOverride=,chanceAmp=,quantityAmp=))
   
   // Sprites 240x240
-	begin object class=UI_Texture_Info Name=Enemy_Portrait_Minotaur_Blue_240
+  begin object class=UI_Texture_Info Name=Enemy_Portrait_Minotaur_Blue_240
     componentTextures.add(Texture2D'Monsters.Enemy_Portrait_Minotaur_Blue_Black_240')
     componentTextures.add(Texture2D'Monsters.Enemy_Portrait_Minotaur_Blue_Yellow_240')
   end object
-	begin object class=UI_Texture_Info Name=Enemy_Portrait_Minotaur_Cyan_240
+  begin object class=UI_Texture_Info Name=Enemy_Portrait_Minotaur_Cyan_240
     componentTextures.add(Texture2D'Monsters.Enemy_Portrait_Minotaur_Cyan_Black_240')
   end object
-	begin object class=UI_Texture_Info Name=Enemy_Portrait_Minotaur_Green_240
+  begin object class=UI_Texture_Info Name=Enemy_Portrait_Minotaur_Green_240
     componentTextures.add(Texture2D'Monsters.Enemy_Portrait_Minotaur_Green_240')
     componentTextures.add(Texture2D'Monsters.Enemy_Portrait_Minotaur_Green_Black_240')
   end object
-	begin object class=UI_Texture_Info Name=Enemy_Portrait_Minotaur_Gold_240
+  begin object class=UI_Texture_Info Name=Enemy_Portrait_Minotaur_Gold_240
     componentTextures.add(Texture2D'Monsters.Enemy_Portrait_Minotaur_Gold_Black_240')
   end object
-	begin object class=UI_Texture_Info Name=Enemy_Portrait_Minotaur_Orange_240
+  begin object class=UI_Texture_Info Name=Enemy_Portrait_Minotaur_Orange_240
     componentTextures.add(Texture2D'Monsters.Enemy_Portrait_Minotaur_Orange_Yellow_240')
   end object
   end object
-	begin object class=UI_Texture_Info Name=Enemy_Portrait_Minotaur_Red_240
+  begin object class=UI_Texture_Info Name=Enemy_Portrait_Minotaur_Red_240
     componentTextures.add(Texture2D'Monsters.Enemy_Portrait_Minotaur_Red_240')
     componentTextures.add(Texture2D'Monsters.Enemy_Portrait_Minotaur_Red_Black_240')
   end object
-	begin object class=UI_Texture_Info Name=Enemy_Portrait_Minotaur_Violet_240
+  begin object class=UI_Texture_Info Name=Enemy_Portrait_Minotaur_Violet_240
     componentTextures.add(Texture2D'Monsters.Enemy_Portrait_Minotaur_Violet_Black_240')
     componentTextures.add(Texture2D'Monsters.Enemy_Portrait_Minotaur_Cyan_Yellow_240')
   end object
-	begin object class=UI_Texture_Info Name=Enemy_Portrait_Minotaur_Purple_240
+  begin object class=UI_Texture_Info Name=Enemy_Portrait_Minotaur_Purple_240
     componentTextures.add(Texture2D'Monsters.Enemy_Portrait_Minotaur_Purple_Yellow_240')
   end object
     
   end object
-	begin object class=UI_Texture_Info Name=Enemy_Portrait_Minotaur_Black_240
+  begin object class=UI_Texture_Info Name=Enemy_Portrait_Minotaur_Black_240
     componentTextures.add(Texture2D'Monsters.Enemy_Portrait_Minotaur_Black_240')
   end object
-	begin object class=UI_Texture_Info Name=Enemy_Portrait_Minotaur_White_240
+  begin object class=UI_Texture_Info Name=Enemy_Portrait_Minotaur_White_240
     componentTextures.add(Texture2D'Monsters.Enemy_Portrait_Minotaur_White_Yellow_240')
   end object
   
   // Sprite options
-	begin object class=UI_Texture_Storage Name=Enemy_Sprite_Container
-		tag="Enemy_Sprite_Container"
-		images(CLAN_BLUE)=Enemy_Portrait_Minotaur_Blue_240
-		images(CLAN_CYAN)=Enemy_Portrait_Minotaur_Cyan_240
-		images(CLAN_GREEN)=Enemy_Portrait_Minotaur_Green_240
-		images(CLAN_GOLD)=Enemy_Portrait_Minotaur_Gold_240
-		images(CLAN_ORANGE)=Enemy_Portrait_Minotaur_Orange_240
-		images(CLAN_RED)=Enemy_Portrait_Minotaur_Red_240
-		images(CLAN_VIOLET)=Enemy_Portrait_Minotaur_Violet_240
-		images(CLAN_PURPLE)=Enemy_Portrait_Minotaur_Purple_240
-		images(CLAN_BLACK)=Enemy_Portrait_Minotaur_Black_240
-		images(CLAN_WHITE)=Enemy_Portrait_Minotaur_White_240
-	end object
+  begin object class=UI_Texture_Storage Name=Enemy_Sprite_Container
+    tag="Enemy_Sprite_Container"
+    images(CLAN_BLUE)=Enemy_Portrait_Minotaur_Blue_240
+    images(CLAN_CYAN)=Enemy_Portrait_Minotaur_Cyan_240
+    images(CLAN_GREEN)=Enemy_Portrait_Minotaur_Green_240
+    images(CLAN_GOLD)=Enemy_Portrait_Minotaur_Gold_240
+    images(CLAN_ORANGE)=Enemy_Portrait_Minotaur_Orange_240
+    images(CLAN_RED)=Enemy_Portrait_Minotaur_Red_240
+    images(CLAN_VIOLET)=Enemy_Portrait_Minotaur_Violet_240
+    images(CLAN_PURPLE)=Enemy_Portrait_Minotaur_Purple_240
+    images(CLAN_BLACK)=Enemy_Portrait_Minotaur_Black_240
+    images(CLAN_WHITE)=Enemy_Portrait_Minotaur_White_240
+  end object
   enemySprites=Enemy_Sprite_Container
-	
+  
   // Sprites 360x360
-	begin object class=UI_Texture_Info Name=Enemy_Portrait_Minotaur_Blue_360
+  begin object class=UI_Texture_Info Name=Enemy_Portrait_Minotaur_Blue_360
     componentTextures.add(Texture2D'Monsters.Enemy_Portrait_Minotaur_Blue_Black_360')
     componentTextures.add(Texture2D'Monsters.Enemy_Portrait_Minotaur_Blue_Yellow_360')
   end object
-	begin object class=UI_Texture_Info Name=Enemy_Portrait_Minotaur_Cyan_360
+  begin object class=UI_Texture_Info Name=Enemy_Portrait_Minotaur_Cyan_360
     componentTextures.add(Texture2D'Monsters.Enemy_Portrait_Minotaur_Cyan_Black_360')
   end object
-	begin object class=UI_Texture_Info Name=Enemy_Portrait_Minotaur_Green_360
+  begin object class=UI_Texture_Info Name=Enemy_Portrait_Minotaur_Green_360
     componentTextures.add(Texture2D'Monsters.Enemy_Portrait_Minotaur_Green_360')
     componentTextures.add(Texture2D'Monsters.Enemy_Portrait_Minotaur_Green_Black_360')
   end object
-	begin object class=UI_Texture_Info Name=Enemy_Portrait_Minotaur_Gold_360
+  begin object class=UI_Texture_Info Name=Enemy_Portrait_Minotaur_Gold_360
     componentTextures.add(Texture2D'Monsters.Enemy_Portrait_Minotaur_Gold_Black_360')
   end object
-	begin object class=UI_Texture_Info Name=Enemy_Portrait_Minotaur_Orange_360
+  begin object class=UI_Texture_Info Name=Enemy_Portrait_Minotaur_Orange_360
     componentTextures.add(Texture2D'Monsters.Enemy_Portrait_Minotaur_Orange_Yellow_360')
   end object
-	begin object class=UI_Texture_Info Name=Enemy_Portrait_Minotaur_Red_360
+  begin object class=UI_Texture_Info Name=Enemy_Portrait_Minotaur_Red_360
     componentTextures.add(Texture2D'Monsters.Enemy_Portrait_Minotaur_Red_360')
     componentTextures.add(Texture2D'Monsters.Enemy_Portrait_Minotaur_Red_Black_360')
   end object
-	begin object class=UI_Texture_Info Name=Enemy_Portrait_Minotaur_Violet_360
+  begin object class=UI_Texture_Info Name=Enemy_Portrait_Minotaur_Violet_360
     componentTextures.add(Texture2D'Monsters.Enemy_Portrait_Minotaur_Violet_Black_360')
     componentTextures.add(Texture2D'Monsters.Enemy_Portrait_Minotaur_Cyan_Yellow_360')
   end object
-	begin object class=UI_Texture_Info Name=Enemy_Portrait_Minotaur_Purple_360
+  begin object class=UI_Texture_Info Name=Enemy_Portrait_Minotaur_Purple_360
     componentTextures.add(Texture2D'Monsters.Enemy_Portrait_Minotaur_Purple_Yellow_360')
   end object
-	begin object class=UI_Texture_Info Name=Enemy_Portrait_Minotaur_Black_360
+  begin object class=UI_Texture_Info Name=Enemy_Portrait_Minotaur_Black_360
     componentTextures.add(Texture2D'Monsters.Enemy_Portrait_Minotaur_Black_360')
   end object
-	begin object class=UI_Texture_Info Name=Enemy_Portrait_Minotaur_White_360
+  begin object class=UI_Texture_Info Name=Enemy_Portrait_Minotaur_White_360
     componentTextures.add(Texture2D'Monsters.Enemy_Portrait_Minotaur_White_Yellow_360')
   end object
   
   // Sprite options
-	begin object class=UI_Texture_Storage Name=Champ_Sprite_Container
-		tag="Champ_Sprite_Container"
-		images(CLAN_BLUE)=Enemy_Portrait_Minotaur_Blue_360
-		images(CLAN_CYAN)=Enemy_Portrait_Minotaur_Cyan_360
-		images(CLAN_GREEN)=Enemy_Portrait_Minotaur_Green_360
-		images(CLAN_GOLD)=Enemy_Portrait_Minotaur_Gold_360
-		images(CLAN_ORANGE)=Enemy_Portrait_Minotaur_Orange_360
-		images(CLAN_RED)=Enemy_Portrait_Minotaur_Red_360
-		images(CLAN_VIOLET)=Enemy_Portrait_Minotaur_Violet_360
-		images(CLAN_PURPLE)=Enemy_Portrait_Minotaur_Purple_360
-		images(CLAN_BLACK)=Enemy_Portrait_Minotaur_Black_360
-		images(CLAN_WHITE)=Enemy_Portrait_Minotaur_White_360
-	end object
+  begin object class=UI_Texture_Storage Name=Champ_Sprite_Container
+    tag="Champ_Sprite_Container"
+    images(CLAN_BLUE)=Enemy_Portrait_Minotaur_Blue_360
+    images(CLAN_CYAN)=Enemy_Portrait_Minotaur_Cyan_360
+    images(CLAN_GREEN)=Enemy_Portrait_Minotaur_Green_360
+    images(CLAN_GOLD)=Enemy_Portrait_Minotaur_Gold_360
+    images(CLAN_ORANGE)=Enemy_Portrait_Minotaur_Orange_360
+    images(CLAN_RED)=Enemy_Portrait_Minotaur_Red_360
+    images(CLAN_VIOLET)=Enemy_Portrait_Minotaur_Violet_360
+    images(CLAN_PURPLE)=Enemy_Portrait_Minotaur_Purple_360
+    images(CLAN_BLACK)=Enemy_Portrait_Minotaur_Black_360
+    images(CLAN_WHITE)=Enemy_Portrait_Minotaur_White_360
+  end object
   champSprites=Champ_Sprite_Container
-	
+  
 }
 
 

@@ -289,13 +289,13 @@ defaultProperties
   bAlignXCenter=true
   
   // Status label
-	begin object class=UI_Label Name=Status_Label
-		tag="Status_Label"
-		alignX=CENTER
-		alignY=CENTER
-	end object
-	componentList.add(Status_Label)
-	
+  begin object class=UI_Label Name=Status_Label
+    tag="Status_Label"
+    alignX=CENTER
+    alignY=CENTER
+  end object
+  componentList.add(Status_Label)
+  
 }
 
 

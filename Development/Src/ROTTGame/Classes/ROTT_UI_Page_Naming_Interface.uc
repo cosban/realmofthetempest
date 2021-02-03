@@ -306,16 +306,16 @@ defaultProperties
   // Random names
   randomNames=("Yufko", "Quria", "Rhexio", "Shujie", "Mox Mox")
   
-	/** ===== Input ===== **/
-	begin object class=ROTT_Input_Handler Name=Input_A
+  /** ===== Input ===== **/
+  begin object class=ROTT_Input_Handler Name=Input_A
     inputName="XBoxTypeS_A"
-		buttonComponent=none
-	end object
+    buttonComponent=none
+  end object
   inputList.add(Input_A)
-	begin object class=ROTT_Input_Handler Name=Input_B
+  begin object class=ROTT_Input_Handler Name=Input_B
     inputName="XBoxTypeS_B"
-		buttonComponent=none
-	end object
+    buttonComponent=none
+  end object
   inputList.add(Input_B)
   
   /** ===== Textures ===== **/
@@ -326,22 +326,22 @@ defaultProperties
   
   /** ===== UI Components ===== **/
   // Background
-	begin object class=UI_Sprite Name=Background_Sprite
-		tag="Background_Sprite"
+  begin object class=UI_Sprite Name=Background_Sprite
+    tag="Background_Sprite"
     bEnabled=true
-		posX=0
-		posY=0
-		images(0)=Background
-	end object
-	componentList.add(Background_Sprite)
+    posX=0
+    posY=0
+    images(0)=Background
+  end object
+  componentList.add(Background_Sprite)
   
-	begin object class=UI_Selector Name=Selection_Input
-		tag="Selection_Input"
+  begin object class=UI_Selector Name=Selection_Input
+    tag="Selection_Input"
     navigationType=SELECTION_2D
     bEnabled=true
     bActive=true
   end object
-	componentList.add(Selection_Input)
+  componentList.add(Selection_Input)
   
   // Selector texture
   begin object class=UI_Texture_Info Name=Selection_Box
@@ -349,18 +349,18 @@ defaultProperties
   end object
   
   // Key Selector
-	begin object class=UI_Selector_2D Name=Key_Selection_Box
-		tag="Key_Selection_Box"
+  begin object class=UI_Selector_2D Name=Key_Selection_Box
+    tag="Key_Selection_Box"
     bEnabled=true
     wrapSelection=true
-		posX=152
-		posY=378
+    posX=152
+    posY=378
     selectOffset=(x=115,y=115)  // Distance from neighboring spaces
     homeCoords=(x=0,y=0)        // The default space for the selector to start
     gridSize=(x=10,y=3)         // Total size of 2d selection space
     
     // Draw Textures
-		images(0)=Selection_Box
+    images(0)=Selection_Box
     
     // Navigation skips
     navSkips(0)=(xCoord=9,yCoord=2,skipDirection=NAV_LEFT)
@@ -369,9 +369,9 @@ defaultProperties
     
     // Alpha Effects
     activeEffects.add((effectType = EFFECT_ALPHA_CYCLE, lifeTime = -1, elapsedTime = 0, intervalTime = 0.4, min = 170, max = 255))
-	end object
-	componentList.add(Key_Selection_Box)
-	
+  end object
+  componentList.add(Key_Selection_Box)
+  
   
   // Large selector
   begin object class=UI_Texture_Info Name=Key_Selector_Large
@@ -379,33 +379,33 @@ defaultProperties
   end object
   
   // Large selector
-	begin object class=UI_Sprite Name=Selector_Large
-		tag="Selector_Large"
+  begin object class=UI_Sprite Name=Selector_Large
+    tag="Selector_Large"
     bEnabled=false
-		posX=1071
-		posY=608
-		images(0)=Key_Selector_Large
+    posX=1071
+    posY=608
+    images(0)=Key_Selector_Large
     
     // Alpha Effects
     activeEffects.add((effectType = EFFECT_ALPHA_CYCLE, lifeTime = -1, elapsedTime = 0, intervalTime = 0.4, min = 170, max = 255))
-	end object
-	componentList.add(Selector_Large)
+  end object
+  componentList.add(Selector_Large)
   
   
   
   // Name text label
-	begin object class=UI_Label Name=Name_Text_Label
-		tag="Name_Text_Label"
-		posX=280
-		posY=202
-		posXEnd=1160
-		posYEnd=294
+  begin object class=UI_Label Name=Name_Text_Label
+    tag="Name_Text_Label"
+    posX=280
+    posY=202
+    posXEnd=1160
+    posYEnd=294
     fontStyle=DEFAULT_LARGE_TAN
-		AlignX=LEFT
-		AlignY=CENTER
-		labelText=""
-	end object
-	componentList.add(Name_Text_Label)
+    AlignX=LEFT
+    AlignY=CENTER
+    labelText=""
+  end object
+  componentList.add(Name_Text_Label)
   
 }
 

@@ -78,27 +78,27 @@ protected function float attributeInfo
  * requirement()
  *===========================================================================*/
 private function int requirement(float a, float b, int level) {
-	local int req, ReqTotal, i;
-	local float k;
-	
-	ReqTotal = 32;
-	k = 1.1;
-	
-	for (i = 0; i < level; i++) {
-		k = k * 1.006;
-		k = k + 0.22;
+  local int req, ReqTotal, i;
+  local float k;
+  
+  ReqTotal = 32;
+  k = 1.1;
+  
+  for (i = 0; i < level; i++) {
+    k = k * 1.006;
+    k = k + 0.22;
 
-		ReqTotal = round(ReqTotal * k);
-		
-		req = round(ReqTotal * (a/b));
-		
-		if (req % 5 != 0 && req%2 != 0)	{
-			do {
-				req++;			
-				k += 0.012;
-			} until (req%5 == 0 || req%2 == 0);
-		}
-	}
+    ReqTotal = round(ReqTotal * k);
+    
+    req = round(ReqTotal * (a/b));
+    
+    if (req % 5 != 0 && req%2 != 0)  {
+      do {
+        req++;      
+        k += 0.012;
+      } until (req%5 == 0 || req%2 == 0);
+    }
+  }
   
   return req;
 }
@@ -108,62 +108,62 @@ private function int requirement(float a, float b, int level) {
  *===========================================================================*/
 function int getStats(string StatType, int SkillLevel) {
 
-	local int iStat1, iStat2, iReq1, iReq2, ReqTotal, i, j;
-	local float k;
-	
-	iStat1 = 2;
-	iStat2 = 14;
-	
-	ReqTotal = 32;
-	i = SkillLevel;
-	j = 1;
-	k = 1.1;
-	
-	do
-	{
-		//Do %SkillLEvel times
-		i = i - 1;
-		
-		k = k * 1.006;
-		k = k + 0.22;
+  local int iStat1, iStat2, iReq1, iReq2, ReqTotal, i, j;
+  local float k;
+  
+  iStat1 = 2;
+  iStat2 = 14;
+  
+  ReqTotal = 32;
+  i = SkillLevel;
+  j = 1;
+  k = 1.1;
+  
+  do
+  {
+    //Do %SkillLEvel times
+    i = i - 1;
+    
+    k = k * 1.006;
+    k = k + 0.22;
 
-		ReqTotal = round(ReqTotal * k);
-		
-		iReq1 = round(ReqTotal * (1.0/3.0));
-		iReq2 = round(ReqTotal * (2.0/3.0));
-		
-		
-		if (iReq1 % 5 != 0 && iReq1%2 != 0 )
-		{
-			Do
-			{
-				iReq1 = iReq1 + 1;		
-				k = k + 0.012;				
-			} until (iReq1%5 == 0 || iReq1%2 == 0);
-		}
-		if (iReq2 % 5 != 0 && iReq2%2 != 0 )
-		{
-			Do
-			{
-				iReq2 = iReq2 + 1;			
-				k = k + 0.012;
-			} until (iReq2%5 == 0 || iReq2%2 == 0);
-		}
-		
-		j = j + 14;
-		iStat1 = iStat1 + (j / skillLevel + 1);
-		iStat2 = iStat2 + j;
-		
+    ReqTotal = round(ReqTotal * k);
+    
+    iReq1 = round(ReqTotal * (1.0/3.0));
+    iReq2 = round(ReqTotal * (2.0/3.0));
+    
+    
+    if (iReq1 % 5 != 0 && iReq1%2 != 0 )
+    {
+      Do
+      {
+        iReq1 = iReq1 + 1;    
+        k = k + 0.012;        
+      } until (iReq1%5 == 0 || iReq1%2 == 0);
+    }
+    if (iReq2 % 5 != 0 && iReq2%2 != 0 )
+    {
+      Do
+      {
+        iReq2 = iReq2 + 1;      
+        k = k + 0.012;
+      } until (iReq2%5 == 0 || iReq2%2 == 0);
+    }
+    
+    j = j + 14;
+    iStat1 = iStat1 + (j / skillLevel + 1);
+    iStat2 = iStat2 + j;
+    
 
-		
-	} until (i <= 0);
-		
-		
-	switch (StatType)	{
-		case "Stat1":	return iStat1; // getStats("Stat1", level);
-		case "Stat2":	return iStat2; // getStats("Stat2", level);
-		case "Req1":	return iReq1;  // getStats("Req1", level);
-		case "Req2":  return iReq2;  // getStats("Req2", level);
+    
+  } until (i <= 0);
+    
+    
+  switch (StatType)  {
+    case "Stat1":  return iStat1; // getStats("Stat1", level);
+    case "Stat2":  return iStat2; // getStats("Stat2", level);
+    case "Req1":  return iReq1;  // getStats("Req1", level);
+    case "Req2":  return iReq2;  // getStats("Req2", level);
   }
 }
 
@@ -190,215 +190,215 @@ defaultProperties
 function int GetUniDmg(string StatType, int SkillLevel)
 {
 
-	local int iReq1, ReqTotal, i, j;
-	local float k;
-	
-	ReqTotal = 32;
-	i = SkillLevel;
-	j = 1;
-	k = 1.1;
-	
+  local int iReq1, ReqTotal, i, j;
+  local float k;
+  
+  ReqTotal = 32;
+  i = SkillLevel;
+  j = 1;
+  k = 1.1;
+  
   k = (((((1.1 * 1.006) + 0.22) * 1.006) + 0.22) * 1.006)
   
-	for (i = 0; i < level; i++)	{
-		k *= 1.006;
-		k += 0.22;
+  for (i = 0; i < level; i++)  {
+    k *= 1.006;
+    k += 0.22;
 
-		ReqTotal = round(ReqTotal * k);
-		
-		iReq1 = round(ReqTotal * (1.0/3.0));
-		
-		if (iReq1 % 5 != 0 && iReq1%2 != 0 ) {
-			do {
-				iReq1 = iReq1 + 1;		
-				k = k + 0.012;				
-			} until (iReq1%5 == 0 || iReq1%2 == 0);
-		}
-	}
+    ReqTotal = round(ReqTotal * k);
+    
+    iReq1 = round(ReqTotal * (1.0/3.0));
+    
+    if (iReq1 % 5 != 0 && iReq1%2 != 0 ) {
+      do {
+        iReq1 = iReq1 + 1;    
+        k = k + 0.012;        
+      } until (iReq1%5 == 0 || iReq1%2 == 0);
+    }
+  }
 }
 
 
 function int GetUniDmg(string StatType, int SkillLevel)
 {
 
-	local int iReq1, iReq2, ReqTotal, i, j;
-	local float k;
-	
-	ReqTotal = 32;
-	i = SkillLevel;
-	j = 1;
-	k = 1.1;
-	
-	for (i = 0; i < level; i++)	{
-		k = k * 1.006;
-		k = k + 0.22;
+  local int iReq1, iReq2, ReqTotal, i, j;
+  local float k;
+  
+  ReqTotal = 32;
+  i = SkillLevel;
+  j = 1;
+  k = 1.1;
+  
+  for (i = 0; i < level; i++)  {
+    k = k * 1.006;
+    k = k + 0.22;
 
-		ReqTotal = round(ReqTotal * k);
-		
-		iReq1 = round(ReqTotal * (1.0/3.0));
-		iReq2 = round(ReqTotal * (2.0/3.0));
-		
-		if (iReq1 % 5 != 0 && iReq1%2 != 0 )
-		{
-			Do
-			{
-				iReq1 = iReq1 + 1;		
-				k = k + 0.012;				
-			} until (iReq1%5 == 0 || iReq1%2 == 0);
-		}
-		if (iReq2 % 5 != 0 && iReq2%2 != 0 )
-		{
-			Do
-			{
-				iReq2 = iReq2 + 1;			
-				k = k + 0.012;
-			} until (iReq2%5 == 0 || iReq2%2 == 0);
-		}
-	}
+    ReqTotal = round(ReqTotal * k);
+    
+    iReq1 = round(ReqTotal * (1.0/3.0));
+    iReq2 = round(ReqTotal * (2.0/3.0));
+    
+    if (iReq1 % 5 != 0 && iReq1%2 != 0 )
+    {
+      Do
+      {
+        iReq1 = iReq1 + 1;    
+        k = k + 0.012;        
+      } until (iReq1%5 == 0 || iReq1%2 == 0);
+    }
+    if (iReq2 % 5 != 0 && iReq2%2 != 0 )
+    {
+      Do
+      {
+        iReq2 = iReq2 + 1;      
+        k = k + 0.012;
+      } until (iReq2%5 == 0 || iReq2%2 == 0);
+    }
+  }
 }
 
 
 function int GetUniDmg(string StatType, int SkillLevel)
 {
 
-	local int iStat1, iStat2, iReq1, iReq2, ReqTotal, i, j;
-	local float k;
-	
-	iStat1 = 2;
-	iStat2 = 14;
-	
-	ReqTotal = 32;
-	i = SkillLevel;
-	j = 1;
-	k = 1.1;
-	
-	do
-	{
-		//Do %SkillLEvel times
-		i = i - 1;
-		
-		k = k * 1.006;
-		k = k + 0.22;
+  local int iStat1, iStat2, iReq1, iReq2, ReqTotal, i, j;
+  local float k;
+  
+  iStat1 = 2;
+  iStat2 = 14;
+  
+  ReqTotal = 32;
+  i = SkillLevel;
+  j = 1;
+  k = 1.1;
+  
+  do
+  {
+    //Do %SkillLEvel times
+    i = i - 1;
+    
+    k = k * 1.006;
+    k = k + 0.22;
 
-		ReqTotal = round(ReqTotal * k);
-		
-		iReq1 = round(ReqTotal * (1.0/3.0));
-		iReq2 = round(ReqTotal * (2.0/3.0));
-		
-		
-		if (iReq1 % 5 != 0 && iReq1%2 != 0 )
-		{
-			Do
-			{
-				iReq1 = iReq1 + 1;		
-				k = k + 0.012;				
-			} until (iReq1%5 == 0 || iReq1%2 == 0);
-		}
-		if (iReq2 % 5 != 0 && iReq2%2 != 0 )
-		{
-			Do
-			{
-				iReq2 = iReq2 + 1;			
-				k = k + 0.012;
-			} until (iReq2%5 == 0 || iReq2%2 == 0);
-		}
-		
-		j = j + 14;
-		iStat1 = iStat1 + (j / skillLevel + 1);
-		iStat2 = iStat2 + j;
-		
+    ReqTotal = round(ReqTotal * k);
+    
+    iReq1 = round(ReqTotal * (1.0/3.0));
+    iReq2 = round(ReqTotal * (2.0/3.0));
+    
+    
+    if (iReq1 % 5 != 0 && iReq1%2 != 0 )
+    {
+      Do
+      {
+        iReq1 = iReq1 + 1;    
+        k = k + 0.012;        
+      } until (iReq1%5 == 0 || iReq1%2 == 0);
+    }
+    if (iReq2 % 5 != 0 && iReq2%2 != 0 )
+    {
+      Do
+      {
+        iReq2 = iReq2 + 1;      
+        k = k + 0.012;
+      } until (iReq2%5 == 0 || iReq2%2 == 0);
+    }
+    
+    j = j + 14;
+    iStat1 = iStat1 + (j / skillLevel + 1);
+    iStat2 = iStat2 + j;
+    
 
-		
-	} until (i <= 0);
-		
-		
-	switch (StatType)
-	{
-		case "Stat1":
-			return iStat1;
-			break;
-		case "Stat2":
-			return iStat2;
-			break;
-		case "Req1":
-			return iReq1;
-			break;
-		case "Req2":
-			return iReq2;
-			break;
-	}
+    
+  } until (i <= 0);
+    
+    
+  switch (StatType)
+  {
+    case "Stat1":
+      return iStat1;
+      break;
+    case "Stat2":
+      return iStat2;
+      break;
+    case "Req1":
+      return iReq1;
+      break;
+    case "Req2":
+      return iReq2;
+      break;
+  }
 }
 
 
 function int GetUniDmg(string StatType, int SkillLevel)
 {
 
-	local int iStat1, iStat2, iReq1, iReq2, ReqTotal, i, j;
-	local float k;
-	
-	iStat1 = 2;
-	iStat2 = 14;
-	
-	ReqTotal = 32;
-	i = SkillLevel;
-	j = 1;
-	k = 1.1;
-	
-	do
-	{
-		//Do %SkillLEvel times
-		i = i - 1;
-		
-		k = k * 1.006;
-		k = k + 0.22;
+  local int iStat1, iStat2, iReq1, iReq2, ReqTotal, i, j;
+  local float k;
+  
+  iStat1 = 2;
+  iStat2 = 14;
+  
+  ReqTotal = 32;
+  i = SkillLevel;
+  j = 1;
+  k = 1.1;
+  
+  do
+  {
+    //Do %SkillLEvel times
+    i = i - 1;
+    
+    k = k * 1.006;
+    k = k + 0.22;
 
-		ReqTotal = round(ReqTotal * k);
-		
-		iReq1 = round(ReqTotal * (1.0/3.0));
-		iReq2 = round(ReqTotal * (2.0/3.0));
-		
-		
-		if (iReq1 % 5 != 0 && iReq1%2 != 0 )
-		{
-			Do
-			{
-				iReq1 = iReq1 + 1;		
-				k = k + 0.012;				
-			} until (iReq1%5 == 0 || iReq1%2 == 0);
-		}
-		if (iReq2 % 5 != 0 && iReq2%2 != 0 )
-		{
-			Do
-			{
-				iReq2 = iReq2 + 1;			
-				k = k + 0.012;
-			} until (iReq2%5 == 0 || iReq2%2 == 0);
-		}
-		
-		j = j + 14;
-		iStat1 = iStat1 + (j / skillLevel + 1);
-		iStat2 = iStat2 + j;
-		
+    ReqTotal = round(ReqTotal * k);
+    
+    iReq1 = round(ReqTotal * (1.0/3.0));
+    iReq2 = round(ReqTotal * (2.0/3.0));
+    
+    
+    if (iReq1 % 5 != 0 && iReq1%2 != 0 )
+    {
+      Do
+      {
+        iReq1 = iReq1 + 1;    
+        k = k + 0.012;        
+      } until (iReq1%5 == 0 || iReq1%2 == 0);
+    }
+    if (iReq2 % 5 != 0 && iReq2%2 != 0 )
+    {
+      Do
+      {
+        iReq2 = iReq2 + 1;      
+        k = k + 0.012;
+      } until (iReq2%5 == 0 || iReq2%2 == 0);
+    }
+    
+    j = j + 14;
+    iStat1 = iStat1 + (j / skillLevel + 1);
+    iStat2 = iStat2 + j;
+    
 
-		
-	} until (i <= 0);
-		
-		
-	switch (StatType)
-	{
-		case "Stat1":
-			return iStat1;
-			break;
-		case "Stat2":
-			return iStat2;
-			break;
-		case "Req1":
-			return iReq1;
-			break;
-		case "Req2":
-			return iReq2;
-			break;
-	}
+    
+  } until (i <= 0);
+    
+    
+  switch (StatType)
+  {
+    case "Stat1":
+      return iStat1;
+      break;
+    case "Stat2":
+      return iStat2;
+      break;
+    case "Req1":
+      return iReq1;
+      break;
+    case "Req2":
+      return iReq2;
+      break;
+  }
 }
 
 

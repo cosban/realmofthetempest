@@ -24,13 +24,13 @@ class ROTT_NPC_Valimor_Wild_E extends ROTT_NPC_Container;
 public function initDialogue() {
   super.initDialogue();
   
-	// Intro
-	`NEW_NODE(GREETING, NUETRAL)
+  // Intro
+  `NEW_NODE(GREETING, NUETRAL)
     "A massive endeavor is like a beast.",
     ""
   `ENDNODE
   
-	`NEW_NODE(GREETING, NUETRAL)
+  `NEW_NODE(GREETING, NUETRAL)
     "Those born without richness in their lives",
     "cannot afford domesticated beasts."
   `ENDNODE
@@ -75,27 +75,27 @@ defaultProperties
   npcName=GENERIC
   
   // Background
-	begin object class=UI_Texture_Info Name=NPC_Background_Texture
-		componentTextures.add(Texture2D'GUI_NPC_Dialog.NPC_Background_Dark_Gray')
-	end object
-	
+  begin object class=UI_Texture_Info Name=NPC_Background_Texture
+    componentTextures.add(Texture2D'GUI_NPC_Dialog.NPC_Background_Dark_Gray')
+  end object
+  
   // Sprite container for transfer
-	begin object class=UI_Texture_Storage Name=NPC_Background
-		tag="NPC_Background"
-		images(0)=NPC_Background_Texture
-	end object
+  begin object class=UI_Texture_Storage Name=NPC_Background
+    tag="NPC_Background"
+    images(0)=NPC_Background_Texture
+  end object
   npcBackground=NPC_Background
   
   // NPC Texture
-	begin object class=UI_Texture_Info Name=NPC_Sprite_Texture
+  begin object class=UI_Texture_Info Name=NPC_Sprite_Texture
     componentTextures.add(Texture2D'NPCs.Tamers.NPC_Portrait_Tamer_Purple_360')
   end object
-	
+  
   // Sprite container for transfer
-	begin object class=UI_Texture_Storage Name=NPC_Sprites
-		tag="NPC_Sprites"
-		images(0)=NPC_Sprite_Texture
-	end object
+  begin object class=UI_Texture_Storage Name=NPC_Sprites
+    tag="NPC_Sprites"
+    images(0)=NPC_Sprite_Texture
+  end object
   npcSprites=NPC_Sprites
 }
 

@@ -49,7 +49,7 @@ defaultProperties
   itemName="Cerok Charm"
   
   // Item texture
-	itemTexture=Texture2D'ROTT_Items.Charms.Item_Charm_Red'
+  itemTexture=Texture2D'ROTT_Items.Charms.Item_Charm_Red'
   
   // Item text color
   itemFont=DEFAULT_SMALL_ORANGE

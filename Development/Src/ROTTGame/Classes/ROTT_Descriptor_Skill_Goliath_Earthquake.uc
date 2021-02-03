@@ -104,47 +104,47 @@ defaultProperties
   ///skillAttributes.add((attributeSet=COMBAT_ACTION_SET,mechanicType=HIT_CHANCE_OVERRIDE,tag="%chance",font=DEFAULT_SMALL_WHITE,returnType=INTEGER));
   
   // Skill Icon
-	begin object class=UI_Texture_Info Name=Encounter_Skill_Icon_Earthquake
+  begin object class=UI_Texture_Info Name=Encounter_Skill_Icon_Earthquake
     componentTextures.add(Texture2D'GUI_Skills.Encounter_Skill_Icon_Earthquake')
   end object
   
   // Skill Icon Container
-	begin object class=UI_Texture_Storage Name=Skill_Icon_Container
-		tag="Skill_Icon_Container"
+  begin object class=UI_Texture_Storage Name=Skill_Icon_Container
+    tag="Skill_Icon_Container"
     textureWidth=108
     textureHeight=108
-		images(0)=Encounter_Skill_Icon_Earthquake
-	end object
+    images(0)=Encounter_Skill_Icon_Earthquake
+  end object
   skillIcon=Skill_Icon_Container
-	
+  
   
   
   // Skill Animation
-	begin object class=UI_Texture_Info Name=SkillAnim_Earthquake_F1
+  begin object class=UI_Texture_Info Name=SkillAnim_Earthquake_F1
     componentTextures.add(Texture2D'GUI_Skills.SkillAnim_Earthquake_F1')
   end object
-	begin object class=UI_Texture_Info Name=SkillAnim_Earthquake_F2
+  begin object class=UI_Texture_Info Name=SkillAnim_Earthquake_F2
     componentTextures.add(Texture2D'GUI_Skills.SkillAnim_Earthquake_F2')
   end object
-	begin object class=UI_Texture_Info Name=SkillAnim_Earthquake_F3
+  begin object class=UI_Texture_Info Name=SkillAnim_Earthquake_F3
     componentTextures.add(Texture2D'GUI_Skills.SkillAnim_Earthquake_F3')
   end object
-	begin object class=UI_Texture_Info Name=SkillAnim_Earthquake_F4
+  begin object class=UI_Texture_Info Name=SkillAnim_Earthquake_F4
     componentTextures.add(Texture2D'GUI_Skills.SkillAnim_Earthquake_F4')
   end object
   
   // Skill Animation Container
-	begin object class=UI_Texture_Storage Name=Skill_Animation_Container
-		tag="Skill_Animation_Container"
+  begin object class=UI_Texture_Storage Name=Skill_Animation_Container
+    tag="Skill_Animation_Container"
     textureWidth=240
     textureHeight=240
-		images(0)=SkillAnim_Earthquake_F1
-		images(1)=SkillAnim_Earthquake_F2
-		images(2)=SkillAnim_Earthquake_F3
-		images(3)=SkillAnim_Earthquake_F4
-	end object
+    images(0)=SkillAnim_Earthquake_F1
+    images(1)=SkillAnim_Earthquake_F2
+    images(2)=SkillAnim_Earthquake_F3
+    images(3)=SkillAnim_Earthquake_F4
+  end object
   skillAnim=Skill_Animation_Container
-	
+  
 }
 
 

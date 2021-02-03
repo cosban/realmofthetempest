@@ -88,57 +88,57 @@ defaultProperties
 /*
 function int GetArmor(string StatType, int SkillLevel)
 {
-	//This function is for the armor glyph stats
-	
-	//Desired outcome
-	// Skill level		Chance		Armor
+  //This function is for the armor glyph stats
+  
+  //Desired outcome
+  // Skill level    Chance    Armor
 
-	//	1				40			1
-	//	2				55			1
-	//	3				70			1
-	//	4				85			1
-	//	5				55			2
-	//	6				70			2
-	//	7				85			2
-	//	8				55			3
-	//	9				70			3
-	//	10			85			3
+  //  1        40      1
+  //  2        55      1
+  //  3        70      1
+  //  4        85      1
+  //  5        55      2
+  //  6        70      2
+  //  7        85      2
+  //  8        55      3
+  //  9        70      3
+  //  10      85      3
 
-	
-	local int iArmor, i, j, k;
-	
-	iArmor = 0;
-	//iChance = 20;
-	i = 0;
-	j = 1;
-	k = 2;
-	
-	do
-	{
-		
-		iArmor = iArmor + j;
-		
-		if (k == 3)
-		{
-			k = 1;
-			j++;
-		}
-		
-		k = k + 1;
+  
+  local int iArmor, i, j, k;
+  
+  iArmor = 0;
+  //iChance = 20;
+  i = 0;
+  j = 1;
+  k = 2;
+  
+  do
+  {
+    
+    iArmor = iArmor + j;
+    
+    if (k == 3)
+    {
+      k = 1;
+      j++;
+    }
+    
+    k = k + 1;
 
-		i++;
-	} until (i >= skillLevel);
-		
-		
-	switch (StatType)
-	{
-		case "Stat":
-			return iArmor;
-			break;
-		case "Chance":
-			return 80;
-			break;
-	}
+    i++;
+  } until (i >= skillLevel);
+    
+    
+  switch (StatType)
+  {
+    case "Stat":
+      return iArmor;
+      break;
+    case "Chance":
+      return 80;
+      break;
+  }
 }
 **/
 

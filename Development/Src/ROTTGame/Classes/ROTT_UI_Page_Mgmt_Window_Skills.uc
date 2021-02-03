@@ -46,11 +46,11 @@ defaultProperties
   // Number of menu options
   selectOptionsCount=3
   
-	/** ===== Input ===== **/
-	begin object class=ROTT_Input_Handler Name=Input_A
+  /** ===== Input ===== **/
+  begin object class=ROTT_Input_Handler Name=Input_A
     inputName="XBoxTypeS_A"
-		buttonComponent=none
-	end object
+    buttonComponent=none
+  end object
   inputList.add(Input_A)
   
   /** ===== Textures ===== **/
@@ -67,29 +67,29 @@ defaultProperties
   
   /** ===== UI Components ===== **/
   // Buttons
-	begin object class=UI_Sprite Name=Button_Invest_1_Sprite
-		tag="Button_Invest_1_Sprite"
-		posX=132
-		posY=544
+  begin object class=UI_Sprite Name=Button_Invest_1_Sprite
+    tag="Button_Invest_1_Sprite"
+    posX=132
+    posY=544
     images(0)=Button_Invest_1
-	end object
-	componentList.add(Button_Invest_1_Sprite)
+  end object
+  componentList.add(Button_Invest_1_Sprite)
   
-	begin object class=UI_Sprite Name=Button_Set_Primary_Sprite
-		tag="Button_Set_Primary_Sprite"
-		posX=132
-		posY=624
+  begin object class=UI_Sprite Name=Button_Set_Primary_Sprite
+    tag="Button_Set_Primary_Sprite"
+    posX=132
+    posY=624
     images(0)=Button_Set_Primary
-	end object
-	componentList.add(Button_Set_Primary_Sprite)
+  end object
+  componentList.add(Button_Set_Primary_Sprite)
   
-	begin object class=UI_Sprite Name=Button_Set_Secondary_Sprite
-		tag="Button_Set_Secondary_Sprite"
-		posX=132
-		posY=704
+  begin object class=UI_Sprite Name=Button_Set_Secondary_Sprite
+    tag="Button_Set_Secondary_Sprite"
+    posX=132
+    posY=704
     images(0)=Button_Set_Secondary
-	end object
-	componentList.add(Button_Set_Secondary_Sprite)
+  end object
+  componentList.add(Button_Set_Secondary_Sprite)
   
 }
   

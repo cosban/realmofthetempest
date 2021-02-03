@@ -95,59 +95,59 @@ defaultProperties
   
   /** ===== Textures ===== **/
   // Tuna Bar
-	begin object class=UI_Texture_Info Name=Mana_Globe_Background
+  begin object class=UI_Texture_Info Name=Mana_Globe_Background
     componentTextures.add(Texture2D'GUI.Mana_Globe_Background')
   end object
-	begin object class=UI_Texture_Info Name=Mana_Globe
+  begin object class=UI_Texture_Info Name=Mana_Globe
     componentTextures.add(Texture2D'GUI.Mana_Globe')
     bFlipVerticalMask=true
   end object
-	begin object class=UI_Texture_Info Name=Mana_Globe_Cover
+  begin object class=UI_Texture_Info Name=Mana_Globe_Cover
     componentTextures.add(Texture2D'GUI.Mana_Globe_Cover')
   end object
   
   // Disc cap
-	begin object class=UI_Texture_Info Name=Disc_Cap
+  begin object class=UI_Texture_Info Name=Disc_Cap
     componentTextures.add(Texture2D'GUI.Mana_Disc_Cap')
   end object
   
-	/** ===== UI Components ===== **/
+  /** ===== UI Components ===== **/
   // Background
-	begin object class=UI_Sprite Name=Hero_Mana_Globe_Background
-		tag="Hero_Mana_Globe_Background"
+  begin object class=UI_Sprite Name=Hero_Mana_Globe_Background
+    tag="Hero_Mana_Globe_Background"
     posX=0
     posY=0
-		images(0)=Mana_Globe_Background
-	end object
-	componentList.add(Hero_Mana_Globe_Background)
-	
+    images(0)=Mana_Globe_Background
+  end object
+  componentList.add(Hero_Mana_Globe_Background)
+  
   // Bar
-	begin object class=UI_Sprite Name=Hero_Mana_Globe
-		tag="Hero_Mana_Globe"
+  begin object class=UI_Sprite Name=Hero_Mana_Globe
+    tag="Hero_Mana_Globe"
     posX=3
     posY=2
-		images(0)=Mana_Globe
-	end object
-	componentList.add(Hero_Mana_Globe)
-	
+    images(0)=Mana_Globe
+  end object
+  componentList.add(Hero_Mana_Globe)
+  
   // Disc Cap
-	begin object class=UI_Sprite Name=Hero_Mana_Disc_Cap
-		tag="Hero_Mana_Disc_Cap"
+  begin object class=UI_Sprite Name=Hero_Mana_Disc_Cap
+    tag="Hero_Mana_Disc_Cap"
     posX=14
     posY=88
-		images(0)=Disc_Cap
-	end object
-	componentList.add(Hero_Mana_Disc_Cap)
-	
+    images(0)=Disc_Cap
+  end object
+  componentList.add(Hero_Mana_Disc_Cap)
+  
   // Cover
-	begin object class=UI_Sprite Name=Hero_Mana_Globe_Cover
-		tag="Hero_Mana_Globe_Cover"
+  begin object class=UI_Sprite Name=Hero_Mana_Globe_Cover
+    tag="Hero_Mana_Globe_Cover"
     posX=0
     posY=0
-		images(0)=Mana_Globe_Cover
-	end object
-	componentList.add(Hero_Mana_Globe_Cover)
-	
+    images(0)=Mana_Globe_Cover
+  end object
+  componentList.add(Hero_Mana_Globe_Cover)
+  
 }
 
 

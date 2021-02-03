@@ -376,21 +376,21 @@ protected function navigationRoutineB() {
 defaultProperties
 {
   /** ===== Input ===== **/
-	begin object class=ROTT_Input_Handler Name=Input_A
+  begin object class=ROTT_Input_Handler Name=Input_A
     inputName="XBoxTypeS_A"
-		buttonComponent=none
-	end object
+    buttonComponent=none
+  end object
   inputList.add(Input_A)
   
-	begin object class=ROTT_Input_Handler Name=Input_B
+  begin object class=ROTT_Input_Handler Name=Input_B
     inputName="XBoxTypeS_B"
     buttonComponent=none
-	end object
+  end object
   inputList.add(Input_B)
   
   /** ===== Textures ===== **/
   // Stats Background
-	begin object class=UI_Texture_Info Name=Menu_Background_Stats
+  begin object class=UI_Texture_Info Name=Menu_Background_Stats
     componentTextures.add(Texture2D'GUI.Menu_Background_Stats')
   end object
   
@@ -401,30 +401,30 @@ defaultProperties
   
   /** ===== UI Components ===== **/
   // Stats Page Background
-	begin object class=UI_Sprite Name=Stats_Page_Background
-		tag="Stats_Page_Background"
-		posX=720
-		posY=0
-		posXEnd=NATIVE_WIDTH
-		posYEnd=NATIVE_HEIGHT
-		images(0)=Menu_Background_Stats
-	end object
-	componentList.add(Stats_Page_Background)
+  begin object class=UI_Sprite Name=Stats_Page_Background
+    tag="Stats_Page_Background"
+    posX=720
+    posY=0
+    posXEnd=NATIVE_WIDTH
+    posYEnd=NATIVE_HEIGHT
+    images(0)=Menu_Background_Stats
+  end object
+  componentList.add(Stats_Page_Background)
 
   // Header
-	begin object class=ROTT_UI_Character_Sheet_Header Name=Character_Sheet_Header
-		tag="Character_Sheet_Header"
-	end object
-	componentList.add(Character_Sheet_Header)
-	
-	// Stat Selection Boxes
-	begin object class=UI_Sprite Name=Stats_Border_Boxes
-		tag="Stats_Border_Boxes"
-		posX=757
-		posY=194
-		images(0)=Stat_Boxes_Background
-	end object
-	componentList.add(Stats_Border_Boxes)
+  begin object class=ROTT_UI_Character_Sheet_Header Name=Character_Sheet_Header
+    tag="Character_Sheet_Header"
+  end object
+  componentList.add(Character_Sheet_Header)
+  
+  // Stat Selection Boxes
+  begin object class=UI_Sprite Name=Stats_Border_Boxes
+    tag="Stats_Border_Boxes"
+    posX=757
+    posY=194
+    images(0)=Stat_Boxes_Background
+  end object
+  componentList.add(Stats_Border_Boxes)
   
   // Stats Selection Component
   begin object class=ROTT_UI_Stats_Selector Name=Stats_Selector
@@ -439,8 +439,8 @@ defaultProperties
     tag="Statistic_Labels"
     posX=759
     posY=0
-		posXEnd=1344
-		posYEnd=765
+    posXEnd=1344
+    posYEnd=765
   end object
   componentList.add(Statistic_Labels)
   
@@ -449,20 +449,20 @@ defaultProperties
     tag="Statistic_Values"
     posX=0
     posY=0
-		posXEnd=1397
-		posYEnd=NATIVE_HEIGHT
+    posXEnd=1397
+    posYEnd=NATIVE_HEIGHT
   end object
   componentList.add(Statistic_Values)
   
   // Experience Bar
-	begin object class=ROTT_UI_Displayer_Experience Name=Experience_Bar_UI
-		tag="Experience_Bar_UI"
-		posX=720
-		posY=737
-		posXEnd=NATIVE_WIDTH
-		posYEnd=NATIVE_HEIGHT
-	end object
-	componentList.add(Experience_Bar_UI)
+  begin object class=ROTT_UI_Displayer_Experience Name=Experience_Bar_UI
+    tag="Experience_Bar_UI"
+    posX=720
+    posY=737
+    posXEnd=NATIVE_WIDTH
+    posYEnd=NATIVE_HEIGHT
+  end object
+  componentList.add(Experience_Bar_UI)
   
   /** ===================================================================== **/
   

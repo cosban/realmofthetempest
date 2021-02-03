@@ -60,25 +60,25 @@ defaultProperties
   
   /** ===== Textures ===== **/
   // Tuna Bar
-	begin object class=UI_Texture_Info Name=Tuna_Background
+  begin object class=UI_Texture_Info Name=Tuna_Background
     componentTextures.add(Texture2D'GUI.Encounter_TUNA_Background')
   end object
   begin object class=UI_Texture_Info Name=Tuna_Bar
     componentTextures.add(Texture2D'GUI.Encounter_TUNA_Bar')
   end object
-	begin object class=UI_Texture_Info Name=Tuna_Cover
+  begin object class=UI_Texture_Info Name=Tuna_Cover
     componentTextures.add(Texture2D'GUI.Encounter_TUNA_Cover')
   end object
   
-	/** ===== UI Components ===== **/
+  /** ===== UI Components ===== **/
   // Background
-	begin object class=UI_Sprite Name=Combat_Tuna_Background
-		tag="Combat_Tuna_Background"
+  begin object class=UI_Sprite Name=Combat_Tuna_Background
+    tag="Combat_Tuna_Background"
     posX=10
     posY=8
-		images(0)=Tuna_Background
-	end object
-	componentList.add(Combat_Tuna_Background)
+    images(0)=Tuna_Background
+  end object
+  componentList.add(Combat_Tuna_Background)
 
   // Bar
   begin object class=UI_Sprite Name=Combat_Tuna_Bar

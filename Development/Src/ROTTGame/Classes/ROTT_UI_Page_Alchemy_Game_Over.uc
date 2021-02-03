@@ -66,10 +66,10 @@ event onPushPageEvent() {
   
   // Move to selected enchantment
   UI_Sprite(findComp("Enchantment_Selection_List")).updatePosition(
-		364 - 120 * index,
-		203,
-		2664 - 120 * index,
-		303
+    364 - 120 * index,
+    203,
+    2664 - 120 * index,
+    303
   );
   
   level = alchemyScene.enchantmentLevel;
@@ -146,159 +146,159 @@ public function onNavigateRight();
 defaultProperties
 {
   /** ===== Input ===== **/
-	begin object class=ROTT_Input_Handler Name=Input_A
+  begin object class=ROTT_Input_Handler Name=Input_A
     inputName="XBoxTypeS_A"
     buttonComponent=none
-	end object
+  end object
   inputList.add(Input_A)
-	begin object class=ROTT_Input_Handler Name=Input_B
+  begin object class=ROTT_Input_Handler Name=Input_B
     inputName="XBoxTypeS_B"
     buttonComponent=none
-	end object
+  end object
   inputList.add(Input_B)
   
-	/** ===== Texture ===== **/
-	// Background
+  /** ===== Texture ===== **/
+  // Background
   begin object class=UI_Texture_Info Name=Menu_Background
     componentTextures.add(Texture2D'ROTT_Alchemy.Alchemy_Menu_Background')
   end object
   begin object class=UI_Texture_Info Name=Window_Background
     componentTextures.add(Texture2D'ROTT_Alchemy.Service.Alchemy_Game_Over_Window')
   end object
-	
-	// Enchantment list
-	begin object class=UI_Texture_Info Name=Enchantment_List
+  
+  // Enchantment list
+  begin object class=UI_Texture_Info Name=Enchantment_List
     componentTextures.add(Texture2D'ROTT_Alchemy.Service.Enchantment_List')
   end object
-	
-	/** ===== Components ===== **/
+  
+  /** ===== Components ===== **/
   // Enchantment list (under background)
-	begin object class=UI_Sprite Name=Enchantment_Selection_List
-		tag="Enchantment_Selection_List" 
-		posX=364
-		posY=203
-		posXEnd=2664
-		posYEnd=303
-		images(0)=Enchantment_List
-	end object
-	componentList.Add(Enchantment_Selection_List)
+  begin object class=UI_Sprite Name=Enchantment_Selection_List
+    tag="Enchantment_Selection_List" 
+    posX=364
+    posY=203
+    posXEnd=2664
+    posYEnd=303
+    images(0)=Enchantment_List
+  end object
+  componentList.Add(Enchantment_Selection_List)
   
   // Background
-	begin object class=UI_Sprite Name=Alchemy_Game_Over_Background
-		tag="Alchemy_Game_Over_Background"
-		posX=0
-		posY=0
-		images(0)=Menu_Background
-	end object
-	componentList.add(Alchemy_Game_Over_Background)
+  begin object class=UI_Sprite Name=Alchemy_Game_Over_Background
+    tag="Alchemy_Game_Over_Background"
+    posX=0
+    posY=0
+    images(0)=Menu_Background
+  end object
+  componentList.add(Alchemy_Game_Over_Background)
   
   // Background
-	begin object class=UI_Sprite Name=Alchemy_Game_Over_Window
-		tag="Alchemy_Game_Over_Window"
-		posX=370
-		posY=100
-		images(0)=Window_Background
-	end object
-	componentList.add(Alchemy_Game_Over_Window)
+  begin object class=UI_Sprite Name=Alchemy_Game_Over_Window
+    tag="Alchemy_Game_Over_Window"
+    posX=370
+    posY=100
+    images(0)=Window_Background
+  end object
+  componentList.add(Alchemy_Game_Over_Window)
   
-	// Header
-	begin object class=UI_Label Name=Alchemy_Game_Over_Enchantment_Name
-		tag="Alchemy_Game_Over_Enchantment_Name"
-		posX=0
-		posY=125
-		posXEnd=NATIVE_WIDTH
-		posYEnd=161
-		alignX=CENTER
-		alignY=TOP
-		fontStyle=DEFAULT_LARGE_WHITE
-		labelText="Mystic Marble"
-	end object
-	componentList.add(Alchemy_Game_Over_Enchantment_Name)
-	
-	// Enchantment effect description (Line #1)
-	begin object class=UI_Label Name=Alchemy_Game_Over_Enchantment_Description_1
-		tag="Alchemy_Game_Over_Enchantment_Description_1"
-		posX=0
-		posY=340
-		posXEnd=NATIVE_WIDTH
-		posYEnd=361
-		alignX=CENTER
-		alignY=TOP
-		fontStyle=DEFAULT_SMALL_WHITE
-		labelText="Increasese maximum mana for every"
-	end object
-	componentList.add(Alchemy_Game_Over_Enchantment_Description_1)
-	
-	// Enchantment effect description (Line #2)
-	begin object class=UI_Label Name=Alchemy_Game_Over_Enchantment_Description_2
-		tag="Alchemy_Game_Over_Enchantment_Description_2"
-		posX=0
-		posY=367
-		posXEnd=NATIVE_WIDTH
-		posYEnd=388
-		alignX=CENTER
-		alignY=TOP
-		fontStyle=DEFAULT_SMALL_WHITE
-		labelText="party of heroes"
-	end object
-	componentList.add(Alchemy_Game_Over_Enchantment_Description_2)
-		
-	// Enchantment effect label
-	begin object class=UI_Label Name=Alchemy_Game_Over_Enchantment_Round_Bonus_Label
-		tag="Alchemy_Game_Over_Enchantment_Round_Bonus_Label"
-		posX=0
-		posY=440
-		posXEnd=NATIVE_WIDTH
-		posYEnd=498
-		fontStyle=DEFAULT_SMALL_GREEN
-		labelText="+2 Health Regen for each round cleared"
-		alignX=CENTER
-		alignY=TOP
-	end object
-	componentList.add(Alchemy_Game_Over_Enchantment_Round_Bonus_Label)
-	
-	// Enchantment level bonus
-	begin object class=UI_Label Name=Alchemy_Game_Over_Enchantment_Bonus_Label
-		tag="Alchemy_Game_Over_Enchantment_Bonus_Label"
-		posX=0
-		posY=517
-		posXEnd=NATIVE_WIDTH
-		posYEnd=575
-		fontStyle=DEFAULT_SMALL_WHITE
-		labelText="Level Bonus: 1"
-		alignX=CENTER
-		alignY=TOP
-	end object
-	componentList.add(Alchemy_Game_Over_Enchantment_Bonus_Label)
-	
-	// Enchantment level bonus
-	begin object class=UI_Label Name=Alchemy_Game_Over_Enchantment_Added_Boost
-		tag="Alchemy_Game_Over_Enchantment_Added_Boost"
-		posX=0
-		posY=594
-		posXEnd=NATIVE_WIDTH
-		posYEnd=652
-		fontStyle=DEFAULT_SMALL_GREEN
-		labelText="Adding +12 Health Regen"
-		alignX=CENTER
-		alignY=TOP
-	end object
-	componentList.add(Alchemy_Game_Over_Enchantment_Added_Boost)
-	
-	// Enchantment level bonus
-	begin object class=UI_Label Name=Alchemy_Game_Over_Enchantment_Total_Boost
-		tag="Alchemy_Game_Over_Enchantment_Total_Boost"
-		posX=0
-		posY=671
-		posXEnd=NATIVE_WIDTH
-		posYEnd=729
-		fontStyle=DEFAULT_SMALL_ORANGE
-		labelText="New Total: +22 Health Regen"
-		alignX=CENTER
-		alignY=TOP
-	end object
-	componentList.add(Alchemy_Game_Over_Enchantment_Total_Boost)
-	
+  // Header
+  begin object class=UI_Label Name=Alchemy_Game_Over_Enchantment_Name
+    tag="Alchemy_Game_Over_Enchantment_Name"
+    posX=0
+    posY=125
+    posXEnd=NATIVE_WIDTH
+    posYEnd=161
+    alignX=CENTER
+    alignY=TOP
+    fontStyle=DEFAULT_LARGE_WHITE
+    labelText="Mystic Marble"
+  end object
+  componentList.add(Alchemy_Game_Over_Enchantment_Name)
+  
+  // Enchantment effect description (Line #1)
+  begin object class=UI_Label Name=Alchemy_Game_Over_Enchantment_Description_1
+    tag="Alchemy_Game_Over_Enchantment_Description_1"
+    posX=0
+    posY=340
+    posXEnd=NATIVE_WIDTH
+    posYEnd=361
+    alignX=CENTER
+    alignY=TOP
+    fontStyle=DEFAULT_SMALL_WHITE
+    labelText="Increasese maximum mana for every"
+  end object
+  componentList.add(Alchemy_Game_Over_Enchantment_Description_1)
+  
+  // Enchantment effect description (Line #2)
+  begin object class=UI_Label Name=Alchemy_Game_Over_Enchantment_Description_2
+    tag="Alchemy_Game_Over_Enchantment_Description_2"
+    posX=0
+    posY=367
+    posXEnd=NATIVE_WIDTH
+    posYEnd=388
+    alignX=CENTER
+    alignY=TOP
+    fontStyle=DEFAULT_SMALL_WHITE
+    labelText="party of heroes"
+  end object
+  componentList.add(Alchemy_Game_Over_Enchantment_Description_2)
+    
+  // Enchantment effect label
+  begin object class=UI_Label Name=Alchemy_Game_Over_Enchantment_Round_Bonus_Label
+    tag="Alchemy_Game_Over_Enchantment_Round_Bonus_Label"
+    posX=0
+    posY=440
+    posXEnd=NATIVE_WIDTH
+    posYEnd=498
+    fontStyle=DEFAULT_SMALL_GREEN
+    labelText="+2 Health Regen for each round cleared"
+    alignX=CENTER
+    alignY=TOP
+  end object
+  componentList.add(Alchemy_Game_Over_Enchantment_Round_Bonus_Label)
+  
+  // Enchantment level bonus
+  begin object class=UI_Label Name=Alchemy_Game_Over_Enchantment_Bonus_Label
+    tag="Alchemy_Game_Over_Enchantment_Bonus_Label"
+    posX=0
+    posY=517
+    posXEnd=NATIVE_WIDTH
+    posYEnd=575
+    fontStyle=DEFAULT_SMALL_WHITE
+    labelText="Level Bonus: 1"
+    alignX=CENTER
+    alignY=TOP
+  end object
+  componentList.add(Alchemy_Game_Over_Enchantment_Bonus_Label)
+  
+  // Enchantment level bonus
+  begin object class=UI_Label Name=Alchemy_Game_Over_Enchantment_Added_Boost
+    tag="Alchemy_Game_Over_Enchantment_Added_Boost"
+    posX=0
+    posY=594
+    posXEnd=NATIVE_WIDTH
+    posYEnd=652
+    fontStyle=DEFAULT_SMALL_GREEN
+    labelText="Adding +12 Health Regen"
+    alignX=CENTER
+    alignY=TOP
+  end object
+  componentList.add(Alchemy_Game_Over_Enchantment_Added_Boost)
+  
+  // Enchantment level bonus
+  begin object class=UI_Label Name=Alchemy_Game_Over_Enchantment_Total_Boost
+    tag="Alchemy_Game_Over_Enchantment_Total_Boost"
+    posX=0
+    posY=671
+    posXEnd=NATIVE_WIDTH
+    posYEnd=729
+    fontStyle=DEFAULT_SMALL_ORANGE
+    labelText="New Total: +22 Health Regen"
+    alignX=CENTER
+    alignY=TOP
+  end object
+  componentList.add(Alchemy_Game_Over_Enchantment_Total_Boost)
+  
 }
 
 

@@ -118,175 +118,175 @@ defaultProperties
   
   /** ===== UI Components ===== **/
   // Primary stat - Vitality Label
-	begin object class=UI_Label Name=Primary_Stat_Vitality_Label
-		tag="Primary_Stat_Vitality_Label"
+  begin object class=UI_Label Name=Primary_Stat_Vitality_Label
+    tag="Primary_Stat_Vitality_Label"
     bRelativeEnd=true
-		posY=201
-		posXEnd=-403
+    posY=201
+    posXEnd=-403
     alignX=RIGHT
     alignY=TOP
-		fontStyle=DEFAULT_SMALL_WHITE
-		labelText="10"
-	end object
-	componentList.add(Primary_Stat_Vitality_Label)
-	
+    fontStyle=DEFAULT_SMALL_WHITE
+    labelText="10"
+  end object
+  componentList.add(Primary_Stat_Vitality_Label)
+  
   // Primary stat - Strength Label
-	begin object class=UI_Label Name=Primary_Stat_Strength_Label
-		tag="Primary_Stat_Strength_Label"
+  begin object class=UI_Label Name=Primary_Stat_Strength_Label
+    tag="Primary_Stat_Strength_Label"
     bRelativeEnd=true
-		posY=261
-		posXEnd=-403
+    posY=261
+    posXEnd=-403
     alignX=RIGHT
     alignY=TOP
-		fontStyle=DEFAULT_SMALL_WHITE
-		labelText="20"
-	end object
-	componentList.add(Primary_Stat_Strength_Label)
-	
+    fontStyle=DEFAULT_SMALL_WHITE
+    labelText="20"
+  end object
+  componentList.add(Primary_Stat_Strength_Label)
+  
   // Primary stat - Courage Label
-	begin object class=UI_Label Name=Primary_Stat_Courage_Label
-		tag="Primary_Stat_Courage_Label"
+  begin object class=UI_Label Name=Primary_Stat_Courage_Label
+    tag="Primary_Stat_Courage_Label"
     bRelativeEnd=true
-		posY=345
-		posXEnd=-403
+    posY=345
+    posXEnd=-403
     alignX=RIGHT
     alignY=TOP
-		fontStyle=DEFAULT_SMALL_WHITE
-		labelText="30"
-	end object
-	componentList.add(Primary_Stat_Courage_Label)
-	
+    fontStyle=DEFAULT_SMALL_WHITE
+    labelText="30"
+  end object
+  componentList.add(Primary_Stat_Courage_Label)
+  
   // Primary stat - Focus Label
-	begin object class=UI_Label Name=Primary_Stat_Focus_Label
-		tag="Primary_Stat_Focus_Label"
+  begin object class=UI_Label Name=Primary_Stat_Focus_Label
+    tag="Primary_Stat_Focus_Label"
     bRelativeEnd=true
-		posY=575
-		posXEnd=-403
+    posY=575
+    posXEnd=-403
     alignX=RIGHT
     alignY=TOP
-		fontStyle=DEFAULT_SMALL_WHITE
-		labelText="40"
-	end object
-	componentList.add(Primary_Stat_Focus_Label)
-	
+    fontStyle=DEFAULT_SMALL_WHITE
+    labelText="40"
+  end object
+  componentList.add(Primary_Stat_Focus_Label)
+  
   
   // Sub stat - Health Label
-	begin object class=UI_Label Name=Sub_Stat_Label_1
-		tag="Sub_Stat_Label_1"
+  begin object class=UI_Label Name=Sub_Stat_Label_1
+    tag="Sub_Stat_Label_1"
     bRelativeEnd=true
-		posY=201
-		posXEnd=0
-		alignX=RIGHT
-		alignY=TOP
-		fontStyle=DEFAULT_SMALL_WHITE
-		labelText="5"
-	end object
-	componentList.add(Sub_Stat_Label_1)
-	
+    posY=201
+    posXEnd=0
+    alignX=RIGHT
+    alignY=TOP
+    fontStyle=DEFAULT_SMALL_WHITE
+    labelText="5"
+  end object
+  componentList.add(Sub_Stat_Label_1)
+  
   // Sub stat - Physical Damage Label
-	begin object class=UI_Label Name=Sub_Stat_Label_2
-		tag="Sub_Stat_Label_2"
+  begin object class=UI_Label Name=Sub_Stat_Label_2
+    tag="Sub_Stat_Label_2"
     bRelativeEnd=true
-		posY=261
-		posXEnd=0
-		alignX=RIGHT
-		alignY=TOP
-		fontStyle=DEFAULT_SMALL_WHITE
-		labelText="5"
-	end object
-	componentList.add(Sub_Stat_Label_2)
-	
+    posY=261
+    posXEnd=0
+    alignX=RIGHT
+    alignY=TOP
+    fontStyle=DEFAULT_SMALL_WHITE
+    labelText="5"
+  end object
+  componentList.add(Sub_Stat_Label_2)
+  
   // Sub stat - Attack Interval Label
-	begin object class=UI_Label Name=Sub_Stat_Label_3
-		tag="Sub_Stat_Label_3"
+  begin object class=UI_Label Name=Sub_Stat_Label_3
+    tag="Sub_Stat_Label_3"
     bRelativeEnd=true
-		posY=345
-		posXEnd=0
-		alignX=RIGHT
-		alignY=TOP
-		fontStyle=DEFAULT_SMALL_WHITE
-		labelText="5"
-	end object
-	componentList.add(Sub_Stat_Label_3)
-	
+    posY=345
+    posXEnd=0
+    alignX=RIGHT
+    alignY=TOP
+    fontStyle=DEFAULT_SMALL_WHITE
+    labelText="5"
+  end object
+  componentList.add(Sub_Stat_Label_3)
+  
   // Sub stat - Critical Chance Label
-	begin object class=UI_Label Name=Sub_Stat_Label_4
-		tag="Sub_Stat_Label_4"
+  begin object class=UI_Label Name=Sub_Stat_Label_4
+    tag="Sub_Stat_Label_4"
     bRelativeEnd=true
-		posY=403
-		posXEnd=0
-		alignX=RIGHT
-		alignY=TOP
-		fontStyle=DEFAULT_SMALL_WHITE
-		labelText="5"
-	end object
-	componentList.add(Sub_Stat_Label_4)
-	
+    posY=403
+    posXEnd=0
+    alignX=RIGHT
+    alignY=TOP
+    fontStyle=DEFAULT_SMALL_WHITE
+    labelText="5"
+  end object
+  componentList.add(Sub_Stat_Label_4)
+  
   // Sub stat - Multiplier Label
-	begin object class=UI_Label Name=Sub_Stat_Label_5
-		tag="Sub_Stat_Label_5"
+  begin object class=UI_Label Name=Sub_Stat_Label_5
+    tag="Sub_Stat_Label_5"
     bRelativeEnd=true
-		posY=461
-		posXEnd=0
-		alignX=RIGHT
-		alignY=TOP
-		fontStyle=DEFAULT_SMALL_WHITE
-		labelText="5"
-	end object
-	componentList.add(Sub_Stat_Label_5)
-	
+    posY=461
+    posXEnd=0
+    alignX=RIGHT
+    alignY=TOP
+    fontStyle=DEFAULT_SMALL_WHITE
+    labelText="5"
+  end object
+  componentList.add(Sub_Stat_Label_5)
+  
   // Sub stat - Accuracy Label
-	begin object class=UI_Label Name=Sub_Stat_Label_6
-		tag="Sub_Stat_Label_6"
+  begin object class=UI_Label Name=Sub_Stat_Label_6
+    tag="Sub_Stat_Label_6"
     bRelativeEnd=true
-		posY=519
-		posXEnd=0
-		alignX=RIGHT
-		alignY=TOP
-		fontStyle=DEFAULT_SMALL_WHITE
-		labelText="5"
-	end object
-	componentList.add(Sub_Stat_Label_6)
-	
+    posY=519
+    posXEnd=0
+    alignX=RIGHT
+    alignY=TOP
+    fontStyle=DEFAULT_SMALL_WHITE
+    labelText="5"
+  end object
+  componentList.add(Sub_Stat_Label_6)
+  
   // Sub stat - Mana Label
-	begin object class=UI_Label Name=Sub_Stat_Label_7
-		tag="Sub_Stat_Label_7"
+  begin object class=UI_Label Name=Sub_Stat_Label_7
+    tag="Sub_Stat_Label_7"
     bRelativeEnd=true
-		posY=575
-		posXEnd=0
-		alignX=RIGHT
-		alignY=TOP
-		fontStyle=DEFAULT_SMALL_WHITE
-		labelText="5"
-	end object
-	componentList.add(Sub_Stat_Label_7)
-	
+    posY=575
+    posXEnd=0
+    alignX=RIGHT
+    alignY=TOP
+    fontStyle=DEFAULT_SMALL_WHITE
+    labelText="5"
+  end object
+  componentList.add(Sub_Stat_Label_7)
+  
   // Sub stat - Dodge Label
-	begin object class=UI_Label Name=Sub_Stat_Label_8
-		tag="Sub_Stat_Label_8"
+  begin object class=UI_Label Name=Sub_Stat_Label_8
+    tag="Sub_Stat_Label_8"
     bRelativeEnd=true
-		posY=632
-		posXEnd=0
-		alignX=RIGHT
-		alignY=TOP
-		fontStyle=DEFAULT_SMALL_WHITE
-		labelText="5"
-	end object
-	componentList.add(Sub_Stat_Label_8)
-	
+    posY=632
+    posXEnd=0
+    alignX=RIGHT
+    alignY=TOP
+    fontStyle=DEFAULT_SMALL_WHITE
+    labelText="5"
+  end object
+  componentList.add(Sub_Stat_Label_8)
+  
   // Sub stat - Threshold Label
-	begin object class=UI_Label Name=Sub_Stat_Label_9
-		tag="Sub_Stat_Label_9"
+  begin object class=UI_Label Name=Sub_Stat_Label_9
+    tag="Sub_Stat_Label_9"
     bRelativeEnd=true
-		posY=690
-		posXEnd=0
-		alignX=RIGHT
-		alignY=TOP
-		fontStyle=DEFAULT_SMALL_WHITE
-		labelText="5"
-	end object
-	componentList.add(Sub_Stat_Label_9)
-	
+    posY=690
+    posXEnd=0
+    alignX=RIGHT
+    alignY=TOP
+    fontStyle=DEFAULT_SMALL_WHITE
+    labelText="5"
+  end object
+  componentList.add(Sub_Stat_Label_9)
+  
 }
   
   

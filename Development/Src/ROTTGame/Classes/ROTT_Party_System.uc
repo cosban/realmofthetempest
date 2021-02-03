@@ -35,10 +35,21 @@ public function initSystem() {
  *===========================================================================*/
 public function addParty() {
   local ROTT_Party newParty;
+  
+  // Create a new party object
   newParty = new(self) class'ROTT_Party';
   newParty.initialize(parties.length);
+  
+  // Add to party list
   parties.addItem(newParty);
-	setActiveParty(parties.length - 1);
+  
+  // Set newest party as active party
+  setActiveParty(parties.length - 1);
+  
+  // Unlock hyper glyphs with multi parties
+  if (getNumberOfParties() > 1) {
+    gameInfo.playerProfile.hyperUnlocked = true;
+  }
 }
 
 /*=============================================================================

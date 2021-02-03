@@ -112,88 +112,88 @@ defaultProperties
   
   /** ===== Textures ===== **/
   // Health Globe
-	begin object class=UI_Texture_Info Name=Health_Globe_Background
+  begin object class=UI_Texture_Info Name=Health_Globe_Background
     componentTextures.add(Texture2D'GUI.Health_Globe_Background')
   end object
-	begin object class=UI_Texture_Info Name=Health_Globe
+  begin object class=UI_Texture_Info Name=Health_Globe
     componentTextures.add(Texture2D'GUI.Health_Globe')
     bFlipVerticalMask=true
   end object
-	begin object class=UI_Texture_Info Name=Health_Globe_Cover
+  begin object class=UI_Texture_Info Name=Health_Globe_Cover
     componentTextures.add(Texture2D'GUI.Health_Globe_Cover')
   end object
   
   // Resurrection
-	begin object class=UI_Texture_Info Name=Resurrection_Globe
+  begin object class=UI_Texture_Info Name=Resurrection_Globe
     componentTextures.add(Texture2D'GUI.Resurrection_Globe')
     drawColor=(R=255,G=255,B=255,A=127)
   end object
-	begin object class=UI_Texture_Info Name=Resurrection_Disc_Cap
+  begin object class=UI_Texture_Info Name=Resurrection_Disc_Cap
     componentTextures.add(Texture2D'GUI.Resurrection_Disc_Cap')
   end object
   
   // Disc cap
-	begin object class=UI_Texture_Info Name=Disc_Cap
+  begin object class=UI_Texture_Info Name=Disc_Cap
     componentTextures.add(Texture2D'GUI.Health_Disc_Cap')
   end object
   
   // Threshold markers
-	begin object class=UI_Texture_Info Name=Threshold_Marker_Red
+  begin object class=UI_Texture_Info Name=Threshold_Marker_Red
     componentTextures.add(Texture2D'GUI.Threshold_Marker_Red')
   end object
-	begin object class=UI_Texture_Info Name=Threshold_Marker_Gold
+  begin object class=UI_Texture_Info Name=Threshold_Marker_Gold
     componentTextures.add(Texture2D'GUI.Threshold_Marker_Gold')
   end object
   
-	/** ===== UI Components ===== **/
+  /** ===== UI Components ===== **/
   // Background
-	begin object class=UI_Sprite Name=Hero_Health_Globe_Background
-		tag="Hero_Health_Globe_Background"
+  begin object class=UI_Sprite Name=Hero_Health_Globe_Background
+    tag="Hero_Health_Globe_Background"
     posX=0
     posY=0
-		images(0)=Health_Globe_Background
-	end object
-	componentList.add(Hero_Health_Globe_Background)
-	
+    images(0)=Health_Globe_Background
+  end object
+  componentList.add(Hero_Health_Globe_Background)
+  
   // Globe
-	begin object class=UI_Sprite Name=Hero_Health_Globe
-		tag="Hero_Health_Globe"
+  begin object class=UI_Sprite Name=Hero_Health_Globe
+    tag="Hero_Health_Globe"
     posX=8
     posY=5
-		images(0)=Health_Globe
-		images(1)=Resurrection_Globe
-	end object
-	componentList.add(Hero_Health_Globe)
-	
+    images(0)=Health_Globe
+    images(1)=Resurrection_Globe
+  end object
+  componentList.add(Hero_Health_Globe)
+  
   // Disc Cap
-	begin object class=UI_Sprite Name=Hero_Health_Disc_Cap
-		tag="Hero_Health_Disc_Cap"
+  begin object class=UI_Sprite Name=Hero_Health_Disc_Cap
+    tag="Hero_Health_Disc_Cap"
     posX=10
     posY=88
-		images(0)=Disc_Cap
-		images(1)=Resurrection_Disc_Cap
-	end object
-	componentList.add(Hero_Health_Disc_Cap)
-	
+    images(0)=Disc_Cap
+    images(1)=Resurrection_Disc_Cap
+  end object
+  componentList.add(Hero_Health_Disc_Cap)
+  
   // Cover
-	begin object class=UI_Sprite Name=Hero_Health_Globe_Cover
-		tag="Hero_Health_Globe_Cover"
+  begin object class=UI_Sprite Name=Hero_Health_Globe_Cover
+    tag="Hero_Health_Globe_Cover"
     posX=0
     posY=0
-		images(0)=Health_Globe_Cover
-	end object
-	componentList.add(Hero_Health_Globe_Cover)
-	
+    images(0)=Health_Globe_Cover
+  end object
+  componentList.add(Hero_Health_Globe_Cover)
+  
   // Morale Threshold
-	begin object class=UI_Sprite Name=Threshold_Marker
-		tag="Threshold_Marker"
-		posX=168
-		posY=27
-		images(0)=Threshold_Marker_Red
-		images(1)=Threshold_Marker_Red
-		images(2)=Threshold_Marker_Gold
-	end object
-	componentList.add(Threshold_Marker)
+  begin object class=UI_Sprite Name=Threshold_Marker
+    tag="Threshold_Marker"
+    posX=168
+    posY=27
+    images(0)=Threshold_Marker_Red
+    images(1)=Threshold_Marker_Red
+    images(2)=Threshold_Marker_Gold
+  end object
+  componentList.add(Threshold_Marker)
   
 }
 

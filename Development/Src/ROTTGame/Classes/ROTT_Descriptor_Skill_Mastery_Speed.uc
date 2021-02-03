@@ -72,48 +72,48 @@ protected function float attributeInfo
  * getStats()
  *===========================================================================*/
 function int getStats(string StatType, int SkillLevel) {
-	local int iStat, iReq, i, j, k;
-	
-	if (SkillLevel == 0)
-	{
-		return 0;
-	}
-	
-	iStat = 0;
-	iReq = 0;
-	i = SkillLevel;
-	j = 18;
-	k = 12;
-	
-	do
-	{
-		//Do %SkillLevel times
-		i = i - 1;
-		
-		k = k + 5;
-		iReq = iReq + k;
-		
-		if (iReq % 5 != 0 && iReq%2 != 0 )
-		{
-			Do
-			{
-				iReq = iReq + 1;
-				k = k + 1;				
-			} until (iReq%5 == 0 || iReq%2 == 0);
-		}
-		
-		iStat = iStat + j;
-		j = j + (12 * i) + 8;
-		
-	} until (i <= 0);
-		
-		
-	switch (StatType)	{
-		case "Stat":
-			return iStat;
-		case "Req":
-			return iReq;
-	}
+  local int iStat, iReq, i, j, k;
+  
+  if (SkillLevel == 0)
+  {
+    return 0;
+  }
+  
+  iStat = 0;
+  iReq = 0;
+  i = SkillLevel;
+  j = 18;
+  k = 12;
+  
+  do
+  {
+    //Do %SkillLevel times
+    i = i - 1;
+    
+    k = k + 5;
+    iReq = iReq + k;
+    
+    if (iReq % 5 != 0 && iReq%2 != 0 )
+    {
+      Do
+      {
+        iReq = iReq + 1;
+        k = k + 1;        
+      } until (iReq%5 == 0 || iReq%2 == 0);
+    }
+    
+    iStat = iStat + j;
+    j = j + (12 * i) + 8;
+    
+  } until (i <= 0);
+    
+    
+  switch (StatType)  {
+    case "Stat":
+      return iStat;
+    case "Req":
+      return iReq;
+  }
 }
 
 /*=============================================================================
@@ -136,51 +136,51 @@ defaultProperties
 function int GetUniSpeed(string StatType, int SkillLevel)
 {
 
-	local int iStat, iReq, i, j, k;
-	
-	if (SkillLevel == 0)
-	{
-		return 0;
-	}
-	
-	iStat = 0;
-	iReq = 0;
-	i = SkillLevel;
-	j = 18;
-	k = 12;
-	
-	do
-	{
-		//Do %SkillLevel times
-		i = i - 1;
-		
-		k = k + 5;
-		iReq = iReq + k;
-		
-		if (iReq % 5 != 0 && iReq%2 != 0 )
-		{
-			Do
-			{
-				iReq = iReq + 1;
-				k = k + 1;				
-			} until (iReq%5 == 0 || iReq%2 == 0);
-		}
-		
-		iStat = iStat + j;
-		j = j + (12 * i) + 8;
-		
-	} until (i <= 0);
-		
-		
-	switch (StatType)
-	{
-		case "Stat":
-			return iStat;
-			break;
-		case "Req":
-			return iReq;
-			break;
-	}
+  local int iStat, iReq, i, j, k;
+  
+  if (SkillLevel == 0)
+  {
+    return 0;
+  }
+  
+  iStat = 0;
+  iReq = 0;
+  i = SkillLevel;
+  j = 18;
+  k = 12;
+  
+  do
+  {
+    //Do %SkillLevel times
+    i = i - 1;
+    
+    k = k + 5;
+    iReq = iReq + k;
+    
+    if (iReq % 5 != 0 && iReq%2 != 0 )
+    {
+      Do
+      {
+        iReq = iReq + 1;
+        k = k + 1;        
+      } until (iReq%5 == 0 || iReq%2 == 0);
+    }
+    
+    iStat = iStat + j;
+    j = j + (12 * i) + 8;
+    
+  } until (i <= 0);
+    
+    
+  switch (StatType)
+  {
+    case "Stat":
+      return iStat;
+      break;
+    case "Req":
+      return iReq;
+      break;
+  }
 }
 
 */

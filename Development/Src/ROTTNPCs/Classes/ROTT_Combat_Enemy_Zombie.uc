@@ -86,139 +86,139 @@ defaultProperties
   itemDropRates.add((dropType=class'ROTT_Inventory_Item_Gold',chanceOverride=,minOverride=,maxOverride=,chanceAmp=,quantityAmp=1.50))
   
   // Sprites 240x240
-	begin object class=UI_Texture_Info Name=Enemy_Portrait_Zombie_Blue_240
+  begin object class=UI_Texture_Info Name=Enemy_Portrait_Zombie_Blue_240
     componentTextures.add(Texture2D'Monsters_Disc_2.Enemy_Portrait_Zombie_Blue_240')
     componentTextures.add(Texture2D'Monsters_Disc_2.Enemy_Portrait_Zombie_Blue_Black_240')
     componentTextures.add(Texture2D'Monsters_Disc_2.Enemy_Portrait_Zombie_Blue_Pale_240')
   end object
-	begin object class=UI_Texture_Info Name=Enemy_Portrait_Zombie_Cyan_240
+  begin object class=UI_Texture_Info Name=Enemy_Portrait_Zombie_Cyan_240
     componentTextures.add(Texture2D'Monsters_Disc_2.Enemy_Portrait_Zombie_Cyan_240')
     componentTextures.add(Texture2D'Monsters_Disc_2.Enemy_Portrait_Zombie_Cyan_Black_240')
     componentTextures.add(Texture2D'Monsters_Disc_2.Enemy_Portrait_Zombie_Cyan_Pale_240')
   end object
-	begin object class=UI_Texture_Info Name=Enemy_Portrait_Zombie_Green_240
+  begin object class=UI_Texture_Info Name=Enemy_Portrait_Zombie_Green_240
     componentTextures.add(Texture2D'Monsters_Disc_2.Enemy_Portrait_Zombie_Green_240')
     componentTextures.add(Texture2D'Monsters_Disc_2.Enemy_Portrait_Zombie_Green_Black_240')
     componentTextures.add(Texture2D'Monsters_Disc_2.Enemy_Portrait_Zombie_Green_Pale_240')
   end object
-	begin object class=UI_Texture_Info Name=Enemy_Portrait_Zombie_Gold_240
+  begin object class=UI_Texture_Info Name=Enemy_Portrait_Zombie_Gold_240
     componentTextures.add(Texture2D'Monsters_Disc_2.Enemy_Portrait_Zombie_Gold_240')
     componentTextures.add(Texture2D'Monsters_Disc_2.Enemy_Portrait_Zombie_Gold_Pale_240')
     componentTextures.add(Texture2D'Monsters_Disc_2.Enemy_Portrait_Zombie_Gold_Black_240')
   end object
-	begin object class=UI_Texture_Info Name=Enemy_Portrait_Zombie_Orange_240
+  begin object class=UI_Texture_Info Name=Enemy_Portrait_Zombie_Orange_240
     componentTextures.add(Texture2D'Monsters_Disc_2.Enemy_Portrait_Zombie_Orange_240')
     componentTextures.add(Texture2D'Monsters_Disc_2.Enemy_Portrait_Zombie_Orange_Black_240')
     componentTextures.add(Texture2D'Monsters_Disc_2.Enemy_Portrait_Zombie_Orange_Pale_240')
   end object
-	begin object class=UI_Texture_Info Name=Enemy_Portrait_Zombie_Red_240
+  begin object class=UI_Texture_Info Name=Enemy_Portrait_Zombie_Red_240
     componentTextures.add(Texture2D'Monsters_Disc_2.Enemy_Portrait_Zombie_Red_240')
     componentTextures.add(Texture2D'Monsters_Disc_2.Enemy_Portrait_Zombie_Red_Black_240')
     componentTextures.add(Texture2D'Monsters_Disc_2.Enemy_Portrait_Zombie_Red_Pale_240')
   end object
-	begin object class=UI_Texture_Info Name=Enemy_Portrait_Zombie_Violet_240
+  begin object class=UI_Texture_Info Name=Enemy_Portrait_Zombie_Violet_240
     componentTextures.add(Texture2D'Monsters_Disc_2.Enemy_Portrait_Zombie_Pink_240')
     componentTextures.add(Texture2D'Monsters_Disc_2.Enemy_Portrait_Zombie_Pink_Black_240')
     componentTextures.add(Texture2D'Monsters_Disc_2.Enemy_Portrait_Zombie_Pink_Pale_240')
   end object
-	begin object class=UI_Texture_Info Name=Enemy_Portrait_Zombie_Purple_240
+  begin object class=UI_Texture_Info Name=Enemy_Portrait_Zombie_Purple_240
     componentTextures.add(Texture2D'Monsters_Disc_2.Enemy_Portrait_Zombie_Purple_240')
     componentTextures.add(Texture2D'Monsters_Disc_2.Enemy_Portrait_Zombie_Purple_Black_240')
     componentTextures.add(Texture2D'Monsters_Disc_2.Enemy_Portrait_Zombie_Purple_Pale_240')
   end object
-	begin object class=UI_Texture_Info Name=Enemy_Portrait_Zombie_Black_240
+  begin object class=UI_Texture_Info Name=Enemy_Portrait_Zombie_Black_240
     componentTextures.add(Texture2D'Monsters_Disc_2.Enemy_Portrait_Zombie_Black_240')
     componentTextures.add(Texture2D'Monsters_Disc_2.Enemy_Portrait_Zombie_Black_Pale_240')
     componentTextures.add(Texture2D'Monsters_Disc_2.Enemy_Portrait_Zombie_Black_White_240')
   end object
-	begin object class=UI_Texture_Info Name=Enemy_Portrait_Zombie_White_240
+  begin object class=UI_Texture_Info Name=Enemy_Portrait_Zombie_White_240
     componentTextures.add(Texture2D'Monsters_Disc_2.Enemy_Portrait_Zombie_Brown_240')
     componentTextures.add(Texture2D'Monsters_Disc_2.Enemy_Portrait_Zombie_Brown_Pale_240')
     componentTextures.add(Texture2D'Monsters_Disc_2.Enemy_Portrait_Zombie_White_Black_240')
   end object
   
   // Sprite options
-	begin object class=UI_Texture_Storage Name=Enemy_Sprite_Container
-		tag="Enemy_Sprite_Container"
-		images(CLAN_BLUE)=Enemy_Portrait_Zombie_Blue_240
-		images(CLAN_CYAN)=Enemy_Portrait_Zombie_Cyan_240
-		images(CLAN_GREEN)=Enemy_Portrait_Zombie_Green_240
-		images(CLAN_GOLD)=Enemy_Portrait_Zombie_Gold_240
-		images(CLAN_ORANGE)=Enemy_Portrait_Zombie_Orange_240
-		images(CLAN_RED)=Enemy_Portrait_Zombie_Red_240
-		images(CLAN_VIOLET)=Enemy_Portrait_Zombie_Violet_240
-		images(CLAN_PURPLE)=Enemy_Portrait_Zombie_Purple_240
-		images(CLAN_BLACK)=Enemy_Portrait_Zombie_Black_240
-		images(CLAN_WHITE)=Enemy_Portrait_Zombie_White_240
-	end object
+  begin object class=UI_Texture_Storage Name=Enemy_Sprite_Container
+    tag="Enemy_Sprite_Container"
+    images(CLAN_BLUE)=Enemy_Portrait_Zombie_Blue_240
+    images(CLAN_CYAN)=Enemy_Portrait_Zombie_Cyan_240
+    images(CLAN_GREEN)=Enemy_Portrait_Zombie_Green_240
+    images(CLAN_GOLD)=Enemy_Portrait_Zombie_Gold_240
+    images(CLAN_ORANGE)=Enemy_Portrait_Zombie_Orange_240
+    images(CLAN_RED)=Enemy_Portrait_Zombie_Red_240
+    images(CLAN_VIOLET)=Enemy_Portrait_Zombie_Violet_240
+    images(CLAN_PURPLE)=Enemy_Portrait_Zombie_Purple_240
+    images(CLAN_BLACK)=Enemy_Portrait_Zombie_Black_240
+    images(CLAN_WHITE)=Enemy_Portrait_Zombie_White_240
+  end object
   enemySprites=Enemy_Sprite_Container
-	
+  
   // Sprites 360x360
-	begin object class=UI_Texture_Info Name=Enemy_Portrait_Zombie_Blue_360
+  begin object class=UI_Texture_Info Name=Enemy_Portrait_Zombie_Blue_360
     componentTextures.add(Texture2D'Monsters_Disc_2.Enemy_Portrait_Zombie_Blue_360')
     componentTextures.add(Texture2D'Monsters_Disc_2.Enemy_Portrait_Zombie_Blue_Black_360')
     componentTextures.add(Texture2D'Monsters_Disc_2.Enemy_Portrait_Zombie_Blue_Pale_360')
   end object
-	begin object class=UI_Texture_Info Name=Enemy_Portrait_Zombie_Cyan_360
+  begin object class=UI_Texture_Info Name=Enemy_Portrait_Zombie_Cyan_360
     componentTextures.add(Texture2D'Monsters_Disc_2.Enemy_Portrait_Zombie_Cyan_360')
     componentTextures.add(Texture2D'Monsters_Disc_2.Enemy_Portrait_Zombie_Cyan_Black_360')
     componentTextures.add(Texture2D'Monsters_Disc_2.Enemy_Portrait_Zombie_Cyan_Pale_360')
   end object
-	begin object class=UI_Texture_Info Name=Enemy_Portrait_Zombie_Green_360
+  begin object class=UI_Texture_Info Name=Enemy_Portrait_Zombie_Green_360
     componentTextures.add(Texture2D'Monsters_Disc_2.Enemy_Portrait_Zombie_Green_360')
     componentTextures.add(Texture2D'Monsters_Disc_2.Enemy_Portrait_Zombie_Green_Black_360')
     componentTextures.add(Texture2D'Monsters_Disc_2.Enemy_Portrait_Zombie_Green_Pale_360')
   end object
-	begin object class=UI_Texture_Info Name=Enemy_Portrait_Zombie_Gold_360
+  begin object class=UI_Texture_Info Name=Enemy_Portrait_Zombie_Gold_360
     componentTextures.add(Texture2D'Monsters_Disc_2.Enemy_Portrait_Zombie_Gold_360')
     componentTextures.add(Texture2D'Monsters_Disc_2.Enemy_Portrait_Zombie_Gold_Pale_360')
     componentTextures.add(Texture2D'Monsters_Disc_2.Enemy_Portrait_Zombie_Gold_Black_360')
   end object
-	begin object class=UI_Texture_Info Name=Enemy_Portrait_Zombie_Orange_360
+  begin object class=UI_Texture_Info Name=Enemy_Portrait_Zombie_Orange_360
     componentTextures.add(Texture2D'Monsters_Disc_2.Enemy_Portrait_Zombie_Orange_360')
     componentTextures.add(Texture2D'Monsters_Disc_2.Enemy_Portrait_Zombie_Orange_Black_360')
     componentTextures.add(Texture2D'Monsters_Disc_2.Enemy_Portrait_Zombie_Orange_Pale_360')
   end object
-	begin object class=UI_Texture_Info Name=Enemy_Portrait_Zombie_Red_360
+  begin object class=UI_Texture_Info Name=Enemy_Portrait_Zombie_Red_360
     componentTextures.add(Texture2D'Monsters_Disc_2.Enemy_Portrait_Zombie_Red_360')
     componentTextures.add(Texture2D'Monsters_Disc_2.Enemy_Portrait_Zombie_Red_Black_360')
     componentTextures.add(Texture2D'Monsters_Disc_2.Enemy_Portrait_Zombie_Red_Pale_360')
   end object
-	begin object class=UI_Texture_Info Name=Enemy_Portrait_Zombie_Violet_360
+  begin object class=UI_Texture_Info Name=Enemy_Portrait_Zombie_Violet_360
     componentTextures.add(Texture2D'Monsters_Disc_2.Enemy_Portrait_Zombie_Pink_360')
     componentTextures.add(Texture2D'Monsters_Disc_2.Enemy_Portrait_Zombie_Pink_Black_360')
     componentTextures.add(Texture2D'Monsters_Disc_2.Enemy_Portrait_Zombie_Pink_Pale_360')
   end object
-	begin object class=UI_Texture_Info Name=Enemy_Portrait_Zombie_Purple_360
+  begin object class=UI_Texture_Info Name=Enemy_Portrait_Zombie_Purple_360
     componentTextures.add(Texture2D'Monsters_Disc_2.Enemy_Portrait_Zombie_Purple_360')
     componentTextures.add(Texture2D'Monsters_Disc_2.Enemy_Portrait_Zombie_Purple_Black_360')
     componentTextures.add(Texture2D'Monsters_Disc_2.Enemy_Portrait_Zombie_Purple_Pale_360')
   end object
-	begin object class=UI_Texture_Info Name=Enemy_Portrait_Zombie_Black_360
+  begin object class=UI_Texture_Info Name=Enemy_Portrait_Zombie_Black_360
     componentTextures.add(Texture2D'Monsters_Disc_2.Enemy_Portrait_Zombie_Black_360')
     componentTextures.add(Texture2D'Monsters_Disc_2.Enemy_Portrait_Zombie_Black_Pale_360')
     componentTextures.add(Texture2D'Monsters_Disc_2.Enemy_Portrait_Zombie_Black_White_360')
   end object
-	begin object class=UI_Texture_Info Name=Enemy_Portrait_Zombie_White_360
+  begin object class=UI_Texture_Info Name=Enemy_Portrait_Zombie_White_360
     componentTextures.add(Texture2D'Monsters_Disc_2.Enemy_Portrait_Zombie_Brown_360')
     componentTextures.add(Texture2D'Monsters_Disc_2.Enemy_Portrait_Zombie_Brown_Pale_360')
     componentTextures.add(Texture2D'Monsters_Disc_2.Enemy_Portrait_Zombie_White_Black_360')
   end object
   
   // Sprite options
-	begin object class=UI_Texture_Storage Name=Champ_Sprite_Container
-		tag="Champ_Sprite_Container"
-		images(CLAN_BLUE)=Enemy_Portrait_Zombie_Blue_360
-		images(CLAN_CYAN)=Enemy_Portrait_Zombie_Cyan_360
-		images(CLAN_GREEN)=Enemy_Portrait_Zombie_Green_360
-		images(CLAN_GOLD)=Enemy_Portrait_Zombie_Gold_360
-		images(CLAN_ORANGE)=Enemy_Portrait_Zombie_Orange_360
-		images(CLAN_RED)=Enemy_Portrait_Zombie_Red_360
-		images(CLAN_VIOLET)=Enemy_Portrait_Zombie_Violet_360
-		images(CLAN_PURPLE)=Enemy_Portrait_Zombie_Purple_360
-		images(CLAN_BLACK)=Enemy_Portrait_Zombie_Black_360
-		images(CLAN_WHITE)=Enemy_Portrait_Zombie_White_360
-	end object
+  begin object class=UI_Texture_Storage Name=Champ_Sprite_Container
+    tag="Champ_Sprite_Container"
+    images(CLAN_BLUE)=Enemy_Portrait_Zombie_Blue_360
+    images(CLAN_CYAN)=Enemy_Portrait_Zombie_Cyan_360
+    images(CLAN_GREEN)=Enemy_Portrait_Zombie_Green_360
+    images(CLAN_GOLD)=Enemy_Portrait_Zombie_Gold_360
+    images(CLAN_ORANGE)=Enemy_Portrait_Zombie_Orange_360
+    images(CLAN_RED)=Enemy_Portrait_Zombie_Red_360
+    images(CLAN_VIOLET)=Enemy_Portrait_Zombie_Violet_360
+    images(CLAN_PURPLE)=Enemy_Portrait_Zombie_Purple_360
+    images(CLAN_BLACK)=Enemy_Portrait_Zombie_Black_360
+    images(CLAN_WHITE)=Enemy_Portrait_Zombie_White_360
+  end object
   champSprites=Champ_Sprite_Container
 
 }

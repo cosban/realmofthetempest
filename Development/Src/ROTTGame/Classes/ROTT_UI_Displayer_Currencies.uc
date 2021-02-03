@@ -30,7 +30,7 @@ public function initializeComponent(optional string newTag = "") {
   
   // Internal references
   goldCountLabel = findLabel("Currency_Gold_Count");
-	gemCountLabel = findLabel("Currency_Gem_Count");
+  gemCountLabel = findLabel("Currency_Gem_Count");
   
 }
 
@@ -51,10 +51,10 @@ defaultProperties
 {
   /** ===== Textures ===== **/
   // Currency icons
-	begin object class=UI_Texture_Info Name=Gem_Revised_Icon
+  begin object class=UI_Texture_Info Name=Gem_Revised_Icon
     componentTextures.add(Texture2D'GUI.Gem_Revised_Icon')
   end object
-	begin object class=UI_Texture_Info Name=Gold_Revised_Icon
+  begin object class=UI_Texture_Info Name=Gold_Revised_Icon
     componentTextures.add(Texture2D'GUI.Gold_Revised_Icon')
   end object
   

@@ -101,9 +101,9 @@ function debugStat() {
 
 function float fRoundUp(float a)
 {
-	a = float (int (a + 0.49999));
-	
-	return a;
+  a = float (int (a + 0.49999));
+  
+  return a;
 }
 
 function int m3(int level) { // this equation is accurate from 1.05 and is slightly different than the current
@@ -143,22 +143,22 @@ defaultProperties
 
 function int GetMPBoost(string StatType, int SkillLevel)
 {
-	local float iMinimum, iMaximum, b;
-	
-	b = float(SkillLevel);
-	
-	iMinimum = Round( fRoundUp(2.4 ** (b ** 0.43)) + (b ** 1.15) + (14.0 * b) + 7.0);
-	iMaximum = Round( fRoundUp(2.4 ** (b ** 0.44)) + (b ** 1.25) + (21.0 * b) + 8.0);
-	
-	// Return type 
-	switch (StatType)
-	{
-		case "Minimum":
-			return int(iMinimum);
-		case "Maximum":
-			return int(iMaximum);
-	}
-	
+  local float iMinimum, iMaximum, b;
+  
+  b = float(SkillLevel);
+  
+  iMinimum = Round( fRoundUp(2.4 ** (b ** 0.43)) + (b ** 1.15) + (14.0 * b) + 7.0);
+  iMaximum = Round( fRoundUp(2.4 ** (b ** 0.44)) + (b ** 1.25) + (21.0 * b) + 8.0);
+  
+  // Return type 
+  switch (StatType)
+  {
+    case "Minimum":
+      return int(iMinimum);
+    case "Maximum":
+      return int(iMaximum);
+  }
+  
 }
 
 **/

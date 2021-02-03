@@ -66,29 +66,29 @@ defaultProperties
   bDrawRelative=true
   
   // Header 1
-	begin object class=UI_Label Name=Team_Viewer_Header_1
-		tag="Team_Viewer_Header_1"
-		posX=720
-		posY=112
-		posXEnd=NATIVE_WIDTH
-		posYEnd=NATIVE_HEIGHT
+  begin object class=UI_Label Name=Team_Viewer_Header_1
+    tag="Team_Viewer_Header_1"
+    posX=720
+    posY=112
+    posXEnd=NATIVE_WIDTH
+    posYEnd=NATIVE_HEIGHT
     fontStyle=DEFAULT_LARGE_TAN
-		AlignX=CENTER
-		AlignY=TOP
-		labelText="Team #X"
-	end object
-	componentList.add(Team_Viewer_Header_1)
-	
+    AlignX=CENTER
+    AlignY=TOP
+    labelText="Team #X"
+  end object
+  componentList.add(Team_Viewer_Header_1)
+  
   // Header 2
-	begin object class=UI_Label Name=Team_Viewer_Header_2
-		tag="Team_Viewer_Header_2"
-		posX=720
-		posY=151
-		posXEnd=NATIVE_WIDTH
-		posYEnd=NATIVE_HEIGHT
-		AlignX=CENTER
-		AlignY=TOP
-		labelText="Of land and sky"
+  begin object class=UI_Label Name=Team_Viewer_Header_2
+    tag="Team_Viewer_Header_2"
+    posX=720
+    posY=151
+    posXEnd=NATIVE_WIDTH
+    posYEnd=NATIVE_HEIGHT
+    AlignX=CENTER
+    AlignY=TOP
+    labelText="Of land and sky"
     fontStyle=DEFAULT_SMALL_GRAY
     /*
       "Of land and sky"
@@ -111,129 +111,129 @@ defaultProperties
       
       "Of the stormlands in the snow"
     */
-	end object
-	componentList.add(Team_Viewer_Header_2)
-	
+  end object
+  componentList.add(Team_Viewer_Header_2)
+  
   // Prowess labels: Spiritual
-	begin object class=UI_Label Name=Team_Viewer_Spiritual_Prowess_Label1
-		tag="Team_Viewer_Spiritual_Prowess_Label1"
-		posX=790
-		posY=243
+  begin object class=UI_Label Name=Team_Viewer_Spiritual_Prowess_Label1
+    tag="Team_Viewer_Spiritual_Prowess_Label1"
+    posX=790
+    posY=243
     fontStyle=DEFAULT_SMALL_CYAN
-		posXEnd=983
-		posYEnd=NATIVE_HEIGHT
-		AlignX=CENTER
-		AlignY=TOP
-		labelText="Spiritual"
-	end object
-	componentList.add(Team_Viewer_Spiritual_Prowess_Label1)
-	begin object class=UI_Label Name=Team_Viewer_Spiritual_Prowess_Label2
-		tag="Team_Viewer_Spiritual_Prowess_Label2"
-		posX=790
-		posY=270
+    posXEnd=983
+    posYEnd=NATIVE_HEIGHT
+    AlignX=CENTER
+    AlignY=TOP
+    labelText="Spiritual"
+  end object
+  componentList.add(Team_Viewer_Spiritual_Prowess_Label1)
+  begin object class=UI_Label Name=Team_Viewer_Spiritual_Prowess_Label2
+    tag="Team_Viewer_Spiritual_Prowess_Label2"
+    posX=790
+    posY=270
     fontStyle=DEFAULT_SMALL_DARK_CYAN
-		posXEnd=983
-		posYEnd=NATIVE_HEIGHT
-		AlignX=CENTER
-		AlignY=TOP
-		labelText="Prowess"
-	end object
-	componentList.add(Team_Viewer_Spiritual_Prowess_Label2)
-	
+    posXEnd=983
+    posYEnd=NATIVE_HEIGHT
+    AlignX=CENTER
+    AlignY=TOP
+    labelText="Prowess"
+  end object
+  componentList.add(Team_Viewer_Spiritual_Prowess_Label2)
+  
   // Prowess labels: Hunting
-	begin object class=UI_Label Name=Team_Viewer_Hunting_Prowess_Label1
-		tag="Team_Viewer_Hunting_Prowess_Label1"
-		posX=983
-		posY=243
+  begin object class=UI_Label Name=Team_Viewer_Hunting_Prowess_Label1
+    tag="Team_Viewer_Hunting_Prowess_Label1"
+    posX=983
+    posY=243
     fontStyle=DEFAULT_SMALL_ORANGE
-		posXEnd=1176
-		posYEnd=NATIVE_HEIGHT
-		AlignX=CENTER
-		AlignY=TOP
-		labelText="Hunting"
-	end object
-	componentList.add(Team_Viewer_Hunting_Prowess_Label1)
-	begin object class=UI_Label Name=Team_Viewer_Hunting_Prowess_Label2
-		tag="Team_Viewer_Hunting_Prowess_Label2"
-		posX=983
-		posY=270
+    posXEnd=1176
+    posYEnd=NATIVE_HEIGHT
+    AlignX=CENTER
+    AlignY=TOP
+    labelText="Hunting"
+  end object
+  componentList.add(Team_Viewer_Hunting_Prowess_Label1)
+  begin object class=UI_Label Name=Team_Viewer_Hunting_Prowess_Label2
+    tag="Team_Viewer_Hunting_Prowess_Label2"
+    posX=983
+    posY=270
     fontStyle=DEFAULT_SMALL_DARK_ORANGE
-		posXEnd=1176
-		posYEnd=NATIVE_HEIGHT
-		AlignX=CENTER
-		AlignY=TOP
-		labelText="Prowess"
-	end object
-	componentList.add(Team_Viewer_Hunting_Prowess_Label2)
-	
+    posXEnd=1176
+    posYEnd=NATIVE_HEIGHT
+    AlignX=CENTER
+    AlignY=TOP
+    labelText="Prowess"
+  end object
+  componentList.add(Team_Viewer_Hunting_Prowess_Label2)
+  
   // Prowess labels: Botanical
-	begin object class=UI_Label Name=Team_Viewer_Botanical_Prowess_Label1
-		tag="Team_Viewer_Botanical_Prowess_Label1"
-		posX=1176
-		posY=243
+  begin object class=UI_Label Name=Team_Viewer_Botanical_Prowess_Label1
+    tag="Team_Viewer_Botanical_Prowess_Label1"
+    posX=1176
+    posY=243
     fontStyle=DEFAULT_SMALL_GREEN
-		posXEnd=1370
-		posYEnd=NATIVE_HEIGHT
-		AlignX=CENTER
-		AlignY=TOP
-		labelText="Botanical"
-	end object
-	componentList.add(Team_Viewer_Botanical_Prowess_Label1)
-	begin object class=UI_Label Name=Team_Viewer_Botanical_Prowess_Label2
-		tag="Team_Viewer_Botanical_Prowess_Label2"
-		posX=1176
-		posY=270
+    posXEnd=1370
+    posYEnd=NATIVE_HEIGHT
+    AlignX=CENTER
+    AlignY=TOP
+    labelText="Botanical"
+  end object
+  componentList.add(Team_Viewer_Botanical_Prowess_Label1)
+  begin object class=UI_Label Name=Team_Viewer_Botanical_Prowess_Label2
+    tag="Team_Viewer_Botanical_Prowess_Label2"
+    posX=1176
+    posY=270
     fontStyle=DEFAULT_SMALL_DARK_GREEN
-		posXEnd=1370
-		posYEnd=NATIVE_HEIGHT
-		AlignX=CENTER
-		AlignY=TOP
-		labelText="Prowess"
-	end object
-	componentList.add(Team_Viewer_Botanical_Prowess_Label2)
-	
+    posXEnd=1370
+    posYEnd=NATIVE_HEIGHT
+    AlignX=CENTER
+    AlignY=TOP
+    labelText="Prowess"
+  end object
+  componentList.add(Team_Viewer_Botanical_Prowess_Label2)
+  
   // Prowess values: Spiritual
-	begin object class=UI_Label Name=Team_Viewer_Spiritual_Prowess_Value
-		tag="Team_Viewer_Spiritual_Prowess_Value"
-		posX=790
-		posY=297
-		posXEnd=983
-		posYEnd=NATIVE_HEIGHT
-		AlignX=CENTER
-		AlignY=TOP
-		labelText="100"
+  begin object class=UI_Label Name=Team_Viewer_Spiritual_Prowess_Value
+    tag="Team_Viewer_Spiritual_Prowess_Value"
+    posX=790
+    posY=297
+    posXEnd=983
+    posYEnd=NATIVE_HEIGHT
+    AlignX=CENTER
+    AlignY=TOP
+    labelText="100"
     fontStyle=DEFAULT_SMALL_WHITE
-	end object
-	componentList.add(Team_Viewer_Spiritual_Prowess_Value)
-	
+  end object
+  componentList.add(Team_Viewer_Spiritual_Prowess_Value)
+  
   // Prowess values: Hunting
-	begin object class=UI_Label Name=Team_Viewer_Hunting_Prowess_Value
-		tag="Team_Viewer_Hunting_Prowess_Value"
-		posX=983
-		posY=297
-		posXEnd=1176
-		posYEnd=NATIVE_HEIGHT
-		AlignX=CENTER
-		AlignY=TOP
-		labelText="50"
+  begin object class=UI_Label Name=Team_Viewer_Hunting_Prowess_Value
+    tag="Team_Viewer_Hunting_Prowess_Value"
+    posX=983
+    posY=297
+    posXEnd=1176
+    posYEnd=NATIVE_HEIGHT
+    AlignX=CENTER
+    AlignY=TOP
+    labelText="50"
     fontStyle=DEFAULT_SMALL_WHITE
-	end object
-	componentList.add(Team_Viewer_Hunting_Prowess_Value)
-	
+  end object
+  componentList.add(Team_Viewer_Hunting_Prowess_Value)
+  
   // Prowess values: Botanical
-	begin object class=UI_Label Name=Team_Viewer_Botanical_Prowess_Value
-		tag="Team_Viewer_Botanical_Prowess_Value"
-		posX=1176
-		posY=297
-		posXEnd=1370
-		posYEnd=NATIVE_HEIGHT
-		AlignX=CENTER
-		AlignY=TOP
-		labelText="200"
+  begin object class=UI_Label Name=Team_Viewer_Botanical_Prowess_Value
+    tag="Team_Viewer_Botanical_Prowess_Value"
+    posX=1176
+    posY=297
+    posXEnd=1370
+    posYEnd=NATIVE_HEIGHT
+    AlignX=CENTER
+    AlignY=TOP
+    labelText="200"
     fontStyle=DEFAULT_SMALL_WHITE
-	end object
-	componentList.add(Team_Viewer_Botanical_Prowess_Value)
-	
+  end object
+  componentList.add(Team_Viewer_Botanical_Prowess_Value)
+  
 }
 
 

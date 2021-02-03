@@ -217,90 +217,90 @@ defaultProperties
   posY=64
   
   /** ===== Textures ===== **/
-	// Highlights
-	begin object class=UI_Texture_Info Name=Skill_Highlight_White
+  // Highlights
+  begin object class=UI_Texture_Info Name=Skill_Highlight_White
     componentTextures.add(Texture2D'GUI.Skill_Highlight_White')
   end object
-	begin object class=UI_Texture_Info Name=Skill_Highlight_Valkyrie
+  begin object class=UI_Texture_Info Name=Skill_Highlight_Valkyrie
     componentTextures.add(Texture2D'GUI.Skill_Highlight_Valkyrie')
   end object
-	begin object class=UI_Texture_Info Name=Skill_Highlight_Goliath
+  begin object class=UI_Texture_Info Name=Skill_Highlight_Goliath
     componentTextures.add(Texture2D'GUI.Skill_Highlight_Goliath')
   end object
-	begin object class=UI_Texture_Info Name=Skill_Highlight_Wizard
+  begin object class=UI_Texture_Info Name=Skill_Highlight_Wizard
     componentTextures.add(Texture2D'GUI.Skill_Highlight_Wizard')
   end object
-	begin object class=UI_Texture_Info Name=Skill_Highlight_Assassin
+  begin object class=UI_Texture_Info Name=Skill_Highlight_Assassin
     componentTextures.add(Texture2D'GUI.Skill_Highlight_Assassin')
   end object
-	begin object class=UI_Texture_Info Name=Skill_Highlight_Titan
+  begin object class=UI_Texture_Info Name=Skill_Highlight_Titan
     componentTextures.add(Texture2D'GUI.Skill_Highlight_Titan')
   end object
-	
+  
   // Highlight colors
   begin object class=UI_Texture_Storage Name=Highlighter_Colors
-		tag="Highlighter_Colors"
-		images(UNSPECIFIED)=Skill_Highlight_White
-		images(VALKYRIE)=Skill_Highlight_Valkyrie
-		images(WIZARD)=Skill_Highlight_Wizard
-		images(GOLIATH)=Skill_Highlight_Goliath
-		images(TITAN)=Skill_Highlight_Titan
-		images(ASSASSIN)=Skill_Highlight_Assassin
+    tag="Highlighter_Colors"
+    images(UNSPECIFIED)=Skill_Highlight_White
+    images(VALKYRIE)=Skill_Highlight_Valkyrie
+    images(WIZARD)=Skill_Highlight_Wizard
+    images(GOLIATH)=Skill_Highlight_Goliath
+    images(TITAN)=Skill_Highlight_Titan
+    images(ASSASSIN)=Skill_Highlight_Assassin
     textureWidth=124
     textureHeight=124
-	end object
-	componentList.add(Highlighter_Colors)
+  end object
+  componentList.add(Highlighter_Colors)
   
   // Skill Highlights
-	begin object class=UI_Sprite Name=Skill_Highlight_0
-		tag="Skill_Highlight_0"
-	end object
-	componentList.add(Skill_Highlight_0)
+  begin object class=UI_Sprite Name=Skill_Highlight_0
+    tag="Skill_Highlight_0"
+  end object
+  componentList.add(Skill_Highlight_0)
   
-	begin object class=UI_Sprite Name=Skill_Highlight_1
-		tag="Skill_Highlight_1"
-	end object
-	componentList.add(Skill_Highlight_1)
+  begin object class=UI_Sprite Name=Skill_Highlight_1
+    tag="Skill_Highlight_1"
+  end object
+  componentList.add(Skill_Highlight_1)
   
-	begin object class=UI_Sprite Name=Skill_Highlight_2
-		tag="Skill_Highlight_2"
-	end object
-	componentList.add(Skill_Highlight_2)
+  begin object class=UI_Sprite Name=Skill_Highlight_2
+    tag="Skill_Highlight_2"
+  end object
+  componentList.add(Skill_Highlight_2)
   
-	begin object class=UI_Sprite Name=Skill_Highlight_3
-		tag="Skill_Highlight_3"
-	end object
-	componentList.add(Skill_Highlight_3)
+  begin object class=UI_Sprite Name=Skill_Highlight_3
+    tag="Skill_Highlight_3"
+  end object
+  componentList.add(Skill_Highlight_3)
   
-	begin object class=UI_Sprite Name=Skill_Highlight_4
-		tag="Skill_Highlight_4"
-	end object
-	componentList.add(Skill_Highlight_4)
+  begin object class=UI_Sprite Name=Skill_Highlight_4
+    tag="Skill_Highlight_4"
+  end object
+  componentList.add(Skill_Highlight_4)
   
-	begin object class=UI_Sprite Name=Skill_Highlight_5
-		tag="Skill_Highlight_5"
-	end object
-	componentList.add(Skill_Highlight_5)
+  begin object class=UI_Sprite Name=Skill_Highlight_5
+    tag="Skill_Highlight_5"
+  end object
+  componentList.add(Skill_Highlight_5)
   
-	begin object class=UI_Sprite Name=Skill_Highlight_6
-		tag="Skill_Highlight_6"
-	end object
-	componentList.add(Skill_Highlight_6)
+  begin object class=UI_Sprite Name=Skill_Highlight_6
+    tag="Skill_Highlight_6"
+  end object
+  componentList.add(Skill_Highlight_6)
   
-	begin object class=UI_Sprite Name=Skill_Highlight_7
-		tag="Skill_Highlight_7"
-	end object
-	componentList.add(Skill_Highlight_7)
+  begin object class=UI_Sprite Name=Skill_Highlight_7
+    tag="Skill_Highlight_7"
+  end object
+  componentList.add(Skill_Highlight_7)
   
-	begin object class=UI_Sprite Name=Skill_Highlight_8
-		tag="Skill_Highlight_8"
-	end object
-	componentList.add(Skill_Highlight_8)
+  begin object class=UI_Sprite Name=Skill_Highlight_8
+    tag="Skill_Highlight_8"
+  end object
+  componentList.add(Skill_Highlight_8)
   
-	begin object class=UI_Sprite Name=Skill_Highlight_9
-		tag="Skill_Highlight_9"
-	end object
-	componentList.add(Skill_Highlight_9)
+  begin object class=UI_Sprite Name=Skill_Highlight_9
+    tag="Skill_Highlight_9"
+  end object
+  componentList.add(Skill_Highlight_9)
   
 }
 

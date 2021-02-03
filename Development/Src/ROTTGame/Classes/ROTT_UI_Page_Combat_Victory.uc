@@ -248,17 +248,17 @@ private function finishedExpAnim() {
  *===========================================================================*/
 defaultProperties
 {
-	/** ===== Input ===== **/
-	begin object class=ROTT_Input_Handler Name=Input_A
+  /** ===== Input ===== **/
+  begin object class=ROTT_Input_Handler Name=Input_A
     inputName="XBoxTypeS_A"
-		buttonComponent=none
-	end object
+    buttonComponent=none
+  end object
   inputList.add(Input_A)
   
-	begin object class=ROTT_Input_Handler Name=Input_B
+  begin object class=ROTT_Input_Handler Name=Input_B
     inputName="XBoxTypeS_B"
     buttonComponent=none
-	end object
+  end object
   inputList.add(Input_B)
   
   /** ===== Textures ===== **/
@@ -269,55 +269,55 @@ defaultProperties
   
   /** ===== UI Components ===== **/
   // Background
-	begin object class=UI_Sprite Name=Background_Sprite
-		tag="Background_Sprite"
+  begin object class=UI_Sprite Name=Background_Sprite
+    tag="Background_Sprite"
     bEnabled=true
-		posX=0
-		posY=0
-		posXEnd=NATIVE_WIDTH
-		posYEnd=NATIVE_HEIGHT
-		images(0)=Victory_Background
-	end object
-	componentList.add(Background_Sprite)
+    posX=0
+    posY=0
+    posXEnd=NATIVE_WIDTH
+    posYEnd=NATIVE_HEIGHT
+    images(0)=Victory_Background
+  end object
+  componentList.add(Background_Sprite)
   
   // Party Displayer
-	begin object class=ROTT_UI_Party_Display Name=Party_Displayer
-		tag="Party_Displayer"
+  begin object class=ROTT_UI_Party_Display Name=Party_Displayer
+    tag="Party_Displayer"
     bEnabled=true
     posX=106
     posY=124
     XOffset=44
     YOffset=246
     displayMode=MANAGER_PORTRAITS
-	end object
-	componentList.add(Party_Displayer)
-	
+  end object
+  componentList.add(Party_Displayer)
+  
   // Exp and class info displayer
-	begin object class=ROTT_UI_Displayer_Victory_Hero Name=Hero_Displayer_1
-		tag="Hero_Displayer_1"
+  begin object class=ROTT_UI_Displayer_Victory_Hero Name=Hero_Displayer_1
+    tag="Hero_Displayer_1"
     bEnabled=true
     posX=106
     posY=124
-	end object
-	componentList.add(Hero_Displayer_1)
+  end object
+  componentList.add(Hero_Displayer_1)
   
   // Exp and class info displayer
-	begin object class=ROTT_UI_Displayer_Victory_Hero Name=Hero_Displayer_2
-		tag="Hero_Displayer_2"
+  begin object class=ROTT_UI_Displayer_Victory_Hero Name=Hero_Displayer_2
+    tag="Hero_Displayer_2"
     bEnabled=true
     posX=150
     posY=370
-	end object
-	componentList.add(Hero_Displayer_2)
+  end object
+  componentList.add(Hero_Displayer_2)
   
   // Exp and class info displayer
-	begin object class=ROTT_UI_Displayer_Victory_Hero Name=Hero_Displayer_3
-		tag="Hero_Displayer_3"
+  begin object class=ROTT_UI_Displayer_Victory_Hero Name=Hero_Displayer_3
+    tag="Hero_Displayer_3"
     bEnabled=true
     posX=194
     posY=616
-	end object
-	componentList.add(Hero_Displayer_3)
+  end object
+  componentList.add(Hero_Displayer_3)
   
   
 }

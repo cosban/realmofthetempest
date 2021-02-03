@@ -73,35 +73,35 @@ public function transitionContinue() {
  * Called every frame to move the camera's view of the 3D world
  *===========================================================================*/
 private function titleCameraTick(float deltaTime) {
-	local float softCut;
-	
-	if (currentCameraStep > maxCameraStep - softClipSteps) {
-		softCut = (maxCameraStep - currentCameraStep) / softClipSteps;
-	} else if (currentCameraStep < softClipSteps) {
-		softCut = (currentCameraStep / softClipSteps);
-	} else {
-		softCut = 1;
-	}
-	
-	/** 250 = Amplitude, currentCameraStep = time elapsed, maxCameraStep = total time **/
-	yawOffset += cameraDirection * (deltaTime * softCut * 120.0);	
-	
+  local float softCut;
+  
+  if (currentCameraStep > maxCameraStep - softClipSteps) {
+    softCut = (maxCameraStep - currentCameraStep) / softClipSteps;
+  } else if (currentCameraStep < softClipSteps) {
+    softCut = (currentCameraStep / softClipSteps);
+  } else {
+    softCut = 1;
+  }
+  
+  /** 250 = Amplitude, currentCameraStep = time elapsed, maxCameraStep = total time **/
+  yawOffset += cameraDirection * (deltaTime * softCut * 120.0);  
+  
   // Set camera position and rotation
-	overrideCamRot.pitch = 62126;
-	overrideCamRot.yaw = 61826 + yawOffset;
-	overrideCamRot.roll = 0;
-	
+  overrideCamRot.pitch = 62126;
+  overrideCamRot.yaw = 61826 + yawOffset;
+  overrideCamRot.roll = 0;
+  
   // Override camera control
   gameInfo.tempestPawn.overrideCamera(overrideCamLoc, overrideCamRot);
   
-	currentCameraStep += cameraDirection;
-	if (currentCameraStep >= maxCameraStep)	{
-		cameraDirection = -1;
-	}
-	
-	if (currentCameraStep <= 0)	{
-		cameraDirection = 1;
-	}
+  currentCameraStep += cameraDirection;
+  if (currentCameraStep >= maxCameraStep)  {
+    cameraDirection = -1;
+  }
+  
+  if (currentCameraStep <= 0)  {
+    cameraDirection = 1;
+  }
 }
 
 /*=============================================================================

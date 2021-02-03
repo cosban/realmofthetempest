@@ -228,14 +228,14 @@ public function setOptions
  *===========================================================================*/
 defaultProperties
 {
-	// Option Selection Box
-	begin object class=UI_Selector Name=NPC_Dialogue_Selection_Box
-		tag="NPC_Dialogue_Selection_Box"
+  // Option Selection Box
+  begin object class=UI_Selector Name=NPC_Dialogue_Selection_Box
+    tag="NPC_Dialogue_Selection_Box"
     navigationType=SELECTION_2D
     bEnabled=false
     bActive=true
-		posX=70
-		posY=680
+    posX=70
+    posY=680
     
     // Pixel distance from neighboring selections
     selectionOffset=(x=660,y=104)  
@@ -258,65 +258,65 @@ defaultProperties
     end object
     componentList.add(Selector_Sprite)
     
-	end object
-	componentList.add(NPC_Dialogue_Selection_Box)
-	
-  // Dialogue option labels
-	begin object class=UI_Label Name=NPC_Option_Label_1
-		tag="NPC_Option_Label_1"
-		posX=70
-		posY=680 
-		posXEnd=710
-		posYEnd=772
-		alignX=CENTER
-		alignY=CENTER
-		fontStyle=DEFAULT_MEDIUM_WHITE
-		LabelText[0]=""
-		//LabelText[0]="This text is a test, this is an option."
-	end object
-	componentList.add(NPC_Option_Label_1)
+  end object
+  componentList.add(NPC_Dialogue_Selection_Box)
   
-	begin object class=UI_Label Name=NPC_Option_Label_2
-		tag="NPC_Option_Label_2"
-		posX=730
-		posY=680
-		posXEnd=1370
-		posYEnd=772
-		alignX=CENTER
-		alignY=CENTER
-		fontStyle=DEFAULT_MEDIUM_WHITE
-		LabelText[0]=""
-		//LabelText[0]="Option number 2!"
-	end object
-	componentList.add(NPC_Option_Label_2)
-	
-	begin object class=UI_Label Name=NPC_Option_Label_3
-		tag="NPC_Option_Label_3"
-		posX=70
-		posY=784
-		posXEnd=710
-		posYEnd=876
-		alignX=CENTER
-		alignY=CENTER
-		fontStyle=DEFAULT_MEDIUM_WHITE
-		LabelText[0]=""
-		//LabelText[0]="Is this the longest sentence I can ask here?"
-	end object
-	componentList.add(NPC_Option_Label_3)
-	
-	begin object class=UI_Label Name=NPC_Option_Label_4
-		tag="NPC_Option_Label_4"
-		posX=730
-		posY=784
-		posXEnd=1370
-		posYEnd=876
-		alignX=CENTER
-		alignY=CENTER
-		fontStyle=DEFAULT_MEDIUM_WHITE
-		LabelText[0]=""
-		//LabelText[0]="Farewell"
-	end object
-	componentList.add(NPC_Option_Label_4)
+  // Dialogue option labels
+  begin object class=UI_Label Name=NPC_Option_Label_1
+    tag="NPC_Option_Label_1"
+    posX=70
+    posY=680 
+    posXEnd=710
+    posYEnd=772
+    alignX=CENTER
+    alignY=CENTER
+    fontStyle=DEFAULT_MEDIUM_WHITE
+    LabelText[0]=""
+    //LabelText[0]="This text is a test, this is an option."
+  end object
+  componentList.add(NPC_Option_Label_1)
+  
+  begin object class=UI_Label Name=NPC_Option_Label_2
+    tag="NPC_Option_Label_2"
+    posX=730
+    posY=680
+    posXEnd=1370
+    posYEnd=772
+    alignX=CENTER
+    alignY=CENTER
+    fontStyle=DEFAULT_MEDIUM_WHITE
+    LabelText[0]=""
+    //LabelText[0]="Option number 2!"
+  end object
+  componentList.add(NPC_Option_Label_2)
+  
+  begin object class=UI_Label Name=NPC_Option_Label_3
+    tag="NPC_Option_Label_3"
+    posX=70
+    posY=784
+    posXEnd=710
+    posYEnd=876
+    alignX=CENTER
+    alignY=CENTER
+    fontStyle=DEFAULT_MEDIUM_WHITE
+    LabelText[0]=""
+    //LabelText[0]="Is this the longest sentence I can ask here?"
+  end object
+  componentList.add(NPC_Option_Label_3)
+  
+  begin object class=UI_Label Name=NPC_Option_Label_4
+    tag="NPC_Option_Label_4"
+    posX=730
+    posY=784
+    posXEnd=1370
+    posYEnd=876
+    alignX=CENTER
+    alignY=CENTER
+    fontStyle=DEFAULT_MEDIUM_WHITE
+    LabelText[0]=""
+    //LabelText[0]="Farewell"
+  end object
+  componentList.add(NPC_Option_Label_4)
 }
 
 

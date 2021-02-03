@@ -63,55 +63,55 @@ defaultProperties
   cullTags.add("Party_Info_Container")
   
   /** ===== Input ===== **/  
-	begin object class=ROTT_Input_Handler Name=Input_B
+  begin object class=ROTT_Input_Handler Name=Input_B
     inputName="XBoxTypeS_B"
     buttonComponent=none
-	end object
+  end object
   inputList.add(Input_B)
   
   /** ===== Textures ===== **/
   // Background
-	begin object class=UI_Texture_Info Name=Team_Viewer_Background
+  begin object class=UI_Texture_Info Name=Team_Viewer_Background
     componentTextures.add(Texture2D'GUI.Party_Mgmt_Window')
   end object
   
-	/** ===== UI Components ===== **/
+  /** ===== UI Components ===== **/
   // Window
-	begin object class=UI_Sprite Name=Team_Viewer_Window
-		tag="Team_Viewer_Window"
+  begin object class=UI_Sprite Name=Team_Viewer_Window
+    tag="Team_Viewer_Window"
     bEnabled=true
     posX=720
     posY=0
     posXEnd=NATIVE_WIDTH
     posYEnd=NATIVE_HEIGHT
-		images(0)=Team_Viewer_Background
-	end object
-	componentList.add(Team_Viewer_Window)
-	
+    images(0)=Team_Viewer_Background
+  end object
+  componentList.add(Team_Viewer_Window)
+  
   // Status description
-	begin object class=UI_Label Name=Team_Viewer_Status_Description
-		tag="Team_Viewer_Status_Description"
-		posX=720
-		posY=189
-		posXEnd=NATIVE_WIDTH
-		posYEnd=NATIVE_HEIGHT
-		AlignX=CENTER
-		AlignY=TOP
-		labelText="You are currently controlling this team."
-	end object
-	componentList.add(Team_Viewer_Status_Description)
-	
+  begin object class=UI_Label Name=Team_Viewer_Status_Description
+    tag="Team_Viewer_Status_Description"
+    posX=720
+    posY=189
+    posXEnd=NATIVE_WIDTH
+    posYEnd=NATIVE_HEIGHT
+    AlignX=CENTER
+    AlignY=TOP
+    labelText="You are currently controlling this team."
+  end object
+  componentList.add(Team_Viewer_Status_Description)
+  
   // Team Info Displayer
-	begin object class=ROTT_UI_Displayer_Team_Info Name=Team_Info_Displayer
-		tag="Team_Info_Displayer"
+  begin object class=ROTT_UI_Displayer_Team_Info Name=Team_Info_Displayer
+    tag="Team_Info_Displayer"
     bEnabled=true
-		posX=0    
-		posY=0
-		posXEnd=NATIVE_WIDTH
-		posYEnd=NATIVE_HEIGHT
-	end object
-	componentList.add(Team_Info_Displayer)
-	
+    posX=0    
+    posY=0
+    posXEnd=NATIVE_WIDTH
+    posYEnd=NATIVE_HEIGHT
+  end object
+  componentList.add(Team_Info_Displayer)
+  
 }
 
 

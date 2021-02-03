@@ -29,11 +29,11 @@ event activated()
  *===========================================================================*/
 defaultProperties
 {
-	objName="ShrineEvent"
-	objCategory="ROTT" 
+  objName="ShrineEvent"
+  objCategory="ROTT" 
   
-	bPlayerOnly=false
-	maxTriggerCount=0
+  bPlayerOnly=false
+  maxTriggerCount=0
 }
 
 

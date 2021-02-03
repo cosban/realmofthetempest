@@ -26,28 +26,28 @@ class ROTT_NPC_Talonovia_Hekatos extends ROTT_NPC_Container;
 public function initDialogue() {
   super.initDialogue();
   
-	// Intro
-	`NEW_NODE(INTRODUCTION, NUETRAL)
+  // Intro
+  `NEW_NODE(INTRODUCTION, NUETRAL)
     "Spirits whispered of your arrival to me.",
     ""
   `ENDNODE
   
-	`NEW_NODE(INTRODUCTION, NUETRAL)
+  `NEW_NODE(INTRODUCTION, NUETRAL)
     "The wispy murmurs of spirits chatter,",
     "while the tempest screams to me."
   `ENDNODE
   
-	`NEW_NODE(INTRODUCTION, NUETRAL)
+  `NEW_NODE(INTRODUCTION, NUETRAL)
     "For I am the master practitioner of chemical witchcraft,",
     "channeler of the high queen of the underworld,"
   `ENDNODE
   
-	`NEW_NODE(INTRODUCTION, NUETRAL)
+  `NEW_NODE(INTRODUCTION, NUETRAL)
     "I am Hekatos.",
     ""
   `ENDNODE
   
-	`NEW_NODE(INTRODUCTION, NUETRAL)
+  `NEW_NODE(INTRODUCTION, NUETRAL)
     "You hear them too, don't you?",
     "The spirits."
   `ENDNODE
@@ -79,24 +79,24 @@ public function initDialogue() {
         "deepens as it does here."
       `ENDNODE
     
-	`NEW_NODE(INTRODUCTION, NUETRAL)
+  `NEW_NODE(INTRODUCTION, NUETRAL)
     "There is terror in the dark,",
     "and the spirits know it."
   `ENDNODE
   
-	`NEW_NODE(INTRODUCTION, NUETRAL)
+  `NEW_NODE(INTRODUCTION, NUETRAL)
     "They tell me your path will wind through the storms",
     "until you reach a citadel, and a tower."
   `ENDNODE
   
-	`NEW_NODE(INTRODUCTION, NUETRAL)
+  `NEW_NODE(INTRODUCTION, NUETRAL)
     "It is the obelisk of Rhunia.",
     "When you reach it, abstain from its agitation."
   `ENDNODE
   
   // ----------------------------------------------------------------------- //
   
-	`NEW_NODE(GREETING, NUETRAL)
+  `NEW_NODE(GREETING, NUETRAL)
     "I was told you would come.",
     ""
   `ENDNODE
@@ -118,71 +118,71 @@ public function initDialogue() {
     
   // ----------------------------------------------------------------------- //
   
-	`NEW_NODE(INQUERY_OBELISK, NUETRAL)
+  `NEW_NODE(INQUERY_OBELISK, NUETRAL)
     "The obelisk of Rhunia must not be disturbed.",
     ""
   `ENDNODE
   
-	`NEW_NODE(INQUERY_OBELISK, NUETRAL)
+  `NEW_NODE(INQUERY_OBELISK, NUETRAL)
     "The screech of that awful tower deafens my link",
     "to the spirit world."
   `ENDNODE
   
-	///`NEW_NODE(INQUERY_OBELISK, NUETRAL)
+  ///`NEW_NODE(INQUERY_OBELISK, NUETRAL)
   ///  "The raging energy invested within it deafens my link",
   ///  "to the spirit world."
   ///`ENDNODE
   
   // ----------------------------------------------------------------------- //
   
-	`NEW_NODE(INQUERY_TOMB, NUETRAL)
+  `NEW_NODE(INQUERY_TOMB, NUETRAL)
     "Yes, yes. . . The tomb.",
     "It is where the soul of the Haxlyn priestess rests."
   `ENDNODE
   
-	`NEW_NODE(INQUERY_TOMB, NUETRAL)
+  `NEW_NODE(INQUERY_TOMB, NUETRAL)
     "I know her spirit well.",
     ""
   `ENDNODE
   
-	`NEW_NODE(INQUERY_TOMB, NUETRAL)
+  `NEW_NODE(INQUERY_TOMB, NUETRAL)
     "She yearns to raise waves through the world as you do, %n.",
     "It is not in her nature to rest."
   `ENDNODE
   
-	`NEW_NODE(INQUERY_TOMB, NUETRAL)
+  `NEW_NODE(INQUERY_TOMB, NUETRAL)
     "The essence of her will is carried through the blossoms",
     "that decorate her tomb."
   `ENDNODE
   
-	`NEW_NODE(INQUERY_TOMB, NUETRAL)
+  `NEW_NODE(INQUERY_TOMB, NUETRAL)
     "To free her will upon the world,",
     "bring us back her botanical blessing."
   `ENDNODE
   
   // ----------------------------------------------------------------------- //
   
-	`NEW_NODE(INQUERY_GOLEM, NUETRAL)
+  `NEW_NODE(INQUERY_GOLEM, NUETRAL)
     "The ethereal hand of our moonlight cast itself upon",
     "a set of scrolls, writing what we call the Lunar Credo."
   `ENDNODE
   
-	`NEW_NODE(INQUERY_GOLEM, NUETRAL)
+  `NEW_NODE(INQUERY_GOLEM, NUETRAL)
     "Now banished, the text corrupts all who read it without sagacity.",
     "It burns holes in their minds."
   `ENDNODE
   
-	`NEW_NODE(INQUERY_GOLEM, NUETRAL)
+  `NEW_NODE(INQUERY_GOLEM, NUETRAL)
     "The high queen of the underworld sanctioned me to read three",
     "of its pages, in which the moonlight etched the golem's husk."
   `ENDNODE
   
-	`NEW_NODE(INQUERY_GOLEM, NUETRAL)
+  `NEW_NODE(INQUERY_GOLEM, NUETRAL)
     "From each esoteric passage, I learned only that mystery",
     "holds a thick cloak over our world."
   `ENDNODE
   
-	`NEW_NODE(INQUERY_GOLEM, NUETRAL)
+  `NEW_NODE(INQUERY_GOLEM, NUETRAL)
     "Do not meddle with their slumber, %n.",
     ""
   `ENDNODE
@@ -212,27 +212,27 @@ defaultProperties
   npcName=HEKATOS
   
   // Background
-	begin object class=UI_Texture_Info Name=NPC_Background_Violet
-		componentTextures.add(Texture2D'GUI_NPC_Dialog.NPC_Background_Violet'
-	end object
-	
+  begin object class=UI_Texture_Info Name=NPC_Background_Violet
+    componentTextures.add(Texture2D'GUI_NPC_Dialog.NPC_Background_Violet'
+  end object
+  
   // Sprite container for transfer
-	begin object class=UI_Texture_Storage Name=NPC_Background
-		tag="NPC_Background"
-		images(0)=NPC_Background_Violet
-	end object
+  begin object class=UI_Texture_Storage Name=NPC_Background
+    tag="NPC_Background"
+    images(0)=NPC_Background_Violet
+  end object
   npcBackground=NPC_Background
   
   // NPC Texture
-	begin object class=UI_Texture_Info Name=NPC_Hekatos
+  begin object class=UI_Texture_Info Name=NPC_Hekatos
     componentTextures.add(Texture2D'NPCs.Witches.NPC_Portrait_Witch_Purple_360')
   end object
-	
+  
   // Sprite container for transfer
-	begin object class=UI_Texture_Storage Name=NPC_Sprites
-		tag="NPC_Sprites"
-		images(0)=NPC_Hekatos
-	end object
+  begin object class=UI_Texture_Storage Name=NPC_Sprites
+    tag="NPC_Sprites"
+    images(0)=NPC_Hekatos
+  end object
   npcSprites=NPC_Sprites
 }
 

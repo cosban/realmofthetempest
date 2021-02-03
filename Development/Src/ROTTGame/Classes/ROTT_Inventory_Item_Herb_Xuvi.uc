@@ -49,7 +49,7 @@ defaultProperties
   itemName="Xuvi Herb"
   
   // Item texture
-	itemTexture=Texture2D'ROTT_Items.Herbs.Item_Herb_Red'
+  itemTexture=Texture2D'ROTT_Items.Herbs.Item_Herb_Red'
   
   // Item text color
   itemFont=DEFAULT_SMALL_ORANGE

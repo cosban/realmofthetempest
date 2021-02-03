@@ -904,7 +904,7 @@ struct ReplyNode {
 };
 
 // This node holds first time introduction and conflict completion responses 
-struct DialogNode	{
+struct DialogNode  {
   // Implemented separately due to difficulty with multiline label implementation 
   var string topLine;
   var string bottomLine;
@@ -915,7 +915,7 @@ struct DialogNode	{
 };
 
 // This node holds first time introduction and conflict completion responses 
-struct EventResponseNodes	{
+struct EventResponseNodes  {
   var array<DialogNode> PosGreetNode; 
   var array<DialogNode> NegGreetNode;
 };
@@ -931,7 +931,7 @@ enum InquiryTopics {
 };
 
 // This node holds first time introduction and conflict completion responses 
-struct InquiryNodeList	{
+struct InquiryNodeList  {
   var array<DialogNode> inqueryNodes; 
 };
 

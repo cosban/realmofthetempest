@@ -168,123 +168,123 @@ protected function navigationRoutineB() {
 defaultProperties
 {
   /** ===== Input ===== **/
-	begin object class=ROTT_Input_Handler Name=Input_A
+  begin object class=ROTT_Input_Handler Name=Input_A
     inputName="XBoxTypeS_A"
-		buttonComponent=none
-	end object
+    buttonComponent=none
+  end object
   inputList.add(Input_A)
   
-	begin object class=ROTT_Input_Handler Name=Input_B
+  begin object class=ROTT_Input_Handler Name=Input_B
     inputName="XBoxTypeS_B"
-		buttonComponent=none
-	end object
+    buttonComponent=none
+  end object
   inputList.add(Input_B)
   
-	/** ===== Textures ===== **/
+  /** ===== Textures ===== **/
   // Window background
-	begin object class=UI_Texture_Info Name=Service_Window
+  begin object class=UI_Texture_Info Name=Service_Window
     componentTextures.add(Texture2D'GUI.Reset_Cost_Window_With_Skill')
   end object
   
   /** ===== UI Components ===== **/
   // Window background
-	begin object class=UI_Sprite Name=Blessing_Cost_Panel
-		tag="Blessing_Cost_Panel"
-		posX=0
-		posY=0
-		images(0)=Service_Window
-	end object
-	componentList.add(Blessing_Cost_Panel)
+  begin object class=UI_Sprite Name=Blessing_Cost_Panel
+    tag="Blessing_Cost_Panel"
+    posX=0
+    posY=0
+    images(0)=Service_Window
+  end object
+  componentList.add(Blessing_Cost_Panel)
   
   // Header label
-	begin object class=UI_Label Name=Header_Label
-		tag="Header_Label"
-		posX=0
-		posY=74
-		posXEnd=720
-		posYEnd=NATIVE_HEIGHT
+  begin object class=UI_Label Name=Header_Label
+    tag="Header_Label"
+    posX=0
+    posY=74
+    posXEnd=720
+    posYEnd=NATIVE_HEIGHT
     fontStyle=DEFAULT_LARGE_WHITE
-		AlignX=CENTER
-		AlignY=TOP
-		labelText="Shrine Donation"
-	end object
-	componentList.add(Header_Label)
+    AlignX=CENTER
+    AlignY=TOP
+    labelText="Shrine Donation"
+  end object
+  componentList.add(Header_Label)
   
   // Donation Cost Displayer #1
-	begin object class=ROTT_UI_Displayer_Cost Name=Donation_Cost_1
-		tag="Donation_Cost_1"
-		posX=0
-		posY=130
+  begin object class=ROTT_UI_Displayer_Cost Name=Donation_Cost_1
+    tag="Donation_Cost_1"
+    posX=0
+    posY=130
     currencyType=class'ROTT_Inventory_Item_Herb'
     costDescriptionText="Herbs needed:"
     costValue=1
-	end object 
-	componentList.add(Donation_Cost_1)
-	
+  end object 
+  componentList.add(Donation_Cost_1)
+  
   // Donation Cost Displayer #2
-	begin object class=ROTT_UI_Displayer_Cost Name=Donation_Cost_2
-		tag="Donation_Cost_2"
-		posX=0
-		posY=272
+  begin object class=ROTT_UI_Displayer_Cost Name=Donation_Cost_2
+    tag="Donation_Cost_2"
+    posX=0
+    posY=272
     currencyType=class'ROTT_Inventory_Item_Gem'
     costDescriptionText="Gems needed:"
     costValue=0
-	end object 
-	componentList.add(Donation_Cost_2)
-	
+  end object 
+  componentList.add(Donation_Cost_2)
+  
   // Donation Cost Displayer #3
-	begin object class=ROTT_UI_Displayer_Cost Name=Donation_Cost_3
-		tag="Donation_Cost_3"
-		posX=0
-		posY=414
+  begin object class=ROTT_UI_Displayer_Cost Name=Donation_Cost_3
+    tag="Donation_Cost_3"
+    posX=0
+    posY=414
     currencyType=class'ROTT_Inventory_Item_Bottle_Swamp_Husks'
     costDescriptionText="Bottles needed:"
     costValue=0
-	end object 
-	componentList.add(Donation_Cost_3)
-	
+  end object 
+  componentList.add(Donation_Cost_3)
+  
   // Button textures
-	begin object class=UI_Texture_Info Name=Button_Offering_1x
+  begin object class=UI_Texture_Info Name=Button_Offering_1x
     componentTextures.add(Texture2D'GUI.Button_Offer_1')
   end object
-	begin object class=UI_Texture_Info Name=Button_Offering_5x
+  begin object class=UI_Texture_Info Name=Button_Offering_5x
     componentTextures.add(Texture2D'GUI.Button_Offer_5')
   end object
-	begin object class=UI_Texture_Info Name=Button_Offer_All 
+  begin object class=UI_Texture_Info Name=Button_Offer_All 
     componentTextures.add(Texture2D'GUI.Button_Offer_Max')
   end object
   
   // Buttons
-	begin object class=UI_Sprite Name=Button_Offering_1x_Sprite
-		tag="Button_Offering_1x_Sprite"
-		posX=132
-		posY=544
+  begin object class=UI_Sprite Name=Button_Offering_1x_Sprite
+    tag="Button_Offering_1x_Sprite"
+    posX=132
+    posY=544
     images(0)=Button_Offering_1x
-	end object
-	componentList.add(Button_Offering_1x_Sprite)
+  end object
+  componentList.add(Button_Offering_1x_Sprite)
   
-	begin object class=UI_Sprite Name=Button_Offering_5x_Sprite
-		tag="Button_Offering_5x_Sprite"
-		posX=132
-		posY=624
+  begin object class=UI_Sprite Name=Button_Offering_5x_Sprite
+    tag="Button_Offering_5x_Sprite"
+    posX=132
+    posY=624
     images(0)=Button_Offering_5x
-	end object
-	componentList.add(Button_Offering_5x_Sprite)
+  end object
+  componentList.add(Button_Offering_5x_Sprite)
   
-	begin object class=UI_Sprite Name=Button_Offer_All_Sprite
-		tag="Button_Offer_All_Sprite"
-		posX=132
-		posY=704
+  begin object class=UI_Sprite Name=Button_Offer_All_Sprite
+    tag="Button_Offer_All_Sprite"
+    posX=132
+    posY=704
     images(0)=Button_Offer_All
-	end object
-	componentList.add(Button_Offer_All_Sprite)
+  end object
+  componentList.add(Button_Offer_All_Sprite)
   
   // Mgmt Window Selection Box
-	begin object class=UI_Selector Name=Selector
-		tag="Selector"
+  begin object class=UI_Selector Name=Selector
+    tag="Selector"
     bEnabled=true
-		posX=144
-		posY=552
+    posX=144
+    posY=552
     selectionOffset=(x=0,y=80)
     numberOfMenuOptions=3
     
@@ -302,8 +302,8 @@ defaultProperties
     end object
     componentList.add(Selector_Sprite)
     
-	end object
-	componentList.add(Selector)
+  end object
+  componentList.add(Selector)
 }
 
 

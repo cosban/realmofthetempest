@@ -185,48 +185,48 @@ public function raveHighwindCall() {
 defaultProperties
 {
   /** ===== Textures ===== **/
-	// Stat Selection Boxes
-	begin object class=UI_Texture_Info Name=Stat_Selection_Box_1
+  // Stat Selection Boxes
+  begin object class=UI_Texture_Info Name=Stat_Selection_Box_1
     componentTextures.add(Texture2D'GUI.Stat_Selection_Box_1')
   end object
-	begin object class=UI_Texture_Info Name=Stat_Selection_Box_2
+  begin object class=UI_Texture_Info Name=Stat_Selection_Box_2
     componentTextures.add(Texture2D'GUI.Stat_Selection_Box_2')
   end object
-	begin object class=UI_Texture_Info Name=Stat_Selection_Box_3
+  begin object class=UI_Texture_Info Name=Stat_Selection_Box_3
     componentTextures.add(Texture2D'GUI.Stat_Selection_Box_3')
   end object
-	begin object class=UI_Texture_Info Name=Stat_Selection_Box_4
+  begin object class=UI_Texture_Info Name=Stat_Selection_Box_4
     componentTextures.add(Texture2D'GUI.Stat_Selection_Box_4')
   end object
-	//-----------------------------------------------------------------
-	begin object class=UI_Texture_Info Name=Stat_Selection_Box_1_Red
+  //-----------------------------------------------------------------
+  begin object class=UI_Texture_Info Name=Stat_Selection_Box_1_Red
     componentTextures.add(Texture2D'GUI.Stat_Selection_Box_1_Red')
   end object
-	begin object class=UI_Texture_Info Name=Stat_Selection_Box_2_Red
+  begin object class=UI_Texture_Info Name=Stat_Selection_Box_2_Red
     componentTextures.add(Texture2D'GUI.Stat_Selection_Box_2_Red')
   end object
-	begin object class=UI_Texture_Info Name=Stat_Selection_Box_3_Red
+  begin object class=UI_Texture_Info Name=Stat_Selection_Box_3_Red
     componentTextures.add(Texture2D'GUI.Stat_Selection_Box_3_Red')
   end object
-	begin object class=UI_Texture_Info Name=Stat_Selection_Box_4_Red
+  begin object class=UI_Texture_Info Name=Stat_Selection_Box_4_Red
     componentTextures.add(Texture2D'GUI.Stat_Selection_Box_4_Red')
   end object
-	//-----------------------------------------------------------------
-	begin object class=UI_Texture_Info Name=Stat_Selection_Box_1_Blue
+  //-----------------------------------------------------------------
+  begin object class=UI_Texture_Info Name=Stat_Selection_Box_1_Blue
     componentTextures.add(Texture2D'GUI.Stat_Selection_Box_1_Blue')
   end object
-	begin object class=UI_Texture_Info Name=Stat_Selection_Box_2_Blue
+  begin object class=UI_Texture_Info Name=Stat_Selection_Box_2_Blue
     componentTextures.add(Texture2D'GUI.Stat_Selection_Box_2_Blue')
   end object
-	begin object class=UI_Texture_Info Name=Stat_Selection_Box_3_Blue
+  begin object class=UI_Texture_Info Name=Stat_Selection_Box_3_Blue
     componentTextures.add(Texture2D'GUI.Stat_Selection_Box_3_Blue')
   end object
-	begin object class=UI_Texture_Info Name=Stat_Selection_Box_4_Blue
+  begin object class=UI_Texture_Info Name=Stat_Selection_Box_4_Blue
     componentTextures.add(Texture2D'GUI.Stat_Selection_Box_4_Blue')
   end object
-	
+  
   // Mini arrow navigation markers
-	begin object class=UI_Texture_Info Name=Mini_Selection_Arrow_Texture
+  begin object class=UI_Texture_Info Name=Mini_Selection_Arrow_Texture
     componentTextures.add(Texture2D'GUI.Menu_Selection_Arrow')
   end object
   

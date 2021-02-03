@@ -504,101 +504,100 @@ defaultProperties
   animationModes(LABEL_TYPE_DAMAGE)=ANIMATE_UP_BOUNCE
   animationModes(LABEL_TYPE_RESIST)=ANIMATE_STILL
   
-	/** ===== Textures ===== **/
-	// Enemy health and TUNA
-	begin object class=UI_Texture_Info Name=Enemy_UI_Back
+  /** ===== Textures ===== **/
+  // Enemy health and TUNA
+  begin object class=UI_Texture_Info Name=Enemy_UI_Back
     componentTextures.add(Texture2D'GUI.Enemy_UI_Back')
   end object
-	begin object class=UI_Texture_Info Name=Enemy_UI_HP_Bar
+  begin object class=UI_Texture_Info Name=Enemy_UI_HP_Bar
     componentTextures.add(Texture2D'GUI.Enemy_UI_HP_Bar')
   end object
-	begin object class=UI_Texture_Info Name=Enemy_UI_TUNA_Bar
+  begin object class=UI_Texture_Info Name=Enemy_UI_TUNA_Bar
     componentTextures.add(Texture2D'GUI.Enemy_UI_TUNA_Bar')
   end object
-	begin object class=UI_Texture_Info Name=Enemy_UI_Frame
+  begin object class=UI_Texture_Info Name=Enemy_UI_Frame
     componentTextures.add(Texture2D'GUI.Enemy_UI_Frame')
   end object
-	
+  
   // Portraits
-	begin object class=UI_Texture_Info Name=Place_Holder_240
+  begin object class=UI_Texture_Info Name=Place_Holder_240
     componentTextures.add(Texture2D'Monsters_Disc_2.Enemy_Portrait_Placeholder_240') 
   end object
-	begin object class=UI_Texture_Info Name=Place_Holder_360
+  begin object class=UI_Texture_Info Name=Place_Holder_360
     componentTextures.add(Texture2D'Monsters_Disc_2.Enemy_Portrait_Placeholder_360')
   end object
   
-	/** ===== UI Components ===== **/
+  /** ===== UI Components ===== **/
   // Enemy UI Background
-	begin object class=UI_Sprite Name=Enemy_UI_Back_Sprite
-		tag="Enemy_UI_Back_Sprite"
+  begin object class=UI_Sprite Name=Enemy_UI_Back_Sprite
+    tag="Enemy_UI_Back_Sprite"
     posX=0
     posY=0
     images(0)=Enemy_UI_Back
-	end object
-	componentList.add(Enemy_UI_Back_Sprite)
-	
+  end object
+  componentList.add(Enemy_UI_Back_Sprite)
+  
   // Enemy Health
-	begin object class=UI_Sprite Name=Enemy_UI_HP_Bar_Sprite
-		tag="Enemy_UI_HP_Bar_Sprite"
+  begin object class=UI_Sprite Name=Enemy_UI_HP_Bar_Sprite
+    tag="Enemy_UI_HP_Bar_Sprite"
     posX=10
     posY=10
     images(0)=Enemy_UI_HP_Bar
-	end object
-	componentList.add(Enemy_UI_HP_Bar_Sprite)
-	
+  end object
+  componentList.add(Enemy_UI_HP_Bar_Sprite)
+  
   // Enemy Tuna
-	begin object class=UI_Sprite Name=Enemy_UI_TUNA_Bar_Sprite
-		tag="Enemy_UI_TUNA_Bar_Sprite"
+  begin object class=UI_Sprite Name=Enemy_UI_TUNA_Bar_Sprite
+    tag="Enemy_UI_TUNA_Bar_Sprite"
     posX=19
     posY=33
     images(0)=Enemy_UI_TUNA_Bar
-	end object
-	componentList.add(Enemy_UI_TUNA_Bar_Sprite)
-	
+  end object
+  componentList.add(Enemy_UI_TUNA_Bar_Sprite)
+  
   // Enemy UI Frame
-	begin object class=UI_Sprite Name=Enemy_UI_Frame_Sprite
-		tag="Enemy_UI_Frame_Sprite"
+  begin object class=UI_Sprite Name=Enemy_UI_Frame_Sprite
+    tag="Enemy_UI_Frame_Sprite"
     posX=0
     posY=0
     images(0)=Enemy_UI_Frame
-	end object
-	componentList.add(Enemy_UI_Frame_Sprite)
-	
+  end object
+  componentList.add(Enemy_UI_Frame_Sprite)
+  
   // Enemy Portrait
-	begin object class=UI_Sprite Name=Enemy_Portrait
-		tag="Enemy_Portrait"
+  begin object class=UI_Sprite Name=Enemy_Portrait
+    tag="Enemy_Portrait"
     bAnchor=true
     anchorX=106
     anchorY=165
-		images(0)=Place_Holder_360
-	end object
-	componentList.add(Enemy_Portrait)
-	
+    images(0)=Place_Holder_360
+  end object
+  componentList.add(Enemy_Portrait)
+  
   // Skill animation sprite
-	begin object class=UI_Sprite Name=Skill_Animation
-		tag="Skill_Animation"
+  begin object class=UI_Sprite Name=Skill_Animation
+    tag="Skill_Animation"
     posX=-14
     posY=75
     posXEnd=226
     posYEnd=315
     images(0)=none
-	end object
-	componentList.add(Skill_Animation)
-	
+  end object
+  componentList.add(Skill_Animation)
+  
   // Monster name
-	begin object class=UI_Label Name=Enemy_Name_Label
-		tag="Enemy_Name_Label"
+  begin object class=UI_Label Name=Enemy_Name_Label
+    tag="Enemy_Name_Label"
     posX=-6
     posY=-31
-		posXEnd=NATIVE_WIDTH
-		posYEnd=NATIVE_HEIGHT
-		AlignX=LEFT
-		AlignY=TOP
+    posXEnd=NATIVE_WIDTH
+    posYEnd=NATIVE_HEIGHT
+    AlignX=LEFT
+    AlignY=TOP
     fontStyle=DEFAULT_SMALL_WHITE
-		labelText=""
-	end object
-	componentList.add(Enemy_Name_Label)
-	
+    labelText=""
+  end object
+  componentList.add(Enemy_Name_Label)
   
   
   
@@ -615,92 +614,93 @@ defaultProperties
   
   
   
-	/** ===== Textures ===== **/
-	// Enemy health and TUNA
-	begin object class=UI_Texture_Info Name=Elite_UI_Back
+  
+  /** ===== Textures ===== **/
+  // Enemy health and TUNA
+  begin object class=UI_Texture_Info Name=Elite_UI_Back
     componentTextures.add(Texture2D'GUI.Champ_UI_Back')
   end object
-	begin object class=UI_Texture_Info Name=Elite_UI_HP_Bar
+  begin object class=UI_Texture_Info Name=Elite_UI_HP_Bar
     componentTextures.add(Texture2D'GUI.Champ_UI_HP_Bar')
   end object
-	begin object class=UI_Texture_Info Name=Elite_UI_TUNA_Bar
+  begin object class=UI_Texture_Info Name=Elite_UI_TUNA_Bar
     componentTextures.add(Texture2D'GUI.Champ_UI_TUNA_Bar')
   end object
-	begin object class=UI_Texture_Info Name=Elite_UI_Frame
+  begin object class=UI_Texture_Info Name=Elite_UI_Frame
     componentTextures.add(Texture2D'GUI.Champ_UI_Frame')
   end object
-	
-	/** ===== UI Components ===== **/
+  
+  /** ===== UI Components ===== **/
   // Elite UI Background
-	begin object class=UI_Sprite Name=Elite_UI_Back_Sprite
-		tag="Elite_UI_Back_Sprite"
+  begin object class=UI_Sprite Name=Elite_UI_Back_Sprite
+    tag="Elite_UI_Back_Sprite"
     posX=-194
     posY=-68
     images(0)=Elite_UI_Back
-	end object
-	componentList.add(Elite_UI_Back_Sprite)
-	
+  end object
+  componentList.add(Elite_UI_Back_Sprite)
+  
   // Elite Health
-	begin object class=UI_Sprite Name=Elite_UI_HP_Bar_Sprite
-		tag="Elite_UI_HP_Bar_Sprite"
+  begin object class=UI_Sprite Name=Elite_UI_HP_Bar_Sprite
+    tag="Elite_UI_HP_Bar_Sprite"
     posX=-183
     posY=-58
     images(0)=Elite_UI_HP_Bar
-	end object
-	componentList.add(Elite_UI_HP_Bar_Sprite)
-	
+  end object
+  componentList.add(Elite_UI_HP_Bar_Sprite)
+  
   // Elite Tuna
-	begin object class=UI_Sprite Name=Elite_UI_TUNA_Bar_Sprite
-		tag="Elite_UI_TUNA_Bar_Sprite"
+  begin object class=UI_Sprite Name=Elite_UI_TUNA_Bar_Sprite
+    tag="Elite_UI_TUNA_Bar_Sprite"
     posX=-75
     posY=-34
     images(0)=Elite_UI_TUNA_Bar
-	end object
-	componentList.add(Elite_UI_TUNA_Bar_Sprite)
-	
+  end object
+  componentList.add(Elite_UI_TUNA_Bar_Sprite)
+  
   // Elite UI Frame
-	begin object class=UI_Sprite Name=Elite_UI_Frame_Sprite
-		tag="Elite_UI_Frame_Sprite"
+  begin object class=UI_Sprite Name=Elite_UI_Frame_Sprite
+    tag="Elite_UI_Frame_Sprite"
     posX=-194
     posY=-68
     images(0)=Elite_UI_Frame
-	end object
-	componentList.add(Elite_UI_Frame_Sprite)
-	
+  end object
+  componentList.add(Elite_UI_Frame_Sprite)
+  
   // Elite Portrait
-	begin object class=UI_Sprite Name=Elite_Portrait
-		tag="Elite_Portrait"
+  begin object class=UI_Sprite Name=Elite_Portrait
+    tag="Elite_Portrait"
     bAnchor=true
     anchorX=106
     anchorY=195 
     images(0)=Place_Holder_360
-	end object
-	componentList.add(Elite_Portrait)
-	
+  end object
+  componentList.add(Elite_Portrait)
+  
   // Skill animation sprite
-	begin object class=UI_Sprite Name=Elite_Skill_Animation
-		tag="Elite_Skill_Animation"
+  begin object class=UI_Sprite Name=Elite_Skill_Animation
+    tag="Elite_Skill_Animation"
     posX=-74
     posY=-4
     posXend=286
     posYend=356
     images(0)=none
-	end object
-	componentList.add(Elite_Skill_Animation)
-	
+  end object
+  componentList.add(Elite_Skill_Animation)
+  
   // Monster name
-	begin object class=UI_Label Name=Elite_Name_Label
-		tag="Elite_Name_Label"
+  begin object class=UI_Label Name=Elite_Name_Label
+    tag="Elite_Name_Label"
     posX=-194
     posY=-103
-		posXEnd=406
-		posYEnd=NATIVE_HEIGHT
-		AlignX=CENTER
-		AlignY=TOP
+    posXEnd=406
+    posYEnd=NATIVE_HEIGHT
+    AlignX=CENTER
+    AlignY=TOP
     fontStyle=DEFAULT_MEDIUM_WHITE
-		labelText=""
-	end object
-	componentList.add(Elite_Name_Label)
+    labelText=""
+  end object
+  componentList.add(Elite_Name_Label)
   
   
   
@@ -718,39 +718,39 @@ defaultProperties
   
   
   // Demoralization Marker
-	begin object class=UI_Texture_Info Name=Demoralization_Marker
+  begin object class=UI_Texture_Info Name=Demoralization_Marker
     componentTextures.add(Texture2D'GUI.Demoralization_Marker')
   end object
   
   // Demoralization threshold marker
-	begin object class=UI_Sprite Name=Enemy_Demoralization_Marker
-		tag="Enemy_Demoralization_Marker"
+  begin object class=UI_Sprite Name=Enemy_Demoralization_Marker
+    tag="Enemy_Demoralization_Marker"
     posX=3 // + 188
     posY=-7
     images(0)=Demoralization_Marker
-	end object
-	componentList.add(Enemy_Demoralization_Marker)
-	
+  end object
+  componentList.add(Enemy_Demoralization_Marker)
+  
   // Status label
-	begin object class=ROTT_UI_Status_Label Name=Enemy_Status_Label
-		tag="Enemy_Status_Label"
+  begin object class=ROTT_UI_Status_Label Name=Enemy_Status_Label
+    tag="Enemy_Status_Label"
     posX=0
     posY=0
-		posXEnd=214
-		posYEnd=140
-	end object
-	componentList.add(Enemy_Status_Label)
-	
+    posXEnd=214
+    posYEnd=140
+  end object
+  componentList.add(Enemy_Status_Label)
+  
   // Status label
-	begin object class=ROTT_UI_Status_Label Name=Elite_Status_Label
-		tag="Elite_Status_Label"
+  begin object class=ROTT_UI_Status_Label Name=Elite_Status_Label
+    tag="Elite_Status_Label"
     posX=0
     posY=-25
-		posXEnd=214
-		posYEnd=29
-	end object
-	componentList.add(Elite_Status_Label)
-	
+    posXEnd=214
+    posYEnd=29
+  end object
+  componentList.add(Elite_Status_Label)
+  
   
 }
 

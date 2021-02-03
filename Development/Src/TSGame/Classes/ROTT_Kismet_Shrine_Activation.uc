@@ -97,8 +97,8 @@ public function updateShrineGraphics(bool bMonumentIsActive) {
  *===========================================================================*/
 defaultProperties
 {
-	ObjName="ShrineActivation"
-	ObjCategory="ROTT" 
+  ObjName="ShrineActivation"
+  ObjCategory="ROTT" 
 }
 
 

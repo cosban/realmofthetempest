@@ -89,22 +89,22 @@ defaultProperties
 
 function float GetMPRegen(string StatType, int SkillLevel)
 {
-	local float iChance, iMPRegen;
-	
-	// MP Regen
-	iMPRegen = (1.2 ** (SkillLevel ** 0.24) + (SkillLevel ** 1.08) + (1.4 * SkillLevel) + 0.2);
-	
-	// Chance
-	iChance = 60;
-	
-	// Return type
-	switch (StatType)
-	{
-		case "Mana":
-			return iMPRegen;
-		case "Chance":
-			return iChance;
-	}
+  local float iChance, iMPRegen;
+  
+  // MP Regen
+  iMPRegen = (1.2 ** (SkillLevel ** 0.24) + (SkillLevel ** 1.08) + (1.4 * SkillLevel) + 0.2);
+  
+  // Chance
+  iChance = 60;
+  
+  // Return type
+  switch (StatType)
+  {
+    case "Mana":
+      return iMPRegen;
+    case "Chance":
+      return iChance;
+  }
 }
 **/
 

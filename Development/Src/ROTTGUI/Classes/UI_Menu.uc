@@ -10,7 +10,7 @@
 class UI_Menu extends UI_Page;
 
 // We store the object that we are selecting from, which we can type cast later
-var public Object selectionSource;
+var public object selectionSource;
 
 // We store the object that we are selecting from, which we can type cast later
 var protectedwrite UI_Sprite selectionSprite;

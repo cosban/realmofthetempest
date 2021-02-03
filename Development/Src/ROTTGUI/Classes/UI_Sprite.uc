@@ -469,7 +469,7 @@ public function resetImageSize() {
     ,
     ,
     getX() + images[drawIndex].getSizeX(),
-	  getY() + images[drawIndex].getSizeY()
+    getY() + images[drawIndex].getSizeY()
   );
 }
 

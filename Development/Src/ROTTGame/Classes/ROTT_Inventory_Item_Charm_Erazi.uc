@@ -49,7 +49,7 @@ defaultProperties
   itemName="Erazi Charm"
   
   // Item texture
-	itemTexture=Texture2D'ROTT_Items.Charms.Item_Charm_Gold'
+  itemTexture=Texture2D'ROTT_Items.Charms.Item_Charm_Gold'
   
   // Item text color
   itemFont=DEFAULT_SMALL_ORANGE

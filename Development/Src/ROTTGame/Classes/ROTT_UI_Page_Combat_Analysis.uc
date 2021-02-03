@@ -178,18 +178,18 @@ private function allowInput() {
  * Assets
  *===========================================================================*/
 defaultProperties
-{	
-	/** ===== Input ===== **/
-	begin object class=ROTT_Input_Handler Name=Input_A
+{  
+  /** ===== Input ===== **/
+  begin object class=ROTT_Input_Handler Name=Input_A
     inputName="XBoxTypeS_A"
-		buttonComponent=none
-	end object
+    buttonComponent=none
+  end object
   inputList.add(Input_A)
   
-	begin object class=ROTT_Input_Handler Name=Input_B
+  begin object class=ROTT_Input_Handler Name=Input_B
     inputName="XBoxTypeS_B"
     buttonComponent=none
-	end object
+  end object
   inputList.add(Input_B)
   
   /** ===== Textures ===== **/
@@ -200,41 +200,41 @@ defaultProperties
   
   /** ===== UI Components ===== **/
   // Background
-	begin object class=UI_Sprite Name=Background_Sprite
-		tag="Background_Sprite"
+  begin object class=UI_Sprite Name=Background_Sprite
+    tag="Background_Sprite"
     bEnabled=true
-		posX=0
-		posY=0
-		posXEnd=NATIVE_WIDTH
-		posYEnd=NATIVE_HEIGHT
-		images(0)=Victory_Background
-	end object
-	componentList.add(Background_Sprite)
+    posX=0
+    posY=0
+    posXEnd=NATIVE_WIDTH
+    posYEnd=NATIVE_HEIGHT
+    images(0)=Victory_Background
+  end object
+  componentList.add(Background_Sprite)
   
   // Analysis info
-	begin object class=ROTT_UI_Displayer_Battle_Analysis Name=Analysis_Info
-		tag="Analysis_Info"
+  begin object class=ROTT_UI_Displayer_Battle_Analysis Name=Analysis_Info
+    tag="Analysis_Info"
     bEnabled=true
     posy=1
-	end object
-	componentList.add(Analysis_Info)
+  end object
+  componentList.add(Analysis_Info)
   
   // Party Displayer
-	begin object class=ROTT_UI_Party_Display Name=Party_Displayer
-		tag="Party_Displayer"
+  begin object class=ROTT_UI_Party_Display Name=Party_Displayer
+    tag="Party_Displayer"
     bEnabled=true
     posX=107
     posY=74
     XOffset=200
     YOffset=0
-	end object
-	componentList.add(Party_Displayer)
-	
-	
+  end object
+  componentList.add(Party_Displayer)
+  
+  
   /** ===== UI Components ===== **/
   // Party Selection Box
-	begin object class=UI_Selector Name=Hero_Selection_Box
-		tag="Hero_Selection_Box"
+  begin object class=UI_Selector Name=Hero_Selection_Box
+    tag="Hero_Selection_Box"
     bEnabled=true
     bActive=true
     posX=107
@@ -256,8 +256,8 @@ defaultProperties
     end object
     componentList.add(Selector_Sprite)
     
-	end object
-	componentList.add(Hero_Selection_Box)
+  end object
+  componentList.add(Hero_Selection_Box)
 }
 
 

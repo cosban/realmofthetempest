@@ -185,62 +185,62 @@ event deleteComp() {
  *===========================================================================*/
 defaultProperties
 {
-	/** ===== Textures ===== **/
+  /** ===== Textures ===== **/
   // Background
-	begin object class=UI_Texture_Info Name=Combat_Background
+  begin object class=UI_Texture_Info Name=Combat_Background
     componentTextures.add(Texture2D'GUI.Combat_Background')
   end object
   
   // Menu
-	begin object class=UI_Texture_Info Name=Combat_Menu
+  begin object class=UI_Texture_Info Name=Combat_Menu
     componentTextures.add(Texture2D'GUI.Combat_Menu')
   end object
   
-	/** ===== UI Components ===== **/
-	tag="Page_Combat_Encounter"
-	posX=0
-	posY=0
-	posXEnd=NATIVE_WIDTH
-	posYEnd=NATIVE_HEIGHT
-	
+  /** ===== UI Components ===== **/
+  tag="Page_Combat_Encounter"
+  posX=0
+  posY=0
+  posXEnd=NATIVE_WIDTH
+  posYEnd=NATIVE_HEIGHT
+  
   // Background
-	begin object class=UI_Sprite Name=Combat_Encounter_Background
-		tag="Combat_Encounter_Background"
+  begin object class=UI_Sprite Name=Combat_Encounter_Background
+    tag="Combat_Encounter_Background"
     posX=0
     posY=0
     posXEnd=NATIVE_WIDTH
     posYEnd=NATIVE_HEIGHT
-		images(0)=Combat_Background
-	end object
-	componentList.add(Combat_Encounter_Background)
-	
+    images(0)=Combat_Background
+  end object
+  componentList.add(Combat_Encounter_Background)
+  
   // Combat Menu
-	begin object class=UI_Sprite Name=Combat_Encounter_Menu
-		tag="Combat_Encounter_Menu"
+  begin object class=UI_Sprite Name=Combat_Encounter_Menu
+    tag="Combat_Encounter_Menu"
     posX=0
     posY=0
     posXEnd=NATIVE_WIDTH
     posYEnd=NATIVE_HEIGHT
-		images(0)=Combat_Menu
-	end object
-	componentList.add(Combat_Encounter_Menu)
-	
+    images(0)=Combat_Menu
+  end object
+  componentList.add(Combat_Encounter_Menu)
+  
   // Enemy displayers
   /** Enemy UI is dynamically created in init() function above **/
   
   // Glyph feedback label
-	begin object class=UI_Label Name=Glyph_Feedback_Label
-		tag="Glyph_Feedback_Label"
+  begin object class=UI_Label Name=Glyph_Feedback_Label
+    tag="Glyph_Feedback_Label"
     posX=405
     posY=551
-		posXEnd=679
-		posYEnd=617
-		AlignX=CENTER
-		AlignY=CENTER
+    posXEnd=679
+    posYEnd=617
+    AlignX=CENTER
+    AlignY=CENTER
     fontStyle=DEFAULT_SMALL_RED
-		labelText="Health+ (#TOTAL)"
-	end object
-	componentList.add(Glyph_Feedback_Label)
+    labelText="Health+ (#TOTAL)"
+  end object
+  componentList.add(Glyph_Feedback_Label)
 }
 
 

@@ -8,8 +8,8 @@
  *===========================================================================*/
 
 class ROTT_Resource_Chest extends Actor
-	ClassGroup(ROTT_Resources)
-	placeable;
+  ClassGroup(ROTT_Resources)
+  placeable;
 
 // Looting delay
 const CHEST_ANIMATION_DELAY = 1.4;
@@ -33,7 +33,7 @@ var() private array<ItemDropMod> itemDropRates;
  * Called when the game has started
  *===========================================================================*/
 event postBeginPlay() {
-	super.postBeginPlay();
+  super.postBeginPlay();
   
   // Set references
   gameInfo = ROTT_Game_Info(Worldinfo.game);
@@ -72,18 +72,18 @@ defaultProperties
   dropAmplifier=3.5
   
   // Editor sprite
-	begin object class=SpriteComponent Name=Sprite
-		sprite=Texture2D'ROTT_Resources.Resource_Icon_Chest'
-		hiddenGame=true
-		hiddenEditor=false
-		alwaysLoadOnClient=false
-		alwaysLoadOnServer=false
-		spriteCategoryName="Navigation"
-		scale=2.0
-	end object
-	components.add(Sprite)
-	editorSprite=Sprite
-	
+  begin object class=SpriteComponent Name=Sprite
+    sprite=Texture2D'ROTT_Resources.Resource_Icon_Chest'
+    hiddenGame=true
+    hiddenEditor=false
+    alwaysLoadOnClient=false
+    alwaysLoadOnServer=false
+    spriteCategoryName="Navigation"
+    scale=2.0
+  end object
+  components.add(Sprite)
+  editorSprite=Sprite
+  
 }
 
 

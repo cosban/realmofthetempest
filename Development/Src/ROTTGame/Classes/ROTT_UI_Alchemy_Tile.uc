@@ -218,125 +218,125 @@ defaultProperties
 {
   bDrawRelative=true
   
-	/** ===== Textures ===== **/
-	// Tile backgrounds
-	begin object class=UI_Texture_Info Name=Tile_Background_Default
+  /** ===== Textures ===== **/
+  // Tile backgrounds
+  begin object class=UI_Texture_Info Name=Tile_Background_Default
     componentTextures.add(Texture2D'ROTT_Alchemy.Game.Alchemy_Game_Tile_Background_Default')
   end object
-	begin object class=UI_Texture_Info Name=Tile_Background_Imbued
+  begin object class=UI_Texture_Info Name=Tile_Background_Imbued
     componentTextures.add(Texture2D'ROTT_Alchemy.Game.Alchemy_Game_Tile_Background_Imbued')
   end object
-	
+  
   // Heat markers
-	begin object class=UI_Texture_Info Name=Alchemy_Game_Tile_Heating_Up
+  begin object class=UI_Texture_Info Name=Alchemy_Game_Tile_Heating_Up
     componentTextures.add(Texture2D'ROTT_Alchemy.Game.Alchemy_Game_Tile_Heating_Up')
   end object
-	begin object class=UI_Texture_Info Name=Alchemy_Game_Tile_Heated
+  begin object class=UI_Texture_Info Name=Alchemy_Game_Tile_Heated
     componentTextures.add(Texture2D'ROTT_Alchemy.Game.Alchemy_Game_Tile_Heated')
   end object
   
   // Level markers (Gold)
-	begin object class=UI_Texture_Info Name=Alchemy_Game_Level_1_Marker_Gold
+  begin object class=UI_Texture_Info Name=Alchemy_Game_Level_1_Marker_Gold
     componentTextures.add(Texture2D'ROTT_Alchemy.Game.Alchemy_Game_Level_1_Marker_Gold')
   end object
-	begin object class=UI_Texture_Info Name=Alchemy_Game_Level_2_Marker_Gold
+  begin object class=UI_Texture_Info Name=Alchemy_Game_Level_2_Marker_Gold
     componentTextures.add(Texture2D'ROTT_Alchemy.Game.Alchemy_Game_Level_2_Marker_Gold')
   end object
-	begin object class=UI_Texture_Info Name=Alchemy_Game_Level_3_Marker_Gold
+  begin object class=UI_Texture_Info Name=Alchemy_Game_Level_3_Marker_Gold
     componentTextures.add(Texture2D'ROTT_Alchemy.Game.Alchemy_Game_Level_3_Marker_Gold')
   end object
-	begin object class=UI_Texture_Info Name=Alchemy_Game_Level_4_Marker_Gold
+  begin object class=UI_Texture_Info Name=Alchemy_Game_Level_4_Marker_Gold
     componentTextures.add(Texture2D'ROTT_Alchemy.Game.Alchemy_Game_Level_4_Marker_Gold')
   end object
   
   // Level markers (Crimson)
-	begin object class=UI_Texture_Info Name=Alchemy_Game_Level_1_Marker_Crimson
+  begin object class=UI_Texture_Info Name=Alchemy_Game_Level_1_Marker_Crimson
     componentTextures.add(Texture2D'ROTT_Alchemy.Game.Alchemy_Game_Level_1_Marker_Crimson')
   end object
-	begin object class=UI_Texture_Info Name=Alchemy_Game_Level_2_Marker_Crimson
+  begin object class=UI_Texture_Info Name=Alchemy_Game_Level_2_Marker_Crimson
     componentTextures.add(Texture2D'ROTT_Alchemy.Game.Alchemy_Game_Level_2_Marker_Crimson')
   end object
-	begin object class=UI_Texture_Info Name=Alchemy_Game_Level_3_Marker_Crimson
+  begin object class=UI_Texture_Info Name=Alchemy_Game_Level_3_Marker_Crimson
     componentTextures.add(Texture2D'ROTT_Alchemy.Game.Alchemy_Game_Level_3_Marker_Crimson')
   end object
-	begin object class=UI_Texture_Info Name=Alchemy_Game_Level_4_Marker_Crimson
+  begin object class=UI_Texture_Info Name=Alchemy_Game_Level_4_Marker_Crimson
     componentTextures.add(Texture2D'ROTT_Alchemy.Game.Alchemy_Game_Level_4_Marker_Crimson')
   end object
   
   // Level markers (Empty)
-	begin object class=UI_Texture_Info Name=Alchemy_Game_Level_1_Marker_Empty
+  begin object class=UI_Texture_Info Name=Alchemy_Game_Level_1_Marker_Empty
     componentTextures.add(Texture2D'ROTT_Alchemy.Game.Alchemy_Game_Level_1_Marker_Empty')
   end object
-	begin object class=UI_Texture_Info Name=Alchemy_Game_Level_2_Marker_Empty
+  begin object class=UI_Texture_Info Name=Alchemy_Game_Level_2_Marker_Empty
     componentTextures.add(Texture2D'ROTT_Alchemy.Game.Alchemy_Game_Level_2_Marker_Empty')
   end object
-	begin object class=UI_Texture_Info Name=Alchemy_Game_Level_3_Marker_Empty
+  begin object class=UI_Texture_Info Name=Alchemy_Game_Level_3_Marker_Empty
     componentTextures.add(Texture2D'ROTT_Alchemy.Game.Alchemy_Game_Level_3_Marker_Empty')
   end object
-	begin object class=UI_Texture_Info Name=Alchemy_Game_Level_4_Marker_Empty
+  begin object class=UI_Texture_Info Name=Alchemy_Game_Level_4_Marker_Empty
     componentTextures.add(Texture2D'ROTT_Alchemy.Game.Alchemy_Game_Level_4_Marker_Empty')
   end object
   
-	/** ===== Components ===== **/
+  /** ===== Components ===== **/
   // Tile Background
-	begin object class=UI_Sprite Name=Tile_Background
-		tag="Tile_Background" 
-		posX=0
-		posY=0
-		images(0)=Tile_Background_Default
-	end object
-	componentList.Add(Tile_Background)
+  begin object class=UI_Sprite Name=Tile_Background
+    tag="Tile_Background" 
+    posX=0
+    posY=0
+    images(0)=Tile_Background_Default
+  end object
+  componentList.Add(Tile_Background)
   
-	begin object class=UI_Sprite Name=Tile_Magic_Background
-		tag="Tile_Magic_Background" 
-		posX=0
-		posY=0
-		images(0)=Tile_Background_Imbued
-	end object
-	componentList.Add(Tile_Magic_Background)
+  begin object class=UI_Sprite Name=Tile_Magic_Background
+    tag="Tile_Magic_Background" 
+    posX=0
+    posY=0
+    images(0)=Tile_Background_Imbued
+  end object
+  componentList.Add(Tile_Magic_Background)
   
   // Level Marker (Unlit)
-	begin object class=UI_Sprite Name=Level_Marker_Unlit
-		tag="Level_Marker_Unlit" 
+  begin object class=UI_Sprite Name=Level_Marker_Unlit
+    tag="Level_Marker_Unlit" 
     bEnabled=true
-		posX=0
-		posY=0
-		images(0)=Tile_Background_Default
-		images(1)=Alchemy_Game_Level_1_Marker_Empty
-		images(2)=Alchemy_Game_Level_2_Marker_Empty
-		images(3)=Alchemy_Game_Level_3_Marker_Empty
-		images(4)=Alchemy_Game_Level_4_Marker_Empty
-	end object
-	componentList.Add(Level_Marker_Unlit)
+    posX=0
+    posY=0
+    images(0)=Tile_Background_Default
+    images(1)=Alchemy_Game_Level_1_Marker_Empty
+    images(2)=Alchemy_Game_Level_2_Marker_Empty
+    images(3)=Alchemy_Game_Level_3_Marker_Empty
+    images(4)=Alchemy_Game_Level_4_Marker_Empty
+  end object
+  componentList.Add(Level_Marker_Unlit)
   
   // Heat Marker
-	begin object class=UI_Sprite Name=Heat_Marker
-		tag="Heat_Marker"
+  begin object class=UI_Sprite Name=Heat_Marker
+    tag="Heat_Marker"
     bEnabled=false
-		posX=0
-		posY=0
-		images(0)=Tile_Background_Default
-		images(HEATING)=Alchemy_Game_Tile_Heating_Up
-		images(HEATED)=Alchemy_Game_Tile_Heated
-	end object
-	componentList.Add(Heat_Marker)
+    posX=0
+    posY=0
+    images(0)=Tile_Background_Default
+    images(HEATING)=Alchemy_Game_Tile_Heating_Up
+    images(HEATED)=Alchemy_Game_Tile_Heated
+  end object
+  componentList.Add(Heat_Marker)
   
   // Level Marker (Lit)
-	begin object class=UI_Sprite Name=Level_Marker_Lit
-		tag="Level_Marker_Lit" 
+  begin object class=UI_Sprite Name=Level_Marker_Lit
+    tag="Level_Marker_Lit" 
     bEnabled=true
-		posX=0
-		posY=0
-		images(0)=Tile_Background_Imbued
-		images(1)=Alchemy_Game_Level_1_Marker_Gold
-		images(2)=Alchemy_Game_Level_2_Marker_Gold
-		images(3)=Alchemy_Game_Level_3_Marker_Gold
-		images(4)=Alchemy_Game_Level_4_Marker_Gold
-		images(5)=Alchemy_Game_Level_1_Marker_Crimson
-		images(6)=Alchemy_Game_Level_2_Marker_Crimson
-		images(7)=Alchemy_Game_Level_3_Marker_Crimson
-		images(8)=Alchemy_Game_Level_4_Marker_Crimson
-	end object
-	componentList.Add(Level_Marker_Lit)
+    posX=0
+    posY=0
+    images(0)=Tile_Background_Imbued
+    images(1)=Alchemy_Game_Level_1_Marker_Gold
+    images(2)=Alchemy_Game_Level_2_Marker_Gold
+    images(3)=Alchemy_Game_Level_3_Marker_Gold
+    images(4)=Alchemy_Game_Level_4_Marker_Gold
+    images(5)=Alchemy_Game_Level_1_Marker_Crimson
+    images(6)=Alchemy_Game_Level_2_Marker_Crimson
+    images(7)=Alchemy_Game_Level_3_Marker_Crimson
+    images(8)=Alchemy_Game_Level_4_Marker_Crimson
+  end object
+  componentList.Add(Level_Marker_Lit)
   
 }

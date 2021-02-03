@@ -99,50 +99,50 @@ defaultProperties
   skillAttributes.add((attributeSet=COMBAT_ACTION_SET,mechanicType=ELEMENTAL_DAMAGE_MAX,tag="%max",font=DEFAULT_SMALL_ORANGE,returnType=INTEGER));
 
   // Skill Icon
-	begin object class=UI_Texture_Info Name=Encounter_Skill_Icon_Thunder_Slash
+  begin object class=UI_Texture_Info Name=Encounter_Skill_Icon_Thunder_Slash
     componentTextures.add(Texture2D'GUI_Skills.Encounter_Skill_Icon_Thunder_Slash')
   end object
   
   // Skill Icon Container
-	begin object class=UI_Texture_Storage Name=Skill_Icon_Container
-		tag="Skill_Icon_Container"
+  begin object class=UI_Texture_Storage Name=Skill_Icon_Container
+    tag="Skill_Icon_Container"
     textureWidth=108
     textureHeight=108
-		images(0)=Encounter_Skill_Icon_Thunder_Slash
-	end object
+    images(0)=Encounter_Skill_Icon_Thunder_Slash
+  end object
   skillIcon=Skill_Icon_Container
-	
+  
   
   // Skill Animation
-	begin object class=UI_Texture_Info Name=SkillAnim_Lightning_B1
+  begin object class=UI_Texture_Info Name=SkillAnim_Lightning_B1
     componentTextures.add(Texture2D'GUI_Skills.SkillAnim_Lightning_B1')
   end object
-	begin object class=UI_Texture_Info Name=SkillAnim_Lightning_B2
+  begin object class=UI_Texture_Info Name=SkillAnim_Lightning_B2
     componentTextures.add(Texture2D'GUI_Skills.SkillAnim_Lightning_B2')
   end object
-	begin object class=UI_Texture_Info Name=SkillAnim_Lightning_B3
+  begin object class=UI_Texture_Info Name=SkillAnim_Lightning_B3
     componentTextures.add(Texture2D'GUI_Skills.SkillAnim_Lightning_B3')
   end object
-	begin object class=UI_Texture_Info Name=SkillAnim_Lightning_B4
+  begin object class=UI_Texture_Info Name=SkillAnim_Lightning_B4
     componentTextures.add(Texture2D'GUI_Skills.SkillAnim_Lightning_B4')
   end object
-	begin object class=UI_Texture_Info Name=SkillAnim_Lightning_B5
+  begin object class=UI_Texture_Info Name=SkillAnim_Lightning_B5
     componentTextures.add(Texture2D'GUI_Skills.SkillAnim_Lightning_B5')
   end object
   
   // Skill Animation Container
-	begin object class=UI_Texture_Storage Name=Skill_Bnimation_Container
-		tag="Skill_Bnimation_Container"
+  begin object class=UI_Texture_Storage Name=Skill_Bnimation_Container
+    tag="Skill_Bnimation_Container"
     textureWidth=240
     textureHeight=240
-		images(0)=SkillAnim_Lightning_B1
-		images(1)=SkillAnim_Lightning_B2
-		images(2)=SkillAnim_Lightning_B3
-		images(3)=SkillAnim_Lightning_B4
-		images(4)=SkillAnim_Lightning_B5
-	end object
+    images(0)=SkillAnim_Lightning_B1
+    images(1)=SkillAnim_Lightning_B2
+    images(2)=SkillAnim_Lightning_B3
+    images(3)=SkillAnim_Lightning_B4
+    images(4)=SkillAnim_Lightning_B5
+  end object
   skillAnim=Skill_Bnimation_Container
-	
+  
 }
 
 

@@ -102,15 +102,15 @@ simulated event postRender() {
   if (!bMouseInitialized) initMousePosition();
   
   // Old Scaleform?
-	// PreCalcValues is a function which can detect if the resolution of the screen has changed.
-	///if (sizeX != canvas.sizeX || sizeY != canvas.sizeY) {
-	///	preCalcValues();
-	///}
+  // PreCalcValues is a function which can detect if the resolution of the screen has changed.
+  ///if (sizeX != canvas.sizeX || sizeY != canvas.sizeY) {
+  ///  preCalcValues();
+  ///}
   
   // Old Benchmarks
-	// Set up delta time
-	///renderDelta = worldInfo.timeSeconds - lastHUDRenderTime;
-	///lastHUDRenderTime = worldInfo.timeSeconds;
+  // Set up delta time
+  ///renderDelta = worldInfo.timeSeconds - lastHUDRenderTime;
+  ///lastHUDRenderTime = worldInfo.timeSeconds;
   
   // Call the render routine on the scene to render its UI components
   if (sceneManager != none) {

@@ -25,22 +25,22 @@ protected function bool validAttachment() {
  *===========================================================================*/
 defaultProperties
 {
-	/** ===== Textures ===== **/
+  /** ===== Textures ===== **/
   // Portraits & Exp Frames
-	begin object class=UI_Texture_Info Name=World_HUD_Party_Portraits_Goliath
+  begin object class=UI_Texture_Info Name=World_HUD_Party_Portraits_Goliath
     componentTextures.add(Texture2D'GUI_Overworld.World_HUD_Party_Portraits_Goliath'
   end object
-	begin object class=UI_Texture_Info Name=World_HUD_Party_Portraits_Valkyrie
+  begin object class=UI_Texture_Info Name=World_HUD_Party_Portraits_Valkyrie
     componentTextures.add(Texture2D'GUI_Overworld.World_HUD_Party_Portraits_Valkyrie'
   end object
-	begin object class=UI_Texture_Info Name=World_HUD_Party_Portraits_Wizard
+  begin object class=UI_Texture_Info Name=World_HUD_Party_Portraits_Wizard
     componentTextures.add(Texture2D'GUI_Overworld.World_HUD_Party_Portraits_Wizard'
   end object
-	begin object class=UI_Texture_Info Name=World_HUD_Party_Portraits_Titan
+  begin object class=UI_Texture_Info Name=World_HUD_Party_Portraits_Titan
     componentTextures.add(Texture2D'GUI_Overworld.World_HUD_Party_Portraits_Titan'
   end object
   
-	/** ===== GUI Components ===== **/
+  /** ===== GUI Components ===== **/
   // Hero Exp Bar
   begin object class=ROTT_UI_Displayer_Stat_Bar Name=Hero_Exp_Bar
     tag="Hero_Exp_Bar"

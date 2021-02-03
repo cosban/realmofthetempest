@@ -23,7 +23,6 @@ enum UtilityMenuItems {
 // Internal references
 var private UI_Sprite utilityMenuBackground;
 var private UI_Selector utilitySelector;
-///var private UI_Sprite partyMgmtMenuGraphic;
 var private UI_Sprite hyperGlyphLabelGraphic;
 
 // External UI references
@@ -41,7 +40,6 @@ public function initializeComponent(optional string newTag = "") {
   // Get internal references
   utilityMenuBackground = findSprite("Utility_Menu_Background");
   utilitySelector = UI_Selector(findComp("Utility_Selector"));
-  ///partyMgmtMenuGraphic = findSprite("Utility_Party_Mgmt_Menu_Graphic");
   hyperGlyphLabelGraphic = findSprite("Utility_Hyper_Label");
 }
 
@@ -54,8 +52,9 @@ event onFocusMenu() {
   // Enable display and navigation graphics
   utilityMenuBackground.setEnabled(true);
   utilitySelector.setActive(true);
-  ///partyMgmtMenuGraphic.setEnabled(true);
   hyperGlyphLabelGraphic.setEnabled(true);
+  
+  hyperGlyphLabelGraphic.setDrawIndex((gameInfo.playerProfile.hyperUnlocked) ? 1 : 0);
   
   // Enable graphics for party manager if in town
   ///partyMgmtMenuGraphic.setDrawIndex((gameInfo.isInTown()) ? 0 : 1);
@@ -135,7 +134,6 @@ protected function navigationRoutineA() {
 protected function navigationRoutineB() {
   utilityMenuBackground.setEnabled(false);
   utilitySelector.resetSelection();
-  ///partyMgmtMenuGraphic.setEnabled(false);
   hyperGlyphLabelGraphic.setEnabled(false);
   
   parentScene.popPage();
@@ -149,61 +147,50 @@ protected function navigationRoutineB() {
  *===========================================================================*/
 defaultProperties
 {
-	/** ===== Input ===== **/
-	begin object class=ROTT_Input_Handler Name=Input_A
+  /** ===== Input ===== **/
+  begin object class=ROTT_Input_Handler Name=Input_A
     inputName="XBoxTypeS_A"
-		buttonComponent=none
-	end object
+    buttonComponent=none
+  end object
   inputList.add(Input_A)
   
-	begin object class=ROTT_Input_Handler Name=Input_B
+  begin object class=ROTT_Input_Handler Name=Input_B
     inputName="XBoxTypeS_B"
     buttonComponent=none
-	end object
+  end object
   inputList.add(Input_B)
   
   /** ===== Textures ===== **/
   // Utility Background
-	begin object class=UI_Texture_Info Name=Utility_Background_Texture
+  begin object class=UI_Texture_Info Name=Utility_Background_Texture
     componentTextures.add(Texture2D'GUI.Utilities.Utility_List_Background')
   end object
   
-  // Party Manager Label Graphics
-  ///begin object class=UI_Texture_Info Name=Utilities_Party_Mgmt_Texture
-  ///  componentTextures.add(Texture2D'GUI.Utilities_PartyMGR')
-  ///end object
-	///begin object class=UI_Texture_Info Name=Utilities_Party_Mgmt_Dim_Texture
-  ///  componentTextures.add(Texture2D'GUI.Utilities_PartyMGR_Dim')
-  ///end object
-  
   // Hyper Glyphs Label Graphics
-	begin object class=UI_Texture_Info Name=Utilities_Secret_Texture
+  begin object class=UI_Texture_Info Name=Utilities_Secret_Texture
     componentTextures.add(Texture2D'GUI.Utilities.Utilities_Mystery_Option')
   end object
   begin object class=UI_Texture_Info Name=Utilities_Hyper_Lit_Texture
-    componentTextures.add(Texture2D'GUI.Utilities_Hyper_Lit')
+    componentTextures.add(Texture2D'GUI.Utilities.Utilities_Mystery_Option_Hyper_Glyph')
   end object
-	///begin object class=UI_Texture_Info Name=Utilities_Hyper_Unlit_Texture
-  ///  componentTextures.add(Texture2D'GUI.Utilities_Hyper_Unlit')
-  ///end object
   
   /** ===== UI Components ===== **/
-	// Utility menu background
-	begin object class=UI_Sprite Name=Utility_Menu_Background
-		tag="Utility_Menu_Background"
+  // Utility menu background
+  begin object class=UI_Sprite Name=Utility_Menu_Background
+    tag="Utility_Menu_Background"
     bEnabled=false
-		posX=720
-		posY=0
-		images(0)=Utility_Background_Texture
-	end object
-	componentList.add(Utility_Menu_Background)
-	
-	// Utility Selection Arrow
-	begin object class=UI_Selector Name=Utility_Selector
-		tag="Utility_Selector"
+    posX=720
+    posY=0
+    images(0)=Utility_Background_Texture
+  end object
+  componentList.add(Utility_Menu_Background)
+  
+  // Utility Selection Arrow
+  begin object class=UI_Selector Name=Utility_Selector
+    tag="Utility_Selector"
     bEnabled=true
-		posX=737
-		posY=50
+    posX=737
+    posY=50
     selectionOffset=(x=0,y=100)
     numberOfMenuOptions=7
     
@@ -234,31 +221,20 @@ defaultProperties
     end object
     componentList.add(Inactive_Selector_Sprite)
     
-	end object
-	componentList.add(Utility_Selector)
+  end object
+  componentList.add(Utility_Selector)
   
-	// Party Manager IMG Label
-	///begin object class=UI_Sprite Name=Utility_Party_Mgmt_Menu_Graphic
-	///	tag="Utility_Party_Mgmt_Menu_Graphic"
-  ///  bEnabled=false
-	///	posX=726
-	///	posY=157
-	///	images(0)=Utilities_Party_Mgmt_Texture
-	///	images(1)=Utilities_Party_Mgmt_Dim_Texture
-	///end object
-	///componentList.add(Utility_Party_Mgmt_Menu_Graphic)
-	
-	// Hyper Glyph Label
-	begin object class=UI_Sprite Name=Utility_Hyper_Label
-		tag="Utility_Hyper_Label"
+  // Hyper Glyph Label
+  begin object class=UI_Sprite Name=Utility_Hyper_Label
+    tag="Utility_Hyper_Label"
     bEnabled=false
-		posX=726
-		posY=658
-		images(0)=Utilities_Secret_Texture
-		images(1)=Utilities_Hyper_Lit_Texture
-	end object
-	componentList.add(Utility_Hyper_Label)
-	
+    posX=726
+    posY=658
+    images(0)=Utilities_Secret_Texture
+    images(1)=Utilities_Hyper_Lit_Texture
+  end object
+  componentList.add(Utility_Hyper_Label)
+  
 }
 
 

@@ -65,18 +65,18 @@ defaultProperties
   
   /** ===== Textures ===== **/
   // Frame graphics
-	begin object class=UI_Texture_Info Name=Experience_Bar_Back_Texture
+  begin object class=UI_Texture_Info Name=Experience_Bar_Back_Texture
     componentTextures.add(Texture2D'GUI.Experience_Bar_Back')
   end object
-	begin object class=UI_Texture_Info Name=Experience_Bar_Frame_Texture
+  begin object class=UI_Texture_Info Name=Experience_Bar_Frame_Texture
     componentTextures.add(Texture2D'GUI.Experience_Bar_Frame')
   end object
   
   // Bar graphics
-	begin object class=UI_Texture_Info Name=Stat_Tube_EXP
+  begin object class=UI_Texture_Info Name=Stat_Tube_EXP
     componentTextures.add(Texture2D'GUI.Stat_Tube_EXP')
   end object
-	
+  
   /** ===== Components ===== **/
   // Backing graphic
   begin object class=UI_Sprite Name=Experience_Bar_Back

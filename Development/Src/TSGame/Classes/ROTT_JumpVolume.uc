@@ -9,7 +9,7 @@
  *===========================================================================*/
 
 class ROTT_JumpVolume extends Volume
-	placeable;
+  placeable;
 
 // Jump settings
 var() int VolumeAcceleration;
@@ -19,11 +19,11 @@ var() float speedAmp;
  * postBeginPlay()
  *===========================================================================*/
 simulated event postBeginPlay() {
-	super.PostBeginPlay();
+  super.PostBeginPlay();
 
-	if (BrushComponent != none)	{
-		bProjTarget = BrushComponent.BlockZeroExtent;
-	}
+  if (BrushComponent != none)  {
+    bProjTarget = BrushComponent.BlockZeroExtent;
+  }
 }
 
 /*=============================================================================
@@ -38,10 +38,10 @@ simulated event touch
 ) 
 {
   // Skip non player objects
-	if (ROTT_Player_Pawn(Other) == none) return;
-	
+  if (ROTT_Player_Pawn(Other) == none) return;
+  
   // Activate a powerful jump
-	ROTT_Player_Pawn(Other).activatePowerJump(VolumeAcceleration, speedAmp);
+  ROTT_Player_Pawn(Other).activatePowerJump(VolumeAcceleration, speedAmp);
 }
 
 /*=============================================================================
@@ -49,31 +49,31 @@ simulated event touch
  *===========================================================================*/
 simulated event untouch(Actor Other) {
   // Skip non player objects
-	if (ROTT_Player_Pawn(Other) == none) return;
-	
+  if (ROTT_Player_Pawn(Other) == none) return;
+  
   // Deactivate power jump
-	ROTT_Player_Pawn(Other).deactivatePowerJump();
+  ROTT_Player_Pawn(Other).deactivatePowerJump();
 }
 
 /*=============================================================================
  * StopsProjectile()
  *===========================================================================*/
-simulated function bool stopsProjectile(Projectile P) {	return false; }
+simulated function bool stopsProjectile(Projectile P) {  return false; }
 
 /*=============================================================================
  * Default properties
  *===========================================================================*/
-defaultproperties
+defaultProperties
 {
   // Brush appearance
-	bColored=true
-	BrushColor=(R=180,G=50,B=250,A=255)
+  bColored=true
+  BrushColor=(R=180,G=50,B=250,A=255)
 
   // Collision
-	bCollideActors=true
-	bProjTarget=true
-	SupportedEvents.Empty
-	SupportedEvents(0)=class'SeqEvent_Touch'
+  bCollideActors=true
+  bProjTarget=true
+  SupportedEvents.Empty
+  SupportedEvents(0)=class'SeqEvent_Touch'
 }
 
 

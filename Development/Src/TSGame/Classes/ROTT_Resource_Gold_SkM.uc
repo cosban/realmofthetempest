@@ -14,15 +14,15 @@ var private skeletalMeshComponent coinSkeleton;
 var private ParticleSystemComponent coinSparkle;
 
 function postBeginPlay() {
-	super.postBeginPlay();
+  super.postBeginPlay();
   
-	coinSkeleton.attachComponentToSocket(coinSparkle, 'Sparkle_Socket');
+  coinSkeleton.attachComponentToSocket(coinSparkle, 'Sparkle_Socket');
   
-	coinSparkle.activateSystem();
+  coinSparkle.activateSystem();
 }
 
 simulated function tick(float deltaTime) {
-	setRotation(
+  setRotation(
     RInterpTo(
       rotation, 
       rotation + rot(0, 25000, 0), 
@@ -35,21 +35,21 @@ simulated function tick(float deltaTime) {
 /*============================================================================= 
  * Default Properties
  *===========================================================================*/
-defaultproperties
+defaultProperties
 {
   // Coin skeletal mesh
-	Begin Object Class=SkeletalMeshComponent Name=Coin_Skeletal_Mesh
-		SkeletalMesh=SkeletalMesh'ROTT_Resources.Resource_Coin'
-		LightingChannels=(Cinematic_8=True)
-	End Object
-	coinSkeleton=Coin_Skeletal_Mesh
+  begin object Class=SkeletalMeshComponent Name=Coin_Skeletal_Mesh
+    SkeletalMesh=SkeletalMesh'ROTT_Resources.Resource_Coin'
+    LightingChannels=(Cinematic_8=True)
+  end object
+  coinSkeleton=Coin_Skeletal_Mesh
   components.add(Coin_Skeletal_Mesh)
-	
+  
   // Coin Sparkle
-	Begin Object Class=ParticleSystemComponent Name=PSC_Coin_Sparkle
+  begin object Class=ParticleSystemComponent Name=PSC_Coin_Sparkle
     Template=ParticleSystem'ROTT_Resources.PS_Resource_Gold'
-	End Object
-	coinSparkle=PSC_Coin_Sparkle
+  end object
+  coinSparkle=PSC_Coin_Sparkle
   components.add(PSC_Coin_Sparkle)
   
 }

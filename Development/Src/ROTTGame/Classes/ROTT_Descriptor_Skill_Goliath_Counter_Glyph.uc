@@ -108,39 +108,39 @@ defaultProperties
   skillAttributes.add((attributeSet=TAKE_DAMAGE_SET,mechanicType=REQUIRES_GLYPH,tag="%req",font=DEFAULT_SMALL_WHITE,returnType=INTEGER));
   
   // Skill Animation
-	begin object class=UI_Texture_Info Name=SkillAnim_Avalanche_F1
+  begin object class=UI_Texture_Info Name=SkillAnim_Avalanche_F1
     componentTextures.add(Texture2D'GUI_Skills.SkillAnim_Avalanche_F1')
   end object
-	begin object class=UI_Texture_Info Name=SkillAnim_Avalanche_F2
+  begin object class=UI_Texture_Info Name=SkillAnim_Avalanche_F2
     componentTextures.add(Texture2D'GUI_Skills.SkillAnim_Avalanche_F2')
   end object
-	begin object class=UI_Texture_Info Name=SkillAnim_Avalanche_F3
+  begin object class=UI_Texture_Info Name=SkillAnim_Avalanche_F3
     componentTextures.add(Texture2D'GUI_Skills.SkillAnim_Avalanche_F3')
   end object
-	begin object class=UI_Texture_Info Name=SkillAnim_Avalanche_F4
+  begin object class=UI_Texture_Info Name=SkillAnim_Avalanche_F4
     componentTextures.add(Texture2D'GUI_Skills.SkillAnim_Avalanche_F4')
   end object
-	begin object class=UI_Texture_Info Name=SkillAnim_Avalanche_F5
+  begin object class=UI_Texture_Info Name=SkillAnim_Avalanche_F5
     componentTextures.add(Texture2D'GUI_Skills.SkillAnim_Avalanche_F5')
   end object
-	begin object class=UI_Texture_Info Name=SkillAnim_Avalanche_F6
+  begin object class=UI_Texture_Info Name=SkillAnim_Avalanche_F6
     componentTextures.add(Texture2D'GUI_Skills.SkillAnim_Avalanche_F6')
   end object
   
   // Skill Animation Container
-	begin object class=UI_Texture_Storage Name=Skill_Animation_Container
-		tag="Skill_Animation_Container"
+  begin object class=UI_Texture_Storage Name=Skill_Animation_Container
+    tag="Skill_Animation_Container"
     textureWidth=240
     textureHeight=240
-		images(0)=SkillAnim_Avalanche_F1
-		images(1)=SkillAnim_Avalanche_F2
-		images(2)=SkillAnim_Avalanche_F3
-		images(3)=SkillAnim_Avalanche_F4
-		images(4)=SkillAnim_Avalanche_F5
-		images(5)=SkillAnim_Avalanche_F6
-	end object
+    images(0)=SkillAnim_Avalanche_F1
+    images(1)=SkillAnim_Avalanche_F2
+    images(2)=SkillAnim_Avalanche_F3
+    images(3)=SkillAnim_Avalanche_F4
+    images(4)=SkillAnim_Avalanche_F5
+    images(5)=SkillAnim_Avalanche_F6
+  end object
   skillAnim=Skill_Animation_Container
-	
+  
 }
 
 
@@ -150,36 +150,36 @@ defaultProperties
 /**
 
 
-			//Counter glyphs
-			i = fSkillLvl;
-			iChance = 20;
-			iStat = 25;
-			iManaCost = 30; //Used for chance to counter
-			
-			do
-			{
-				i = i - 1;
-				iChance = iChance + 20;
-				
-				if (iChance >= 80)
-				{
-					iStat = Round(iStat * 4.0 / 3.0);
-					iChance = 40;
-					iManaCost = iManaCost + 10;
-					if (iManaCost > 100)
-					{
-						iManaCost = 100;
-						iStat = Round(iStat * 4.0 / 3.0);
-					}
-				}
-				
- 			} until (i <= 0);
-			
-			if (fSkillLvl == 0)
-				iChance = 0;
-			
-			iMinDmg = (CharMinDamage * (iStat/100.00));
-			iMaxDmg = (CharMaxDamage * (iStat/100.00));
+      //Counter glyphs
+      i = fSkillLvl;
+      iChance = 20;
+      iStat = 25;
+      iManaCost = 30; //Used for chance to counter
+      
+      do
+      {
+        i = i - 1;
+        iChance = iChance + 20;
+        
+        if (iChance >= 80)
+        {
+          iStat = Round(iStat * 4.0 / 3.0);
+          iChance = 40;
+          iManaCost = iManaCost + 10;
+          if (iManaCost > 100)
+          {
+            iManaCost = 100;
+            iStat = Round(iStat * 4.0 / 3.0);
+          }
+        }
+        
+       } until (i <= 0);
+      
+      if (fSkillLvl == 0)
+        iChance = 0;
+      
+      iMinDmg = (CharMinDamage * (iStat/100.00));
+      iMaxDmg = (CharMaxDamage * (iStat/100.00));
 
 
 

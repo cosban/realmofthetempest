@@ -35,7 +35,7 @@ public function initializeComponent(optional string newTag = "") {
   gameVersionText = findLabel("Game_Version_Text");
   
   // Draw version info
-	gameVersionText.setText(gameInfo.getVersionInfo()); 
+  gameVersionText.setText(gameInfo.getVersionInfo()); 
 }
 
 /*============================================================================= 
@@ -174,11 +174,11 @@ defaultProperties
   // Map controls
   mapSpeed=12.f
   
-	/** ===== Input ===== **/
-	begin object class=ROTT_Input_Handler Name=Input_B
+  /** ===== Input ===== **/
+  begin object class=ROTT_Input_Handler Name=Input_B
     inputName="XBoxTypeS_B"
     buttonComponent=none
-	end object
+  end object
   inputList.add(Input_B)
   
   /** ===== Textures ===== **/
@@ -189,16 +189,16 @@ defaultProperties
   
   /** ===== UI Components ===== **/
   // Background
-	begin object class=UI_Sprite Name=Background_Sprite
-		tag="Background_Sprite"
+  begin object class=UI_Sprite Name=Background_Sprite
+    tag="Background_Sprite"
     bEnabled=true
-		posX=-720
-		posY=-450
-		posXEnd=2160
-		posYEnd=1350
-		images(0)=World_Map
-	end object
-	componentList.add(Background_Sprite)
+    posX=-720
+    posY=-450
+    posXEnd=2160
+    posYEnd=1350
+    images(0)=World_Map
+  end object
+  componentList.add(Background_Sprite)
   
   // Left menu backgrounds
   begin object class=UI_Texture_Info Name=World_Map_Frame
@@ -206,31 +206,31 @@ defaultProperties
   end object
   
   // Background
-	begin object class=UI_Sprite Name=Frame_Sprite
-		tag="Frame_Sprite"
+  begin object class=UI_Sprite Name=Frame_Sprite
+    tag="Frame_Sprite"
     bEnabled=true
-		posX=0
-		posY=0
-		posXEnd=1440
-		posYEnd=900
-		images(0)=World_Map_Frame
-	end object
-	componentList.add(Frame_Sprite)
+    posX=0
+    posY=0
+    posXEnd=1440
+    posYEnd=900
+    images(0)=World_Map_Frame
+  end object
+  componentList.add(Frame_Sprite)
   
   // Version label
-	begin object class=UI_Label Name=Game_Version_Text
-		tag="Game_Version_Text"
-		posX=25
-		posY=25
-		posXEnd=1415
-		posYEnd=875
-		alignX=LEFT
-		alignY=BOTTOM
-		fontStyle=DEFAULT_SMALL_BROWN
-		labelText=""
-	end object
-	componentList.add(Game_Version_Text)
-	
+  begin object class=UI_Label Name=Game_Version_Text
+    tag="Game_Version_Text"
+    posX=25
+    posY=25
+    posXEnd=1415
+    posYEnd=875
+    alignX=LEFT
+    alignY=BOTTOM
+    fontStyle=DEFAULT_SMALL_BROWN
+    labelText=""
+  end object
+  componentList.add(Game_Version_Text)
+  
 }
 
 

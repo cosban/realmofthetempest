@@ -9,7 +9,7 @@
  *===========================================================================*/
 
 class NPCVolume extends Volume
-	placeable;
+  placeable;
 
 // Rotation constants
 const FOURTY_FIVE_DEGREES = 8192;
@@ -61,7 +61,7 @@ simulated event touch
 )
 {
   // Filter out irrelevant objects
-	if (ROTT_Player_Pawn(other) == none) return;
+  if (ROTT_Player_Pawn(other) == none) return;
   
   // Stop player movement
   gameInfo.pauseGame();
@@ -82,8 +82,8 @@ simulated event touch
  * Opens the npc dialog
  *===========================================================================*/
 private function openNPCDialog() {
-	local rotator direction;      // This turns the player around for their exit
-	local vector posOffset;       // places the player away from the house
+  local rotator direction;      // This turns the player around for their exit
+  local vector posOffset;       // places the player away from the house
   
   // Display npc interface
   gameInfo.openNPCDialog(npcType);
@@ -117,9 +117,9 @@ defaultProperties
   exitDirection=NORTH
   
   // Volume settings
-	bStatic=false
-	bCollideActors=true
-	CollisionType=COLLIDE_TouchAll
+  bStatic=false
+  bCollideActors=true
+  CollisionType=COLLIDE_TouchAll
 }
 
 

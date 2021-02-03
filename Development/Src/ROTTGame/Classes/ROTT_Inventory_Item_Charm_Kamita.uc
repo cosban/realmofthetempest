@@ -49,7 +49,7 @@ defaultProperties
   itemName="Kamita Charm"
   
   // Item texture
-	itemTexture=Texture2D'ROTT_Items.Charms.Item_Charm_Teal'
+  itemTexture=Texture2D'ROTT_Items.Charms.Item_Charm_Teal'
   
   // Item text color
   itemFont=DEFAULT_SMALL_ORANGE

@@ -99,19 +99,19 @@ defaultProperties
   statBarLength=100
   statBarHeight=10
   
-	/** ===== Textures ===== **/
+  /** ===== Textures ===== **/
   // Exp bar
-	begin object class=UI_Texture_Info Name=Stat_Tube_EXP
+  begin object class=UI_Texture_Info Name=Stat_Tube_EXP
     componentTextures.add(Texture2D'GUI.Stat_Tube_EXP')
   end object
   
-	/** ===== GUI Components ===== **/
-	// Stat bar sprite
-	begin object class=UI_Sprite Name=Stat_Bar_Sprite
-		tag="Stat_Bar_Sprite"
+  /** ===== GUI Components ===== **/
+  // Stat bar sprite
+  begin object class=UI_Sprite Name=Stat_Bar_Sprite
+    tag="Stat_Bar_Sprite"
     images(0)=Stat_Tube_EXP
-	end object
-	componentList.add(Stat_Bar_Sprite)
+  end object
+  componentList.add(Stat_Bar_Sprite)
   
 }
 

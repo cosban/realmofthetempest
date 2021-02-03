@@ -69,7 +69,7 @@ event onPopPageEvent() {
  *===========================================================================*/
 protected function navigationRoutineA();
 protected function navigationRoutineB() {
-	/** delegate me **/
+  /** delegate me **/
 }
 
 /*=============================================================================
@@ -104,27 +104,27 @@ protected function navigationRoutineLB() {
  *===========================================================================*/
 defaultProperties
 {
-	/** ===== Input ===== **/
-	begin object class=ROTT_Input_Handler Name=Input_LB
+  /** ===== Input ===== **/
+  begin object class=ROTT_Input_Handler Name=Input_LB
     inputName="XboxTypeS_LeftShoulder"
-		buttonComponent=none
-	end object
+    buttonComponent=none
+  end object
   inputList.add(Input_LB)
   
-	begin object class=ROTT_Input_Handler Name=Input_RB
+  begin object class=ROTT_Input_Handler Name=Input_RB
     inputName="XboxTypeS_RightShoulder"
-		buttonComponent=none
-	end object
+    buttonComponent=none
+  end object
   inputList.add(Input_RB)
   
   /** ===== UI Components ===== **/
-	begin object class=UI_Selector Name=Input_Listener
-		tag="Input_Listener"
+  begin object class=UI_Selector Name=Input_Listener
+    tag="Input_Listener"
     navigationType=SELECTION_2D
     bEnabled=true
     bActive=true
   end object
-	componentList.add(Input_Listener)
+  componentList.add(Input_Listener)
 }
 
 

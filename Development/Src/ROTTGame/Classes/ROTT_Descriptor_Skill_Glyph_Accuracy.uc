@@ -72,20 +72,20 @@ protected function float attributeInfo
 
 /**
 private function int accuracyRating(int level) {
-	local int i, delta, accuracy;
-	
-	delta = 6;
-	accuracy = 6;
+  local int i, delta, accuracy;
   
-	for (i = 0; i < level; i++) {
-		accuracy += delta;
-		
-		if (i % 3 == 0 && i != 0)	{
-			delta = delta + 4;
-		} else {
-			delta = delta + 2;
-		}
-	}
+  delta = 6;
+  accuracy = 6;
+  
+  for (i = 0; i < level; i++) {
+    accuracy += delta;
+    
+    if (i % 3 == 0 && i != 0)  {
+      delta = delta + 4;
+    } else {
+      delta = delta + 2;
+    }
+  }
   
   return accuracy;
 }
@@ -107,38 +107,38 @@ defaultProperties
 }
 
 /**
-	
+  
 function int GetAccuracy(string StatType, int SkillLevel)
 {
-	local int i, j, iAccuracy, iChance;
-	//(Rand(Max - Min) + Min)
-	
-	i = 0;
-	j = 0;
-	iAccuracy = 6;
-	iChance = 60;
-	do
-	{
-		iAccuracy = iAccuracy + 6 + j;
-		
-		if (i%3 == 0 && i != 0)
-		{
-			j = j + 4;
-		} else {
-			j = j + 2;
-		}
-		
-		i++;
-	} until (i >= SkillLevel);
-	
-	// Return type 
-	switch (StatType)
-	{
-		case "Stat":
-			return iAccuracy;
-		case "Chance":
-			return iChance;
-	}
+  local int i, j, iAccuracy, iChance;
+  //(Rand(Max - Min) + Min)
+  
+  i = 0;
+  j = 0;
+  iAccuracy = 6;
+  iChance = 60;
+  do
+  {
+    iAccuracy = iAccuracy + 6 + j;
+    
+    if (i%3 == 0 && i != 0)
+    {
+      j = j + 4;
+    } else {
+      j = j + 2;
+    }
+    
+    i++;
+  } until (i >= SkillLevel);
+  
+  // Return type 
+  switch (StatType)
+  {
+    case "Stat":
+      return iAccuracy;
+    case "Chance":
+      return iChance;
+  }
 }
 
 **/

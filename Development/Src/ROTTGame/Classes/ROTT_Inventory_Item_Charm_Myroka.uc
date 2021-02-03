@@ -49,7 +49,7 @@ defaultProperties
   itemName="Myroka Charm"
   
   // Item texture
-	itemTexture=Texture2D'ROTT_Items.Charms.Item_Charm_Blue'
+  itemTexture=Texture2D'ROTT_Items.Charms.Item_Charm_Blue'
   
   // Item text color
   itemFont=DEFAULT_SMALL_ORANGE

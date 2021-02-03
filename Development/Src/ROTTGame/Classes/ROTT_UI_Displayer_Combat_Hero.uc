@@ -408,172 +408,172 @@ defaultProperties
   animationModes(LABEL_TYPE_MANA_DAMAGE)=ANIMATE_POP_RIGHT
   animationModes(LABEL_TYPE_RESIST)=ANIMATE_STILL
   
-	/** ===== Textures ===== **/
-	// Class labels
+  /** ===== Textures ===== **/
+  // Class labels
   begin object class=UI_Texture_Info Name=Class_Label_Wizard
     componentTextures.add(Texture2D'GUI.Encounter_Wizard_Label')
   end object
-	begin object class=UI_Texture_Info Name=Class_Label_Valkyrie
+  begin object class=UI_Texture_Info Name=Class_Label_Valkyrie
     componentTextures.add(Texture2D'GUI.Encounter_Valkyrie_Label')
   end object
-	begin object class=UI_Texture_Info Name=Class_Label_Goliath
+  begin object class=UI_Texture_Info Name=Class_Label_Goliath
     componentTextures.add(Texture2D'GUI.Encounter_Goliath_Label')
   end object
-	begin object class=UI_Texture_Info Name=Class_Label_Titan
+  begin object class=UI_Texture_Info Name=Class_Label_Titan
     componentTextures.add(Texture2D'GUI.Encounter_Titan_Label')
   end object
   
   
-	/** ===== UI Components ===== **/
+  /** ===== UI Components ===== **/
   // Hero Tuna
-	begin object class=ROTT_UI_Displayer_Tuna_Bar Name=Combat_Tuna_Displayer
-		tag="Combat_Tuna_Displayer"
+  begin object class=ROTT_UI_Displayer_Tuna_Bar Name=Combat_Tuna_Displayer
+    tag="Combat_Tuna_Displayer"
     posX=39
     posY=332
-	end object
-	componentList.add(Combat_Tuna_Displayer)
-	
+  end object
+  componentList.add(Combat_Tuna_Displayer)
+  
   // Hero Health Globe
-	begin object class=ROTT_UI_Displayer_Health_Globe Name=Combat_Health_Displayer
-		tag="Combat_Health_Displayer"
+  begin object class=ROTT_UI_Displayer_Health_Globe Name=Combat_Health_Displayer
+    tag="Combat_Health_Displayer"
     posX=40
     posY=100
-	end object
-	componentList.add(Combat_Health_Displayer)
-	
+  end object
+  componentList.add(Combat_Health_Displayer)
+  
   // Hero Mana Globe
-	begin object class=ROTT_UI_Displayer_Mana_Globe Name=Combat_Mana_Displayer
-		tag="Combat_Mana_Displayer"
+  begin object class=ROTT_UI_Displayer_Mana_Globe Name=Combat_Mana_Displayer
+    tag="Combat_Mana_Displayer"
     posX=1
     posY=21
-	end object
-	componentList.add(Combat_Mana_Displayer)
-	
+  end object
+  componentList.add(Combat_Mana_Displayer)
+  
   // Hero Class Label
-	begin object class=UI_Sprite Name=Hero_Class_Label
-		tag="Hero_Class_Label"
-		posX=50
-		posY=386
-		images(0)=Class_Label_Wizard
-		images(WIZARD)=Class_Label_Wizard
-		images(TITAN)=Class_Label_Titan
-		images(VALKYRIE)=Class_Label_Valkyrie
-		images(GOLIATH)=Class_Label_Goliath
-	end object
-	componentList.add(Hero_Class_Label)
+  begin object class=UI_Sprite Name=Hero_Class_Label
+    tag="Hero_Class_Label"
+    posX=50
+    posY=386
+    images(0)=Class_Label_Wizard
+    images(WIZARD)=Class_Label_Wizard
+    images(TITAN)=Class_Label_Titan
+    images(VALKYRIE)=Class_Label_Valkyrie
+    images(GOLIATH)=Class_Label_Goliath
+  end object
+  componentList.add(Hero_Class_Label)
   
   // Health label
-	begin object class=UI_Label Name=Hero_Health_Slash
-		tag="Hero_Health_Slash"
+  begin object class=UI_Label Name=Hero_Health_Slash
+    tag="Hero_Health_Slash"
     posX=40
     posY=174
-		posXEnd=254
-		posYEnd=NATIVE_HEIGHT
-		AlignX=CENTER
-		AlignY=TOP
+    posXEnd=254
+    posYEnd=NATIVE_HEIGHT
+    AlignX=CENTER
+    AlignY=TOP
     fontStyle=DEFAULT_MEDIUM_WHITE
-		labelText="/"
-	end object
-	componentList.add(Hero_Health_Slash)
-	
-	begin object class=UI_Label Name=Hero_Current_Health_Label
-		tag="Hero_Current_Health_Label"
+    labelText="/"
+  end object
+  componentList.add(Hero_Health_Slash)
+  
+  begin object class=UI_Label Name=Hero_Current_Health_Label
+    tag="Hero_Current_Health_Label"
     posX=68
     posY=154
-		posXEnd=147
-		posYEnd=NATIVE_HEIGHT
-		AlignX=CENTER
-		AlignY=TOP
+    posXEnd=147
+    posYEnd=NATIVE_HEIGHT
+    AlignX=CENTER
+    AlignY=TOP
     fontStyle=DEFAULT_MEDIUM_WHITE
-		labelText=""
-	end object
-	componentList.add(Hero_Current_Health_Label)
-	
-	begin object class=UI_Label Name=Hero_Max_Health_Label
-		tag="Hero_Max_Health_Label"
+    labelText=""
+  end object
+  componentList.add(Hero_Current_Health_Label)
+  
+  begin object class=UI_Label Name=Hero_Max_Health_Label
+    tag="Hero_Max_Health_Label"
     posX=147
     posY=194
-		posXEnd=226
-		posYEnd=NATIVE_HEIGHT
-		AlignX=CENTER
-		AlignY=TOP
+    posXEnd=226
+    posYEnd=NATIVE_HEIGHT
+    AlignX=CENTER
+    AlignY=TOP
     fontStyle=DEFAULT_MEDIUM_WHITE
-		labelText=""
-	end object
-	componentList.add(Hero_Max_Health_Label)
-	
+    labelText=""
+  end object
+  componentList.add(Hero_Max_Health_Label)
+  
   // Mana label
-	begin object class=UI_Label Name=Hero_Mana_Slash
-		tag="Hero_Mana_Slash"
+  begin object class=UI_Label Name=Hero_Mana_Slash
+    tag="Hero_Mana_Slash"
     posX=6
     posY=36
-		posXEnd=112
-		posYEnd=NATIVE_HEIGHT
-		AlignX=CENTER
-		AlignY=TOP
-		labelText="/"
-	end object
-	componentList.add(Hero_Mana_Slash)
-	
-	begin object class=UI_Label Name=Hero_Current_Mana_Label
-		tag="Hero_Current_Mana_Label"
+    posXEnd=112
+    posYEnd=NATIVE_HEIGHT
+    AlignX=CENTER
+    AlignY=TOP
+    labelText="/"
+  end object
+  componentList.add(Hero_Mana_Slash)
+  
+  begin object class=UI_Label Name=Hero_Current_Mana_Label
+    tag="Hero_Current_Mana_Label"
     posX=6
     posY=26
-		posXEnd=59
-		posYEnd=NATIVE_HEIGHT
-		AlignX=CENTER
-		AlignY=TOP
-		labelText=""
-	end object
-	componentList.add(Hero_Current_Mana_Label)
-	
-	begin object class=UI_Label Name=Hero_Max_Mana_Label
-		tag="Hero_Max_Mana_Label"
+    posXEnd=59
+    posYEnd=NATIVE_HEIGHT
+    AlignX=CENTER
+    AlignY=TOP
+    labelText=""
+  end object
+  componentList.add(Hero_Current_Mana_Label)
+  
+  begin object class=UI_Label Name=Hero_Max_Mana_Label
+    tag="Hero_Max_Mana_Label"
     posX=59
     posY=46
-		posXEnd=112
-		posYEnd=NATIVE_HEIGHT
-		AlignX=CENTER
-		AlignY=TOP
-		labelText=""
-	end object
-	componentList.add(Hero_Max_Mana_Label)
-	
+    posXEnd=112
+    posYEnd=NATIVE_HEIGHT
+    AlignX=CENTER
+    AlignY=TOP
+    labelText=""
+  end object
+  componentList.add(Hero_Max_Mana_Label)
+  
   // Speed amplifier
-	begin object class=UI_Label Name=Hero_Speed_Amp_Label
-		tag="Hero_Speed_Amp_Label"
+  begin object class=UI_Label Name=Hero_Speed_Amp_Label
+    tag="Hero_Speed_Amp_Label"
     posX=0
     posY=0
-		posXEnd=258
-		posYEnd=346
-		AlignX=RIGHT
-		AlignY=BOTTOM
+    posXEnd=258
+    posYEnd=346
+    AlignX=RIGHT
+    AlignY=BOTTOM
     fontStyle=COMBAT_SMALL_TAN
-		labelText="1.55x"
-	end object
-	componentList.add(Hero_Speed_Amp_Label)
-	
+    labelText="1.55x"
+  end object
+  componentList.add(Hero_Speed_Amp_Label)
+  
   // Status label (Demoralized)
-	begin object class=ROTT_UI_Status_Label Name=Hero_Demoralized_Label
-		tag="Hero_Demoralized_Label"
+  begin object class=ROTT_UI_Status_Label Name=Hero_Demoralized_Label
+    tag="Hero_Demoralized_Label"
     posX=38
     posY=179
-		posXEnd=258
-		posYEnd=344
-	end object
-	componentList.add(Hero_Demoralized_Label)
-	
+    posXEnd=258
+    posYEnd=344
+  end object
+  componentList.add(Hero_Demoralized_Label)
+  
   // Status label
-	begin object class=ROTT_UI_Status_Label Name=Hero_Status_Label
-		tag="Hero_Status_Label"
+  begin object class=ROTT_UI_Status_Label Name=Hero_Status_Label
+    tag="Hero_Status_Label"
     bAlignXCenter=false
     posX=35
     posY=0
-		posXEnd=258
-		posYEnd=346
-	end object
-	componentList.add(Hero_Status_Label)
-	
+    posXEnd=258
+    posYEnd=346
+  end object
+  componentList.add(Hero_Status_Label)
+  
 }
 
 

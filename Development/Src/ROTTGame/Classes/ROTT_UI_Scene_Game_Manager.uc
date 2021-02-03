@@ -90,23 +90,23 @@ defaultProperties
   pageComponents.add(Page_Game_Manager)
   
   // Warning Window
-	begin object class=ROTT_UI_Page_Warning_Window Name=Game_Mgmt_Warning_Window
-		tag="Game_Mgmt_Warning_Window"
+  begin object class=ROTT_UI_Page_Warning_Window Name=Game_Mgmt_Warning_Window
+    tag="Game_Mgmt_Warning_Window"
     bEnabled=false
     
     header="Exit Confirmation"
     messageLine1="Are you sure you want to quit?"
     
-	end object
-	pageComponents.add(Game_Mgmt_Warning_Window)
-	
+  end object
+  pageComponents.add(Game_Mgmt_Warning_Window)
+  
   // Game Options Page
-	begin object class=ROTT_UI_Page_Game_Options Name=Page_Game_Options
-		tag="Page_Game_Options"
+  begin object class=ROTT_UI_Page_Game_Options Name=Page_Game_Options
+    tag="Page_Game_Options"
     bEnabled=false
-	end object
-	pageComponents.add(Page_Game_Options)
-	
+  end object
+  pageComponents.add(Page_Game_Options)
+  
 }
 
 

@@ -50,7 +50,7 @@ var private ROTT_Game_Info gameInfo;
  *              profile information
  *===========================================================================*/
 simulated event PostBeginPlay() {
-	super.PostBeginPlay();
+  super.PostBeginPlay();
   
   // Link game info for convenience
   gameInfo = ROTT_Game_Info(WorldInfo.Game);///ROTT_Game_Info(class'WorldInfo'.static.GetWorldInfo().Game);
@@ -118,9 +118,9 @@ simulated event touch
   local string mapName;
   
   // ignore irrelevant events
-	if (ROTT_Player_Pawn(Other) == none) return;
-	if (currentState == GATE_CLOSED) return;
-	
+  if (ROTT_Player_Pawn(Other) == none) return;
+  if (currentState == GATE_CLOSED) return;
+  
   if (bLocalDestination == false) {
     // Perform a temp save of the game
     gameInfo.saveGame(TRANSITION_SAVE, arrivalIndex);
@@ -158,25 +158,25 @@ defaultProperties
   closedMaterial=Material'ROTT_Utilities.Portals.M_Portal_Vortex_Black'
   
   // Actor properties
-	bStatic=false
-	bCollideActors=true
-	CollisionType=COLLIDE_TouchAll
-	
+  bStatic=false
+  bCollideActors=true
+  CollisionType=COLLIDE_TouchAll
+  
   // Visual components
-	begin object class=StaticMeshComponent name=PortalGraphic
-		StaticMesh=StaticMesh'ROTT_Utilities.Portals.SM_Portal_1A'
-	end object
-	Components.Add(PortalGraphic);
-	CollisionComponent=PortalGraphic
-	StaticMeshComponent=PortalGraphic
-	
+  begin object class=StaticMeshComponent name=PortalGraphic
+    StaticMesh=StaticMesh'ROTT_Utilities.Portals.SM_Portal_1A'
+  end object
+  Components.Add(PortalGraphic);
+  CollisionComponent=PortalGraphic
+  StaticMeshComponent=PortalGraphic
+  
   // I think this is just ugly
   /**
-	Begin Object class=ParticleSystemComponent name=PortalParticle
-		SecondsBeforeInactive=1.0f		
-	End Object
-	MyPSC=PortalParticle
-	//ParticleSystemComponent=PortalParticle
-	Components.Add(PortalParticle)
+  begin object class=ParticleSystemComponent name=PortalParticle
+    SecondsBeforeInactive=1.0f    
+  end object
+  MyPSC=PortalParticle
+  //ParticleSystemComponent=PortalParticle
+  Components.Add(PortalParticle)
   */
 }

@@ -163,146 +163,146 @@ protected function bool requirementRoutineB() { return elapsedTime > 2; }
  *===========================================================================*/
 defaultProperties
 {
-	/** ===== Input ===== **/
-	begin object class=ROTT_Input_Handler Name=Input_A
+  /** ===== Input ===== **/
+  begin object class=ROTT_Input_Handler Name=Input_A
     inputName="XBoxTypeS_A"
-		buttonComponent=none
-	end object
+    buttonComponent=none
+  end object
   inputList.add(Input_A)
   
-	begin object class=ROTT_Input_Handler Name=Input_B
+  begin object class=ROTT_Input_Handler Name=Input_B
     inputName="XBoxTypeS_B"
     buttonComponent=none
-	end object
+  end object
   inputList.add(Input_B)
   
   /** ===== UI Components ===== **/
   // Version
-	begin object class=UI_Label Name=H1_Label
-		tag="H1_Label"
-		posX=0
-		posY=60
-		posXEnd=NATIVE_WIDTH
-		posYEnd=NATIVE_HEIGHT
-		alignX=CENTER
-		alignY=TOP
-		fontStyle=DEFAULT_LARGE_TAN
-		labelText="Realm of the Tempest's Expanding ! ! !"
-	end object
-	componentList.add(H1_Label)
+  begin object class=UI_Label Name=H1_Label
+    tag="H1_Label"
+    posX=0
+    posY=60
+    posXEnd=NATIVE_WIDTH
+    posYEnd=NATIVE_HEIGHT
+    alignX=CENTER
+    alignY=TOP
+    fontStyle=DEFAULT_LARGE_TAN
+    labelText="Realm of the Tempest's Expanding ! ! !"
+  end object
+  componentList.add(H1_Label)
   
-	begin object class=UI_Label Name=P1_Label
-		tag="P1_Label"
-		posX=0
-		posY=108
-		posXEnd=NATIVE_WIDTH
-		posYEnd=NATIVE_HEIGHT
-		alignX=CENTER
-		alignY=TOP
-		fontStyle=DEFAULT_MEDIUM_WHITE
-		labelText="This game still has work in progress, expanding indefinitely."
-	end object
-	componentList.add(P1_Label)
+  begin object class=UI_Label Name=P1_Label
+    tag="P1_Label"
+    posX=0
+    posY=108
+    posXEnd=NATIVE_WIDTH
+    posYEnd=NATIVE_HEIGHT
+    alignX=CENTER
+    alignY=TOP
+    fontStyle=DEFAULT_MEDIUM_WHITE
+    labelText="This game still has work in progress, expanding indefinitely."
+  end object
+  componentList.add(P1_Label)
   
-	begin object class=UI_Label Name=P2_Label
-		tag="P2_Label"
-		posX=0
-		posY=188
-		posXEnd=NATIVE_WIDTH
-		posYEnd=NATIVE_HEIGHT
-		alignX=CENTER
-		alignY=TOP
-		fontStyle=DEFAULT_LARGE_TAN
-		labelText="Bramble Gate Studios will be recruiting now!"
-	end object
-	componentList.add(P2_Label)
-	begin object class=UI_Label Name=P3_Label
-		tag="P3_Label"
-		posX=0
-		posY=228
-		posXEnd=NATIVE_WIDTH
-		posYEnd=NATIVE_HEIGHT
-		alignX=CENTER
-		alignY=TOP
-		fontStyle=DEFAULT_MEDIUM_WHITE
-		labelText="Artists, Programmers, Musicians, Designers, Management, etc."
-	end object
-	componentList.add(P3_Label)
+  begin object class=UI_Label Name=P2_Label
+    tag="P2_Label"
+    posX=0
+    posY=188
+    posXEnd=NATIVE_WIDTH
+    posYEnd=NATIVE_HEIGHT
+    alignX=CENTER
+    alignY=TOP
+    fontStyle=DEFAULT_LARGE_TAN
+    labelText="Bramble Gate Studios will be recruiting now!"
+  end object
+  componentList.add(P2_Label)
+  begin object class=UI_Label Name=P3_Label
+    tag="P3_Label"
+    posX=0
+    posY=228
+    posXEnd=NATIVE_WIDTH
+    posYEnd=NATIVE_HEIGHT
+    alignX=CENTER
+    alignY=TOP
+    fontStyle=DEFAULT_MEDIUM_WHITE
+    labelText="Artists, Programmers, Musicians, Designers, Management, etc."
+  end object
+  componentList.add(P3_Label)
   
-	begin object class=UI_Label Name=P4_Label
-		tag="P4_Label"
-		posX=0
-		posY=308
-		posXEnd=NATIVE_WIDTH
-		posYEnd=NATIVE_HEIGHT
-		alignX=CENTER
-		alignY=TOP
-		fontStyle=DEFAULT_LARGE_GREEN
-		labelText="Realm of the Tempest now open source on Github.com/Otays ! ! !"
-	end object
-	componentList.add(P4_Label)
-	begin object class=UI_Label Name=P5_Label
-		tag="P5_Label"
-		posX=0
-		posY=348
-		posXEnd=NATIVE_WIDTH
-		posYEnd=NATIVE_HEIGHT
-		alignX=CENTER
-		alignY=TOP
-		fontStyle=DEFAULT_MEDIUM_WHITE
-		labelText="Thank you for sharing in this experience with Me !"
-	end object
-	componentList.add(P5_Label)
+  begin object class=UI_Label Name=P4_Label
+    tag="P4_Label"
+    posX=0
+    posY=308
+    posXEnd=NATIVE_WIDTH
+    posYEnd=NATIVE_HEIGHT
+    alignX=CENTER
+    alignY=TOP
+    fontStyle=DEFAULT_LARGE_GREEN
+    labelText="Realm of the Tempest now open source on Github.com/Otays ! ! !"
+  end object
+  componentList.add(P4_Label)
+  begin object class=UI_Label Name=P5_Label
+    tag="P5_Label"
+    posX=0
+    posY=348
+    posXEnd=NATIVE_WIDTH
+    posYEnd=NATIVE_HEIGHT
+    alignX=CENTER
+    alignY=TOP
+    fontStyle=DEFAULT_MEDIUM_WHITE
+    labelText="Thank you for sharing in this experience with Me !"
+  end object
+  componentList.add(P5_Label)
   
-	begin object class=UI_Label Name=H2_Donor_Label
-		tag="H2_Donor_Label"
-		posX=0
-		posY=448
-		posXEnd=NATIVE_WIDTH
-		posYEnd=NATIVE_HEIGHT
-		alignX=CENTER
-		alignY=TOP
-		fontStyle=DEFAULT_LARGE_TAN
-		labelText="- Donation Squad ! ! -"
-	end object
-	componentList.add(H2_Donor_Label)
-	begin object class=UI_Label Name=Donor_List_Label_1
-		tag="Donor_List_Label_1"
-		posX=0
-		posY=508
-		posXEnd=NATIVE_WIDTH
-		posYEnd=NATIVE_HEIGHT
-		alignX=CENTER
-		alignY=TOP
-		fontStyle=DEFAULT_MEDIUM_CYAN
-		labelText="Xenopher, val, formerfuture, Dustin Pundt, Gaiashield, cydy"
-	end object
-	componentList.add(Donor_List_Label_1)
+  begin object class=UI_Label Name=H2_Donor_Label
+    tag="H2_Donor_Label"
+    posX=0
+    posY=448
+    posXEnd=NATIVE_WIDTH
+    posYEnd=NATIVE_HEIGHT
+    alignX=CENTER
+    alignY=TOP
+    fontStyle=DEFAULT_LARGE_TAN
+    labelText="- Donation Squad ! ! -"
+  end object
+  componentList.add(H2_Donor_Label)
+  begin object class=UI_Label Name=Donor_List_Label_1
+    tag="Donor_List_Label_1"
+    posX=0
+    posY=508
+    posXEnd=NATIVE_WIDTH
+    posYEnd=NATIVE_HEIGHT
+    alignX=CENTER
+    alignY=TOP
+    fontStyle=DEFAULT_MEDIUM_CYAN
+    labelText="Xenopher, val, formerfuture, Dustin Pundt, Gaiashield, cydy"
+  end object
+  componentList.add(Donor_List_Label_1)
   
-	begin object class=UI_Label Name=P6_Label
-		tag="P6_Label"
-		posX=0
-		posY=748
-		posXEnd=NATIVE_WIDTH
-		posYEnd=NATIVE_HEIGHT
-		alignX=CENTER
-		alignY=TOP
-		fontStyle=DEFAULT_MEDIUM_WHITE
-		labelText="Contact realmofthetempest@gmail.com"
-	end object
-	componentList.add(P6_Label)
-	begin object class=UI_Label Name=P7_Label
-		tag="P7_Label"
-		posX=0
-		posY=788
-		posXEnd=NATIVE_WIDTH
-		posYEnd=NATIVE_HEIGHT
-		alignX=CENTER
-		alignY=TOP
-		fontStyle=DEFAULT_MEDIUM_GRAY
-		labelText=" ~~~ Free download  ~~~  www.RealmoftheTempest.com  ~~~ "
-	end object
-	componentList.add(P7_Label)
+  begin object class=UI_Label Name=P6_Label
+    tag="P6_Label"
+    posX=0
+    posY=748
+    posXEnd=NATIVE_WIDTH
+    posYEnd=NATIVE_HEIGHT
+    alignX=CENTER
+    alignY=TOP
+    fontStyle=DEFAULT_MEDIUM_WHITE
+    labelText="Contact realmofthetempest@gmail.com"
+  end object
+  componentList.add(P6_Label)
+  begin object class=UI_Label Name=P7_Label
+    tag="P7_Label"
+    posX=0
+    posY=788
+    posXEnd=NATIVE_WIDTH
+    posYEnd=NATIVE_HEIGHT
+    alignX=CENTER
+    alignY=TOP
+    fontStyle=DEFAULT_MEDIUM_GRAY
+    labelText=" ~~~ Free download  ~~~  www.RealmoftheTempest.com  ~~~ "
+  end object
+  componentList.add(P7_Label)
 
   // Black Texture
   begin object class=UI_Texture_Info Name=Black_Texture
@@ -310,15 +310,15 @@ defaultProperties
   end object
   
   // Fade effects
-	begin object class=UI_Sprite Name=Fade_Component
-		tag="Fade_Component"
-		posX=0
-		posY=0
-		posXEnd=NATIVE_WIDTH
-		posYEnd=NATIVE_HEIGHT
-		images(0)=Black_Texture
-	end object
-	componentList.add(Fade_Component)
+  begin object class=UI_Sprite Name=Fade_Component
+    tag="Fade_Component"
+    posX=0
+    posY=0
+    posXEnd=NATIVE_WIDTH
+    posYEnd=NATIVE_HEIGHT
+    images(0)=Black_Texture
+  end object
+  componentList.add(Fade_Component)
   
 }
 

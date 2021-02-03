@@ -217,49 +217,49 @@ defaultProperties
 {
   /** ===== Textures ===== **/
   // Conscription button
-	begin object class=UI_Texture_Info Name=Conscription_Button
+  begin object class=UI_Texture_Info Name=Conscription_Button
     componentTextures.add(Texture2D'GUI.Conscription_Button')
   end object
   
   /** ===== UI Components ===== **/
   // Party Management Display Containers
-	begin object class=ROTT_UI_Party_Manager_Container Name=Party_Manager_Container_1
-		tag="Party_Manager_Container_1" 
-		posX=756
-		posY=42
-	end object
-	componentList.add(Party_Manager_Container_1)
+  begin object class=ROTT_UI_Party_Manager_Container Name=Party_Manager_Container_1
+    tag="Party_Manager_Container_1" 
+    posX=756
+    posY=42
+  end object
+  componentList.add(Party_Manager_Container_1)
   
-	begin object class=ROTT_UI_Party_Manager_Container Name=Party_Manager_Container_2
-		tag="Party_Manager_Container_2" 
-		posX=756
-		posY=322
-	end object
-	componentList.add(Party_Manager_Container_2)
+  begin object class=ROTT_UI_Party_Manager_Container Name=Party_Manager_Container_2
+    tag="Party_Manager_Container_2" 
+    posX=756
+    posY=322
+  end object
+  componentList.add(Party_Manager_Container_2)
   
-	begin object class=ROTT_UI_Party_Manager_Container Name=Party_Manager_Container_3
-		tag="Party_Manager_Container_3" 
-		posX=756
-		posY=602
-	end object
-	componentList.add(Party_Manager_Container_3)
+  begin object class=ROTT_UI_Party_Manager_Container Name=Party_Manager_Container_3
+    tag="Party_Manager_Container_3" 
+    posX=756
+    posY=602
+  end object
+  componentList.add(Party_Manager_Container_3)
   
-	begin object class=ROTT_UI_Party_Manager_Container Name=Party_Manager_Container_4
-		tag="Party_Manager_Container_4" 
-		posX=756
-		posY=882
-	end object
-	componentList.add(Party_Manager_Container_4)
+  begin object class=ROTT_UI_Party_Manager_Container Name=Party_Manager_Container_4
+    tag="Party_Manager_Container_4" 
+    posX=756
+    posY=882
+  end object
+  componentList.add(Party_Manager_Container_4)
   
-	// Conscription Option
-	begin object class=UI_Sprite Name=Party_Mgmt_Conscription_Button
-		tag="Party_Mgmt_Conscription_Button"
-		posX=59
-		posY=46
-		images(0)=Conscription_Button
-	end object
-	componentList.add(Party_Mgmt_Conscription_Button)
-	
+  // Conscription Option
+  begin object class=UI_Sprite Name=Party_Mgmt_Conscription_Button
+    tag="Party_Mgmt_Conscription_Button"
+    posX=59
+    posY=46
+    images(0)=Conscription_Button
+  end object
+  componentList.add(Party_Mgmt_Conscription_Button)
+  
 }
 
 

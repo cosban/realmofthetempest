@@ -129,7 +129,7 @@ public static function EnchantmentDescriptor getEnchantment
       setResultText(script,
         "+%bonus% Luck per round reached",
         "Adding +%add% Luck",
-			  "New Total: +%total% Luck"
+        "New Total: +%total% Luck"
       );
       setGoldGemCost(script, 25000, 25);
       setBonus(script, 5);
@@ -146,7 +146,7 @@ public static function EnchantmentDescriptor getEnchantment
       setResultText(script,
         "+%bonus Armor per round reached",
         "Adding +%add Armor",
-			  "New Total: +%total Armor"
+        "New Total: +%total Armor"
       );
       setGoldGemCost(script, 10000, 50);
       setBonus(script, 2);
@@ -163,7 +163,7 @@ public static function EnchantmentDescriptor getEnchantment
       setResultText(script,
         "+%bonus Accuracy, +%bonus Dodge per round reached",
         "Adding +%add Accuracy, +%add Dodge",
-			  "New Total: +%total Accuracy, +%total Dodge"
+        "New Total: +%total Accuracy, +%total Dodge"
       );
       setGoldGemCost(script, 5000, 25);
       setBonus(script, 10);
@@ -180,7 +180,7 @@ public static function EnchantmentDescriptor getEnchantment
       setResultText(script,
         "-%bonus Speed Points per round reached",
         "Adding -%add Speed Points",
-			  "New Total: -%total Speed Points"
+        "New Total: -%total Speed Points"
       );
       setGoldGemCost(script, 10000, 100);
       setBonus(script, 2);
@@ -197,7 +197,7 @@ public static function EnchantmentDescriptor getEnchantment
       setResultText(script,
         "+%bonus Class Skills per round reached",
         "Adding +%add Class Skills",
-			  "New Total: +%total Class Skills"
+        "New Total: +%total Class Skills"
       );
       setGoldGemCost(script, 25000, 250);
       setBonus(script, 1);
@@ -214,7 +214,7 @@ public static function EnchantmentDescriptor getEnchantment
       setResultText(script,
         "+%bonus Mana Regen per round reached",
         "Adding +%add Mana Regen",
-			  "New Total: +%total Mana Regen"
+        "New Total: +%total Mana Regen"
       );
       setGoldGemCost(script, 7500, 75);
       setBonus(script, 1);
@@ -231,7 +231,7 @@ public static function EnchantmentDescriptor getEnchantment
       setResultText(script,
         "+%bonus% Mana per round reached",
         "Adding +%add% Mana",
-			  "New Total: +%total% Mana"
+        "New Total: +%total% Mana"
       );
       setGoldGemCost(script, 5000, 25);
       setBonus(script, 2);
@@ -248,7 +248,7 @@ public static function EnchantmentDescriptor getEnchantment
       setResultText(script,
         "+%bonus% Health per round reached",
         "Adding +%add% Health",
-			  "New Total: +%total% Health"
+        "New Total: +%total% Health"
       );
       setGoldGemCost(script, 5000, 25);
       setBonus(script, 2);
@@ -265,7 +265,7 @@ public static function EnchantmentDescriptor getEnchantment
       setResultText(script,
         "+%bonus Health Regen per round reached",
         "Adding +%add Health Regen",
-			  "New Total: +%total Health Regen"
+        "New Total: +%total Health Regen"
       );
       setGoldGemCost(script, 10000, 100);
       setBonus(script, 1);
@@ -282,7 +282,7 @@ public static function EnchantmentDescriptor getEnchantment
       setResultText(script,
         "+%bonus All Stats per round reached",
         "Adding +%add All Stats",
-			  "New Total: +%total All Stats"
+        "New Total: +%total All Stats"
       );
       setGoldGemCost(script, 5000, 50);
       setBonus(script, 1);
@@ -299,7 +299,7 @@ public static function EnchantmentDescriptor getEnchantment
       setResultText(script,
         "+%bonus Glyph Skills per round reached",
         "Adding +%add Glyph Skills",
-			  "New Total: +%total Glyph Skills"
+        "New Total: +%total Glyph Skills"
       );
       setGoldGemCost(script, 17500, 125);
       setBonus(script, 1);
@@ -316,7 +316,7 @@ public static function EnchantmentDescriptor getEnchantment
       setResultText(script,
         "+%bonus% Physical Damage per round reached",
         "Adding +%add% Physical Damage",
-			  "New Total: +%total% Physical Damage"
+        "New Total: +%total% Physical Damage"
       );
       setGoldGemCost(script, 12500, 25);
       setBonus(script, 5);
@@ -333,7 +333,7 @@ public static function EnchantmentDescriptor getEnchantment
       setResultText(script,
         "+%bonus% Experience per round reached",
         "Adding +%add% Experience",
-			  "New Total: +%total% Experience"
+        "New Total: +%total% Experience"
       );
       setGoldGemCost(script, 12500, 125);
       setBonus(script, 2);
@@ -350,7 +350,7 @@ public static function EnchantmentDescriptor getEnchantment
       setResultText(script,
         "%bonus DPS per round reached",
         "Adding +%add DPS",
-			  "New Total: %total DPS"
+        "New Total: %total DPS"
       );
       setGoldGemCost(script, 50000, 100);
       setBonus(script, 1);

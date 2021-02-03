@@ -124,18 +124,18 @@ defaultProperties
   
   /** ===== Textures ===== **/
   // Frame graphics
-	begin object class=UI_Texture_Info Name=Slider_Background
+  begin object class=UI_Texture_Info Name=Slider_Background
     componentTextures.add(Texture2D'GUI.Experience_Bar_Back')
   end object
-	begin object class=UI_Texture_Info Name=Slider_Frame
+  begin object class=UI_Texture_Info Name=Slider_Frame
     componentTextures.add(Texture2D'ROTT_GUI_Options.Slider_Bar_Frame')
   end object
   
   // Bar graphics
-	begin object class=UI_Texture_Info Name=Bar_Color
+  begin object class=UI_Texture_Info Name=Bar_Color
     componentTextures.add(Texture2D'ROTT_GUI_Options.Slider_Bar_Color_Blue')
   end object
-	
+  
   /** ===== UI Components ===== **/
   // Background
   begin object class=UI_Sprite Name=Slider_Background_Sprite

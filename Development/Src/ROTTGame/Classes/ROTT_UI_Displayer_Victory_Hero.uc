@@ -81,85 +81,85 @@ defaultProperties
 {
   bDrawRelative=true
   
-	/** ===== Textures ===== **/
+  /** ===== Textures ===== **/
   // Class Names
-	begin object class=UI_Texture_Info Name=Class_Label_Wizard
+  begin object class=UI_Texture_Info Name=Class_Label_Wizard
     componentTextures.add(Texture2D'GUI.Encounter_Wizard_Label')
   end object
-	begin object class=UI_Texture_Info Name=Class_Label_Valkyrie
+  begin object class=UI_Texture_Info Name=Class_Label_Valkyrie
     componentTextures.add(Texture2D'GUI.Encounter_Valkyrie_Label')
   end object
-	begin object class=UI_Texture_Info Name=Class_Label_Goliath
+  begin object class=UI_Texture_Info Name=Class_Label_Goliath
     componentTextures.add(Texture2D'GUI.Encounter_Goliath_Label')
   end object
-	begin object class=UI_Texture_Info Name=Class_Label_Titan
+  begin object class=UI_Texture_Info Name=Class_Label_Titan
     componentTextures.add(Texture2D'GUI.Encounter_Titan_Label')
   end object
   
-	/** ===== UI Components ===== **/
+  /** ===== UI Components ===== **/
   // Hero Class Label
-	begin object class=UI_Sprite Name=Hero_Class_Label
-		tag="Hero_Class_Label"
-		posX=180
-		posY=20
-		images(0)=Class_Label_Wizard
-		images(WIZARD)=Class_Label_Wizard
-		images(TITAN)=Class_Label_Titan
-		images(VALKYRIE)=Class_Label_Valkyrie
-		images(GOLIATH)=Class_Label_Goliath
-	end object
-	componentList.add(Hero_Class_Label)
+  begin object class=UI_Sprite Name=Hero_Class_Label
+    tag="Hero_Class_Label"
+    posX=180
+    posY=20
+    images(0)=Class_Label_Wizard
+    images(WIZARD)=Class_Label_Wizard
+    images(TITAN)=Class_Label_Titan
+    images(VALKYRIE)=Class_Label_Valkyrie
+    images(GOLIATH)=Class_Label_Goliath
+  end object
+  componentList.add(Hero_Class_Label)
   
   // Exp bar
   begin object class=ROTT_UI_Displayer_Experience Name=Experience_Bar_UI
     tag="Experience_Bar_UI"
-		posX=180
-		posY=80
-		posXend=900
+    posX=180
+    posY=80
+    posXend=900
   end object
   componentList.add(Experience_Bar_UI)
   
   // Level label
-	begin object class=UI_Label Name=Level_Label
-		tag="Level_Label"
+  begin object class=UI_Label Name=Level_Label
+    tag="Level_Label"
     posX=205
     posY=172
-		posXEnd=NATIVE_WIDTH
-		posYEnd=NATIVE_HEIGHT
-		AlignX=LEFT
-		AlignY=TOP
+    posXEnd=NATIVE_WIDTH
+    posYEnd=NATIVE_HEIGHT
+    AlignX=LEFT
+    AlignY=TOP
     fontStyle=DEFAULT_SMALL_TAN
-		labelText="Level 1"
-	end object
-	componentList.add(Level_Label)
+    labelText="Level 1"
+  end object
+  componentList.add(Level_Label)
   
   // Experience
-	begin object class=UI_Label Name=Experience_Label
-		tag="Experience_Label"
+  begin object class=UI_Label Name=Experience_Label
+    tag="Experience_Label"
     posX=496
     posY=17
-		posXEnd=NATIVE_WIDTH
-		posYEnd=NATIVE_HEIGHT
-		AlignX=LEFT
-		AlignY=TOP
+    posXEnd=NATIVE_WIDTH
+    posYEnd=NATIVE_HEIGHT
+    AlignX=LEFT
+    AlignY=TOP
     fontStyle=DEFAULT_LARGE_TAN
-		labelText="Experience Gained:"
-	end object
-	componentList.add(Experience_Label)
+    labelText="Experience Gained:"
+  end object
+  componentList.add(Experience_Label)
   
   // Experience Points
-	begin object class=UI_Label Name=Experience_Points_Label
-		tag="Experience_Points_Label"
+  begin object class=UI_Label Name=Experience_Points_Label
+    tag="Experience_Points_Label"
     posX=0
     posY=17
-		posXEnd=1030
-		posYEnd=NATIVE_HEIGHT
-		AlignX=RIGHT
-		AlignY=TOP
+    posXEnd=1030
+    posYEnd=NATIVE_HEIGHT
+    AlignX=RIGHT
+    AlignY=TOP
     fontStyle=DEFAULT_LARGE_WHITE
-		labelText="+ 51263"
-	end object
-	componentList.add(Experience_Points_Label)
+    labelText="+ 51263"
+  end object
+  componentList.add(Experience_Points_Label)
   
   
 }

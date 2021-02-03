@@ -311,7 +311,7 @@ defaultProperties
   alignX=CENTER
   
   // Scroll effect
-	cycleIndex=0
+  cycleIndex=0
   
   // Style cycling
   ///bCycleStyles=false

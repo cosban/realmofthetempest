@@ -18,11 +18,11 @@ var privatewrite bool bActiveZone;
   
 // Spawn rarity
 enum SpawnRarity {
-	Common,
-	Uncommon,
-	Rare
+  Common,
+  Uncommon,
+  Rare
 };
-	
+  
 // Level range
 struct LvlRange {
   var() int min;
@@ -55,8 +55,8 @@ enum ClanColors {
 
 // Enemy Types
 enum EnemyTypes {
-	No_Spawn,
-	
+  No_Spawn,
+  
   Ash_Reaper,  
   Basilisk,  
   Blood_Weaver,
@@ -64,7 +64,7 @@ enum EnemyTypes {
   Corrupter,
   Cyclops,
   Dimedius,
-	Dragon_Lord,
+  Dragon_Lord,
   Dreadskold,
   Elder,
   Emissary,
@@ -76,7 +76,7 @@ enum EnemyTypes {
   Minotaur,
   Nether_Hydra,
   Nightingale,
-	Ocules,
+  Ocules,
   Oculox,
   Ogre,
   Okitian_Spirit,
@@ -132,11 +132,11 @@ var protectedwrite array<class<ROTT_Combat_Enemy> > enemyClasses;
  *
  *===========================================================================*/
 simulated event postBeginPlay() {
-	super.postBeginPlay();
+  super.postBeginPlay();
 
-	if (brushComponent != none)	{
-		bProjTarget = brushComponent.blockZeroExtent;
-	}
+  if (brushComponent != none)  {
+    bProjTarget = brushComponent.blockZeroExtent;
+  }
   
   // Link game info for convenience
   gameInfo = ROTT_Game_Info(class'WorldInfo'.static.GetWorldInfo().Game);
@@ -159,8 +159,8 @@ simulated event touch
 )
 {
   // ignore irrelevant events
-	if (ROTT_Player_Pawn(other) == none) return;
-	
+  if (ROTT_Player_Pawn(other) == none) return;
+  
   // Add enemies to spawn list
   bActiveZone = true;
 }
@@ -172,14 +172,14 @@ simulated event touch
  *===========================================================================*/
 simulated event untouch(Actor other) {
   // ignore irrelevant events
-	if (ROTT_Player_Pawn(other) == none) return;
-	
+  if (ROTT_Player_Pawn(other) == none) return;
+  
   // Remove enemies from spawn list
   bActiveZone = false;
 }
 
 // Disable projectile functionality
-simulated function bool stopsProjectile(Projectile P) {	return false; }
+simulated function bool stopsProjectile(Projectile P) {  return false; }
 
 /*=============================================================================
  * getEnemyClass()
@@ -195,12 +195,12 @@ public function class<ROTT_Combat_Enemy> getEnemyClass(EnemyTypes index) {
  *===========================================================================*/
 defaultProperties
 {
-	BrushColor=(R=0,G=180,B=255,A=255)
+  BrushColor=(R=0,G=180,B=255,A=255)
 
-	bProjTarget=true
-	SupportedEvents.Empty
-	SupportedEvents(0)=class'SeqEvent_Touch'
-	SupportedEvents(1)=class'SeqEvent_TakeDamage'
+  bProjTarget=true
+  SupportedEvents.Empty
+  SupportedEvents(0)=class'SeqEvent_Touch'
+  SupportedEvents(1)=class'SeqEvent_TakeDamage'
   
 }
 

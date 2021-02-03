@@ -426,29 +426,29 @@ event deleteComp() {
  *===========================================================================*/
 defaultProperties
 {
-	/** ===== Input ===== **/
-	begin object class=ROTT_Input_Handler Name=Input_A
+  /** ===== Input ===== **/
+  begin object class=ROTT_Input_Handler Name=Input_A
     inputName="XBoxTypeS_A"
-		buttonComponent=none
-	end object
+    buttonComponent=none
+  end object
   inputList.add(Input_A)
   
-	begin object class=ROTT_Input_Handler Name=Input_B
+  begin object class=ROTT_Input_Handler Name=Input_B
     inputName="XBoxTypeS_B"
     buttonComponent=none
-	end object
+  end object
   inputList.add(Input_B)
   
-	/** ===== UI Components ===== **/
-	tag="Target_Selection_Page"
-	posX=0
-	posY=0
-	posXEnd=NATIVE_WIDTH
-	posYEnd=NATIVE_HEIGHT
+  /** ===== UI Components ===== **/
+  tag="Target_Selection_Page"
+  posX=0
+  posY=0
+  posXEnd=NATIVE_WIDTH
+  posYEnd=NATIVE_HEIGHT
 
   // Target selector (Enemy)
-	begin object class=UI_Selector Name=Enemy_Selector
-		tag="Enemy_Selector"
+  begin object class=UI_Selector Name=Enemy_Selector
+    tag="Enemy_Selector"
     bEnabled=false
     posX=185
     posY=231
@@ -469,12 +469,12 @@ defaultProperties
       `ALPHA_EFFECT()
     end object
     componentList.add(Selector_Sprite)
-	end object
-	componentList.add(Enemy_Selector)
-	
+  end object
+  componentList.add(Enemy_Selector)
+  
   // Target selector (Hero)
-	begin object class=UI_Selector Name=Hero_Selector
-		tag="Hero_Selector"
+  begin object class=UI_Selector Name=Hero_Selector
+    tag="Hero_Selector"
     bEnabled=false
     posX=724
     posY=597
@@ -504,11 +504,11 @@ defaultProperties
       `ALPHA_EFFECT()
     end object
     componentList.add(Inactive_Selector_Sprite)
-	end object
-	componentList.add(Hero_Selector)
+  end object
+  componentList.add(Hero_Selector)
   
   // All Hero Targets
-	begin object class=UI_Container Name=All_Hero_Selector
+  begin object class=UI_Container Name=All_Hero_Selector
     tag="All_Hero_Selector"
     bEnabled=false
     
@@ -553,13 +553,13 @@ defaultProperties
     end object
     componentList.add(Hero_Selector_3)
     
-	end object
-	componentList.add(All_Hero_Selector)
-	
+  end object
+  componentList.add(All_Hero_Selector)
+  
   
   
   // All Enemy Targets
-	begin object class=UI_Container Name=All_Enemy_Selector
+  begin object class=UI_Container Name=All_Enemy_Selector
     tag="All_Enemy_Selector"
     bEnabled=false
     
@@ -604,9 +604,9 @@ defaultProperties
     end object
     componentList.add(Enemy_Selector_3)
     
-	end object
-	componentList.add(All_Enemy_Selector)
-	
+  end object
+  componentList.add(All_Enemy_Selector)
+  
 }
 
 

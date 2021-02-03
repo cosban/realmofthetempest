@@ -128,23 +128,23 @@ public function onNavigateRight() {
 defaultProperties
 {
   /** ===== Textures ===== **/
-	// class Skill Tree Backgrounds
-	begin object class=UI_Texture_Info Name=Class_Skill_Tree_Valkyrie
+  // class Skill Tree Backgrounds
+  begin object class=UI_Texture_Info Name=Class_Skill_Tree_Valkyrie
     componentTextures.add(Texture2D'GUI.Class_Skill_Tree_Valkyrie')
   end object
-	begin object class=UI_Texture_Info Name=Class_Skill_Tree_Goliath
+  begin object class=UI_Texture_Info Name=Class_Skill_Tree_Goliath
     componentTextures.add(Texture2D'GUI.Class_Skill_Tree_Goliath')
   end object
-	begin object class=UI_Texture_Info Name=Class_Skill_Tree_Titan
+  begin object class=UI_Texture_Info Name=Class_Skill_Tree_Titan
     componentTextures.add(Texture2D'GUI.Class_Skill_Tree_Titan')
   end object
-	begin object class=UI_Texture_Info Name=Class_Skill_Tree_Wizard
+  begin object class=UI_Texture_Info Name=Class_Skill_Tree_Wizard
     componentTextures.add(Texture2D'GUI.Class_Skill_Tree_Wizard')
   end object
-	begin object class=UI_Texture_Info Name=Class_Skill_Tree_Assassin
+  begin object class=UI_Texture_Info Name=Class_Skill_Tree_Assassin
     componentTextures.add(Texture2D'GUI.Class_Skill_Tree_Assassin')
   end object
-	
+  
   // Skill Selection Box
   begin object class=UI_Texture_Info Name=Skill_Selection_Box
     componentTextures.add(Texture2D'GUI.Skill_Selection_Box')
@@ -154,51 +154,51 @@ defaultProperties
   end object
   
   /** ===== UI Components ===== **/
-	// Right background
-	begin object class=UI_Sprite Name=Class_Skilltree_Background
-		tag="Class_Skilltree_Background"
+  // Right background
+  begin object class=UI_Sprite Name=Class_Skilltree_Background
+    tag="Class_Skilltree_Background"
     bEnabled=false
-		posX=720
-		posY=0
-		posXEnd=NATIVE_WIDTH
-		posYEnd=NATIVE_HEIGHT
-		images(0)=Class_Skill_Tree_Valkyrie
+    posX=720
+    posY=0
+    posXEnd=NATIVE_WIDTH
+    posYEnd=NATIVE_HEIGHT
+    images(0)=Class_Skill_Tree_Valkyrie
     images(VALKYRIE)=Class_Skill_Tree_Valkyrie
-		images(GOLIATH)=Class_Skill_Tree_Goliath
-		images(TITAN)=Class_Skill_Tree_Titan
-		images(WIZARD)=Class_Skill_Tree_Wizard
-		images(ASSASSIN)=Class_Skill_Tree_Assassin
-	end object
-	componentList.add(Class_Skilltree_Background)
+    images(GOLIATH)=Class_Skill_Tree_Goliath
+    images(TITAN)=Class_Skill_Tree_Titan
+    images(WIZARD)=Class_Skill_Tree_Wizard
+    images(ASSASSIN)=Class_Skill_Tree_Assassin
+  end object
+  componentList.add(Class_Skilltree_Background)
   
   // Header
-	begin object class=ROTT_UI_Character_Sheet_Header Name=Character_Sheet_Header
-		tag="Character_Sheet_Header"
-	end object
-	componentList.add(Character_Sheet_Header)
-	
+  begin object class=ROTT_UI_Character_Sheet_Header Name=Character_Sheet_Header
+    tag="Character_Sheet_Header"
+  end object
+  componentList.add(Character_Sheet_Header)
+  
   // Skill Highlights
-	begin object class=ROTT_UI_Tree_Highlights Name=Skill_Highlights
-		tag="Skill_Highlights"
-	end object
-	componentList.add(Skill_Highlights)
+  begin object class=ROTT_UI_Tree_Highlights Name=Skill_Highlights
+    tag="Skill_Highlights"
+  end object
+  componentList.add(Skill_Highlights)
   
   // Skill Selector
-	begin object class=UI_Tree_Selector Name=Skill_Selector
-		tag="Skill_Selector"
+  begin object class=UI_Tree_Selector Name=Skill_Selector
+    tag="Skill_Selector"
     bEnabled=false
-		posX=803
-		posY=63
+    posX=803
+    posY=63
     
     // Tree type
     treeType=WIZARD_TREE
     
     // Draw Textures
-		images(0)=Skill_Selection_Box
-		images(1)=Skill_Selection_Box_Red
+    images(0)=Skill_Selection_Box
+    images(1)=Skill_Selection_Box_Red
     
-	end object
-	componentList.add(Skill_Selector)
+  end object
+  componentList.add(Skill_Selector)
   
 }
 

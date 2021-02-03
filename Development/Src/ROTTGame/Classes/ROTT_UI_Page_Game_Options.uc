@@ -338,18 +338,18 @@ public function widgetSelectorInputB() {
  * Assets
  *===========================================================================*/
 defaultProperties
-{	
-	/** ===== Input ===== **/
-	begin object class=ROTT_Input_Handler Name=Input_A
+{  
+  /** ===== Input ===== **/
+  begin object class=ROTT_Input_Handler Name=Input_A
     inputName="XBoxTypeS_A"
-		buttonComponent=none
-	end object
+    buttonComponent=none
+  end object
   inputList.add(Input_A)
   
-	begin object class=ROTT_Input_Handler Name=Input_B
+  begin object class=ROTT_Input_Handler Name=Input_B
     inputName="XBoxTypeS_B"
     buttonComponent=none
-	end object
+  end object
   inputList.add(Input_B)
   
   // Scene frame
@@ -367,23 +367,23 @@ defaultProperties
   
   /** ===== UI Components ===== **/
   // Background
-	begin object class=UI_Sprite Name=Background_Sprite
-		tag="Background_Sprite"
+  begin object class=UI_Sprite Name=Background_Sprite
+    tag="Background_Sprite"
     bEnabled=true
-		posX=0
-		posY=0
-		posXEnd=NATIVE_WIDTH
-		posYEnd=NATIVE_HEIGHT
-		images(0)=Page_Background
-	end object
-	componentList.add(Background_Sprite)
+    posX=0
+    posY=0
+    posXEnd=NATIVE_WIDTH
+    posYEnd=NATIVE_HEIGHT
+    images(0)=Page_Background
+  end object
+  componentList.add(Background_Sprite)
   
   // Selection box
-	begin object class=UI_Selector Name=Menu_Selector
-		tag="Menu_Selector"
+  begin object class=UI_Selector Name=Menu_Selector
+    tag="Menu_Selector"
     bEnabled=true
-		posX=76
-		posY=178
+    posX=76
+    posY=178
     selectionOffset=(x=0,y=100)
     numberOfMenuOptions=6
     
@@ -408,9 +408,9 @@ defaultProperties
     end object
     componentList.add(Inactive_Selector_Sprite)
     
-	end object
-	componentList.add(Menu_Selector)
-	
+  end object
+  componentList.add(Menu_Selector)
+  
   // Resolution options
   begin object class=UI_Texture_Info Name=Resolution_Option_1280_x_720
     componentTextures.add(Texture2D'ROTT_GUI_Options.Resolution_Option_1280_x_720')
@@ -441,7 +441,7 @@ defaultProperties
   end object
   
   // Resolution options
-	begin object class=UI_Selector Name=Resolution_Options
+  begin object class=UI_Selector Name=Resolution_Options
     tag="Resolution_Options"
     bActive=false
     navigationType=SELECTION_HORIZONTAL
@@ -468,47 +468,47 @@ defaultProperties
   componentList.add(Resolution_Options)
 
   // Slider Music Volume
-	begin object class=UI_Slider Name=Slider_Music_Volume
+  begin object class=UI_Slider Name=Slider_Music_Volume
     tag="Slider_Music_Volume"
     bEnabled=true
     bActive=false
     posX=656
     posY=273
-	end object
-	componentList.add(Slider_Music_Volume)
+  end object
+  componentList.add(Slider_Music_Volume)
   
   // Slider Effect Volume
-	begin object class=UI_Slider Name=Slider_Effect_Volume
+  begin object class=UI_Slider Name=Slider_Effect_Volume
     tag="Slider_Effect_Volume"
     bEnabled=true
     bActive=false
     posX=656
     posY=373
-	end object
-	componentList.add(Slider_Effect_Volume)
+  end object
+  componentList.add(Slider_Effect_Volume)
   
   // Target Memory Checkbox
-	begin object class=UI_Checkbox Name=Target_Memory_Checkbox
+  begin object class=UI_Checkbox Name=Target_Memory_Checkbox
     tag="Target_Memory_Checkbox"
     bEnabled=true
     bDrawRelative=true
     posX=721
     posY=484
-	end object
-	componentList.add(Target_Memory_Checkbox)
+  end object
+  componentList.add(Target_Memory_Checkbox)
   
   // Action Memory Checkbox
-	begin object class=UI_Checkbox Name=Action_Memory_Checkbox
+  begin object class=UI_Checkbox Name=Action_Memory_Checkbox
     tag="Action_Memory_Checkbox"
     bEnabled=true
     bDrawRelative=true
     posX=721
     posY=584
-	end object
-	componentList.add(Action_Memory_Checkbox)
+  end object
+  componentList.add(Action_Memory_Checkbox)
   
   // Scaling options
-	begin object class=UI_Selector Name=Scaling_Options
+  begin object class=UI_Selector Name=Scaling_Options
     tag="Scaling_Options"
     bActive=false
     navigationType=SELECTION_HORIZONTAL
@@ -541,18 +541,18 @@ defaultProperties
 
   /// wip
   // Version
-	begin object class=UI_Label Name=WIP_Label
-		tag="WIP_Label"
-		posX=0
-		posY=0
-		posXEnd=NATIVE_WIDTH
-		posYEnd=NATIVE_HEIGHT
-		alignX=RIGHT
-		alignY=BOTTOM
-		fontStyle=DEFAULT_MEDIUM_TAN
-		labelText="Work in progress"
-	end object
-	componentList.add(WIP_Label)
+  begin object class=UI_Label Name=WIP_Label
+    tag="WIP_Label"
+    posX=0
+    posY=0
+    posXEnd=NATIVE_WIDTH
+    posYEnd=NATIVE_HEIGHT
+    alignX=RIGHT
+    alignY=BOTTOM
+    fontStyle=DEFAULT_MEDIUM_TAN
+    labelText="Work in progress"
+  end object
+  componentList.add(WIP_Label)
 }
 
 

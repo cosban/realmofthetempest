@@ -93,54 +93,54 @@ defaultProperties
   // Relative draw position
   bDrawRelative=true
   
-	/** ===== Input ===== **/
-	begin object class=ROTT_Input_Handler Name=Input_A
+  /** ===== Input ===== **/
+  begin object class=ROTT_Input_Handler Name=Input_A
     inputName="XBoxTypeS_A"
-		buttonComponent=none
-	end object
+    buttonComponent=none
+  end object
   inputList.add(Input_A)
   
-	begin object class=ROTT_Input_Handler Name=Input_B
+  begin object class=ROTT_Input_Handler Name=Input_B
     inputName="XBoxTypeS_B"
     buttonComponent=none
-	end object
+  end object
   inputList.add(Input_B)
   
   /** ===== Textures ===== **/
   // Background
-	begin object class=UI_Texture_Info Name=Team_Viewer_Background
+  begin object class=UI_Texture_Info Name=Team_Viewer_Background
     componentTextures.add(Texture2D'GUI.Party_Mgmt_Window')
   end object
   
-	/** ===== UI Components ===== **/
+  /** ===== UI Components ===== **/
   // Window
-	begin object class=UI_Sprite Name=Team_Viewer_Window
-		tag="Team_Viewer_Window"
+  begin object class=UI_Sprite Name=Team_Viewer_Window
+    tag="Team_Viewer_Window"
     bEnabled=true
     posX=720
     posY=0
-		images(0)=Team_Viewer_Background
-	end object
-	componentList.add(Team_Viewer_Window)
-	
+    images(0)=Team_Viewer_Background
+  end object
+  componentList.add(Team_Viewer_Window)
+  
   // Status description
-	begin object class=UI_Label Name=Team_Viewer_Status_Description
-		tag="Team_Viewer_Status_Description"
-		posX=720
-		posY=189
-		posXEnd=NATIVE_WIDTH
-		posYEnd=NATIVE_HEIGHT
-		AlignX=CENTER
-		AlignY=TOP
-		labelText="This team awaits your command."
-	end object
-	componentList.add(Team_Viewer_Status_Description)
-	
+  begin object class=UI_Label Name=Team_Viewer_Status_Description
+    tag="Team_Viewer_Status_Description"
+    posX=720
+    posY=189
+    posXEnd=NATIVE_WIDTH
+    posYEnd=NATIVE_HEIGHT
+    AlignX=CENTER
+    AlignY=TOP
+    labelText="This team awaits your command."
+  end object
+  componentList.add(Team_Viewer_Status_Description)
+  
   // Button: "Shrine"
-	begin object class=UI_Sprite Name=Button_Shrine_Sprite
-		tag="Button_Shrine_Sprite"
-		posX=852
-		posY=544
+  begin object class=UI_Sprite Name=Button_Shrine_Sprite
+    tag="Button_Shrine_Sprite"
+    posX=852
+    posY=544
     
     // Texture
     begin object class=UI_Texture_Info Name=Button_Shrine
@@ -148,14 +148,14 @@ defaultProperties
     end object
 
     images(0)=Button_Shrine
-	end object
-	componentList.add(Button_Shrine_Sprite)
+  end object
+  componentList.add(Button_Shrine_Sprite)
   
   // Button: "Control"
-	begin object class=UI_Sprite Name=Button_Control_Sprite
-		tag="Button_Control_Sprite"
-		posX=852
-		posY=624
+  begin object class=UI_Sprite Name=Button_Control_Sprite
+    tag="Button_Control_Sprite"
+    posX=852
+    posY=624
     
     // Texture
     begin object class=UI_Texture_Info Name=Button_Control
@@ -163,26 +163,26 @@ defaultProperties
     end object
     
     images(0)=Button_Control
-	end object
-	componentList.add(Button_Control_Sprite)
+  end object
+  componentList.add(Button_Control_Sprite)
   
   // Team Info Displayer
-	begin object class=ROTT_UI_Displayer_Team_Info Name=Team_Info_Displayer
-		tag="Team_Info_Displayer"
+  begin object class=ROTT_UI_Displayer_Team_Info Name=Team_Info_Displayer
+    tag="Team_Info_Displayer"
     bEnabled=true
-		posX=0    
-		posY=0
-		posXEnd=NATIVE_WIDTH
-		posYEnd=NATIVE_HEIGHT
-	end object
-	componentList.add(Team_Info_Displayer)
-	
+    posX=0    
+    posY=0
+    posXEnd=NATIVE_WIDTH
+    posYEnd=NATIVE_HEIGHT
+  end object
+  componentList.add(Team_Info_Displayer)
+  
   // Selection Box
-	begin object class=UI_Selector Name=Selection_Box
-		tag="Selection_Box"
+  begin object class=UI_Selector Name=Selection_Box
+    tag="Selection_Box"
     bEnabled=true
-		posX=864
-		posY=552
+    posX=864
+    posY=552
     selectionOffset=(x=0,y=80)
     numberOfMenuOptions=2
     
@@ -199,8 +199,8 @@ defaultProperties
     end object
     componentList.add(Selector_Sprite)
     
-	end object
-	componentList.add(Selection_Box)
+  end object
+  componentList.add(Selection_Box)
   
 }
 

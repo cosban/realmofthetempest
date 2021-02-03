@@ -13,11 +13,11 @@ dependsOn(ROTT_UI_Scene_Manager)
 dependsOn(ROTT_NPC_Container);
  
 // Version info
-const MAJOR = 1;  const MINOR = 5;  const REVISION = 2;  const PATCH = 'a';  
+const MAJOR = 1;  const MINOR = 5;  const REVISION = 3;  const PATCH = 'a';  
 const PHASE_INFO = "III";
 
 // Publishing settings
-const bDevMode = false;      
+const bDevMode = true;      
 const bQaMode = true;     
 
 // Parameters used in ROTTTimers:
@@ -211,9 +211,9 @@ event initGame(string options, out string errorMessage) {
   
   // Load gameplay based on map name
   switch (getCurrentMap()) {
-		case MAP_UI_TITLE_MENU:
-		case MAP_UI_GAME_OVER:
-		case MAP_UI_CREDITS:
+    case MAP_UI_TITLE_MENU:
+    case MAP_UI_GAME_OVER:
+    case MAP_UI_CREDITS:
       // No gameplay, no save data
       break;
       
@@ -289,7 +289,7 @@ public function bool saveFileExist() {
   // Initialize a player profile
   profile = new class'ROTT_Game_Player_Profile';
   
-	if (class'Engine'.static.basicLoadObject(profile, path, true, 0)) {
+  if (class'Engine'.static.basicLoadObject(profile, path, true, 0)) {
     return true;
   }
   return false;
@@ -319,7 +319,7 @@ public function bool loadSavedGame(optional bool transitionMode = false) {
   
   // Attempt to load profile
   darkcyanlog("Loading profile: ..." $ path, DEBUG_DATA_STRUCTURE);
-	if (class'Engine'.static.basicLoadObject(playerProfile, path, true, 0)) {
+  if (class'Engine'.static.basicLoadObject(playerProfile, path, true, 0)) {
     // Upon successful profile load, continue loading and setup profile
     playerProfile.loadGame(transitionMode);
     playerProfile.linkReferences();
@@ -1275,7 +1275,7 @@ public function setCheckpointInfo
 ) 
 {
   // Expand array as needed
-	if (checkpoints.length <= index) checkpoints.length = index + 1;
+  if (checkpoints.length <= index) checkpoints.length = index + 1;
   
   // Add info the array
   checkPoints[index].location = spawnLocation;
@@ -1332,7 +1332,7 @@ public function bool isInTown() {
  * Transfers out from NPC dialog to the specified NPC Service interface.
  *===========================================================================*/
 public function launchNPCService(NpcServices serviceType) {
-	switch (serviceType) {
+  switch (serviceType) {
     case SERVICE_BLESSINGS: 
       // Switch to blessing interface
       sceneManager.switchScene(SCENE_SERVICE_BLESSINGS);

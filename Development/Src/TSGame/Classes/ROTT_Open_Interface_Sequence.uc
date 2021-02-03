@@ -47,10 +47,10 @@ event activated() {
  *===========================================================================*/
 defaultProperties
 {
-	ObjName="Open_Interface_Sequence"
-	ObjCategory="ROTT"
-	
-	bCallHandler=false
+  ObjName="Open_Interface_Sequence"
+  ObjCategory="ROTT"
+  
+  bCallHandler=false
   
   // Input links
   InputLinks(0)=(LinkDesc="Show")

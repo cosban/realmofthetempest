@@ -71,21 +71,21 @@ protected function float attributeInfo
 }
 
 private function int speedRating(int level) {
-	local int speed, i, delta;
-	
-	speed = 4;
-	delta = 2;
-	
-	for (i = 0; i < level; i++) {
-		speed = speed + delta;
-		
-		if (i%2 == 0 && i != 0) {
-			delta = delta + 3;
-		} else {
-			delta = delta + 2;
-		}
-	} 
-	return speed;
+  local int speed, i, delta;
+  
+  speed = 4;
+  delta = 2;
+  
+  for (i = 0; i < level; i++) {
+    speed = speed + delta;
+    
+    if (i%2 == 0 && i != 0) {
+      delta = delta + 3;
+    } else {
+      delta = delta + 2;
+    }
+  } 
+  return speed;
 }
 
 /*============================================================================= 
@@ -106,31 +106,31 @@ defaultProperties
 // #test#
 /*
 function int s2(int lv) {
-	local int s;
-	s = (5 * ((lv * (lv / 2)) / 2)) + lv % 2 + 5;
-	return s;
+  local int s;
+  s = (5 * ((lv * (lv / 2)) / 2)) + lv % 2 + 5;
+  return s;
 }
 */
 
 /**
-	
+  
 function int GetSpeed(string StatType, int SkillLevel)
 {
-	local int s, i, j;
-	
-	s = 4;
-	j = 2;
-	
-	for (i = 0; i < level; i++) {
-		s = s + j;
-		
-		if (i%2 == 0 && i != 0) {
-			j = j + 3;
-		} else {
-			j = j + 2;
-		}
-	} 
-	
+  local int s, i, j;
+  
+  s = 4;
+  j = 2;
+  
+  for (i = 0; i < level; i++) {
+    s = s + j;
+    
+    if (i%2 == 0 && i != 0) {
+      j = j + 3;
+    } else {
+      j = j + 2;
+    }
+  } 
+  
 }
 
 i:0 j: 2    s: 5+1    d:

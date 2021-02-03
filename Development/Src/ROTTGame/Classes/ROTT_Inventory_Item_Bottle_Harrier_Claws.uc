@@ -49,7 +49,7 @@ defaultProperties
   itemName="Harrier Claws"
   
   // Item texture
-	itemTexture=Texture2D'ROTT_Items.Bottles.Item_Bottle_Blue'
+  itemTexture=Texture2D'ROTT_Items.Bottles.Item_Bottle_Blue'
   
   // Item text color
   itemFont=DEFAULT_SMALL_ORANGE

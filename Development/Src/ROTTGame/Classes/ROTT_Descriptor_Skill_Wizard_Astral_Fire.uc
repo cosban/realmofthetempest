@@ -142,35 +142,35 @@ defaultProperties
   skillAttributes.add((attributeSet=ATMOSPHERIC_SET,mechanicType=ATMOSPHERIC_DAMAGE_MAX,tag="%max",font=DEFAULT_SMALL_ORANGE,returnType=INTEGER));
   
   // Skill Animation
-	begin object class=UI_Texture_Info Name=SkillAnim_AstralFire_F1
+  begin object class=UI_Texture_Info Name=SkillAnim_AstralFire_F1
     componentTextures.add(Texture2D'GUI_Skills.SkillAnim_AstralFire_F1')
   end object
-	begin object class=UI_Texture_Info Name=SkillAnim_AstralFire_F2
+  begin object class=UI_Texture_Info Name=SkillAnim_AstralFire_F2
     componentTextures.add(Texture2D'GUI_Skills.SkillAnim_AstralFire_F2')
   end object
-	begin object class=UI_Texture_Info Name=SkillAnim_AstralFire_F3
+  begin object class=UI_Texture_Info Name=SkillAnim_AstralFire_F3
     componentTextures.add(Texture2D'GUI_Skills.SkillAnim_AstralFire_F3')
   end object
-	begin object class=UI_Texture_Info Name=SkillAnim_AstralFire_F4
+  begin object class=UI_Texture_Info Name=SkillAnim_AstralFire_F4
     componentTextures.add(Texture2D'GUI_Skills.SkillAnim_AstralFire_F4')
   end object
-	begin object class=UI_Texture_Info Name=SkillAnim_AstralFire_F5
+  begin object class=UI_Texture_Info Name=SkillAnim_AstralFire_F5
     componentTextures.add(Texture2D'GUI_Skills.SkillAnim_AstralFire_F5')
   end object
   
   // Skill Animation Container
-	begin object class=UI_Texture_Storage Name=Skill_Animation_Container
-		tag="Skill_Animation_Container"
+  begin object class=UI_Texture_Storage Name=Skill_Animation_Container
+    tag="Skill_Animation_Container"
     textureWidth=240
     textureHeight=240
-		images(0)=SkillAnim_AstralFire_F1
-		images(1)=SkillAnim_AstralFire_F2
-		images(2)=SkillAnim_AstralFire_F3
-		images(3)=SkillAnim_AstralFire_F4
-		images(4)=SkillAnim_AstralFire_F5
-	end object
+    images(0)=SkillAnim_AstralFire_F1
+    images(1)=SkillAnim_AstralFire_F2
+    images(2)=SkillAnim_AstralFire_F3
+    images(3)=SkillAnim_AstralFire_F4
+    images(4)=SkillAnim_AstralFire_F5
+  end object
   skillAnim=Skill_Animation_Container
-	
+  
   
 }
 

@@ -157,53 +157,53 @@ defaultProperties
   costValue=100
   
   // Textures
-	begin object class=UI_Texture_Info Name=Inventory_Slot_Texture
+  begin object class=UI_Texture_Info Name=Inventory_Slot_Texture
     componentTextures.add(Texture2D'GUI.Cost_Inventory_Slot')
   end object
   
   // Inventory slot background
   begin object class=UI_Sprite Name=Inventory_Slot_Sprite
-		tag="Inventory_Slot_Sprite"
-		posX=431
-		posY=-10
+    tag="Inventory_Slot_Sprite"
+    posX=431
+    posY=-10
     images(0)=Inventory_Slot_Texture
-	end object
-	componentList.add(Inventory_Slot_Sprite)
-	
+  end object
+  componentList.add(Inventory_Slot_Sprite)
+  
   // Inventory slot
   begin object class=ROTT_UI_Displayer_Item Name=Player_Inventory_Slot
-		tag="Player_Inventory_Slot"
+    tag="Player_Inventory_Slot"
     bShowIfSingular=true
-		posX=443
-		posY=0
-	end object
-	componentList.add(Player_Inventory_Slot)
-	
+    posX=443
+    posY=0
+  end object
+  componentList.add(Player_Inventory_Slot)
+  
   // Cost description label
-	begin object class=UI_Label Name=Cost_Description_Label
-		tag="Cost_Description_Label"
-		posX=144
-		posY=34
-		posYEnd=64
+  begin object class=UI_Label Name=Cost_Description_Label
+    tag="Cost_Description_Label"
+    posX=144
+    posY=34
+    posYEnd=64
     fontStyle=DEFAULT_SMALL_TAN
-		AlignX=LEFT
-		AlignY=CENTER
-		labelText="Gold cost per point:"
-	end object
-	componentList.add(Cost_Description_Label)
-	
+    AlignX=LEFT
+    AlignY=CENTER
+    labelText="Gold cost per point:"
+  end object
+  componentList.add(Cost_Description_Label)
+  
   // Cost display value
-	begin object class=UI_Label Name=Cost_Quantity
-		tag="Cost_Quantity"
-		posX=174
-		posY=86
-		posYEnd=116
-		AlignX=LEFT
-		AlignY=CENTER
-		labelText="100"
-	end object
-	componentList.add(Cost_Quantity)
-	
+  begin object class=UI_Label Name=Cost_Quantity
+    tag="Cost_Quantity"
+    posX=174
+    posY=86
+    posYEnd=116
+    AlignX=LEFT
+    AlignY=CENTER
+    labelText="100"
+  end object
+  componentList.add(Cost_Quantity)
+  
 }
 
 

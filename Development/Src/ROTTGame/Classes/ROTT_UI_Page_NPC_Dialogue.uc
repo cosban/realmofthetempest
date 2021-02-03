@@ -349,139 +349,139 @@ protected function navigationRoutineB() {
  *===========================================================================*/
 defaultProperties
 {
-	/** ===== Input ===== **/
-	begin object class=ROTT_Input_Handler Name=Input_A
+  /** ===== Input ===== **/
+  begin object class=ROTT_Input_Handler Name=Input_A
     inputName="XBoxTypeS_A"
-		buttonComponent=none
-	end object
+    buttonComponent=none
+  end object
   inputList.add(Input_A)
   
-	begin object class=ROTT_Input_Handler Name=Input_B
+  begin object class=ROTT_Input_Handler Name=Input_B
     inputName="XBoxTypeS_B"
     buttonComponent=none
-	end object
+  end object
   inputList.add(Input_B)
   
-	// Backgrounds
-	begin object class=UI_Texture_Info Name=NPC_Background_Blue
-		componentTextures.add(Texture2D'GUI_NPC_Dialog.NPC_Background_Blue')
-	end object
+  // Backgrounds
+  begin object class=UI_Texture_Info Name=NPC_Background_Blue
+    componentTextures.add(Texture2D'GUI_NPC_Dialog.NPC_Background_Blue')
+  end object
   
   // This is used to fade in the NPC scene
-	begin object class=UI_Sprite Name=Dialogue_Background
-		tag="Dialogue_Background" 
-		posX=0
-		posY=0
-		posXEnd=NATIVE_WIDTH
-		posYEnd=NATIVE_HEIGHT
-		images(0)=NPC_Background_Blue
-	end object
-	componentList.add(Dialogue_Background)
-	
-	// Texture components
-	begin object class=UI_Texture_Info Name=Black_Texture
-		componentTextures.add(Texture2D'GUI.Black_Square')
-	end object
-	begin object class=UI_Texture_Info Name=NPC_Frame_Texture
+  begin object class=UI_Sprite Name=Dialogue_Background
+    tag="Dialogue_Background" 
+    posX=0
+    posY=0
+    posXEnd=NATIVE_WIDTH
+    posYEnd=NATIVE_HEIGHT
+    images(0)=NPC_Background_Blue
+  end object
+  componentList.add(Dialogue_Background)
+  
+  // Texture components
+  begin object class=UI_Texture_Info Name=Black_Texture
+    componentTextures.add(Texture2D'GUI.Black_Square')
+  end object
+  begin object class=UI_Texture_Info Name=NPC_Frame_Texture
     componentTextures.add(Texture2D'GUI.NPC_Frame')
   end object
-	begin object class=UI_Texture_Info Name=NPC_Frame_B
+  begin object class=UI_Texture_Info Name=NPC_Frame_B
     componentTextures.add(Texture2D'GUI.NPC_Frame_B')
   end object
-	
+  
   // This is used to fade in the NPC scene
-	///begin object class=UI_Sprite Name=Dialogue_Fade_Screen
-	///	tag="Dialogue_Fade_Screen"
+  ///begin object class=UI_Sprite Name=Dialogue_Fade_Screen
+  ///  tag="Dialogue_Fade_Screen"
   ///  bEnabled=false
-	///	posX=0
-	///	posY=0
-	///	posXEnd=NATIVE_WIDTH
-	///	posYEnd=NATIVE_HEIGHT
-	///	images(0)=Black_Texture
-	///end object
-	///componentList.add(Dialogue_Fade_Screen)
-	
+  ///  posX=0
+  ///  posY=0
+  ///  posXEnd=NATIVE_WIDTH
+  ///  posYEnd=NATIVE_HEIGHT
+  ///  images(0)=Black_Texture
+  ///end object
+  ///componentList.add(Dialogue_Fade_Screen)
+  
   // Back frame of the NPC interaction
-	begin object class=UI_Sprite Name=NPC_Frame
-		tag="NPC_Frame"
-		posX=0
-		posY=0
-		posXEnd=NATIVE_WIDTH
-		posYEnd=NATIVE_HEIGHT
-		images(0)=NPC_Frame_Texture
-	end object
-	componentList.add(NPC_Frame)
-	
+  begin object class=UI_Sprite Name=NPC_Frame
+    tag="NPC_Frame"
+    posX=0
+    posY=0
+    posXEnd=NATIVE_WIDTH
+    posYEnd=NATIVE_HEIGHT
+    images(0)=NPC_Frame_Texture
+  end object
+  componentList.add(NPC_Frame)
+  
   // Portrait
-	begin object class=UI_Texture_Info Name=Place_Holder_360
+  begin object class=UI_Texture_Info Name=Place_Holder_360
     componentTextures.add(Texture2D'Monsters_Disc_2.Enemy_Portrait_Placeholder_360')
   end object
   
   // The character display component
-	begin object class=UI_Sprite Name=NPC_Character_Display
-		tag="NPC_Character_Display"
+  begin object class=UI_Sprite Name=NPC_Character_Display
+    tag="NPC_Character_Display"
     bAnchor=true
-		anchorX=720
-		anchorY=281
-		images(0)=Place_Holder_360
-	end object
-	componentList.add(NPC_Character_Display)
-	
+    anchorX=720
+    anchorY=281
+    images(0)=Place_Holder_360
+  end object
+  componentList.add(NPC_Character_Display)
+  
   // Front frame of the NPC interaction
-	begin object class=UI_Sprite Name=NPC_Frame2
-		tag="NPC_Frame2"
-		posX=0
-		posY=0
-		posXEnd=NATIVE_WIDTH
-		posYEnd=NATIVE_HEIGHT
-		images(0)=NPC_Frame_B
-	end object
-	componentList.add(NPC_Frame2)
-	
+  begin object class=UI_Sprite Name=NPC_Frame2
+    tag="NPC_Frame2"
+    posX=0
+    posY=0
+    posXEnd=NATIVE_WIDTH
+    posYEnd=NATIVE_HEIGHT
+    images(0)=NPC_Frame_B
+  end object
+  componentList.add(NPC_Frame2)
+  
   // NPC Dialogue Options
-	begin object class=UI_Dialogue_Options Name=NPC_Dialogue_Options
-		tag="NPC_Dialogue_Options"
-	end object
-	componentList.add(NPC_Dialogue_Options)
+  begin object class=UI_Dialogue_Options Name=NPC_Dialogue_Options
+    tag="NPC_Dialogue_Options"
+  end object
+  componentList.add(NPC_Dialogue_Options)
   
   // NPC Intro Fader
-	begin object class=UI_Sprite Name=Dialogue_Fade_Screen
-		tag="Dialogue_Fade_Screen"
-		posX=0
-		posY=0
-		posXEnd=NATIVE_WIDTH
-		posYEnd=NATIVE_HEIGHT
-		images(0)=Black_Texture
-	end object
-	componentList.add(Dialogue_Fade_Screen)
-	
+  begin object class=UI_Sprite Name=Dialogue_Fade_Screen
+    tag="Dialogue_Fade_Screen"
+    posX=0
+    posY=0
+    posXEnd=NATIVE_WIDTH
+    posYEnd=NATIVE_HEIGHT
+    images(0)=Black_Texture
+  end object
+  componentList.add(Dialogue_Fade_Screen)
+  
   // Dialog text
-	begin object class=UI_Label Name=NPC_Label_1
-		tag="NPC_Label_1"
-		posX=0
-		posY=562
-		posXEnd=NATIVE_WIDTH
-		posYEnd=612
-		alignX=CENTER
-		alignY=TOP
-		fontStyle=DEFAULT_MEDIUM_WHITE
-		labelText="[PLACEHOLDER DIALOG: LINE 1]"
-	end object
-	componentList.add(NPC_Label_1)
-	
-	begin object class=UI_Label Name=NPC_Label_2
-		tag="NPC_Label_2"
-		posX=0
-		posY=600
-		posXEnd=NATIVE_WIDTH
-		posYEnd=621
-		alignX=CENTER
-		alignY=TOP
-		fontStyle=DEFAULT_MEDIUM_WHITE
-		labelText="[PLACEHOLDER DIALOG: LINE 2]"
-	end object
-	componentList.add(NPC_Label_2)
-	
+  begin object class=UI_Label Name=NPC_Label_1
+    tag="NPC_Label_1"
+    posX=0
+    posY=562
+    posXEnd=NATIVE_WIDTH
+    posYEnd=612
+    alignX=CENTER
+    alignY=TOP
+    fontStyle=DEFAULT_MEDIUM_WHITE
+    labelText="[PLACEHOLDER DIALOG: LINE 1]"
+  end object
+  componentList.add(NPC_Label_1)
+  
+  begin object class=UI_Label Name=NPC_Label_2
+    tag="NPC_Label_2"
+    posX=0
+    posY=600
+    posXEnd=NATIVE_WIDTH
+    posYEnd=621
+    alignX=CENTER
+    alignY=TOP
+    fontStyle=DEFAULT_MEDIUM_WHITE
+    labelText="[PLACEHOLDER DIALOG: LINE 2]"
+  end object
+  componentList.add(NPC_Label_2)
+  
 }
 
 

@@ -923,13 +923,13 @@ public function bool skillAction
   // Check validity of target
   if (targets.length == 0) { 
     yellowLog("Warning (!) Empty targets for skill action");
-		return false;
+    return false;
   }
   
   // Check validity of set type
   if (attributeSet == PASSIVE_SET) { 
     yellowLog("Warning (!) Passive set cannot be executed");
-		return false;
+    return false;
   }
   
   // Create mechanic arrays
@@ -1539,7 +1539,7 @@ protected function int getManaEquation
   float A, float B, float C, float D, float E
 ) 
 {
-	return round(round(A ** (skillLevel ** B)) + (skillLevel ** C) + (D * skillLevel) + E);
+  return round(round(A ** (skillLevel ** B)) + (skillLevel ** C) + (D * skillLevel) + E);
 }
 
 /*============================================================================= 

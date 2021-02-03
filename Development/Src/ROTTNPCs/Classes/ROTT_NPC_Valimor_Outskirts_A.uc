@@ -24,18 +24,18 @@ class ROTT_NPC_Valimor_Outskirts_A extends ROTT_NPC_Container;
 public function initDialogue() {
   super.initDialogue();
   
-	// Intro
-	`NEW_NODE(GREETING, NUETRAL)
+  // Intro
+  `NEW_NODE(GREETING, NUETRAL)
     "Light blinds us so we hate the colors of your clans.",
     ""
   `ENDNODE
   
-	`NEW_NODE(GREETING, NUETRAL)
+  `NEW_NODE(GREETING, NUETRAL)
     "Touch hurts us so we hate the feeling of your skin.",
     ""
   `ENDNODE
   
-	`NEW_NODE(GREETING, NUETRAL)
+  `NEW_NODE(GREETING, NUETRAL)
     "Get away from me.  Who are you",
     "and why are you in my house?"
   `ENDNODE
@@ -65,27 +65,27 @@ defaultProperties
   npcName=GENERIC
   
   // Background
-	begin object class=UI_Texture_Info Name=NPC_Background_Texture
-		componentTextures.add(Texture2D'GUI_NPC_Dialog.NPC_Background_Dark_Gray')
-	end object
-	
+  begin object class=UI_Texture_Info Name=NPC_Background_Texture
+    componentTextures.add(Texture2D'GUI_NPC_Dialog.NPC_Background_Dark_Gray')
+  end object
+  
   // Sprite container for transfer
-	begin object class=UI_Texture_Storage Name=NPC_Background
-		tag="NPC_Background"
-		images(0)=NPC_Background_Texture
-	end object
+  begin object class=UI_Texture_Storage Name=NPC_Background
+    tag="NPC_Background"
+    images(0)=NPC_Background_Texture
+  end object
   npcBackground=NPC_Background
   
   // NPC Texture
-	begin object class=UI_Texture_Info Name=NPC_Sprite_Texture
+  begin object class=UI_Texture_Info Name=NPC_Sprite_Texture
     componentTextures.add(Texture2D'Monsters_Disc_2.Enemy_Portrait_Zombie_Purple_Black_360')
   end object
-	
+  
   // Sprite container for transfer
-	begin object class=UI_Texture_Storage Name=NPC_Sprites
-		tag="NPC_Sprites"
-		images(0)=NPC_Sprite_Texture
-	end object
+  begin object class=UI_Texture_Storage Name=NPC_Sprites
+    tag="NPC_Sprites"
+    images(0)=NPC_Sprite_Texture
+  end object
   npcSprites=NPC_Sprites
 }
 

@@ -9,7 +9,7 @@
  *===========================================================================*/
 
 class CheckpointZone extends Volume
-	placeable; 
+  placeable; 
  
 // Index of checkpoint associated with reaching this zone
 var() int checkpointIndex;  
@@ -32,7 +32,7 @@ simulated event touch
 {
   local ROTT_Checkpoint checkpoint;
   
-	// Filter out non-player objects
+  // Filter out non-player objects
   if (ROTT_Player_Pawn(Other) == none) return;
   
   // Get checkpoint
@@ -69,14 +69,14 @@ public function ROTT_Checkpoint getCheckpoint(int index) {
 /*=============================================================================
  * Default properties
  *===========================================================================*/
-defaultproperties
+defaultProperties
 {
   // Unique ID set in editor for each checkpoint zone
-	checkpointIndex=0
+  checkpointIndex=0
   
   // Editor Appearance
-	bColored=true
-	BrushColor=(R=40,G=255,B=185,A=255)
+  bColored=true
+  BrushColor=(R=40,G=255,B=185,A=255)
 }
 
 

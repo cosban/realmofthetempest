@@ -69,7 +69,7 @@ public function initializeComponent(optional string newTag = "") {
   restartRequiredNotification = findSprite("Restart_Required_Notification");
   
   // Draw version info
-	gameVersionText.setText(gameInfo.getVersionInfo()); 
+  gameVersionText.setText(gameInfo.getVersionInfo()); 
   addEffectToComponent(DELAY, "Title_Fade_Component", 1.2);
   addEffectToComponent(FADE_OUT, "Title_Fade_Component", 0.8);
   
@@ -117,7 +117,7 @@ function bool onInputKey
 ) 
 {
   /// Debug input
-	//gameVersionText.setText(gameInfo.getVersionInfo() $ "                        " $ Key $ "  " $ AmountDepressed); 
+  //gameVersionText.setText(gameInfo.getVersionInfo() $ "                        " $ Key $ "  " $ AmountDepressed); 
   
   if (Key == 'Escape') gameInfo.consoleCommand("EXIT");
   switch (Key) {
@@ -164,7 +164,7 @@ private function hideControllerNotification() {
  * Button controls
  *===========================================================================*/
 protected function navigationRoutineA() {
-	switch (currentUIScene) {
+  switch (currentUIScene) {
     case MENU_HIDDEN:            showMenu();        break;
     case GAMEPLAY_MENU_VISIBLE:  menuSelect();      break;
     case GAMEMODE_MENU_VISIBLE:  modeMenuSelect();  break;
@@ -312,27 +312,27 @@ private function menuSelect() {
  *              settings, which require a restart of the application. 
  *===========================================================================*/
 private function bool checkSystemSettings() {
-	local CustomSystemSettings settings;
-	local ROTT_Cookie_Requirement cookie;
+  local CustomSystemSettings settings;
+  local ROTT_Cookie_Requirement cookie;
 
   settings = class'WorldInfo'.static.getWorldInfo().spawn(class'CustomSystemSettings');
-	cookie = new(self) class'ROTT_Cookie_Requirement';
-	
-	// Hacky! check version info to see if the game has been run before
-	if (class'Engine'.static.basicLoadObject(cookie, "Save\\version_cookie.bin", true, 0)) {
-		if (cookie.sVersion == gameInfo.getVersionInfo()) {
-			return REQUIREMENTS_PASS;
-		}
-	}
-	
-	// Force VSync (game looks awful without it)
-	settings.setUseVsync(true);
-	
-	// Hacky! Save version info out to allow future requirement checks to pass
-	cookie.sVersion = gameInfo.getVersionInfo();
-	class'Engine'.static.basicSaveObject(cookie, "Save\\version_cookie.bin", true, 0);
+  cookie = new(self) class'ROTT_Cookie_Requirement';
+  
+  // Hacky! check version info to see if the game has been run before
+  if (class'Engine'.static.basicLoadObject(cookie, "Save\\version_cookie.bin", true, 0)) {
+    if (cookie.sVersion == gameInfo.getVersionInfo()) {
+      return REQUIREMENTS_PASS;
+    }
+  }
+  
+  // Force VSync (game looks awful without it)
+  settings.setUseVsync(true);
+  
+  // Hacky! Save version info out to allow future requirement checks to pass
+  cookie.sVersion = gameInfo.getVersionInfo();
+  class'Engine'.static.basicSaveObject(cookie, "Save\\version_cookie.bin", true, 0);
 
-	return REQUIREMENTS_FAIL; // restart required
+  return REQUIREMENTS_FAIL; // restart required
 
 }
 
@@ -382,77 +382,77 @@ defaultProperties
 {
   bMandatoryScaleToWindow=true
   
-	/** ===== Input ===== **/
-	begin object class=ROTT_Input_Handler Name=Input_A
+  /** ===== Input ===== **/
+  begin object class=ROTT_Input_Handler Name=Input_A
     inputName="XBoxTypeS_A"
-		buttonComponent=none
-	end object
+    buttonComponent=none
+  end object
   inputList.add(Input_A)
   
-	begin object class=ROTT_Input_Handler Name=Input_B
+  begin object class=ROTT_Input_Handler Name=Input_B
     inputName="XBoxTypeS_B"
-		buttonComponent=none
-	end object
+    buttonComponent=none
+  end object
   inputList.add(Input_B)
   
-	/** ===== Textures ===== **/
-	begin object class=UI_Texture_Info Name=Title_Image_Texture
+  /** ===== Textures ===== **/
+  begin object class=UI_Texture_Info Name=Title_Image_Texture
     componentTextures.add(Texture2D'GUI.Tempest_Stronghold_Title')
   end object
-	begin object class=UI_Texture_Info Name=Title_Menu_Buttons_Texture
+  begin object class=UI_Texture_Info Name=Title_Menu_Buttons_Texture
     componentTextures.add(Texture2D'GUI.Title_Menu_Buttons')
   end object
-	begin object class=UI_Texture_Info Name=Title_Menu_Buttons_Disabled_Texture
+  begin object class=UI_Texture_Info Name=Title_Menu_Buttons_Disabled_Texture
     componentTextures.add(Texture2D'GUI.Title_Menu_Buttons_Disabled')
   end object
-	begin object class=UI_Texture_Info Name=Game_Mode_Menu_Buttons_Texture
+  begin object class=UI_Texture_Info Name=Game_Mode_Menu_Buttons_Texture
     componentTextures.add(Texture2D'GUI.Game_Mode_Menu_Buttons')
   end object
-	begin object class=UI_Texture_Info Name=Black_Texture
-		componentTextures.add(Texture2D'GUI.Black_Square')
-	end object
-	begin object class=UI_Texture_Info Name=Restart_Required_Texture
-		componentTextures.add(Texture2D'GUI.RestartRequired')
-	end object
-	
+  begin object class=UI_Texture_Info Name=Black_Texture
+    componentTextures.add(Texture2D'GUI.Black_Square')
+  end object
+  begin object class=UI_Texture_Info Name=Restart_Required_Texture
+    componentTextures.add(Texture2D'GUI.RestartRequired')
+  end object
+  
   // Game title sprite
-	begin object class=UI_Sprite Name=Game_Title_Image
-		tag="Game_Title_Image"
-		posX=420
-		posY=160
-		posXEnd=1020
-		posYEnd=430
-		images(0)=Title_Image_Texture
-	end object
-	componentList.add(Game_Title_Image)
+  begin object class=UI_Sprite Name=Game_Title_Image
+    tag="Game_Title_Image"
+    posX=420
+    posY=160
+    posXEnd=1020
+    posYEnd=430
+    images(0)=Title_Image_Texture
+  end object
+  componentList.add(Game_Title_Image)
   
   // Game Play Options
-	begin object class=UI_Sprite Name=Title_Menu_Options
-		tag="Title_Menu_Options"
+  begin object class=UI_Sprite Name=Title_Menu_Options
+    tag="Title_Menu_Options"
     bEnabled=false
-		posX=539
-		posY=547
-		images(0)=Title_Menu_Buttons_Texture
-		images(1)=Title_Menu_Buttons_Disabled_Texture
-	end object
-	componentList.add(Title_Menu_Options)
-	
+    posX=539
+    posY=547
+    images(0)=Title_Menu_Buttons_Texture
+    images(1)=Title_Menu_Buttons_Disabled_Texture
+  end object
+  componentList.add(Title_Menu_Options)
+  
   // Game Mode Options
-	begin object class=UI_Sprite Name=Game_Mode_Menu_Options
-		tag="Game_Mode_Menu_Options"
+  begin object class=UI_Sprite Name=Game_Mode_Menu_Options
+    tag="Game_Mode_Menu_Options"
     bEnabled=false
-		posX=539
-		posY=547
-		images(0)=Game_Mode_Menu_Buttons_Texture
-	end object
-	componentList.add(Game_Mode_Menu_Options)
-	
+    posX=539
+    posY=547
+    images(0)=Game_Mode_Menu_Buttons_Texture
+  end object
+  componentList.add(Game_Mode_Menu_Options)
+  
   // Selector
-	begin object class=UI_Selector Name=Title_Menu_Selector
-		tag="Title_Menu_Selector"
+  begin object class=UI_Selector Name=Title_Menu_Selector
+    tag="Title_Menu_Selector"
     bEnabled=false
-		posX=519
-		posY=549
+    posX=519
+    posY=549
     selectionOffset=(x=0,y=71)
     numberOfMenuOptions=2
     
@@ -477,95 +477,95 @@ defaultProperties
     end object
     componentList.add(Inactive_Selector_Sprite)
     
-	end object
-	componentList.add(Title_Menu_Selector)
-	
+  end object
+  componentList.add(Title_Menu_Selector)
+  
   // Restart info
-	begin object class=UI_Sprite Name=Restart_Required_Notification
-		tag="Restart_Required_Notification"
+  begin object class=UI_Sprite Name=Restart_Required_Notification
+    tag="Restart_Required_Notification"
     bEnabled=false
-		posX=390
-		posY=540
-		posXEnd=1050
-		posYEnd=660
-		images(0)=Restart_Required_Texture
-	end object
-	componentList.add(Restart_Required_Notification)
-	
+    posX=390
+    posY=540
+    posXEnd=1050
+    posYEnd=660
+    images(0)=Restart_Required_Texture
+  end object
+  componentList.add(Restart_Required_Notification)
+  
   // Version
-	begin object class=UI_Label Name=Game_Version_Text
-		tag="Game_Version_Text"
-		posX=0
-		posY=0
-		posXEnd=NATIVE_WIDTH
-		posYEnd=NATIVE_HEIGHT
-		alignX=LEFT
-		alignY=BOTTOM
-		fontStyle=DEFAULT_SMALL_BEIGE
-		labelText=""
-	end object
-	componentList.add(Game_Version_Text)
-	
+  begin object class=UI_Label Name=Game_Version_Text
+    tag="Game_Version_Text"
+    posX=0
+    posY=0
+    posXEnd=NATIVE_WIDTH
+    posYEnd=NATIVE_HEIGHT
+    alignX=LEFT
+    alignY=BOTTOM
+    fontStyle=DEFAULT_SMALL_BEIGE
+    labelText=""
+  end object
+  componentList.add(Game_Version_Text)
+  
   // Build info
-	begin object class=UI_Label Name=Dev_Build_Warning
-		tag="Dev_Build_Warning"
-		posX=95
-		posY=0
-		posXEnd=NATIVE_WIDTH
-		posYEnd=NATIVE_HEIGHT
-		alignX=LEFT
-		alignY=BOTTOM
-		fontStyle=DEFAULT_SMALL_RED
-		labelText="Dev Build"
-	end object
-	componentList.add(Dev_Build_Warning)
-	
+  begin object class=UI_Label Name=Dev_Build_Warning
+    tag="Dev_Build_Warning"
+    posX=95
+    posY=0
+    posXEnd=NATIVE_WIDTH
+    posYEnd=NATIVE_HEIGHT
+    alignX=LEFT
+    alignY=BOTTOM
+    fontStyle=DEFAULT_SMALL_RED
+    labelText="Dev Build"
+  end object
+  componentList.add(Dev_Build_Warning)
+  
   // Fade effects
-	begin object class=UI_Sprite Name=Title_Fade_Component
-		tag="Title_Fade_Component"
-		posX=0
-		posY=0
-		posXEnd=NATIVE_WIDTH
-		posYEnd=NATIVE_HEIGHT
-		images(0)=Black_Texture
-	end object
-	componentList.add(Title_Fade_Component)
+  begin object class=UI_Sprite Name=Title_Fade_Component
+    tag="Title_Fade_Component"
+    posX=0
+    posY=0
+    posXEnd=NATIVE_WIDTH
+    posYEnd=NATIVE_HEIGHT
+    images(0)=Black_Texture
+  end object
+  componentList.add(Title_Fade_Component)
   
   
   // Notification for Controller requirement
-	begin object class=UI_Label Name=Controller_Notification_Label_Shadow
-		tag="Controller_Notification_Label_Shadow"
+  begin object class=UI_Label Name=Controller_Notification_Label_Shadow
+    tag="Controller_Notification_Label_Shadow"
     bEnabled=false
-		posX=0
-		posY=500
-		posXEnd=NATIVE_WIDTH
-		posYEnd=550
+    posX=0
+    posY=500
+    posXEnd=NATIVE_WIDTH
+    posYEnd=550
     padding=(top=1, left=13, right=11, bottom=7)
-		fontStyle=DEFAULT_LARGE_ORANGE
-		labelText="A controller is required for play"
+    fontStyle=DEFAULT_LARGE_ORANGE
+    labelText="A controller is required for play"
     activeEffects.add((effectType=EFFECT_ALPHA_CYCLE, lifeTime=-1, elapsedTime=0, intervalTime=0.4, min=220, max=255))
-		alignX=CENTER
-		alignY=CENTER
-	end object
-	componentList.add(Controller_Notification_Label_Shadow)
+    alignX=CENTER
+    alignY=CENTER
+  end object
+  componentList.add(Controller_Notification_Label_Shadow)
   
   // Notification for Controller requirement
-	begin object class=UI_Label Name=Controller_Notification_Label
-		tag="Controller_Notification_Label"
+  begin object class=UI_Label Name=Controller_Notification_Label
+    tag="Controller_Notification_Label"
     bEnabled=false
-		posX=0
-		posY=500
-		posXEnd=NATIVE_WIDTH
-		posYEnd=550
-		fontStyle=DEFAULT_LARGE_ORANGE
-		labelText="A controller is required for play"
+    posX=0
+    posY=500
+    posXEnd=NATIVE_WIDTH
+    posYEnd=550
+    fontStyle=DEFAULT_LARGE_ORANGE
+    labelText="A controller is required for play"
     activeEffects.add((effectType=EFFECT_ALPHA_CYCLE, lifeTime=-1, elapsedTime=0, intervalTime=0.4, min=200, max=255))
     activeEffects.add((effectType=EFFECT_FLIPBOOK, lifeTime=-1, elapsedTime=0, intervalTime=0.10, min=0, max=255))
     cycleStyles=(DEFAULT_LARGE_GOLD, DEFAULT_LARGE_ORANGE)
-		alignX=CENTER
-		alignY=CENTER
-	end object
-	componentList.add(Controller_Notification_Label)
+    alignX=CENTER
+    alignY=CENTER
+  end object
+  componentList.add(Controller_Notification_Label)
   
 }
 

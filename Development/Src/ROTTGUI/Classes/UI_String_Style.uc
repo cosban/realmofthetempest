@@ -38,7 +38,7 @@ public function drawString
 ) 
 {
   // Prevent division by zero from bad bounds
-	if (boundScale.X ~= 0.f) boundScale.X = 1.f;
+  if (boundScale.X ~= 0.f) boundScale.X = 1.f;
   if (boundScale.Y ~= 0.f) boundScale.Y = 1.f;
   
   // Text outlining (lower shadow)

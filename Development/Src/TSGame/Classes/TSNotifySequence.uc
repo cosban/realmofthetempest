@@ -9,7 +9,7 @@
 class TSNotifySequence extends SequenceAction;
 
 // Message to display
-var(ObjectiveRunParams) string sMessage;	
+var(ObjectiveRunParams) string sMessage;  
 
 /*=============================================================================
  * Activated()
@@ -23,15 +23,15 @@ event Activated() {
 /*=============================================================================
  * Default properties
  *===========================================================================*/
-defaultproperties
+defaultProperties
 {
-	ObjName="WorldNotification"
-	ObjCategory="TSFunctions"
+  ObjName="WorldNotification"
+  ObjCategory="TSFunctions"
 
-	sMessage="Hello world"
-	bCallHandler=false
-	//HandlerName="StartFuelDropRun"
-	
+  sMessage="Hello world"
+  bCallHandler=false
+  //HandlerName="StartFuelDropRun"
+  
 }
 
 

@@ -1090,15 +1090,15 @@ defaultProperties
   
   // Cache block
   begin object class=UI_Sprite Name=Sprite_Cacher
-		tag="Sprite_Cacher"
+    tag="Sprite_Cacher"
     bEnabled=true
     posX=-50
     posY=-50
     posXEnd=-49
     posYend=-49
-		images(0)=none
-	end object
-	uiComponents.add(Sprite_Cacher)
+    images(0)=none
+  end object
+  uiComponents.add(Sprite_Cacher)
   
 }
 

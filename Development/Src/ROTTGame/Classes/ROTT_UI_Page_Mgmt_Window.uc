@@ -225,13 +225,13 @@ protected function setSecondarySkill
 defaultProperties
 {
   // Culling
-	cullTags.add("Game_Menu_Selector")
+  cullTags.add("Game_Menu_Selector")
   
   /** ===== Input ===== **/
-	begin object class=ROTT_Input_Handler Name=Input_B  
+  begin object class=ROTT_Input_Handler Name=Input_B  
     inputName="XBoxTypeS_B"
     buttonComponent=none
-	end object
+  end object
   inputList.add(Input_B)
   
   /** ===== Textures ===== **/
@@ -242,178 +242,178 @@ defaultProperties
   
   /** ===== UI Components ===== **/
   // Window mgmt background
-	begin object class=UI_Sprite Name=Mgmt_Window_Background
-		tag="Mgmt_Window_Background"
+  begin object class=UI_Sprite Name=Mgmt_Window_Background
+    tag="Mgmt_Window_Background"
     posX=0
     posY=0
-		images(0)=Mgmt_Window_Default
-	end object
-	componentList.add(Mgmt_Window_Background)
+    images(0)=Mgmt_Window_Default
+  end object
+  componentList.add(Mgmt_Window_Background)
   
   // Mgmt Window - Title Label
-	begin object class=UI_Label Name=Mgmt_Window_Label_0
-		tag="Mgmt_Window_Label_0"
-		posX=0
-		posY=112
-		posXEnd=720
-		posYEnd=NATIVE_HEIGHT
-		AlignX=CENTER
-		AlignY=TOP
-		labelText=""
-	end object
-	componentList.add(Mgmt_Window_Label_0)
-	
+  begin object class=UI_Label Name=Mgmt_Window_Label_0
+    tag="Mgmt_Window_Label_0"
+    posX=0
+    posY=112
+    posXEnd=720
+    posYEnd=NATIVE_HEIGHT
+    AlignX=CENTER
+    AlignY=TOP
+    labelText=""
+  end object
+  componentList.add(Mgmt_Window_Label_0)
+  
   // Mgmt Window - Description Labels
-	begin object class=UI_Label Name=Mgmt_Window_Label_1
-		tag="Mgmt_Window_Label_1"
-		posX=0
-		posY=151
-		posXEnd=720
-		posYEnd=NATIVE_HEIGHT
-		AlignX=CENTER
-		AlignY=TOP
-		labelText=""
-	end object
-	componentList.add(Mgmt_Window_Label_1)
-	
-	begin object class=UI_Label Name=Mgmt_Window_Label_2
-		tag="Mgmt_Window_Label_2"
-		posX=0
-		posY=189
-		posXEnd=720
-		posYEnd=NATIVE_HEIGHT
-		AlignX=CENTER
-		AlignY=TOP
-		labelText=""
-	end object
-	componentList.add(Mgmt_Window_Label_2)
-	
-	begin object class=UI_Label Name=Mgmt_Window_Label_3
-		tag="Mgmt_Window_Label_3"
-		posX=0
-		posY=216
-		posXEnd=720
-		posYEnd=NATIVE_HEIGHT
-		AlignX=CENTER
-		AlignY=TOP
-		labelText=""
-	end object
-	componentList.add(Mgmt_Window_Label_3)
-	
-	begin object class=UI_Label Name=Mgmt_Window_Label_4
-		tag="Mgmt_Window_Label_4"
-		posX=0
-		posY=243
-		posXEnd=720
-		posYEnd=NATIVE_HEIGHT
-		AlignX=CENTER
-		AlignY=TOP
-		labelText=""
-	end object
-	componentList.add(Mgmt_Window_Label_4)
-	
-	begin object class=UI_Label Name=Mgmt_Window_Label_5
-		tag="Mgmt_Window_Label_5"
-		posX=0
-		posY=297
-		posXEnd=720
-		posYEnd=NATIVE_HEIGHT
-		AlignX=CENTER
-		AlignY=TOP
-		labelText="Skill Level: 1"
-	end object
-	componentList.add(Mgmt_Window_Label_5)
-	
-	begin object class=UI_Label Name=Mgmt_Window_Label_6
-		tag="Mgmt_Window_Label_6"
-		posX=0
-		posY=324
-		posXEnd=720
-		posYEnd=NATIVE_HEIGHT
-		AlignX=CENTER
-		AlignY=TOP
-		labelText="Mana Cost: 5"
-	end object
-	componentList.add(Mgmt_Window_Label_6)
-	
-	begin object class=UI_Label Name=Mgmt_Window_Label_7
-		tag="Mgmt_Window_Label_7"
-		posX=0
-		posY=351
-		posXEnd=720
-		posYEnd=NATIVE_HEIGHT
-		AlignX=CENTER
-		AlignY=TOP
-		labelText="Damage: 1 - 3"
-	end object
-	componentList.add(Mgmt_Window_Label_7)
-	
-	begin object class=UI_Label Name=Mgmt_Window_Label_8
-		tag="Mgmt_Window_Label_8"
-		posX=0
-		posY=378
-		posXEnd=720
-		posYEnd=NATIVE_HEIGHT
-		AlignX=CENTER
-		AlignY=TOP
-		labelText="Critical Srike: 5%"
-	end object
-	componentList.add(Mgmt_Window_Label_8)
-	
-	begin object class=UI_Label Name=Mgmt_Window_Label_9
-		tag="Mgmt_Window_Label_9"
-		posX=0
-		posY=423
-		posXEnd=720
-		posYEnd=NATIVE_HEIGHT
-		AlignX=CENTER
-		AlignY=TOP
-		labelText="Next Level"
-	end object
-	componentList.add(Mgmt_Window_Label_9)
-	
-	begin object class=UI_Label Name=Mgmt_Window_Label_10
-		tag="Mgmt_Window_Label_10"
-		posX=0
-		posY=450
-		posXEnd=720
-		posYEnd=NATIVE_HEIGHT
-		AlignX=CENTER
-		AlignY=TOP
-		labelText="Mana Cost: 6"
-	end object
-	componentList.add(Mgmt_Window_Label_10)
-	
-	begin object class=UI_Label Name=Mgmt_Window_Label_11
-		tag="Mgmt_Window_Label_11"
-		posX=0
-		posY=477
-		posXEnd=720
-		posYEnd=NATIVE_HEIGHT
-		AlignX=CENTER
-		AlignY=TOP
-		labelText="Damage: 4 - 9"
-	end object
-	componentList.add(Mgmt_Window_Label_11)
-	
-	begin object class=UI_Label Name=Mgmt_Window_Label_12
-		tag="Mgmt_Window_Label_12"
-		posX=0
-		posY=504
-		posXEnd=720
-		posYEnd=NATIVE_HEIGHT
-		AlignX=CENTER
-		AlignY=TOP
-		labelText="Critical Chance: 10%"
-	end object
-	componentList.add(Mgmt_Window_Label_12)
-	
+  begin object class=UI_Label Name=Mgmt_Window_Label_1
+    tag="Mgmt_Window_Label_1"
+    posX=0
+    posY=151
+    posXEnd=720
+    posYEnd=NATIVE_HEIGHT
+    AlignX=CENTER
+    AlignY=TOP
+    labelText=""
+  end object
+  componentList.add(Mgmt_Window_Label_1)
+  
+  begin object class=UI_Label Name=Mgmt_Window_Label_2
+    tag="Mgmt_Window_Label_2"
+    posX=0
+    posY=189
+    posXEnd=720
+    posYEnd=NATIVE_HEIGHT
+    AlignX=CENTER
+    AlignY=TOP
+    labelText=""
+  end object
+  componentList.add(Mgmt_Window_Label_2)
+  
+  begin object class=UI_Label Name=Mgmt_Window_Label_3
+    tag="Mgmt_Window_Label_3"
+    posX=0
+    posY=216
+    posXEnd=720
+    posYEnd=NATIVE_HEIGHT
+    AlignX=CENTER
+    AlignY=TOP
+    labelText=""
+  end object
+  componentList.add(Mgmt_Window_Label_3)
+  
+  begin object class=UI_Label Name=Mgmt_Window_Label_4
+    tag="Mgmt_Window_Label_4"
+    posX=0
+    posY=243
+    posXEnd=720
+    posYEnd=NATIVE_HEIGHT
+    AlignX=CENTER
+    AlignY=TOP
+    labelText=""
+  end object
+  componentList.add(Mgmt_Window_Label_4)
+  
+  begin object class=UI_Label Name=Mgmt_Window_Label_5
+    tag="Mgmt_Window_Label_5"
+    posX=0
+    posY=297
+    posXEnd=720
+    posYEnd=NATIVE_HEIGHT
+    AlignX=CENTER
+    AlignY=TOP
+    labelText="Skill Level: 1"
+  end object
+  componentList.add(Mgmt_Window_Label_5)
+  
+  begin object class=UI_Label Name=Mgmt_Window_Label_6
+    tag="Mgmt_Window_Label_6"
+    posX=0
+    posY=324
+    posXEnd=720
+    posYEnd=NATIVE_HEIGHT
+    AlignX=CENTER
+    AlignY=TOP
+    labelText="Mana Cost: 5"
+  end object
+  componentList.add(Mgmt_Window_Label_6)
+  
+  begin object class=UI_Label Name=Mgmt_Window_Label_7
+    tag="Mgmt_Window_Label_7"
+    posX=0
+    posY=351
+    posXEnd=720
+    posYEnd=NATIVE_HEIGHT
+    AlignX=CENTER
+    AlignY=TOP
+    labelText="Damage: 1 - 3"
+  end object
+  componentList.add(Mgmt_Window_Label_7)
+  
+  begin object class=UI_Label Name=Mgmt_Window_Label_8
+    tag="Mgmt_Window_Label_8"
+    posX=0
+    posY=378
+    posXEnd=720
+    posYEnd=NATIVE_HEIGHT
+    AlignX=CENTER
+    AlignY=TOP
+    labelText="Critical Srike: 5%"
+  end object
+  componentList.add(Mgmt_Window_Label_8)
+  
+  begin object class=UI_Label Name=Mgmt_Window_Label_9
+    tag="Mgmt_Window_Label_9"
+    posX=0
+    posY=423
+    posXEnd=720
+    posYEnd=NATIVE_HEIGHT
+    AlignX=CENTER
+    AlignY=TOP
+    labelText="Next Level"
+  end object
+  componentList.add(Mgmt_Window_Label_9)
+  
+  begin object class=UI_Label Name=Mgmt_Window_Label_10
+    tag="Mgmt_Window_Label_10"
+    posX=0
+    posY=450
+    posXEnd=720
+    posYEnd=NATIVE_HEIGHT
+    AlignX=CENTER
+    AlignY=TOP
+    labelText="Mana Cost: 6"
+  end object
+  componentList.add(Mgmt_Window_Label_10)
+  
+  begin object class=UI_Label Name=Mgmt_Window_Label_11
+    tag="Mgmt_Window_Label_11"
+    posX=0
+    posY=477
+    posXEnd=720
+    posYEnd=NATIVE_HEIGHT
+    AlignX=CENTER
+    AlignY=TOP
+    labelText="Damage: 4 - 9"
+  end object
+  componentList.add(Mgmt_Window_Label_11)
+  
+  begin object class=UI_Label Name=Mgmt_Window_Label_12
+    tag="Mgmt_Window_Label_12"
+    posX=0
+    posY=504
+    posXEnd=720
+    posYEnd=NATIVE_HEIGHT
+    AlignX=CENTER
+    AlignY=TOP
+    labelText="Critical Chance: 10%"
+  end object
+  componentList.add(Mgmt_Window_Label_12)
+  
   // Mgmt Window Selection Box
-	begin object class=UI_Selector Name=Mgmt_Window_Selection_Box
-		tag="Mgmt_Window_Selection_Box"
+  begin object class=UI_Selector Name=Mgmt_Window_Selection_Box
+    tag="Mgmt_Window_Selection_Box"
     bEnabled=false
-		posX=144
-		posY=552
+    posX=144
+    posY=552
     selectionOffset=(x=0,y=80)
     numberOfMenuOptions=3
     
@@ -431,8 +431,8 @@ defaultProperties
     end object
     componentList.add(Selector_Sprite)
     
-	end object
-	componentList.add(Mgmt_Window_Selection_Box)
+  end object
+  componentList.add(Mgmt_Window_Selection_Box)
   
 }
   

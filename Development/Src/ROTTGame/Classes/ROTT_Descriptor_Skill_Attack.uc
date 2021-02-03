@@ -75,31 +75,31 @@ defaultProperties
   skillAttributes.add((attributeSet=COMBAT_ACTION_SET,mechanicType=PHYSICAL_DAMAGE_MAX,tag="%max",font=DEFAULT_SMALL_ORANGE,returnType=INTEGER));
   
   // Skill Animation
-	begin object class=UI_Texture_Info Name=SkillAnim_Attack_A1
+  begin object class=UI_Texture_Info Name=SkillAnim_Attack_A1
     componentTextures.add(Texture2D'GUI_Skills.SkillAnim_Attack_A1')
   end object
-	begin object class=UI_Texture_Info Name=SkillAnim_Attack_A2
+  begin object class=UI_Texture_Info Name=SkillAnim_Attack_A2
     componentTextures.add(Texture2D'GUI_Skills.SkillAnim_Attack_A2')
   end object
-	begin object class=UI_Texture_Info Name=SkillAnim_Attack_A3
+  begin object class=UI_Texture_Info Name=SkillAnim_Attack_A3
     componentTextures.add(Texture2D'GUI_Skills.SkillAnim_Attack_A3')
   end object
-	begin object class=UI_Texture_Info Name=SkillAnim_Attack_A4
+  begin object class=UI_Texture_Info Name=SkillAnim_Attack_A4
     componentTextures.add(Texture2D'GUI_Skills.SkillAnim_Attack_A4')
   end object
   
   // Skill Animation Container
-	begin object class=UI_Texture_Storage Name=Skill_Animation_Container
-		tag="Skill_Animation_Container"
+  begin object class=UI_Texture_Storage Name=Skill_Animation_Container
+    tag="Skill_Animation_Container"
     textureWidth=240
     textureHeight=240
-		images(0)=SkillAnim_Attack_A1
-		images(1)=SkillAnim_Attack_A2
-		images(2)=SkillAnim_Attack_A3
-		images(3)=SkillAnim_Attack_A4
-	end object
+    images(0)=SkillAnim_Attack_A1
+    images(1)=SkillAnim_Attack_A2
+    images(2)=SkillAnim_Attack_A3
+    images(3)=SkillAnim_Attack_A4
+  end object
   skillAnim=Skill_Animation_Container
-	
+  
   
 }
 

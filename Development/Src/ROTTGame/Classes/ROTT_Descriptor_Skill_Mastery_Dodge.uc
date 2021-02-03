@@ -75,81 +75,81 @@ protected function float attributeInfo
  * requirement()
  *===========================================================================
 private function int requirement() {
-	local int req, ReqTotal, i, j;
-	local float k;
-	
-	ReqTotal = 32;
-	k = 1.1;
-	
-	for (i = 0; i < level; i++)	{
-		k = k * 1.007;
-		k = k + 0.14;
+  local int req, ReqTotal, i, j;
+  local float k;
+  
+  ReqTotal = 32;
+  k = 1.1;
+  
+  for (i = 0; i < level; i++)  {
+    k = k * 1.007;
+    k = k + 0.14;
 
-		ReqTotal = round(ReqTotal * k);
-		
-		req = round(ReqTotal * (a/b));
-		
-		if (req % 5 != 0 && req % 2 != 0) {
-      req++;		
+    ReqTotal = round(ReqTotal * k);
+    
+    req = round(ReqTotal * (a/b));
+    
+    if (req % 5 != 0 && req % 2 != 0) {
+      req++;    
       k = k + 0.013;
-		}
-	}
-	
-	return req;
+    }
+  }
+  
+  return req;
 }*/
 
 /*=============================================================================
  * getStats()
  *===========================================================================*/
 private function int getStats(string StatType, int level) {
-	local int iStat, iReq1, iReq2, ReqTotal, i, j;
-	local float k;
-	
-	if (level == 0) return 0;
-	
-	iStat = 0;
-	ReqTotal = 32;
-	j = 18;
-	k = 1.1;
-	
-	for (i = 0; i < level; i++)	{
-		k = k * 1.007;
-		k = k + 0.14;
+  local int iStat, iReq1, iReq2, ReqTotal, i, j;
+  local float k;
+  
+  if (level == 0) return 0;
+  
+  iStat = 0;
+  ReqTotal = 32;
+  j = 18;
+  k = 1.1;
+  
+  for (i = 0; i < level; i++)  {
+    k = k * 1.007;
+    k = k + 0.14;
 
-		ReqTotal = round(ReqTotal * k);
-		
-		iReq1 = round(ReqTotal * (2.0/3.0));
-		iReq2 = round(ReqTotal * (1.0/3.0));
-		
-		
-		if (iReq1 % 5 != 0 && iReq1%2 != 0 )
-		{
-			do
-			{
-				iReq1 = iReq1 + 1;		
-				k = k + 0.013;				
-			} until (iReq1%5 == 0 || iReq1%2 == 0);
-		}
+    ReqTotal = round(ReqTotal * k);
     
-		if (iReq2 % 5 != 0 && iReq2%2 != 0 )
-		{
-			do
-			{
-				iReq2 = iReq2 + 1;			
-				k = k + 0.013;
-			} until (iReq2%5 == 0 || iReq2%2 == 0);
-		}
-		
-		j = j + (5 * i) + 6;
-		iStat = iStat + j;
-	}
-	
-	
-	switch (StatType)	{
-		case "Stat":		  return iStat;
-		case "Req1":			return iReq1;
-		case "Req2":			return iReq2;
-	}
+    iReq1 = round(ReqTotal * (2.0/3.0));
+    iReq2 = round(ReqTotal * (1.0/3.0));
+    
+    
+    if (iReq1 % 5 != 0 && iReq1%2 != 0 )
+    {
+      do
+      {
+        iReq1 = iReq1 + 1;    
+        k = k + 0.013;        
+      } until (iReq1%5 == 0 || iReq1%2 == 0);
+    }
+    
+    if (iReq2 % 5 != 0 && iReq2%2 != 0 )
+    {
+      do
+      {
+        iReq2 = iReq2 + 1;      
+        k = k + 0.013;
+      } until (iReq2%5 == 0 || iReq2%2 == 0);
+    }
+    
+    j = j + (5 * i) + 6;
+    iStat = iStat + j;
+  }
+  
+  
+  switch (StatType)  {
+    case "Stat":      return iStat;
+    case "Req1":      return iReq1;
+    case "Req2":      return iReq2;
+  }
 }
 
 /*=============================================================================
@@ -168,69 +168,69 @@ defaultProperties
 }
 
 //function int j() {
-//	local int iStat, i, j;
-//	
-//	iStat = 0;
-//	j = 18;
-//	
-//	for (i = 0; i < level; i++)	{
-//		j += (5 * i) + 6;
-//		iStat += j;
-//	}
-//	
-//	return iStat;
+//  local int iStat, i, j;
+//  
+//  iStat = 0;
+//  j = 18;
+//  
+//  for (i = 0; i < level; i++)  {
+//    j += (5 * i) + 6;
+//    iStat += j;
+//  }
+//  
+//  return iStat;
 //}
 
 /*
 function int GetUniDodge(string StatType, int level) {
-	local int iStat, iReq1, iReq2, ReqTotal, i, j;
-	local float k;
-	
-	if (level == 0) return 0;
-	
-	iStat = 0;
-	ReqTotal = 32;
-	j = 18;
-	k = 1.1;
-	
-	for (i = 0; i < level; i++)	{
-		k = k * 1.007;
-		k = k + 0.14;
+  local int iStat, iReq1, iReq2, ReqTotal, i, j;
+  local float k;
+  
+  if (level == 0) return 0;
+  
+  iStat = 0;
+  ReqTotal = 32;
+  j = 18;
+  k = 1.1;
+  
+  for (i = 0; i < level; i++)  {
+    k = k * 1.007;
+    k = k + 0.14;
 
-		ReqTotal = round(ReqTotal * k);
-		
-		iReq1 = round(ReqTotal * (2.0/3.0));
-		iReq2 = round(ReqTotal * (1.0/3.0));
-		
-		
-		if (iReq1 % 5 != 0 && iReq1%2 != 0 )
-		{
-			do
-			{
-				iReq1 = iReq1 + 1;		
-				k = k + 0.013;				
-			} until (iReq1%5 == 0 || iReq1%2 == 0);
-		}
+    ReqTotal = round(ReqTotal * k);
     
-		if (iReq2 % 5 != 0 && iReq2%2 != 0 )
-		{
-			do
-			{
-				iReq2 = iReq2 + 1;			
-				k = k + 0.013;
-			} until (iReq2%5 == 0 || iReq2%2 == 0);
-		}
-		
-		j = j + (5 * i) + 6;
-		iStat = iStat + j;
-	}
-	
-	
-	switch (StatType)	{
-		case "Stat":		  return iStat;
-		case "Req1":			return iReq1;
-		case "Req2":			return iReq2;
-	}
+    iReq1 = round(ReqTotal * (2.0/3.0));
+    iReq2 = round(ReqTotal * (1.0/3.0));
+    
+    
+    if (iReq1 % 5 != 0 && iReq1%2 != 0 )
+    {
+      do
+      {
+        iReq1 = iReq1 + 1;    
+        k = k + 0.013;        
+      } until (iReq1%5 == 0 || iReq1%2 == 0);
+    }
+    
+    if (iReq2 % 5 != 0 && iReq2%2 != 0 )
+    {
+      do
+      {
+        iReq2 = iReq2 + 1;      
+        k = k + 0.013;
+      } until (iReq2%5 == 0 || iReq2%2 == 0);
+    }
+    
+    j = j + (5 * i) + 6;
+    iStat = iStat + j;
+  }
+  
+  
+  switch (StatType)  {
+    case "Stat":      return iStat;
+    case "Req1":      return iReq1;
+    case "Req2":      return iReq2;
+  }
 }
 */
 

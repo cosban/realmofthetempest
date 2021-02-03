@@ -479,122 +479,122 @@ event deleteComp() {
  *===========================================================================*/
 defaultProperties
 {
-	/** ===== Input ===== **/
-	begin object class=ROTT_Input_Handler Name=Input_A
+  /** ===== Input ===== **/
+  begin object class=ROTT_Input_Handler Name=Input_A
     inputName="XBoxTypeS_A"
-		buttonComponent=none
-	end object
+    buttonComponent=none
+  end object
   inputList.add(Input_A)
   
-	/** ===== Textures ===== **/
+  /** ===== Textures ===== **/
   // Buttons
-	begin object class=UI_Texture_Info Name=Combat_Action_Button_Wide
+  begin object class=UI_Texture_Info Name=Combat_Action_Button_Wide
     componentTextures.add(Texture2D'GUI.Combat_Action_Button_Wide')
   end object
-	begin object class=UI_Texture_Info Name=Combat_Action_Button_Wide_Down
+  begin object class=UI_Texture_Info Name=Combat_Action_Button_Wide_Down
     componentTextures.add(Texture2D'GUI.Combat_Action_Button_Wide_Down')
   end object
   
-	begin object class=UI_Texture_Info Name=Combat_Action_Skill
+  begin object class=UI_Texture_Info Name=Combat_Action_Skill
     componentTextures.add(Texture2D'GUI.Combat_Action_Skill')
   end object
-	begin object class=UI_Texture_Info Name=Combat_Action_Skill_Down
+  begin object class=UI_Texture_Info Name=Combat_Action_Skill_Down
     componentTextures.add(Texture2D'GUI.Combat_Action_Skill_Down')
   end object
   
   // Button Text (Icons)
-	begin object class=UI_Texture_Info Name=Combat_Action_Attack_Text
+  begin object class=UI_Texture_Info Name=Combat_Action_Attack_Text
     componentTextures.add(Texture2D'GUI.Combat_Action_Attack_Text')
   end object
-	begin object class=UI_Texture_Info Name=Combat_Action_Defend_Text
+  begin object class=UI_Texture_Info Name=Combat_Action_Defend_Text
     componentTextures.add(Texture2D'GUI.Combat_Action_Defend_Text')
   end object
   
   // Attack Button
-	begin object class=UI_Sprite Name=Action_Attack_Button
-		tag="Action_Attack_Button"
+  begin object class=UI_Sprite Name=Action_Attack_Button
+    tag="Action_Attack_Button"
     posX=51
     posY=621
-		images(0)=Combat_Action_Button_Wide
-		images(1)=Combat_Action_Button_Wide
-		images(2)=Combat_Action_Button_Wide_Down
-	end object
-	componentList.add(Action_Attack_Button)
+    images(0)=Combat_Action_Button_Wide
+    images(1)=Combat_Action_Button_Wide
+    images(2)=Combat_Action_Button_Wide_Down
+  end object
+  componentList.add(Action_Attack_Button)
   
   // Defend Button
-	begin object class=UI_Sprite Name=Action_Defend_Button
-		tag="Action_Defend_Button"
+  begin object class=UI_Sprite Name=Action_Defend_Button
+    tag="Action_Defend_Button"
     posX=51
     posY=738
-		images(0)=Combat_Action_Button_Wide
-		images(1)=Combat_Action_Button_Wide
-		images(2)=Combat_Action_Button_Wide_Down
-	end object
-	componentList.add(Action_Defend_Button)
+    images(0)=Combat_Action_Button_Wide
+    images(1)=Combat_Action_Button_Wide
+    images(2)=Combat_Action_Button_Wide_Down
+  end object
+  componentList.add(Action_Defend_Button)
   
   // Attack text
-	begin object class=UI_Sprite Name=Action_Attack_Button_Text
-		tag="Action_Attack_Button_Text"
+  begin object class=UI_Sprite Name=Action_Attack_Button_Text
+    tag="Action_Attack_Button_Text"
     posX=51
     posY=621
-		images(0)=Combat_Action_Attack_Text
-	end object
-	componentList.add(Action_Attack_Button_Text)
+    images(0)=Combat_Action_Attack_Text
+  end object
+  componentList.add(Action_Attack_Button_Text)
   
   // Defend text
-	begin object class=UI_Sprite Name=Action_Defend_Button_Text
-		tag="Action_Defend_Button_Text"
+  begin object class=UI_Sprite Name=Action_Defend_Button_Text
+    tag="Action_Defend_Button_Text"
     posX=51
     posY=738
-		images(0)=Combat_Action_Defend_Text
-	end object
-	componentList.add(Action_Defend_Button_Text)
+    images(0)=Combat_Action_Defend_Text
+  end object
+  componentList.add(Action_Defend_Button_Text)
   
   // Skill Button - Primary
-	begin object class=UI_Sprite Name=Action_Skill_Button_Primary
-		tag="Action_Skill_Button_Primary"
+  begin object class=UI_Sprite Name=Action_Skill_Button_Primary
+    tag="Action_Skill_Button_Primary"
     posX=240
     posY=621
-		images(0)=Combat_Action_Skill
-		images(1)=Combat_Action_Skill
-		images(2)=Combat_Action_Skill_Down
-	end object
-	componentList.add(Action_Skill_Button_Primary)
+    images(0)=Combat_Action_Skill
+    images(1)=Combat_Action_Skill
+    images(2)=Combat_Action_Skill_Down
+  end object
+  componentList.add(Action_Skill_Button_Primary)
   
   // Skill Button - Secondary
-	begin object class=UI_Sprite Name=Action_Skill_Button_Secondary
-		tag="Action_Skill_Button_Secondary"
+  begin object class=UI_Sprite Name=Action_Skill_Button_Secondary
+    tag="Action_Skill_Button_Secondary"
     posX=240
     posY=738
-		images(0)=Combat_Action_Skill
-		images(1)=Combat_Action_Skill
-		images(2)=Combat_Action_Skill_Down
-	end object
-	componentList.add(Action_Skill_Button_Secondary)
+    images(0)=Combat_Action_Skill
+    images(1)=Combat_Action_Skill
+    images(2)=Combat_Action_Skill_Down
+  end object
+  componentList.add(Action_Skill_Button_Secondary)
   
   // Skill Icon - Primary
-	begin object class=UI_Sprite Name=Action_Skill_Icon_Primary
-		tag="Action_Skill_Icon_Primary"
+  begin object class=UI_Sprite Name=Action_Skill_Icon_Primary
+    tag="Action_Skill_Icon_Primary"
     posX=246
     posY=627
-		images(0)=Combat_Action_Skill
-	end object
-	componentList.add(Action_Skill_Icon_Primary)
+    images(0)=Combat_Action_Skill
+  end object
+  componentList.add(Action_Skill_Icon_Primary)
   
   // Skill Icon - Secondary
-	begin object class=UI_Sprite Name=Action_Skill_Icon_Secondary
-		tag="Action_Skill_Icon_Secondary"
+  begin object class=UI_Sprite Name=Action_Skill_Icon_Secondary
+    tag="Action_Skill_Icon_Secondary"
     posX=246
     posY=744
-		images(0)=Combat_Action_Skill
-	end object
-	componentList.add(Action_Skill_Icon_Secondary)
+    images(0)=Combat_Action_Skill
+  end object
+  componentList.add(Action_Skill_Icon_Secondary)
   
   
   /**
   // Large Selector
-	begin object class=UI_Selector Name=Selector_Large
-		tag="Selector_Large"
+  begin object class=UI_Selector Name=Selector_Large
+    tag="Selector_Large"
     bDrawRelative=true
     posX=46
     posY=617
@@ -616,12 +616,12 @@ defaultProperties
     end object
     componentList.add(Selector_Sprite)
     
-	end object
-	componentList.add(Selector_Large)
+  end object
+  componentList.add(Selector_Large)
   
   // Small Selector
-	begin object class=UI_Selector Name=Selector_Small
-		tag="Selector_Small"
+  begin object class=UI_Selector Name=Selector_Small
+    tag="Selector_Small"
     bDrawRelative=true
     posX=236
     posY=617
@@ -643,14 +643,14 @@ defaultProperties
     end object
     componentList.add(Selector_Sprite)
     
-	end object
-	componentList.add(Selector_Small)
+  end object
+  componentList.add(Selector_Small)
   
   **/
   
   // Large Selector
-	begin object class=UI_Selector Name=Action_Selector
-		tag="Action_Selector"
+  begin object class=UI_Selector Name=Action_Selector
+    tag="Action_Selector"
     bDrawRelative=true
     bWrapAround=false
     posX=46
@@ -679,8 +679,8 @@ defaultProperties
     end object
     componentList.add(Selector_Sprite)
     
-	end object
-	componentList.add(Action_Selector)
+  end object
+  componentList.add(Action_Selector)
   
 }
 
