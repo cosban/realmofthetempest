@@ -1,13 +1,14 @@
 /*=============================================================================
- * ROTT_Descriptor_Skill_Hyper_Armor
+ * ROTT_Descriptor_Skill_Hyper_Dodge
  *
  * Author: Otay
  * Bramble Gate Studios (All rights reserved)
  *
- * This is a glyph skill, collected in combat to provide armor boost.
+ * Hyper glyph providing permanent Dodge boosts, and temporary damage reduction
+ * by percent
  *===========================================================================*/
 
-class ROTT_Descriptor_Skill_Hyper_Armor extends ROTT_Descriptor_Hero_Skill;
+class ROTT_Descriptor_Skill_Hyper_Dodge extends ROTT_Descriptor_Hero_Skill;
  
 /**
 # Ratings
@@ -20,7 +21,7 @@ class ROTT_Descriptor_Skill_Hyper_Armor extends ROTT_Descriptor_Hero_Skill;
   '4 shrines'
     "Cleric's Shrine"        - Health glyph, Tome             // All glyphs here correspond to % chance
     "Cobalt Sanctum"         - Armor% glyph, Hp/mp% glyph
-    "The Rosette Pillars"    - Gems, Reflect glyph
+    "The Rosette Pillars"    - Gems, Dodge glyph
     "Lockspire Shrine"       - Damage% glyph, Herb
     
 # Hunt a monster
@@ -39,7 +40,7 @@ class ROTT_Descriptor_Skill_Hyper_Armor extends ROTT_Descriptor_Hero_Skill;
     "Myrrhian Thicket"       - Eluvi Charm, Leech glyph
       https://en.wikipedia.org/wiki/Myrrh
 **/
-    
+
 /*=============================================================================
  * initialize()
  *
@@ -49,7 +50,7 @@ class ROTT_Descriptor_Skill_Hyper_Armor extends ROTT_Descriptor_Hero_Skill;
 public function setUI() {
   // Set header
   h1(
-    "Hyper Armor",
+    "Hyper Dodge",
   );
   
   // Set header
@@ -67,8 +68,8 @@ public function setUI() {
   // Set skill information for p2 and p3
   skillInfo(      
     "Chance to spawn: %spawn%",
-    "+%%dr Damage Reduction per Glyph",
-    ""
+    "+%permDodge Permanent Dodge Rating",
+    "+%%maxDodge Dodge Rating"
   );
 }
 
@@ -109,12 +110,13 @@ protected function float attributeInfo
 defaultProperties 
 {
   // Level lookup info
-  skillIndex=GLYPH_TREE_ARMOR
+  skillIndex=GLYPH_TREE_Dodge
   parentTree=HYPER_TREE
   
   // Glyph Attributes
   skillAttributes.add((attributeSet=GLYPH_SET,mechanicType=HYPER_SPAWN_CHANCE,tag="%spawn",font=DEFAULT_SMALL_BLUE,returnType=INTEGER));
-  skillAttributes.add((attributeSet=GLYPH_SET,mechanicType=HYPER_ARMOR_BOOST,tag="%dr",font=DEFAULT_SMALL_GREEN,returnType=INTEGER));
+  skillAttributes.add((attributeSet=GLYPH_SET,mechanicType=HYPER_ARMOR_BOOST,tag="%permDodge",font=DEFAULT_SMALL_GREEN,returnType=INTEGER));
+  skillAttributes.add((attributeSet=GLYPH_SET,mechanicType=HYPER_ARMOR_BOOST,tag="%maxDodge",font=DEFAULT_SMALL_GREEN,returnType=INTEGER));
   
 }
 

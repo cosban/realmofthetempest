@@ -4,11 +4,12 @@
  * Author: Otay
  * Bramble Gate Studios (All rights reserved)
  *
- * This is a glyph skill, collected in combat to provide armor boost.
+ * Hyper glyph providing permanent armor boosts, and temporary damage reduction
+ * by percent
  *===========================================================================*/
 
 class ROTT_Descriptor_Skill_Hyper_Armor extends ROTT_Descriptor_Hero_Skill;
- 
+
 /**
 # Ratings
   'Spiritual Prowess'   hyper glyph intensity++ when worshipping AT ANY SHRINE
@@ -39,6 +40,7 @@ class ROTT_Descriptor_Skill_Hyper_Armor extends ROTT_Descriptor_Hero_Skill;
     "Myrrhian Thicket"       - Eluvi Charm, Leech glyph
       https://en.wikipedia.org/wiki/Myrrh
 **/
+
     
 /*=============================================================================
  * initialize()
@@ -67,8 +69,8 @@ public function setUI() {
   // Set skill information for p2 and p3
   skillInfo(      
     "Chance to spawn: %spawn%",
-    "+%%dr Damage Reduction per Glyph",
-    ""
+    "+%permArmor Permanent Armor",
+    "+%%dr Damage Reduction"
   );
 }
 
@@ -114,6 +116,7 @@ defaultProperties
   
   // Glyph Attributes
   skillAttributes.add((attributeSet=GLYPH_SET,mechanicType=HYPER_SPAWN_CHANCE,tag="%spawn",font=DEFAULT_SMALL_BLUE,returnType=INTEGER));
+  skillAttributes.add((attributeSet=GLYPH_SET,mechanicType=HYPER_ARMOR_BOOST,tag="%permArmor",font=DEFAULT_SMALL_GREEN,returnType=INTEGER));
   skillAttributes.add((attributeSet=GLYPH_SET,mechanicType=HYPER_ARMOR_BOOST,tag="%dr",font=DEFAULT_SMALL_GREEN,returnType=INTEGER));
   
 }

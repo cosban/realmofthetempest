@@ -1,5 +1,5 @@
 /*=============================================================================
- * ROTT_Descriptor_Skill_Hyper_Armor
+ * ROTT_Descriptor_Skill_Hyper_Mana
  *
  * Author: Otay
  * Bramble Gate Studios (All rights reserved)
@@ -7,7 +7,7 @@
  * This is a glyph skill, collected in combat to provide armor boost.
  *===========================================================================*/
 
-class ROTT_Descriptor_Skill_Hyper_Armor extends ROTT_Descriptor_Hero_Skill;
+class ROTT_Descriptor_Skill_Hyper_Mana extends ROTT_Descriptor_Hero_Skill;
  
 /**
 # Ratings
@@ -49,7 +49,7 @@ class ROTT_Descriptor_Skill_Hyper_Armor extends ROTT_Descriptor_Hero_Skill;
 public function setUI() {
   // Set header
   h1(
-    "Hyper Armor",
+    "Hyper Mana",
   );
   
   // Set header
@@ -67,8 +67,8 @@ public function setUI() {
   // Set skill information for p2 and p3
   skillInfo(      
     "Chance to spawn: %spawn%",
-    "+%%dr Damage Reduction per Glyph",
-    ""
+    "+%%eleDmg Permanent Elemental Damage",
+    "+%%maxMp Mana Pool"
   );
 }
 
@@ -109,12 +109,13 @@ protected function float attributeInfo
 defaultProperties 
 {
   // Level lookup info
-  skillIndex=GLYPH_TREE_ARMOR
+  skillIndex=GLYPH_TREE_MANA
   parentTree=HYPER_TREE
   
   // Glyph Attributes
   skillAttributes.add((attributeSet=GLYPH_SET,mechanicType=HYPER_SPAWN_CHANCE,tag="%spawn",font=DEFAULT_SMALL_BLUE,returnType=INTEGER));
-  skillAttributes.add((attributeSet=GLYPH_SET,mechanicType=HYPER_ARMOR_BOOST,tag="%dr",font=DEFAULT_SMALL_GREEN,returnType=INTEGER));
+  skillAttributes.add((attributeSet=GLYPH_SET,mechanicType=HYPER_ARMOR_BOOST,tag="%eleDmg",font=DEFAULT_SMALL_GREEN,returnType=INTEGER));
+  skillAttributes.add((attributeSet=GLYPH_SET,mechanicType=HYPER_ARMOR_BOOST,tag="%maxMp",font=DEFAULT_SMALL_GREEN,returnType=INTEGER));
   
 }
 

@@ -81,8 +81,37 @@ public function refresh() {
   hero = gameInfo.playerProfile.getActiveParty().getHero(0);
   
   switch (treeSelector.getSelection()) {
+    case 0:
+      descriptor = gameInfo.playerProfile.hyperSkills.getScript(GLYPH_TREE_HEALTH, hero);
+      ROTT_UI_Scene_Game_Menu(parentScene).setMgmtDescriptor(descriptor);
+      break;
     case 1:
       descriptor = gameInfo.playerProfile.hyperSkills.getScript(GLYPH_TREE_ARMOR, hero);
+      ROTT_UI_Scene_Game_Menu(parentScene).setMgmtDescriptor(descriptor);
+      break;
+    case 2:
+      descriptor = gameInfo.playerProfile.hyperSkills.getScript(GLYPH_TREE_MANA, hero);
+      ROTT_UI_Scene_Game_Menu(parentScene).setMgmtDescriptor(descriptor);
+      break;
+    case 3:
+      descriptor = gameInfo.playerProfile.hyperSkills.getScript(GLYPH_TREE_SPEED, hero);
+      ROTT_UI_Scene_Game_Menu(parentScene).setMgmtDescriptor(descriptor);
+      break;
+    case 5:
+      descriptor = gameInfo.playerProfile.hyperSkills.getScript(GLYPH_TREE_MP_REGEN, hero);
+      ROTT_UI_Scene_Game_Menu(parentScene).setMgmtDescriptor(descriptor);
+      break;
+    case 6:
+      descriptor = gameInfo.playerProfile.hyperSkills.getScript(GLYPH_TREE_ACCURACY, hero);
+      ROTT_UI_Scene_Game_Menu(parentScene).setMgmtDescriptor(descriptor);
+      break;
+    case 4:
+    case 7:
+      descriptor = gameInfo.playerProfile.hyperSkills.getScript(GLYPH_TREE_DAMAGE, hero);
+      ROTT_UI_Scene_Game_Menu(parentScene).setMgmtDescriptor(descriptor);
+      break;
+    case 8:
+      descriptor = gameInfo.playerProfile.hyperSkills.getScript(GLYPH_TREE_DODGE, hero);
       ROTT_UI_Scene_Game_Menu(parentScene).setMgmtDescriptor(descriptor);
       break;
     default:
