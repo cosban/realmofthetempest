@@ -16,7 +16,7 @@ function UpdateViewTarget(out TViewTarget OutVT, float DeltaTime) {
   OutVT.POV.FOV = mCustomFOV;
 }
 
-defaultproperties
+defaultProperties
 {
   mCustomFOV=80 // in version [1.0.5] this was 75
 }

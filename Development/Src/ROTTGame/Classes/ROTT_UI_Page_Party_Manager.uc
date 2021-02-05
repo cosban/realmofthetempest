@@ -155,7 +155,7 @@ public function onNavigateRight();
 /*=============================================================================
  * Assets
  *===========================================================================*/
-defaultproperties
+defaultProperties
 {  
   /** ===== Input ===== **/
   begin object class=ROTT_Input_Handler Name=Input_A

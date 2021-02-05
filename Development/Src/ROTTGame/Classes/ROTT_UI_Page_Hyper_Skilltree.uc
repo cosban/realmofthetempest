@@ -65,6 +65,29 @@ event onFocusMenu() {
   hyperSkillsBackground.setEnabled(true);
   treeSelector.resetSelection();
   treeSelector.setEnabled(true);
+  refresh();
+}
+
+/*=============================================================================
+ * refresh()
+ *
+ * Called to update the gold and gems
+ *===========================================================================*/
+public function refresh() {
+  local ROTT_Descriptor descriptor;
+  local ROTT_Combat_Hero hero;
+  
+  // Pick out a hero, not relevant to display info
+  hero = gameInfo.playerProfile.getActiveParty().getHero(0);
+  
+  switch (treeSelector.getSelection()) {
+    case 1:
+      descriptor = gameInfo.playerProfile.hyperSkills.getScript(GLYPH_TREE_ARMOR, hero);
+      ROTT_UI_Scene_Game_Menu(parentScene).setMgmtDescriptor(descriptor);
+      break;
+    default:
+      yellowLog("Warning (!) Unhandled index " $ treeSelector.getSelection());
+  }
 }
 
 /*=============================================================================
@@ -72,19 +95,22 @@ event onFocusMenu() {
  *===========================================================================*/
 public function onNavigateUp() {
   treeSelector.moveUp();
-  `log("~~~~~~?");
+  refresh();
 }
 
 public function onNavigateDown() {
   treeSelector.moveDown();
+  refresh();
 }
 
 public function onNavigateLeft() {
   treeSelector.moveLeft();
+  refresh();
 }
 
 public function onNavigateRight() {
   treeSelector.moveRight();
+  refresh();
 }
 
 /*=============================================================================

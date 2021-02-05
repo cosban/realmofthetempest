@@ -83,7 +83,7 @@ protected function string pCase(coerce string msg) {
   return caps(left(msg, 1)) $ locs(right(msg, len(msg) - 1));
 }
 
-defaultproperties
+defaultProperties
 {
   
 }

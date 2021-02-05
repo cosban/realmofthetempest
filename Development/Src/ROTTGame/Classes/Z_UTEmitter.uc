@@ -72,7 +72,7 @@ function SetLightEnvironment(LightEnvironmentComponent Light)
     ParticleSystemComponent.SetLightEnvironment(Light);
   }
 }
-defaultproperties
+defaultProperties
 {
   Components.Remove(ArrowComponent0)
   Components.Remove(Sprite)

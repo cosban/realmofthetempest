@@ -68,7 +68,7 @@ simulated function bool stopsProjectile(Projectile P) {  return false; }
 /*=============================================================================
  * Default Properties
  *===========================================================================*/
-defaultproperties
+defaultProperties
 {
   BrushColor=(R=0,G=255,B=200,A=255)
   bColored=true

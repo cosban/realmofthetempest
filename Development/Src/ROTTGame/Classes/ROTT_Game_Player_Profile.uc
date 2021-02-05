@@ -9,6 +9,7 @@
  *===========================================================================*/
 
 class ROTT_Game_Player_Profile extends ROTTObject
+dependsOn(ROTT_Party)
 dependsOn(ROTT_NPC_Container)
 dependsOn(ROTT_Descriptor_Enchantment_List);
 
@@ -143,6 +144,9 @@ var public bool bTrackTime;
 // UI Preferences
 var public bool showOverworldDetail;
 
+// Hyper glyph skill descriptors
+var public ROTT_Descriptor_List_Hyper_Skills hyperSkills;
+
 // Activity statuses
 var public bool bPraying;
 var public bool bSinging;
@@ -166,6 +170,10 @@ public function newGameSetup(byte newGameMode) {
   // Make inventory
   playerInventory = new(self) class'ROTT_Inventory_Package_Player';
   playerInventory.linkReferences();
+  
+  // Make hyper glyph storage
+  hyperSkills = new(self) class'ROTT_Descriptor_List_Hyper_Skills';
+  hyperSkills.initialize();
   
   // Portal system
   initNewGamePortals();
@@ -512,6 +520,10 @@ public function loadGame(optional bool transitionMode = false) {
     }
   }
   
+  // Make hyper glyph storage
+  hyperSkills = new(self) class'ROTT_Descriptor_List_Hyper_Skills';
+  hyperSkills.initialize();
+  
   debugProfileDump();
   
   // Set active party
@@ -830,6 +842,72 @@ public function setPortalUnlocked(MapNameEnum unlockMap) {
  *===========================================================================*/
 public function ROTT_Party getActiveParty() {
   return partySystem.getActiveParty();
+}
+
+/*=============================================================================
+ * getSpiritualProwess()
+ *
+ * Returns total spiritual prowess for active worshippers
+ *===========================================================================*/
+public function float getSpiritualProwess() {
+  local int i;
+  local float prowess;
+  
+  // Scan through parties
+  for (i = 0; i < partySystem.getNumberOfParties(); i++) {
+    // Check if party is worshipping
+    if (partySystem.getParty(i).partyActivity != NO_SHRINE_ACTIVITY) {
+      // Track sum of spiritual prowess
+      prowess += partySystem.getParty(i).getSpiritualProwess();
+    }
+  }
+  
+  return prowess;
+}
+
+/*=============================================================================
+ * getShrineActivityCount()
+ *
+ * Counts how many parties are attending the given shrine
+ *===========================================================================*/
+public function int getHyperGlyphLevel
+(
+  int hyperIndex
+) 
+{
+  switch (hyperIndex) {
+    case GLYPH_TREE_ARMOR:
+      return getShrineActivityCount(COBALT_SANCTUM);
+      break;
+    default:
+      yellowLog("Warning (!) Unhandled Hyper glyph level " $ hyperIndex);
+      break;
+  }
+  return 0;
+}
+  
+/*=============================================================================
+ * getShrineActivityCount()
+ *
+ * Counts how many parties are attending the given shrine
+ *===========================================================================*/
+public function int getShrineActivityCount
+(
+  PassiveShrineActivies shrineType
+) 
+{
+  local int i;
+  local int count;
+  
+  // Scan through parties
+  for (i = 0; i < partySystem.getNumberOfParties(); i++) {
+    // Check if party is worshipping at the given shrine
+    if (partySystem.getParty(i).partyActivity == shrineType) {
+      count++;
+    }
+  }
+  
+  return count;
 }
 
 /*============================================================================= 

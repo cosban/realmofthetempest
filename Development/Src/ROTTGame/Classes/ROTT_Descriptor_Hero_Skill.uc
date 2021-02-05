@@ -22,7 +22,8 @@ const NEXT_LEVEL = 1;
 enum TreeType {
   CLASS_TREE,
   GLYPH_TREE,
-  MASTERY_TREE
+  MASTERY_TREE,
+  HYPER_TREE
 };
 
 // Assign the enumeration skill ID to this index
@@ -94,6 +95,9 @@ enum AttributeTypes {
   GLYPH_DAMAGE_BOOST,
   GLYPH_SPEED_BOOST,
   GLYPH_SPAWN_CHANCE,
+  
+  HYPER_SPAWN_CHANCE,
+  HYPER_ARMOR_BOOST,
   
   // Damage
   PHYSICAL_DAMAGE_MIN,
@@ -379,83 +383,108 @@ public function formatScript(ROTT_Combat_Hero hero) {
   skillInfoData[1] = replaceCodes(skillText[1], skillLevel);
   skillInfoData[2] = replaceCodes(skillText[2], skillLevel);
   
-  // Format display info
-  if (skillLevel == 0) {
-    // p2 holds current skill level info, which is empty if skill level is 0
-    p2(
-      "",
-      "",
-      "",
-      ""
-    );
-    
-    if (bShowPrevious) {
-      // Top alignment for reseting skills
+  switch(parentTree) {
+    case HYPER_TREE:
+      // Chance info in 2nd paragraph 
       p2(
-        "No Level",
-        "",
-        "",
-        ""
-      );
-      p3(
-        "",
-        "",
-        "",
-        ""
-      );
-    } else {
-      
-      p2(
-        "",
-        "",
-        "",
+        "Maximum chance to hyper spawn is 80%,",
+        "but increasing over this cap produces",
+        "a multiplier for higher effects.",
         ""
       );
       
-      // p3 holds next skill level info, which the first level in this case
+      // Override colors of p2
+      skillInfoData[0].topFont = DEFAULT_SMALL_WHITE;
+      skillInfoData[1].topFont = DEFAULT_SMALL_WHITE;
+      skillInfoData[2].topFont = DEFAULT_SMALL_WHITE;
+      
+      // Chance and effect intensity info 
       p3(
-        "First Level",
-        skillInfoData[0].nextLvlText,
-        skillInfoData[1].nextLvlText,
-        skillInfoData[2].nextLvlText
+        "Shrine Level: " $ skillLevel,
+        skillInfoData[0].currentText,
+        skillInfoData[1].currentText,
+        skillInfoData[2].currentText
       );
-    }
-    
-  } else {
-    // p2 holds current skill level info
-    p2(
-      "Skill Level: " $ skillLevel,
-      skillInfoData[0].currentText,
-      skillInfoData[1].currentText,
-      skillInfoData[2].currentText
-    );
-    
-    // p3 holds next (or previous) skill level info
-    if (bShowPrevious) {
-      if (skillLevel == 1) {
-        p3(
+      break;
+    default:
+      // Format display info
+      if (skillLevel == 0) {
+        // p2 holds current skill level info, which is empty if skill level is 0
+        p2(
           "",
           "",
           "",
           ""
         );
-
+        
+        if (bShowPrevious) {
+          // Top alignment for reseting skills
+          p2(
+            "No Level",
+            "",
+            "",
+            ""
+          );
+          p3(
+            "",
+            "",
+            "",
+            ""
+          );
+        } else {
+          
+          p2(
+            "",
+            "",
+            "",
+            ""
+          );
+          
+          // p3 holds next skill level info, which the first level in this case
+          p3(
+            "First Level",
+            skillInfoData[0].nextLvlText,
+            skillInfoData[1].nextLvlText,
+            skillInfoData[2].nextLvlText
+          );
+        }
+        
       } else {
-        p3(
-          "Skill Level: " $ skillLevel - 1,
-          skillInfoData[0].previousLvlText,
-          skillInfoData[1].previousLvlText,
-          skillInfoData[2].previousLvlText
+        // p2 holds current skill level info
+        p2(
+          "Skill Level: " $ skillLevel,
+          skillInfoData[0].currentText,
+          skillInfoData[1].currentText,
+          skillInfoData[2].currentText
         );
+        
+        // p3 holds next (or previous) skill level info
+        if (bShowPrevious) {
+          if (skillLevel == 1) {
+            p3(
+              "",
+              "",
+              "",
+              ""
+            );
+
+          } else {
+            p3(
+              "Skill Level: " $ skillLevel - 1,
+              skillInfoData[0].previousLvlText,
+              skillInfoData[1].previousLvlText,
+              skillInfoData[2].previousLvlText
+            );
+          }
+        } else {
+          p3(
+            "Next Level",
+            skillInfoData[0].nextLvlText,
+            skillInfoData[1].nextLvlText,
+            skillInfoData[2].nextLvlText
+          );
+        }
       }
-    } else {
-      p3(
-        "Next Level",
-        skillInfoData[0].nextLvlText,
-        skillInfoData[1].nextLvlText,
-        skillInfoData[2].nextLvlText
-      );
-    }
   }
   
   // Assign font colors
@@ -501,8 +530,14 @@ private function SkillInfoSet replaceCodes
   local SkillInfoSet returnInfo;
   local int i;
   
-  // Set up replacement info
+  // Get hero attached to skill
   hero = ROTT_Combat_Hero(outer.outer);
+  if (hero == none) {
+    // Used to ensure hero info for hyper glyph formatting
+    hero = lastHeroAccessed;
+  }
+  
+  // Set up replacement info
   returnInfo.currentText = textInfo;
   returnInfo.nextLvlText = textInfo;
   returnInfo.previousLvlText = textInfo;
@@ -677,6 +712,8 @@ public function float getAttributeInfo
           }
           break;
         case MASTERY_TREE: 
+          break;
+        case HYPER_TREE: 
           break;
       }
       break;
@@ -1597,15 +1634,24 @@ public function bool statReqCheck(ROTT_Combat_Hero hero) {
  * This fetches the skill level from the hero provided, including bonuses
  *===========================================================================*/
 public function int getSkillLevel(ROTT_Combat_Hero hero) {
+  // Check for valid skill index
   if (skillIndex == -1) {
     yellowLog("Warning (!) skill index not set for skill");
     return 0;
   }
   
+  // Check for valid hero unit
+  if (hero == none) {
+    yellowLog("Warning (!) No hero.");
+    scriptTrace();
+  }
+  
+  // Get skill info from skill trees
   switch (parentTree) {
     case CLASS_TREE:   return hero.getClassLevel(skillIndex);
     case GLYPH_TREE:   return hero.getGlyphLevel(skillIndex);
     case MASTERY_TREE: return hero.getMasteryLevel(skillIndex);
+    case HYPER_TREE:   return gameInfo.playerProfile.getHyperGlyphLevel(skillIndex);
   }
 }
 

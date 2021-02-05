@@ -16,7 +16,7 @@ simulated function PawnBaseDied()
   }
 }
 
-defaultproperties
+defaultProperties
 {
   
 }

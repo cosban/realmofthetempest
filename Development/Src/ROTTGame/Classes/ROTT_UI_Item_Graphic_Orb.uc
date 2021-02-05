@@ -59,7 +59,7 @@ public function renderItem(optional ROTT_Inventory_Item item = none) {
 /*=============================================================================
  * Assets
  *===========================================================================*/
-defaultproperties
+defaultProperties
 {  
   /** ===== Textures ===== **/
   // Orb Sphere
