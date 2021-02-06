@@ -95,9 +95,13 @@ protected function float attributeInfo
       // Get hyper chance, based on worship count
       attribute = gameInfo.playerProfile.getShrineActivityCount(COBALT_SANCTUM) * 20; 
       break;
-    case HYPER_ARMOR_BOOST:
-      // Damage Reduction based on spiritual prowess
-      attribute = gameInfo.playerProfile.getSpiritualProwess() / 100; 
+    case PERM_DODGE_BOOST:
+      // Dodge increase permanent
+      attribute = 10 + 5 * gameInfo.playerProfile.getSpiritualProwess() / 500; 
+      break;
+    case HYPER_DODGE_PERCENT:
+      // Dodge increase by percent
+      attribute = 2 + gameInfo.playerProfile.getSpiritualProwess() / 1000; 
       break;
   }
   
@@ -115,8 +119,8 @@ defaultProperties
   
   // Glyph Attributes
   skillAttributes.add((attributeSet=GLYPH_SET,mechanicType=HYPER_SPAWN_CHANCE,tag="%spawn",font=DEFAULT_SMALL_BLUE,returnType=INTEGER));
-  skillAttributes.add((attributeSet=GLYPH_SET,mechanicType=HYPER_ARMOR_BOOST,tag="%permDodge",font=DEFAULT_SMALL_GREEN,returnType=INTEGER));
-  skillAttributes.add((attributeSet=GLYPH_SET,mechanicType=HYPER_ARMOR_BOOST,tag="%maxDodge",font=DEFAULT_SMALL_GREEN,returnType=INTEGER));
+  skillAttributes.add((attributeSet=GLYPH_SET,mechanicType=PERM_DODGE_BOOST,tag="%permDodge",font=DEFAULT_SMALL_GREEN,returnType=INTEGER));
+  skillAttributes.add((attributeSet=GLYPH_SET,mechanicType=HYPER_DODGE_PERCENT,tag="%maxDodge",font=DEFAULT_SMALL_GREEN,returnType=INTEGER));
   
 }
 

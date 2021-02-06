@@ -94,9 +94,13 @@ protected function float attributeInfo
       // Get hyper chance, based on worship count
       attribute = gameInfo.playerProfile.getShrineActivityCount(COBALT_SANCTUM) * 20; 
       break;
-    case HYPER_ARMOR_BOOST:
-      // Damage Reduction based on spiritual prowess
-      attribute = gameInfo.playerProfile.getSpiritualProwess() / 100; 
+    case PERM_SLOW_ENEMIES:
+      // Permanent reduction of enemy speed rating
+      attribute = 1 + gameInfo.playerProfile.getSpiritualProwess() / 1000; 
+      break;
+    case HYPER_MULTISTRIKE_CHANCE:
+      // Multistrike chance
+      attribute = 2 + gameInfo.playerProfile.getSpiritualProwess() / 1000; 
       break;
   }
   
@@ -114,8 +118,8 @@ defaultProperties
   
   // Glyph Attributes
   skillAttributes.add((attributeSet=GLYPH_SET,mechanicType=HYPER_SPAWN_CHANCE,tag="%spawn",font=DEFAULT_SMALL_BLUE,returnType=INTEGER));
-  skillAttributes.add((attributeSet=GLYPH_SET,mechanicType=HYPER_ARMOR_BOOST,tag="%permSpeed",font=DEFAULT_SMALL_GREEN,returnType=INTEGER));
-  skillAttributes.add((attributeSet=GLYPH_SET,mechanicType=HYPER_ARMOR_BOOST,tag="%ms",font=DEFAULT_SMALL_GREEN,returnType=INTEGER));
+  skillAttributes.add((attributeSet=GLYPH_SET,mechanicType=PERM_SLOW_ENEMIES,tag="%permSpeed",font=DEFAULT_SMALL_GREEN,returnType=INTEGER));
+  skillAttributes.add((attributeSet=GLYPH_SET,mechanicType=HYPER_MULTISTRIKE_CHANCE,tag="%ms",font=DEFAULT_SMALL_GREEN,returnType=INTEGER));
   
 }
 

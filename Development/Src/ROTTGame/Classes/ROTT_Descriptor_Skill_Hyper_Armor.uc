@@ -96,9 +96,13 @@ protected function float attributeInfo
       // Get hyper chance, based on worship count
       attribute = gameInfo.playerProfile.getShrineActivityCount(COBALT_SANCTUM) * 20; 
       break;
-    case HYPER_ARMOR_BOOST:
+    case PERM_ARMOR_BOOST:
+      // Permanent armor
+      attribute = 1 + gameInfo.playerProfile.getSpiritualProwess() / 1000; 
+      break;
+    case HYPER_DAMAGE_REDUCTION:
       // Damage Reduction based on spiritual prowess
-      attribute = gameInfo.playerProfile.getSpiritualProwess() / 100; 
+      attribute = 2 + gameInfo.playerProfile.getSpiritualProwess() / 3000; 
       break;
   }
   
@@ -116,8 +120,8 @@ defaultProperties
   
   // Glyph Attributes
   skillAttributes.add((attributeSet=GLYPH_SET,mechanicType=HYPER_SPAWN_CHANCE,tag="%spawn",font=DEFAULT_SMALL_BLUE,returnType=INTEGER));
-  skillAttributes.add((attributeSet=GLYPH_SET,mechanicType=HYPER_ARMOR_BOOST,tag="%permArmor",font=DEFAULT_SMALL_GREEN,returnType=INTEGER));
-  skillAttributes.add((attributeSet=GLYPH_SET,mechanicType=HYPER_ARMOR_BOOST,tag="%dr",font=DEFAULT_SMALL_GREEN,returnType=INTEGER));
+  skillAttributes.add((attributeSet=GLYPH_SET,mechanicType=PERM_ARMOR_BOOST,tag="%permArmor",font=DEFAULT_SMALL_GREEN,returnType=INTEGER));
+  skillAttributes.add((attributeSet=GLYPH_SET,mechanicType=HYPER_DAMAGE_REDUCTION,tag="%dr",font=DEFAULT_SMALL_GREEN,returnType=INTEGER));
   
 }
 
