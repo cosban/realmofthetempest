@@ -52,7 +52,7 @@ public function initDialogue() {
   
   `NEW_NODE(GREETING, NUETRAL)
     "And that juxtaposition of growth and decay in",
-    "society is not unlike the struggle within myself."
+    "society is not unlike the struggle within oneself."
   `ENDNODE
   
   // ----------------------------------------------------------------------- //
