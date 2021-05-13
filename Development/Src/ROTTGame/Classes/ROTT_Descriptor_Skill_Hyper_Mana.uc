@@ -98,6 +98,10 @@ protected function float attributeInfo
       // Damage Reduction based on spiritual prowess
       attribute = 2 + 1 * gameInfo.playerProfile.getSpiritualProwess() / 1000; 
       break;
+    case HYPER_MANA_BOOST:
+      // Increase mana by percent
+      attribute = 2 + 1 * gameInfo.playerProfile.getSpiritualProwess() / 1000; 
+      break;
   }
   
   return attribute;

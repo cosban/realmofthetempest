@@ -275,9 +275,21 @@ defaultProperties
     alignX=CENTER
     alignY=TOP
     fontStyle=DEFAULT_MEDIUM_CYAN
-    labelText="Xenopher, val, formerfuture, Dustin Pundt, Gaiashield, cydy"
+    labelText="Phillis Emril Productions, Xenopher, val, formerfuture, Dustin Pundt, Gaiashield, cydy,"
   end object
   componentList.add(Donor_List_Label_1)
+  begin object class=UI_Label Name=Donor_List_Label_2
+    tag="Donor_List_Label_2"
+    posX=0
+    posY=548
+    posXEnd=NATIVE_WIDTH
+    posYEnd=NATIVE_HEIGHT
+    alignX=CENTER
+    alignY=TOP
+    fontStyle=DEFAULT_MEDIUM_CYAN
+    labelText="Loud Pockets"
+  end object
+  componentList.add(Donor_List_Label_2)
   
   begin object class=UI_Label Name=P6_Label
     tag="P6_Label"
@@ -303,6 +315,18 @@ defaultProperties
     labelText=" ~~~ Free download  ~~~  www.RealmoftheTempest.com  ~~~ "
   end object
   componentList.add(P7_Label)
+  begin object class=UI_Label Name=P8_Label
+    tag="P8_Label"
+    posX=0
+    posY=828
+    posXEnd=NATIVE_WIDTH
+    posYEnd=NATIVE_HEIGHT
+    alignX=CENTER
+    alignY=TOP
+    fontStyle=DEFAULT_MEDIUM_GRAY
+    labelText=" ~~~ Track updates online ~~~ twitter.com/BrambleGate ~~~ "
+  end object
+  componentList.add(P8_Label)
 
   // Black Texture
   begin object class=UI_Texture_Info Name=Black_Texture

@@ -29,7 +29,7 @@ public function initDialogue() {
   // Intro
   `NEW_NODE(INTRODUCTION, NUETRAL)
     "I am the keeper of beasts and demons.",
-    "My name is Tannim, the dragon tamer."
+    "My name is. . . Tannim, the dragon tamer."
   `ENDNODE
   
   // ----------------------------------------------------------------------- //

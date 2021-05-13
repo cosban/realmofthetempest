@@ -42,8 +42,8 @@ public function initStats
       armorPerLvl = 0;
       baseStatsPerLvl[PRIMARY_VITALITY] = 2;
       baseStatsPerLvl[PRIMARY_STRENGTH] = 1;
-      baseStatsPerLvl[PRIMARY_COURAGE] = 5;
-      baseStatsPerLvl[PRIMARY_FOCUS] = 2;
+      baseStatsPerLvl[PRIMARY_COURAGE] = 4;
+      baseStatsPerLvl[PRIMARY_FOCUS] = 1;
       
       // Randomly rolled stat variation
       randStatsPerLvl = 2;
