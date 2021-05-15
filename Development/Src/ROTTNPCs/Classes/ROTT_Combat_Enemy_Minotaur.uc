@@ -117,9 +117,6 @@ defaultProperties
   end object
   begin object class=UI_Texture_Info Name=Enemy_Portrait_Minotaur_Purple_240
     componentTextures.add(Texture2D'Monsters.Enemy_Portrait_Minotaur_Purple_Yellow_240')
-  end object
-    
-  end object
   begin object class=UI_Texture_Info Name=Enemy_Portrait_Minotaur_Black_240
     componentTextures.add(Texture2D'Monsters.Enemy_Portrait_Minotaur_Black_240')
   end object
