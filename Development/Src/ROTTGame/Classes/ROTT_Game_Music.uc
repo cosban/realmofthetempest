@@ -368,7 +368,7 @@ defaultProperties
   // Haxlyn
   worldSoundtracks[MAP_HAXLYN_CITADEL]=Lexical_Wind_OST_Cue
   worldSoundtracks[MAP_HAXLYN_WILDERNESS]=Spiritual_Concomitance_OST_Cue
-  worldSoundtracks[MAP_HAXLYN_BACKLANDS]=Black_Magic_OST_Cue /// Change
+  worldSoundtracks[MAP_HAXLYN_BACKLANDS]=Black_Magic_OST_Cue /// Change ... Phantom's #2 track?
   worldSoundtracks[MAP_HAXLYN_OUTSKIRTS]=A_Storm_is_a_Serpent_OST_Cue
   
   // Valimor
