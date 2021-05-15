@@ -287,7 +287,7 @@ defaultProperties
     alignX=CENTER
     alignY=TOP
     fontStyle=DEFAULT_MEDIUM_CYAN
-    labelText="Loud Pockets, Dumpis, Avnova, The Wolverine, Grimnir, Poe Link"
+    labelText="Loud Pockets, Dumpis, Avnova, The Wolverine, Grimnir, Poe Link, lelia, sc0ttmst, Phantom"
   end object
   componentList.add(Donor_List_Label_2)
   
