@@ -116,7 +116,7 @@ defaultProperties
   
   // Sprite options
   begin object class=UI_Texture_Storage Name=Enemy_Sprite_Container
-    tag="Enemy_Sprite_Container"
+    tag="Enemy_Sprite_Container" 
     images(CLAN_BLUE)=Enemy_Portrait_Lycanthrox_Blue_240
     images(CLAN_CYAN)=Enemy_Portrait_Lycanthrox_Cyan_240
     images(CLAN_GREEN)=Enemy_Portrait_Lycanthrox_Green_240

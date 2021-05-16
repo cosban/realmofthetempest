@@ -290,6 +290,18 @@ defaultProperties
     labelText="Loud Pockets, Dumpis, Avnova, The Wolverine, Grimnir, Poe Link, lelia, sc0ttmst, Phantom"
   end object
   componentList.add(Donor_List_Label_2)
+  begin object class=UI_Label Name=Donor_List_Label_3
+    tag="Donor_List_Label_3"
+    posX=0
+    posY=588
+    posXEnd=NATIVE_WIDTH
+    posYEnd=NATIVE_HEIGHT
+    alignX=CENTER
+    alignY=TOP
+    fontStyle=DEFAULT_MEDIUM_CYAN
+    labelText="Summoner99, JD"
+  end object
+  componentList.add(Donor_List_Label_3)
   
   begin object class=UI_Label Name=P6_Label
     tag="P6_Label"

@@ -1279,7 +1279,7 @@ public function setCheckpointInfo
   
   // Add info the array
   checkPoints[index].location = spawnLocation;
-  checkPoints[index].rotation = spawnRotation;
+  checkPoints[index].rotation = spawnRotation;  /// Funky bug here?
 }
 
 /*=============================================================================

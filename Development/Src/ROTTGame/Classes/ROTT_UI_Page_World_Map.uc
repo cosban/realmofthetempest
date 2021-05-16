@@ -10,7 +10,8 @@
 class ROTT_UI_Page_World_Map extends ROTT_UI_Page;
 
 // Internal references
-var private UI_Sprite worldMap;
+var private UI_Container worldMap;
+var private UI_Sprite playerMarker;
 var private UI_Label gameVersionText;
 
 // Parent scene
@@ -31,7 +32,8 @@ public function initializeComponent(optional string newTag = "") {
   someScene = ROTT_UI_Scene_World_Map(outer);
   
   // Internal references
-  worldMap = findSprite("Background_Sprite");
+  worldMap = UI_Container(findComp("World_Map_Container"));
+  playerMarker = UI_Sprite(worldMap.findComp("Player_Marker_Sprite"));
   gameVersionText = findLabel("Game_Version_Text");
   
   // Draw version info
@@ -63,7 +65,85 @@ event onPopPageEvent() {
  * correctly updated on the UI.
  *===========================================================================*/
 public function refresh() {
+  `log("Y: " $ gameInfo.tempestPawn.location.x);
+  `log("X: " $ gameInfo.tempestPawn.location.y);
   
+  switch(gameInfo.getCurrentMap()) {
+    case MAP_TALONOVIA_TOWN:
+      playerMarker.updatePosition(
+        0.017 * gameInfo.tempestPawn.location.y + 1466 + worldMap.getX(),
+        -0.017 * gameInfo.tempestPawn.location.x + 1260.375 + worldMap.getY()
+      );
+      break;
+    case MAP_RHUNIA_WILDERNESS:
+      playerMarker.updatePosition(
+        0.0086685 * gameInfo.tempestPawn.location.y + 1511 + worldMap.getX(),
+        -0.0086685 * gameInfo.tempestPawn.location.x + 840 + worldMap.getY()
+      );
+      break;
+    case MAP_RHUNIA_CITADEL:
+      playerMarker.updatePosition(
+        0.015131 * gameInfo.tempestPawn.location.y + 1084 + worldMap.getX(),
+        -0.015131 * gameInfo.tempestPawn.location.x + 213 + worldMap.getY()
+      );
+      break;
+    case MAP_ETZLAND_WILDERNESS:
+      playerMarker.updatePosition(
+        0.00571555 * gameInfo.tempestPawn.location.y + 1024 + worldMap.getX(),
+        -0.00571555 * gameInfo.tempestPawn.location.x + 809 + worldMap.getY()
+      );
+      break;
+    case MAP_ETZLAND_CITADEL:
+      playerMarker.updatePosition(
+        0.015 * gameInfo.tempestPawn.location.y + 1322 + worldMap.getX(),
+        -0.015 * gameInfo.tempestPawn.location.x + 372 + worldMap.getY()
+      );
+      break;
+    case MAP_HAXLYN_WILDERNESS:
+      playerMarker.updatePosition(
+        0.0092 * gameInfo.tempestPawn.location.y + 121+25+60 + worldMap.getX(),
+        -0.0092 * gameInfo.tempestPawn.location.x + 750+25+148 + worldMap.getY()
+      );
+      break;
+    case MAP_HAXLYN_CITADEL:
+      playerMarker.updatePosition(
+        0.021 * gameInfo.tempestPawn.location.y + -109+25 + worldMap.getX(),
+        -0.021 * gameInfo.tempestPawn.location.x + 416+25 + worldMap.getY()
+      );
+      break;
+    case MAP_HAXLYN_OUTSKIRTS:
+      playerMarker.updatePosition(
+        0.011378 * gameInfo.tempestPawn.location.y + 211+639+25 + worldMap.getX(),
+        -0.011378 * gameInfo.tempestPawn.location.x + 900+575+10 + worldMap.getY()
+      );
+      break;
+  }
+  
+
+  /// point 2D                  point 3D
+  /// x 1581                    /// 2410
+  /// y 625                     /// -2496
+  
+  /// point 2D                  point 3D
+  /// x 1638                    /// -9795
+  /// y 398                     /// 19403
+  
+  /**
+  /// FIND RATIO OF 3D WORLD LENGTH VS 2D WORLD LENGTH
+  #12205    X1 : 3D WORLD LENGTH
+  #21899    Y1 : 3D WORLD LENGTH
+  
+  #202 X1  :  2D MAP LENGTH
+  #367 Y1 :  2D MAP LENGTH
+  
+  /// SOLVE AVERAGE RATIO FOR SLOPE
+  # ((202 / 12205) + (367 / 21899)) / 2
+  # 0.01665467506321477849437229600816
+  #
+  
+  /// PLUG INTO Y=MX+B TO SOLVE FOR B
+  
+  **/
 }
   
 /*============================================================================= 
@@ -117,6 +197,8 @@ public function elapseTimers(float deltaTime) {
       0
     );
   }
+  
+  refresh();
 }
 
 /*=============================================================================
@@ -181,31 +263,128 @@ defaultProperties
   end object
   inputList.add(Input_B)
   
-  /** ===== Textures ===== **/
-  // Left menu backgrounds
-  begin object class=UI_Texture_Info Name=World_Map
-    componentTextures.add(Texture2D'GUI_Overworld.World_Map')
-  end object
-  
   /** ===== UI Components ===== **/
-  // Background
-  begin object class=UI_Sprite Name=Background_Sprite
-    tag="Background_Sprite"
+  begin object class=UI_Container Name=World_Map_Container
+    tag="World_Map_Container"
     bEnabled=true
+    bDrawRelative=true
     posX=-720
     posY=-450
     posXEnd=2160
     posYEnd=1350
-    images(0)=World_Map
-  end object
-  componentList.add(Background_Sprite)
+    
+    // Left menu backgrounds
+    begin object class=UI_Texture_Info Name=World_Map
+      componentTextures.add(Texture2D'GUI_Overworld.World_Map')
+    end object
+    
+    // Background
+    begin object class=UI_Sprite Name=Background_Sprite
+      tag="Background_Sprite"
+      bEnabled=true
+      posX=0
+      posY=0
+      posXEnd=2880
+      posYEnd=1800
+      images(0)=World_Map
+    end object
+    componentList.add(Background_Sprite)
+      
+    // Map Markers
+    begin object class=UI_Texture_Info Name=Player_Marker_Texture
+      componentTextures.add(Texture2D'GUI_Overworld.Map_Markers.World_Map_Player_Marker')
+    end object
+    begin object class=UI_Texture_Info Name=Blue_Marker_Texture
+      componentTextures.add(Texture2D'GUI_Overworld.Map_Markers.World_Map_Blue_Marker')
+    end object
+    begin object class=UI_Texture_Info Name=Cyan_Marker_Texture
+      componentTextures.add(Texture2D'GUI_Overworld.Map_Markers.World_Map_Cyan_Marker')
+    end object
+    begin object class=UI_Texture_Info Name=Green_Marker_Texture
+      componentTextures.add(Texture2D'GUI_Overworld.Map_Markers.World_Map_Green_Marker')
+    end object
+    begin object class=UI_Texture_Info Name=Purple_Marker_Texture
+      componentTextures.add(Texture2D'GUI_Overworld.Map_Markers.World_Map_Purple_Marker')
+    end object
+    begin object class=UI_Texture_Info Name=Red_Marker_Texture
+      componentTextures.add(Texture2D'GUI_Overworld.Map_Markers.World_Map_Red_Marker')
+    end object
+    
+    // Azra Marker
+    begin object class=UI_Sprite Name=Azra_Marker_Sprite
+      tag="Azra_Marker_Sprite"
+      bEnabled=true
+      posX=1531
+      posY=139
+      images(0)=Red_Marker_Texture
+      activeEffects.add((effectType = EFFECT_ALPHA_CYCLE, lifeTime = -1, elapsedTime = 0, intervalTime = 0.4, min = 170, max = 255))
+    end object
+    componentList.add(Azra_Marker_Sprite)
   
-  // Left menu backgrounds
+    // Hyrix Marker
+    begin object class=UI_Sprite Name=Hyrix_Marker_Sprite
+      tag="Hyrix_Marker_Sprite"
+      bEnabled=true
+      posX=1191
+      posY=98
+      images(0)=Green_Marker_Texture
+      activeEffects.add((effectType = EFFECT_ALPHA_CYCLE, lifeTime = -1, elapsedTime = 0, intervalTime = 0.4, min = 170, max = 255))
+    end object
+    componentList.add(Hyrix_Marker_Sprite)
+  
+    // Khomat Marker
+    begin object class=UI_Sprite Name=Khomat_Marker_Sprite
+      tag="Khomat_Marker_Sprite"
+      bEnabled=true
+      posX=114
+      posY=32
+      images(0)=Blue_Marker_Texture
+      activeEffects.add((effectType = EFFECT_ALPHA_CYCLE, lifeTime = -1, elapsedTime = 0, intervalTime = 0.4, min = 170, max = 255))
+    end object
+    componentList.add(Khomat_Marker_Sprite)
+  
+    // ??? Marker
+    begin object class=UI_Sprite Name=P_Marker_Sprite
+      tag="P_Marker_Sprite"
+      bEnabled=true
+      posX=2620
+      posY=66
+      images(0)=Purple_Marker_Texture
+      activeEffects.add((effectType = EFFECT_ALPHA_CYCLE, lifeTime = -1, elapsedTime = 0, intervalTime = 0.4, min = 170, max = 255))
+    end object
+    componentList.add(P_Marker_Sprite)
+  
+    // ??? Marker
+    begin object class=UI_Sprite Name=C_Marker_Sprite
+      tag="C_Marker_Sprite"
+      bEnabled=false
+      posX=450
+      posY=450
+      images(0)=Cyan_Marker_Texture
+      activeEffects.add((effectType = EFFECT_ALPHA_CYCLE, lifeTime = -1, elapsedTime = 0, intervalTime = 0.4, min = 170, max = 255))
+    end object
+    componentList.add(C_Marker_Sprite)
+  
+    // Player Marker
+    begin object class=UI_Sprite Name=Player_Marker_Sprite
+      tag="Player_Marker_Sprite"
+      bEnabled=true
+      posX=0
+      posY=0
+      images(0)=Player_Marker_Texture
+      activeEffects.add((effectType = EFFECT_ALPHA_CYCLE, lifeTime = -1, elapsedTime = 0, intervalTime = 0.4, min = 170, max = 255))
+    end object
+    componentList.add(Player_Marker_Sprite)
+  
+  end object
+  componentList.add(World_Map_Container)
+  
+  // Frame Texture
   begin object class=UI_Texture_Info Name=World_Map_Frame
     componentTextures.add(Texture2D'GUI_Overworld.World_Map_Frame')
   end object
   
-  // Background
+  // Frame
   begin object class=UI_Sprite Name=Frame_Sprite
     tag="Frame_Sprite"
     bEnabled=true

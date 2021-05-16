@@ -445,6 +445,24 @@ public function updatePosition
 }
 
 /*=============================================================================
+ * getCenterX()
+ *
+ * Returns center coordinates
+ *===========================================================================*/
+public function float getCenterX() {
+  return (posXEnd - posX) / 2.0 + posX;
+}
+
+/*=============================================================================
+ * getCenterY()
+ *
+ * Returns center coordinates
+ *===========================================================================*/
+public function float getCenterY() {
+  return (posYEnd - posY) / 2.0 + posY;
+}
+
+/*=============================================================================
  * elapseTimer()
  *
  * Increments time every engine tick.
