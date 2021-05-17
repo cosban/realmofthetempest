@@ -87,6 +87,12 @@ public function refresh() {
         -0.015131 * gameInfo.tempestPawn.location.x + 213 + worldMap.getY()
       );
       break;
+    case MAP_RHUNIA_OUTSKIRTS: //////////////////////////////////////
+      playerMarker.updatePosition(
+        0.0077979 * gameInfo.tempestPawn.location.y + 1911+25-16 + worldMap.getX(),
+        -0.0077979 * gameInfo.tempestPawn.location.x + 840+136-10 + worldMap.getY()
+      );
+      break;
     case MAP_ETZLAND_WILDERNESS:
       playerMarker.updatePosition(
         0.00571555 * gameInfo.tempestPawn.location.y + 1024 + worldMap.getX(),
@@ -99,22 +105,52 @@ public function refresh() {
         -0.015 * gameInfo.tempestPawn.location.x + 372 + worldMap.getY()
       );
       break;
+    case MAP_ETZLAND_OUTSKIRTS:
+      playerMarker.updatePosition(
+        0.0054896 * gameInfo.tempestPawn.location.y + 938 + worldMap.getX(),
+        -0.0054896 * gameInfo.tempestPawn.location.x + 457 + worldMap.getY()
+      );
+      break;
     case MAP_HAXLYN_WILDERNESS:
       playerMarker.updatePosition(
-        0.0092 * gameInfo.tempestPawn.location.y + 121+25+60 + worldMap.getX(),
-        -0.0092 * gameInfo.tempestPawn.location.x + 750+25+148 + worldMap.getY()
+        0.0092 * gameInfo.tempestPawn.location.y + 206 + worldMap.getX(),
+        -0.0092 * gameInfo.tempestPawn.location.x + 923 + worldMap.getY()
       );
       break;
     case MAP_HAXLYN_CITADEL:
       playerMarker.updatePosition(
-        0.021 * gameInfo.tempestPawn.location.y + -109+25 + worldMap.getX(),
-        -0.021 * gameInfo.tempestPawn.location.x + 416+25 + worldMap.getY()
+        0.021 * gameInfo.tempestPawn.location.y + -84 + worldMap.getX(),
+        -0.021 * gameInfo.tempestPawn.location.x + 441 + worldMap.getY()
       );
       break;
     case MAP_HAXLYN_OUTSKIRTS:
       playerMarker.updatePosition(
-        0.011378 * gameInfo.tempestPawn.location.y + 211+639+25 + worldMap.getX(),
-        -0.011378 * gameInfo.tempestPawn.location.x + 900+575+10 + worldMap.getY()
+        0.011378 * gameInfo.tempestPawn.location.y + 875 + worldMap.getX(),
+        -0.011378 * gameInfo.tempestPawn.location.x + 1485 + worldMap.getY()
+      );
+      break;
+    case MAP_TALONOVIA_BACKLANDS:
+      playerMarker.updatePosition(
+        0.00741425 * gameInfo.tempestPawn.location.y + 1199 + worldMap.getX(),
+        -0.00741425 * gameInfo.tempestPawn.location.x + 1472 + worldMap.getY()
+      );
+      break;
+    case MAP_TALONOVIA_OUTSKIRTS:
+      playerMarker.updatePosition(
+        0.00747 * gameInfo.tempestPawn.location.y + 1699 + worldMap.getX(),
+        -0.00747 * gameInfo.tempestPawn.location.x + 1441 + worldMap.getY()
+      );
+      break;
+    case MAP_VALIMOR_WILDERNESS:
+      playerMarker.updatePosition(
+        0.006507 * gameInfo.tempestPawn.location.y + 1982 + worldMap.getX(),
+        -0.006507 * gameInfo.tempestPawn.location.x + 632 + worldMap.getY()
+      );
+      break;
+    case MAP_VALIMOR_CITADEL:
+      playerMarker.updatePosition(
+        0.01641298 * gameInfo.tempestPawn.location.y + 3004+28 + worldMap.getX(),
+        -0.01641298 * gameInfo.tempestPawn.location.x + 661+9 + worldMap.getY()
       );
       break;
   }
