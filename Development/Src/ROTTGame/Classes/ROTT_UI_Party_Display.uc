@@ -110,7 +110,7 @@ public function elapseTimer(float deltaTime, float gameSpeedOverride) {
 public function syncIconEffects() {
   local int i;
   
-  for (i = 0; i < 3; i++) {
+  for (i = 0; i < PARTY_CAPACITY; i++) {
     unspentIcon[i].resetEffectTimes();
   }
 }

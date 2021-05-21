@@ -99,6 +99,7 @@ enum EnemyTypes {
   Boss_Rhunia,
   Boss_Etzland,
   Boss_Haxlyn,
+  Boss_Valimor,
   
 };
 

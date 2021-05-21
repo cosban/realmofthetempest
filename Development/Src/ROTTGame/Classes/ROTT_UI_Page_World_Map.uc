@@ -11,6 +11,7 @@ class ROTT_UI_Page_World_Map extends ROTT_UI_Page;
 
 // Internal references
 var private UI_Container worldMap;
+var private UI_Sprite worldMapSprite;
 var private UI_Sprite playerMarker;
 var private UI_Label gameVersionText;
 
@@ -33,6 +34,7 @@ public function initializeComponent(optional string newTag = "") {
   
   // Internal references
   worldMap = UI_Container(findComp("World_Map_Container"));
+  worldMapSprite = UI_Sprite(worldMap.findComp("Background_Sprite"));
   playerMarker = UI_Sprite(worldMap.findComp("Player_Marker_Sprite"));
   gameVersionText = findLabel("Game_Version_Text");
   
@@ -46,7 +48,6 @@ public function initializeComponent(optional string newTag = "") {
  * Description: This event is called every time the page is pushed.
  *===========================================================================*/
 event onPushPageEvent() {
-  
 }
 
 /*============================================================================= 
@@ -65,9 +66,6 @@ event onPopPageEvent() {
  * correctly updated on the UI.
  *===========================================================================*/
 public function refresh() {
-  `log("Y: " $ gameInfo.tempestPawn.location.x);
-  `log("X: " $ gameInfo.tempestPawn.location.y);
-  
   switch(gameInfo.getCurrentMap()) {
     case MAP_TALONOVIA_TOWN:
       playerMarker.updatePosition(
@@ -188,7 +186,17 @@ public function refresh() {
  * Called every time the parent scene is loaded
  *===========================================================================*/
 public function onSceneActivation() {
-
+  // Update the player location
+  refresh();
+  
+  // Center to play location
+  worldMap.ShiftX(
+    (NATIVE_WIDTH / 2) - (playerMarker.getX() + 32)
+  );
+  
+  worldMap.ShiftY(
+    (NATIVE_HEIGHT / 2) - (playerMarker.getY() + 32)
+  );
 }
 
 /*=============================================================================

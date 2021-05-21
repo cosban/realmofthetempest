@@ -158,6 +158,9 @@ private function exitPage() {
   }
   
   ///playsfx SFX_MENU_ACCEPT SFX_MENU_BACK SFX_MENU_NAVIGATE
+  
+  // Autosave update
+  gameInfo.saveGame(true);
 }
 
 /*============================================================================= 

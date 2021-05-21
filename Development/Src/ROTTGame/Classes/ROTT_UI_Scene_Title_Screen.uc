@@ -40,7 +40,7 @@ event initScene() {
 event loadScene() {
   super.loadScene();
   
-  pushPage(titlePage);
+  if (pageStack.length == 0) pushPage(titlePage);
 }
 
 
@@ -54,15 +54,11 @@ public function elapseTimer(float deltaTime, float gameSpeedOverride) {
 }
 
 /*=============================================================================
- * titleCameraTick()
+ * transitionContinue()
  *
- * Called every frame to move the camera's view of the 3D world
+ * Load the transition effect to the save manager, from the continue button.
  *===========================================================================*/
 public function transitionContinue() {
-  // Load last town
-  transitionOnContinuePage.destinationWorld = gameInfo.getMapFileName(MAP_TALONOVIA_TOWN);
-  /* to do ... replace talonovia with last town */
-  
   // Execute transition
   pushPage(transitionOnContinuePage);
 }
@@ -147,7 +143,7 @@ defaultProperties
     effectConfig=NPC_TRANSITION_OUT
     
     // Destination
-    destinationScene=NO_SCENE
+    destinationScene=SCENE_SAVE_MANAGER
   end object
   pageComponents.add(Page_Transition_Continue)
   

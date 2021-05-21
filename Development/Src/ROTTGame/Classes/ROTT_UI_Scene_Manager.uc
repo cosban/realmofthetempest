@@ -19,6 +19,7 @@ var privatewrite ROTT_Game_Info gameInfo;
 // UI Scenes
 enum DisplayScenes {
   SCENE_TITLE_SCREEN,
+  SCENE_SAVE_MANAGER,
   SCENE_CHARACTER_CREATION,
   SCENE_OVER_WORLD,
   SCENE_WORLD_MAP,
@@ -49,6 +50,9 @@ var privatewrite DisplayScenes currentSceneType;
 
 // Title Screen
 var privatewrite ROTT_UI_Scene_Title_Screen sceneTitleScreen;
+
+// Save Manager
+var privatewrite ROTT_UI_Scene_Save_Manager sceneSaveManager;
 
 // Character Creation
 var privatewrite ROTT_UI_Scene_Character_Creation sceneCharacterCreation;
@@ -109,6 +113,7 @@ event initSceneManager() {
   // Note: Cannot initialize scenes here
   // Set references to avoid type casting
   sceneTitleScreen = ROTT_UI_Scene_Title_Screen(uiScenes[SCENE_TITLE_SCREEN]);
+  sceneSaveManager = ROTT_UI_Scene_Save_Manager(uiScenes[SCENE_SAVE_MANAGER]);
   sceneCharacterCreation = ROTT_UI_Scene_Character_Creation(uiScenes[SCENE_CHARACTER_CREATION]);
   sceneOverWorld = ROTT_UI_Scene_Over_World(uiScenes[SCENE_OVER_WORLD]);
   sceneWorldMap = ROTT_UI_Scene_World_Map(uiScenes[SCENE_WORLD_MAP]);
@@ -323,6 +328,11 @@ defaultProperties
   begin object class=ROTT_UI_Scene_Title_Screen Name=UI_Scene_Title_Screen
   end object
   uiScenes[SCENE_TITLE_SCREEN]=UI_Scene_Title_Screen
+  
+  // Save Files 
+  begin object class=ROTT_UI_Scene_Save_Manager Name=UI_Scene_Save_Manager
+  end object
+  uiScenes[SCENE_SAVE_MANAGER]=UI_Scene_Save_Manager
   
   // Character Creation
   begin object class=ROTT_UI_Scene_Character_Creation Name=UI_Scene_Character_Creation

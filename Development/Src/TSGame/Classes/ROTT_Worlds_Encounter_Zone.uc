@@ -22,6 +22,7 @@ simulated event postBeginPlay() {
   enemyClasses[Boss_Rhunia]=class'ROTT_Combat_Enemy_Boss_Rhunia';
   enemyClasses[Boss_Etzland]=class'ROTT_Combat_Enemy_Boss_Etzland';
   enemyClasses[Boss_Haxlyn]=class'ROTT_Combat_Enemy_Boss_Haxlyn';
+  enemyClasses[Boss_Valimor]=class'ROTT_Combat_Enemy_Boss_Valimor';
   
   // Ash Reaper
   enemyClasses[Ash_Reaper]=class'ROTT_Combat_Enemy_Ash_Reaper';

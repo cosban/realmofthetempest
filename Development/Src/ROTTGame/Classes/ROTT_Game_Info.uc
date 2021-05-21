@@ -13,7 +13,7 @@ dependsOn(ROTT_UI_Scene_Manager)
 dependsOn(ROTT_NPC_Container);
  
 // Version info
-const MAJOR = 1;  const MINOR = 5;  const REVISION = 3;  const PATCH = 'b';  
+const MAJOR = 1;  const MINOR = 5;  const REVISION = 3;  const PATCH = 'c';  
 const PHASE_INFO = "III";
 
 // Publishing settings
@@ -273,6 +273,29 @@ public function postLogin(PlayerController newPlayer) {
 }
 
 /*=============================================================================
+ * getSaveFile()
+ * 
+ * Returns a player profile if it exists.
+ *===========================================================================*/
+public function ROTT_Game_Player_Profile getSaveFile
+(
+  optional string folder = "save",
+  optional string path = "\\player_profile.bin"
+) 
+{
+  local ROTT_Game_Player_Profile profile;
+  
+  // Initialize a player profile
+  profile = new class'ROTT_Game_Player_Profile';
+  
+  if (class'Engine'.static.basicLoadObject(profile, folder $ path, true, 0)) {
+    profile.linkReferences();
+    return profile;
+  }
+  return none;
+}
+
+/**=============================================================================
  * saveFileExist()
  * 
  * Returns true if there is a save file.
@@ -321,7 +344,7 @@ public function bool loadSavedGame(optional bool transitionMode = false) {
   darkcyanlog("Loading profile: ..." $ path, DEBUG_DATA_STRUCTURE);
   if (class'Engine'.static.basicLoadObject(playerProfile, path, true, 0)) {
     // Upon successful profile load, continue loading and setup profile
-    playerProfile.loadGame(transitionMode);
+    playerProfile.loadProfile(transitionMode);
     playerProfile.linkReferences();
     return true;
   } else {

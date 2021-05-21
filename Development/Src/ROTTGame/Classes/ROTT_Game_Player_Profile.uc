@@ -395,7 +395,7 @@ public function linkGUIReferences(ROTT_UI_Scene_Manager sceneMgr) {
 /*============================================================================= 
  * saveGame()
  *
- * Description: Saves each child component of the player profile
+ * Saves each child component of the player profile
  * (See ROTT_Game_Info.saveGame())
  *===========================================================================*/
 public function saveGame
@@ -453,12 +453,11 @@ public function saveGame
 }
 
 /*============================================================================= 
- * loadGame()
+ * loadProfile()
  *
- * Description: Saves each child component of the player profile
- * (See ROTT_Game_Info.saveGame())
+ * Loads in data and prepares the profile for play.
  *===========================================================================*/
-public function loadGame(optional bool transitionMode = false) {
+public function loadProfile(optional bool transitionMode = false) {
   local ROTT_Party party;
   local ROTT_Combat_Hero tempHero;
   local ROTT_Inventory_Item tempItem;
@@ -501,7 +500,7 @@ public function loadGame(optional bool transitionMode = false) {
     // Load a party
     if (class'Engine'.static.BasicLoadObject(party, path, true, 0)) {
       
-      // Reset data structures (remove bad pointers from save file?)
+      // Reset to initial data structure
       party.initialize(i);
       
       // Place party into profile

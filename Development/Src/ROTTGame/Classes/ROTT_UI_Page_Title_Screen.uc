@@ -285,21 +285,24 @@ private function menuSelect() {
       
     case CONTINUE_GAME:
       whitelog("--+ Continue Game +--");
+      
+      gameInfo.sceneManager.sceneTitleScreen.transitionContinue();
+      
       // Attempt to load game
-      if (gameInfo.loadSavedGame()) {
-        // If loaded successfully, save for transition
-        gameInfo.saveGame(true);
-        
-        // Queue transition
-        gameInfo.sceneManager.sceneTitleScreen.transitionContinue();
-        
-        // Deactivate selector
-        menuSelector.setActive(false);
-      } else {
-        // Save file does not exist, play sound
-        gameinfo.sfxBox.playSFX(SFX_MENU_INSUFFICIENT); 
-        redlog("Save file does not exist");
-      }
+      ///if (gameInfo.loadSavedGame()) {
+      ///  // If loaded successfully, save for transition
+      ///  gameInfo.saveGame(true);
+      ///  
+      ///  // Queue transition
+      ///  gameInfo.sceneManager.sceneTitleScreen.transitionContinue();
+      ///  
+      ///  // Deactivate selector
+      ///  menuSelector.setActive(false);
+      ///} else {
+      ///  // Save file does not exist, play sound
+      ///  gameinfo.sfxBox.playSFX(SFX_MENU_INSUFFICIENT); 
+      ///  redlog("Save file does not exist");
+      ///}
       break;
   }
   
@@ -347,6 +350,15 @@ private function showIntroPage() {
   // Remove timer
   newGameTimer.destroy();
 } 
+
+/*============================================================================= 
+ * onSceneActivation
+ *
+ * Called every time the parent scene is loaded
+ *===========================================================================*/
+public function onSceneActivation() {
+  if (currentUIScene != MENU_HIDDEN) menuSelector.setActive(true);
+}
 
 /*=============================================================================
  * allowInput()

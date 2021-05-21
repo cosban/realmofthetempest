@@ -570,7 +570,8 @@ protected function updatePhysicalDamage() {
   
   // Calculate base damages
   subStats[MIN_PHYSICAL_DAMAGE] = strength / 2 + baseMinDamage;
-  subStats[MAX_PHYSICAL_DAMAGE] = (1 + (strength * 3) / 4) + baseMaxDamage;
+  ///subStats[MAX_PHYSICAL_DAMAGE] = (1 + (strength * 3) / 4) + baseMaxDamage;
+  subStats[MAX_PHYSICAL_DAMAGE] = (1 + (strength * 4) / 3) + baseMaxDamage;
   
   // Add temporary combat boosts
   subStats[MIN_PHYSICAL_DAMAGE] += statBoosts[ADD_MIN_PHYS_DAMAGE];

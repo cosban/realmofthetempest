@@ -49,10 +49,14 @@ public function initializeComponent(optional string newTag = "") {
   
   super.initializeComponent(newTag);
   
+  // Search loop for finding party containers
   for (i = 0; i < 4; i++) {
-    containers[i] = ROTT_UI_Party_Manager_Container(findComp("Party_Manager_Container_" $ i+1));
+    containers[i] = ROTT_UI_Party_Manager_Container(
+      findComp("Party_Manager_Container_" $ i+1)
+    );
   }
   
+  // Conscription
   conscriptionButton = findSprite("Party_Mgmt_Conscription_Button");
 }
 

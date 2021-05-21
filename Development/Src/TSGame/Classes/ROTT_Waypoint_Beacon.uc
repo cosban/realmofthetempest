@@ -136,7 +136,7 @@ defaultProperties
   // Particle decoration
   begin object Class=ParticleSystemComponent Name=Beacon_Particles
     bAutoActivate=true
-    Template=ParticleSystem'ROTT_Utilities.Shrines.Golem_Sys_1E_Blue'
+    Template=ParticleSystem'ROTT_Monument_Shrines.Golems.Golem_Sys_1E_Blue'
     //SecondsBeforeInactive=1
   end object
   beaconParticles=Beacon_Particles
