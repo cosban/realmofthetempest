@@ -57,7 +57,7 @@ protected function float attributeInfo
   
   switch (type) {
     case MANA_COST:
-      attribute = getManaEquation(level, 1.2, 0.8, 2.1, 4.0, 34.0);
+      attribute = getManaEquation(level, 1.2, 0.8, 2.6, 7.0, 34.0);
       break;
       
     case ELEMENTAL_DAMAGE_MIN:

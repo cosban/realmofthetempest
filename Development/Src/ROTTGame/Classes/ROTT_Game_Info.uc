@@ -17,7 +17,7 @@ const MAJOR = 1;  const MINOR = 5;  const REVISION = 3;  const PATCH = 'c';
 const PHASE_INFO = "III";
 
 // Publishing settings
-const bDevMode = true;      
+const bDevMode = false;      
 const bQaMode = false;     
 
 // Parameters used in ROTTTimers:
