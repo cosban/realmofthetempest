@@ -109,13 +109,19 @@ protected function navigationRoutineA() {
   switch(selector.getSelection()) {
     // Load hard save
     case 0:
+      // Check for valid file
+      if (!gameInfo.saveFileExist(selector.getSelection())) return;
+      
       // Load save file #1
       gameInfo.loadSavedGame(false);
       // Move save file to autosave slot
       gameInfo.saveGame(true);
       break;
     // Load autosave
-    case 1:
+    case maxIndex - 1:
+      // Check for valid file
+      if (!gameInfo.saveFileExist(-1)) return;
+      
       gameInfo.loadSavedGame(true);
       break;
   }

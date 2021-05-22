@@ -1,5 +1,5 @@
 /*=============================================================================
- * ROTT_Descriptor_Skill_Goliath_Earthquake
+ * ROTT_Descriptor_Skill_Goliath_Earthquake_Debuff
  *
  * Author: Otay
  * Bramble Gate Studios (All rights reserved)
@@ -7,7 +7,7 @@
  * One of the valkyries skill descriptors.
  *===========================================================================*/
 
-class ROTT_Descriptor_Skill_Goliath_Earthquake extends ROTT_Descriptor_Hero_Skill;
+class ROTT_Descriptor_Skill_Goliath_Earthquake_Debuff extends ROTT_Descriptor_Hero_Skill;
 
 /*=============================================================================
  * initialize()
@@ -16,6 +16,7 @@ class ROTT_Descriptor_Skill_Goliath_Earthquake extends ROTT_Descriptor_Hero_Skil
  * and paragraph formatting info
  *===========================================================================*/
 public function setUI() {
+  // Hidden from view, secondary effect module
   // Set header
   h1(
     "Earthquake"
@@ -56,17 +57,6 @@ protected function float attributeInfo
   local float attribute;
   
   switch (type) {
-    case MANA_COST:
-      attribute = getManaEquation(level, 1.2, 0.8, 2.1, 4.0, 34.0);
-      break;
-      
-    case ELEMENTAL_DAMAGE_MIN:
-      attribute = (level * 10) * (1 + int(level / 2.f) / 10.f);
-      break;
-    case ELEMENTAL_DAMAGE_MAX:
-      attribute = (level * 20) * (1 + int(level / 2.f) / 10.f);
-      break;
-      
     case DECREASE_DODGE_RATING: /// need to make this separate % chance to hit
       attribute = level * 10;
       break;
@@ -84,32 +74,18 @@ protected function float attributeInfo
  *===========================================================================*/
 defaultProperties
 {
-  targetingLabel=MULTI_TARGET_ATTACK
+  targetingLabel=MULTI_TARGET_DEBUFF
   
   // Level lookup info
   skillIndex=GOLIATH_EARTHQUAKE
   parentTree=CLASS_TREE
 
   // Sound effect
-  combatSfx=SFX_COMBAT_ATTACK
-  
-  // Secondary effect script
-  secondaryScriptIndex=GOLIATH_EARTHQUAKE_DEBUFF
+  combatSfx=SFX_COMBAT_DEBUFF
   
   // Skill Attributes
-  // Mana cost
-  skillAttributes.add((attributeSet=COMBAT_ACTION_SET,mechanicType=MANA_COST,tag="%mana",font=DEFAULT_SMALL_BLUE,returnType=INTEGER));
-  
-  // Elemental damage
-  skillAttributes.add((attributeSet=COMBAT_ACTION_SET,mechanicType=ELEMENTAL_DAMAGE_MIN,tag="%min",font=DEFAULT_SMALL_ORANGE,returnType=INTEGER));
-  skillAttributes.add((attributeSet=COMBAT_ACTION_SET,mechanicType=ELEMENTAL_DAMAGE_MAX,tag="%max",font=DEFAULT_SMALL_ORANGE,returnType=INTEGER));
-  
-  // Secondary debuff script
-  skillAttributes.add((attributeSet=COMBAT_ACTION_SET,mechanicType=QUEUED_SECONDARY_EFFECT,tag="%none",font=DEFAULT_SMALL_WHITE,returnType=INTEGER));
-  
   // Dodge reduction
-  skillAttributes.add((attributeSet=INACTIVE_SET,mechanicType=DECREASE_DODGE_RATING,tag="%dodge",font=DEFAULT_SMALL_ORANGE,returnType=INTEGER));
-  ///skillAttributes.add((attributeSet=COMBAT_SECONDARY_SET,mechanicType=HIT_CHANCE_OVERRIDE,tag="%chance",font=DEFAULT_SMALL_WHITE,returnType=INTEGER));
+  skillAttributes.add((attributeSet=QUEUED_ACTION_SET,mechanicType=DECREASE_DODGE_RATING,tag="%dodge",font=DEFAULT_SMALL_ORANGE,returnType=INTEGER));
   
   // Skill Icon
   begin object class=UI_Texture_Info Name=Encounter_Skill_Icon_Earthquake
@@ -126,17 +102,26 @@ defaultProperties
   skillIcon=Skill_Icon_Container
   
   // Skill Animation
-  begin object class=UI_Texture_Info Name=SkillAnim_Earthquake_F1
-    componentTextures.add(Texture2D'GUI_Skills.SkillAnim_Earthquake_F1')
+  begin object class=UI_Texture_Info Name=SkillAnim_Debuff_Red_F1
+    componentTextures.add(Texture2D'GUI_Skills.SkillAnim_Debuff_Red_F1')
   end object
-  begin object class=UI_Texture_Info Name=SkillAnim_Earthquake_F2
-    componentTextures.add(Texture2D'GUI_Skills.SkillAnim_Earthquake_F2')
+  begin object class=UI_Texture_Info Name=SkillAnim_Debuff_Red_F2
+    componentTextures.add(Texture2D'GUI_Skills.SkillAnim_Debuff_Red_F2')
   end object
-  begin object class=UI_Texture_Info Name=SkillAnim_Earthquake_F3
-    componentTextures.add(Texture2D'GUI_Skills.SkillAnim_Earthquake_F3')
+  begin object class=UI_Texture_Info Name=SkillAnim_Debuff_Red_F3
+    componentTextures.add(Texture2D'GUI_Skills.SkillAnim_Debuff_Red_F3')
   end object
-  begin object class=UI_Texture_Info Name=SkillAnim_Earthquake_F4
-    componentTextures.add(Texture2D'GUI_Skills.SkillAnim_Earthquake_F4')
+  begin object class=UI_Texture_Info Name=SkillAnim_Debuff_Red_F4
+    componentTextures.add(Texture2D'GUI_Skills.SkillAnim_Debuff_Red_F4')
+  end object
+  begin object class=UI_Texture_Info Name=SkillAnim_Debuff_Red_F5
+    componentTextures.add(Texture2D'GUI_Skills.SkillAnim_Debuff_Red_F5')
+  end object
+  begin object class=UI_Texture_Info Name=SkillAnim_Debuff_Red_F6
+    componentTextures.add(Texture2D'GUI_Skills.SkillAnim_Debuff_Red_F6')
+  end object
+  begin object class=UI_Texture_Info Name=SkillAnim_Debuff_Red_F7
+    componentTextures.add(Texture2D'GUI_Skills.SkillAnim_Debuff_Red_F7')
   end object
   
   // Skill Animation Container
@@ -144,10 +129,13 @@ defaultProperties
     tag="Skill_Animation_Container"
     textureWidth=240
     textureHeight=240
-    images(0)=SkillAnim_Earthquake_F1
-    images(1)=SkillAnim_Earthquake_F2
-    images(2)=SkillAnim_Earthquake_F3
-    images(3)=SkillAnim_Earthquake_F4
+    images(0)=SkillAnim_Debuff_Red_F1
+    images(1)=SkillAnim_Debuff_Red_F2
+    images(2)=SkillAnim_Debuff_Red_F3
+    images(3)=SkillAnim_Debuff_Red_F4
+    images(4)=SkillAnim_Debuff_Red_F5
+    images(5)=SkillAnim_Debuff_Red_F6
+    images(6)=SkillAnim_Debuff_Red_F7
   end object
   skillAnim=Skill_Animation_Container
   

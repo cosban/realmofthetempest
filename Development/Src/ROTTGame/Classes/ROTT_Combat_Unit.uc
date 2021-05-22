@@ -619,7 +619,8 @@ public function queueAction
   array<ROTT_Combat_Unit> targets,
   int count,
   float delay,
-  ROTT_Descriptor_Hero_Skill skillScript
+  ROTT_Descriptor_Hero_Skill skillScript,
+  optional bool bForceDelay = false
 ) 
 {
   local QueuedActionInfo nextAction;
@@ -631,11 +632,16 @@ public function queueAction
   
   // Queue actions
   for (i = 0; i < count; i++) {
-    // Remove delay if queue is empty
-    nextAction.delay = (queuedActions.length > 0) ? delay : 0.f;
+    // Use delay if forced or queue in use
+    if (bForceDelay || (queuedActions.length > 0)) {
+      nextAction.delay = delay;
+    } else {
+      delay = 0.f;
+    }
     
     // Add to queue
     queuedActions.addItem(nextAction);
+    violetLog("Added to queue:" @ skillScript);
   }
 }
 

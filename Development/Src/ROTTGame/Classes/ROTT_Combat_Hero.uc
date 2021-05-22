@@ -308,7 +308,6 @@ protected function populateActiveMods() {
  *===========================================================================*/
 private function addUnitMod(object unitModifier) {
   local ROTT_Descriptor_Hero_Skill mod;
-  
   // Type cast unit modifier
   mod = ROTT_Descriptor_Hero_Skill(unitModifier);
   

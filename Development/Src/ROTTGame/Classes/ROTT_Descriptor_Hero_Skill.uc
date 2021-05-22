@@ -187,6 +187,7 @@ enum AttributeTypes {
   ATMOSPHERIC_TAG,
   QUEUED_MULTISTRIKE_COUNT,
   QUEUED_MULTISTRIKE_DELAY,
+  QUEUED_SECONDARY_EFFECT,
   OMNI_SEEKER_HARDCORE,
   
   // Misc UI
@@ -269,6 +270,9 @@ struct SkillInfoSet {
 
 // Cache last hero reference for refresh
 var private ROTT_Combat_Hero lastHeroAccessed;
+
+// Store secondary effect script
+var private int secondaryScriptIndex;
 
 // Skill display information, generated from skillText and replaceCodes()
 var protected SkillInfoSet skillInfoData[3];
@@ -1112,6 +1116,13 @@ public function bool skillAction
           );
           break;
           
+        case DECREASE_DODGE_RATING:
+          targetMechanics.addMechanic(
+            REDUCE_DODGE, 
+            getAttributeInfo(DECREASE_DODGE_RATING, caster, level)
+          );
+          break;
+          
         case DECREASE_ACCURACY_RATING:
           targetMechanics.addMechanic(
             REDUCE_ACCURACY, 
@@ -1427,7 +1438,9 @@ public function bool skillAction
           break;
         
         case TARGET_CASTER:
-          if (caster.autoTargetedUnit == none) caster.autoTargetedUnit = caster.lastAttacker;
+          if (caster.autoTargetedUnit == none) {
+            caster.autoTargetedUnit = caster.lastAttacker;
+          }
           break;
         
         case RANDOM_TARGET:
@@ -1448,6 +1461,26 @@ public function bool skillAction
           // Note: We clear targets so that the combat action does not hit
           // Anything you may want on the combat action, should instead be queued. Do not mix.
           targets.length = 0;
+          break;
+        
+        case QUEUED_SECONDARY_EFFECT:
+          // Check for secondary script
+          ///if (secondaryScriptIndex == none) { 
+          ///  yellowLog("Warning (!) Empty secondary script field.");
+          ///  break;
+          ///}
+          // Queue up secondary effects
+          violetLog("Queue secondary effect");
+          caster.queueAction(
+            targets,
+            1,   // strike count
+            0.6, // delay
+            ROTT_Descriptor_Hero_Skill(caster.getSkillScript(secondaryScriptIndex)),
+            true
+          );
+          // Note: We clear targets so that the combat action does not hit
+          // Anything you may want on the combat action, should instead be queued. Do not mix.
+          ///targets.length = 0;
           break;
         
         case OVERRIDE_ATTACK_TIME:

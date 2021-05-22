@@ -288,6 +288,7 @@ public function ROTT_Game_Player_Profile getSaveFile
   // Initialize a player profile
   profile = new class'ROTT_Game_Player_Profile';
   
+  violetLog("Checking path: " $ folder $ path);
   if (class'Engine'.static.basicLoadObject(profile, folder $ path, true, 0)) {
     profile.linkReferences();
     return profile;
@@ -295,27 +296,34 @@ public function ROTT_Game_Player_Profile getSaveFile
   return none;
 }
 
-/**=============================================================================
+/*=============================================================================
  * saveFileExist()
  * 
- * Returns true if there is a save file.
+ * Based on a given index returns true if there is a save file.
  *===========================================================================*/
-public function bool saveFileExist() {
-  local ROTT_Game_Player_Profile profile;
-  local string path;
-  local string folder;
-  
-  // Load from main save folder
-  folder = "save";
-  path = folder $ "\\player_profile.bin";
-  
-  // Initialize a player profile
-  profile = new class'ROTT_Game_Player_Profile';
-  
-  if (class'Engine'.static.basicLoadObject(profile, path, true, 0)) {
-    return true;
+public function bool saveFileExist(optional int saveIndex = -1) {
+  switch (saveIndex) {
+    case -1:
+      // Load from temp save folder
+      if (getSaveFile("temp") != none) return true;
+      break;
+    default:      
+      // Load from main save folder
+      if (getSaveFile("save") != none) return true;
+      break;
   }
+  violetLog("Checked path: " $ saveIndex @ "DNE");
   return false;
+}
+
+/*=============================================================================
+ * saveFilesExist()
+ * 
+ * Returns true if there is at least one save file.
+ *===========================================================================*/
+public function bool saveFilesExist() {
+  // Check autosave and first(0th) slot
+  return (saveFileExist() || saveFileExist(0));
 }
 
 /*=============================================================================

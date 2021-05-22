@@ -15,13 +15,15 @@ class ROTT_Descriptor_List_Goliath_Skills extends ROTT_Descriptor_List;
 // A list of all skills in this set
 enum GoliathSkills {
   GOLIATH_STONE_STRIKE,
-  GOLIATH_EARTHQUAKE,
   GOLIATH_INTIMIDATION,
+  GOLIATH_EARTHQUAKE,
   GOLIATH_DEMOLISH,         
   GOLIATH_OBSIDIAN_SPIRIT,           
   GOLIATH_COUNTER_GLYPHS,
   GOLIATH_MARBLE_SPIRIT, 
-  GOLIATH_AVALANCHE
+  GOLIATH_AVALANCHE,
+  
+  GOLIATH_EARTHQUAKE_DEBUFF,
 };
 
 /*============================================================================= 
@@ -29,13 +31,13 @@ enum GoliathSkills {
  *
  * Called to reset skill data at the start of a new battle
  *===========================================================================*/
-public function skillReset() {
-  local int i;
-  
-  for (i = 0; i < GoliathSkills.enumCount; i++) {
-    ROTT_Descriptor_Hero_Skill(scriptList[i]).skillReset();
-  }
-}
+///public function skillReset() {
+///  local int i;
+///  
+///  for (i = 0; i < GoliathSkills.enumCount; i++) {
+///    ROTT_Descriptor_Hero_Skill(scriptList[i]).skillReset();
+///  }
+///}
 
 /*=============================================================================
  * descriptors
@@ -51,6 +53,7 @@ defaultProperties
   scriptClasses(GOLIATH_OBSIDIAN_SPIRIT)=class'ROTT_Descriptor_Skill_Goliath_Obsidian_Spirit'
   scriptClasses(GOLIATH_AVALANCHE)=class'ROTT_Descriptor_Skill_Goliath_Avalanche'
   scriptClasses(GOLIATH_MARBLE_SPIRIT)=class'ROTT_Descriptor_Skill_Goliath_Marble_Spirit'
+  scriptClasses(GOLIATH_EARTHQUAKE_DEBUFF)=class'ROTT_Descriptor_Skill_Goliath_Earthquake_Debuff'
   
   /** ================================================================
   Do not attach static objects here, they need to know gameInfo, which

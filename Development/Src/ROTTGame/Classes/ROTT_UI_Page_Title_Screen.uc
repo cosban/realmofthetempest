@@ -219,7 +219,7 @@ private function showMenu() {
   titleMenuOptions.setEnabled(true);
   menuSelector.setEnabled(true);
   
-  if (gameInfo.saveFileExist()) {
+  if (gameInfo.saveFilesExist()) {
     titleMenuOptions.setDrawIndex(0);
   } else {
     titleMenuOptions.setDrawIndex(1);
