@@ -39,7 +39,7 @@ public static function array<ItemCost> getRitualCost(RitualTypes ritualType) {
   local ItemCost costInfo;
   
   switch (ritualType) {
-    case RITUAL_EXPERIENCE_BOOST:
+    case RITUAL_EXPERIENCE_BOOST: /// Etzland forest
       // Set cost
       costInfo.currencyType = class'ROTT_Inventory_Item_Herb';
       costInfo.quantity = 1;
@@ -47,7 +47,7 @@ public static function array<ItemCost> getRitualCost(RitualTypes ritualType) {
       // Add to list
       costList.addItem(costInfo);
       break;
-    case RITUAL_MANA_REGEN:
+    case RITUAL_MANA_REGEN: /// Haxlyn Wilderness
       // Set cost
       costInfo.currencyType = class'ROTT_Inventory_Item_Bottle_Harrier_Claws';
       costInfo.quantity = 1;
@@ -77,7 +77,7 @@ public static function array<ItemCost> getRitualCost(RitualTypes ritualType) {
       // Add to list
       costList.addItem(costInfo);
       break;
-    case RITUAL_HEALTH_BOOST:
+    case RITUAL_HEALTH_BOOST:  /// Rhunia Citadel, Valimor gate
       // Set cost
       costInfo.currencyType = class'ROTT_Inventory_Item_Charm_Cerok';
       costInfo.quantity = 2;
@@ -92,7 +92,7 @@ public static function array<ItemCost> getRitualCost(RitualTypes ritualType) {
       ///// Add to list
       ///costList.addItem(costInfo);
       break;
-    case RITUAL_HEALTH_REGEN:
+    case RITUAL_HEALTH_REGEN: /// Rhunia cavern
       // Set cost
       costInfo.currencyType = class'ROTT_Inventory_Item_Bottle_Faerie_Bones';
       costInfo.quantity = 1;
@@ -107,7 +107,7 @@ public static function array<ItemCost> getRitualCost(RitualTypes ritualType) {
       // Add to list
       costList.addItem(costInfo);
       break;
-    case RITUAL_MANA_BOOST:
+    case RITUAL_MANA_BOOST: /// Haxland Outskirts
       // Set cost
       costInfo.currencyType = class'ROTT_Inventory_Item_Charm_Myroka';
       costInfo.quantity = 1;
@@ -122,7 +122,7 @@ public static function array<ItemCost> getRitualCost(RitualTypes ritualType) {
       // Add to list
       costList.addItem(costInfo);
       break;
-    case RITUAL_ARMOR:
+    case RITUAL_ARMOR: /// Haxland Wilderness Cave
       // Set cost
       costInfo.currencyType = class'ROTT_Inventory_Item_Charm_Cerok';
       costInfo.quantity = 1;
@@ -137,7 +137,7 @@ public static function array<ItemCost> getRitualCost(RitualTypes ritualType) {
       // Add to list
       costList.addItem(costInfo);
       break;
-    case RITUAL_SKILL_POINT:
+    case RITUAL_SKILL_POINT: /// Talonovia Backlands
       // Set cost
       costInfo.currencyType = class'ROTT_Inventory_Item_Bottle_Yinras_ore';
       costInfo.quantity = 1;
