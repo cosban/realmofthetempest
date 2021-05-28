@@ -61,16 +61,18 @@ protected function float attributeInfo
   switch (type) {
     case MANA_COST:
       //attribute = getManaEquation(level, 1.14, 0.785, 2.42, 48.0, 7.0);
-      attribute = getManaEquation(level, 1.14, 0.785, 2.38, 33.0, 3.0);
+      attribute = getManaEquation(level, 1.14, 0.785, 2.38, 25.0, 8.0);
       break;
       
     case PHYSICAL_DAMAGE_MIN:
       //attribute = hero.subStats[MIN_PHYSICAL_DAMAGE] * (1.45 + (0.23 * (level - 1)));
-      attribute = hero.subStats[MIN_PHYSICAL_DAMAGE] * (2.75 + (0.25 * (level - 1)));
+      //attribute = hero.subStats[MIN_PHYSICAL_DAMAGE] * (2.75 + (0.25 * (level - 1)));
+      attribute = hero.subStats[MIN_PHYSICAL_DAMAGE] * (2.75 + (0.35 * (level - 1)));
       break;
     case PHYSICAL_DAMAGE_MAX:
       //attribute = hero.subStats[MAX_PHYSICAL_DAMAGE] * (1.45 + (0.23 * (level - 1)));
-      attribute = hero.subStats[MAX_PHYSICAL_DAMAGE] * (2.5 + (0.65 * (level - 1)));
+      //attribute = hero.subStats[MAX_PHYSICAL_DAMAGE] * (2.5 + (0.65 * (level - 1)));
+      attribute = hero.subStats[MAX_PHYSICAL_DAMAGE] * (2.75 + (0.85 * (level - 1)));
       break;
       
     case TEMP_MANA_DRAIN_TIME:

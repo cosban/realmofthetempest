@@ -424,6 +424,11 @@ public function parseMechanics
           
           // Deal physical damage
           takeDamage(value, caster, critAmp);
+          
+          // Track damage dealt
+          if (ROTT_Combat_Hero(caster) != none) {
+            ROTT_Combat_Hero(caster).persistentStatistics[TRACK_PHYSICAL_DAMAGE] += value;
+          }
           break;
         case ELEMENTAL_DAMAGE:
           // Check for demoralized caster
@@ -434,10 +439,20 @@ public function parseMechanics
           
           // Deal elemental damage
           takeDamage(value, caster);
+          
+          // Track damage dealt
+          if (ROTT_Combat_Hero(caster) != none) {
+            ROTT_Combat_Hero(caster).persistentStatistics[TRACK_ELEMENTAL_DAMAGE] += value;
+          }
           break;
         case ATMOSPHERIC_DAMAGE:
           // Deal atmospheric damage
           takeDamage(value, caster, , IGNORE_ARMOR_RATING);
+          
+          // Track damage dealt
+          if (ROTT_Combat_Hero(caster) != none) {
+            ROTT_Combat_Hero(caster).persistentStatistics[TRACK_ATMOSPHERIC_DAMAGE] += value;
+          }
           break;
         case RECOVER_HEALTH:
           // Heal

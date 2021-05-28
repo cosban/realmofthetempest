@@ -1574,9 +1574,12 @@ public function int getGlyphChance(GlyphEnum glyph) {
  * Should be called before each battle.
  *===========================================================================*/
 public function skillReset() {
+  // Pass skill reset to skill trees
   classSkillSet.skillReset();
   glyphSkillSet.skillReset();
   masterySkillSet.skillReset();
+  
+  // Pass skill reset to defend skill
   defendAbility.skillReset();
 }
 
