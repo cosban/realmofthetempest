@@ -147,37 +147,17 @@ public function refresh() {
       break;
     case MAP_VALIMOR_CITADEL:
       playerMarker.updatePosition(
-        0.01641298 * gameInfo.tempestPawn.location.y + 3004+28 + worldMap.getX(),
-        -0.01641298 * gameInfo.tempestPawn.location.x + 661+9 + worldMap.getY()
+        0.01641298 * gameInfo.tempestPawn.location.y + 3032 + worldMap.getX(),
+        -0.01641298 * gameInfo.tempestPawn.location.x + 670 + worldMap.getY()
+      );
+      break;
+    case MAP_KALROTH_WILDERNESS:
+      playerMarker.updatePosition(
+        0.00686793 * gameInfo.tempestPawn.location.y + 2203 + worldMap.getX(),
+        -0.00686793 * gameInfo.tempestPawn.location.x + 1136 + worldMap.getY()
       );
       break;
   }
-  
-
-  /// point 2D                  point 3D
-  /// x 1581                    /// 2410
-  /// y 625                     /// -2496
-  
-  /// point 2D                  point 3D
-  /// x 1638                    /// -9795
-  /// y 398                     /// 19403
-  
-  /**
-  /// FIND RATIO OF 3D WORLD LENGTH VS 2D WORLD LENGTH
-  #12205    X1 : 3D WORLD LENGTH
-  #21899    Y1 : 3D WORLD LENGTH
-  
-  #202 X1  :  2D MAP LENGTH
-  #367 Y1 :  2D MAP LENGTH
-  
-  /// SOLVE AVERAGE RATIO FOR SLOPE
-  # ((202 / 12205) + (367 / 21899)) / 2
-  # 0.01665467506321477849437229600816
-  #
-  
-  /// PLUG INTO Y=MX+B TO SOLVE FOR B
-  
-  **/
 }
   
 /*============================================================================= 
