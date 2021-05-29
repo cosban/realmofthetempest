@@ -122,7 +122,6 @@ public function selectTexture(int index) {
  *============================================================================*/
 public function randomizeTexture() {
   selectTexture(rand(componentTextures.length));
-  violetLog("Randomly selected: " $ textureIndex);
 }
 
 /*============================================================================= 

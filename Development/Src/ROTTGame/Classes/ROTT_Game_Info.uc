@@ -13,7 +13,7 @@ dependsOn(ROTT_UI_Scene_Manager)
 dependsOn(ROTT_NPC_Container);
  
 // Version info
-const MAJOR = 1;  const MINOR = 5;  const REVISION = 3;  const PATCH = 'd';  
+const MAJOR = 1;  const MINOR = 5;  const REVISION = 3;  const PATCH = 'e';  
 const PHASE_INFO = "III";
 
 // Publishing settings
@@ -206,7 +206,7 @@ event initGame(string options, out string errorMessage) {
   
   // Attempt to load speedrun info
   if (class'Engine'.static.basicLoadObject(milestoneCookie, "Save\\milestones.bin", true, 0)) {
-    cyanLog("Speedrun info loaded");
+    cyanLog("Speedrun info loaded", DEBUG_DATA_STRUCTURE);
   }
   
   // Load gameplay based on map name
@@ -288,7 +288,7 @@ public function ROTT_Game_Player_Profile getSaveFile
   // Initialize a player profile
   profile = new class'ROTT_Game_Player_Profile';
   
-  violetLog("Checking path: " $ folder $ path);
+  // Attempt to load from path
   if (class'Engine'.static.basicLoadObject(profile, folder $ path, true, 0)) {
     profile.linkReferences();
     return profile;
@@ -312,7 +312,7 @@ public function bool saveFileExist(optional int saveIndex = -1) {
       if (getSaveFile("save") != none) return true;
       break;
   }
-  violetLog("Checked path: " $ saveIndex @ "DNE");
+  ///violetLog("Checked path: " $ saveIndex @ "DNE");
   return false;
 }
 

@@ -193,16 +193,18 @@ public function newGameSetup(byte newGameMode) {
 public function setGameMode(GameModes newGameMode) {
   gameMode = newGameMode;
   
+  // Check game mode
   switch (gameMode) {
     case MODE_CASUAL:
+      // No mods
       break;
     case MODE_HARDCORE:
       // Add luck boost
       enchantmentLevels[OMNI_SEEKER] = 10;
       break;
     case MODE_TOUR:
-      // Disable encounters
-      /// Feature implemented through game mode
+      // Open all portals
+      gameInfo.playerProfile.unlockAllPortals();
       break;
   }
   

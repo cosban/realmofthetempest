@@ -256,7 +256,6 @@ public function onNavigateRight() {
 public function bool preNavigateLeft() {
   switch (menuState) {
     case SELECT_ENCHANTMENT:
-      violetLog("enchantmentSelection: " $ selector.getselection());
       // Select enchantment left
       if (enchantmentSelection > 0) return true;
       break;

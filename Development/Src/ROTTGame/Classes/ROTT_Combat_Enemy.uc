@@ -149,7 +149,6 @@ public function UI_Texture_Info getPortrait() {
       break;
     default:
       info = enemySprites.images[clanColor];
-      violetLog("Clan color: " $ clanColor);
       break;
   } 
   

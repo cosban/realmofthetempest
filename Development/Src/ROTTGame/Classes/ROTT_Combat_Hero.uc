@@ -162,6 +162,9 @@ delegate bool actionRoutine
 public function initialize() {
   linkReferences();
   
+  // Skip if game is not engaged
+  if (gameInfo.playerProfile == none) return;
+  
   // Set up stat data
   statDescriptors = new(self) class'ROTT_Descriptor_List_Stats';
   statDescriptors.initialize();

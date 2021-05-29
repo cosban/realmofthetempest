@@ -145,9 +145,10 @@ public static function ROTT_Inventory_Item generateItem
   
   // Calculate chance to drop
   if (fRand() * 100 < dropChance) {
-    item.darkGreenLog(" ~ ");
-    item.darkGreenLog(" Random range: " $ minQuantity $ " - " $ maxQuantity $ " for " $item);
-    item.darkGreenLog(" ~ ");
+    item.darkGreenLog(
+      "Random range: " $ minQuantity $ " - " $ maxQuantity $ " for " $ item,
+      DEBUG_LOOT
+    );
     
     // Roll random quantity
     itemCount = minQuantity + rand(maxQuantity - minQuantity + 1);

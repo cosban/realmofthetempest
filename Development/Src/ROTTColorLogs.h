@@ -18,6 +18,7 @@ const PREFIX_UI_CONTROLLERS = 'Controller';
 const PREFIX_PLAYER_PROFILE = 'Profile';
 const PREFIX_DATA_STRUCTURE = 'Data';
 const PREFIX_HIERARCHY      = 'Hierarchy';
+const PREFIX_LOOT           = 'Loot';
   
 // Filtering modes for each debug type
 const VERBOSE_DEFAULT        = true;
@@ -29,6 +30,7 @@ const VERBOSE_UI_CONTROLLERS = false;
 const VERBOSE_PLAYER_PROFILE = false;
 const VERBOSE_DATA_STRUCTURE = false;
 const VERBOSE_HIERARCHY      = false;
+const VERBOSE_LOOT           = true;
   
 // Types of debug messages
 enum LogTypes {
@@ -41,6 +43,7 @@ enum LogTypes {
   DEBUG_PLAYER_PROFILE,
   DEBUG_DATA_STRUCTURE,
   DEBUG_HIERARCHY,
+  DEBUG_LOOT,
 };
 
 /*=============================================================================
@@ -59,6 +62,7 @@ static private function Name getPrefix(LogTypes logType) {
     case DEBUG_PLAYER_PROFILE: return PREFIX_PLAYER_PROFILE;
     case DEBUG_DATA_STRUCTURE: return PREFIX_DATA_STRUCTURE;
     case DEBUG_HIERARCHY:      return PREFIX_HIERARCHY;
+    case DEBUG_LOOT:           return PREFIX_LOOT;
     default:
       yellowLog("Warning (!) Unhandled debug type");
       return '';
@@ -82,6 +86,7 @@ static private function bool verboseCheck(LogTypes logType) {
     case DEBUG_PLAYER_PROFILE: return VERBOSE_PLAYER_PROFILE;
     case DEBUG_DATA_STRUCTURE: return VERBOSE_DATA_STRUCTURE;
     case DEBUG_HIERARCHY:      return VERBOSE_HIERARCHY;
+    case DEBUG_LOOT:           return VERBOSE_LOOT;
     default:
       yellowLog("Warning (!) Unhandled debug type");
       return false;
