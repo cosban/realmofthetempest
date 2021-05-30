@@ -135,6 +135,11 @@ var public ROTT_Mob enemyEncounter;
 var public bool bEncounterActive;
 var public bool bEncounterPending;
 
+// Time until encounter forced
+var private float encounterDelay;
+var private bool bDelayedCombat;
+var private array<SpawnerInfo> delayedMobInfo;
+
 // Combat trigger delay for traps and falling
 var private ROTTTimer combatTriggerDelay;
 
@@ -597,6 +602,21 @@ public function combatTransition() {
 }
 
 /*=============================================================================
+ * forceEncounterDelay()
+ *
+ * Called to delay an encounter for a given time
+ *===========================================================================*/
+public function forceEncounterDelay(
+  array<SpawnerInfo> mobInfo, 
+  float delayTime
+) 
+{
+  encounterDelay = delayTime;
+  bDelayedCombat = true;
+  delayedMobInfo = mobInfo;
+}
+
+/*=============================================================================
  * forceEncounter()
  *
  * Called to force battles with specific bosses and what not
@@ -1000,6 +1020,18 @@ public function tick(float deltaTime) {
     // Track temporal usage
     if (gameSpeed != 1) {
       playerProfile.timeTemporallyAccelerated += deltaTime / gameSpeed;
+    }
+  }
+  
+  // Track combat delay
+  if (bDelayedCombat) {
+    // Track time for countdown
+    encounterDelay -= deltaTime;
+    
+    // Check for completion
+    if (encounterDelay <= 0) {
+      bDelayedCombat = false;
+      forceEncounter(delayedMobInfo);
     }
   }
 }
