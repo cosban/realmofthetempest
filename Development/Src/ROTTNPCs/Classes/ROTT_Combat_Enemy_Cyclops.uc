@@ -90,7 +90,7 @@ defaultProperties
     componentTextures.add(Texture2D'Monsters.Enemy_Portrait_Cyclops_Dark_Blue_240')
   end object
   begin object class=UI_Texture_Info Name=Enemy_Portrait_Cyclops_Cyan_240
-    // Oh no! I'm missing :( 
+    componentTextures.add(Texture2D'Monsters.Enemy_Portrait_Cyclops_Cyan_240')
   end object
   begin object class=UI_Texture_Info Name=Enemy_Portrait_Cyclops_Green_240
     componentTextures.add(Texture2D'Monsters.Enemy_Portrait_Cyclops_Green_240')
@@ -101,7 +101,7 @@ defaultProperties
     componentTextures.add(Texture2D'Monsters.Enemy_Portrait_Cyclops_Gold_240')
   end object
   begin object class=UI_Texture_Info Name=Enemy_Portrait_Cyclops_Orange_240
-    // Oh no! I'm missing :( 
+    componentTextures.add(Texture2D'Monsters.Enemy_Portrait_Cyclops_Orange_240')
   end object
   begin object class=UI_Texture_Info Name=Enemy_Portrait_Cyclops_Red_240
     componentTextures.add(Texture2D'Monsters.Enemy_Portrait_Cyclops_Red_Black_240')
@@ -113,10 +113,10 @@ defaultProperties
     componentTextures.add(Texture2D'Monsters.Enemy_Portrait_Cyclops_Purple_240')
   end object
   begin object class=UI_Texture_Info Name=Enemy_Portrait_Cyclops_Black_240
-    componentTextures.add(Texture2D'Monsters.Enemy_Portrait_Cyclops_Black_Tan_240')
+    componentTextures.add(Texture2D'Monsters.Enemy_Portrait_Cyclops_Black_240')
   end object
   begin object class=UI_Texture_Info Name=Enemy_Portrait_Cyclops_White_240
-    // Oh no! I'm missing :( 
+    componentTextures.add(Texture2D'Monsters.Enemy_Portrait_Cyclops_Black_Tan_240')
   end object
   
   // Sprite options
@@ -141,7 +141,7 @@ defaultProperties
     componentTextures.add(Texture2D'Monsters.Enemy_Portrait_Cyclops_Dark_Blue_360')
   end object
   begin object class=UI_Texture_Info Name=Enemy_Portrait_Cyclops_Cyan_360
-    // Oh no! I'm missing :( 
+    componentTextures.add(Texture2D'Monsters.Enemy_Portrait_Cyclops_Cyan_360')
   end object
   begin object class=UI_Texture_Info Name=Enemy_Portrait_Cyclops_Green_360
     componentTextures.add(Texture2D'Monsters.Enemy_Portrait_Cyclops_Green_360')
@@ -152,7 +152,7 @@ defaultProperties
     componentTextures.add(Texture2D'Monsters.Enemy_Portrait_Cyclops_Gold_360')
   end object
   begin object class=UI_Texture_Info Name=Enemy_Portrait_Cyclops_Orange_360
-    // Oh no! I'm missing :( 
+    componentTextures.add(Texture2D'Monsters.Enemy_Portrait_Cyclops_Orange_360')
   end object
   begin object class=UI_Texture_Info Name=Enemy_Portrait_Cyclops_Red_360
     componentTextures.add(Texture2D'Monsters.Enemy_Portrait_Cyclops_Red_Black_360')
@@ -164,10 +164,10 @@ defaultProperties
     componentTextures.add(Texture2D'Monsters.Enemy_Portrait_Cyclops_Purple_360')
   end object
   begin object class=UI_Texture_Info Name=Enemy_Portrait_Cyclops_Black_360
-    componentTextures.add(Texture2D'Monsters.Enemy_Portrait_Cyclops_Black_Tan_360')
+    componentTextures.add(Texture2D'Monsters.Enemy_Portrait_Cyclops_Black_240')
   end object
   begin object class=UI_Texture_Info Name=Enemy_Portrait_Cyclops_White_360
-    // Oh no! I'm missing :( 
+    componentTextures.add(Texture2D'Monsters.Enemy_Portrait_Cyclops_Black_Tan_360')
   end object
   
   // Sprite options
