@@ -28,37 +28,42 @@ public function initDialogue() {
   
   // Introduction
   `NEW_NODE(INTRODUCTION, NUETRAL)
-    "Drujiva speaking, I'm the druid sage of this", 
-    "mountain shrine"
+    "Drujiva speaking, druid sage of this. . .", 
+    "Mountain temple."
   `ENDNODE
   
   `NEW_NODE(INTRODUCTION, NUETRAL)
-    "Heal beneath this four spirit house, as the", 
-    "queen of this mountain peak shines holy light down for us."
+    "I don't know if I can. . .", 
+    "Fix this fallen world again."
   `ENDNODE
-  
-  `NEW_NODE(INTRODUCTION, NUETRAL)
-    "Won't you. . . will you help recover this shrine?", 
-    "Our only need is to retrieve the golden ornaments."
-  `ENDNODE
-  
+
   `NEW_NODE(INTRODUCTION, NUETRAL)
     "The golden ornaments have become sprawled out,", 
-    "now in the hands of evil, in the chaos of this. . ."
+    "now in the hands of evil, amid the chaos of this. . ."
   `ENDNODE
   
   `NEW_NODE(INTRODUCTION, NUETRAL)
-    "this. . . black magic tragedy.", 
+    ". . . black magic tragedy. . .", 
     ""
   `ENDNODE
   
   `NEW_NODE(INTRODUCTION, NUETRAL)
-    "Retrieve the golden ornaments of chaos from the fallen citadels", 
+    "You don't have to help us,", 
+    "but if you seek the ornaments return them here."
+  `ENDNODE
+  
+  `NEW_NODE(INTRODUCTION, NUETRAL)
+    "The golden relics lie in the fallen citadels", 
     "of Rhunia, Etzland, Haxlyn, Valimor, and Kalroth."
   `ENDNODE
   
   `NEW_NODE(INTRODUCTION, NUETRAL)
-    "Then shall we. . . find hope in order.", 
+    "Bring healing here, to this four spirit house,", 
+    "where the sun shines holy light down upon it's peak."
+  `ENDNODE
+  
+  `NEW_NODE(INTRODUCTION, NUETRAL)
+    "Then shall we. . . find hope. . . in order. . .", 
     ""
   `ENDNODE
   
