@@ -127,14 +127,14 @@ public function onDefend(ROTT_Combat_Unit target, ROTT_Combat_Hero caster) {
     heroScript = ROTT_Descriptor_Hero_Skill(scriptList[i]);
     if (heroScript.getSkillLevel(caster) != 0) {
       heroScript.skillAction(
-        targets,
-        caster,
-        ON_DEFEND_SET
-      );
-      heroScript.skillAction(
         allHeroes,
         caster,
         ON_DEFEND_PARTY_SET
+      );
+      heroScript.skillAction(
+        targets,
+        caster,
+        ON_DEFEND_SET
       );
     }
   }

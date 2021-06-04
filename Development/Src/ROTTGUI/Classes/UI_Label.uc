@@ -133,13 +133,13 @@ protected function drawCanvas(Canvas canvas) {
   canvas.textSize(
     labelText, 
     textWidth, 
-    textHeight, 
+    textHeight,
     uiFonts[fontStyle].scaleX * windowScale.x, 
     uiFonts[fontStyle].scaleY * windowScale.y
   );
   
   // Calculate x and y starting coordinates
-  calcAlignmentXY(x, y, textWidth, textHeight);
+  calcAlignmentXY(x, y, textWidth, textHeight *0.95); ///test
   
   // Calculate real time color
   realTimeColor = getColor();
@@ -284,6 +284,9 @@ protected function calcAlignmentXY
  *===========================================================================*/
 public function elapseTimer(float deltaTime, float gameSpeedOverride) {
   super.elapseTimer(deltaTime, gameSpeedOverride);
+  
+  // Stall for activation delay
+  if (activationDelay > 0) { return; } /// This line could be encapsulated better
   
   /// move to update()
   // Scroll effect

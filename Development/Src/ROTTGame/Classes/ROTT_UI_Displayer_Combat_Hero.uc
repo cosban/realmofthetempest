@@ -12,6 +12,13 @@
 
 class ROTT_UI_Displayer_Combat_Hero extends ROTT_UI_Displayer_Combat;
 
+// Display control variables
+// Store delay time before showing HUD updates
+var public float displayerDelay;
+
+// Store delay from overlapping previous labels
+var public float overlapDelay;
+
 // Internal references
 var private ROTT_UI_Displayer_Tuna_Bar tunaDisplayer;
 var private ROTT_UI_Displayer_Health_Globe healthDisplayer;
@@ -128,7 +135,8 @@ protected function UI_Label makeLabel
   coerce string text,
   optional CombatFonts fontIndex = FONT_LARGE,
   optional ColorStyles colorIndex = COLOR_GRAY,
-  optional LabelClass labelType = LABEL_TYPE_RESIST
+  optional LabelClass labelType = LABEL_TYPE_RESIST,
+  optional float labelDelay = 0.f
 ) 
 {
   local UI_Label label;
@@ -136,23 +144,35 @@ protected function UI_Label makeLabel
   // Regular make label routine
   label = super.makeLabel(text, fontIndex, colorIndex, labelType);
   
+  // Set label delay
+  if (labelDelay != 0) {
+    label.activationDelay = labelDelay;
+    label.setEnabled(false);
+  }
+  
   // Adjust text location
   switch (labelType) {
     case LABEL_TYPE_STAT_REPORT: 
+      // Label placement
       label.updatePosition(getX(), getY() - 25, getX() + 294, getY() + 35);
       break;
     case LABEL_TYPE_STAT_CHANGE: 
+      // Label placement
       label.updatePosition(getX(), getY() - 55, getX() + 384, getY() + 5);
       break;
+    // Health recovery
     case LABEL_TYPE_HEALTH_GAIN: 
       label.updatePosition(getX() + 75, getY() + 135, getX() + 305, getY() + 75);
       break;
+    // Mana recovery
     case LABEL_TYPE_MANA_GAIN:   
       label.updatePosition(getX(), getY() + 10, getX() + 150, getY() + 45);
       break;
+    // Damage numbers
     case LABEL_TYPE_DAMAGE:
       label.updatePosition(getX() + 175, getY(), NATIVE_WIDTH, getY() + 300);
       break;
+    // Mana Damage
     case LABEL_TYPE_MANA_DAMAGE:
       label.updatePosition(getX() + 80, getY() + 21, NATIVE_WIDTH, getY() + 66);
       break;
@@ -178,6 +198,10 @@ protected function UI_Label makeLabel
 public function elapseTimer(float deltaTime, float gameSpeedOverride) {
   // The parent class will erase temporary combat labels over time
   super.elapseTimer(deltaTime, gameSpeedOverride);
+  
+  // Track overlap delay
+  overlapDelay -= deltaTime;
+  if (overlapDelay <= 0) overlapDelay = 0;
 }
 
 /*=============================================================================
@@ -316,11 +340,17 @@ public function improveStat(float value, float total, MechanicTypes targetStat) 
       break;
   }
   
-  // Total stat message
-  makeLabel(totalMsg, FONT_MEDIUM_ITALICS, msgColor, LABEL_TYPE_STAT_REPORT);
-  
   // Skip next message for when stance is reverting attributes
   if (value < 0) return;
+  
+  // Total stat message
+  makeLabel(
+    totalMsg, 
+    FONT_MEDIUM_ITALICS, 
+    msgColor, 
+    LABEL_TYPE_STAT_REPORT,
+    displayerDelay + overlapDelay
+  );
   
   // Set hero add message
   switch (targetStat) {
@@ -345,7 +375,17 @@ public function improveStat(float value, float total, MechanicTypes targetStat) 
   }
   
   // Added stat message
-  makeLabel(addedMsg, FONT_MEDIUM_ITALICS, msgColor, LABEL_TYPE_STAT_CHANGE);
+  makeLabel(
+    addedMsg, 
+    FONT_MEDIUM_ITALICS, 
+    msgColor, 
+    LABEL_TYPE_STAT_CHANGE,
+    displayerDelay + overlapDelay
+  );
+  
+  // Increase overlap delay
+  overlapDelay += 0.5;
+  
 }
   
 /*=============================================================================

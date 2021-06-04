@@ -49,6 +49,7 @@ public function initializeComponent(optional string newTag = "") {
     componentList.addItem(heroDisplayers[i]);
     heroDisplayers[i].initializeComponent();
     heroDisplayers[i].updatePosition(687 + (i*230), 443);
+    heroDisplayers[i].displayerDelay = i * 0.125;
   }
   
   glyphFeedback = findLabel("Glyph_Feedback_Label");

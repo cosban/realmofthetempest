@@ -264,6 +264,7 @@ public function elapseTimer(float deltaTime, float gameSpeedOverride) {
         
         // Force out more labels if overwhelmed
         while (queues[i].queueDelay + QUEUE_DELAY <= 0 && queues[i].queue.length > 0) {
+          // Set delay
           queues[i].queueDelay += QUEUE_DELAY;
           
           // Swap from queue to active components
@@ -271,9 +272,6 @@ public function elapseTimer(float deltaTime, float gameSpeedOverride) {
           queues[i].queue.remove(0, 1);
           /// heavier animation??
         }
-        
-        // Set delay
-        ///queues[i].queueDelay = QUEUE_DELAY;
       }
     }
   }
@@ -313,7 +311,8 @@ protected function UI_Label makeLabel
   coerce string text,
   optional CombatFonts fontIndex = FONT_LARGE,
   optional ColorStyles colorIndex = COLOR_GRAY,
-  optional LabelClass labelType = LABEL_TYPE_RESIST
+  optional LabelClass labelType = LABEL_TYPE_RESIST,
+  optional float labelDelay = 0.f
 ) 
 {
   local UI_Label_Combat label;

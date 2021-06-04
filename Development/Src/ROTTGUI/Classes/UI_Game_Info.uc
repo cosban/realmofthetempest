@@ -47,8 +47,8 @@ event initGame(string options, out string errorMessage) {
     graylog("No option settings found, loading defaults.");
     
     // Default options
-    optionsCookie.sfxVolume = 1.0;
-    optionsCookie.musicVolume = 1.0;
+    optionsCookie.sfxVolume = 0.65;
+    optionsCookie.musicVolume = 0.75;
     
     // Default resolution
     setResolution(1440, 900);

@@ -434,7 +434,8 @@ protected function UI_Label makeLabel
   coerce string text,
   optional CombatFonts fontIndex = FONT_LARGE,
   optional ColorStyles colorIndex = COLOR_GRAY,
-  optional LabelClass labelType = LABEL_TYPE_RESIST
+  optional LabelClass labelType = LABEL_TYPE_RESIST,
+  optional float labelDelay = 0.f
 ) 
 {
   local UI_Label label;

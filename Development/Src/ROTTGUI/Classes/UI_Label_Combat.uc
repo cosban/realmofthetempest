@@ -243,6 +243,9 @@ protected function Color getColor() {
 public function elapseTimer(float deltaTime, float gameSpeedOverride) {
   super.elapseTimer(deltaTime, gameSpeedOverride);
   
+  // Stall for activation delay
+  if (activationDelay > 0) { return; } /// This line could be encapsulated better
+  
   // Track lifetime
   lifeTime -= deltaTime;
   elapsedTime += deltaTime;

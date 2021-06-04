@@ -32,6 +32,9 @@ var privatewrite string tag;
 // The components attached to this component
 var public editinline instanced array<UI_Component> componentList;
 
+// Store time until display active
+var public float activationDelay;
+
 // If true, size changes will be oriented around the center point
 var public bool bAnchor;
 var public int anchorX, anchorY;
@@ -291,72 +294,6 @@ public function uncullTag(UI_Component source) {
   }
 }
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-/**=============================================================================
- * getTextures()
- *
- * Retrieves all images textures from components of this object
- *===========================================================================*/
-///public function array<UI_Texture_Info> getTextures() {
-///  local array<UI_Texture_Info> returnTextures, tempTextures;
-///  local int i, j;
-///  
-///  // Collect textures recursively
-///  for (i = 0; i < componentList.length; i++) {
-///    tempTextures = componentList[i].getTextures();
-///    for (j = 0; j < tempTextures.length; j++) {
-///      returnTextures.addItem(tempTextures[j]);
-///    }
-///  }
-///  
-///  return returnTextures;
-///}
-
-/**=============================================================================
- * append()
- *
- * Concatenates one list with another
- *===========================================================================
-public function array<UI_Texture_Info> append
-(
-  array<UI_Texture_Info> list1,
-  array<UI_Texture_Info> list2
-) 
-{
-  local array<UI_Texture_Info> returnList;
-  local int i;
-  
-  // Populate items from first list
-  for (i = 0; i < list1.length; i++) {
-    returnList.addItem(list1[i]);
-  }
-
-  for (i = 0; i < list2.length; i++) {
-    returnList.addItem(list2[i]);
-  } 
-  
-  return returnList;
-}*/
-
 /*============================================================================= 
  * initializeComponent
  *
@@ -469,6 +406,22 @@ public function float getCenterY() {
  *===========================================================================*/
 public function elapseTimer(float deltaTime, float gameSpeedOverride) {
   local float deltaX, deltaY;
+  
+  // Track delayed activation of this UI element
+  if (activationDelay > 0) {
+    // Track time
+    activationDelay -= deltaTime;
+    
+    // Check for time completion
+    if (activationDelay <= 0) {
+      // Switch to visibility
+      bEnabled = true;
+    } else {
+      // Remain hidden
+      bEnabled = false;
+      return;
+    }
+  }
   
   // Ignore effect calculations if disabled
   if (!bEnabled) return;
