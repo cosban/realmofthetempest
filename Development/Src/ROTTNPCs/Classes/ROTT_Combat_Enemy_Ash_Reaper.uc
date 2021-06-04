@@ -48,8 +48,8 @@ public function initStats
       armorPerLvl = 0;
       baseStatsPerLvl[PRIMARY_VITALITY] = 1;
       baseStatsPerLvl[PRIMARY_STRENGTH] = 2;
-      baseStatsPerLvl[PRIMARY_COURAGE] = 6;
-      baseStatsPerLvl[PRIMARY_FOCUS] = 4;
+      baseStatsPerLvl[PRIMARY_COURAGE] = 5;
+      baseStatsPerLvl[PRIMARY_FOCUS] = 5;
 
       // Randomly rolled stat variation
       randStatsPerLvl = 2;
@@ -78,7 +78,7 @@ public function initStats
  *===========================================================================*/
 defaultProperties
 {
-  monsterName="Ash Ripper"
+  monsterName="Ash Reaper"
   
   // Double experience because these things are quick and nasty little demons
   expAmp=2

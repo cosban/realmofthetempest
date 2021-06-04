@@ -41,10 +41,10 @@ public function initStats
     case CLAN_WHITE:
       // Fixed stat points per level
       armorPerLvl = 0;
-      baseStatsPerLvl[PRIMARY_VITALITY] = 4;
-      baseStatsPerLvl[PRIMARY_STRENGTH] = 4;
+      baseStatsPerLvl[PRIMARY_VITALITY] = 3;
+      baseStatsPerLvl[PRIMARY_STRENGTH] = 3;
       baseStatsPerLvl[PRIMARY_COURAGE] = 2;
-      baseStatsPerLvl[PRIMARY_FOCUS] = 2;
+      baseStatsPerLvl[PRIMARY_FOCUS] = 1;
       
       // Randomly rolled stat variation
       randStatsPerLvl = 3;

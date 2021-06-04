@@ -1,9 +1,9 @@
 /*=============================================================================
  * ROTT_Combat_Enemy_Watcher
  *
- * Lore:
+ * Lore: Their lantern is not a lantern... but instead it is a special package
+ *  with many pockets.
  *  
- *
  * Abilities:
  *  
  *===========================================================================*/
