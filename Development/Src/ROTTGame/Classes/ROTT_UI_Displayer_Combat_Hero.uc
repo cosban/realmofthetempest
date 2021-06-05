@@ -12,12 +12,11 @@
 
 class ROTT_UI_Displayer_Combat_Hero extends ROTT_UI_Displayer_Combat;
 
-// Display control variables
+// Reference to parent container
+var private ROTT_UI_Displayer_Combat_Heroes parentDisplayer;
+
 // Store delay time before showing HUD updates
 var public float displayerDelay;
-
-// Store delay from overlapping previous labels
-var public float overlapDelay;
 
 // Internal references
 var private ROTT_UI_Displayer_Tuna_Bar tunaDisplayer;
@@ -44,6 +43,9 @@ var private ROTT_UI_Status_Label demoralizeLabel;
  *===========================================================================*/
 public function initializeComponent(optional string newTag = "") {
   super.initializeComponent(newTag);
+  
+  // Parent
+  parentDisplayer = ROTT_UI_Displayer_Combat_Heroes(outer);
   
   // Internal references
   tunaDisplayer = ROTT_UI_Displayer_Tuna_Bar(findComp("Combat_Tuna_Displayer"));
@@ -198,10 +200,6 @@ protected function UI_Label makeLabel
 public function elapseTimer(float deltaTime, float gameSpeedOverride) {
   // The parent class will erase temporary combat labels over time
   super.elapseTimer(deltaTime, gameSpeedOverride);
-  
-  // Track overlap delay
-  overlapDelay -= deltaTime;
-  if (overlapDelay <= 0) overlapDelay = 0;
 }
 
 /*=============================================================================
@@ -283,6 +281,14 @@ public function improveStat(float value, float total, MechanicTypes targetStat) 
   local ColorStyles msgColor;
   local string totalMsg;
   local string addedMsg;
+  local float overlapDelay;
+  
+  // Fetch delay time from parent
+  overlapDelay = 0;
+  if (targetStat != parentDisplayer.lastStatType) {
+    overlapDelay = parentDisplayer.overlapDelay;
+    parentDisplayer.queueStatType = targetStat;
+  }
   
   // Set UI color
   switch (targetStat) {
@@ -384,7 +390,7 @@ public function improveStat(float value, float total, MechanicTypes targetStat) 
   );
   
   // Increase overlap delay
-  overlapDelay += 0.5;
+  parentDisplayer.overlapDelayUpdate(targetStat);
   
 }
   

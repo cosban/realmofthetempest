@@ -83,7 +83,7 @@ event loadScene() {
       /// ...
       
       // Attach component
-      hero.uiComponent = combatPage.heroDisplayers[hero.partyIndex];
+      hero.uiComponent = combatPage.heroDisplayers.heroDisplayers[hero.partyIndex];
       
       // Reset interface for new battle
       hero.uiComponent.resetUI();
@@ -306,9 +306,7 @@ public function toggleCombatDetail() {
   gameInfo.optionsCookie.toggleCombatDetail();
   
   // Toggle UI display
-  for (i = 0; i < gameInfo.getActiveParty().getPartySize(); i++) {
-    combatPage.heroDisplayers[i].showDetail(gameInfo.optionsCookie.showCombatDetail);
-  }
+  combatPage.heroDisplayers.toggleCombatDetail();
   for (i = 0; i < 3; i++) {
     if (gameInfo.enemyEncounter.getEnemy(i) != none) {
       gameInfo.getEnemyUI(i).showDetail(gameInfo.optionsCookie.showCombatDetail);

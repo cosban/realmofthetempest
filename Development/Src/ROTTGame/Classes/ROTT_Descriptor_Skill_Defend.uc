@@ -50,7 +50,7 @@ protected function float attributeInfo
       break;
     
     // Stance attributes
-    case GLYPH_ARMOR_BOOST:
+    case INCREASE_ARMOR:
       attribute = caster.level * 2;
       break;
     case HEALTH_GAIN_OVER_TIME:
@@ -94,10 +94,9 @@ defaultProperties
   
   // Stance Attributes
   skillAttributes.add((attributeSet=ADD_STANCE_SET,mechanicType=ATTACK_TIME_AMPLIFIER,tag="%tuna",font=DEFAULT_SMALL_WHITE,returnType=DECIMAL));
-  skillAttributes.add((attributeSet=ADD_STANCE_SET,mechanicType=GLYPH_ARMOR_BOOST,tag="%armor",font=DEFAULT_SMALL_WHITE,returnType=INTEGER));
-  skillAttributes.add((attributeSet=ADD_STANCE_SET,mechanicType=HEALTH_GAIN_OVER_TIME,tag="%hpregen",font=DEFAULT_SMALL_WHITE,returnType=INTEGER));
+  skillAttributes.add((attributeSet=ADD_STANCE_SET,mechanicType=INCREASE_ARMOR,tag="%armor",font=DEFAULT_SMALL_WHITE,returnType=INTEGER));
   skillAttributes.add((attributeSet=ADD_STANCE_SET,mechanicType=GLYPH_MANA_REGEN,tag="%mpregen",font=DEFAULT_SMALL_WHITE,returnType=INTEGER));
-  
+  skillAttributes.add((attributeSet=ADD_STANCE_SET,mechanicType=HEALTH_GAIN_OVER_TIME,tag="%hpregen",font=DEFAULT_SMALL_WHITE,returnType=INTEGER));
 }
 
 

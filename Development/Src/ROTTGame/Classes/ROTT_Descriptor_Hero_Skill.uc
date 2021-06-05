@@ -83,6 +83,9 @@ enum AttributeTypes {
   DECREASE_DODGE_RATING,
   DECREASE_ACCURACY_RATING,
 
+  // Armor
+  INCREASE_ARMOR,
+  
   // Glyph mods
   GLYPH_ARMOR_BOOST,
   GLYPH_MIN_HEALTH_BOOST,
@@ -1238,6 +1241,8 @@ public function bool skillAction
           break;
           
         case PARTY_ELEMENTAL_AMPLIFIER:
+        cyanLog("Party elemental amp");
+          scripttrace();
           targetMechanics.addMechanic(
             ELEMENTAL_MULTIPLIER, 
             getAttributeInfo(PARTY_ELEMENTAL_AMPLIFIER, caster, level)
@@ -1335,6 +1340,17 @@ public function bool skillAction
             attributeInfo(TEMP_MANA_DRAIN_AMOUNT, caster, level),
             attributeInfo(TEMP_MANA_DRAIN_TIME, caster, level)
           );
+          break;
+          
+        // Armor
+        case INCREASE_ARMOR:
+          casterMechanics.addMechanic(
+            ADD_ARMOR, 
+            getAttributeInfo(INCREASE_ARMOR, caster, level)
+          );
+          
+        violetLog("Armor amp");
+          scripttrace();
           break;
           
         // Demoralization

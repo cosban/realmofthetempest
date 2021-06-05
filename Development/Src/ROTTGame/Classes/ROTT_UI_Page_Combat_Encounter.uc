@@ -11,7 +11,8 @@
 class ROTT_UI_Page_Combat_Encounter extends ROTT_UI_Page;
 
 // Internal References
-var privatewrite ROTT_UI_Displayer_Combat_Hero heroDisplayers[3];
+///var privatewrite ROTT_UI_Displayer_Combat_Hero heroDisplayers[3];
+var privatewrite ROTT_UI_Displayer_Combat_Heroes heroDisplayers;
 var privatewrite ROTT_UI_Displayer_Combat_Enemy enemyDisplayers[3];
 
 var public UI_Label glyphFeedback;
@@ -43,14 +44,18 @@ public function initializeComponent(optional string newTag = "") {
   }
   
   // Combat unit displayers
-  for (i = 0; i < 3; i++) {
-    // Hero displayers
-    heroDisplayers[i] = new class'ROTT_UI_Displayer_Combat_Hero';
-    componentList.addItem(heroDisplayers[i]);
-    heroDisplayers[i].initializeComponent();
-    heroDisplayers[i].updatePosition(687 + (i*230), 443);
-    heroDisplayers[i].displayerDelay = i * 0.125;
-  }
+  heroDisplayers = ROTT_UI_Displayer_Combat_Heroes(
+    findComp("Displayer_Combat_Heroes")
+  );
+  
+  ///for (i = 0; i < 3; i++) {
+  ///  // Hero displayers
+  ///  heroDisplayers[i] = new class'ROTT_UI_Displayer_Combat_Hero';
+  ///  componentList.addItem(heroDisplayers[i]);
+  ///  heroDisplayers[i].initializeComponent();
+  ///  heroDisplayers[i].updatePosition(687 + (i*230), 443);
+  ///  heroDisplayers[i].displayerDelay = i * 0.125;
+  ///}
   
   glyphFeedback = findLabel("Glyph_Feedback_Label");
   
@@ -92,8 +97,12 @@ public function onSceneActivation() {
   
   // Attach each hero display
   for (i = 0; i < 3; i++) {
-    heroDisplayers[i].attachDisplayer(gameInfo.getActiveParty().getHero(i));
-    heroDisplayers[i].showDetail(gameInfo.optionsCookie.showCombatDetail);
+    heroDisplayers.getDisplay(i).attachDisplayer(
+      gameInfo.getActiveParty().getHero(i)
+    );
+    heroDisplayers.getDisplay(i).showDetail(
+      gameInfo.optionsCookie.showCombatDetail
+    );
   }
 }
 
@@ -174,9 +183,10 @@ event deleteComp() {
   
   super.deleteComp();
   
+  if (heroDisplayers != none) heroDisplayers.deleteComp();
+  
   // Clean combat unit displayers
   for (i = 0; i < 3; i++) {
-    heroDisplayers[i] = none;
     enemyDisplayers[i] = none;
   }
 }
@@ -228,6 +238,14 @@ defaultProperties
   
   // Enemy displayers
   /** Enemy UI is dynamically created in init() function above **/
+  
+  // Hero displayers
+  begin object class=ROTT_UI_Displayer_Combat_Heroes Name=Displayer_Combat_Heroes
+    tag="Displayer_Combat_Heroes"
+    posX=0
+    posY=0
+  end object
+  componentList.add(Displayer_Combat_Heroes)
   
   // Glyph feedback label
   begin object class=UI_Label Name=Glyph_Feedback_Label
