@@ -91,31 +91,31 @@ defaultProperties
     componentTextures.add(Texture2D'Monsters_Disc_2.Enemy_Portrait_Okitian_Spirit_Blue_240')
   end object
   begin object class=UI_Texture_Info Name=Enemy_Portrait_Okitian_Spirit_Cyan_240
-    ///componentTextures.add(Texture2D'Monsters_Disc_2.Enemy_Portrait_Okitian_Spirit_Cyan_240')
+    componentTextures.add(Texture2D'Monsters_Disc_2.Enemy_Portrait_Okitian_Spirit_Cyan_240')
   end object
   begin object class=UI_Texture_Info Name=Enemy_Portrait_Okitian_Spirit_Green_240
-    ///componentTextures.add(Texture2D'Monsters_Disc_2.Enemy_Portrait_Okitian_Spirit_Green_240')
+    componentTextures.add(Texture2D'Monsters_Disc_2.Enemy_Portrait_Okitian_Spirit_Green_240')
   end object
   begin object class=UI_Texture_Info Name=Enemy_Portrait_Okitian_Spirit_Gold_240
-    ///componentTextures.add(Texture2D'Monsters_Disc_2.Enemy_Portrait_Okitian_Spirit_Gold_240')
+    componentTextures.add(Texture2D'Monsters_Disc_2.Enemy_Portrait_Okitian_Spirit_Gold_240')
   end object
   begin object class=UI_Texture_Info Name=Enemy_Portrait_Okitian_Spirit_Orange_240
-    ///componentTextures.add(Texture2D'Monsters_Disc_2.Enemy_Portrait_Okitian_Spirit_Orange_240')
+    componentTextures.add(Texture2D'Monsters_Disc_2.Enemy_Portrait_Okitian_Spirit_Orange_240')
   end object
   begin object class=UI_Texture_Info Name=Enemy_Portrait_Okitian_Spirit_Red_240
-    ///componentTextures.add(Texture2D'Monsters_Disc_2.Enemy_Portrait_Okitian_Spirit_Red_240')
+    componentTextures.add(Texture2D'Monsters_Disc_2.Enemy_Portrait_Okitian_Spirit_Red_240')
   end object
   begin object class=UI_Texture_Info Name=Enemy_Portrait_Okitian_Spirit_Violet_240
-    ///componentTextures.add(Texture2D'Monsters_Disc_2.Enemy_Portrait_Okitian_Spirit_Violet_240')
+    componentTextures.add(Texture2D'Monsters_Disc_2.Enemy_Portrait_Okitian_Spirit_Violet_240')
   end object
   begin object class=UI_Texture_Info Name=Enemy_Portrait_Okitian_Spirit_Purple_240
     componentTextures.add(Texture2D'Monsters_Disc_2.Enemy_Portrait_Okitian_Spirit_Purple_240')
   end object
   begin object class=UI_Texture_Info Name=Enemy_Portrait_Okitian_Spirit_Black_240
-    ///componentTextures.add(Texture2D'Monsters_Disc_2.Enemy_Portrait_Okitian_Spirit_Black_240')
+    componentTextures.add(Texture2D'Monsters_Disc_2.Enemy_Portrait_Okitian_Spirit_Black_240')
   end object
   begin object class=UI_Texture_Info Name=Enemy_Portrait_Okitian_Spirit_White_240
-    ///componentTextures.add(Texture2D'Monsters_Disc_2.Enemy_Portrait_Okitian_Spirit_White_240')
+    componentTextures.add(Texture2D'Monsters_Disc_2.Enemy_Portrait_Okitian_Spirit_White_240')
   end object
   
   // Sprite options
@@ -139,31 +139,31 @@ defaultProperties
     componentTextures.add(Texture2D'Monsters_Disc_2.Enemy_Portrait_Okitian_Spirit_Blue_360')
   end object
   begin object class=UI_Texture_Info Name=Enemy_Portrait_Okitian_Spirit_Cyan_360
-    ///componentTextures.add(Texture2D'Monsters_Disc_2.Enemy_Portrait_Okitian_Spirit_Cyan_360')
+    componentTextures.add(Texture2D'Monsters_Disc_2.Enemy_Portrait_Okitian_Spirit_Cyan_360')
   end object
   begin object class=UI_Texture_Info Name=Enemy_Portrait_Okitian_Spirit_Green_360
-    ///componentTextures.add(Texture2D'Monsters_Disc_2.Enemy_Portrait_Okitian_Spirit_Green_360')
+    componentTextures.add(Texture2D'Monsters_Disc_2.Enemy_Portrait_Okitian_Spirit_Green_360')
   end object
   begin object class=UI_Texture_Info Name=Enemy_Portrait_Okitian_Spirit_Gold_360
-    ///componentTextures.add(Texture2D'Monsters_Disc_2.Enemy_Portrait_Okitian_Spirit_Gold_360')
+    componentTextures.add(Texture2D'Monsters_Disc_2.Enemy_Portrait_Okitian_Spirit_Gold_360')
   end object
   begin object class=UI_Texture_Info Name=Enemy_Portrait_Okitian_Spirit_Orange_360
-    ///componentTextures.add(Texture2D'Monsters_Disc_2.Enemy_Portrait_Okitian_Spirit_Orange_360')
+    componentTextures.add(Texture2D'Monsters_Disc_2.Enemy_Portrait_Okitian_Spirit_Orange_360')
   end object
   begin object class=UI_Texture_Info Name=Enemy_Portrait_Okitian_Spirit_Red_360
-    ///componentTextures.add(Texture2D'Monsters_Disc_2.Enemy_Portrait_Okitian_Spirit_Red_360')
+    componentTextures.add(Texture2D'Monsters_Disc_2.Enemy_Portrait_Okitian_Spirit_Red_360')
   end object
   begin object class=UI_Texture_Info Name=Enemy_Portrait_Okitian_Spirit_Violet_360
-    ///componentTextures.add(Texture2D'Monsters_Disc_2.Enemy_Portrait_Okitian_Spirit_Violet_360')
+    componentTextures.add(Texture2D'Monsters_Disc_2.Enemy_Portrait_Okitian_Spirit_Violet_360')
   end object
   begin object class=UI_Texture_Info Name=Enemy_Portrait_Okitian_Spirit_Purple_360
     componentTextures.add(Texture2D'Monsters_Disc_2.Enemy_Portrait_Okitian_Spirit_Purple_360')
   end object
   begin object class=UI_Texture_Info Name=Enemy_Portrait_Okitian_Spirit_Black_360
-    ///componentTextures.add(Texture2D'Monsters_Disc_2.Enemy_Portrait_Okitian_Spirit_Black_360')
+    componentTextures.add(Texture2D'Monsters_Disc_2.Enemy_Portrait_Okitian_Spirit_Black_360')
   end object
   begin object class=UI_Texture_Info Name=Enemy_Portrait_Okitian_Spirit_White_360
-    ///componentTextures.add(Texture2D'Monsters_Disc_2.Enemy_Portrait_Okitian_Spirit_White_360')
+    componentTextures.add(Texture2D'Monsters_Disc_2.Enemy_Portrait_Okitian_Spirit_White_360')
   end object
   
   // Sprite options
