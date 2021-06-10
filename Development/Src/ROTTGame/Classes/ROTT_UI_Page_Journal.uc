@@ -25,7 +25,24 @@ public function initializeComponent(optional string newTag = "") {
  * Description: This event is called every time the page is pushed.
  *===========================================================================*/
 event onPushPageEvent() {
+  local int journalEntries;
+  local int i;
   
+  // Fetch number of journal entries, cap at 3
+  journalEntries = gameInfo.playerProfile.journalEntries.length;
+  if (journalEntries > 3) journalEntries = 3;
+  
+  // Clear journal text
+  findLabel("Journal_Text_1").setText("");
+  findLabel("Journal_Text_2").setText("");
+  findLabel("Journal_Text_3").setText("");
+  
+  // Read journal entries
+  for (i = 0; i < journalEntries; i++) {
+    findLabel("Journal_Text_" $ i + 1).setText(
+      gameInfo.playerProfile.journalEntries[i]
+    );
+  }
 }
 
 /*=============================================================================
@@ -138,7 +155,7 @@ defaultProperties
     fontStyle=JOURNAL_22_BROWN
     AlignX=LEFT
     AlignY=TOP
-    labelText="Night 1: \n What happened . . .\n Did I choose a familiar from inside\n the ethereal stream?"
+    labelText=""
   end object
   componentList.add(Journal_Text_1)
   
@@ -152,7 +169,7 @@ defaultProperties
     fontStyle=JOURNAL_22_BROWN
     AlignX=LEFT
     AlignY=TOP
-    labelText="Night 2: \n I've been introduced to the town healer,\n Salus, who has requested me to engage \n the obelisk in prayer."
+    labelText=""
   end object
   componentList.add(Journal_Text_2)
   
@@ -166,7 +183,7 @@ defaultProperties
     fontStyle=JOURNAL_22_BROWN
     AlignX=LEFT
     AlignY=TOP
-    labelText="Night 4: \n The Talonovian council seems to be in\n disagreement.  Mekuba, the Necromancer,\n says not to disturb the obelisk."
+    labelText=""
   end object
   componentList.add(Journal_Text_3)
   

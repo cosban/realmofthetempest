@@ -1006,6 +1006,15 @@ public function ROTT_UI_Displayer_Combat_Enemy getEnemyUI(int index) {
 }
 
 /*=============================================================================
+ * pushJournalEntry()
+ * 
+ * Called by quest milestone triggers to update the journal.
+ *===========================================================================*/
+public function pushJournalEntry(string questMsg) {
+  playerProfile.pushJournalEntry(questMsg);
+}
+
+/*=============================================================================
  * tick()
  * 
  * Called every time the engine renders a frame, with the elapsed render time.

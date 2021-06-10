@@ -256,6 +256,9 @@ public function startConversation(ROTT_UI_Page_NPC_Dialogue ui) {
   // initialize dialog traversal
   currentNode = 0;
   currentTopic = getTopic(true);
+  
+  // Check for quest update
+  gameInfo.playerProfile.questCheck(currentTopic, self);
 }
 
 /*============================================================================*

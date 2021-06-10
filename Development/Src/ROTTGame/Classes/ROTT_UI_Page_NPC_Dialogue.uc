@@ -176,6 +176,10 @@ public function launchNPC(class<ROTT_NPC_Container> npcType) {
   
   // Set dialog background
   dialogBackground.copySprite(npc.npcBackground, 0, NO_RESIZE);
+  
+  // Keep count of goodnights
+  gameInfo.playerProfile.nightCounter++;
+  violetLog("Nightcounter = " $ gameInfo.playerProfile.nightCounter);
 }
 
 /*=============================================================================

@@ -1616,7 +1616,7 @@ public function elapseTime(float deltaTime) {
   local float m, d;
   
   // Analysis tracking for total battle time
-  battleStatistics[BATTLE_TIME] += deltaTime;
+  battleStatistics[BATTLE_TIME] += deltaTime / gameInfo.gameSpeed;
   
   // Ignore time for dead units
   if (bDead) {

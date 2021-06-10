@@ -132,6 +132,35 @@ var privatewrite NpcHistoryRecord npcRecords[NPCs];
 
 //==================================================//
 
+// Milestones for speedruns
+enum JournalMilestones {
+  // Talonovia
+  JOURNAL_TALKED_TO_COUNCIL,
+  JOURNAL_COUNCIL_CONFLICT,
+  
+  // Mountain shrine
+  JOURNAL_MET_DRUJIVA,
+  JOURNAL_COLLECTED_ICE_TOME,
+};
+
+// Quest entry markers
+enum QuestMilestones {
+  JOURNAL_READY,
+  JOURNAL_COMPLETE
+};
+
+// Track journal milestones
+var privatewrite QuestMilestones bJournalMiletones[JournalMilestones];
+
+// Store the preference of the first Talonovian council member
+var privatewrite bool bFirstCouncilVotesYes;
+
+// A list of journal entries for quest progression
+var privatewrite array<string> journalEntries;
+var public int nightCounter;
+
+//==================================================//
+
 // Portal destination checkpoint
 var public int arrivalCheckpoint;
 
@@ -211,6 +240,18 @@ public function setGameMode(GameModes newGameMode) {
 }
 
 /*=============================================================================
+ * pushJournalEntry()
+ * 
+ * Called by quest milestone triggers to update the journal.
+ *===========================================================================*/
+public function pushJournalEntry(string questMsg) {
+  // Night enumeration prefix
+  questMsg = "Night " $ nightCounter $ ": " $ questMsg;
+  
+  journalEntries.addItem(questMsg);
+}
+
+/*=============================================================================
  * toggleOverworldDetail()
  *
  * This function modifies the data for tracking overworld detail visibility.
@@ -218,6 +259,131 @@ public function setGameMode(GameModes newGameMode) {
 public function toggleOverworldDetail() {
   showOverworldDetail = !showOverworldDetail;
 }
+
+/*=============================================================================
+ * questCheck()
+ *
+ * Checks for updating journal entries.
+ *===========================================================================*/
+public function questCheck
+(
+  TopicList currentTopic, 
+  ROTT_NPC_Container targetNPC
+)
+{
+  local string questText;
+  
+  // Check if player has been introduced to a Talonovian Council member
+  if (bJournalMiletones[JOURNAL_TALKED_TO_COUNCIL] == JOURNAL_READY) {
+    // Check for introduction trigger
+    if (currentTopic == INTRODUCTION) {
+      // Replace quest info based on NPC preference
+      switch (targetNPC.preferences[OBELISK_ACTIVATION]) {
+        case ACTION:
+          // Set quest text
+          questText = "\n I've been introduced to the %PROFESSION,";
+          questText $= "\n %NPC, who has requested me to engage";
+          questText $= "\n the obelisk's ritual.";
+          bFirstCouncilVotesYes = true;
+          break;
+        case INACTION:
+          // Set quest text
+          questText = "\n I've been introduced to the %PROFESSION,";
+          questText $= "\n %NPC, who has requested me to abstain";
+          questText $= "\n from the obelisk ritual.";
+          bFirstCouncilVotesYes = false;
+          break;
+        default:
+          violetlog("No obelisk preference found?");
+      }
+      
+      // Replace valid talonovian council names
+      switch (targetNPC.npcName) {
+        case SALUS:    questText = repl(questText, "%NPC", "Salus"); break;
+        case MEKUBA:   questText = repl(questText, "%NPC", "Mekuba"); break;
+        case HEKATOS:  questText = repl(questText, "%NPC", "Hekatos"); break;
+        case TANNIM:   questText = repl(questText, "%NPC", "Tannim"); break;
+        case LUCROSUS: questText = repl(questText, "%NPC", "Lucrosus"); break;
+        case MIGMAS:   questText = repl(questText, "%NPC", "Migmas"); break;
+        case KALEV:    questText = repl(questText, "%NPC", "Kalev"); break;
+        default: return;
+      }
+      
+      // Replace professions
+      switch (targetNPC.npcName) {
+        case SALUS:    questText = repl(questText, "%PROFESSION", "town healer"); break;
+        case MEKUBA:   questText = repl(questText, "%PROFESSION", "necromancer"); break;
+        case HEKATOS:  questText = repl(questText, "%PROFESSION", "local witch"); break;
+        case TANNIM:   questText = repl(questText, "%PROFESSION", "dragon tamer"); break;
+        case LUCROSUS: questText = repl(questText, "%PROFESSION", "merchant"); break;
+        case MIGMAS:   questText = repl(questText, "%PROFESSION", "alchemist"); break;
+        case KALEV:    questText = repl(questText, "%PROFESSION", "former prince"); break;
+        default: return;
+      }
+      
+      // Commit to journal entry
+      gameInfo.playerProfile.pushJournalEntry(questText);
+      bJournalMiletones[JOURNAL_TALKED_TO_COUNCIL] = JOURNAL_COMPLETE;
+    }
+  }
+
+  // Check if player has noticed conflicting quest info
+  if (bJournalMiletones[JOURNAL_COUNCIL_CONFLICT] == JOURNAL_READY) {
+    // Check for introduction trigger
+    if (currentTopic == INTRODUCTION) {
+      // Ignore if no quest conflict found
+      if (bFirstCouncilVotesYes && targetNPC.preferences[OBELISK_ACTIVATION] == ACTION) return;
+      if (!bFirstCouncilVotesYes && targetNPC.preferences[OBELISK_ACTIVATION] == INACTION) return;
+      
+      // Replace quest info based on NPC preference
+      switch (targetNPC.preferences[OBELISK_ACTIVATION]) {
+        case ACTION:
+          // Set quest text
+          questText = "\n The Talonovian council seems to be in";
+          questText $= "\n disagreement.  %NPC, the %PROFESSION,";
+          questText $= "\n pushed for performing the obelisk ritual.";
+          break;
+        case INACTION:
+          // Set quest text
+          questText = "\n The Talonovian council seems to be in";
+          questText $= "\n disagreement.  %NPC, the %PROFESSION,";
+          questText $= "\n says not to disturb the obelisk.";
+          break;
+        default:
+          violetlog("No obelisk preference found?");
+      }
+      
+      // Replace valid talonovian council names
+      switch (targetNPC.npcName) {
+        case SALUS:    questText = repl(questText, "%NPC", "Salus"); break;
+        case MEKUBA:   questText = repl(questText, "%NPC", "Mekuba"); break;
+        case HEKATOS:  questText = repl(questText, "%NPC", "Hekatos"); break;
+        case TANNIM:   questText = repl(questText, "%NPC", "Tannim"); break;
+        case LUCROSUS: questText = repl(questText, "%NPC", "Lucrosus"); break;
+        case MIGMAS:   questText = repl(questText, "%NPC", "Migmas"); break;
+        case KALEV:    questText = repl(questText, "%NPC", "Kalev"); break;
+        default: return;
+      }
+      
+      // Replace professions
+      switch (targetNPC.npcName) {
+        case SALUS:    questText = repl(questText, "%PROFESSION", "town healer"); break;
+        case MEKUBA:   questText = repl(questText, "%PROFESSION", "necromancer"); break;
+        case HEKATOS:  questText = repl(questText, "%PROFESSION", "local witch"); break;
+        case TANNIM:   questText = repl(questText, "%PROFESSION", "dragon tamer"); break;
+        case LUCROSUS: questText = repl(questText, "%PROFESSION", "merchant"); break;
+        case MIGMAS:   questText = repl(questText, "%PROFESSION", "alchemist"); break;
+        case KALEV:    questText = repl(questText, "%PROFESSION", "former prince"); break;
+        default: return;
+      }
+      
+      // Commit to journal entry
+      gameInfo.playerProfile.pushJournalEntry(questText);
+      bJournalMiletones[JOURNAL_COUNCIL_CONFLICT] = JOURNAL_COMPLETE;
+    }
+  }
+
+};
 
 /*=============================================================================
  * elapseTime()
@@ -823,6 +989,11 @@ public function initNewGamePortals() {
   setPortalUnlocked(MAP_TALONOVIA_TOWN);
   setPortalUnlocked(MAP_RHUNIA_WILDERNESS);
   
+  // First journal entry
+  gameInfo.playerProfile.pushJournalEntry(
+    "\n What happened . . .\n Did I choose a familiar from inside\n the ethereal stream?"
+  );
+  
   // Placeholder maps
   setPortalUnlocked(MAP_TALONOVIA_SHRINE);
 }
@@ -948,6 +1119,9 @@ private function debugProfileDump() {
  *===========================================================================*/
 defaultProperties
 {
+  // Night counter for journal entries
+  nightCounter=1
+  
   // Portal checkpoint
   arrivalCheckpoint=-1
   

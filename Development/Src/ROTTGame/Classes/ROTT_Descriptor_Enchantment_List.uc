@@ -148,7 +148,7 @@ public static function EnchantmentDescriptor getEnchantment
         "Adding +%add Armor",
         "New Total: +%total Armor"
       );
-      setGoldGemCost(script, 10000, 50);
+      setGoldGemCost(script, 50000, 10);
       setBonus(script, 2);
       
       return script;
