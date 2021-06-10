@@ -177,6 +177,11 @@ defaultProperties
   // NPC identity
   npcName=LUCROSUS
   
+  // Quest preferences
+  preferences(OBELISK_ACTIVATION) = ACTION
+  preferences(VALOR_BLOSSOMS)     = INACTION
+  preferences(GOLEMS_BREATH)      = ACTION
+  
   // Background
   begin object class=UI_Texture_Info Name=NPC_Background_Green
     componentTextures.add(Texture2D'GUI_NPC_Dialog.NPC_Background_Green'

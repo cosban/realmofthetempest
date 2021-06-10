@@ -144,6 +144,11 @@ defaultProperties
   // NPC identity
   npcName=TANNIM
   
+  // Quest preferences
+  preferences(OBELISK_ACTIVATION) = INACTION
+  preferences(VALOR_BLOSSOMS)     = ACTION
+  preferences(GOLEMS_BREATH)      = ACTION
+  
   // Background
   begin object class=UI_Texture_Info Name=NPC_Background_Orange
     componentTextures.add(Texture2D'GUI_NPC_Dialog.NPC_Background_Orange'

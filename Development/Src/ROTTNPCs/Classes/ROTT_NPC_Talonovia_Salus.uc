@@ -195,6 +195,11 @@ defaultProperties
   npcName=SALUS
   serviceType=SERVICE_BLESSINGS
   
+  // Quest preferences
+  preferences(OBELISK_ACTIVATION) = ACTION
+  preferences(VALOR_BLOSSOMS)     = ACTION
+  preferences(GOLEMS_BREATH)      = INACTION
+  
   // Background
   begin object class=UI_Texture_Info Name=NPC_Background_Tan_Blue
     componentTextures.add(Texture2D'GUI_NPC_Dialog.NPC_Background_Tan_Blue'

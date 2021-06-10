@@ -223,6 +223,11 @@ defaultProperties
   // NPC identity
   npcName=KALEV
   
+  // Quest preferences
+  preferences(OBELISK_ACTIVATION) = INACTION
+  preferences(VALOR_BLOSSOMS)     = INACTION
+  preferences(GOLEMS_BREATH)      = INACTION
+  
   // Background
   begin object class=UI_Texture_Info Name=NPC_Background_Dark_Tan
     componentTextures.add(Texture2D'GUI_NPC_Dialog.NPC_Background_Dark_Tan'
