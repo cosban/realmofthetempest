@@ -26,12 +26,7 @@ public function initDialogue() {
   
   // Intro
   `NEW_NODE(GREETING, NUETRAL)
-    "What can we do but neglect the victims of unfathomable crimes?",
-    ""
-  `ENDNODE
-  
-  `NEW_NODE(GREETING, NUETRAL)
-    "Eat the dirt we spit on until you understand our pain.",
+    "Unfathomable crimes.",
     ""
   `ENDNODE
   

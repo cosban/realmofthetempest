@@ -26,38 +26,8 @@ public function initDialogue() {
   
   // Intro
   `NEW_NODE(GREETING, NUETRAL)
-    "We are RETARDED, so you look away.",
-    ""
-  `ENDNODE
-  
-  `NEW_NODE(GREETING, NUETRAL)
-    "Falling from a dark tree, to a poisoned fountain.",
-    ""
-  `ENDNODE
-  
-  `NEW_NODE(GREETING, NUETRAL)
-    "Swallowed by the youth and spit back again.",
-    ""
-  `ENDNODE
-  
-  `NEW_NODE(GREETING, NUETRAL)
-    "RETARDS never love you.",
-    ""
-  `ENDNODE
-  
-  `NEW_NODE(GREETING, NUETRAL)
-    "Because RETARDS are never loved.",
-    ""
-  `ENDNODE
-  
-  `NEW_NODE(GREETING, NUETRAL)
-    "Aren't you RETARDED?  Would you like to",
-    "crawl with us through the old filth of fallen angels?"
-  `ENDNODE
-  
-  `NEW_NODE(GREETING, NUETRAL)
-    "Come here little RETARD, spit with us.",
-    "We'll wait for you."
+    "We aren't here, so you look away. . .",
+    "But we'll wait for you."
   `ENDNODE
   
   // ----------------------------------------------------------------------- //

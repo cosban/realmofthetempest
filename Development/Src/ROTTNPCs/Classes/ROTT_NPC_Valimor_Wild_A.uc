@@ -26,24 +26,29 @@ public function initDialogue() {
   
   // Intro
   `NEW_NODE(GREETING, NUETRAL)
-    "Misery is a mystery of infinite depth.",
+    "Are you born the sort of monster you are?",
     ""
   `ENDNODE
   
-  `NEW_NODE(GREETING, NUETRAL)
-    "We crawl.",
-    ""
-  `ENDNODE
-  
-  `NEW_NODE(GREETING, NUETRAL)
-    "We crawl away.",
-    ""
-  `ENDNODE
-  
-  `NEW_NODE(GREETING, NUETRAL)
-    "Sunshine never reaches our rotting roots.",
-    ""
-  `ENDNODE
+    `ADD_OPTIONS(GREETING, NUETRAL)
+      "Bestiary",
+      "Inquiry",
+      "",
+      "",
+      
+      BEHAVIOR_LAUNCH_SERVICE,
+      BEHAVIOR_NONE
+    `ENDNODE
+    
+      `ADD_REPLY(GREETING, NUETRAL, 0)
+        "(Service unavailable in this version)",
+        ""
+      `ENDNODE
+
+  ///`NEW_NODE(GREETING, NUETRAL)
+  ///  "Sunshine never reaches our rotting roots.",
+  ///  ""
+  ///`ENDNODE
   
   // ----------------------------------------------------------------------- //
   
@@ -83,7 +88,7 @@ defaultProperties
   
   // NPC Texture
   begin object class=UI_Texture_Info Name=NPC_Sprite_Texture
-    componentTextures.add(Texture2D'Monsters.Enemy_Portrait_Elder_Red_360')
+    componentTextures.add(Texture2D'NPCs.Tamers.NPC_Portrait_Tamer_Purple_360')
   end object
   
   // Sprite container for transfer

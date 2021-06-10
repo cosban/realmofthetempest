@@ -26,28 +26,8 @@ public function initDialogue() {
   
   // Intro
   `NEW_NODE(GREETING, NUETRAL)
-    "The lines are red.  The skin is yours.",
-    "The sins are theirs."
-  `ENDNODE
-  
-  `NEW_NODE(GREETING, NUETRAL)
-    "Our wardens waiting.  Forever mending your",
-    "wine soaked fists."
-  `ENDNODE
-  
-  `NEW_NODE(GREETING, NUETRAL)
-    "We sense it in the air and come with a hunger",
-    "that you'll never know."
-  `ENDNODE
-  
-  `NEW_NODE(GREETING, NUETRAL)
-    "We sense it from the ocean with a thirst",
-    "that you'll never see."
-  `ENDNODE
-  
-  `NEW_NODE(GREETING, NUETRAL)
-    "Sensory is a crime of toxic spit.",
-    ""
+    "Our wardens waiting.  Forever mending. . .",
+    "Mental ailments."
   `ENDNODE
   
   // ----------------------------------------------------------------------- //

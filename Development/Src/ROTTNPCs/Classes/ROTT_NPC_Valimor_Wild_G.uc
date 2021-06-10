@@ -26,17 +26,7 @@ public function initDialogue() {
   
   // Intro
   `NEW_NODE(GREETING, NUETRAL)
-    "Red velvet tears, torn away from brown eyes.",
-    ""
-  `ENDNODE
-  
-  `NEW_NODE(GREETING, NUETRAL)
-    "The door you'll find never opens.",
-    "The hand that holds you never folds."
-  `ENDNODE
-  
-  `NEW_NODE(GREETING, NUETRAL)
-    "Abuse is the only love we will ever-ever know.",
+    "Do not disturb my sewing kit.",
     ""
   `ENDNODE
   
