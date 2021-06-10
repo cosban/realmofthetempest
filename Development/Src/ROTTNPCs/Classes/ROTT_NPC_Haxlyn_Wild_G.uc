@@ -31,7 +31,7 @@ public function initDialogue() {
   `ENDNODE
   
   `NEW_NODE(GREETING, NUETRAL)
-    "and I cant stop whispering.",
+    "and I can't stop whispering.",
     ""
   `ENDNODE
   
@@ -41,7 +41,7 @@ public function initDialogue() {
   `ENDNODE
   
   `NEW_NODE(GREETING, NUETRAL)
-    "and I cant stop whispering.",
+    "and I can't stop whispering.",
     ""
   `ENDNODE
   
@@ -51,7 +51,7 @@ public function initDialogue() {
   `ENDNODE
   
   `NEW_NODE(GREETING, NUETRAL)
-    "I cant stop whispering.",
+    "I can't stop whispering.",
     ""
   `ENDNODE
   
@@ -61,7 +61,7 @@ public function initDialogue() {
   `ENDNODE
   
   `NEW_NODE(GREETING, NUETRAL)
-    "I cant stop whispering.",
+    "I can't stop whispering.",
     ""
   `ENDNODE
   
