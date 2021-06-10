@@ -53,6 +53,9 @@ enum FontStyles {
   COMBAT_SMALL_GREEN,
   COMBAT_SMALL_BLUE,
   COMBAT_SMALL_PURPLE,
+  
+  JOURNAL_22_BROWN,
+  
 };
 
 // Fonts for label components are stored here
@@ -139,7 +142,7 @@ protected function drawCanvas(Canvas canvas) {
   );
   
   // Calculate x and y starting coordinates
-  calcAlignmentXY(x, y, textWidth, textHeight *0.95); ///test
+  calcAlignmentXY(x, y, textWidth, textHeight);
   
   // Calculate real time color
   realTimeColor = getColor();
@@ -742,6 +745,14 @@ defaultProperties
     font=Font'GUI.Combat_Font_24'
   end object
   uiFonts[COMBAT_SMALL_PURPLE]=FriendDeed_Small_Purple
+  
+  // Journal
+  begin object class=UI_String_Style Name=Journal_Font_22
+    ///drawColor=(R=48,G=43,B=32,A=255) 
+    drawColor=(R=227,G=203,B=172,A=255) 
+    font=Font'GUI.Fonts.Note_This_22'
+  end object
+  uiFonts[JOURNAL_22_BROWN]=Journal_Font_22
   
   // Padding
   padding=(top=0, left=12, right=12, bottom=8)

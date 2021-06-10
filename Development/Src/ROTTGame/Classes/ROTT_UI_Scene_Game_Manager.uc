@@ -14,6 +14,7 @@ class ROTT_UI_Scene_Game_Manager extends ROTT_UI_Scene;
 var privatewrite ROTT_UI_Page_Game_Manager gameManagerPage;
 var privatewrite ROTT_UI_Page_Warning_Window gameMgmtWarningWindow;
 var privatewrite ROTT_UI_Page_Game_Options gameOptionsPage;
+var privatewrite ROTT_UI_Page_Journal journalPage;
 
 /*=============================================================================
  * initScene()
@@ -27,6 +28,7 @@ event initScene() {
   gameManagerPage = ROTT_UI_Page_Game_Manager(findComp("Page_Game_Manager"));
   gameMgmtWarningWindow = ROTT_UI_Page_Warning_Window(findComp("Game_Mgmt_Warning_Window"));
   gameOptionsPage = ROTT_UI_Page_Game_Options(findComp("Page_Game_Options"));
+  journalPage = ROTT_UI_Page_Journal(findComp("Page_Journal"));
   
   // Initial stack
   pushPage(gameManagerPage);
@@ -43,6 +45,8 @@ event initScene() {
  *===========================================================================*/
 event loadScene() {
   super.loadScene();
+  
+  if (pageStack.length == 0) pushPageByTag("Page_Game_Manager");
 }
 
 /*=============================================================================
@@ -106,6 +110,13 @@ defaultProperties
     bEnabled=false
   end object
   pageComponents.add(Page_Game_Options)
+  
+  // Quest journal
+  begin object class=ROTT_UI_Page_Journal Name=Page_Journal
+    tag="Page_Journal"
+    bEnabled=false
+  end object
+  pageComponents.add(Page_Journal)
   
 }
 

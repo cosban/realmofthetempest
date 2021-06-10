@@ -11,6 +11,7 @@
 class ROTT_UI_Page_Game_Manager extends ROTT_UI_Page;
 
 enum GameMgmtOptions {
+  GAME_MGMT_JOURNAL,
   GAME_MGMT_OPTIONS,
   GAME_MGMT_SAVE,
   GAME_MGMT_EXIT
@@ -68,6 +69,12 @@ protected function navigationRoutineA() {
   selection = GameMgmtOptions(gameMgmtSelector.getSelection());
   
   switch (selection) {
+    case GAME_MGMT_JOURNAL:
+      // Show Journal
+      parentScene.popPage();
+      parentScene.pushPageByTag("Page_Journal");
+      sfxBox.playSfx(SFX_MENU_ACCEPT);
+      break;
     case GAME_MGMT_OPTIONS:
       // Show options page
       parentScene.pushPageByTag("Page_Game_Options");
@@ -152,7 +159,7 @@ defaultProperties
     posX=444
     posY=54
     selectionOffset=(x=0,y=96)
-    numberOfMenuOptions=3
+    numberOfMenuOptions=4
     
     // Selection texture
     begin object class=UI_Texture_Info Name=Selection_Box_Texture
