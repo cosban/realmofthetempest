@@ -13,7 +13,7 @@ dependsOn(ROTT_UI_Scene_Manager)
 dependsOn(ROTT_NPC_Container);
  
 // Version info
-const MAJOR = 1;  const MINOR = 5;  const REVISION = 3;  const PATCH = 'h';  
+const MAJOR = 1;  const MINOR = 5;  const REVISION = 3;  const PATCH = 'i';  
 const PHASE_INFO = "III";
 
 // Publishing settings
