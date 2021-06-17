@@ -121,6 +121,12 @@ public function refresh() {
         -0.021 * gameInfo.tempestPawn.location.x + 441 + worldMap.getY()
       );
       break;
+    case MAP_HAXLYN_BACKLANDS:
+      playerMarker.updatePosition(
+        0.008758447 * gameInfo.tempestPawn.location.y + 252+203+82 + worldMap.getX(),
+        -0.008758447 * gameInfo.tempestPawn.location.x + 330+192+78 + worldMap.getY()
+      );
+      break;
     case MAP_HAXLYN_OUTSKIRTS:
       playerMarker.updatePosition(
         0.011378 * gameInfo.tempestPawn.location.y + 875 + worldMap.getX(),
@@ -143,6 +149,12 @@ public function refresh() {
       playerMarker.updatePosition(
         0.006507 * gameInfo.tempestPawn.location.y + 1982 + worldMap.getX(),
         -0.006507 * gameInfo.tempestPawn.location.x + 632 + worldMap.getY()
+      );
+      break;
+    case MAP_VALIMOR_BACKLANDS:
+      playerMarker.updatePosition(
+        0.0069776447 * gameInfo.tempestPawn.location.y + 2392 + worldMap.getX(),
+        -0.0069776447 * gameInfo.tempestPawn.location.x + 442 + worldMap.getY()
       );
       break;
     case MAP_VALIMOR_CITADEL:
