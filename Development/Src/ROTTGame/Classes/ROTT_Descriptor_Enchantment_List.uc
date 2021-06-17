@@ -148,7 +148,7 @@ public static function EnchantmentDescriptor getEnchantment
         "Adding +%add Armor",
         "New Total: +%total Armor"
       );
-      setGoldGemCost(script, 50000, 10);
+      setGoldGemCost(script, 20000, 20);
       setBonus(script, 2);
       
       return script;
@@ -165,7 +165,7 @@ public static function EnchantmentDescriptor getEnchantment
         "Adding +%add Accuracy, +%add Dodge",
         "New Total: +%total Accuracy, +%total Dodge"
       );
-      setGoldGemCost(script, 5000, 25);
+      setGoldGemCost(script, 15000, 20);
       setBonus(script, 10);
       
       return script;
@@ -199,7 +199,7 @@ public static function EnchantmentDescriptor getEnchantment
         "Adding +%add Class Skills",
         "New Total: +%total Class Skills"
       );
-      setGoldGemCost(script, 25000, 250);
+      setGoldGemCost(script, 125000, 250);
       setBonus(script, 1);
       
       return script;
@@ -335,7 +335,7 @@ public static function EnchantmentDescriptor getEnchantment
         "Adding +%add% Experience",
         "New Total: +%total% Experience"
       );
-      setGoldGemCost(script, 12500, 125);
+      setGoldGemCost(script, 12500, 50);
       setBonus(script, 2);
       
       return script;
