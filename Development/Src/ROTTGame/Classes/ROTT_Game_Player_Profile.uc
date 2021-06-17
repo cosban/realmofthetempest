@@ -249,6 +249,8 @@ public function pushJournalEntry(string questMsg) {
   questMsg = "Night " $ nightCounter $ ": " $ questMsg;
   
   journalEntries.addItem(questMsg);
+  
+  gameInfo.showGameplayNotification("New Journal Entry!");
 }
 
 /*=============================================================================

@@ -635,6 +635,8 @@ defaultProperties
   
   armorPerLvl=0.f
   
+  affinity(CRIT_MULTIPLIER)=(amp[MINOR]=1.2, amp[AVERAGE]=1.2, amp[MAJOR]=1.2) 
+  
   // Reward info
   expAmp=1.f
   lootAmplifier=1.f
