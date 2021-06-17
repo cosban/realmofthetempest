@@ -889,7 +889,9 @@ public function int getExpForLevel(int lvl) {
   if (lvl <= 1) return 0;
   
   // Approximate exp equation
-  exp = int(FCeil(1.5 ** (lvl ** 0.9)) + (lvl ** 4.2) + (300 * lvl) - 521);
+  ///exp = int(FCeil(1.5 ** (lvl ** 0.9)) + (lvl ** 4.2) + (300 * lvl) - 521);
+  ///exp = int(FCeil(1.5 ** (lvl ** 0.9)) + (lvl ** 3.3) + (355 * lvl) - 622);
+  exp = int(FCeil(1.5 ** (lvl ** 0.9)) + (lvl ** 3.6) + (345 * lvl) - 605);
   
   // Round by 5:
   exp /= 5.0;
