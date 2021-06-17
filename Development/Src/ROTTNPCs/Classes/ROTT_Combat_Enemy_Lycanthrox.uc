@@ -72,6 +72,9 @@ defaultProperties
 {
   monsterName="Lycanthrox"
   
+  // Exp boost
+  expAmp=4
+  
   // Positive drop rate modifiers
   ///itemDropRates.add((dropType=class'ROTT_Inventory_Item_Charm_Kamita',chanceOverride=,minOverride=,maxOverride=,chanceAmp=2,quantityAmp=))
   

@@ -43,7 +43,7 @@ public function initStats
     case CLAN_WHITE:
       // Fixed stat points per level
       armorPerLvl = 0;
-      baseStatsPerLvl[PRIMARY_VITALITY] = 5;
+      baseStatsPerLvl[PRIMARY_VITALITY] = 8;
       baseStatsPerLvl[PRIMARY_STRENGTH] = 5;
       baseStatsPerLvl[PRIMARY_COURAGE] = 1;
       baseStatsPerLvl[PRIMARY_FOCUS] = 1;
@@ -77,14 +77,19 @@ defaultProperties
 {
   monsterName="Dragon Lord"
   
-  // Positive drop rate modifiers
-  ///itemDropRates.add((dropType=class'ROTT_Inventory_Item_Charm_Kamita',chanceOverride=,minOverride=,maxOverride=,chanceAmp=2,quantityAmp=))
+  // Positive drop rate modifiers 
+  // (Gold items)
+  itemDropRates.add((dropType=class'ROTT_Inventory_Item_Bottle_Yinras_ore',chanceOverride=,minOverride=,maxOverride=,chanceAmp=2,quantityAmp=))
+  itemDropRates.add((dropType=class'ROTT_Inventory_Item_Charm_Erazi',chanceOverride=,minOverride=,maxOverride=,chanceAmp=2,quantityAmp=))
+  itemDropRates.add((dropType=class'ROTT_Inventory_Item_Herb_Zeltsi',chanceOverride=,minOverride=,maxOverride=,chanceAmp=2,quantityAmp=))
   
   // Negative drop rate modifiers
-  ///itemDropRates.add((dropType=class'ROTT_Inventory_Item_Charm_Eluvi',chanceOverride=,minOverride=,maxOverride=,chanceAmp=0,quantityAmp=))
+  itemDropRates.add((dropType=class'ROTT_Inventory_Item_Herb_Saripine',chanceOverride=,minOverride=,maxOverride=,chanceAmp=0,quantityAmp=))
+  itemDropRates.add((dropType=class'ROTT_Inventory_Item_Charm_Bayuta',chanceOverride=,minOverride=,maxOverride=,chanceAmp=0,quantityAmp=))
+  itemDropRates.add((dropType=class'ROTT_Inventory_Item_Bottle_Swamp_Husks',chanceOverride=,minOverride=,maxOverride=,chanceAmp=0,quantityAmp=))
   
   // Currency modifiers
-  ///itemDropRates.add((dropType=class'ROTT_Inventory_Item_Gold',chanceOverride=,minOverride=,maxOverride=,chanceAmp=,quantityAmp=1.75))
+  itemDropRates.add((dropType=class'ROTT_Inventory_Item_Gold',chanceOverride=,minOverride=,maxOverride=,chanceAmp=,quantityAmp=4.75))
   ///itemDropRates.add((dropType=class'ROTT_Inventory_Item_Gem',chanceOverride=100,minOverride=,maxOverride=,chanceAmp=,quantityAmp=1))
   
   // Sprites 240x240

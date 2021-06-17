@@ -78,7 +78,7 @@ public function initStats
  *===========================================================================*/
 defaultProperties
 {
-  monsterName="Ash Reaper"
+  monsterName="Ash Demon"
   
   // Double experience because these things are quick and nasty little demons
   expAmp=2

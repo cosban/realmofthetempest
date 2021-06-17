@@ -72,6 +72,9 @@ defaultProperties
 {
   monsterName="Thrasher"
   
+  // Exp boost
+  expAmp=1.5
+  
   // Positive drop rate modifiers
   ///itemDropRates.add((dropType=class'ROTT_Inventory_Item_Charm_Kamita',chanceOverride=,minOverride=,maxOverride=,chanceAmp=2,quantityAmp=))
   

@@ -38,7 +38,7 @@ public function initStats
     case CLAN_WHITE:
       // Fixed stat points per level
       armorPerLvl = 0;
-      baseStatsPerLvl[PRIMARY_VITALITY] = 3;
+      baseStatsPerLvl[PRIMARY_VITALITY] = 5;
       baseStatsPerLvl[PRIMARY_STRENGTH] = 4;
       baseStatsPerLvl[PRIMARY_COURAGE] = 2;
       baseStatsPerLvl[PRIMARY_FOCUS] = 2;
@@ -72,6 +72,9 @@ defaultProperties
 {
   monsterName="Watcher"
   
+  // Exp boost
+  expAmp=3
+  
   // Positive drop rate modifiers
   ///itemDropRates.add((dropType=class'ROTT_Inventory_Item_Charm_Kamita',chanceOverride=,minOverride=,maxOverride=,chanceAmp=2,quantityAmp=))
   
@@ -79,8 +82,8 @@ defaultProperties
   ///itemDropRates.add((dropType=class'ROTT_Inventory_Item_Charm_Eluvi',chanceOverride=,minOverride=,maxOverride=,chanceAmp=0,quantityAmp=))
   
   // Currency modifiers
-  ///itemDropRates.add((dropType=class'ROTT_Inventory_Item_Gold',chanceOverride=,minOverride=,maxOverride=,chanceAmp=,quantityAmp=1.75))
-  ///itemDropRates.add((dropType=class'ROTT_Inventory_Item_Gem',chanceOverride=100,minOverride=,maxOverride=,chanceAmp=,quantityAmp=1))
+  itemDropRates.add((dropType=class'ROTT_Inventory_Item_Gold',chanceOverride=,minOverride=,maxOverride=,chanceAmp=,quantityAmp=1.75))
+  itemDropRates.add((dropType=class'ROTT_Inventory_Item_Gem',chanceOverride=100,minOverride=,maxOverride=,chanceAmp=,quantityAmp=3))
   
   // Sprites 240x240
   begin object class=UI_Texture_Info Name=Enemy_Portrait_Watcher_Blue_240

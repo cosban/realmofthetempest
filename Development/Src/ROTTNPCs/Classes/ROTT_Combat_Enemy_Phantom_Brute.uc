@@ -38,8 +38,8 @@ public function initStats
     case CLAN_WHITE:
       // Fixed stat points per level
       armorPerLvl = 0;
-      baseStatsPerLvl[PRIMARY_VITALITY] = 4;
-      baseStatsPerLvl[PRIMARY_STRENGTH] = 4;
+      baseStatsPerLvl[PRIMARY_VITALITY] = 6;
+      baseStatsPerLvl[PRIMARY_STRENGTH] = 6;
       baseStatsPerLvl[PRIMARY_COURAGE] = 1;
       baseStatsPerLvl[PRIMARY_FOCUS] = 4;
       
@@ -80,7 +80,7 @@ defaultProperties
   
   // Currency modifiers
   ///itemDropRates.add((dropType=class'ROTT_Inventory_Item_Gold',chanceOverride=,minOverride=,maxOverride=,chanceAmp=,quantityAmp=1.75))
-  ///itemDropRates.add((dropType=class'ROTT_Inventory_Item_Gem',chanceOverride=100,minOverride=,maxOverride=,chanceAmp=,quantityAmp=1))
+  itemDropRates.add((dropType=class'ROTT_Inventory_Item_Gem',chanceOverride=100,minOverride=,maxOverride=,chanceAmp=,quantityAmp=2.0))
   
   // Sprites 240x240
   begin object class=UI_Texture_Info Name=Enemy_Portrait_Phantom_Brute_Blue_240

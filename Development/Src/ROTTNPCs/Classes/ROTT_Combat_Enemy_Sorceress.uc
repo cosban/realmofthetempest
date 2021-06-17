@@ -72,15 +72,18 @@ defaultProperties
 {
   monsterName="Sorceress"
   
+  // Exp boost
+  expAmp=1.5
+  
   // Positive drop rate modifiers
-  ///itemDropRates.add((dropType=class'ROTT_Inventory_Item_Charm_Kamita',chanceOverride=,minOverride=,maxOverride=,chanceAmp=2,quantityAmp=))
+  itemDropRates.add((dropType=class'ROTT_Inventory_Item_Charm_Kamita',chanceOverride=,minOverride=,maxOverride=,chanceAmp=2,quantityAmp=))
   
   // Negative drop rate modifiers
-  ///itemDropRates.add((dropType=class'ROTT_Inventory_Item_Charm_Eluvi',chanceOverride=,minOverride=,maxOverride=,chanceAmp=0,quantityAmp=))
+  itemDropRates.add((dropType=class'ROTT_Inventory_Item_Bottle_Yinras_Ore',chanceOverride=,minOverride=,maxOverride=,chanceAmp=0,quantityAmp=))
   
   // Currency modifiers
   ///itemDropRates.add((dropType=class'ROTT_Inventory_Item_Gold',chanceOverride=,minOverride=,maxOverride=,chanceAmp=,quantityAmp=1.75))
-  ///itemDropRates.add((dropType=class'ROTT_Inventory_Item_Gem',chanceOverride=100,minOverride=,maxOverride=,chanceAmp=,quantityAmp=1))
+  itemDropRates.add((dropType=class'ROTT_Inventory_Item_Gem',chanceOverride=100,minOverride=,maxOverride=,chanceAmp=,quantityAmp=2))
   
   // Sprites 240x240
   begin object class=UI_Texture_Info Name=Enemy_Portrait_Sorceress_Blue_240

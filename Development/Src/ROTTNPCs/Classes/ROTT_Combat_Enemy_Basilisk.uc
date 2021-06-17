@@ -78,6 +78,9 @@ defaultProperties
 {
   monsterName="Basilisk"
   
+  // Exp boost
+  expAmp=8
+  
   // Positive drop rate modifiers
   ///itemDropRates.add((dropType=class'ROTT_Inventory_Item_Charm_Kamita',chanceOverride=,minOverride=,maxOverride=,chanceAmp=2,quantityAmp=))
   
