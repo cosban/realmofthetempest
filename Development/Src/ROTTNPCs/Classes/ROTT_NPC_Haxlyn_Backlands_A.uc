@@ -7,7 +7,7 @@
  * A Backlands NPC in Haxlyn.
  *===========================================================================*/
 
-class ROTT_NPC_Haxlyn_Backland_A extends ROTT_NPC_Container;
+class ROTT_NPC_Haxlyn_Backlands_A extends ROTT_NPC_Container;
 
 // Macros for formatting dialog content
 `DEFINE NEW_NODE(TOPIC, MODE)           addDialogNode(`TOPIC, `MODE, 
