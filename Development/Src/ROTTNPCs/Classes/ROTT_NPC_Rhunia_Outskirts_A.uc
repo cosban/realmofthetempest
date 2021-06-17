@@ -1,13 +1,13 @@
 /*=============================================================================
- * NPC - Valimor Outskirts (B)
+ * NPC - Rhunia Outskirts (A)
  *
  * Author: Otay
  * Bramble Gate Studios (All rights reserved)
  *
- * A wilderness NPC in Valimor.
+ * A Outskirts NPC in Rhunia.
  *===========================================================================*/
 
-class ROTT_NPC_Valimor_Outskirts_B extends ROTT_NPC_Container;
+class ROTT_NPC_Rhunia_Outskirts_A extends ROTT_NPC_Container;
 
 // Macros for formatting dialog content
 `DEFINE NEW_NODE(TOPIC, MODE)           addDialogNode(`TOPIC, `MODE, 
@@ -26,10 +26,25 @@ public function initDialogue() {
   
   // Intro
   `NEW_NODE(GREETING, NUETRAL)
-    ". . .",
+    "You did not get lost, did you?",
     ""
   `ENDNODE
   
+    `ADD_OPTIONS(GREETING, NUETRAL)
+      "Barter",
+      "Inquiry",
+      "",
+      "",
+      
+      BEHAVIOR_LAUNCH_SERVICE,
+      BEHAVIOR_NONE
+    `ENDNODE
+    
+      `ADD_REPLY(GREETING, NUETRAL, 0)
+        "(Service unavailable in this version)",
+        ""
+      `ENDNODE
+
   // ----------------------------------------------------------------------- //
   
   setInquiry(
@@ -56,7 +71,7 @@ defaultProperties
   
   // Background
   begin object class=UI_Texture_Info Name=NPC_Background_Texture
-    componentTextures.add(Texture2D'GUI_NPC_Dialog.NPC_Background_Dark_Gray')
+    componentTextures.add(Texture2D'GUI_NPC_Dialog.NPC_Background_Red')
   end object
   
   // Sprite container for transfer
@@ -67,14 +82,14 @@ defaultProperties
   npcBackground=NPC_Background
   
   // NPC Texture
-  begin object class=UI_Texture_Info Name=NPC_Sprite_Texture
-    componentTextures.add(Texture2D'Monsters.Enemy_Portrait_Ash_Reaper_Purple_Black_360')
+  begin object class=UI_Texture_Info Name=NPC_Sprite
+    componentTextures.add(Texture2D'NPCs.Merchants.NPC_Portrait_Merchant_Red_360')
   end object
   
   // Sprite container for transfer
   begin object class=UI_Texture_Storage Name=NPC_Sprites
     tag="NPC_Sprites"
-    images(0)=NPC_Sprite_Texture
+    images(0)=NPC_Sprite
   end object
   npcSprites=NPC_Sprites
 }
