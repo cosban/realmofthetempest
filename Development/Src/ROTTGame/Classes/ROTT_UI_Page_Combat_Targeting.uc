@@ -130,6 +130,7 @@ public function setTargetMode(TargetingClassification mode) {
 private function selectSingleEnemy() { 
   local ROTT_Combat_Hero hero;
   local ROTT_Mob mob;
+  local int targetIndex;
   local int i;
   
   // Get acting unit
@@ -140,11 +141,21 @@ private function selectSingleEnemy() {
   
   // Move selector to first slot
   enemySelector.setEnabled(true);
-  enemySelector.forceSelection(hero.lastEnemySelection);
+  
+  // Check target memory option
+  if (gameInfo.optionsCookie.bTickTargetMemory) {
+    // Recall selection
+    targetIndex = hero.lastEnemySelection;
+  } else {
+    targetIndex = 0;
+  }
+  
+  // Update selection
+  enemySelector.forceSelection(targetIndex);
   
   // Check validity of selection 
-  if (mob.getEnemy(hero.lastEnemySelection) != none) {
-    if (mob.getEnemy(hero.lastEnemySelection).bDead == false) {
+  if (mob.getEnemy(targetIndex) != none) {
+    if (mob.getEnemy(targetIndex).bDead == false) {
       return;
     }
   }

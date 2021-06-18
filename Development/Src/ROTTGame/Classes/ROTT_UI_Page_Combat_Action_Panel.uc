@@ -86,12 +86,7 @@ event onPushPageEvent() {
   hero = gameInfo.getActiveParty().readyUnits[0];
   
   // Get heroes last selection
-  switch (hero.actionType) {
-    case ATTACK: actionSelection = ACTION_ATTACK; break; 
-    case DEFEND: actionSelection = ACTION_DEFEND; break; 
-    case PRIMARY_SKILL: actionSelection = ACTION_SKILL_PRIMARY; break; 
-    case SECONDARY_SKILL: actionSelection = ACTION_SKILL_SECONDARY; break; 
-  }
+  getActionFromMemory(hero.actionType);
   
   // Initialize menu graphics
   hero.primaryScript.skillIcon.initializeComponent();
@@ -140,16 +135,32 @@ event onFocusMenu() {
   hero = gameInfo.getActiveParty().readyUnits[0];
   
   // Get heroes last selection
-  switch (hero.actionType) {
-    case ATTACK: actionSelection = ACTION_ATTACK; break; 
-    case DEFEND: actionSelection = ACTION_DEFEND; break; 
-    case PRIMARY_SKILL: actionSelection = ACTION_SKILL_PRIMARY; break; 
-    case SECONDARY_SKILL: actionSelection = ACTION_SKILL_SECONDARY; break; 
-  }
+  getActionFromMemory(hero.actionType);
   
   // Draw selector immediately if backing out from targeting
   if (menuControl == ACCEPT_INPUT) {
     showSelector();
+  }
+}
+
+/*============================================================================= 
+ * getActionFromMemory()
+ *
+ * Called to initialize the action panel selection.
+ *===========================================================================*/
+public function getActionFromMemory(CombActEnum action) {
+  // Get heroes last selection
+  if (gameInfo.optionsCookie.bTickActionMemory) {
+    // Fetch from hero memory
+    switch (action) {
+      case ATTACK: actionSelection = ACTION_ATTACK; break; 
+      case DEFEND: actionSelection = ACTION_DEFEND; break; 
+      case PRIMARY_SKILL: actionSelection = ACTION_SKILL_PRIMARY; break; 
+      case SECONDARY_SKILL: actionSelection = ACTION_SKILL_SECONDARY; break; 
+    }
+  } else {
+    // No memory, default attack
+    actionSelection = ACTION_ATTACK;
   }
 }
 

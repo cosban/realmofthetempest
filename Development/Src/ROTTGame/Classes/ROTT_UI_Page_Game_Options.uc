@@ -100,8 +100,8 @@ event onPushPageEvent() {
   musicSlider.setKnob(gameInfo.optionsCookie.musicVolume);
   
   // Load checkboxes from profile
-  targetMemoryCheckbox.setTick(gameInfo.optionsCookie.bTick1);
-  actionMemoryCheckbox.setTick(gameInfo.optionsCookie.bTick2);
+  targetMemoryCheckbox.setTick(gameInfo.optionsCookie.bTickTargetMemory);
+  actionMemoryCheckbox.setTick(gameInfo.optionsCookie.bTickActionMemory);
   
 }
 
@@ -111,6 +111,13 @@ event onPushPageEvent() {
  * Called when this page is removed from the scene
  *===========================================================================*/
 event onPopPageEvent() {
+  // Change options data
+  gameInfo.optionsCookie.bTickActionMemory = actionMemoryCheckbox.bTick;
+  gameInfo.optionsCookie.bTickTargetMemory = targetMemoryCheckbox.bTick;
+  `log("Action : " $ actionMemoryCheckbox.bTick);
+  `log("Target : " $ targetMemoryCheckbox.bTick);
+  
+  // Save
   gameInfo.saveOptions();
 }
 
@@ -223,14 +230,18 @@ public function optionSelectorInputA() {
       optionSelector.setActive(false);
       sfxBox.playSfx(SFX_MENU_ACCEPT);
       break;
-    case OPTION_ACTION_MEMORY:
-      // Toggle tick state
-      actionMemoryCheckbox.toggleTick();
-      sfxBox.playSfx(SFX_MENU_ACCEPT);
-      break;
     case OPTION_TARGET_MEMORY:
       // Toggle tick state
       targetMemoryCheckbox.toggleTick();
+      
+      // Sound
+      sfxBox.playSfx(SFX_MENU_ACCEPT);
+      break;
+    case OPTION_ACTION_MEMORY:
+      // Toggle tick state
+      actionMemoryCheckbox.toggleTick();
+      
+      // Sound
       sfxBox.playSfx(SFX_MENU_ACCEPT);
       break;
     case OPTION_SCALE_MODE:

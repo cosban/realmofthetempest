@@ -9,14 +9,22 @@
  
 class Cookie_Options extends object;
 
+// Sound volume
 var float sfxVolume;
+
+// Music volume
 var float musicVolume;
 
-var bool bTick1;
-var bool bTick2;
+// Action selection memory
+var bool bTickActionMemory;
 
+// Target selection memory
+var bool bTickTargetMemory;
+
+// Scale mode
 var int scaleModeType;
 
+// Combat view mode
 var bool showCombatDetail;
 
 /*=============================================================================
@@ -35,5 +43,6 @@ defaultProperties
 {
   // Default display settings
   showCombatDetail=true 
+  
   
 }

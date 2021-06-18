@@ -50,6 +50,10 @@ event initGame(string options, out string errorMessage) {
     optionsCookie.sfxVolume = 0.65;
     optionsCookie.musicVolume = 0.75;
     
+    // Default memory selection
+    optionsCookie.bTickActionMemory = true;
+    optionsCookie.bTickTargetMemory = true;
+  
     // Default resolution
     setResolution(1440, 900);
   }
@@ -84,7 +88,6 @@ public function setResolution(int x, int y) {
  *===========================================================================*/
 public function saveOptions() {
   // Save game options
-  darkcyanlog("Saving options.  Music Volume: " $ optionsCookie.musicVolume);
   class'Engine'.static.basicSaveObject(optionsCookie, "Save\\options_cookie.bin", true, 0);
 }
 
