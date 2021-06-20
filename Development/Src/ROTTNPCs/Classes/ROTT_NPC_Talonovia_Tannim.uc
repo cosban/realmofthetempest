@@ -28,8 +28,29 @@ public function initDialogue() {
   
   // Intro
   `NEW_NODE(INTRODUCTION, NUETRAL)
-    "I am the keeper of beasts and demons.",
-    "My name is. . . Tannim, the dragon tamer."
+    "Tannim the dragon tamer is dangling a smoking thurible",
+    "over a pet gargoyle. . ."
+  `ENDNODE
+  setColor(DEFAULT_MEDIUM_GOLD);
+  
+  `NEW_NODE(INTRODUCTION, NUETRAL)
+    "Keeper of beasts and demons,",
+    "Tannim, at your service."
+  `ENDNODE
+  
+  `NEW_NODE(INTRODUCTION, NUETRAL)
+    "You aren't here about the obelisk are you?",
+    ""
+  `ENDNODE
+  
+  `NEW_NODE(INTRODUCTION, NUETRAL)
+    "Ever since \"the black magic tragedy\", the Talonovian high council",
+    "has been in all sorts of disagreements."
+  `ENDNODE
+  
+  `NEW_NODE(INTRODUCTION, NUETRAL)
+    "Just don't.  Leave Rhunia's obelisk alone.",
+    ""
   `ENDNODE
   
   // ----------------------------------------------------------------------- //
@@ -116,7 +137,7 @@ public function initDialogue() {
   `ENDNODE
   
   `NEW_NODE(INQUERY_GOLEM, NUETRAL)
-    "Wake the golems, and they will wake you.",
+    "Wake the golems, and they will wake you too.",
     ""
   `ENDNODE
   

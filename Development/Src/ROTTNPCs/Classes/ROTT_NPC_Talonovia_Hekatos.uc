@@ -28,6 +28,12 @@ public function initDialogue() {
   
   // Intro
   `NEW_NODE(INTRODUCTION, NUETRAL)
+    "Hekatos the Witch is coughing over a haze of violet fumes. . .",
+    ""
+  `ENDNODE
+  setColor(DEFAULT_MEDIUM_GOLD);
+  
+  `NEW_NODE(INTRODUCTION, NUETRAL)
     "Spirits whispered of your arrival to me.",
     ""
   `ENDNODE
@@ -39,7 +45,7 @@ public function initDialogue() {
   
   `NEW_NODE(INTRODUCTION, NUETRAL)
     "For I am the master practitioner of chemical witchcraft,",
-    "channeler of the high queen of the underworld,"
+    "channeler of the high queen of the underworld. . ."
   `ENDNODE
   
   `NEW_NODE(INTRODUCTION, NUETRAL)
@@ -49,34 +55,34 @@ public function initDialogue() {
   
   `NEW_NODE(INTRODUCTION, NUETRAL)
     "You hear them too, don't you?",
-    "The spirits."
+    "The spirits. . ."
   `ENDNODE
   
     `ADD_OPTIONS(INTRODUCTION, NUETRAL)
-      "Yes",
-      "Sorry, no",
-      "Are you mad?",
+      "Sure",
+      "Not really",
+      "Are you mad or what?",
       ""
     `ENDNODE
     
       `ADD_REPLY(INTRODUCTION, NUETRAL, 0)
-        "We share a common curse with this blessing then.",
-        ""
+        "This curse is not too common. . .",
+        "What a blessing I found you."
       `ENDNODE
     
       `ADD_REPLY(INTRODUCTION, NUETRAL, 1)
-        "Fret not.  I am here to relay you their secrets.",
+        "Have no fear.  I am here to relay you their secrets.",
         ""
       `ENDNODE
     
       `ADD_REPLY(INTRODUCTION, NUETRAL, 2)
         "Swallow your spit, coward.",
-        "You cannot taunt me or the goddess I serve."
+        "You cannot taunt me or the goddess we serve."
       `ENDNODE
     
       `ADD_REPLY(INTRODUCTION, NUETRAL, 2)
         "Madness is no weakness when the darkness",
-        "deepens as it does here."
+        "deepens as it does here, in this realm."
       `ENDNODE
     
   `NEW_NODE(INTRODUCTION, NUETRAL)

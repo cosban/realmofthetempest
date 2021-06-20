@@ -27,18 +27,24 @@ public function initDialogue() {
   
   // Intro
   `NEW_NODE(INTRODUCTION, NUETRAL)
-    "Greetings.",
+    "Kalev the Prince is busy reading, and avoids eye contact. . .",
+    ""
+  `ENDNODE
+  setColor(DEFAULT_MEDIUM_GOLD);
+  
+  `NEW_NODE(INTRODUCTION, NUETRAL)
+    "Greetings. . .",
     ""
   `ENDNODE
   
   `NEW_NODE(INTRODUCTION, NUETRAL)
-    "I was once a prince, but my kingdom is long lost.",
-    "My name is Kalev."
+    "The mystical gates of this harbor here were woven",
+    "by ancient sages to be our nexus across the realm."
   `ENDNODE
   
   `NEW_NODE(INTRODUCTION, NUETRAL)
-    "The mystical gates of this harbor here were woven",
-    "by ancient sages as our nexus across the realm."
+    "Formerly I was a prince, but my kingdom is long lost.",
+    "My name is. . . Kalev."
   `ENDNODE
   
   `NEW_NODE(INTRODUCTION, NUETRAL)
@@ -47,8 +53,8 @@ public function initDialogue() {
   `ENDNODE
   
   `NEW_NODE(INTRODUCTION, NUETRAL)
-    "I must advise you not to engage with the obelisk,",
-    "or empower its magick."
+    "Do not engage with the obelisk. . .",
+    "Do not empower its magick."
   `ENDNODE
   
   // ----------------------------------------------------------------------- //

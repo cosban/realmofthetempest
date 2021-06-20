@@ -28,13 +28,19 @@ public function initDialogue() {
   
   // Intro
   `NEW_NODE(INTRODUCTION, NUETRAL)
+    "Mekuba the Necromancer stands still, like unplugged machinery. . .",
+    ""
+  `ENDNODE
+  setColor(DEFAULT_MEDIUM_GOLD);
+  
+  `NEW_NODE(INTRODUCTION, NUETRAL)
     ". . .",
     ""
   `ENDNODE
   
     `ADD_OPTIONS(INTRODUCTION, NUETRAL)
-      "Who are you?",
-      "Maybe I should leave.",
+      "Hello?",
+      "Maybe I should go. . .",
       "",
       "",
       
@@ -43,8 +49,8 @@ public function initDialogue() {
     `ENDNODE
     
       `ADD_REPLY(INTRODUCTION, NUETRAL, 0)
-        "Watcher of the damned, lord of rot,",
-        "I am Mekuba, the necromancer."
+        "Watcher of the damned, lord of rot. . .",
+        "You speak now to Mekuba."
       `ENDNODE
     
   // ----------------------------------------------------------------------- //

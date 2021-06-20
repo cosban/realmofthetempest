@@ -26,8 +26,19 @@ public function initDialogue() {
   
   // Intro
   `NEW_NODE(INTRODUCTION, NUETRAL)
-    "Welcome to Talonovia.  I'm Salus, the cleric.",
-    "I watched you arrive from the portals."
+    "Salus the Cleric is tinkering with some flasks. . .",
+    ""
+  `ENDNODE
+  setColor(DEFAULT_MEDIUM_GOLD);
+  
+  `NEW_NODE(INTRODUCTION, NUETRAL)
+    "Welcome to Talonovia.",
+    ""
+  `ENDNODE
+  
+  `NEW_NODE(INTRODUCTION, NUETRAL)
+    "I don't mean to disturb you, traveler,",
+    "but I saw you arrive from the portals."
   `ENDNODE
   
   `NEW_NODE(INTRODUCTION, NUETRAL)
@@ -36,14 +47,14 @@ public function initDialogue() {
   `ENDNODE
   
     `ADD_OPTIONS(INTRODUCTION, NUETRAL)
-      "I'm here to help.",
-      "I'm here to fight evil.",
+      "Here to help.",
+      "For the fight against evil.",
       "I don't know.",
       "None of your business, \"Salus.\""
     `ENDNODE
     
       `ADD_REPLY(INTRODUCTION, NUETRAL, 0)
-        "Your help is welcome here.",
+        "What great news, your help is welcome here.",
         ""
       `ENDNODE
     
@@ -53,7 +64,7 @@ public function initDialogue() {
       `ENDNODE
     
       `ADD_REPLY(INTRODUCTION, NUETRAL, 2)
-        "If you're searching for purpose, you may find it here.",
+        "Searching for your purpose then, huh?",
         ""
       `ENDNODE
     
@@ -63,19 +74,24 @@ public function initDialogue() {
       `ENDNODE
     
   `NEW_NODE(INTRODUCTION, NUETRAL)
-    "Your time would be well spent in Rhunia.",
-    "One of our portals tethers there."
+    "Your time would be well spent in Rhunia,",
+    "where one of our portals is tethered to."
   `ENDNODE
   
   `NEW_NODE(INTRODUCTION, NUETRAL)
-    "And if you can reach it, there is an obelisk in the citadel.",
-    "I advise you to turn it on, %n."
+    "If you can reach it, there is an obelisk in the citadel.",
+    ""
+  `ENDNODE
+  
+  `NEW_NODE(INTRODUCTION, NUETRAL)
+    "I advise you to read the obelisk's prayers, %n. . .",
+    "For summoning a protective barrier over the town."
   `ENDNODE
   
   // ----------------------------------------------------------------------- //
   
   `NEW_NODE(GREETING, NUETRAL)
-    "May the storm bless and keep you.",
+    "May the storm bless and keep you, traveler.",
     ""
   `ENDNODE
   
@@ -97,7 +113,7 @@ public function initDialogue() {
   // ----------------------------------------------------------------------- //
   
   `NEW_NODE(INQUERY_OBELISK, NUETRAL)
-    "When we pray at the shrine of the obelisk,",
+    "Once we pray again, at the shrine of the obelisk. . .",
     "a powerful spiritual pressure emenates from it."
   `ENDNODE
   
@@ -149,8 +165,8 @@ public function initDialogue() {
   `ENDNODE
   
   `NEW_NODE(INQUERY_TOMB, NUETRAL)
-    "So based on her relationship to sacrifice, I believe she'd want",
-    "the blossoms to be collected from her holy burial site."
+    "So based on her relationship to sacrifice, don't you think she'd",
+    "want the blossoms to be collected from her holy burial site?"
   `ENDNODE
   
   // ----------------------------------------------------------------------- //

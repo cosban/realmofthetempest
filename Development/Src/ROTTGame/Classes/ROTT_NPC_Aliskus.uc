@@ -27,12 +27,12 @@ public function initDialogue() {
   // Pre-Intro
   `NEW_NODE(INTRODUCTION, NUETRAL)
     "In a subtractive space, black is the absolute combination",
-    "of all things."
+    "of all color."
   `ENDNODE
   setColor(DEFAULT_MEDIUM_GOLD);
   
   `NEW_NODE(INTRODUCTION, NUETRAL)
-    "And in the additive space, black is the emptiness of all things.",
+    "And in the additive space, black is the emptiness of all color.",
     ""
   `ENDNODE
   setColor(DEFAULT_MEDIUM_GOLD);
@@ -52,33 +52,28 @@ public function initDialogue() {
   setColor(DEFAULT_MEDIUM_WHITE);
   
   `NEW_NODE(INTRODUCTION, NUETRAL)
-    "Even if you're dead, you can wake up.",
+    "Even when you're dead, waking up is possible.",
     ""
   `ENDNODE
   
   `NEW_NODE(INTRODUCTION, NUETRAL)
-    "That's a trick I once learned from a gatekeeper.",
-    "I've studied their connection to the ethereal stream."
+    "That is just a little trick for us gatekeepers. . .",
+    "out here, in the ethereal stream."
   `ENDNODE
   
   `NEW_NODE(INTRODUCTION, NUETRAL)
     "There are two sides to any gate.",
-    "And when the gate awakens, we have crossed it."
-  `ENDNODE
-  
-  `NEW_NODE(INTRODUCTION, NUETRAL)
-    "Death is life's complement.",
-    "Each are governed by the same gate."
-  `ENDNODE
-  
-  `NEW_NODE(INTRODUCTION, NUETRAL)
-    "We are here to cheat life's complement, for that which",
-    "precedes life is \"not living.\""
-  `ENDNODE
-  
-  `NEW_NODE(INTRODUCTION, NUETRAL)
-    "A gate that awakens with birth, awakens with death.",
     ""
+  `ENDNODE
+  
+  `NEW_NODE(INTRODUCTION, NUETRAL)
+    "Death is not life's complement, but",
+    "each are governed by the same gate."
+  `ENDNODE
+  
+  `NEW_NODE(INTRODUCTION, NUETRAL)
+    "To cheat life's complement, know now. . . that what",
+    "precedes life is \"not living.\""
   `ENDNODE
   
   `NEW_NODE(INTRODUCTION, NUETRAL)
@@ -87,8 +82,8 @@ public function initDialogue() {
   `ENDNODE
   
   `NEW_NODE(INTRODUCTION, NUETRAL)
-    "But whatever you seek to obtain here is no more obtainable",
-    "than it is where you've come from."
+    "You won't find what you seek to obtain here. . .",
+    "for it is no more obtainable here than where you're from."
   `ENDNODE
   
   //`NEW_NODE(INTRODUCTION, NUETRAL)
@@ -140,8 +135,14 @@ public function initDialogue() {
   `ENDNODE
   
   `NEW_NODE(INTRODUCTION, NUETRAL)
+    "Menacing laughter slowly erupts from the cloaked figure. . .",
+    ""
+  `ENDNODE
+  setColor(DEFAULT_MEDIUM_GOLD);
+  
+  `NEW_NODE(INTRODUCTION, NUETRAL)
     "I came into the world like spit,",
-    "and so will you."
+    "and so will you!"
   `ENDNODE
   
   /// Force goodbye
@@ -160,26 +161,26 @@ defaultProperties
   bFadeIn=true
   
   // Background
-  begin object class=UI_Texture_Info Name=NPC_Background_Blue
-    componentTextures.add(Texture2D'GUI_NPC_Dialog.NPC_Background_Blue')
+  begin object class=UI_Texture_Info Name=NPC_Background_Texture
+    componentTextures.add(Texture2D'GUI_NPC_Dialog.NPC_Background_Dark_Gray')
   end object
   
   // Sprite container for transfer
   begin object class=UI_Texture_Storage Name=NPC_Background
     tag="NPC_Background"
-    images(0)=NPC_Background_Blue
+    images(0)=NPC_Background_Texture
   end object
   npcBackground=NPC_Background
   
   // NPC Texture
-  begin object class=UI_Texture_Info Name=NPC_Aliskus
-    componentTextures.add(Texture2D'Monsters.Enemy_Portrait_Gatekeeper_Cyan_360')
+  begin object class=UI_Texture_Info Name=NPC_Portrait
+    componentTextures.add(Texture2D'Monsters.Enemy_Portrait_Gatekeeper_Black_360')
   end object
   
   // Sprite container for transfer
   begin object class=UI_Texture_Storage Name=NPC_Sprites
     tag="NPC_Sprites"
-    images(0)=NPC_Aliskus
+    images(0)=NPC_Portrait
   end object
   npcSprites=NPC_Sprites
 }

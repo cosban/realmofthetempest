@@ -26,44 +26,55 @@ public function initDialogue() {
   
   // Intro
   `NEW_NODE(INTRODUCTION, NUETRAL)
-    "On stormy nights, I watch the wind raging",
-    "in the tempest, thrashing against itself."
+    "Migmas the Alchemist is handling a magical flame. . .",
+    ""
+  `ENDNODE
+  setColor(DEFAULT_MEDIUM_GOLD);
+  
+  `NEW_NODE(INTRODUCTION, NUETRAL)
+    "On stormy nights, I can watch the wind raging",
+    "in the tempest, thrashing against itself. . ."
   `ENDNODE
   
   `NEW_NODE(INTRODUCTION, NUETRAL)
-    "Is the mixing of the storms any different than the mixtures",
-    "of alchemy? are they equally enchanting?"
+    "Is this mixing any different than the concoctions",
+    "of alchemy, or are they equally enchanting?"
   `ENDNODE
     
     `ADD_OPTIONS(INTRODUCTION, NUETRAL)
-      "Yes",
-      "No",
+      "Sure",
+      "Not at all",
       "",
       ""
     `ENDNODE
     
       `ADD_REPLY(INTRODUCTION, NUETRAL, 0)
-        "I'm glad you think so.",
+        "Excellently so.",
         ""
       `ENDNODE
     
       `ADD_REPLY(INTRODUCTION, NUETRAL, 1)
-        "Perhaps.",
+        "No. . . ?",
         ""
       `ENDNODE
     
   `NEW_NODE(INTRODUCTION, NUETRAL)
-    "I am Migmas, the alchemist.",
+    "Call me. . . Migmas, the local alchemist,",
+    "member of the Talonovian high council."
+  `ENDNODE
+  
+  `NEW_NODE(INTRODUCTION, NUETRAL)
+    "I don't like company, but I handle enchantment",
+    "services for travellers like yourself."
+  `ENDNODE
+  
+  `NEW_NODE(INTRODUCTION, NUETRAL)
+    "Now heed this advice carefully. . .",
     ""
   `ENDNODE
   
   `NEW_NODE(INTRODUCTION, NUETRAL)
-    "I serve as a member of the Talonovian council,",
-    "and I provide enchantment services."
-  `ENDNODE
-  
-  `NEW_NODE(INTRODUCTION, NUETRAL)
-    "Through the portal of Rhunia, you may find an obelisk",
+    "Through the portal of Rhunia, you can find an obelisk",
     "towering above the halls of an abandoned citadel."
   `ENDNODE
   
@@ -73,8 +84,8 @@ public function initDialogue() {
   `ENDNODE
   
   `NEW_NODE(INTRODUCTION, NUETRAL)
-    "I urge you to perform this prayer,",
-    "and awaken the power of the obelisk."
+    "I won't tell you what to do but I urge you",
+    "to perform this prayer, and awaken the power of the obelisk."
   `ENDNODE
   
   // ----------------------------------------------------------------------- //
@@ -102,17 +113,17 @@ public function initDialogue() {
   // ----------------------------------------------------------------------- //
   
   `NEW_NODE(INQUERY_OBELISK, NUETRAL)
-    "I use my alchemy to fortify and sustain Talonovia.",
+    "Practicing alchemy helps to fortify and sustain Talonovia.",
     ""
   `ENDNODE
   
   `NEW_NODE(INQUERY_OBELISK, NUETRAL)
-    "The aura exerted by the obelisk will empower my magicks.",
+    "The aura exerted by the obelisk will empower these magicks.",
     ""
   `ENDNODE
   
   `NEW_NODE(INQUERY_OBELISK, NUETRAL)
-    "Go forth and give it your prayer.",
+    "So go forth, and give it your prayer once again.",
     ""
   `ENDNODE
   
@@ -151,7 +162,7 @@ public function initDialogue() {
   `ENDNODE
   
   `NEW_NODE(INQUERY_GOLEM, NUETRAL)
-    "I am eager to witness their power.",
+    "Are you not eager to witness their power?",
     ""
   `ENDNODE
   

@@ -27,23 +27,30 @@ public function initDialogue() {
   
   // Intro
   `NEW_NODE(INTRODUCTION, NUETRAL)
-    "My shop is open, welcome.",
-    "I am Lucrosus the merchant."
+    "With a sudden turn to the door, Lucrosus the Merchant drops",
+    "some coins to the floor. . ."
+  `ENDNODE
+  setColor(DEFAULT_MEDIUM_GOLD);
+  
+  // Intro
+  `NEW_NODE(INTRODUCTION, NUETRAL)
+    "Yes this shop is open, welcome!",
+    ""
   `ENDNODE
   
   `NEW_NODE(INTRODUCTION, NUETRAL)
     "All my wares are blessed by the silver wind,",
-    "guiding the paths of true heroes."
+    "guiding the paths of all great heroes."
   `ENDNODE
   
   `NEW_NODE(INTRODUCTION, NUETRAL)
-    "Fortune shines here, on Talonovia's harbor.",
+    "So may fortune shine for us here!",
     ""
   `ENDNODE
   
   `NEW_NODE(INTRODUCTION, NUETRAL)
     "If you're keen to a cut of fortune for yourself,",
-    "perhaps the Gods may smile upon you at the obelisk shrine."
+    "why not seek out the Obelisk's shrine for me?"
   `ENDNODE
   
   `NEW_NODE(INTRODUCTION, NUETRAL)
@@ -52,14 +59,14 @@ public function initDialogue() {
   `ENDNODE
   
     `ADD_OPTIONS(INTRODUCTION, NUETRAL)
-      "Yes",
-      "No",
+      "Uhuh. . .",
+      "No, not yet",
       "",
       ""
     `ENDNODE
     
       `ADD_REPLY(INTRODUCTION, NUETRAL, 0)
-        "Good.",
+        "What wonderful news!",
         ""
       `ENDNODE
     
@@ -69,8 +76,8 @@ public function initDialogue() {
       `ENDNODE
     
   `NEW_NODE(INTRODUCTION, NUETRAL)
-    "If you pray at the shrine, an immense power",
-    "will flow, and food production will be crippled."
+    "Praying at the shrine summons an immense power,",
+    "whose flow will cripple food production."
   `ENDNODE
   
   `NEW_NODE(INTRODUCTION, NUETRAL)
@@ -79,7 +86,7 @@ public function initDialogue() {
   `ENDNODE
   
   `NEW_NODE(INTRODUCTION, NUETRAL)
-    "You understand?",
+    "You. . . understand?",
     ""
   `ENDNODE
   
@@ -90,7 +97,7 @@ public function initDialogue() {
   
   `NEW_NODE(INTRODUCTION, NUETRAL)
     "Go call the roar of this ancient tower,",
-    "and you'll have my praise."
+    "and you'll have my praise. . ."
   `ENDNODE
   
   // ----------------------------------------------------------------------- //
@@ -119,25 +126,28 @@ public function initDialogue() {
   
   `NEW_NODE(INQUERY_OBELISK, NUETRAL)
     "The tome at the base of the obelisk in Rhunia's citadel",
-    "will summon a protective force if you activate it."
-    //"The obelisk is a protective totem",
-    //" feed."
+    "will summon a protective force when it is activated."
   `ENDNODE
   
   `NEW_NODE(INQUERY_OBELISK, NUETRAL)
-    "And it will also cripple food production,",
-    "which I will. . . exploit for profit."
+    "Which also cripples food production. . . See?",
+    ""
+  `ENDNODE
+  
+  `NEW_NODE(INQUERY_OBELISK, NUETRAL)
+    "Not the worst thing to exploit for profit. . . Right?",
+    ""
   `ENDNODE
   
   // ----------------------------------------------------------------------- //
   
   `NEW_NODE(INQUERY_TOMB, NUETRAL)
-    "Those wretched blossoms will ruin me.",
+    "Those wretched blossoms will ruin me again.",
     ""
   `ENDNODE
   
   `NEW_NODE(INQUERY_TOMB, NUETRAL)
-    "I swear on the storms, do not harvest that tomb.",
+    "So I swear on the storms. . . Do not harvest that tomb.",
     ""
   `ENDNODE
   
