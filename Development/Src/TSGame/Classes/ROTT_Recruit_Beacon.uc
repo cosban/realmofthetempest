@@ -98,7 +98,7 @@ simulated event Touch
 private function setGraphics(bool state) {
   if (state) {
     beaconMesh.SetMaterial(0, Material'ROTT_Utilities.Beacons.M_Jump_Beacon_Blue_Purple');
-    beaconMesh.SetMaterial(1, Material'MyPackage.Recruit_Gradiant');
+    beaconMesh.SetMaterial(1, Material'ROTT_Utilities.Beacons.Recruit_Gradiant');
     beaconParticles.activateSystem();
   } else {
     beaconMesh.SetMaterial(0, Material'ROTT_Utilities.Beacons.M_Recruit_Beacon_Disabled');
@@ -144,7 +144,7 @@ defaultProperties
   // Particles
   begin object Class=ParticleSystemComponent Name=Beacon_Particles
     bAutoActivate=true
-    Template=ParticleSystem'MyPackage.Recruit_Beacon_Stars_1A'
+    Template=ParticleSystem'ROTT_Utilities.Beacons.Recruit_Beacon_Stars_1A'
     SecondsBeforeInactive=1
   end object
   beaconParticles=Beacon_Particles

@@ -38,7 +38,7 @@ event initGame(string options, out string errorMessage) {
   systemSettings = spawn(class'CustomSystemSettings');
   
   graylog("Loading options...");
-    
+  
   // Load options
   optionsCookie = new(self) class'Cookie_Options';
   if (class'Engine'.static.basicLoadObject(optionsCookie, "Save\\options_cookie.bin", true, 0)) {

@@ -187,7 +187,7 @@ defaultProperties
     alignX=CENTER
     alignY=TOP
     fontStyle=DEFAULT_LARGE_TAN
-    labelText="Realm of the Tempest's Expanding ! ! !"
+    labelText="Realm of the Tempest is still expanding. . . Hopefully"
   end object
   componentList.add(H1_Label)
   
@@ -200,7 +200,7 @@ defaultProperties
     alignX=CENTER
     alignY=TOP
     fontStyle=DEFAULT_MEDIUM_WHITE
-    labelText="This game still has work in progress, expanding indefinitely."
+    labelText="Story is incomplete, worlds are missing, etc."
   end object
   componentList.add(P1_Label)
   
@@ -213,7 +213,7 @@ defaultProperties
     alignX=CENTER
     alignY=TOP
     fontStyle=DEFAULT_LARGE_TAN
-    labelText="Bramble Gate Studios will be recruiting now!"
+    labelText=""
   end object
   componentList.add(P2_Label)
   begin object class=UI_Label Name=P3_Label
@@ -225,7 +225,7 @@ defaultProperties
     alignX=CENTER
     alignY=TOP
     fontStyle=DEFAULT_MEDIUM_WHITE
-    labelText="Artists, Programmers, Musicians, Designers, Management, etc."
+    labelText=""
   end object
   componentList.add(P3_Label)
   
@@ -238,7 +238,7 @@ defaultProperties
     alignX=CENTER
     alignY=TOP
     fontStyle=DEFAULT_LARGE_GREEN
-    labelText="Realm of the Tempest now open source on Github.com/Otays ! ! !"
+    labelText="Open source on Github.com/Otays"
   end object
   componentList.add(P4_Label)
   begin object class=UI_Label Name=P5_Label
@@ -250,7 +250,7 @@ defaultProperties
     alignX=CENTER
     alignY=TOP
     fontStyle=DEFAULT_MEDIUM_WHITE
-    labelText="Thank you for sharing in this experience with Me !"
+    labelText="All art and code made public for educational use."
   end object
   componentList.add(P5_Label)
   
@@ -263,7 +263,7 @@ defaultProperties
     alignX=CENTER
     alignY=TOP
     fontStyle=DEFAULT_LARGE_TAN
-    labelText="- Donation Squad ! ! -"
+    labelText="- Donation Squad -"
   end object
   componentList.add(H2_Donor_Label)
   begin object class=UI_Label Name=Donor_List_Label_1
@@ -311,8 +311,8 @@ defaultProperties
     posYEnd=NATIVE_HEIGHT
     alignX=CENTER
     alignY=TOP
-    fontStyle=DEFAULT_MEDIUM_WHITE
-    labelText="Contact realmofthetempest@gmail.com"
+    fontStyle=DEFAULT_MEDIUM_GRAY
+    labelText="RealmOfTheTempest@gmail.com"
   end object
   componentList.add(P6_Label)
   begin object class=UI_Label Name=P7_Label
@@ -324,7 +324,7 @@ defaultProperties
     alignX=CENTER
     alignY=TOP
     fontStyle=DEFAULT_MEDIUM_GRAY
-    labelText=" ~~~ Free download  ~~~  www.RealmoftheTempest.com  ~~~ "
+    labelText="www.RealmOfTheTempest.com"
   end object
   componentList.add(P7_Label)
   begin object class=UI_Label Name=P8_Label
@@ -336,7 +336,7 @@ defaultProperties
     alignX=CENTER
     alignY=TOP
     fontStyle=DEFAULT_MEDIUM_GRAY
-    labelText=" ~~~ Track updates online ~~~ twitter.com/BrambleGate ~~~ "
+    labelText="twitter.com/BrambleGate"
   end object
   componentList.add(P8_Label)
 

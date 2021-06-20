@@ -633,7 +633,7 @@ public function forceEncounter(array<SpawnerInfo> mobInfo) {
 
   // Generate enemies
   for (i = 0; i < mobInfo.length; i++) {
-    enemyUnit = makeUnit(mobInfo[i], mobInfo[i].spawnMode); /* fixed boss value for now */
+    enemyUnit = makeUnit(mobInfo[i], mobInfo[i].spawnMode); 
     enemyEncounter.addEnemy(enemyUnit);
   }
   
@@ -659,7 +659,7 @@ public function queueEncounter(array<SpawnerInfo> mobInfo) {
 
   // Generate enemies
   for (i = 0; i < mobInfo.length; i++) {
-    enemyUnit = makeUnit(mobInfo[i], mobInfo[i].spawnMode); /* fixed boss value for now */
+    enemyUnit = makeUnit(mobInfo[i], mobInfo[i].spawnMode); 
     enemyEncounter.addEnemy(enemyUnit);
   }
 }
