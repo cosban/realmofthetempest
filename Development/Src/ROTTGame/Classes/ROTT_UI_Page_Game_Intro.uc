@@ -275,7 +275,7 @@ defaultProperties
     alignX=CENTER
     alignY=TOP
     fontStyle=DEFAULT_MEDIUM_CYAN
-    labelText="Phillis Emril Productions, Xenopher, val, formerfuture, Dustin Pundt, Gaiashield, cydy,"
+    labelText="Phillis Emril Productions, XenoJB, val, formerfuture, Dustin Pundt, Gaiashield, cydy,"
   end object
   componentList.add(Donor_List_Label_1)
   begin object class=UI_Label Name=Donor_List_Label_2

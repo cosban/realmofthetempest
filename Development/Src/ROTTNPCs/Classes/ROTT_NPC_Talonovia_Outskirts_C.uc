@@ -1,13 +1,13 @@
 /*=============================================================================
- * NPC - Talonovia Backlands (A)
+ * NPC - Talonovia Outskirts (C)
  *
  * Author: Otay
  * Bramble Gate Studios (All rights reserved)
  *
- * A cleric on the edge of town.
+ * No comment.
  *===========================================================================*/
 
-class ROTT_NPC_Talonovia_Backlands_A extends ROTT_NPC_Container;
+class ROTT_NPC_Talonovia_Outskirts_C extends ROTT_NPC_Container;
 
 // Macros for formatting dialog content
 `DEFINE NEW_NODE(TOPIC, MODE)           addDialogNode(`TOPIC, `MODE, 
@@ -26,36 +26,25 @@ public function initDialogue() {
   
   // Greeting
   `NEW_NODE(GREETING, NUETRAL)
-    "Spells personify the dreams that have walked beside us",
-    "through a lightyear of darkness."
+    "Welcome to the campsite, shy one.",
+    ""
   `ENDNODE
   
   `NEW_NODE(GREETING, NUETRAL)
-    "The uncontainable spirit knows no state of crisis,",
-    "only the shell abandoned by it can crumble."
+    "Is this my space?",
+    ""
   `ENDNODE
   
   `NEW_NODE(GREETING, NUETRAL)
-    "But the immutable heart ties shell to spirit.",
-    "Coalesced, they collapse, and they crack together."
+    "I spy matches. . . through the mystics heap. . .",
+    "Thy escapism. . . through peachy mists. . ."
   `ENDNODE
   
-    `ADD_OPTIONS(GREETING, NUETRAL)
-      "Blessing",
-      "Goodnight",
-      "",
-      "",
-      
-      BEHAVIOR_LAUNCH_SERVICE,
-      BEHAVIOR_GOODBYE
-    `ENDNODE
-      
-      // This acts as a safeguard
-      `ADD_REPLY(GREETING, NUETRAL, 0)
-        "(Service unavailable in this version)",
-        ""
-      `ENDNODE
-    
+  `NEW_NODE(GREETING, NUETRAL)
+    "Is this my space?",
+    ""
+  `ENDNODE
+  
   // ----------------------------------------------------------------------- //
   
   setInquiry(
@@ -79,11 +68,10 @@ defaultProperties
 {
   // NPC identity
   npcName=GENERIC
-  serviceType=SERVICE_BLESSINGS
   
   // Background
   begin object class=UI_Texture_Info Name=NPC_Background_Texture
-    componentTextures.add(Texture2D'GUI_NPC_Dialog.NPC_Background_Blue')
+    componentTextures.add(Texture2D'GUI_NPC_Dialog.NPC_Background_Dark_Gray'
   end object
   
   // Sprite container for transfer
@@ -95,7 +83,7 @@ defaultProperties
   
   // NPC Texture
   begin object class=UI_Texture_Info Name=NPC_Sprite_Texture
-    componentTextures.add(Texture2D'NPCs.Clerics.NPC_Portrait_Cleric_Cyan_360')
+    componentTextures.add(Texture2D'NPCs.Princes.NPC_Portrait_Prince_Purple_360')
   end object
   
   // Sprite container for transfer
