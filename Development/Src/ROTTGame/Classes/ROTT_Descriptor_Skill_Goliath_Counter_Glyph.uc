@@ -84,6 +84,13 @@ protected function float attributeInfo
 }
 
 /*=============================================================================
+ * addManaOverflow()
+ *
+ * Called to track mana that overflows beyond a combat unit's max mana value
+ *===========================================================================*/
+public function addManaOverflow(float manaOverflow);
+
+/*=============================================================================
  * Default Properties
  *===========================================================================*/
 defaultProperties
@@ -142,54 +149,6 @@ defaultProperties
   skillAnim=Skill_Animation_Container
   
 }
-
-
-
-
-
-/**
-
-
-      //Counter glyphs
-      i = fSkillLvl;
-      iChance = 20;
-      iStat = 25;
-      iManaCost = 30; //Used for chance to counter
-      
-      do
-      {
-        i = i - 1;
-        iChance = iChance + 20;
-        
-        if (iChance >= 80)
-        {
-          iStat = Round(iStat * 4.0 / 3.0);
-          iChance = 40;
-          iManaCost = iManaCost + 10;
-          if (iManaCost > 100)
-          {
-            iManaCost = 100;
-            iStat = Round(iStat * 4.0 / 3.0);
-          }
-        }
-        
-       } until (i <= 0);
-      
-      if (fSkillLvl == 0)
-        iChance = 0;
-      
-      iMinDmg = (CharMinDamage * (iStat/100.00));
-      iMaxDmg = (CharMaxDamage * (iStat/100.00));
-
-
-
-
-
-
-
-
-**/
-
 
 
 

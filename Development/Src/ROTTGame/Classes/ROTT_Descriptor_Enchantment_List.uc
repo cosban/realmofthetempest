@@ -44,7 +44,7 @@ enum EnchantmentEnum {
   MYSTIC_MARBLE,
   ARCANE_BLOODPRISM,
   ROSEWOOD_PENDANT,
-  INIFINITY_JEWEL,
+  INFINITY_JEWEL,
   EMPERORS_TALISMAN,
   SCORPION_TALON,
   SOLAR_CHARM,
@@ -182,8 +182,8 @@ public static function EnchantmentDescriptor getEnchantment
         "Adding -%add Speed Points",
         "New Total: -%total Speed Points"
       );
-      setGoldGemCost(script, 10000, 100);
-      setBonus(script, 2);
+      setGoldGemCost(script, 10000, 15);
+      setBonus(script, 5);
       
       return script;
       
@@ -199,7 +199,7 @@ public static function EnchantmentDescriptor getEnchantment
         "Adding +%add Class Skills",
         "New Total: +%total Class Skills"
       );
-      setGoldGemCost(script, 125000, 250);
+      setGoldGemCost(script, 125000, 500);
       setBonus(script, 1);
       
       return script;
@@ -233,8 +233,8 @@ public static function EnchantmentDescriptor getEnchantment
         "Adding +%add% Mana",
         "New Total: +%total% Mana"
       );
-      setGoldGemCost(script, 5000, 25);
-      setBonus(script, 2);
+      setGoldGemCost(script, 4000, 20);
+      setBonus(script, 5);
       
       return script;
       
@@ -250,8 +250,8 @@ public static function EnchantmentDescriptor getEnchantment
         "Adding +%add% Health",
         "New Total: +%total% Health"
       );
-      setGoldGemCost(script, 5000, 25);
-      setBonus(script, 2);
+      setGoldGemCost(script, 4000, 20);
+      setBonus(script, 1);
       
       return script;
       
@@ -272,7 +272,7 @@ public static function EnchantmentDescriptor getEnchantment
       
       return script;
       
-    case INIFINITY_JEWEL:
+    case INFINITY_JEWEL:
       setTextFields(script,
         "Inifinity Jewel",
         "Increases all primary stats",

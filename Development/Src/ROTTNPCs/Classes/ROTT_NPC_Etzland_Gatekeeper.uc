@@ -26,23 +26,23 @@ public function initDialogue() {
   
   // Greeting
   `NEW_NODE(GREETING, NUETRAL)
-    "The dark conscience lurks below our vestigial hearts.",
-    ""
+    "The dark conscience lurks below our",
+    "vestigial hearts."
   `ENDNODE
   
   `NEW_NODE(GREETING, NUETRAL)
-    "Ablation for oblation,",
-    "our hearts in our hands are our offering."
+    "Ablation for oblation, let our hearts in our",
+    "hands be our offerings."
   `ENDNODE
   
   `NEW_NODE(GREETING, NUETRAL)
-    "Shroud of Etzland, unwind your spells from our minds.",
-    ""
+    "Shroud of Etzland, unwind",
+    "your spells from our cloudy minds."
   `ENDNODE
   
   `NEW_NODE(GREETING, NUETRAL)
     "May those who were banished upon the wind,",
-    "walk amongst us once again."
+    "walk amongst us here again."
   `ENDNODE
   
   setInquiry(

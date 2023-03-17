@@ -183,6 +183,13 @@ public function improveStat(float value, float total, MechanicTypes targetStat);
 public function addStatus(ROTT_Descriptor_Hero_Skill skillInfo);
 
 /*=============================================================================
+ * addManualStatus()
+ *
+ * Used to add a status manually, with no skill descriptor (e.g. Persistence)
+ *===========================================================================*/
+public function addManualStatus(string statusTag, FontStyles statusColor);
+
+/*=============================================================================
  * removeStatus()
  *
  * Called to remove a status from being displayed by this label

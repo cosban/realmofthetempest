@@ -38,6 +38,40 @@ protected function navigationRoutineA() {
   }
 }
 
+/*============================================================================= 
+ * setDescriptor()
+ *
+ * This parses a descriptor to update the text displayed in this window
+ *===========================================================================*/
+public function setDescriptor(ROTT_Descriptor descriptor) {
+  local ROTT_Descriptor_Hero_Skill heroScript;
+  
+  // Check if descriptor exists
+  if (descriptor == none) {
+    yellowLog("Warning (!) A descriptor still needs to be implemented.");
+    return;
+  }
+  
+  super.setDescriptor(descriptor);
+  
+  // Convert to hero skill script
+  heroScript = ROTT_Descriptor_Hero_Skill(descriptor);
+  
+  // Check if descriptor is valid
+  if (heroScript == none) {
+    yellowLog("Warning (!) Foreign descriptor provided to skills window. " $ descriptor);
+    return;
+  }
+  
+  // Show skill level boost
+  if (heroScript.boostLevel != 0) {
+    findLabel("Skill_Boost_Label").setText(" ( +" $ heroScript.boostLevel $ " )");
+    findLabel("Skill_Boost_Label").setFont(DEFAULT_SMALL_CYAN);
+  } else {
+    findLabel("Skill_Boost_Label").setText("");
+  }
+}
+
 /*=============================================================================
  * Assets
  *===========================================================================*/
@@ -90,6 +124,20 @@ defaultProperties
     images(0)=Button_Set_Secondary
   end object
   componentList.add(Button_Set_Secondary_Sprite)
+  
+  // Skill boost display
+  begin object class=UI_Label Name=Skill_Boost_Label
+    tag="Skill_Boost_Label"
+    posX=450
+    posY=297
+    posXEnd=720
+    posYEnd=NATIVE_HEIGHT
+    fontStyle=DEFAULT_SMALL_CYAN
+    AlignX=LEFT
+    AlignY=TOP
+    labelText="(+1)"
+  end object
+  componentList.add(Skill_Boost_Label)
   
 }
   

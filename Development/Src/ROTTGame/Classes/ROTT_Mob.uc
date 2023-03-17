@@ -7,7 +7,7 @@
  * Description: This object manages a mob of enemy units.
  *===========================================================================*/
 
-class ROTT_Mob extends ROTTObject;
+class ROTT_Mob extends ROTT_Object;
 
 const MAX_MOB_SIZE = 3;
 
@@ -17,17 +17,26 @@ var privatewrite array<ROTT_Combat_Enemy> mobLineup;
 // The enemy placement is handled here by 3 slots
 var private ROTT_Combat_Enemy enemyUnits[MAX_MOB_SIZE];  
 
-// Mob size
+// Stores mob size
 var privatewrite int mobCapacity;
 
-// Mob size
+// Store exp provided upon defeat of this mob
 var privatewrite int mobExp;
 
 // Combat status
 var privatewrite bool bCombatEnded;
 
+// Store black hole status
+var public bool bBlackHoleActive;
+
+// Store average level of enemy units
+var privatewrite int averageLevel;
+
 // Rewards for defeating this mob
 var protectedwrite ROTT_Inventory_Package itemPackage;
+
+// Stores true when summoned via bestiary services
+var public bool bBestiarySummon;
 
 /*=============================================================================
  * battlePrep()
@@ -37,6 +46,8 @@ var protectedwrite ROTT_Inventory_Package itemPackage;
  *===========================================================================*/
 public function battlePrep() {
   local ROTT_Combat_Enemy tempUnit;
+  local int avgLevel;
+  local int enemyCount;
   local int i;
   
   bCombatEnded = false;
@@ -125,6 +136,16 @@ public function battlePrep() {
   for (i = 0; i < MAX_MOB_SIZE; i++) {
     if (enemyUnits[i] != none) enemyUnits[i].mobIndex = i;
   }
+  
+  // Store average mob level
+  for (i = 0; i < MAX_MOB_SIZE; i++) {
+    if (enemyUnits[i] != none) {
+      avgLevel += enemyUnits[i].level;
+      enemyCount++;
+    }
+  }
+  avgLevel /= enemyCount;
+  averageLevel = avgLevel;
 }
 
 /*=============================================================================
@@ -140,6 +161,9 @@ public function battleEnd() {
   for (i = 0; i < 3; i++) {
     gameInfo.getEnemyUI(i).resetUI();
   }
+  
+  // Report mob
+  gameInfo.playerProfile.reportMobLevel(averageLevel); 
 }
 
 /*=============================================================================
@@ -148,6 +172,7 @@ public function battleEnd() {
  * Called when the battle starts to set a reward if the player wins.
  *===========================================================================*/
 public function generateBounty() {
+  local int itemLevel;
   local int i;
   
   // Create item package
@@ -155,9 +180,25 @@ public function generateBounty() {
   
   // Add drops from each monster to the package
   for (i = 0; i < mobLineup.length; i++) {
+    // Set drop level for items
+    itemLevel = mobLineup[i].level;
+    
+    // Amplify based on spawn type
+    switch (mobLineup[i].spawnType) {
+      case SPAWN_BOSS:
+        itemLevel *= 2.5;
+        break;
+      case SPAWN_MINIBOSS:
+        itemLevel *= 1.5;
+        break;
+      case SPAWN_CHAMPION:
+        itemLevel *= 1.25;
+        break;
+    }
+    
     itemPackage.takeInventory(
       gameInfo.generateLoot(
-        mobLineup[i].level,
+        itemLevel,
         mobLineup[i].lootAmplifier,
         mobLineup[i].itemDropRates
       )
@@ -309,11 +350,11 @@ public function elapseTime(float deltaTime) {
  *
  * This function is called to drain life from the mob, regardless of armor
  *============================================================================*/
-public function drainMobLife(float life, optional bool bTrackBhDamage = false) {
+public function drainMobLife(float life, optional bool bTrackBlackHoleDamage = false) {
   local int i;
   
   for (i = 0; i < getMaxMobSize(); i++) {
-    if (getEnemy(i) != none) getEnemy(i).drainLife(life, bTrackBhDamage);
+    if (getEnemy(i) != none) getEnemy(i).drainLife(life, bTrackBlackHoleDamage);
   }
 }
 

@@ -16,6 +16,7 @@ var privatewrite ROTT_UI_Page_Mgmt_Window_Shrine_Offering shrineMgmt;
 var privatewrite ROTT_UI_Page serviceInfoShrine;
 var privatewrite UI_Label donationInfo1;
 var privatewrite UI_Label donationInfo2;
+var privatewrite UI_Label donationInfo3;
 
 // Party
 var private ROTT_UI_Party_Display partyDisplayer;
@@ -38,6 +39,7 @@ event initScene() {
   partyDisplayer = ROTT_UI_Party_Display(serviceInfoShrine.findComp("Party_Displayer"));
   donationInfo1 = UI_Label(serviceInfoShrine.findComp("Item_Donation_Info_Line_1"));
   donationInfo2 = UI_Label(serviceInfoShrine.findComp("Item_Donation_Info_Line_2"));
+  donationInfo3 = UI_Label(serviceInfoShrine.findComp("Item_Donation_Info_Line_3"));
   
 }
 
@@ -47,39 +49,60 @@ event initScene() {
  * Used to set the donation parameters
  *===========================================================================*/
 public function launchShrine(RitualTypes donationType) {
+  local int x;
+  
+  // Get bonus information
+  x = class'ROTT_Descriptor_Rituals'.static.getRitualBoost(donationType);
+  
   // Set donation process information
   switch (donationType) {
     case RITUAL_EXPERIENCE_BOOST:
       donationInfo1.setText("Donating herbs at this shrine provides");
       donationInfo2.setText("experience to the character chosen.");
+      donationInfo3.setText("+1/8 of Current Bar");
+      donationInfo3.setFont(DEFAULT_SMALL_TAN);
       break;
     case RITUAL_MANA_REGEN:
       donationInfo1.setText("Donating at this shrine provides");
       donationInfo2.setText("mana regen to the character chosen.");
+      donationInfo3.setText("+" $ x $ " to Mana Regeneration");
+      donationInfo3.setFont(DEFAULT_SMALL_BLUE);
       break;
     case RITUAL_MANA_BOOST:
       donationInfo1.setText("Donating at this shrine provides higher");
       donationInfo2.setText("mana to the character chosen.");
+      donationInfo3.setText("+" $ x $ " to Max Mana");
+      donationInfo3.setFont(DEFAULT_SMALL_BLUE);
       break;
     case RITUAL_PHYSICAL_DAMAGE:
       donationInfo1.setText("Donating at this shrine provides higher");
       donationInfo2.setText("physical damage to the character chosen.");
+      donationInfo3.setText("+" $ x $ "% to Physical Damage");
+      donationInfo3.setFont(DEFAULT_SMALL_ORANGE);
       break;
     case RITUAL_HEALTH_BOOST:
       donationInfo1.setText("Donating at this shrine provides higher");
       donationInfo2.setText("health to the character chosen.");
+      donationInfo3.setText("+" $ x $ " to Max Health");
+      donationInfo3.setFont(DEFAULT_SMALL_PINK);
       break;
     case RITUAL_HEALTH_REGEN:
       donationInfo1.setText("Donating at this shrine provides");
       donationInfo2.setText("health regen to the character chosen.");
+      donationInfo3.setText("+" $ x $ " to Health Regeneration");
+      donationInfo3.setFont(DEFAULT_SMALL_PINK);
       break;
     case RITUAL_ARMOR:
       donationInfo1.setText("Donating at this shrine provides");
       donationInfo2.setText("armor to the character chosen.");
+      donationInfo3.setText("+" $ x $ " to Armor");
+      donationInfo3.setFont(DEFAULT_SMALL_TAN);
       break;
     case RITUAL_SKILL_POINT:
       donationInfo1.setText("Donating at this shrine provides a");
       donationInfo2.setText("skill point to the character chosen.");
+      donationInfo3.setText("+" $ x $ " Unspent Skill Point");
+      donationInfo3.setFont(DEFAULT_SMALL_TAN);
       break;
   }
   
@@ -266,6 +289,19 @@ defaultProperties
       labelText="experience to the character chosen."
     end object
     componentList.add(Item_Donation_Info_Line_2)
+    
+    begin object class=UI_Label Name=Item_Donation_Info_Line_3
+      tag="Item_Donation_Info_Line_3"
+      posX=0
+      posY=270
+      posXEnd=720
+      posYEnd=NATIVE_HEIGHT
+      fontStyle=DEFAULT_SMALL_PINK
+      AlignX=CENTER
+      AlignY=TOP
+      labelText=""
+    end object
+    componentList.add(Item_Donation_Info_Line_3)
     
     // Party Displayer
     begin object class=ROTT_UI_Party_Display Name=Party_Displayer

@@ -26,8 +26,14 @@ public function initDialogue() {
   
   // Intro
   `NEW_NODE(GREETING, NUETRAL)
-    "This entire realm is a dance between order and chaos.",
-    ""
+    "A figure lurks in the shadows",
+    "of an old house."
+  `ENDNODE
+  setColor(DEFAULT_MEDIUM_GOLD);
+  
+  `NEW_NODE(GREETING, NUETRAL)
+    "This realm's a labyrinth dancing between",
+    "order and messy noises."
   `ENDNODE
   
   // ----------------------------------------------------------------------- //

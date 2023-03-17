@@ -46,8 +46,8 @@ public function initStats
       armorPerLvl = 0;
       baseStatsPerLvl[PRIMARY_VITALITY] = 5;
       baseStatsPerLvl[PRIMARY_STRENGTH] = 5;
-      baseStatsPerLvl[PRIMARY_COURAGE] = 1;
-      baseStatsPerLvl[PRIMARY_FOCUS] = 1;
+      baseStatsPerLvl[PRIMARY_COURAGE] = 3;
+      baseStatsPerLvl[PRIMARY_FOCUS] = 3;
       
       // Randomly rolled stat variation
       randStatsPerLvl = 3;
@@ -89,7 +89,7 @@ defaultProperties
   
   // Currency modifiers
   ///itemDropRates.add((dropType=class'ROTT_Inventory_Item_Gold',chanceOverride=,minOverride=,maxOverride=,chanceAmp=,quantityAmp=1.75))
-  ///itemDropRates.add((dropType=class'ROTT_Inventory_Item_Gem',chanceOverride=100,minOverride=,maxOverride=,chanceAmp=,quantityAmp=1))
+  itemDropRates.add((dropType=class'ROTT_Inventory_Item_Gem',chanceOverride=100,minOverride=,maxOverride=,chanceAmp=,quantityAmp=1))
   
   // Sprites 240x240
   begin object class=UI_Texture_Info Name=Enemy_Portrait_Basilisk_Blue_240

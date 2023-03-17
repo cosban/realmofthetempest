@@ -33,6 +33,12 @@ var private PortraitTypes displayMode;
 // Unspent icon animation
 var private float flipBookInterval, flipBookTime;
 
+// Item slot graphics
+var privatewrite ROTT_UI_Displayer_Item inventorySlots[3];
+
+// References
+var privatewrite ROTT_Game_Info gameInfo;
+
 /*============================================================================= 
  * initializeComponent
  *
@@ -40,6 +46,9 @@ var private float flipBookInterval, flipBookTime;
  *===========================================================================*/
 public function initializeComponent(optional string newTag = "") {
   local int i;
+  
+  // Game reference
+  gameInfo = ROTT_Game_Info(class'WorldInfo'.static.getWorldInfo().game);
   
   super.initializeComponent(newTag);
   
@@ -58,6 +67,19 @@ public function initializeComponent(optional string newTag = "") {
     
     unspentIcon[i].shiftX(XOffset * i);
     unspentIcon[i].shiftY(YOffset * i);
+  }
+  
+  // Initialize item displayers
+  for (i = 0; i < 3; i++) {
+    inventorySlots[i] = new(self) class'ROTT_UI_Displayer_Item';
+    componentList.addItem(inventorySlots[i]);
+    inventorySlots[i].initializeComponent();
+    inventorySlots[i].updatePosition(
+      portrait[i].getX() + 34,
+      portrait[i].getY() + 119,
+      portrait[i].getX() + 162,
+      portrait[i].getY() + 247
+    );
   }
 }
 
@@ -89,6 +111,20 @@ public function renderParty(ROTT_Party party) {
     } else {
       portrait[i].setEnabled(false);
       unspentIcon[i].setEnabled(false);
+    }
+  }
+  
+  // Show item graphics
+  for (i = 0; i < 3; i++) {
+    // Check valid hero
+    if (party.getHero(i) != none) {
+      // Display held item
+      inventorySlots[i].updateDisplay(
+        party.getHero(i).heldItem
+      );
+    } else {
+      // Show no item graphics
+      inventorySlots[i].updateDisplay(none);
     }
   }
 }

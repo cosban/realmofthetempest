@@ -88,6 +88,13 @@ private function int speedRating(int level) {
   return speed;
 }
 
+/*=============================================================================
+ * addManaOverflow()
+ *
+ * Called to track mana that overflows beyond a combat unit's max mana value
+ *===========================================================================*/
+public function addManaOverflow(float manaOverflow);
+
 /*============================================================================= 
  * Default Properties
  *===========================================================================*/
@@ -102,46 +109,6 @@ defaultProperties
   skillAttributes.add((attributeSet=GLYPH_SET,mechanicType=GLYPH_SPEED_BOOST,tag="%speed",font=DEFAULT_SMALL_GREEN,returnType=INTEGER));
   
 }
-
-// #test#
-/*
-function int s2(int lv) {
-  local int s;
-  s = (5 * ((lv * (lv / 2)) / 2)) + lv % 2 + 5;
-  return s;
-}
-*/
-
-/**
-  
-function int GetSpeed(string StatType, int SkillLevel)
-{
-  local int s, i, j;
-  
-  s = 4;
-  j = 2;
-  
-  for (i = 0; i < level; i++) {
-    s = s + j;
-    
-    if (i%2 == 0 && i != 0) {
-      j = j + 3;
-    } else {
-      j = j + 2;
-    }
-  } 
-  
-}
-
-i:0 j: 2    s: 5+1    d:
-i:1 j: 4    s: 10     d: 5
-i:2 j: 6    s: 15+1   d: 5
-i:3 j: 9    s: 25     d: 10
-i:4 j: 11   s: 35+1   d: 10
-i:5 j: 14   s: 50     d: 15
-
-**/
-
 
 
 

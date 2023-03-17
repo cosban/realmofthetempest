@@ -57,38 +57,30 @@ protected function float attributeInfo
   
   switch (type) {
     case MANA_OVERFLOW_COST:
-      ///max = attributeInfo(ATMOSPHERIC_DAMAGE_MIN, hero, level);
-      ///min = attributeInfo(ATMOSPHERIC_DAMAGE_MAX, hero, level);
-      ///
-      ///attribute = ((max - min) / 2 + min) * 42 - level * 30;
+      // Exponential early game climb
       attribute = 275 * 2 ** (level - 1);
+      
+      // Linear late game climb
+      if (level > 6) attribute = 12000 + 275 * 4 * (level-5);
+      
+      // Item attribute bonus
+      attribute *= 1 - hero.heldItemStat(ITEM_FASTER_AURA_STRIKES) / 100.f;
       break;
       
     case ATMOSPHERIC_DAMAGE_MIN:
-      ///attribute = (level * 1) + (level / 2.0 * (level - 1)) + 2 - 1;
+      // Exponential early game climb
       attribute = 2 * 2.25 ** (level - 1);
+      
+      // Linear late game climb
+      if (level >= 7) attribute = 115 + (level - 6) * 65;
       break;
     case ATMOSPHERIC_DAMAGE_MAX:
-      ///attribute = (level * 7) + (level / 2.0 * (level - 1)) + 6;
+      // Exponential early game climb
       attribute = 13 * 2.25 ** (level - 1);
-      break;
       
-      /**
-    case MANA_OVERFLOW_COST:
-      attribute = getManaEquation(level, 1.29, 0.915, 2.69, 87.0, 3.0);
+      // Linear late game climb
+      if (level >= 7) attribute = 750 + (level - 6) * 415;
       break;
-    case MANA_TRANSFER_RATE:
-      attribute = 5.0; // length in seconds of mana cost transfer 
-      break;
-      
-    case ATMOSPHERIC_DAMAGE_MIN:
-      attribute = (level * 1) + (level / 2.0 * (level - 1)) + 2;
-      break;
-    case ATMOSPHERIC_DAMAGE_MAX:
-      attribute = (level * 7) + (level / 2.0 * (level - 1)) + 6;
-      break;
-      
-      **/
   }
   
   return attribute;

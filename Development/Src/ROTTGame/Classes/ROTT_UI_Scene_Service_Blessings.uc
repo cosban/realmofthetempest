@@ -209,7 +209,7 @@ defaultProperties
       posYEnd=NATIVE_HEIGHT
       AlignX=CENTER
       AlignY=TOP
-      labelText="character level."
+      labelText="character level, until level 20."
     end object
     componentList.add(Mgmt_Window_Label_3)
     

@@ -9,6 +9,18 @@
  *===========================================================================*/
 class ROTT_UI_Page_Save_Manager extends ROTT_UI_Page;
 
+/** ============================== **/
+
+enum ControlState {
+  IGNORE_INPUT,
+  ACCEPT_INPUT
+};
+
+// Menu state
+var private ControlState menuControl;
+
+/** ============================== **/
+
 // Parent scene
 var privatewrite ROTT_UI_Scene_Save_Manager saveManagerScene;
 
@@ -22,6 +34,8 @@ var private int maxIndex;
 ///var private ROTT_UI_Party_Manager_Container_List containerList;
 var private ROTT_UI_Party_Manager_Container infoContainer[2];
 var private UI_Selector selector;
+
+var private bool bSetTransition;
 
 /*=============================================================================
  * Initialize Component
@@ -55,6 +69,10 @@ public function initializeComponent(optional string newTag = "") {
  *===========================================================================*/
 event onFocusMenu() {
   selector.setActive(true);
+  
+  // Enable input
+  menuControl = ACCEPT_INPUT;
+  
 }
 
 /*============================================================================= 
@@ -63,6 +81,8 @@ event onFocusMenu() {
  * Called every time the parent scene is loaded
  *===========================================================================*/
 public function onSceneActivation() {
+  local ROTT_Game_Player_Profile profile;
+  
   // Reset selector
   selectionIndex = 0;
   selector.resetSelection();
@@ -70,8 +90,18 @@ public function onSceneActivation() {
   // Render the party system
   ///containerList.displayParties(partySystem);
   
-  // Render info to screen
-  refresh();
+  // Selection data is based on number of save folders
+  maxIndex = 2;
+  
+  // Render save info to screen
+  profile = gameInfo.getSaveFile();
+  profile.loadProfile(false);
+  infoContainer[0].renderSaveFile(profile, 1);
+  
+  profile = gameInfo.getSaveFile("temp");
+  profile.loadProfile(true);
+  infoContainer[1].renderSaveFile(profile);
+  
 }
 
 /*============================================================================= 
@@ -81,23 +111,30 @@ public function onSceneActivation() {
  * correctly updated on the UI.
  *===========================================================================*/
 public function refresh() {
-  local ROTT_Game_Player_Profile profile;
   
   // Render the party system
   ///containerList.refreshParties();
   
-  // Selection data is based on number of save folders
-  maxIndex = 2;
+}
+
+/*=============================================================================
+ * elapseTimer()
+ *
+ * Increments time every engine tick.
+ *===========================================================================*/
+public function elapseTimers(float deltaTime) {
+  super.elapseTimers(deltaTime);
   
-  profile = gameInfo.getSaveFile();
-    ///gameinfo.playerProfile = profile;
-  profile.loadProfile(false);
-  infoContainer[0].renderSaveFile(profile, 1);
-  
-  profile = gameInfo.getSaveFile("temp");
-    ///gameinfo.playerProfile = profile;
-  profile.loadProfile(true);
-  infoContainer[1].renderSaveFile(profile);
+  if (bSetTransition) {
+    // Execute transition
+    saveManagerScene.transitionLoadGame();
+    
+    // Disable input
+    menuControl = IGNORE_INPUT;
+    selector.setActive(false);
+    
+    bSetTransition = false;
+  }
   
 }
 
@@ -105,6 +142,9 @@ public function refresh() {
  * Button inputs
  *===========================================================================*/
 protected function navigationRoutineA() {
+  // Check for disabled input
+  if (menuControl == IGNORE_INPUT) return;
+  
   // Load game
   switch(selector.getSelection()) {
     // Load hard save
@@ -122,20 +162,38 @@ protected function navigationRoutineA() {
       // Check for valid file
       if (!gameInfo.saveFileExist(-1)) return;
       
+      // Load autosave
       gameInfo.loadSavedGame(true);
+      
+      // Reset arrival checkpoint
+      gameInfo.playerProfile.arrivalCheckpoint = 0;
+      
+      // Move save file to autosave slot
+      gameInfo.saveGame(true);
       break;
   }
   
   // Sfx
   gameInfo.sfxBox.playSfx(SFX_MENU_ACCEPT);
   
+  // Delay transition call to avoid iteration count overflow
+  bSetTransition = true;
+  
   // Execute transition
-  saveManagerScene.transitionLoadGame();
+  ///saveManagerScene.transitionLoadGame();
+  ///
+  ///// Disable input
+  ///menuControl = IGNORE_INPUT;
+  ///selector.setActive(false);
+  
 }
 
 protected function navigationRoutineB() {
   // Back to title scene
   sceneManager.switchScene(SCENE_TITLE_SCREEN);
+  
+  // Unlock controls
+  sceneManager.sceneTitleScreen.titlePage.bLockControls = false;
   
   // Sfx
   gameInfo.sfxBox.playSfx(SFX_MENU_BACK);
@@ -256,6 +314,8 @@ defaultProperties
     posY=39
     selectionOffset=(x=0,y=280)
     numberOfMenuOptions=3
+    hoverCoords(0)=(xStart=58,yStart=44,xEnd=1408,yEnd=298)
+    hoverCoords(1)=(xStart=58,yStart=310,xEnd=1408,yEnd=578)
     
     // Selection texture
     begin object class=UI_Texture_Info Name=Selection_Box_Texture

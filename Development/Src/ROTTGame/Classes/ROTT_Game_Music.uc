@@ -11,7 +11,7 @@
  * other miscellaneous songs.
  *===========================================================================*/
 
-class ROTT_Game_Music extends ROTTObject
+class ROTT_Game_Music extends ROTT_Object
 dependsOn(ROTT_Game_Info);
 
 // Default Soundtracks for each World
@@ -32,7 +32,7 @@ var private AudioComponent worldMusic;
 var private AudioComponent overrideMusic;
 
 // Music delay timers
-var public ROTTTimer overrideDelay; 
+var public ROTT_Timer overrideDelay; 
 
 // Queue'd Fade controller
 var privatewrite float fadeInTime; 
@@ -79,6 +79,7 @@ public function loadMusic(MapNameEnum map) {
       break;
       
     case MAP_ETZLAND_OUTSKIRTS:
+    case MAP_VALIMOR_WILDERNESS:
       fadeIn(8);
       break;
       
@@ -118,7 +119,7 @@ public function overrideSoundtrack
   } else {
     // Play delay
     if (overrideDelay != none) overrideDelay.destroy();
-    overrideDelay = gameInfo.spawn(class'ROTTTimer');
+    overrideDelay = gameInfo.spawn(class'ROTT_Timer');
     overrideDelay.makeTimer(delay, LOOP_OFF, overridePlay);
   }
 }
@@ -151,7 +152,7 @@ public function fadeIn(float time, optional bool targetOverride = false) {
  *===========================================================================*/
 public function fadeOut(int time, optional bool targetOverride = false) {
   if (targetOverride) {
-    overrideMusic.fadein(time, 0);
+    overrideMusic.fadeOut(time, 0);
   } else {
     worldMusic.fadeOut(time, 0);
   }
@@ -236,6 +237,11 @@ defaultProperties
     SoundCue=SoundCue'ROTT_Music_Disc_1.ROTT-Cue-Stone_Soaked_Shrine'
   end object
   
+  // Stone Soaked Shrine
+  begin object class=AudioComponent Name=Perpetual_Zugzwang_OST_Cue
+    SoundCue=SoundCue'ROTT_Music_Disc_4.ROTT-Cue-Perpetual_Zugzwang'
+  end object
+  
   // Cult of Dreamfire
   begin object class=AudioComponent Name=Cult_of_Dreamfire_OST_Cue
     SoundCue=SoundCue'ROTT_Music_Disc_1.ROTT-Cue-Cult_of_Dreamfire'
@@ -257,8 +263,8 @@ defaultProperties
   end object
   
   // The Path Within
-  begin object class=AudioComponent Name=The_Path_Within_OST_Cue
-    SoundCue=SoundCue'ROTT_Music_Disc_3.ROTT-Cue-The_Path_Within'
+  begin object class=AudioComponent Name=Without_Paths_OST_Cue
+    SoundCue=SoundCue'ROTT_Music_Disc_3.ROTT-Cue-Without_Paths'
   end object
 
   // Neutrality The Toy
@@ -336,6 +342,11 @@ defaultProperties
     SoundCue=SoundCue'ROTT_Music_Disc_4.ROTT-Cue-Black_Magic'
   end object
   
+  // Marro World
+  begin object class=AudioComponent Name=Marro_OST_Cue
+    SoundCue=SoundCue'ROTT_Music_Disc_4.ROTT-Cue-Marro'
+  end object
+  
   // Placeholder music
   begin object class=AudioComponent Name=Placeholder_OST_Cue
     SoundCue=SoundCue'ROTT_Sound_Effects.ROTT-SFXCUE-Ambient_Ominous'
@@ -362,30 +373,31 @@ defaultProperties
   // Etzland
   worldSoundtracks[MAP_ETZLAND_CITADEL]=Unicursal_Immolation_OST_Cue
   worldSoundtracks[MAP_ETZLAND_WILDERNESS]=Swing_Of_The_Meadow_OST_Cue
-  worldSoundtracks[MAP_ETZLAND_BACKLANDS]=Gears_and_Gadgets_OST_Cue
-  worldSoundtracks[MAP_ETZLAND_OUTSKIRTS]=The_Path_Within_OST_Cue
+  worldSoundtracks[MAP_ETZLAND_BACKLANDS]=Perpetual_Zugzwang_OST_Cue
+  worldSoundtracks[MAP_ETZLAND_OUTSKIRTS]=Yellow_Petals_OST_Cue
   
   // Haxlyn
   worldSoundtracks[MAP_HAXLYN_CITADEL]=Lexical_Wind_OST_Cue
   worldSoundtracks[MAP_HAXLYN_WILDERNESS]=Spiritual_Concomitance_OST_Cue
-  worldSoundtracks[MAP_HAXLYN_BACKLANDS]=Black_Magic_OST_Cue /// Change ... Phantom's #2 track?
+  worldSoundtracks[MAP_HAXLYN_BACKLANDS]=Marro_OST_Cue
   worldSoundtracks[MAP_HAXLYN_OUTSKIRTS]=A_Storm_is_a_Serpent_OST_Cue
   
   // Valimor
   worldSoundtracks[MAP_VALIMOR_CITADEL]=Cult_of_Dreamfire_OST_Cue
-  worldSoundtracks[MAP_VALIMOR_WILDERNESS]=Blue_Harps_OST_Cue
+  worldSoundtracks[MAP_VALIMOR_WILDERNESS]=Without_Paths_OST_Cue
   worldSoundtracks[MAP_VALIMOR_BACKLANDS]=Lexical_Toil_OST_Cue
   worldSoundtracks[MAP_VALIMOR_OUTSKIRTS]=Mira_Monstrosity_OST_Cue
   
   // Kalroth
   worldSoundtracks[MAP_KALROTH_CITADEL]=Hex_Wrought_Haze_OST_Cue
   worldSoundtracks[MAP_KALROTH_WILDERNESS]=Empty_Myriads_OST_Cue
-  worldSoundtracks[MAP_KALROTH_BACKLANDS]=Yellow_Petals_OST_Cue
+  worldSoundtracks[MAP_KALROTH_BACKLANDS]=Blue_Harps_OST_Cue
   worldSoundtracks[MAP_KALROTH_OUTSKIRTS]=Placeholder_OST_Cue 
   
   // Caves
   worldSoundtracks[MAP_KYRIN_CAVERN]=Lachrymal_Static_OST_Cue
   worldSoundtracks[MAP_KAUFINAZ_CAVERN]=Stone_Soaked_Shrine_OST_Cue
+  worldSoundtracks[MAP_KORUMS_CAVERN]=Gears_and_Gadgets_OST_Cue
   
   // Misc: The land between the tempests
   worldSoundtracks[MAP_AKSALOM_SKYGATE]=The_Sky_is_a_Mountain_Tamer_OST_Cue

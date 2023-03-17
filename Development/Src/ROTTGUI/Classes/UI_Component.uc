@@ -94,7 +94,7 @@ var private float countdownTime;
 var private bool bReceiveText;
 
 // Duplicate fail safe
-var private bool bInitialized;
+var privatewrite bool bInitialized;
 
 // Positioning mode, relative when false
 var private bool bAbsolute;
@@ -302,6 +302,7 @@ public function uncullTag(UI_Component source) {
 public function initializeComponent(optional string newTag = "") {
   if (bInitialized == true) {
     yellowLog("Warning (!) Duplicate initilization: " $ tag);
+    scriptTrace();
     return;
   }
   
@@ -889,10 +890,10 @@ public static function Color multiplyColors(Color c1, Color c2) {
 protected function Color getColor() { 
   local Color returnColor;
   
-  returnColor.r = drawColor.r;
-  returnColor.g = drawColor.g;
-  returnColor.b = drawColor.b;
-  returnColor.a = drawColor.a * fadeSystem.getFadeScalar();
+  returnColor.r = drawColor.r * fadeSystem.getFadeToBlackScalar();
+  returnColor.g = drawColor.g * fadeSystem.getFadeToBlackScalar();
+  returnColor.b = drawColor.b * fadeSystem.getFadeToBlackScalar();
+  returnColor.a = drawColor.a * fadeSystem.getFadeScalar() + (255 - drawColor.a * fadeSystem.getFadeScalar()) * (1 - fadeSystem.getFadeToBlackScalar());
   
   return returnColor;
 }

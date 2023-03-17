@@ -14,7 +14,7 @@ simulated event Touch(Actor Other, PrimitiveComponent OtherComp,
 {
   // Placeholder
   ROTT_Game_Info(WorldInfo.Game).showGameplayNotification("A calm wind rests around you");
-  ROTT_Game_Info(WorldInfo.Game).sfxBox.playSFX(SFX_WORLD_SHRINE);
+  ROTT_Game_Info(WorldInfo.Game).sfxBox.playSFX(SFX_MENU_BLESS_STAT);
   
   // Healing is obsolete
   ///ROTT_Game_Info(WorldInfo.Game).playerProfile.healActiveParty();

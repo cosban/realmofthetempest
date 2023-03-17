@@ -13,7 +13,7 @@ class ROTT_Descriptor_Skill_Titan_Fusion extends ROTT_Descriptor_Hero_Skill;
 var private float elapsedFuseTime;
 
 // How much time between fusion distributions
-const totalFuseInterval = 1.2f;
+const TOTAL_FUSE_INTERVAL = 1.2f;
 
 // How many points are pending fusion transfer
 var private float pendingTransfer;
@@ -145,7 +145,7 @@ public function onTick(ROTT_Combat_Hero hero, float deltaTime) {
 public function float getFuseInterval() {
   local float intervalTime;
   
-  intervalTime = totalFuseInterval - (castCount * totalFuseInterval / 12.f);
+  intervalTime = TOTAL_FUSE_INTERVAL - (castCount * TOTAL_FUSE_INTERVAL / 12.f);
   if (intervalTime < 0.0125) intervalTime = 0.0125;
   
   return intervalTime;

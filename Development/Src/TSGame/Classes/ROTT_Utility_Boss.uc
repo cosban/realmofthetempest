@@ -31,7 +31,7 @@ var private bool bEnabled;
 var private ROTT_Game_Info gameInfo;
 
 // Timer
-var private ROTTTimer deactivationTimer;
+var private float deactivationTime;
 
 `include(ROTTColorLogs.h)
 
@@ -44,7 +44,7 @@ event preBeginPlay() {
   super.preBeginPlay();
   
   // Set up references
-  gameInfo = ROTT_Game_Info(WorldInfo.Game);
+  gameInfo = ROTT_Game_Info(WorldInfo.game);
 }
 
 /*=============================================================================
@@ -72,9 +72,8 @@ simulated event touch
     // Disable beacon
     bEnabled = false;
   
-    // Queue beacon graphic change for after transition effects (sloppy)
-    deactivationTimer = gameInfo.spawn(class'ROTTTimer');
-    deactivationTimer.makeTimer(3.00, LOOP_OFF, disableBeacon);
+    // Queue beacon graphic change for after transition effects
+    deactivationTime = 3.0;
     
     // Door sound
     gameInfo.sfxBox.playSfx(SFX_WORLD_DOOR);
@@ -107,6 +106,24 @@ simulated event untouch(Actor Other) {
 }
 
 /*=============================================================================
+ * tick()
+ *
+ * Called each frame with time between frames as argument
+ *===========================================================================*/
+function tick(float fDeltaTime) {
+	super.tick(fDeltaTime);
+  
+  // Check if deactivation time is up
+  if (deactivationTime > 0) {
+    // Subtract from deactivation time
+    deactivationTime -= fDeltaTime;
+    
+    // On complete, disable beacon
+    if (deactivationTime <= 0) disableBeacon();
+  }
+}
+
+/*=============================================================================
  * launchBeaconNPC()
  *===========================================================================*/
 private function launchBeaconNPC() {
@@ -118,15 +135,20 @@ private function launchBeaconNPC() {
  * disableBeacon()
  *===========================================================================*/
 private function disableBeacon() {
-  local ROTTPortal portal;
+  local ROTT_Portal portal;
+  local int i;
   
   // Set disabled state graphics
   beaconMesh.setMaterial(0, Material'ROTT_Utilities.Beacons.M_Recruit_Beacon_Disabled');
   beaconMesh.setMaterial(1, Material'MyPackage.NPC_Blank');
   
   // Unlock boss locks on portals
-  forEach AllActors(class'ROTTPortal', portal) {
-    portal.openBossLock();
+  for (i = 0; i < mobInfo.length; i++) { 
+    if (mobInfo[i].spawnMode == SPAWN_BOSS) {
+      forEach AllActors(class'ROTT_Portal', portal) {
+        portal.openBossLock();
+      }
+    }
   }
 }
 
@@ -155,9 +177,9 @@ defaultProperties
   // Static Mesh
   begin object class=StaticMeshComponent name=Beacon_Mesh
     StaticMesh=StaticMesh'ROTT_Utilities.Beacons.Boss_Beacon'
-    bForceDirectLightMap=True
-    bUsePrecomputedShadows=True
-    LightingChannels=(bInitialized=True,Static=True)
+    bForceDirectLightMap=true
+    bUsePrecomputedShadows=true
+    LightingChannels=(bInitialized=true,Static=true)
   end object
   components.Add(Beacon_Mesh);
   beaconMesh=Beacon_Mesh

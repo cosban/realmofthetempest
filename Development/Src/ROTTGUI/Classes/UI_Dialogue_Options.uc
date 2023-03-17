@@ -57,6 +57,11 @@ public function initializeComponent(optional string newTag = "") {
 public function showSelector() {
   selector.setEnabled(true);
   setActive(true);
+  
+  if (!isValidOption()) {
+    selector.resetSelection();
+    selectedOption = TOP_LEFT;
+  }
 }
 
 /*=============================================================================
@@ -221,6 +226,12 @@ public function setOptions
   optionText[1].setText(option2);
   optionText[2].setText(option3);
   optionText[3].setText(option4);
+  
+  if (option1 != "") selector.setNumberOfMenuOptions(1);
+  if (option2 != "") selector.setNumberOfMenuOptions(2);
+  if (option3 != "") selector.setNumberOfMenuOptions(3);
+  if (option4 != "") selector.setNumberOfMenuOptions(4);
+  
 }
 
 /*=============================================================================
@@ -236,6 +247,10 @@ defaultProperties
     bActive=true
     posX=70
     posY=680
+    hoverCoords(0)=(xStart=74,yStart=685,xEnd=712,yEnd=771)
+    hoverCoords(1)=(xStart=733,yStart=681,xEnd=1372,yEnd=771)
+    hoverCoords(2)=(xStart=74,yStart=786,xEnd=712,yEnd=871)
+    hoverCoords(3)=(xStart=733,yStart=786,xEnd=1372,yEnd=871)
     
     // Pixel distance from neighboring selections
     selectionOffset=(x=660,y=104)  

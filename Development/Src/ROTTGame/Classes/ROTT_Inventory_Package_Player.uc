@@ -15,7 +15,12 @@ class ROTT_Inventory_Package_Player extends ROTT_Inventory_Package;
  *
  * Adds the item to the inventory list, while consolidating items by types.
  *===========================================================================*/
-public function addItem(ROTT_Inventory_Item newItem) {
+public function addItem
+(
+  ROTT_Inventory_Item newItem, 
+  optional bool bSkipSort = false
+)
+{
   switch (newItem.class) {
     // Track total earned gold
     case class'ROTT_Inventory_Item_Gold': 
@@ -35,8 +40,10 @@ public function addItem(ROTT_Inventory_Item newItem) {
  *
  * Adds the item to the inventory list, without profile tracking updates.
  *===========================================================================*/
-public function loadItem(ROTT_Inventory_Item newItem) {
-  super.addItem(newItem);
+public function loadItem(ROTT_Inventory_Item newItem, optional bool bSort = true) {
+  super.addItem(newItem, true);
+  
+  if (bSort) sort();
 }
 
 /*============================================================================= 

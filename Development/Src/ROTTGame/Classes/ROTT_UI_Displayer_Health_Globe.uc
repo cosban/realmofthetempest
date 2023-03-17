@@ -127,6 +127,7 @@ defaultProperties
   begin object class=UI_Texture_Info Name=Resurrection_Globe
     componentTextures.add(Texture2D'GUI.Resurrection_Globe')
     drawColor=(R=255,G=255,B=255,A=127)
+    bFlipVerticalMask=true
   end object
   begin object class=UI_Texture_Info Name=Resurrection_Disc_Cap
     componentTextures.add(Texture2D'GUI.Resurrection_Disc_Cap')

@@ -16,7 +16,7 @@ var(ObjectiveRunParams) string sMessage;
  *
  * Called when the sequence is activated in kismet
  *===========================================================================*/
-event Activated() {
+event activated() {
   ROTT_Game_Info(class'WorldInfo'.static.GetWorldInfo().Game).showGameplayNotification(sMessage);
 }
 

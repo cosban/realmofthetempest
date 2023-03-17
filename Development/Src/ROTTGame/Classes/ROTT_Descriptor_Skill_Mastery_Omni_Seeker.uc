@@ -54,9 +54,21 @@ protected function float attributeInfo
   int level
 ) 
 {
-  return level;
-  return gameInfo.playerProfile.enchantmentLevels[OMNI_SEEKER];
+  switch (type) {
+    case OMNI_SEEKER_HARDCORE: return level;
+  }
+  
+  return 0;
+  
+  ///return gameInfo.playerProfile.enchantmentLevels[OMNI_SEEKER];
 }
+
+/*=============================================================================
+ * addManaOverflow()
+ *
+ * Called to track mana that overflows beyond a combat unit's max mana value
+ *===========================================================================*/
+public function addManaOverflow(float manaOverflow);
 
 /*=============================================================================
  * Default Properties
@@ -64,7 +76,6 @@ protected function float attributeInfo
 defaultProperties 
 {
   // Status info
-  statusTag="Omni_Seekering"
   statusColor=COMBAT_SMALL_RED
   
   // Skill attributes

@@ -45,6 +45,19 @@ delegate inputDelegation();
 public function parseInput(Name inputName, EInputEvent inputEvent) {
   if (!bActive) return;
 
+  // Remap
+  switch (inputName) {
+    // Mouse and keyboard
+    case 'LeftMouseButton':   inputName = 'XBoxTypeS_A'; break;
+    case 'Q':                 inputName = 'XBoxTypeS_B'; break;
+    case 'SpaceBar':          inputName = 'XBoxTypeS_A'; break;   
+    
+    case 'W': case 'Up':      inputName = 'XBoxTypeS_DPad_Up'; break;   
+    case 'A': case 'Left':    inputName = 'XBoxTypeS_DPad_Left'; break;   
+    case 'S': case 'Down':    inputName = 'XBoxTypeS_DPad_Down'; break;   
+    case 'D': case 'Right':   inputName = 'XBoxTypeS_DPad_Right'; break;
+  }
+  
   // Check input event type
   if (inputEvent == IE_Released) {
     // Button release inputs

@@ -26,27 +26,7 @@ public function initDialogue() {
   
   // Intro
   `NEW_NODE(GREETING, NUETRAL)
-    "I have no place here in these woods.",
-    ""
-  `ENDNODE
-  
-  `NEW_NODE(GREETING, NUETRAL)
-    "But in my loneliness, I am reminded that how \"different\" you feel",
-    "in a society is a predetermined result that comes. . ."
-  `ENDNODE
-  
-  `NEW_NODE(GREETING, NUETRAL)
-    ". . . from the ambition of your soul.",
-    ""
-  `ENDNODE
-  
-  `NEW_NODE(GREETING, NUETRAL)
-    "So even though lives like mine are not sustained here,",
-    "where the common evil thrives. . ."
-  `ENDNODE
-  
-  `NEW_NODE(GREETING, NUETRAL)
-    "I will one day rest in heaven.",
+    "May those at the gate be free from the church.", 
     ""
   `ENDNODE
   

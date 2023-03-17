@@ -1,15 +1,16 @@
 /*=============================================================================
- *  ROTT_Party
+ * ROTT_Party
  *
- *  Author: Otay
- *  Bramble Gate Studios (All rights reserved)
+ * Author: Otay
+ * Bramble Gate Studios (All rights reserved)
  *
- *  Description: This object manages a party of hero units.
- *  (For enemy units, see: ROTT_Mob.uc)
+ * Description: This object manages a party of hero units.
+ * (For enemy units, see: ROTT_Mob.uc)
  *
  *===========================================================================*/
 
-class ROTT_Party extends ROTTObject;
+class ROTT_Party extends ROTT_Object
+dependsOn(ROTT_Descriptor_Hyper_Shrine_List);
 
 // The members of the party are stored here
 var private array<ROTT_Combat_Hero> heroUnits;  
@@ -49,35 +50,18 @@ enum PartyStatusModes {
 };
 var privatewrite PartyStatusModes partyStatus;
 
-// Shrine activities --- [Move to shrine activity descriptor]
-enum PassiveShrineActivies {
-  NO_SHRINE_ACTIVITY,
-  
-  CLERICS_SHRINE,
-  COBALT_SANCTUM,
-  THE_ROSETTE_PILLARS,
-  LOCKSPIRE_SHRINE,
-  
-  THE_UNDEAD,
-  THE_DEMONIC,
-  THE_SERPENTINE,
-  THE_BEASTS,
-  
-  HAWKSPIRE_MEADOW,
-  LACEROOT_SHRINE,
-  FATEWOOD_GROVE,
-  MYRRHIAN_THICKET
-  
-};
-
 // Stores the shrine activity selected for this party
-var public PassiveShrineActivies partyActivity;
+var privatewrite PassiveShrineActivies partyActivity;
 
 // Damage to be dealt at respawn
 var private int pendingDamage;
 
 // Total glyph count
 var public int glyphCount[GlyphEnum];
+
+// Stores the index for the team header string
+var public int teamHeaderIndex;
+var private array<string> teamHeaders;
 
 /*=============================================================================
  * isShrineActive()
@@ -101,6 +85,8 @@ public function initialize(int index) {
   
   heroUnits.length = 0;
   readyUnits.length = 0;
+  
+  if (teamHeaderIndex == -1) teamHeaderIndex = rand(teamHeaders.length);
 }
 
 /*=============================================================================
@@ -184,6 +170,22 @@ public function int getHardcoreOmniBonus() {
   }
   
   return omniLevel;
+}
+  
+/*=============================================================================
+ * getLevelSum()
+ *
+ * Sums the levels of the team
+ *===========================================================================*/
+public function int getLevelSum() {
+  local int sum;
+  local int i;
+  
+  for (i = 0; i < getPartySize(); i++) {
+    sum += getHero(i).level;
+  }
+  
+  return sum;
 }
   
 /*=============================================================================
@@ -566,12 +568,60 @@ public function fuseTeamHpMp(float transferTotal) {
 }
 
 /*=============================================================================
+ * setShrineActivity()
+ *
+ * Sets the teams hyper shrine activity
+ *===========================================================================*/
+public function setShrineActivity(PassiveShrineActivies activity) {
+  // Set activity
+  partyActivity = activity;
+  
+  // Set status
+  switch (activity) {
+    case NO_SHRINE_ACTIVITY: 
+      // Nothing
+      break;
+      
+    case CLERICS_SHRINE:
+    case COBALT_SANCTUM:
+    case THE_ROSETTE_PILLARS:
+    case LOCKSPIRE_SHRINE:
+      setPartyStatus(PARTY_WORSHIPPING);
+      break;
+      
+    case THE_UNDEAD:
+    case THE_DEMONIC:
+    case THE_SERPENTINE:
+    case THE_BEASTS:
+      setPartyStatus(PARTY_MONSTER_HUNTING);
+      break;
+      
+    case HAWKSPIRE_MEADOW:
+    case LACEROOT_SHRINE:
+    case FATEWOOD_GROVE:
+    case MYRRHIAN_THICKET:
+      setPartyStatus(PARTY_TENDING_GARDENS);
+      break;
+    
+  }
+}
+
+/*=============================================================================
  * setPartyStatus()
  *
  * Sets the party status (idle, active, praying, hunting)
  *===========================================================================*/
 public function setPartyStatus(PartyStatusModes status) {
+  // Set status
   partyStatus = status;
+  
+  // Remove hyper shrine activity
+  switch (status) {
+    case PARTY_ACTIVE: 
+    case PARTY_IDLE:   
+      setShrineActivity(NO_SHRINE_ACTIVITY);
+      break;
+  }
 }
 
 /*=============================================================================
@@ -581,6 +631,62 @@ public function setPartyStatus(PartyStatusModes status) {
  *===========================================================================*/
 public function prepareSaveInfo() {
   saveInfoPartySize = heroUnits.length;
+}
+
+/*=============================================================================
+ * getEnemySpeedReduction()
+ * 
+ * Returns the total speed reduction for enemies fighting this party
+ *===========================================================================*/
+public function float getEnemySpeedReduction() {
+  local float speedPoints;
+  local int i;
+  
+  // Apply enchantment
+  speedPoints += gameInfo.playerProfile.getEnchantBoost(GHOSTKINGS_BRANCH);
+  
+  // Apply item boosts
+  for (i = 0; i < getPartySize(); i++) {
+    speedPoints += getHero(i).heldItemStat(ITEM_REDUCE_ENEMY_SPEED);
+  }
+  
+  return speedPoints;
+}
+
+/*=============================================================================
+ * getExpMultiplier()
+ * 
+ * Returns the total multiplier percent (e.g. 0.1f for ten percent)
+ *===========================================================================*/
+public function float getExpMultiplier() {
+  local float expMultiplier;
+  local int i;
+  
+  expMultiplier = gameInfo.playerProfile.getEnchantBoost(SOLAR_CHARM) / 100.f;
+  
+  // Apply item boosts
+  for (i = 0; i < getPartySize(); i++) {
+    expMultiplier += getHero(i).heldItemStat(ITEM_MULTIPLY_EXPERIENCE) / 100.f;
+  }
+  
+  return expMultiplier;
+}
+
+/*=============================================================================
+ * getGlyphLuckBoost()
+ * 
+ * Returns the total increase to glyph spawn chances
+ *===========================================================================*/
+public function float getGlyphLuckBoost() {
+  local float glyphLuck;
+  local int i;
+  
+  // Apply item boosts
+  for (i = 0; i < getPartySize(); i++) {
+    glyphLuck += getHero(i).heldItemStat(ITEM_ADD_GLYPH_LUCK);
+  }
+  
+  return glyphLuck;
 }
 
 /*=============================================================================
@@ -713,13 +819,23 @@ public function bool tryGlyphSpawn(GlyphEnum glyph) {
   local int chance;
   local int roll;
   
-  // Scan party
+  // Scan party for glyph chance
   for (i = 0; i < getPartySize(); i++) {
-    // Sum hero chances
+    // Find max chance value
     chance = getHero(i).getGlyphChance(glyph);
+    
+    // Break since any positive value is max
     if (chance > 0) break;
   }
 
+  // Scan party for luck boosts
+  if (chance > 0) {
+    for (i = 0; i < getPartySize(); i++) {
+      // Apply glyph luck boost
+      chance += getHero(i).heldItemStat(ITEM_ADD_GLYPH_LUCK);
+    }
+  }
+  
   // Roll random number
   roll = rand(100);
   
@@ -735,7 +851,7 @@ public function onDeath() {
   local int i;
   
   // Remove this unit from ready queue
-  for (i = 0; i < readyUnits.length; i++) {
+  for (i = readyUnits.length - 1; i >= 0; i--) {
     if (readyUnits[i].bdead) {
       // Dequeue dead unit
       readyUnits.remove(i, 1);
@@ -750,8 +866,36 @@ public function onDeath() {
     if (!heroUnits[i].bDead) return;
   }
   
-  // Load game over screen
-  gameInfo.consoleCommand("open " $ gameInfo.getMapFileName(MAP_UI_GAME_OVER));
+  // Pause combat
+  gameInfo.sceneManager.sceneCombatEncounter.pauseScene();
+  
+  // Load game over transition
+  gameInfo.sceneManager.transitioner.setTransition(
+    TRANSITION_OUT,                              // Transition direction
+    RESPAWN_END_TRANSITION,                      // Sorting config
+    ,                                            // Pattern reversal
+    ,                                            // Destination scene
+    ,                                            // Destination page
+    gameInfo.getMapFileName(MAP_UI_GAME_OVER),   // Destination world
+    MakeColor(255, 0, 0, 130),                   // Color
+    5,                                           // Tile speed
+    3.f,                                         // Delay
+    false,                                       // Input consumed if true
+    "",                                          // Transition tag
+    true,                                        // Hold screen
+    1.f                                          // Fade time 
+  );
+  gameInfo.jukebox.fadeOut(1);
+  ///gameInfo.consoleCommand("open " $ gameInfo.getMapFileName(MAP_UI_GAME_OVER));
+}
+
+/*=============================================================================
+ * getTeamHeader()
+ *
+ * Returns the team header for decorative purposes 
+ *============================================================================*/
+public function string getTeamHeader() {
+  return teamHeaders[teamHeaderIndex];
 }
 
 /*=============================================================================
@@ -759,11 +903,34 @@ public function onDeath() {
  *============================================================================*/
 defaultProperties 
 {
+  // Team header save data
+  teamHeaderIndex=-1
+  
+  // Class types
   heroTypes[VALKYRIE]=ROTT_Combat_Hero_Valkyrie
   heroTypes[WIZARD]=ROTT_Combat_Hero_Wizard
   heroTypes[GOLIATH]=ROTT_Combat_Hero_Goliath
   heroTypes[TITAN]=ROTT_Combat_Hero_Titan
   heroTypes[ASSASSIN]=ROTT_Combat_Hero_Assassin
+  
+  // Team Headers
+  teamHeaders(0)="Of land and sky"
+  teamHeaders(1)="Of the blossom beneath the sea"
+  teamHeaders(2)="From the land of waves and flames"
+  teamHeaders(3)="From the howling coast"
+  teamHeaders(4)="Of the lunar lotus clan"
+  teamHeaders(5)="From the wind with ribbons"
+  teamHeaders(6)="Walkers of the nightlands"
+  teamHeaders(7)="From the land of scarlet song"
+  teamHeaders(8)="From the plane of twisted starlight"
+  teamHeaders(9)="Dancers from the crackling storm"
+  teamHeaders(10)="From the land of quiet thunder"
+  teamHeaders(11)="From the river of whispers"
+  teamHeaders(12)="From the ocean of dream"
+  teamHeaders(13)="From the land buried in roots"
+  teamHeaders(14)="From the silver coast beyond"
+  teamHeaders(15)="Of the stormlands in the snow"
+  teamHeaders(16)="From the canyon of gnarled branches"
 }
 
 

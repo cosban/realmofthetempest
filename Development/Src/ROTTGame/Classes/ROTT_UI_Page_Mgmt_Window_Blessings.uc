@@ -37,17 +37,8 @@ public function initializeComponent(optional string newTag = "") {
  * Called to update the gold and gems
  *===========================================================================*/
 public function refresh() {
-  local int i;
-  
   // Set Blessing price tag
   setCostValues(gameInfo.getBlessingCost());
-  
-  // Refresh costs
-  for (i = 0; i < componentList.length; i++) {
-    if (ROTT_UI_Displayer_Cost(componentList[i]) != none) {
-      ROTT_UI_Displayer_Cost(componentList[i]).refresh();
-    }
-  }
 }
 
 /*============================================================================= 
@@ -141,7 +132,7 @@ public function bool blessHero
   local bool bSuccess;
   local int i;
   
-  for (i = 0; i < blessCount || bInvestAll; i++) {
+  for (i = 0; (i < blessCount || bInvestAll) && i <= 100; i++) {
     // Attempt to bless
     switch (hero.blessStat(StatTypes(selection))) {
       case 0:
@@ -263,6 +254,9 @@ defaultProperties
     posY=552
     selectionOffset=(x=0,y=80)
     numberOfMenuOptions=3
+    hoverCoords(0)=(xStart=146,yStart=555,xEnd=580,yEnd=625)
+    hoverCoords(1)=(xStart=146,yStart=635,xEnd=580,yEnd=705)
+    hoverCoords(2)=(xStart=146,yStart=715,xEnd=580,yEnd=785)
     
     // Selection texture
     begin object class=UI_Texture_Info Name=Selection_Box_Texture

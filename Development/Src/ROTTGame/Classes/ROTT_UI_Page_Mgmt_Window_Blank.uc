@@ -13,8 +13,8 @@ class ROTT_UI_Page_Mgmt_Window_Blank extends ROTT_UI_Page_Mgmt_Window;
 /*=============================================================================
  * D-Pad controls
  *===========================================================================*/
-protected function navigateUp();
-protected function navigateDown();
+public function onNavigateLeft();
+public function onNavigateRight();
 
 /*=============================================================================
  * Button controls

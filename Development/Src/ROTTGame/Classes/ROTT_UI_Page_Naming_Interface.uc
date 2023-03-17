@@ -105,22 +105,25 @@ public function elapseTimers(float deltaTime) {
  * Controls
  *
  * ControllerId     the controller that generated this input key event
- * Key              the name of the key which an event occured for
+ * inputName        the name of the key which an event occured for
  * EventType        the type of event which occured
  * AmountDepressed  for analog keys, the depression percent.
  *
  * Returns: true to consume the key event, false to pass it on.
  *===========================================================================*/
-function bool onInputKey( 
+function bool onInputKey
+( 
   int ControllerId, 
-  name Key, 
+  name inputName, 
   EInputEvent Event, 
   float AmountDepressed = 1.f, 
-  bool bGamepad = false) 
+  bool bGamepad = false
+) 
 {
   // Pressed inputs
   if (Event == IE_Pressed) {
-    switch (Key) {
+    switch (inputName) {
+      case 'Tab':
       case 'XBoxTypeS_Y':
         // Randomize name
         randomIndex++;
@@ -132,7 +135,8 @@ function bool onInputKey(
         break;
       case 'Enter':
         // Submit name
-        navigationRoutineA();
+        submitName();
+        selector.forceSelect(9, 2);
         break;
       case 'SpaceBar':
         if (namingLabel.getLength() < 16) {
@@ -142,16 +146,34 @@ function bool onInputKey(
       case 'BackSpace':
         namingLabel.removeChar();
         break;
+      case 'XBoxTypeS_DPad_Up':    
+      case 'XBoxTypeS_DPad_Down':  
+      case 'XBoxTypeS_DPad_Left':  
+      case 'XBoxTypeS_DPad_Right': 
+        super.onInputKey(ControllerId, inputName, Event, AmountDepressed, bGamepad);
+        refresh();
+        return true;
       default:
-        addChar(Key);
+        addChar(inputName);
+        forceSelectKey(inputName);
         break;
+    }
+  } else if (Event == IE_Released) {
+    switch (inputName) {
+      case 'XBoxTypeS_A': 
+      case 'XBoxTypeS_B':
+        super.onInputKey(ControllerId, inputName, Event, AmountDepressed, bGamepad);
+        refresh();
+        return true;
+      case 'LeftMouseButton':
+        if (selector.getSelection() == 29) submitName();
+        return true;
     }
   }
   
   // UI updates
   refresh();
-  
-  return super.onInputKey(ControllerId, Key, Event, AmountDepressed, bGamepad);
+  return true;
 }
 
 /*=============================================================================
@@ -178,6 +200,66 @@ public function onNavigateUp() {
 }
 
 /*=============================================================================
+ * submitName()
+ *===========================================================================*/
+private function submitName() {
+  // Remove trailing spaces
+  removeSpaces();
+  
+  // Check if name is valid
+  if (namingLabel.getLength() == 0) {
+    sfxBox.playSfx(SFX_MENU_INSUFFICIENT);
+    return;
+  }
+  
+  // Sound effect
+  sfxBox.playSfx(SFX_MENU_CLICK);
+  
+  // Give name to profile
+  gameInfo.playerProfile.nameProfile(namingLabel.labelText);
+  
+  // Navigate back to dialog
+  parentScene.popPage();
+  someScene.sceneManager.sceneNpcDialog.npcDialoguePage.npc.dialogTraversal();
+}
+
+/*=============================================================================
+ * forceSelectKey()
+ *===========================================================================*/
+private function forceSelectKey(name selectKey) {
+  // Key input
+  switch (selectKey) {
+    case 'Q': selector.forceSelect(0, 0); break;
+    case 'W': selector.forceSelect(1, 0); break;
+    case 'E': selector.forceSelect(2, 0); break;
+    case 'R': selector.forceSelect(3, 0); break;
+    case 'T': selector.forceSelect(4, 0); break;
+    case 'Y': selector.forceSelect(5, 0); break;
+    case 'U': selector.forceSelect(6, 0); break;
+    case 'I': selector.forceSelect(7, 0); break;
+    case 'O': selector.forceSelect(8, 0); break;
+    case 'P': selector.forceSelect(9, 0); break;
+    case 'A': selector.forceSelect(0, 1); break;
+    case 'S': selector.forceSelect(1, 1); break;
+    case 'D': selector.forceSelect(2, 1); break;
+    case 'F': selector.forceSelect(3, 1); break;
+    case 'G': selector.forceSelect(4, 1); break;
+    case 'H': selector.forceSelect(5, 1); break;
+    case 'J': selector.forceSelect(6, 1); break;
+    case 'K': selector.forceSelect(7, 1); break;
+    case 'L': selector.forceSelect(8, 1); break;
+    case ' ': selector.forceSelect(0, 2); break;
+    case 'Z': selector.forceSelect(1, 2); break;
+    case 'X': selector.forceSelect(2, 2); break;
+    case 'C': selector.forceSelect(3, 2); break;
+    case 'V': selector.forceSelect(4, 2); break;
+    case 'B': selector.forceSelect(5, 2); break;
+    case 'N': selector.forceSelect(6, 2); break;
+    case 'M': selector.forceSelect(7, 2); break;
+  }
+}
+
+/*=============================================================================
  * Button controls
  *===========================================================================*/
 protected function navigationRoutineA() {
@@ -185,24 +267,7 @@ protected function navigationRoutineA() {
   switch (selector.getSelection()) {
     case 28:
     case 29:
-      // Remove trailing spaces
-      removeSpaces();
-      
-      // Check if name is valid
-      if (namingLabel.getLength() == 0) {
-        sfxBox.playSfx(SFX_MENU_INSUFFICIENT);
-        return;
-      }
-      
-      // Sound effect
-      sfxBox.playSfx(SFX_MENU_CLICK);
-      
-      // Give name to profile
-      gameInfo.playerProfile.nameProfile(namingLabel.labelText);
-      
-      // Navigate back to dialog
-      parentScene.popPage();
-      someScene.sceneManager.sceneNpcDialog.npcDialoguePage.npc.dialogTraversal();
+      submitName();
       return;
   }
   
@@ -303,6 +368,8 @@ public function addChar(name key) {
  *===========================================================================*/
 defaultProperties
 {
+  bPageForcesCursorOff=true
+  
   // Random names
   randomNames=("Yufko", "Quria", "Rhexio", "Shujie", "Mox Mox")
   

@@ -39,7 +39,7 @@ public function onNavigateLeft() {
     case VIEW_MODE:
     case RESET_VIEW_MODE:
       // Change view to class skill tree
-      someScene.switchPage(CLASS_SKILLTREE);
+      gameMenuScene.switchPage(CLASS_SKILLTREE);
       break;
   }
 }
@@ -51,7 +51,7 @@ public function onNavigateRight() {
     case VIEW_MODE:
     case RESET_VIEW_MODE:
       // Change view to master tree
-      someScene.switchPage(MASTERY_SKILLTREE);
+      gameMenuScene.switchPage(MASTERY_SKILLTREE);
       break;
   }
 }
@@ -144,6 +144,20 @@ defaultProperties
     
     // Alpha Effects
     activeEffects.add((effectType = EFFECT_ALPHA_CYCLE, lifeTime = -1, elapsedTime = 0, intervalTime = 0.4, min = 170, max = 255))
+    
+    hoverCoords(1)=(xStart=1035,yStart=81,xEnd=1125,yEnd=171)
+    //hoverCoords(4)=(xStart=1035,yStart=298,xEnd=1125,yEnd=386)
+    hoverCoords(7)=(xStart=1035,yStart=515,xEnd=1125,yEnd=601)
+    //hoverCoords(10)=(xStart=1035,yStart=732,xEnd=1125,yEnd=816)
+    
+    hoverCoords(0)=(xStart=821,yStart=190,xEnd=909,yEnd=278)
+    hoverCoords(3)=(xStart=821,yStart=405,xEnd=909,yEnd=493)
+    hoverCoords(6)=(xStart=821,yStart=620,xEnd=909,yEnd=708)
+    
+    hoverCoords(2)=(xStart=1253,yStart=190,xEnd=1341,yEnd=278)
+    hoverCoords(5)=(xStart=1253,yStart=405,xEnd=1341,yEnd=493)
+    hoverCoords(8)=(xStart=1253,yStart=620,xEnd=1341,yEnd=708)
+    
   end object
   componentList.add(Glyph_Tree_Selection_Box)
   

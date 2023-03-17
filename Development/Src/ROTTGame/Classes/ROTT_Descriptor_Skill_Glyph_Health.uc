@@ -41,6 +41,12 @@ public function setUI() {
   );
 }
 
+/*=============================================================================
+ * addManaOverflow()
+ *
+ * Called to track mana that overflows beyond a combat unit's max mana value
+ *===========================================================================*/
+public function addManaOverflow(float manaOverflow);
 
 /*=============================================================================
  * attributeInfo()

@@ -12,6 +12,10 @@ class UI_Page extends UI_Container dependsOn(UI_Fade_System);
 // Pause game control
 var protectedwrite bool bPauseGameWhenUp;
 
+// Hide cursor setting
+var protectedwrite bool bPageForcesCursorOff;
+var protectedwrite bool bPageForcesCursorOn;
+
 // This page is always displayed after a reset if true
 var protectedwrite bool bInitialPage;
 
@@ -50,13 +54,13 @@ protected function onClick(int x, int y) {
  * Gives control to the menu
  *===========================================================================*/
 final public function focusMenu() {
-  local UI_Component comp;
-  
-  foreach componentList(comp) {
-    /* you must init joy stick in focus menu for UI_Menu */
-    ///if (UI_Selector(comp) != none) UI_Selector(comp).initJoyStick();
-  }
-  
+  ///local UI_Component comp;
+  ///
+  ///foreach componentList(comp) {
+  ///  /* you must init joy stick in focus menu for UI_Menu */
+  ///  ///if (UI_Selector(comp) != none) UI_Selector(comp).initJoyStick();
+  ///}
+  ///
   // Event implemented on children
   onFocusMenu();
 }
@@ -87,6 +91,14 @@ public function bool updateSelection
   class<object> selectionType, 
   int selectionIndex
 );
+
+/*============================================================================= 
+ * refresh()
+ *
+ * This function should ensure that any data thats been changed will be 
+ * correctly updated on the UI.
+ *===========================================================================*/
+public function refresh();
 
 /*=============================================================================
  * resetEffectOnComponent()

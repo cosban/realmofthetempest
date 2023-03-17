@@ -118,12 +118,12 @@ public function onSceneUnpause() {
  *===========================================================================*/
 function bool onInputKey( 
   int ControllerId, 
-  name Key, 
+  name inputName, 
   EInputEvent Event, 
   float AmountDepressed = 1.f, 
   bool bGamepad = false) 
 {
-  switch (Key) {
+  switch (inputName) {
     case 'XboxTypeS_A':
       if (glyphSelector.bEnabled) {
         if (Event == IE_Pressed) { 
@@ -136,7 +136,7 @@ function bool onInputKey(
       break;
   }
   
-  return super.onInputKey(ControllerId, Key, Event, AmountDepressed, bGamepad);
+  return super.onInputKey(ControllerId, inputName, Event, AmountDepressed, bGamepad);
 }
 
 /*=============================================================================
@@ -170,6 +170,13 @@ protected function navigationRoutineA() {
 }
 protected function navigationRoutineB();
 
+/*=============================================================================
+ * Requirements
+ *===========================================================================*/
+protected function bool requirementRoutineA() { 
+  return glyphSelector.bEnabled; 
+}
+
 /*============================================================================= 
  * collectGlyph()
  *
@@ -191,7 +198,7 @@ private function collectGlyph() {
   if (selectedGlyph == NO_GLYPH) return;
   
   // Sfx
-  sfxBox.playSFX(SFX_COMBAT_GLYPH_COLLECT);
+  sfxBox.playSfx(SFX_COMBAT_GLYPH_COLLECT);
   
   // Count
   party.glyphCount[selectedGlyph]++;
@@ -334,6 +341,8 @@ event deleteComp() {
  *===========================================================================*/
 defaultProperties
 {
+  bPageForcesCursorOff=true
+  
   /** ===== Input ===== **/
   begin object class=ROTT_Input_Handler Name=Input_A
     inputName="XBoxTypeS_A"
@@ -467,6 +476,7 @@ defaultProperties
     gridSize=(x=4,y=4)          // Total size of 2d selection space
     bEnabled=true
     bActive=true
+    navSound=NO_SFX
   end object
   componentList.add(Input_Listener)
   begin object class=UI_Selector_2D Name=Combat_Glyph_Selector

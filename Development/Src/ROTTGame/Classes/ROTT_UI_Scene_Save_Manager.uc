@@ -11,7 +11,6 @@ class ROTT_UI_Scene_Save_Manager extends ROTT_UI_Scene;
 
 // Internal page references
 var private ROTT_UI_Page_Save_Manager saveManagerPage;
-var private ROTT_UI_Page_Transition transitionOnLoadGame;
 
 /*=============================================================================
  * initScene()
@@ -23,7 +22,6 @@ event initScene() {
   
   // Internal references
   saveManagerPage = ROTT_UI_Page_Save_Manager(findComp("Page_Save_Manager"));
-  transitionOnLoadGame = ROTT_UI_Page_Transition(findComp("Page_Transition_Load_Game"));
   
   // Initial stack
   pushPage(saveManagerPage);
@@ -55,11 +53,23 @@ event unloadScene() {
  *===========================================================================*/
 public function transitionLoadGame() {
   // Load last town
-  transitionOnLoadGame.destinationWorld = gameInfo.getMapFileName(MAP_TALONOVIA_TOWN);
-  /* to do ... replace talonovia with last town */
+  /// to do ... replace talonovia with last town 
   
   // Execute transition
-  pushPage(transitionOnLoadGame);
+  gameInfo.sceneManager.transitioner.setTransition(
+    TRANSITION_OUT,                              // Transition direction
+    NPC_TRANSITION_OUT,                          // Sorting config
+    ,                                            // Pattern reversal
+    ,                                            // Destination scene
+    ,                                            // Destination page
+    gameInfo.getMapFileName(MAP_TALONOVIA_TOWN), // Destination world
+    ,                                            // Color
+    18,                                          // Tile speed
+    0.25,                                        // Delay
+    ,                                            // Input consumption
+    ,                                            // Tag
+    true                                         // Hold screen
+  );
 }
 
 /*=============================================================================
@@ -80,22 +90,6 @@ defaultProperties
     tag="Page_Save_Manager"
   end object
   pageComponents.add(Page_Save_Manager)
-  
-  // Transition for loading game
-  begin object class=ROTT_UI_Page_Transition Name=Page_Transition_Load_Game
-    tag="Page_Transition_Load_Game"
-    bEnabled=false
-    
-    // Transition speed
-    tilesPerTick=18
-    
-    // Sorter effect config
-    effectConfig=NPC_TRANSITION_OUT
-    
-    // Destination
-    destinationScene=NO_SCENE
-  end object
-  pageComponents.add(Page_Transition_Load_Game)
   
 }
 

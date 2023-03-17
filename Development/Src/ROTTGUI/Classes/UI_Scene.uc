@@ -83,6 +83,15 @@ public function popPage(optional string tag = "") {
 }
 
 /*=============================================================================
+ * isMouseVisible()
+ *
+ * True if the mouse should be shown
+ *===========================================================================*/
+public function bool isMouseVisible() { 
+  // Implemented where pagestack is available
+}
+
+/*=============================================================================
  * isCulled()
  *
  * True if the given tag is being hidden by a page above it
@@ -218,7 +227,7 @@ protected function onSelectObject(object selectedObject);
 public function bool onInputKey
 (
   int ControllerId, 
-  name Key, 
+  name inputName, 
   EInputEvent Event, 
   float AmountDepressed = 1.f, 
   bool bGamepad = false

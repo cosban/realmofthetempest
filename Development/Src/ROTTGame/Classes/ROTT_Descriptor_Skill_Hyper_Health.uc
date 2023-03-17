@@ -67,8 +67,8 @@ public function setUI() {
   // Set skill information for p2 and p3
   skillInfo(      
     "Chance to spawn: %spawn%",
-    "+%permHP Permanent Max Health",
-    "+%hpRegen Health Regeneration"
+    "+%permHP Max Health",
+    "+%hpRegen Permanent Health Regeneration"
   );
 }
 
@@ -94,11 +94,11 @@ protected function float attributeInfo
       // Get hyper chance, based on worship count
       attribute = gameInfo.playerProfile.getShrineActivityCount(COBALT_SANCTUM) * 20; 
       break;
-    case PERM_MAX_HEALTH_BOOST:
+    case HYPER_MAX_HEALTH_BOOST:
       // Max health increase
       attribute = 10 + 5 * gameInfo.playerProfile.getSpiritualProwess() / 1500; 
       break;
-    case HYPER_HEALTH_REGEN:
+    case PERM_HEALTH_REGEN:
       // Max health increase
       attribute = 1 + gameInfo.playerProfile.getSpiritualProwess() / 1000; 
       break;
@@ -118,8 +118,8 @@ defaultProperties
   
   // Glyph Attributes
   skillAttributes.add((attributeSet=GLYPH_SET,mechanicType=HYPER_SPAWN_CHANCE,tag="%spawn",font=DEFAULT_SMALL_BLUE,returnType=INTEGER));
-  skillAttributes.add((attributeSet=GLYPH_SET,mechanicType=PERM_MAX_HEALTH_BOOST,tag="%permHP",font=DEFAULT_SMALL_GREEN,returnType=INTEGER));
-  skillAttributes.add((attributeSet=GLYPH_SET,mechanicType=HYPER_HEALTH_REGEN,tag="%hpRegen",font=DEFAULT_SMALL_GREEN,returnType=INTEGER));
+  skillAttributes.add((attributeSet=GLYPH_SET,mechanicType=HYPER_MAX_HEALTH_BOOST,tag="%permHP",font=DEFAULT_SMALL_GREEN,returnType=INTEGER));
+  skillAttributes.add((attributeSet=GLYPH_SET,mechanicType=PERM_HEALTH_REGEN,tag="%hpRegen",font=DEFAULT_SMALL_GREEN,returnType=INTEGER));
   
 }
 

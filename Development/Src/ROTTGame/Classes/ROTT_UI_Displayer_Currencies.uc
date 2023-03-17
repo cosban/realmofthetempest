@@ -7,13 +7,6 @@
  * Description: This object displays player currency (Gold, gems)
  *===========================================================================*/
 
- 
- 
- 
-/// This is just being used on the over world right now...
-
-
- 
 class ROTT_UI_Displayer_Currencies extends ROTT_UI_Displayer;
 
 // Internal UI References
@@ -40,8 +33,8 @@ public function initializeComponent(optional string newTag = "") {
  * Description: This function updates player trueCurrency on screen.
  *===========================================================================*/
 public function updateCurrency(int gold, int gems) { 
-  goldCountLabel.setText(gold);
-  gemCountLabel.setText(gems);
+  goldCountLabel.setText(class'UI_Label'.static.abbreviate(gold));
+  gemCountLabel.setText(class'UI_Label'.static.abbreviate(gems));
 }
 
 /*============================================================================= 

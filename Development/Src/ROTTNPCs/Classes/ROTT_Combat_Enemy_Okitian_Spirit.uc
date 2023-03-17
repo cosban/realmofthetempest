@@ -41,8 +41,8 @@ public function initStats
     case CLAN_BLACK: 
     case CLAN_WHITE:
       // Fixed stat points per level
-      armorPerLvl = 0;
-      baseStatsPerLvl[PRIMARY_VITALITY] = 1;
+      armorPerLvl = 1;
+      baseStatsPerLvl[PRIMARY_VITALITY] = 2;
       baseStatsPerLvl[PRIMARY_STRENGTH] = 2;
       baseStatsPerLvl[PRIMARY_COURAGE] = 3;
       baseStatsPerLvl[PRIMARY_FOCUS] = 5;
@@ -77,7 +77,7 @@ defaultProperties
   monsterName="Okitian Spirit"
   
   // Positive drop rate modifiers
-  ///itemDropRates.add((dropType=class'ROTT_Inventory_Item_Charm_Kamita',chanceOverride=,minOverride=,maxOverride=,chanceAmp=2,quantityAmp=))
+  itemDropRates.add((dropType=class'ROTT_Inventory_Item_Lustrous_Baton',chanceOverride=,minOverride=,maxOverride=,chanceAmp=5,quantityAmp=))
   
   // Negative drop rate modifiers
   ///itemDropRates.add((dropType=class'ROTT_Inventory_Item_Charm_Eluvi',chanceOverride=,minOverride=,maxOverride=,chanceAmp=0,quantityAmp=))

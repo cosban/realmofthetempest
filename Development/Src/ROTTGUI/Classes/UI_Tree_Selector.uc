@@ -58,6 +58,17 @@ var private IntPair gridSize;        // Total size of 2d selection space
 // Setup variables
 var private int rowCount;
 
+// Store coordinates for mouse hover selection
+struct HoverSelectionCoords {
+  var int xStart;
+  var int xEnd;
+  var int yStart;
+  var int yEnd;
+};
+
+// Hover coordinates
+var editinline instanced array<HoverSelectionCoords> hoverCoords;
+
 /*=============================================================================
  * switchTreeType()
  *
@@ -122,6 +133,59 @@ public function initializeComponent(optional string newTag = "") {
   
   // Initialize navigation
   switchTreeType(treeType);
+}
+
+/*=============================================================================
+ * elapseTimer()
+ *
+ * Increments time every engine tick.
+ *===========================================================================*/
+public function elapseTimer(float deltaTime, float gameSpeedOverride) {
+  local UI_Player_Input playerInput;
+  local int i;
+  
+  super.elapseTimer(deltaTime, gameSpeedOverride);
+  
+  // Check if component is active
+  if (!bEnabled) return;
+  if (activeEffects.length != 1) return;
+  
+  // Get player input data
+  playerInput = UI_Player_Input(getPlayerInput());
+  if (hud.bHideCursor) return;
+  
+  // Scan through coordinate sets
+  for (i = 0; i < hoverCoords.length; i++) {
+    // Skip invalid coordinates
+    if (!isPreviewValid(i)) continue;
+    
+    // Check X bounds
+    if (playerInput.getMousePositionX() < hoverCoords[i].xEnd) {
+      if (playerInput.getMousePositionX() > hoverCoords[i].xStart) {
+        // Check Y bounds
+        if (playerInput.getMousePositionY() < hoverCoords[i].yEnd) {
+          if (playerInput.getMousePositionY() > hoverCoords[i].yStart) {
+            // Update selection
+            forceSelect1D(i);
+            return;
+          }
+        }
+      }
+    }
+  }
+}
+
+/*=============================================================================
+ * forceSelect1D()
+ *
+ * Moves selector to an index
+ *===========================================================================*/
+public function forceSelect1D(int index) {
+  selectionCoords.x = index % gridSize.x;
+  selectionCoords.y = index / gridSize.x;
+  
+  renderUpdate();
+  if (UI_Page(outer) != none) UI_Page(outer).refresh();
 }
 
 /*=============================================================================
@@ -301,6 +365,25 @@ protected function row(NodeConfig node1, NodeConfig node2, NodeConfig node3) {
  *
  * This checks if the 
  *===========================================================================*/
+private function bool isPreviewValid(int previewIndex) { 
+  local bool bValid;
+  
+  // Check if the selection is within the node config
+  switch (previewIndex / gridSize.x) {
+    case 0: bValid = bool(row1[previewIndex % gridSize.x]); break;
+    case 1: bValid = bool(row2[previewIndex % gridSize.x]); break;
+    case 2: bValid = bool(row3[previewIndex % gridSize.x]); break;
+    case 3: bValid = bool(row4[previewIndex % gridSize.x]); break;
+  }
+  
+  return bValid;
+}
+
+/*=============================================================================
+ * validCoords()
+ *
+ * This checks if the 
+ *===========================================================================*/
 private function bool validCoords() { 
   local bool bValid;
   
@@ -394,6 +477,20 @@ defaultProperties
 
   // Alpha Effects
   activeEffects.add((effectType = EFFECT_ALPHA_CYCLE, lifeTime = -1, elapsedTime = 0, intervalTime = 0.4, min = 170, max = 255))
+  
+  // Hover
+  hoverCoords(1)=(xStart=1035,yStart=81,xEnd=1125,yEnd=171)
+  hoverCoords(4)=(xStart=1035,yStart=298,xEnd=1125,yEnd=386)
+  hoverCoords(7)=(xStart=1035,yStart=515,xEnd=1125,yEnd=601)
+  hoverCoords(10)=(xStart=1035,yStart=732,xEnd=1125,yEnd=816)
+  
+  hoverCoords(3)=(xStart=821,yStart=190,xEnd=909,yEnd=278)
+  hoverCoords(6)=(xStart=821,yStart=405,xEnd=909,yEnd=493)
+  hoverCoords(9)=(xStart=821,yStart=620,xEnd=909,yEnd=708)
+  
+  hoverCoords(5)=(xStart=1253,yStart=190,xEnd=1341,yEnd=278)
+  hoverCoords(8)=(xStart=1253,yStart=405,xEnd=1341,yEnd=493)
+  hoverCoords(11)=(xStart=1253,yStart=620,xEnd=1341,yEnd=708)
   
 }
 

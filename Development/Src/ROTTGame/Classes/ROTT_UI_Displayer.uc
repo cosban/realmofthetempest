@@ -28,7 +28,7 @@ var privatewrite ROTT_Game_Sfx sfxBox;
 var privatewrite ROTT_Game_Music jukeBox;
 
 // Store the object that is being displayed by this displayer
-var protected ROTTObject displayObject;
+var protected ROTT_Object displayObject;
   
 // Store the object as a combat unit if possible
 var protected ROTT_Combat_Unit combatUnit;
@@ -75,7 +75,7 @@ public function initializeComponent(optional string newTag = "") {
  *
  * Used to link this displayer to a given game object
  *===========================================================================*/
-public function attachDisplayer(ROTTObject attachObject) {
+public function attachDisplayer(ROTT_Object attachObject) {
   // Detatch if nothing given
   if (attachObject == none) { detachDisplayer(); return; }
   

@@ -33,13 +33,13 @@ var private UI_Label dialogTopLine;
 var private UI_Label dialogBottomLine;
 
 // Selector reference
-var privatewrite UI_Selector selector; 
+///var privatewrite UI_Selector selector; 
 
 // Dialog navigation vars
 var privatewrite ROTT_NPC_Container npc;      // Stores the NPC Dialog data structure
 
 // Input delay timer
-var public ROTTTimer inputDelayTimer; 
+var public ROTT_Timer inputDelayTimer; 
 
 // Used to filter first A releast event
 var private bool bUnlockA;
@@ -127,6 +127,10 @@ function bool onInputKey(
       }
       return true;
       
+    case 'LeftMouseButton':
+    case 'SpaceBar':
+    case 'Q':
+    
     case 'XBoxTypeS_DPad_Down':
     case 'XBoxTypeS_DPad_Up':
     case 'XBoxTypeS_DPad_Left':
@@ -159,11 +163,11 @@ public function launchNPC(class<ROTT_NPC_Container> npcType) {
   
   // Ignore input until timer is ready
   if (npc.bFadeIn) {
-    inputDelayTimer = gameInfo.spawn(class'ROTTTimer');
+    inputDelayTimer = gameInfo.spawn(class'ROTT_Timer');
     inputDelayTimer.makeTimer(1.4, LOOP_OFF, allowInput);
     findSprite("Dialogue_Fade_Screen").setEnabled(true);
   } else {
-    inputDelayTimer = gameInfo.spawn(class'ROTTTimer');
+    inputDelayTimer = gameInfo.spawn(class'ROTT_Timer');
     inputDelayTimer.makeTimer(1.0, LOOP_OFF, allowInput);
     findSprite("Dialogue_Fade_Screen").setEnabled(false);
   }
@@ -179,7 +183,7 @@ public function launchNPC(class<ROTT_NPC_Container> npcType) {
   
   // Keep count of goodnights
   gameInfo.playerProfile.nightCounter++;
-  violetLog("Nightcounter = " $ gameInfo.playerProfile.nightCounter);
+  
 }
 
 /*=============================================================================

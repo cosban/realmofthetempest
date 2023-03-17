@@ -66,20 +66,20 @@ public function renderHeroData(ROTT_Combat_Hero hero) {
   hero.updateSubStats();
   
   // Get hero info
-  hp = string(int(hero.subStats[CURRENT_HEALTH]));
-  hpMax = string(int(hero.subStats[MAX_HEALTH]));
+  hp = class'UI_Label'.static.abbreviate(string(int(hero.subStats[CURRENT_HEALTH])));
+  hpMax = class'UI_Label'.static.abbreviate(string(int(hero.subStats[MAX_HEALTH])));
   
-  dmgMin = string(int(hero.subStats[MIN_PHYSICAL_DAMAGE]));
-  dmgMax = string(int(hero.subStats[MAX_PHYSICAL_DAMAGE]));
+  dmgMin = class'UI_Label'.static.abbreviate(string(int(hero.subStats[MIN_PHYSICAL_DAMAGE])));
+  dmgMax = class'UI_Label'.static.abbreviate(string(int(hero.subStats[MAX_PHYSICAL_DAMAGE])));
   
   atkInterval = string(hero.subStats[TOTAL_ATK_INTERVAL]);
   critChance = string(hero.subStats[CRIT_CHANCE]);
   critRolls = string(hero.getCritRolls());
-  accuracy = string(int(hero.subStats[ACCURACY_RATING]));
+  accuracy = class'UI_Label'.static.abbreviate(string(int(hero.subStats[ACCURACY_RATING])));
   
-  mp = string(int(hero.subStats[CURRENT_MANA]));
-  mpMax = string(int(hero.subStats[MAX_MANA]));
-  dodge = string(int(hero.subStats[DODGE_RATING]));
+  mp = class'UI_Label'.static.abbreviate(string(int(hero.subStats[CURRENT_MANA])));
+  mpMax = class'UI_Label'.static.abbreviate(string(int(hero.subStats[MAX_MANA])));
+  dodge = class'UI_Label'.static.abbreviate(string(int(hero.subStats[DODGE_RATING])));
   threshold = string(hero.subStats[MORALE_THRESHOLD]);
   
   // Show primary stat values
@@ -89,7 +89,11 @@ public function renderHeroData(ROTT_Combat_Hero hero) {
   focLabel.setText(hero.getPrimaryStat(PRIMARY_FOCUS));
   
   // Show vitality substats
-  healthLabel.setText(hp $ "/" $ hpMax);
+  if (int(hero.subStats[MAX_HEALTH]) < 1000) {
+    healthLabel.setText(hp $ "/" $ hpMax);
+  } else {
+    healthLabel.setText(hpMax);
+  }
   
   // Show strength substats
   physDmgLabel.setText(dmgMin $ " to " $ dmgMax);
@@ -101,7 +105,11 @@ public function renderHeroData(ROTT_Combat_Hero hero) {
   accuracyLabel.setText(accuracy);
   
   // Show focus substats
-  manaLabel.setText(mp $ "/" $ mpMax);
+  if (int(hero.subStats[MAX_MANA]) < 1000) {
+    manaLabel.setText(mp $ "/" $ mpMax);
+  } else {
+    manaLabel.setText(mpMax);
+  }
   dodgeLabel.setText(dodge);
   thresholdLabel.setText(decimal(threshold, 1) $ "%");
   
@@ -174,6 +182,7 @@ defaultProperties
   begin object class=UI_Label Name=Sub_Stat_Label_1
     tag="Sub_Stat_Label_1"
     bRelativeEnd=true
+    ///bFormatAbbreviations=true // Abbreviate health numbers
     posY=201
     posXEnd=0
     alignX=RIGHT

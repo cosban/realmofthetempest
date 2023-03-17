@@ -22,7 +22,7 @@ enum EffectTypes {
   EFFECT_HUE_SHIFT,
   EFFECT_ALPHA_CYCLE,
   EFFECT_FLICKER,
-  EFFECT_FLIPBOOK
+  EFFECT_FLIPBOOK,
 };
 
 // Stores effect information

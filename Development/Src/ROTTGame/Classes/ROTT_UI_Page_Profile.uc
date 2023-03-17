@@ -13,6 +13,7 @@ class ROTT_UI_Page_Profile extends ROTT_UI_Page;
 // Internal references
 var private UI_Label labelHeroName;
 var private UI_Label labelGameMode;
+var private UI_Label labelGameTime;
 var private UI_Label labelHeroCount;
 var private UI_Label labelPartyCount;
 var private UI_Label labelTotalGold;
@@ -27,14 +28,14 @@ var private UI_Label labelTimeSaved;
 var private UI_Label labelSpeedRunAzra;
 var private UI_Label labelSpeedRunHyrix;
 var private UI_Label labelSpeedRunKhomat;
-var private UI_Label labelSpeedRunViliroth;
-var private UI_Label labelSpeedRunTythizerus;
+var private UI_Label labelSpeedRunViscorn;
+var private UI_Label labelSpeedRunGinqsu;
 
 var private UI_Label labelBestAzra;
 var private UI_Label labelBestHyrix;
 var private UI_Label labelBestKhomat;
-var private UI_Label labelBestViliroth;
-var private UI_Label labelBestTythizerus;
+var private UI_Label labelBestViscorn;
+var private UI_Label labelBestGinqsu;
 
 /*============================================================================= 
  * initializeComponent()
@@ -47,6 +48,7 @@ public function initializeComponent(optional string newTag = "") {
   // Internal references
   labelHeroName = UI_Label(findComp("Profile_Value_Hero_Name"));
   labelGameMode = UI_Label(findComp("Profile_Value_Profile_Mode"));
+  labelGameTime = UI_Label(findComp("Profile_Value_Profile_Time"));
   labelHeroCount = UI_Label(findComp("Profile_Value_Hero_Count"));
   labelPartyCount = UI_Label(findComp("Profile_Value_Party_Count"));
   labelTotalGold = UI_Label(findComp("Profile_Value_Total_Gold"));
@@ -62,15 +64,15 @@ public function initializeComponent(optional string newTag = "") {
   labelSpeedRunAzra = UI_Label(findComp("Profile_Value_Azra"));
   labelSpeedRunHyrix = UI_Label(findComp("Profile_Value_Hyrix"));
   labelSpeedRunKhomat = UI_Label(findComp("Profile_Value_Khomat"));
-  labelSpeedRunViliroth = UI_Label(findComp("Profile_Value_Viliroth"));
-  labelSpeedRunTythizerus = UI_Label(findComp("Profile_Value_Tythizerus"));
+  labelSpeedRunViscorn = UI_Label(findComp("Profile_Value_Viscorn"));
+  labelSpeedRunGinqsu = UI_Label(findComp("Profile_Value_Ginqsu"));
   
   // Best times
   labelBestAzra = UI_Label(findComp("Profile_Value_Azra_Best"));
   labelBestHyrix = UI_Label(findComp("Profile_Value_Hyrix_Best"));
   labelBestKhomat = UI_Label(findComp("Profile_Value_Khomat_Best"));
-  labelBestViliroth = UI_Label(findComp("Profile_Value_Viliroth_Best"));
-  labelBestTythizerus = UI_Label(findComp("Profile_Value_Tythizerus_Best"));
+  labelBestViscorn = UI_Label(findComp("Profile_Value_Viscorn_Best"));
+  labelBestGinqsu = UI_Label(findComp("Profile_Value_Ginqsu_Best"));
 }
 
 /*============================================================================= 
@@ -90,6 +92,22 @@ event onPushPageEvent() {
  *===========================================================================*/
 event onFocusMenu() {
   
+}
+
+/*=============================================================================
+ * elapseTimers()
+ *
+ * Ticks every frame.  Used to check for joystick navigation.
+ *===========================================================================*/
+public function elapseTimers(float deltaTime) {
+  super.elapseTimers(deltaTime);
+  
+  // Elapsed game time
+  labelGameTime.setText(
+    gameInfo.milestoneCookie.formatMilestoneTime(
+      gameInfo.playerProfile.elapsedPlayTime
+    )
+  );
 }
 
 /*============================================================================= 
@@ -115,8 +133,6 @@ public function refresh() {
       break;
   }
   
-  
-  
   // Render profile information
   labelHeroName.setText(gameInfo.playerProfile.username);
   labelHeroCount.setText(gameInfo.playerProfile.getHeroCount());
@@ -134,15 +150,15 @@ public function refresh() {
   labelSpeedRunAzra.setText(gameinfo.playerProfile.milestoneList[MILESTONE_AZRA_KOTH].milestoneTimeFormatted);
   labelSpeedRunHyrix.setText(gameinfo.playerProfile.milestoneList[MILESTONE_HYRIX].milestoneTimeFormatted);
   labelSpeedRunKhomat.setText(gameinfo.playerProfile.milestoneList[MILESTONE_KHOMAT].milestoneTimeFormatted);
-  labelSpeedRunViliroth.setText(gameinfo.playerProfile.milestoneList[MILESTONE_VILIROTH].milestoneTimeFormatted);
-  labelSpeedRunTythizerus.setText(gameinfo.playerProfile.milestoneList[MILESTONE_TYTHIZERUS].milestoneTimeFormatted);
+  labelSpeedRunViscorn.setText(gameinfo.playerProfile.milestoneList[MILESTONE_VISCORN].milestoneTimeFormatted);
+  labelSpeedRunGinqsu.setText(gameinfo.playerProfile.milestoneList[MILESTONE_GINQSU].milestoneTimeFormatted);
   
   // Best Speedrun times
   labelBestAzra.setText(gameinfo.milestoneCookie.formatMilestoneTime(gameinfo.milestoneCookie.bestTimes[MILESTONE_AZRA_KOTH]));
   labelBestHyrix.setText(gameinfo.milestoneCookie.formatMilestoneTime(gameinfo.milestoneCookie.bestTimes[MILESTONE_HYRIX]));
   labelBestKhomat.setText(gameinfo.milestoneCookie.formatMilestoneTime(gameinfo.milestoneCookie.bestTimes[MILESTONE_KHOMAT]));
-  labelBestViliroth.setText(gameinfo.milestoneCookie.formatMilestoneTime(gameinfo.milestoneCookie.bestTimes[MILESTONE_VILIROTH]));
-  labelBestTythizerus.setText(gameinfo.milestoneCookie.formatMilestoneTime(gameinfo.milestoneCookie.bestTimes[MILESTONE_TYTHIZERUS]));
+  labelBestViscorn.setText(gameinfo.milestoneCookie.formatMilestoneTime(gameinfo.milestoneCookie.bestTimes[MILESTONE_VISCORN]));
+  labelBestGinqsu.setText(gameinfo.milestoneCookie.formatMilestoneTime(gameinfo.milestoneCookie.bestTimes[MILESTONE_GINQSU]));
 }
 
 /*=============================================================================
@@ -223,6 +239,17 @@ defaultProperties
     labelText="Mode:"
   end object
   componentList.add(Profile_Info_Labels00)
+  
+  begin object class=UI_Label Name=Profile_Info_Labels000
+    tag="Profile_Info_Labels000"
+    posX=333
+    posY=201
+    AlignX=Left
+    AlignY=Top
+    fontStyle=DEFAULT_SMALL_TAN
+    labelText="Time:"
+  end object
+  componentList.add(Profile_Info_Labels000)
   
   begin object class=UI_Label Name=Profile_Info_Labels1
     tag="Profile_Info_Labels1"
@@ -363,7 +390,7 @@ defaultProperties
     AlignX=Left
     AlignY=Top
     fontStyle=DEFAULT_SMALL_CYAN
-    labelText="Viliroth Time:"
+    labelText="Viscorn Time:"
   end object
   componentList.add(Profile_Info_Labels13)
   
@@ -374,7 +401,7 @@ defaultProperties
     AlignX=Left
     AlignY=Top
     fontStyle=DEFAULT_SMALL_CYAN
-    labelText="Tythizerus Time:"
+    labelText="Ginqsu Time:"
   end object
   componentList.add(Profile_Info_Labels14)
       
@@ -455,6 +482,17 @@ defaultProperties
     labelText=""
   end object
   componentList.add(Profile_Value_Profile_Mode)
+  
+  begin object class=UI_Label Name=Profile_Value_Profile_Time
+    tag="Profile_Value_Profile_Time"
+    posX=419
+    posY=201
+    AlignX=Left
+    AlignY=Top
+    fontStyle=DEFAULT_SMALL_WHITE
+    labelText=""
+  end object
+  componentList.add(Profile_Value_Profile_Time)
   
   // Statistic Values - Hero count
   begin object class=UI_Label Name=Profile_Value_Hero_Count
@@ -599,8 +637,8 @@ defaultProperties
   componentList.add(Profile_Value_Khomat)
   
   // Speedruns
-  begin object class=UI_Label Name=Profile_Value_Viliroth
-    tag="Profile_Value_Viliroth"
+  begin object class=UI_Label Name=Profile_Value_Viscorn
+    tag="Profile_Value_Viscorn"
     posY=751
     posX=254
     AlignX=Left
@@ -608,11 +646,11 @@ defaultProperties
     fontStyle=DEFAULT_SMALL_WHITE
     labelText="N/A"
   end object
-  componentList.add(Profile_Value_Viliroth)
+  componentList.add(Profile_Value_Viscorn)
   
   // Speedruns
-  begin object class=UI_Label Name=Profile_Value_Tythizerus
-    tag="Profile_Value_Tythizerus"
+  begin object class=UI_Label Name=Profile_Value_Ginqsu
+    tag="Profile_Value_Ginqsu"
     posY=801
     posX=280
     AlignX=Left
@@ -620,7 +658,7 @@ defaultProperties
     fontStyle=DEFAULT_SMALL_WHITE
     labelText="N/A"
   end object
-  componentList.add(Profile_Value_Tythizerus)
+  componentList.add(Profile_Value_Ginqsu)
   
   
   
@@ -661,8 +699,8 @@ defaultProperties
   componentList.add(Profile_Value_Khomat_Best)
   
   // Best speedruns
-  begin object class=UI_Label Name=Profile_Value_Viliroth_Best
-    tag="Profile_Value_Viliroth_Best"
+  begin object class=UI_Label Name=Profile_Value_Viscorn_Best
+    tag="Profile_Value_Viscorn_Best"
     posY=751
     posX=475
     AlignX=Left
@@ -670,11 +708,11 @@ defaultProperties
     fontStyle=DEFAULT_SMALL_WHITE
     labelText="N/A"
   end object
-  componentList.add(Profile_Value_Viliroth_Best)
+  componentList.add(Profile_Value_Viscorn_Best)
   
   // Best speedruns
-  begin object class=UI_Label Name=Profile_Value_Tythizerus_Best
-    tag="Profile_Value_Tythizerus_Best"
+  begin object class=UI_Label Name=Profile_Value_Ginqsu_Best
+    tag="Profile_Value_Ginqsu_Best"
     posY=801
     posX=475
     AlignX=Left
@@ -682,7 +720,7 @@ defaultProperties
     fontStyle=DEFAULT_SMALL_WHITE
     labelText="N/A"
   end object
-  componentList.add(Profile_Value_Tythizerus_Best)
+  componentList.add(Profile_Value_Ginqsu_Best)
   
 }
 

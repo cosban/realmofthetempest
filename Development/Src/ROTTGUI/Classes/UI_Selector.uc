@@ -34,6 +34,10 @@ enum JoyStatesY {
 var privatewrite JoyStatesX joyStateX;
 var privatewrite JoyStatesY joyStateY;
 
+// Position for initial index
+var private int homeX;              
+var private int homeY;
+
 // Widget graphics 
 var public UI_Sprite selectorSprite;
 var public UI_Sprite inactiveSprite;
@@ -50,7 +54,7 @@ struct intPair {
 };
 
 // Pixels between each option selection
-var private intPair selectionOffset;      
+var privatewrite intPair selectionOffset;      
 
 // Size of 2D grid
 var private intPair gridSize;      
@@ -68,15 +72,7 @@ var private SoundEffectsEnum navSound;
 var private bool bLimitSelectionRange;
 var private array<bool> limitedValueRange;
 
-
-
-
-
-
-
-
-/// wip
-// Render offsets
+// Store rendering offset data, like for the glyph trees unorthodox structure
 struct offsetNode {
   var int xCoord;
   var int yCoord;
@@ -86,7 +82,7 @@ struct offsetNode {
 };
 var editinline instanced array<offsetNode> renderOffsets;
 
-// Navigation skips
+// Navigation skips, like for skipping over empty selection options
 enum NavDirections {
   NAV_LEFT,
   NAV_RIGHT,
@@ -94,22 +90,22 @@ enum NavDirections {
   NAV_DOWN
 };
 
-struct navNode {
+struct NavNode {
   var int xCoord;
   var int yCoord;
   
   var NavDirections skipDirection;
 };
-var editinline instanced array<navNode> navSkips;
+var editinline instanced array<NavNode> navSkips;
 
-
-
-
-
-
-
-
-
+// Store coordinates for mouse hover selection
+struct HoverSelectionCoords {
+  var int xStart;
+  var int xEnd;
+  var int yStart;
+  var int yEnd;
+};
+var editinline instanced array<HoverSelectionCoords> hoverCoords;
 
 /*============================================================================= 
  * initializeComponent
@@ -206,6 +202,47 @@ public function setLimitedValueRange(array<bool> limitedRange) {
 }
 
 /*=============================================================================
+ * elapseTimer()
+ *
+ * Increments time every engine tick.
+ *===========================================================================*/
+public function elapseTimer(float deltaTime, float gameSpeedOverride) {
+  local UI_Player_Input playerInput;
+  local bool bMandatoryScale;
+  local int i;
+  
+  super.elapseTimer(deltaTime, gameSpeedOverride);
+  
+  // Check if component is active
+  if (!bActive) return;
+  
+  // Get player input data
+  playerInput = UI_Player_Input(getPlayerInput());
+  if (hud.bHideCursor) return;
+  
+  bMandatoryScale = getParentPage().bMandatoryScaleToWindow;
+  // Scan through coordinate sets
+  for (i = 0; i < hoverCoords.length; i++) {
+    // Check if inbounds of option count
+    if (i >= numberOfMenuOptions) return;
+    
+    // Check X bounds
+    if (playerInput.getMousePositionX(bMandatoryScale) < hoverCoords[i].xEnd) {
+      if (playerInput.getMousePositionX(bMandatoryScale) > hoverCoords[i].xStart) {
+        // Check Y bounds
+        if (playerInput.getMousePositionY(bMandatoryScale) < hoverCoords[i].yEnd) {
+          if (playerInput.getMousePositionY(bMandatoryScale) > hoverCoords[i].yStart) {
+            // Update selection
+            forceSelection(i);
+            return;
+          }
+        }
+      }
+    }
+  }
+}
+
+/*=============================================================================
  * previousValidSelection()
  *
  * Selects backward, toward the first valid entry
@@ -276,6 +313,7 @@ public function forceSelection(int xIndex, optional int yIndex = -1) {
   }
   
   selectionUpdate();
+  if (getParentPage() != none) getParentPage().refresh();
 }
 
 /*=============================================================================
@@ -460,16 +498,31 @@ protected function onDeactivation() {
  * Called whenever a change has been made to the selection
  *===========================================================================*/
 private function selectionUpdate() {
+  local int xOffset, yOffset;
+  local int i;
+  
+  // Scan through rendering offsets
+  for (i = 0; i < renderOffsets.Length; i++) {
+    // Check if current selection matches offset info
+    if (selectionCoords.x == renderOffsets[i].xCoord) {
+      if (selectionCoords.y == renderOffsets[i].yCoord) {
+        // Store offsets
+        xOffset = renderOffsets[i].xOffset;
+        yOffset = renderOffsets[i].yOffset;
+      }
+    }
+  }
+  
   // Active widget graphics
   if (selectorSprite != none) selectorSprite.setOffset(
-    selectionOffset.x * selectionCoords.x,
-    selectionOffset.y * selectionCoords.y
+    selectionOffset.x * selectionCoords.x + xOffset,
+    selectionOffset.y * selectionCoords.y + yOffset
   );
   
   // Inactive widget graphics
   if (inactiveSprite != none) inactiveSprite.setOffset(
-    selectionOffset.x * selectionCoords.x,
-    selectionOffset.y * selectionCoords.y
+    selectionOffset.x * selectionCoords.x + xOffset,
+    selectionOffset.y * selectionCoords.y + yOffset
   );
   
   // Selection graphics
@@ -605,13 +658,16 @@ protected function UI_Page getParentPage() {
 /*============================================================================= 
  * setDrawIndex()
  *
- * 
+ * Changes display texture to the one stored at the given index 
  *===========================================================================*/
 public function setDrawIndex(byte index) {
   local int i;
   
+  // Scan through components
   for (i = 0; i < componentList.length; i++) {
+    // Check if sprite
     if (UI_Sprite(componentList[i]) != none) {
+      // Change draw info
       UI_Sprite(componentList[i]).setDrawIndex(index);
       UI_Sprite(componentList[i]).resetImageSize();
     }
@@ -626,23 +682,11 @@ public function setDrawIndex(byte index) {
 public function raveHighwindCall() {
   super.raveHighwindCall();
   
+  // Add rainbow effect to selectors
   if (selectorSprite != none) selectorSprite.addHueEffect();
   if (inactiveSprite != none) inactiveSprite.addHueEffect();
 }
 
-
-
-
-
-
-
-
-
-
-
-
-
-/// wip
 /*=============================================================================
  * isNavSkipped()
  *
@@ -651,10 +695,14 @@ public function raveHighwindCall() {
  *===========================================================================*/
 private function bool isNavSkipped(NavDirections direction) {
   local int i;
+  
   // Search through navigation skips
   for (i = 0; i < navSkips.Length; i++) {
+    // Check x coordinate
     if (navSkips[i].xCoord == selectionCoords.x) {
+      // Check y coordinate
       if (navSkips[i].yCoord == selectionCoords.y) {
+        // Check direction match
         if (navSkips[i].skipDirection == direction) {
           return true;
         }
@@ -663,13 +711,6 @@ private function bool isNavSkipped(NavDirections direction) {
   }
   return false;
 }
-
-
-
-
-
-
-
 
 /*=============================================================================
  * Default Properties

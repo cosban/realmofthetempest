@@ -79,19 +79,39 @@ protected function bool validAttachment() {
 }
 
 /*=============================================================================
+ * checkStatus()
+ *
+ * Returns true if the given tag is already up
+ *===========================================================================*/
+public function bool checkStatus(string statusTag) {
+  local int i;
+  
+  // Search for status tag
+  for (i = 0; i < statusList.length; i++) {
+    if (statusList[i].statusText == statusTag) return true;
+  }
+  
+  return false;
+}
+
+/*=============================================================================
  * addStatus()
  *
  * Called to add a status to be displayed in by this label
  *===========================================================================*/
-public function addStatus(ROTT_Descriptor_Hero_Skill skillInfo) {
+public function addStatus(string statusTag, FontStyles statusColor) {
   local StatusInfo status;
   
   // Filter empty status info
-  if (skillInfo.statusTag == "") return;
+  if (statusTag == "") return;
+  if (checkStatus(statusTag)) {
+    yellowLog("Warning (!) Duplicate status attempt on " $ statusTag);
+    return;
+  }
   
   // Assemble status info
-  status.statusText = skillInfo.statusTag;
-  status.statusColor = skillInfo.statusColor;
+  status.statusText = statusTag;
+  status.statusColor = statusColor;
   
   // Add status to the list
   statusList.addItem(status);
@@ -109,16 +129,29 @@ public function addStatus(ROTT_Descriptor_Hero_Skill skillInfo) {
  * Called to remove a status from being displayed by this label
  *===========================================================================*/
 public function removeStatus(ROTT_Descriptor_Hero_Skill skillInfo) {
-  local int i;
-  
   // Ignore empty requests
   if (skillInfo == none) return;
   if (skillInfo.statusTag == "") return;
   
+  // Remove status manually
+  removeStatusManually(skillInfo.statusTag);
+}
+
+/*=============================================================================
+ * removeStatusManually()
+ *
+ * Removes a status given the tag, rather than the skill descriptor
+ *===========================================================================*/
+public function removeStatusManually(string statusTag) {
+  local int i;
+  
+  // Ignore empty requests
+  if (statusTag == "") return;
+  
   // Loop through each status
   for (i = 0; i < statusList.length; i++) {
     // Check if status matches
-    if (statusList[i].statusText == skillInfo.statusTag) {
+    if (statusList[i].statusText == statusTag) {
       // Remove status
       statusList.remove(i, 1);
       
@@ -143,7 +176,7 @@ public function removeStatus(ROTT_Descriptor_Hero_Skill skillInfo) {
       return;
     }
   }
-  yellowLog("Warning (!) failed to find status: " $ skillInfo.statusTag);
+  yellowLog("Warning (!) failed to find status: " $ statusTag);
 }
 
 /*=============================================================================

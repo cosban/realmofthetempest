@@ -103,6 +103,11 @@ public function refresh() {
   local EnchantmentDescriptor script;
   local int i;
   
+  // Minimum game level cap 
+  if (alchemyScene.minigameMultiplier < 1) {
+    alchemyScene.minigameMultiplier = 1;
+  }
+  
   // Get script
   script = class'ROTT_Descriptor_Enchantment_List'.static.getEnchantment(
     enchantmentSelection
@@ -119,13 +124,6 @@ public function refresh() {
   
   // Set price per game
   setCostValues(getEnchantmentCost());
-  
-  // Refresh costs
-  for (i = 0; i < componentList.length; i++) {
-    if (ROTT_UI_Displayer_Cost(componentList[i]) != none) {
-      ROTT_UI_Displayer_Cost(componentList[i]).refresh();
-    }
-  }
   
   // Set active widgets
   switch (menuState) {
@@ -160,6 +158,33 @@ public function array<ItemCost> getEnchantmentCost() {
   }
   
   return returnCosts;
+}
+
+/*=============================================================================
+ * Controls
+ *
+ * ControllerId     the controller that generated this input key event
+ * inputName        the name of the key which an event occured for
+ * EventType        the type of event which occured
+ * AmountDepressed  for analog keys, the depression percent.
+ *
+ * Returns: true to consume the key event, false to pass it on.
+ *===========================================================================*/
+function bool onInputKey
+( 
+  int ControllerId, 
+  name inputName, 
+  EInputEvent Event, 
+  float amountDepressed = 1.f, 
+  bool bGamepad = false
+)
+{
+  switch (inputName) {
+    case 'Z': inputName = 'XboxTypeS_LeftShoulder';  break;
+    case 'C': inputName = 'XboxTypeS_RightShoulder'; break;
+  }
+  
+  return super.onInputKey(ControllerId, inputName, Event, amountDepressed, bGamepad);
 }
 
 /*============================================================================*
@@ -209,6 +234,45 @@ protected function navigationRoutineB() {
   }
   // Sfx
   gameInfo.sfxBox.playSfx(SFX_MENU_BACK);
+}
+
+/*=============================================================================
+ * Bumper inputs
+ *===========================================================================*/
+protected function navigationRoutineLB() {
+  switch (menuState) {
+    case SELECT_ENCHANTMENT:
+      // No action
+      return;
+    case SELECT_MULTIPLIER:
+      // Navigate alchemy multiplier left, in groups of 10
+      alchemyScene.minigameMultiplier -= 10;
+      refresh();
+      
+      // Play sound
+      sfxBox.playSFX(SFX_MENU_NAVIGATE);
+      break;
+  }
+}
+ 
+protected function navigationRoutineRB() {
+  switch (menuState) {
+    case SELECT_ENCHANTMENT:
+      // No action
+      return;
+    case SELECT_MULTIPLIER:
+      // Navigate alchemy multiplier right, in groups of 10
+      if (alchemyScene.minigameMultiplier == 1) {
+        alchemyScene.minigameMultiplier += 9;
+      } else {
+        alchemyScene.minigameMultiplier += 10;
+      }
+      refresh();
+      
+      // Play sound
+      sfxBox.playSFX(SFX_MENU_NAVIGATE);
+      break;
+  }
 }
 
 /*============================================================================*
@@ -299,6 +363,19 @@ defaultProperties
     buttonComponent=none
   end object
   inputList.add(Input_B)
+  
+  // Bumpers
+  begin object class=ROTT_Input_Handler Name=Input_LB
+    inputName="XboxTypeS_LeftShoulder"
+    buttonComponent=none
+  end object
+  inputList.add(Input_LB)
+  
+  begin object class=ROTT_Input_Handler Name=Input_RB
+    inputName="XboxTypeS_RightShoulder"
+    buttonComponent=none
+  end object
+  inputList.add(Input_RB)
   
   /** ===== Textures ===== **/
   // Background

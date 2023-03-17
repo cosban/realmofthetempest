@@ -12,9 +12,6 @@ class ROTT_UI_Scene_Combat_Results extends ROTT_UI_Scene;
 // Page references
 var privatewrite ROTT_UI_Page_Combat_Victory pageCombatVictory;
 var privatewrite ROTT_UI_Page_Combat_Analysis pageCombatAnalysis;
-var privatewrite ROTT_UI_Page_Transition transitionPageIn;
-var privatewrite ROTT_UI_Page_Transition transitionPageOut;
-var privatewrite ROTT_UI_Page_Transition transitionPageOverWorld;
 
 // Page transfering mechanics
 var public bool bLevelUpTransfer;
@@ -31,9 +28,6 @@ event initScene() {
   // Internal menu references
   pageCombatVictory = ROTT_UI_Page_Combat_Victory(findComp("Page_Combat_Victory"));
   pageCombatAnalysis = ROTT_UI_Page_Combat_Analysis(findComp("Page_Combat_Analysis"));
-  transitionPageIn = ROTT_UI_Page_Transition(findComp("Page_Transition_In"));
-  transitionPageOut = ROTT_UI_Page_Transition(findComp("Page_Transition_Out"));
-  transitionPageOverWorld = ROTT_UI_Page_Transition(findComp("Page_Transition_Out_Over_World"));
   
   pushPage(pageCombatVictory);
 }
@@ -53,19 +47,6 @@ event loadScene() {
   
   // Transition into victory page
   pushPage(pageCombatVictory);
-  pushPage(transitionPageIn); 
-}
-
-/*=============================================================================
- * transitionToAnalysis()
- *
- * Called from the victory page to switch to analysis
- *===========================================================================*/
-event transitionToAnalysis() {
-  // Set transition
-  transitionPageOut.destinationPage = pageCombatAnalysis;
-  transitionPageOut.destinationScene = NO_SCENE;
-  pushPage(transitionPageOut);
 }
 
 /*=============================================================================
@@ -75,10 +56,20 @@ event transitionToAnalysis() {
  * after level up.
  *===========================================================================*/
 event transitionToHeroStats() {
-  // Set transition
-  transitionPageOut.destinationPage = none;
-  transitionPageOut.destinationScene = SCENE_GAME_MENU;
-  pushPage(transitionPageOut);
+  // Transition to level up stats
+  gameInfo.sceneManager.transitioner.setTransition(
+    TRANSITION_OUT,                              // Transition direction
+    RIGHT_SWEEP_TRANSITION_OUT,                  // Sorting config
+    ,                                            // Pattern reversal
+    SCENE_GAME_MENU,                             // Destination scene
+    ,                                            // Destination page
+    ,                                            // Destination world
+    ,                                            // Color
+    ,                                            // Tile speed
+    0.2f,                                        // Delay
+    true,                                        // Input consumption
+    ""
+  );
   
   // Make menu navigate to hero
   gameInfo.sceneManager.sceneGameMenu.transitionToHeroStats();
@@ -108,50 +99,6 @@ defaultProperties
   end object
   pageComponents.add(Page_Combat_Analysis)
   
-  // Transition Page (in)
-  begin object class=ROTT_UI_Page_Transition Name=Page_Transition_In
-    tag="Page_Transition_In"
-    bEnabled=false
-    bConsumeInput=true
-    transitionDelay=0.2
-    
-    // Sorter effect config
-    effectConfig=RIGHT_SWEEP_TRANSITION_IN
-    
-    // Destination
-    destinationScene=NO_SCENE
-  end object
-  pageComponents.add(Page_Transition_In)
-
-  // Transition Page (out)
-  begin object class=ROTT_UI_Page_Transition Name=Page_Transition_Out
-    tag="Page_Transition_Out"
-    bEnabled=false
-    bConsumeInput=true
-    transitionDelay=0.2
-    
-    // Sorter effect config
-    effectConfig=RIGHT_SWEEP_TRANSITION_OUT
-    
-    // Destination
-    destinationScene=NO_SCENE
-  end object
-  pageComponents.add(Page_Transition_Out)
-  
-  // Transition Page (out)
-  begin object class=ROTT_UI_Page_Transition Name=Page_Transition_Out_Over_World
-    tag="Page_Transition_Out_Over_World"
-    bEnabled=false
-    bConsumeInput=true
-    
-    // Sorter effect config
-    effectConfig=RIGHT_SWEEP_TRANSITION_OUT
-    
-    // Destination
-    destinationScene=SCENE_OVER_WORLD
-  end object
-  pageComponents.add(Page_Transition_Out_Over_World)
-
 }
 
 

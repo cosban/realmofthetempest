@@ -26,10 +26,25 @@ public function initDialogue() {
   
   // Greeting
   `NEW_NODE(GREETING, NUETRAL)
-    "A chemist pays for mystic phases.",
-    ""
+    "A chemist plays with mystic phrases,",
+    "lit like a candle's wick."
   `ENDNODE
   
+    `ADD_OPTIONS(GREETING, NUETRAL)
+      "Barter",
+      "Inquiry",
+      "",
+      "",
+      
+      BEHAVIOR_LAUNCH_SERVICE,
+      BEHAVIOR_NONE
+    `ENDNODE
+    
+      `ADD_REPLY(GREETING, NUETRAL, 0)
+        "(Service unavailable in this version)",
+        ""
+      `ENDNODE
+
   // ----------------------------------------------------------------------- //
   
   setInquiry(
@@ -53,6 +68,7 @@ defaultProperties
 {
   // NPC identity
   npcName=GENERIC
+  serviceType=SERVICE_BARTERING
   
   // Background
   begin object class=UI_Texture_Info Name=NPC_Background_Texture

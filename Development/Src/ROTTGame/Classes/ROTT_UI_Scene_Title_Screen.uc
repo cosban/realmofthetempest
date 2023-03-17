@@ -14,9 +14,8 @@ class ROTT_UI_Scene_Title_Screen extends ROTT_UI_Scene;
 var float currentCameraStep, maxCameraStep;
 var float yawOffset, softClipSteps, cameraDirection;
 
-var private ROTT_UI_Page_Title_Screen titlePage;
-var private ROTT_UI_Page_Game_Intro introPage;
-var private ROTT_UI_Page_Transition transitionOnContinuePage;
+var privatewrite ROTT_UI_Page_Title_Screen titlePage;
+var privatewrite ROTT_UI_Page_Game_Intro introPage;
 
 /*=============================================================================
  * initScene()
@@ -28,7 +27,6 @@ event initScene() {
   
   titlePage = ROTT_UI_Page_Title_Screen(findComp("Page_Title_Screen"));
   introPage = ROTT_UI_Page_Game_Intro(findComp("Page_Game_Intro"));
-  transitionOnContinuePage = ROTT_UI_Page_Transition(findComp("Page_Transition_Continue"));
   
 }
 
@@ -54,13 +52,23 @@ public function elapseTimer(float deltaTime, float gameSpeedOverride) {
 }
 
 /*=============================================================================
- * transitionContinue()
+ * transitionOnContinue()
  *
  * Load the transition effect to the save manager, from the continue button.
  *===========================================================================*/
-public function transitionContinue() {
+public function transitionOnContinue() {
   // Execute transition
-  pushPage(transitionOnContinuePage);
+  gameInfo.sceneManager.transitioner.setTransition(
+    TRANSITION_OUT,        // Transition direction
+    NPC_TRANSITION_OUT,    // Sorting config
+    ,                      // Pattern reversal
+    SCENE_SAVE_MANAGER,    // Destination scene
+    ,                      // Destination page
+    ,                      // Destination world
+    ,                      // Color
+    18,                    // Tile speed
+    0.25                   // Delay
+  );
 }
 
 /*=============================================================================
@@ -130,22 +138,6 @@ defaultProperties
     bEnabled=false
   end object
   pageComponents.add(Page_Game_Intro)
-  
-  // Transition for continue
-  begin object class=ROTT_UI_Page_Transition Name=Page_Transition_Continue
-    tag="Page_Transition_Continue"
-    bEnabled=false
-    
-    // Transition speed
-    tilesPerTick=18
-    
-    // Sorter effect config
-    effectConfig=NPC_TRANSITION_OUT
-    
-    // Destination
-    destinationScene=SCENE_SAVE_MANAGER
-  end object
-  pageComponents.add(Page_Transition_Continue)
   
 }
 

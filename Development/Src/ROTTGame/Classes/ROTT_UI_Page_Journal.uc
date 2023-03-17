@@ -72,7 +72,7 @@ protected function navigationRoutineA() {
 
 protected function navigationRoutineB() {
   // Update menu status to 'closed'
-  gameInfo.closeGameMenu();
+  ///gameInfo.closeGameMenu();
   parentScene.popPage();
   
   gameInfo.sfxBox.playSfx(SFX_MENU_BACK);

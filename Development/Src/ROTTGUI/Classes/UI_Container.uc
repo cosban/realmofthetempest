@@ -170,6 +170,19 @@ protected function lerpComponent(float deltaTime) {
   super.lerpComponent(deltaTime);
 }
 
+/*=============================================================================
+ * addEffectToQueue()
+ *
+ * Allows special effects to be queued
+ *===========================================================================*/
+public function addEffectToQueue(EffectStates state, float time) {
+  local int i;
+  
+  for (i = 0; i < componentList.length; i++) {
+    componentList[i].fadeSystem.addEffectToQueue(state, time);
+  }
+}
+
 /*============================================================================*
  * decimal()
  *
@@ -202,12 +215,12 @@ public function debugHierarchy(int tabLength, bool bEnabledParent) {
  * for garbage collection.
  *===========================================================================*/
 event deleteComp() {
-  local UI_Component Cur;
+  local UI_Component comp;
 
   super.deleteComp();
 
-  foreach componentList(Cur) {
-    Cur.deleteComp();
+  foreach componentList(comp) {
+    comp.deleteComp();
   }
 }
 

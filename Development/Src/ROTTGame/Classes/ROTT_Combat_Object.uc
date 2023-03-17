@@ -1,4 +1,4 @@
-class ROTT_Combat_Object extends ROTTObject;
+class ROTT_Combat_Object extends ROTT_Object;
 
 const MANA_SUFFICIENT = true;
 const MANA_INSUFFICIENT = false;
@@ -138,6 +138,34 @@ enum MechanicTypes {
   
 };
  
+// Substats
+enum SubStatTypes {
+  CURRENT_HEALTH,
+  MAX_HEALTH,
+  
+  MIN_PHYSICAL_DAMAGE,
+  MAX_PHYSICAL_DAMAGE,
+  
+  ELAPSED_ATK_TIME,
+  TOTAL_ATK_INTERVAL,
+  CRIT_CHANCE,
+  CRIT_MULTIPLIER,
+  ACCURACY_RATING,
+  
+  CURRENT_MANA,
+  MAX_MANA,
+  DODGE_RATING,
+  MORALE_THRESHOLD,
+  
+  RESURRECTION_CURRENT,
+  RESURRECTION_LIMIT,
+  
+  HEALTH_REGEN,
+  MANA_REGEN,
+  
+  ARMOR_RATING
+};
+
 // A list of all skills in the glyph tree
 enum GlyphSkills {
   GLYPH_TREE_ARMOR,

@@ -67,7 +67,13 @@ defaultProperties
   
   expAmp=1
   
+  // Quest items
+  itemDropRates.add((dropType=class'ROTT_Inventory_Item_Quest_Amulet',chanceOverride=100,minOverride=,maxOverride=,chanceAmp=,quantityAmp=))
+  
   // Drop rate modifiers
+  itemDropRates.add((dropType=class'ROTT_Inventory_Item_Lustrous_Baton',chanceOverride=,minOverride=,maxOverride=,chanceAmp=8,quantityAmp=))
+  
+  // Currency
   itemDropRates.add((dropType=class'ROTT_Inventory_Item_Gem',chanceOverride=100,minOverride=,maxOverride=,chanceAmp=,quantityAmp=))
   
   // Sprites 240x240

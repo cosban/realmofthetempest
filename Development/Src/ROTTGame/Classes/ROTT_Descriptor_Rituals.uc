@@ -7,14 +7,16 @@
  * Stores design information for rituals, such as ritual costs.
  *===========================================================================*/
   
-class ROTT_Descriptor_Rituals extends ROTTObject
+class ROTT_Descriptor_Rituals extends ROTT_Object
 dependsOn(ROTT_Game_Info)
 abstract;
 
 enum RitualTypes {
   RITUAL_EXPERIENCE_BOOST,
+  RITUAL_LUCK_BOOST,
   
   RITUAL_PHYSICAL_DAMAGE,
+  RITUAL_ELEMENTAL_DAMAGE,
   
   RITUAL_MANA_REGEN,
   RITUAL_MANA_BOOST,
@@ -27,8 +29,10 @@ enum RitualTypes {
   RITUAL_SPEED_POINTS,
   
   RITUAL_SKILL_POINT,
-};
   
+  RITUAL_PERSISTENCE,
+};
+
 /*=============================================================================
  * getRitualCost()
  * 
@@ -39,9 +43,17 @@ public static function array<ItemCost> getRitualCost(RitualTypes ritualType) {
   local ItemCost costInfo;
   
   switch (ritualType) {
-    case RITUAL_EXPERIENCE_BOOST: /// Etzland forest
+    case RITUAL_EXPERIENCE_BOOST: /// Haxlyn Backlands
       // Set cost
       costInfo.currencyType = class'ROTT_Inventory_Item_Herb';
+      costInfo.quantity = 1;
+      
+      // Add to list
+      costList.addItem(costInfo);
+      break;
+    case RITUAL_LUCK_BOOST: /// Etzland Backlands
+      // Set cost
+      costInfo.currencyType = class'ROTT_Inventory_Item_Bottle_Norkiva_Chips';
       costInfo.quantity = 1;
       
       // Add to list
@@ -62,7 +74,7 @@ public static function array<ItemCost> getRitualCost(RitualTypes ritualType) {
       // Add to list
       costList.addItem(costInfo);
       break;
-    case RITUAL_PHYSICAL_DAMAGE:
+    case RITUAL_PHYSICAL_DAMAGE: /// Kyrin Cavern
       // Set cost
       costInfo.currencyType = class'ROTT_Inventory_Item_Charm_Eluvi';
       costInfo.quantity = 1;
@@ -77,20 +89,35 @@ public static function array<ItemCost> getRitualCost(RitualTypes ritualType) {
       // Add to list
       costList.addItem(costInfo);
       break;
-    case RITUAL_HEALTH_BOOST:  /// Rhunia Citadel, Valimor gate
+    case RITUAL_ELEMENTAL_DAMAGE: /// Rhunia Backlands
       // Set cost
-      costInfo.currencyType = class'ROTT_Inventory_Item_Charm_Cerok';
-      costInfo.quantity = 2;
+      costInfo.currencyType = class'ROTT_Inventory_Item_Herb_Aquifinie';
+      costInfo.quantity = 1;
       
       // Add to list
       costList.addItem(costInfo);
       
       // Set cost
-      ///costInfo.currencyType = class'ROTT_Inventory_Item_Gold';
-      ///costInfo.quantity = 1000;
-      ///
+      costInfo.currencyType = class'ROTT_Inventory_Item_Gold';
+      costInfo.quantity = 1000;
+      
+      // Add to list
+      costList.addItem(costInfo);
+      break;
+    case RITUAL_HEALTH_BOOST:  /// Talonovia outskirts
+      // Set cost
+      costInfo.currencyType = class'ROTT_Inventory_Item_Herb_Xuvi';
+      costInfo.quantity = 1;
+      
+      // Add to list
+      costList.addItem(costInfo);
+      
+      // Set cost
+      costInfo.currencyType = class'ROTT_Inventory_Item_Gold';
+      costInfo.quantity = 1000;
+      
       ///// Add to list
-      ///costList.addItem(costInfo);
+      costList.addItem(costInfo);
       break;
     case RITUAL_HEALTH_REGEN: /// Rhunia cavern
       // Set cost
@@ -159,6 +186,51 @@ public static function array<ItemCost> getRitualCost(RitualTypes ritualType) {
       // Add to list
       costList.addItem(costInfo);
       break;
+    case RITUAL_ACCURACY: /// Etzland Wilderness
+      // Set cost
+      costInfo.currencyType = class'ROTT_Inventory_Item_Bottle_Nettle_Roots';
+      costInfo.quantity = 1;
+      
+      // Add to list
+      costList.addItem(costInfo);
+      
+      // Set cost
+      costInfo.currencyType = class'ROTT_Inventory_Item_Herb_Jengsu';
+      costInfo.quantity = 1;
+      
+      // Add to list
+      costList.addItem(costInfo);
+      break;
+    case RITUAL_DODGE:    /// Valimor Wilderness
+      // Set cost
+      costInfo.currencyType = class'ROTT_Inventory_Item_Charm_Bayuta';
+      costInfo.quantity = 1;
+      
+      // Add to list
+      costList.addItem(costInfo);
+      
+      // Set cost
+      costInfo.currencyType = class'ROTT_Inventory_Item_Herb_Saripine';
+      costInfo.quantity = 1;
+      
+      // Add to list
+      costList.addItem(costInfo);
+      break;
+    case RITUAL_PERSISTENCE:    /// Kalroth ...
+      // Set cost
+      costInfo.currencyType = class'ROTT_Inventory_Item_Herb_Unjah';
+      costInfo.quantity = 1;
+      
+      // Add to list
+      costList.addItem(costInfo);
+      
+      // Set cost
+      costInfo.currencyType = class'ROTT_Inventory_Item_Herb_Koshta';
+      costInfo.quantity = 1;
+      
+      // Add to list
+      costList.addItem(costInfo);
+      break;
   }
   
   // Return list
@@ -174,13 +246,16 @@ public static function float getRitualBoost(RitualTypes ritualType) {
   // Return amp by ritual type
   switch (ritualType) {
     case RITUAL_EXPERIENCE_BOOST:  return 1;
-    case RITUAL_PHYSICAL_DAMAGE:   return 1;
-    case RITUAL_MANA_BOOST:        return 15;
-    case RITUAL_MANA_REGEN:        return 1;
-    case RITUAL_HEALTH_BOOST:      return 10;
-    case RITUAL_HEALTH_REGEN:      return 1;
-    case RITUAL_ARMOR:             return 1;
+    case RITUAL_PHYSICAL_DAMAGE:   return 5;
+    case RITUAL_MANA_BOOST:        return 100;
+    case RITUAL_MANA_REGEN:        return 5;
+    case RITUAL_HEALTH_BOOST:      return 40;
+    case RITUAL_HEALTH_REGEN:      return 5;
+    case RITUAL_ARMOR:             return 5;
     case RITUAL_SKILL_POINT:       return 1;
+    case RITUAL_ACCURACY:          return 100;
+    case RITUAL_DODGE:             return 100;
+    case RITUAL_SPEED_POINTS:      return 25;
   }
   
   yellowLog("Warning (!) Unhandled ritual type: " $ ritualType);

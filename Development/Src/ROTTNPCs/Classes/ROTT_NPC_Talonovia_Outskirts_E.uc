@@ -26,15 +26,16 @@ public function initDialogue() {
   
   // Greeting
   `NEW_NODE(GREETING, NUETRAL)
-    "My pastiches. . . My pastiches. . .",
-    ""
+    "In a cluttered room, a witch",
+    "shuffles through stacks of paper work."
   `ENDNODE
-  
+  setColor(DEFAULT_MEDIUM_GOLD);
+	
   `NEW_NODE(GREETING, NUETRAL)
-    "Have I lost my pastiches?",
+    "Nothing really matters.",
     ""
   `ENDNODE
-  
+	
   // ----------------------------------------------------------------------- //
   
   setInquiry(
@@ -73,7 +74,7 @@ defaultProperties
   
   // NPC Texture
   begin object class=UI_Texture_Info Name=NPC_Sprite_Texture
-    componentTextures.add(Texture2D'NPCs.Witches.NPC_Portrait_Witch_Orange_360')
+    componentTextures.add(Texture2D'NPCs.Witches.NPC_Portrait_Witch_Cyan_360')
   end object
   
   // Sprite container for transfer

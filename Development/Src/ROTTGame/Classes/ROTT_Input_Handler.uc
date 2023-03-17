@@ -86,7 +86,7 @@ public function playSuccessSfx() {
     currentPage.gameInfo.sfxBox.playSFX(inputSuccessSfx);
   } else {
     // Play default
-    switch(inputName) {
+    switch (inputName) {
       case 'XBoxTypeS_A': 
         currentPage.gameInfo.sfxBox.playSFX(SFX_MENU_ACCEPT);
         break;

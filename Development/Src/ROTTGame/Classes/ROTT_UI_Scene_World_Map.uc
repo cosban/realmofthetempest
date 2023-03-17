@@ -70,24 +70,6 @@ defaultProperties
   end object
   pageComponents.add(Page_World_Map)
 
-  // Black Texture
-  ///begin object class=UI_Texture_Info Name=Black_Texture
-  ///  componentTextures.add(Texture2D'GUI.Black_Square')
-  ///end object
-  ///
-  ///// Black screen 
-  ///begin object class=UI_Sprite Name=World_Black_Screen
-  ///  tag="World_Black_Screen"
-  ///  bEnabled=false
-  ///  posX=0
-  ///  posY=0
-  ///  posXEnd=NATIVE_WIDTH
-  ///  posYEnd=NATIVE_HEIGHT
-  ///  images(0)=Black_Texture
-  ///  bMandatoryScaleToWindow=true
-  ///end object
-  ///uiComponents.add(World_Black_Screen)
-  
 }
 
 

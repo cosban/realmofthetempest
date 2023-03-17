@@ -35,7 +35,7 @@ public function setUI() {
   
   // Set skill information for p2 and p3
   skillInfo(      
-    "-%rejuv HP / sec",
+    "-%rejuv HP / sec (Passive)",
     "+%stats to all stats",
     ""
   );
@@ -94,7 +94,7 @@ defaultProperties
   parentTree=CLASS_TREE
 
   // Skill Attributes
-  skillAttributes.add((attributeSet=COMBAT_ACTION_SET,mechanicType=HEALTH_LOSS_OVER_TIME,tag="%rejuv",font=DEFAULT_SMALL_RED,returnType=INTEGER));
+  skillAttributes.add((attributeSet=PASSIVE_SET,mechanicType=HEALTH_LOSS_OVER_TIME,tag="%rejuv",font=DEFAULT_SMALL_RED,returnType=INTEGER));
   
   skillAttributes.add((attributeSet=COMBAT_ACTION_SET,mechanicType=INCREASE_ALL_STATS,tag="%stats",font=DEFAULT_SMALL_GREEN,returnType=INTEGER));
   

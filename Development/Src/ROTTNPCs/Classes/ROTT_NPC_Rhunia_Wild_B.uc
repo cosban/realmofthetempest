@@ -26,10 +26,21 @@ public function initDialogue() {
   
   // Intro
   `NEW_NODE(GREETING, NUETRAL)
-    "Chaos mocks our fickle fate, while order takes us to it.",
-    ""
+    "A cauldron babbles gently in",
+    "a thick red haze. . ."
+  `ENDNODE
+  setColor(DEFAULT_MEDIUM_GOLD);
+  
+  `NEW_NODE(GREETING, NUETRAL)
+    "Oh how chaos mocks our fickle fate",
+    "while order takes us to it."
   `ENDNODE
   
+  `NEW_NODE(GREETING, NUETRAL)
+    "Whirlwind of miserable dreams, bring us back",
+    "to the ethereal stream."
+  `ENDNODE
+	
   // ----------------------------------------------------------------------- //
   
   setInquiry(

@@ -22,9 +22,9 @@ public function initStats
 
   // Fixed stat points per level
   armorPerLvl = 0;
-  baseStatsPerLvl[PRIMARY_VITALITY] = 25;
-  baseStatsPerLvl[PRIMARY_STRENGTH] = 5;
-  baseStatsPerLvl[PRIMARY_COURAGE] = 5;
+  baseStatsPerLvl[PRIMARY_VITALITY] = 20;
+  baseStatsPerLvl[PRIMARY_STRENGTH] = 3;
+  baseStatsPerLvl[PRIMARY_COURAGE] = 4;
   baseStatsPerLvl[PRIMARY_FOCUS] = 5;
   
   // Randomly rolled stat variation
@@ -38,8 +38,8 @@ public function initStats
 
   // Affinities
   statAffinities[PRIMARY_VITALITY] = AVERAGE;
-  statAffinities[PRIMARY_STRENGTH] = AVERAGE;
-  statAffinities[PRIMARY_COURAGE] = AVERAGE;
+  statAffinities[PRIMARY_STRENGTH] = MINOR;
+  statAffinities[PRIMARY_COURAGE] = MINOR;
   statAffinities[PRIMARY_FOCUS] = AVERAGE;
 }
 
@@ -52,7 +52,7 @@ protected function onDeath() {
   super.onDeath();
   
   gameInfo.playerProfile.updateMilestone(
-    MILESTONE_VILIROTH, 
+    MILESTONE_VISCORN, 
     MILESTONE_JUST_COMPLETED
   );
 }
@@ -62,12 +62,16 @@ protected function onDeath() {
  *===========================================================================*/
 defaultProperties
 {
-  //monsterName="Sariel the Tormentor"
-  monsterName="Viliroth the Tormentor"
+  ///monsterName="Sariel the Tormentor"
+  monsterName="Viscorn the Tormentor"
   
   expAmp=1
   
   // Drop rate modifiers
+  itemDropRates.add((dropType=class'ROTT_Inventory_Item_Shield_Kite',chanceOverride=,minOverride=,maxOverride=,chanceAmp=15,quantityAmp=))
+  itemDropRates.add((dropType=class'ROTT_Inventory_Item_Lustrous_Baton',chanceOverride=,minOverride=,maxOverride=,chanceAmp=15,quantityAmp=))
+  
+  // Currency modifier
   itemDropRates.add((dropType=class'ROTT_Inventory_Item_Gem',chanceOverride=100,minOverride=,maxOverride=,chanceAmp=,quantityAmp=))
   
   // Sprites 240x240

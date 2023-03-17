@@ -11,7 +11,7 @@
  * encapsulated in the parties themselves
  *===========================================================================*/
 
-class ROTT_Party_System extends ROTTObject;
+class ROTT_Party_System extends ROTT_Object;
 
 // Parties belonging to this system are stored here
 var privatewrite array<ROTT_Party> parties;
@@ -88,6 +88,19 @@ public function setActiveParty(int index) {
   parties[activePartyIndex].setPartyStatus(PARTY_IDLE);
   activePartyIndex = index;
   parties[activePartyIndex].setPartyStatus(PARTY_ACTIVE);
+  
+  // Check if defend settings are valid
+  if (gameInfo.sceneManager != none) {
+    if (gameInfo.sceneManager.sceneGameManager.gameOptionsExtendedPage != none) {
+      if (!gameInfo.sceneManager.sceneGameManager.gameOptionsExtendedPage.isAlwaysDefendValid(, true)) {
+        /// Temporary reset of first hero defend option
+        gameInfo.optionsCookie.bAlwaysDefendHero1 = false;
+        
+        /// Prefer to have settings saved for each team, initialized as (0, 0, 0)
+        /// Thus preserving the invariant across loading separate teams
+      }
+    }
+  }
 }
 
 /**=============================================================================
@@ -137,6 +150,27 @@ public function ROTT_Party getParty(int slot) {
  *===========================================================================*/
 public function int activePartySize() {
   return parties[activePartyIndex].getPartySize();
+}
+
+/*=============================================================================
+ * getHeldItemEnchantment()
+ *
+ * Returns the sum of all held item boosts for a particular enchantment.
+ *===========================================================================*/
+public function int getHeldItemEnchantment(int enchantmentIndex) {
+  local int i, j;
+  local int bonus;
+  
+  // Scan every team
+  for (i = 0; i < getNumberOfParties(); i++) {
+    // Scan each hero in the team
+    for (j = 0; j < getParty(i).getPartySize(); j++) {
+      // Sum the bonuses
+      bonus += getParty(i).getHero(j).getHeldItemEnchantment(enchantmentIndex);
+    }
+  }
+  
+  return bonus;
 }
 
 

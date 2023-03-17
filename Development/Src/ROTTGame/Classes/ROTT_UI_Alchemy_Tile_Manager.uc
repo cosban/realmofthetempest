@@ -64,6 +64,7 @@ public function initializeComponent(optional string newTag = "") {
   patternAlgorithms.addItem(setPattern3);
   patternAlgorithms.addItem(setPattern4);
   patternAlgorithms.addItem(setPattern5);
+  patternAlgorithms.addItem(setPattern6);
   
   gameInfo = ROTT_Game_Info(class'WorldInfo'.static.getWorldInfo().game);
 }
@@ -275,7 +276,7 @@ public function setPattern1() {
   submitTargets();
   submitTargets();
   
-  // Pattern settings
+  // Pattern settings: time between groups, time heating up, time staying hot
   setPatternParameters(0.6, 2.0, 1.0); /// timeBetweenGroups, timeHeatingUp, timeStayingHot
 }
   
@@ -328,10 +329,10 @@ public function setPattern2() {
   addTarget(25);
   submitTargets();
   
-  ///
+  // Delay
   submitTargets();
   
-  // Pattern settings
+  // Pattern settings: time between groups, time heating up, time staying hot
   setPatternParameters(1.0, 1.5, 0.75);
 }
   
@@ -406,8 +407,8 @@ public function setPattern3() {
   // Delay
   submitTargets();
   
-  // Pattern settings
-  setPatternParameters(1.2, 1.7, 0.3);
+  // Pattern settings: time between groups, time heating up, time staying hot
+  setPatternParameters(1.25, 2.0, 0.3);
 }
 
 /*============================================================================= 
@@ -475,7 +476,7 @@ public function setPattern4() {
   addTarget(20);
   submitTargets();
   
-  // Pattern settings
+  // Pattern settings: time between groups, time heating up, time staying hot
   setPatternParameters(2.5, 1.8, 0.4);
 }
 
@@ -548,9 +549,103 @@ public function setPattern5() {
   // Delay
   submitTargets();
   
-  // Pattern settings
+  // Pattern settings: time between groups, time heating up, time staying hot
   setPatternParameters(1.0, 1.5, 0.75);
 }
+
+/*============================================================================= 
+ * setPattern6()
+ *
+ * Left wall, right wall pattern
+ *===========================================================================*/
+public function setPattern6() {
+  // Randomly select which side first
+  if (rand(100) % 2 == 0) {
+    // Top left
+    bomb3x3(7);
+    submitTargets();
+    
+    // Top right
+    bomb3x3(9);
+    submitTargets();
+    
+    // Bottom right
+    bomb3x3(19);
+    submitTargets();
+    
+    // Bottom left
+    bomb3x3(17);
+    submitTargets();
+    submitTargets();
+  } else {
+    // Bottom right
+    bomb3x3(19);
+    submitTargets();
+    
+    // Bottom left
+    bomb3x3(17);
+    submitTargets();
+    
+    // Top left
+    bomb3x3(7);
+    submitTargets();
+    
+    // Top right
+    bomb3x3(9);
+    submitTargets();
+    submitTargets();
+  }
+  
+  // Pattern settings: time between groups, time heating up, time staying hot
+  setPatternParameters(3.12, 2.75, 0.35);
+}
+
+/*============================================================================= 
+ * bomb3x3()
+ *
+ * Creates a 3x3 pattern, centered on the given index
+ *===========================================================================*/
+public function bomb3x3(int centerIndex) {
+  local int i, j;
+  
+  // 3x3 bomb area
+  for (i = -1; i < 2; i++) {
+    for (j = -1; j < 2; j++) {
+      // Check valid indices
+      if (centerIndex + i + j * 5 < 1 || centerIndex + i + j * 5 > 25) {
+        yellowLog("Warning (!) bomb3x3 out of bounds");
+        return;
+      }
+      // Add indices
+      addTarget(centerIndex + i + j * 5);
+    }
+  }
+}
+
+/// /*============================================================================= 
+///  * rightWall()
+///  *
+///  * Creates a 3 column pattern hugging the right side of the board
+///  *===========================================================================*/
+/// public function rightWall() {
+///   // Right wall
+///   addTarget(5);
+///   addTarget(10);
+///   addTarget(15);
+///   addTarget(20);
+///   addTarget(25);
+///   addTarget(4);
+///   addTarget(9);
+///   addTarget(14);
+///   addTarget(19);
+///   addTarget(24);
+///   addTarget(3);
+///   addTarget(8);
+///   addTarget(13);
+///   addTarget(18);
+///   addTarget(23);
+///   submitTargets();
+/// }
 
 /*============================================================================= 
  * getSpeedAmp()

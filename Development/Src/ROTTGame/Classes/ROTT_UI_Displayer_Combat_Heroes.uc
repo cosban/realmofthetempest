@@ -47,7 +47,7 @@ public function toggleCombatDetail() {
   local int i;
   
   // Toggle option settings
-  gameInfo.optionsCookie.toggleCombatDetail();
+  ///gameInfo.optionsCookie.toggleCombatDetail();
   
   // Toggle UI display
   for (i = 0; i < gameInfo.getActiveParty().getPartySize(); i++) {

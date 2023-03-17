@@ -67,6 +67,8 @@ protected function bool validAttachment() {
  * Returns true when there actually exists a unit to display, false otherwise.
  *===========================================================================*/
 public function bool updateDisplay() {
+  local string hpRecovered, mpRecovered, mpRegenRecovered;
+  local string addedAccuracy, addedDodge, addedDamage;
   local string totalTime;
   local int i;
   
@@ -75,7 +77,11 @@ public function bool updateDisplay() {
   
   // Display action analysis numbers
   for (i = 0; i < 9 - 1; i++) {
-    actionAnalysis[i].setText(int(hero.battleStatistics[i]));
+    actionAnalysis[i].setText(
+      class'UI_Label'.static.abbreviate(
+        int(hero.battleStatistics[i]), 100000
+      )
+    );
   }
   
   // Display total time
@@ -84,6 +90,26 @@ public function bool updateDisplay() {
   
   // Display total glyphs
   glyphTotal.setText(hero.getTotalGlyphCount());
+  
+  // Store and abbreviate analysis numbers
+  hpRecovered = class'UI_Label'.static.abbreviate(
+    int(hero.battleStatistics[RECOVERED_HEALTH])
+  );
+  mpRecovered = class'UI_Label'.static.abbreviate(
+    int(hero.battleStatistics[RECOVERED_MANA])
+  );
+  mpRegenRecovered = class'UI_Label'.static.abbreviate(
+    int(hero.battleStatistics[RECOVERED_MANA_REGEN])
+  );
+  addedAccuracy = class'UI_Label'.static.abbreviate(
+    int(hero.battleStatistics[ADDED_GLYPH_ACCURACY])
+  );
+  addedDodge = class'UI_Label'.static.abbreviate(
+    int(hero.battleStatistics[ADDED_GLYPH_DODGE])
+  );
+  addedDamage = class'UI_Label'.static.abbreviate(
+    int(hero.battleStatistics[ADDED_GLYPH_DAMAGE])
+  );
   
   // Display glyph analysis numbers
   for (i = 0; i < 8; i++) {
@@ -99,18 +125,18 @@ public function bool updateDisplay() {
       switch(i) {
         case GLYPH_TREE_HEALTH:
           glyphDetails[i].setText(
-            "+ " $ int(hero.battleStatistics[RECOVERED_HEALTH]) $ " recovered health"
+            "+ " $ hpRecovered $ " recovered health"
           );
           break;
         case GLYPH_TREE_MANA:
           glyphDetails[i].setText(
-            "+ " $ int(hero.battleStatistics[RECOVERED_MANA]) $ " recovered mana"
+            "+ " $ mpRecovered $ " recovered mana"
           );
           break;
         case GLYPH_TREE_MP_REGEN:
           glyphDetails[i].setText(
             decimal(hero.statBoosts[ADD_MANA_REGEN], 1) $ " mana / sec" $ "\n" $
-            "+ " $ int(hero.battleStatistics[RECOVERED_MANA_REGEN]) $ " recovered mana"
+            "+ " $ mpRegenRecovered $ " recovered mana"
           );
           break;
         case GLYPH_TREE_SPEED:
@@ -120,17 +146,17 @@ public function bool updateDisplay() {
           break;
         case GLYPH_TREE_ACCURACY:
           glyphDetails[i].setText(
-            "+ " $ int(hero.battleStatistics[ADDED_GLYPH_ACCURACY]) $ " accuracy rating"
+            "+ " $ addedAccuracy $ " accuracy rating"
           );
           break;
         case GLYPH_TREE_DODGE:
           glyphDetails[i].setText(
-            "+ " $ int(hero.battleStatistics[ADDED_GLYPH_DODGE]) $ " dodge rating"
+            "+ " $ addedDodge $ " dodge rating"
           );
           break;
         case GLYPH_TREE_DAMAGE:
           glyphDetails[i].setText(
-            int(hero.battleStatistics[ADDED_GLYPH_DAMAGE]) $ " additional damage"
+            addedDamage $ " additional damage"
           );
           break;
         case GLYPH_TREE_ARMOR:
@@ -211,7 +237,7 @@ defaultProperties
     posYEnd=NATIVE_HEIGHT
     AlignX=LEFT
     AlignY=TOP
-    fontStyle=DEFAULT_MEDIUM_ORANGE
+    fontStyle=DEFAULT_MEDIUM_PEACH
     labelText="Outgoing Actions\n\n\n\n\nIncoming Actions\n\n\n\n\nElapsed Time"
   end object
   componentList.add(Analysis_Descriptions_Left_Orange)
@@ -239,7 +265,7 @@ defaultProperties
     posYEnd=NATIVE_HEIGHT
     AlignX=LEFT
     AlignY=TOP
-    fontStyle=DEFAULT_MEDIUM_ORANGE
+    fontStyle=DEFAULT_MEDIUM_PEACH
     labelText="Glyphs Collected"
   end object
   componentList.add(Analysis_Descriptions_Right_Orange)

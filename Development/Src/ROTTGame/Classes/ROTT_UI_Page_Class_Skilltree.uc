@@ -101,11 +101,11 @@ public function onNavigateLeft() {
   switch (controlState) {
     case VIEW_MODE:
       // Change view to stats page
-      someScene.switchPage(STATS_INSPECTION);
+      gameMenuScene.switchPage(STATS_INSPECTION);
       break;
     case RESET_VIEW_MODE:
       // Change view to stats page
-      someScene.switchPage(MASTERY_SKILLTREE);
+      gameMenuScene.switchPage(MASTERY_SKILLTREE);
       break;
   }
 }
@@ -117,7 +117,7 @@ public function onNavigateRight() {
     case VIEW_MODE:
     case RESET_VIEW_MODE:
       // Change view to glyph tree
-      someScene.switchPage(GLYPH_SKILLTREE);
+      gameMenuScene.switchPage(GLYPH_SKILLTREE);
       break;
   }
 }

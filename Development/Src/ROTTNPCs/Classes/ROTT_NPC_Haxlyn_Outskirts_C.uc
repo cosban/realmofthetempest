@@ -26,8 +26,8 @@ public function initDialogue() {
   
   // Intro
   `NEW_NODE(GREETING, NUETRAL)
-    "Eyes to the texts.",
-    ""
+    "Eyes to the scriptures,",
+    "ears to the whispers, dreamer."
   `ENDNODE
   
     `ADD_OPTIONS(GREETING, NUETRAL)
@@ -68,7 +68,6 @@ defaultProperties
 {
   // NPC identity
   npcName=GENERIC
-  serviceType=SERVICE_ALCHEMY
   
   // Background
   begin object class=UI_Texture_Info Name=NPC_Background_Texture

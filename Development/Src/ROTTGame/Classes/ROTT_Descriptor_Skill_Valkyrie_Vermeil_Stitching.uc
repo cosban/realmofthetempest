@@ -58,6 +58,8 @@ protected function float attributeInfo
   switch (type) {
     case ADD_HEALTH_WHILE_DEFENDING:
       attribute = 1 * level;
+      if (level > 20) attribute += (level - 20);
+      if (level > 40) attribute += (level - 40) * 2;
       break;
   }
   

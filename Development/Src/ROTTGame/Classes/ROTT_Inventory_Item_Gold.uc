@@ -14,7 +14,8 @@ class ROTT_Inventory_Item_Gold extends ROTT_Inventory_Item;
  *
  * Implemented in each item subclsas
  *===========================================================================*/
-protected function float getDropChance(int dropLevel) {
+protected function float getDropChance(int dropLevel, bool bBestiaryDrop) {
+  if (bBestiaryDrop) return 0;
   return 100.f;
 }
 

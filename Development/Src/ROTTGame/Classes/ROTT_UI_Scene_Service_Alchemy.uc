@@ -60,10 +60,13 @@ event unloadScene() {
  *===========================================================================*/
 public function submitAlchemyResult() {
   // Increase enchantment level
-  gameInfo.playerProfile.enchantmentLevels[selectedEnchantment] += enchantmentLevel * minigameMultiplier;
+  gameInfo.playerProfile.addEnchantBoost(
+    selectedEnchantment, 
+    enchantmentLevel * minigameMultiplier
+  );
   
   // Sound effect
-  gameInfo.sfxbox.playSfx(SFX_WORLD_SHRINE);
+  gameInfo.sfxbox.playSfx(SFX_MENU_BLESS_STAT);
 }
 
 /*=============================================================================

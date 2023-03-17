@@ -69,7 +69,12 @@ protected function float attributeInfo
  *
  * This fetches the skill level from the unit provided
  *===========================================================================*/
-public function int getSkillLevel(ROTT_Combat_Hero caster) {
+public function int getSkillLevel
+(
+  ROTT_Combat_Hero hero, 
+  optional bool bIgnoreBoost = false
+) 
+{
   // Override: always level 1
   return 1;
 }
@@ -80,6 +85,7 @@ public function int getSkillLevel(ROTT_Combat_Hero caster) {
 defaultProperties 
 {
   targetingLabel=SELF_TARGET_BUFF
+  parentTree=NO_TREE
   
   // Status info
   statusTag="Defending"

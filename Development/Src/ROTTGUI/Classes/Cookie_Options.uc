@@ -27,6 +27,17 @@ var int scaleModeType;
 // Combat view mode
 var bool showCombatDetail;
 
+// 3D World turning speed
+var float turnSpeed;
+
+// Invert view Josytick axis
+var bool bInvertY;
+
+// Always defend hero combat options
+var bool bAlwaysDefendHero1;
+var bool bAlwaysDefendHero2;
+var bool bAlwaysDefendHero3;
+
 /*=============================================================================
  * toggleCombatDetail()
  *
@@ -34,6 +45,8 @@ var bool showCombatDetail;
  *===========================================================================*/
 public function toggleCombatDetail() {
   showCombatDetail = !showCombatDetail;
+  scripttrace();
+  `log("showCombatDetail"@showCombatDetail);
 }
 
 /*=============================================================================
@@ -44,5 +57,6 @@ defaultProperties
   // Default display settings
   showCombatDetail=true 
   
+  scaleModeType=1  ///NO_STRETCH_SCALE
   
 }

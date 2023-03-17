@@ -68,8 +68,6 @@ event onFocusMenu() {
 /*=============================================================================
  * D-Pad controls
  *===========================================================================*/
-protected function navigateDown();
-protected function navigateUp();
 public function onNavigateLeft();
 public function onNavigateRight();
 

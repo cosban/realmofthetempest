@@ -18,6 +18,9 @@ var private UI_Sprite itemSprite;
 // Quantity label
 var private UI_Label quantityLabel;
 
+// Stores true if background sprite has been set
+var private bool bBackgroundOn;
+
 /*============================================================================= 
  * initializeComponent
  *
@@ -30,6 +33,8 @@ public function initializeComponent(optional string newTag = "") {
   itemSprite = findSprite("Item_Sprite");
   quantityLabel = findLabel("Item_Quantity_Label");
   
+  // Set background if called for
+  if (bBackgroundOn) setBackground(true);
 }
 
 /*=============================================================================
@@ -39,8 +44,6 @@ public function initializeComponent(optional string newTag = "") {
  *===========================================================================*/
 public function elapseTimer(float deltaTime, float gameSpeedOverride) {
   super.elapseTimer(deltaTime, gameSpeedOverride);
-  
-  
 }
 
 /*=============================================================================
@@ -54,17 +57,44 @@ public function updateDisplay(ROTT_Inventory_Item item) {
     setEnabled(true);
     
     // Show item graphic
+    itemSprite.setEnabled(true);
     itemSprite.copySprite(item.itemSprite, 0, true);
     
     // Show quantity only for stacked items
     if (bShowIfSingular || item.quantity > 1 || item.quantity == 0) {
-      quantityLabel.setText(item.quantity);
+      quantityLabel.setText(class'UI_Label'.static.abbreviate(item.quantity));
     } else {
       quantityLabel.setText("");
     }
   } else {
-    setEnabled(false);
+    if (bBackgroundOn) {
+      // Hide all except background
+      itemSprite.setEnabled(false);
+      quantityLabel.setText("");
+    } else {
+      // Hide all
+      setEnabled(false);
+    }
   }
+}
+
+/*=============================================================================
+ * setFont()
+ *
+ * Changes text color
+ *===========================================================================*/
+public function setFont(FontStyles fontColor) {
+  quantityLabel.setFont(fontColor);
+}
+
+/*=============================================================================
+ * setBackground()
+ *
+ * Sets the visibility for the backgruond slot
+ *===========================================================================*/
+public function setBackground(bool bShow) {
+  bBackgroundOn = bShow;
+  findSprite("Inventory_Slot_Sprite").setEnabled(bShow);
 }
 
 /*=============================================================================
@@ -76,6 +106,21 @@ defaultProperties
   
   // Hide by default
   bShowIfSingular=false
+  
+  // Textures
+  begin object class=UI_Texture_Info Name=Inventory_Slot_Texture
+    componentTextures.add(Texture2D'GUI.Cost_Inventory_Slot')
+  end object
+  
+  // Inventory slot background
+  begin object class=UI_Sprite Name=Inventory_Slot_Sprite
+    tag="Inventory_Slot_Sprite"
+    bEnabled=false
+    posX=-11
+    posY=-11
+    images(0)=Inventory_Slot_Texture
+  end object
+  componentList.add(Inventory_Slot_Sprite)
   
   // Item graphic
   begin object class=UI_Sprite Name=Item_Sprite

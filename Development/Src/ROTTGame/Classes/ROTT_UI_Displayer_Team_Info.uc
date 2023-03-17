@@ -53,6 +53,9 @@ public function bool updateDisplay() {
   findLabel("Team_Viewer_Hunting_Prowess_Value").setText(party.getHuntingProwess());
   findLabel("Team_Viewer_Botanical_Prowess_Value").setText(party.getBotanicalProwess());
   
+  // Prowess values
+  findLabel("Team_Viewer_Header_2").setText(party.getTeamHeader());
+  
   // Successfully drew hero information
   return true;
 }

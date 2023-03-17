@@ -26,35 +26,10 @@ public function initDialogue() {
   
   // Intro
   `NEW_NODE(GREETING, NUETRAL)
-    "I have been starving myself for six days,",
-    "just as the locksmith did in Lesser Oblivion."
-  `ENDNODE
-  
-  `NEW_NODE(GREETING, NUETRAL)
-    "The soul suffers separation sickness, while",
-    "my shell laments for the loss of clarity."
-  `ENDNODE
-  
-  `NEW_NODE(GREETING, NUETRAL)
-    "But now, when my mind's eye wanders,",
-    "images appear."
-  `ENDNODE
-  
-  `NEW_NODE(GREETING, NUETRAL)
-    ". . . Seemingly separate from my own cognition.",
+    ". . .",
     ""
   `ENDNODE
-  
-  `NEW_NODE(GREETING, NUETRAL)
-    "And when these images appear. . .",
-    ""
-  `ENDNODE
-  
-  `NEW_NODE(GREETING, NUETRAL)
-    "I pray.",
-    ""
-  `ENDNODE
-  
+	
   // ----------------------------------------------------------------------- //
   
   setInquiry(

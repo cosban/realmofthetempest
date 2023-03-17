@@ -15,6 +15,9 @@ var private UI_Sprite worldMapSprite;
 var private UI_Sprite playerMarker;
 var private UI_Label gameVersionText;
 
+// Store reference to input
+var private UI_Player_Input rottInput;
+
 // Parent scene
 var private ROTT_UI_Scene_World_Map someScene;
 
@@ -189,6 +192,8 @@ public function onSceneActivation() {
   worldMap.ShiftY(
     (NATIVE_HEIGHT / 2) - (playerMarker.getY() + 32)
   );
+  
+  rottInput = UI_Player_Input(getPlayerInput());
 }
 
 /*=============================================================================
@@ -207,8 +212,16 @@ public function elapseTimers(float deltaTime) {
   super.elapseTimers(deltaTime);
   
   // Map movement
-  worldMap.shiftX(mapSpeed * gameInfo.tempestPC.PlayerInput.RawJoyRight * -1);
-  worldMap.shiftY(mapSpeed * gameInfo.tempestPC.PlayerInput.RawJoyUp);
+  if (UI_Player_Input(getPlayerInput()).bGamepadActive) {
+    worldMap.shiftX(mapSpeed * rottInput.RawJoyRight * -1);
+    worldMap.shiftY(mapSpeed * rottInput.RawJoyUp);
+  } else {
+    // Map movement
+    worldMap.shiftX(mapSpeed * rottInput.isKeyDown('XBoxTypeS_DPad_Left'));
+    worldMap.shiftX(mapSpeed * rottInput.isKeyDown('XBoxTypeS_DPad_Right') * -1);
+    worldMap.shiftY(mapSpeed * rottInput.isKeyDown('XBoxTypeS_DPad_Up'));
+    worldMap.shiftY(mapSpeed * rottInput.isKeyDown('XBoxTypeS_DPad_Down') * -1);
+  }
   
   // Left-right bounds
   if (worldMap.getX() < -1 * NATIVE_WIDTH) {
@@ -247,20 +260,38 @@ public function elapseTimers(float deltaTime) {
  *
  * Returns: true to consume the key event, false to pass it on.
  *===========================================================================*/
-function bool onInputKey( 
+function bool onInputKey
+( 
   int ControllerId, 
-  name Key, 
+  name inputName, 
   EInputEvent Event, 
   float AmountDepressed = 1.f, 
-  bool bGamepad = false) 
+  bool bGamepad = false
+) 
 {
-  switch (Key) {
+  // Remap
+  ///switch (inputName) {
+  ///  // Mouse and keyboard
+  ///  case 'W': case 'Up':      inputName = 'XBoxTypeS_DPad_Up'; break;   
+  ///  case 'A': case 'Left':    inputName = 'XBoxTypeS_DPad_Left'; break;   
+  ///  case 'S': case 'Down':    inputName = 'XBoxTypeS_DPad_Down'; break;   
+  ///  case 'D': case 'Right':   inputName = 'XBoxTypeS_DPad_Right'; break;
+  ///}
+  
+  // Process input
+  switch (inputName) {
+    case 'M': 
     case 'XboxTypeS_Back': 
       // World map
-      if (Event == IE_Pressed) gameinfo.sceneManager.switchScene(SCENE_OVER_WORLD);
+      if (Event == IE_Pressed) {
+        gameinfo.sceneManager.switchScene(SCENE_OVER_WORLD);
+        
+        // Sfx
+        sfxBox.playSFX(SFX_CLOSE_WORLD_MAP);
+      }
       break;
     default:
-      return super.onInputKey(ControllerId, Key, Event, AmountDepressed, bGamepad);
+      return super.onInputKey(ControllerId, inputName, Event, AmountDepressed, bGamepad);
   }
   
   return false;
@@ -271,8 +302,6 @@ function bool onInputKey(
  *===========================================================================*/
 public function onNavigateLeft();
 public function onNavigateRight();
-protected function navigateDown();
-protected function navigateUp();
 
 /*=============================================================================
  * Button controls
@@ -281,7 +310,9 @@ protected function navigationRoutineA();
 
 protected function navigationRoutineB() {
   gameInfo.sceneManager.switchScene(SCENE_OVER_WORLD);
-  gameInfo.sfxBox.playSfx(SFX_MENU_BACK);
+  
+  // Sfx
+  sfxBox.playSFX(SFX_CLOSE_WORLD_MAP);
 }
 
 /*=============================================================================

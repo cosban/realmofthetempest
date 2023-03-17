@@ -17,26 +17,6 @@ var privatewrite ROTT_UI_Page_Messaging messagingPage;
 var privatewrite ROTT_UI_Page_Shrine_Notification shrineNotificationPage;
 var privatewrite ROTT_UI_Page_Shrine_Options shrineOptionsPage;
 
-// Respawn transition
-var privatewrite ROTT_UI_Page_Transition respawnTransitionPageIn;
-var privatewrite ROTT_UI_Page_Transition respawnTransitionPageOut;
-
-// Combat transition
-var privatewrite ROTT_UI_Page_Transition transitionToCombat;
-
-// Npc transition
-var privatewrite ROTT_UI_Page_Transition transitionToNPC;
-var privatewrite ROTT_UI_Page_Transition transitionFromNPC;
-
-// Door portal
-var privatewrite ROTT_UI_Page_Transition transitionDoorPortal;
-
-// Combat Npc prelude transition
-var privatewrite ROTT_UI_Page_Transition transitionToPreludeNPC;
-
-// Portal transition
-var privatewrite ROTT_UI_Page_Transition portalPage;
-
 // Respawn transition delay
 var private float respawnTransDelay; 
 
@@ -52,16 +32,6 @@ event initScene() {
   messagingPage = ROTT_UI_Page_Messaging(findComp("Page_Messaging"));
   shrineNotificationPage = ROTT_UI_Page_Shrine_Notification(findComp("Page_Shrine_Notification"));
   shrineOptionsPage = ROTT_UI_Page_Shrine_Options(findComp("Page_Shrine_Options"));
-  
-  // Transition references
-  respawnTransitionPageIn = ROTT_UI_Page_Transition(findComp("Page_Respawn_Transition_In"));
-  respawnTransitionPageOut = ROTT_UI_Page_Transition(findComp("Page_Respawn_Transition_Out"));
-  transitionToCombat = ROTT_UI_Page_Transition(findComp("Page_Combat_Transition"));
-  transitionDoorPortal = ROTT_UI_Page_Transition(findComp("Page_Door_Portal_Enter"));
-  transitionToNPC = ROTT_UI_Page_Transition(findComp("Page_NPC_Transition_Away"));
-  transitionFromNPC = ROTT_UI_Page_Transition(findComp("Page_NPC_Transition_Back"));
-  transitionToPreludeNPC = ROTT_UI_Page_Transition(findComp("Page_Prelude_NPC_Transition_Away"));
-  portalPage = ROTT_UI_Page_Transition(findComp("Page_Portal_Transition"));
   
   super.initScene();
   
@@ -109,7 +79,20 @@ public function elapseTimer(float deltaTime, float gameSpeedOverride) {
  *===========================================================================*/
 public function npcPreludeTransition() {
   // World to NPC transition
-  pushPage(transitionToPreludeNPC);
+  gameInfo.sceneManager.transitioner.setTransition(
+    TRANSITION_OUT,                              // Transition direction
+    OUT_FROM_OVER_WORLD_TRANSITION,              // Sorting config
+    ,                                            // Pattern reversal
+    ,                                            // Destination scene
+    ,                                            // Destination page
+    ,                                            // Destination world
+    ,                                            // Color
+    20,                                          // Tile speed
+    0.f,                                         // Delay
+    ,
+    "Page_Prelude_NPC_Transition_Away"
+  );
+  
 }
 
 /*=============================================================================
@@ -118,8 +101,20 @@ public function npcPreludeTransition() {
  * Called when exiting an NPC dialog
  *===========================================================================*/
 public function npcExitTransition() {
-  // Exit transition
-  pushPage(transitionFromNPC, false);
+  // Execute NPC Exit transition
+  gameInfo.sceneManager.transitioner.setTransition(
+    TRANSITION_IN,                               // Transition direction
+    NPC_TRANSITION_IN,                           // Sorting config
+    true,                                        // Pattern reversal
+    ,                                            // Destination scene
+    ,                                            // Destination page
+    ,                                            // Destination world
+    ,                                            // Color
+    8,                                           // Tile speed
+    0.f,                                         // Delay
+    false,
+    "Page_NPC_Transition_Back"
+  );
 }
 
 /*=============================================================================
@@ -130,6 +125,7 @@ public function npcExitTransition() {
 public function enableMessageMode() {
   // Show messaging UI
   pushPage(messagingPage);
+  gameInfo.pauseGame();
 }
 
 /*=============================================================================
@@ -160,6 +156,7 @@ public function disableMonumentInterface() {
 public function submitMessage(string message) {
   // Close page
   popPage();
+  gameInfo.unpauseGame();
   
   // Check for public commands
   if (parseCommand(message)) {
@@ -178,19 +175,6 @@ public function submitMessage(string message) {
     gameInfo.showGameplayNotification("Cheat enabled");
     return;
   }
-  
-  // Custom commands
-  switch (message) {
-    case "taylor":
-      gameInfo.showGameplayNotification("7ay is bae");
-      return;
-    case "ghostgoats":
-      gameInfo.showGameplayNotification("Ghost Goats rules");
-      return;
-    case "gdq":
-      gameInfo.showGameplayNotification("Heck yeah");
-      return;
-  }
 }
 
 /*=============================================================================
@@ -208,12 +192,24 @@ public function bool parseCommand(string message) {
       gameInfo.jukeBox.setVolume(0.0);
       return true;
     case "profile":
-      // Shows graphic statistics
+      // Profiler for tracking performance, 10 seconds
       gameInfo.consoleCommand("PROFILEGAME 10");
+      
+      // Saves file to C:\ROTT\UDKGame\Profiling
+      // Opened with C:\ROTT\Binaries\GameplayProfiler.exe
+      
       return true;
     case "stat":
       // Shows graphic statistics
       gameInfo.consoleCommand("STAT D3D9RHI");
+      return true;
+    case "statslow":
+      // Stats for spikes
+      gameInfo.consoleCommand("STAT SLOW");
+      return true;
+    case "verifygc":
+      // Disable garbage collection
+      gameInfo.consoleCommand("-NoVerifyGC");
       return true;
   }
   
@@ -311,6 +307,13 @@ public function bool parseDevCheat(string message) {
       gameInfo.playerProfile.addCurrency(class'ROTT_Inventory_Item_Bottle_Yinras_ore', 10);
       gameInfo.playerProfile.addCurrency(class'ROTT_Inventory_Item_Bottle_Nettle_Roots', 1);
       gameInfo.playerProfile.addCurrency(class'ROTT_Inventory_Item_Charm_Zogis_Anchor', 1);
+      gameInfo.playerProfile.addCurrency(class'ROTT_Inventory_Item_Lustrous_Baton_Chroma_Conductor', 1);
+      gameInfo.playerProfile.addCurrency(class'ROTT_Inventory_Item_Shield_Kite_Crimson_Heater', 1);
+      gameInfo.playerProfile.addCurrency(class'ROTT_Inventory_Item_Buckler_Smoke_Shell', 1);
+      gameInfo.playerProfile.addCurrency(class'ROTT_Inventory_Item_Buckler_Oak_Wilters_Crest', 1);
+      gameInfo.playerProfile.addCurrency(class'ROTT_Inventory_Item_Paintbrush_Zephyrs_Whisper', 1);
+      gameInfo.playerProfile.addCurrency(class'ROTT_Inventory_Item_Flail_Ultimatum', 1);
+      gameInfo.playerProfile.addCurrency(class'ROTT_Inventory_Item_Ceremonial_Dagger_Whirlwind_Spike', 1);
       return true;
     case "she her for help":
       // Opens all portals
@@ -319,13 +322,16 @@ public function bool parseDevCheat(string message) {
     case "feather melts tempo":
       // +1 to all enchantments
       for (i = 0; i < class'ROTT_Descriptor_Enchantment_List'.static.countEnchantmentEnum(); i++) {
-        gameInfo.playerProfile.enchantmentLevels[i] += 5;
+        gameInfo.playerProfile.addEnchantBoost(i, 5);
       }
       return true;
     case "new heart":
       // reset all enchantments
       for (i = 0; i < class'ROTT_Descriptor_Enchantment_List'.static.countEnchantmentEnum(); i++) {
-        gameInfo.playerProfile.enchantmentLevels[i] = 0;
+        gameInfo.playerProfile.addEnchantBoost(
+          i, 
+          -1 * gameInfo.playerProfile.enchantmentLevels[i]
+        );
       }
       return true;
   }
@@ -340,8 +346,21 @@ public function bool parseDevCheat(string message) {
  * This pushes an effect to transition into combat
  *===========================================================================*/
 public function combatTransition() {
-  // Transition
-  pushPage(transitionToCombat, true); /// why would we want to push unfocused?
+  // Execute transition
+  gameInfo.sceneManager.transitioner.setTransition(
+    TRANSITION_OUT,                              // Transition direction
+    OUT_FROM_OVER_WORLD_TRANSITION,              // Sorting config
+    ,                                            // Pattern reversal
+    SCENE_COMBAT_ENCOUNTER,                      // Destination scene
+    ,                                            // Destination page
+    ,                                            // Destination world
+    ,                                            // Color
+    10,                                          // Tile speed
+    0.4f,                                        // Delay
+    true,                                        // Consume input
+    "Page_Combat_Transition"
+  );
+  
 }
 
 /*=============================================================================
@@ -350,14 +369,25 @@ public function combatTransition() {
  * This pushes an effect to transition through a portal
  *===========================================================================*/
 public function portalTransition(string mapName) {
-  local int i;
+  // Check if already transitioning
+  if (gameInfo.sceneManager.transitioner.bTransitionEnabled) return;
   
-  // Prevent doubling transition pages
-  for (i = 0; i < pageStack.length; i++) {
-    if (pageStack[i] == portalPage) return;
-  }
-  portalPage.destinationWorld = mapName;
-  pushPage(portalPage);
+  // Execute transition
+  gameInfo.sceneManager.transitioner.setTransition(
+    TRANSITION_OUT,                              // Transition direction
+    PORTAL_TRANSITION,                           // Sorting config
+    ,                                            // Pattern reversal
+    ,                                            // Destination scene
+    ,                                            // Destination page
+    mapName,                                     // Destination world
+    MakeColor(0, 187, 255, 130),                 // Color
+    20,                                          // Tile speed
+    1.0f,                                        // Delay
+    ,                                            // Input consumption
+    ,                                            // Tag
+    true,                                        // Hold screen
+    1.0f                                         // Fade time
+  );
 }
 
 /*=============================================================================
@@ -366,7 +396,21 @@ public function portalTransition(string mapName) {
  * Called when the player falls off the map.
  *===========================================================================*/
 public function onPlayerFall() {
-  pushPage(respawnTransitionPageOut); ///, false);
+  // Execute transition
+  gameInfo.sceneManager.transitioner.setTransition(
+    TRANSITION_OUT,                              // Transition direction
+    RESPAWN_END_TRANSITION,                      // Sorting config
+    true,                                        // Pattern reversal
+    ,                                            // Destination scene
+    ,                                            // Destination page
+    ,                                            // Destination world
+    ,                                            // Color
+    20,                                          // Tile speed
+    0.f,                                         // Delay
+    ,
+    "Page_Respawn_Transition_Out"
+  );
+  
   sfxBox.playSFX(SFX_WORLD_FALLING);
 }
 
@@ -448,17 +492,24 @@ public function transitionCompletion(string tag) {
  * Called to pull up the transition for entering a door.
  *===========================================================================*/
 public function startDoorTransition() {
-  local int i;
+  // Check if already transitioning
+  if (gameInfo.sceneManager.transitioner.bTransitionEnabled) return;
   
-  for (i = 0; i < pageStack.length; i++) {
-    // Page is already up
-    if (pageStack[i] == transitionDoorPortal) {
-      return;
-    }
-  }
+  // Execute transition
+  gameInfo.sceneManager.transitioner.setTransition(
+    TRANSITION_IN,                               // Transition direction
+    DOOR_PORTAL_TRANSITION_OUT,                  // Sorting config
+    true,                                        // Pattern reversal
+    ,                                            // Destination scene
+    ,                                            // Destination page
+    ,                                            // Destination world
+    ,                                            // Color
+    20,                                          // Tile speed
+    0.f,                                         // Delay
+    false,
+    "Page_Door_Portal_Enter"
+  );
   
-  pushPage(transitionDoorPortal);
-  // on complete: gameInfo.tempestPawn.respawnPlayer();
 }
 
 /*=============================================================================
@@ -467,16 +518,21 @@ public function startDoorTransition() {
  * Called from NPC volumes to trigger a transfer into npc scene
  *===========================================================================*/
 public function startTransitionToNPC() {
-  local int i;
+  // Execute transition
+  gameInfo.sceneManager.transitioner.setTransition(
+    TRANSITION_OUT,                              // Transition direction
+    NPC_TRANSITION_OUT,                          // Sorting config
+    ,                                            // Pattern reversal
+    ,                                            // Destination scene
+    ,                                            // Destination page
+    ,                                            // Destination world
+    ,                                            // Color
+    12,                                          // Tile speed
+    0.f,                                         // Delay
+    ,
+    "Page_Prelude_NPC_Transition_Away"
+  );
   
-  for (i = 0; i < pageStack.length; i++) {
-    // Page is already up
-    if (pageStack[i] == transitionToNPC) {
-      return;
-    }
-  }
-  
-  pushPage(transitionToNPC);
 }
 
 /*=============================================================================
@@ -488,8 +544,20 @@ private function respawnTransitionIn() {
   // Remove black screen
   UI_Sprite(findComp("World_Black_Screen")).setEnabled(false);
   
-  // Add transition effect
-  pushPage(respawnTransitionPageIn, false);
+  // Execute transition
+  gameInfo.sceneManager.transitioner.setTransition(
+    TRANSITION_IN,                               // Transition direction
+    RESPAWN_END_TRANSITION,                      // Sorting config
+    ,                                            // Pattern reversal
+    ,                                            // Destination scene
+    ,                                            // Destination page
+    ,                                            // Destination world
+    ,                                            // Color
+    20,                                          // Tile speed
+    0.f,                                         // Delay
+    false,                                       // Input consumed if true
+    "Page_Respawn_Transition_In"
+  );
   
   // Unfreeze player controls
   gameInfo.respawnTransitionIn();
@@ -518,7 +586,7 @@ defaultProperties
   // Never show cursor if true
   bHideCursorOverride=true
   
-  // Over World Page
+  // Over World Page 
   begin object class=ROTT_UI_Page_Over_World Name=Page_Over_World
     tag="Page_Over_World"
     bEnabled=false
@@ -552,124 +620,6 @@ defaultProperties
     bEnabled=false
   end object
   pageComponents.add(Page_Shrine_Options)
-
-  // Combat Transition Page
-  begin object class=ROTT_UI_Page_Transition Name=Page_Combat_Transition
-    tag="Page_Combat_Transition"
-    bEnabled=false
-    bConsumeInput=true
-    
-    effectConfig=OUT_FROM_OVER_WORLD_TRANSITION
-    
-    // Destination
-    destinationScene=SCENE_COMBAT_ENCOUNTER
-  end object
-  pageComponents.add(Page_Combat_Transition)
-
-  // NPC Transition page (back to world)
-  begin object class=ROTT_UI_Page_Transition Name=Page_NPC_Transition_Back
-    tag="Page_NPC_Transition_Back"
-    bEnabled=false
-    
-    // Transition speed
-    tilesPerTick=8
-    
-    // Sorter effect config
-    effectConfig=NPC_TRANSITION_IN
-    
-    // Destination
-    destinationScene=NO_SCENE
-  end object
-  pageComponents.add(Page_NPC_Transition_Back)
-  
-  // NPC Transition page (away from world)
-  begin object class=ROTT_UI_Page_Transition Name=Page_NPC_Transition_Away
-    tag="Page_NPC_Transition_Away"
-    bEnabled=false
-    
-    // Transition speed
-    tilesPerTick=12
-    
-    // Sorter effect config
-    effectConfig=NPC_TRANSITION_OUT
-    
-    // Destination
-    destinationScene=NO_SCENE
-  end object
-  pageComponents.add(Page_NPC_Transition_Away)
-  
-  // NPC Prelude transition page (away from world)
-  begin object class=ROTT_UI_Page_Transition Name=Page_Prelude_NPC_Transition_Away
-    tag="Page_Prelude_NPC_Transition_Away"
-    bEnabled=false
-    
-    effectConfig=OUT_FROM_OVER_WORLD_TRANSITION
-    
-    // Destination
-    destinationScene=NO_SCENE
-  end object
-  pageComponents.add(Page_Prelude_NPC_Transition_Away)
-  
-  // Respawn Transition Page (out)
-  begin object class=ROTT_UI_Page_Transition Name=Page_Respawn_Transition_Out
-    tag="Page_Respawn_Transition_Out"
-    bEnabled=false
-    tilesPerTick=20
-    
-    // Sorter effect config
-    effectConfig=RESPAWN_START_TRANSITION
-    
-    // Destination
-    destinationScene=NO_SCENE
-  end object
-  pageComponents.add(Page_Respawn_Transition_Out)
-
-  // Respawn Transition Page (in)
-  begin object class=ROTT_UI_Page_Transition Name=Page_Respawn_Transition_In
-    tag="Page_Respawn_Transition_In"
-    bEnabled=false
-    tilesPerTick=20
-    
-    // Sorter effect config
-    effectConfig=RESPAWN_END_TRANSITION
-    
-    // Destination
-    destinationScene=NO_SCENE
-  end object
-  pageComponents.add(Page_Respawn_Transition_In)
-
-  // NPC Transition page (away from world)
-  begin object class=ROTT_UI_Page_Transition Name=Page_Door_Portal_Enter
-    tag="Page_Door_Portal_Enter"
-    bEnabled=false
-    bConsumeInput=false
-    
-    // Transition speed
-    tilesPerTick=20
-    
-    // Sorter effect config
-    effectConfig=DOOR_PORTAL_TRANSITION_OUT
-    
-    // Destination
-    destinationScene=NO_SCENE
-  end object
-  pageComponents.add(Page_Door_Portal_Enter)
-  
-  
-  // Portal Transition Page
-  begin object class=ROTT_UI_Page_Transition Name=Page_Portal_Transition
-    tag="Page_Portal_Transition"
-    bEnabled=false
-    bUseColor=true
-    tilesPerTick=10
-    
-    // Sorter effect config
-    effectConfig=PORTAL_TRANSITION
-    
-    // Destination
-    destinationScene=NO_SCENE
-  end object
-  pageComponents.add(Page_Portal_Transition)
 
   // Black Texture
   begin object class=UI_Texture_Info Name=Black_Texture

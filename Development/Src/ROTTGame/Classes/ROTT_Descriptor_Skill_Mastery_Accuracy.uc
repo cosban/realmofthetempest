@@ -58,13 +58,14 @@ protected function float attributeInfo
   
   switch (type) {
     case MASTERY_REQ_STRENGTH:
-      attribute = getStats("Req1", level);
+      attribute = 8 + (level * 4);
       break;
     case MASTERY_REQ_FOCUS:
-      attribute = getStats("Req2", level);
+      attribute = 12 + (level * 6);
       break;
     case PASSIVE_ACCURACY_BOOST:
-      attribute = 48 * level + 10 * (level / 2) + 10 * (level / 4);
+      attribute = 48 * level + 10 * (level / 2);
+      if (level > 4) attribute += 100 * (level - 4) * (1.1 ** (level / 4));
       break;
   }
   
@@ -72,41 +73,11 @@ protected function float attributeInfo
 }
 
 /*=============================================================================
- * getStats()
+ * addManaOverflow()
+ *
+ * Called to track mana that overflows beyond a combat unit's max mana value
  *===========================================================================*/
-function int getStats(string StatType, int SkillLevel) {
-  local int iReq1, iReq2; ///iStat
-  
-  // Level 0 does not exist 
-  if (SkillLevel == 0)
-    return 0;
-  
-  
-  // Strength Requirement 
-  iReq1 = (SkillLevel*11) + (SkillLevel * (SkillLevel-1)) + 1;
-  if (iReq1 % 5 != 0 && iReq1%2 != 0 )
-    iReq1++;
-  
-  // Focus Requirement 
-  iReq2 = (SkillLevel*21) + (SkillLevel * 2 * (SkillLevel-1)) + 4;
-  if (iReq2 % 5 != 0 && iReq2%2 != 0 )
-    iReq2++;
-  
-  // Accuracy 
-  ///iStat = (SkillLevel*27) + (SkillLevel * 3 * (SkillLevel-1)) + 1;
-  ///if (iStat % 5 != 0 && iStat%2 != 0 )
-  ///  iStat++;
-    
-  switch (StatType)
-  {
-    ///case "Stat":
-    ///  return iStat;
-    case "Req1":
-      return iReq1;
-    case "Req2":
-      return iReq2;
-  }
-}
+public function addManaOverflow(float manaOverflow);
 
 /*=============================================================================
  * Default Properties

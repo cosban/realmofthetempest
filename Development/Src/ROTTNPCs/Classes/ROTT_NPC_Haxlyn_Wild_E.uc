@@ -26,8 +26,19 @@ public function initDialogue() {
   
   // Intro
   `NEW_NODE(GREETING, NUETRAL)
-    "I bow to the ethereal hand of eternity.",
-    ""
+    "Motionless like a statue, a spirit",
+    "speaks telepathically."
+  `ENDNODE
+  setColor(DEFAULT_MEDIUM_GOLD);
+  
+  `NEW_NODE(GREETING, NUETRAL)
+    "Bow to the ethereal hand of eternity!",
+    "Foolish mortal!"
+  `ENDNODE
+  
+  `NEW_NODE(GREETING, NUETRAL)
+    "Or forever drown in ethereal things, like",
+    "wicked thieves."
   `ENDNODE
   
   // ----------------------------------------------------------------------- //
@@ -56,7 +67,7 @@ defaultProperties
   
   // Background
   begin object class=UI_Texture_Info Name=NPC_Background_Texture
-    componentTextures.add(Texture2D'GUI_NPC_Dialog.NPC_Background_Dark_Gray'
+    componentTextures.add(Texture2D'GUI_NPC_Dialog.NPC_Background_Blue'
   end object
   
   // Sprite container for transfer
@@ -68,7 +79,7 @@ defaultProperties
   
   // NPC Texture
   begin object class=UI_Texture_Info Name=NPC_Sprite_Texture
-    componentTextures.add(Texture2D'NPCs.Witches.NPC_Portrait_Witch_Cyan_360')
+    componentTextures.add(Texture2D'Monsters_Disc_2.Enemy_Portrait_Okitian_Spirit_Cyan_360')
   end object
   
   // Sprite container for transfer

@@ -5,7 +5,7 @@
  * Bramble Gate Studios (All rights reserved)
  *
  * Description: This is a base class for all characters that can participate
- * in combat.  (e.g. ROTT_Hero_Unit, ROTT_Enemy_Unit)
+ * in combat.  (e.g. ROTT_Hero_Unit, ROTT_Combat_Enemy)
  *===========================================================================*/
  
 class ROTT_Combat_Unit extends ROTT_Combat_Object
@@ -29,34 +29,6 @@ enum StatTypes {
   PRIMARY_STRENGTH,
   PRIMARY_COURAGE,
   PRIMARY_FOCUS
-};
-
-// Substats
-enum SubStatTypes {
-  CURRENT_HEALTH,
-  MAX_HEALTH,
-  
-  MIN_PHYSICAL_DAMAGE,
-  MAX_PHYSICAL_DAMAGE,
-  
-  ELAPSED_ATK_TIME,
-  TOTAL_ATK_INTERVAL,
-  CRIT_CHANCE,
-  CRIT_MULTIPLIER,
-  ACCURACY_RATING,
-  
-  CURRENT_MANA,
-  MAX_MANA,
-  DODGE_RATING,
-  MORALE_THRESHOLD,
-  
-  RESURRECTION_CURRENT,
-  RESURRECTION_LIMIT,
-  
-  HEALTH_REGEN,
-  MANA_REGEN,
-  
-  ARMOR_RATING
 };
 
 // Primary stat affinity types
@@ -154,7 +126,7 @@ var protectedwrite array<PendingMechanics> pendingMechs;
 var protectedwrite float blackHoleDamage; 
 
 // Tracks if the last black hole cast was defended
-var protectedwrite bool bResistingBh; 
+var protectedwrite bool bResistingBlackHole; 
 
 // List of all active attachable unit modifiers
 var protectedwrite array<ROTT_Descriptor_Hero_Skill> activeMods; 
@@ -211,6 +183,20 @@ var protectedwrite bool bForceAttack;
 // Temporary status storage until new status system is implemented
 var protectedwrite bool bDemoralizedStatus;
 
+// Laceration and persistence settings
+var public int lacerationCount;
+var public int persistenceCount;
+var public bool bPersisting;
+
+// Store information for modifying attack times
+struct TimeMod {
+  var float timeMultiplier;
+  var string tag;
+  var int lifeSteps;
+};
+
+var protectedwrite array<TimeMod> tunaMultipliers;
+
 // Display component
 var public ROTT_UI_Displayer_Combat uiComponent;
 
@@ -265,6 +251,13 @@ public function onAnalysisComplete() {
 protected function clearTemporaryInfo() {
   local int i;
   
+  // Reset persistence and lacerations
+  persistenceCount = 0;
+  lacerationCount = 0;
+  
+  // Reset time mods
+  tunaMultipliers.length = 0;
+  
   // Reset queued actions and mechanics
   queuedActions.length = 0;
   pendingMechs.length = 0;
@@ -288,15 +281,15 @@ protected function clearTemporaryInfo() {
   updateSubStats();
 }
 
-/*=============================================================================
- * populateActiveMods()
+/**=============================================================================
+ * populateSkillMods()
  *
  * This function initializes the list of all active stat modifying skills,
  * items, enchantments. 
  *===========================================================================*/
-protected function populateActiveMods();
+protected function populateSkillMods();
 
-/*=============================================================================
+/**=============================================================================
  * getPassiveBoost()
  *
  * Retrieves a total for a given type of passive boost
@@ -304,6 +297,8 @@ protected function populateActiveMods();
 protected function float getPassiveBoost(AttributeTypes type) {
   local float value;
   local int i;
+  
+  if (activeMods.length == 0) return 0;
   
   // Sum the modifiers
   for (i = 0; i < activeMods.length; i++) {
@@ -341,7 +336,7 @@ public function bool parsePacket
   // Track black hole resistance
   if (combatPacket.bAtmospheric) {
     // Cut damage in half
-    bResistingBh = !bHit;
+    bResistingBlackHole = !bHit;
   }
   
   // Handle missed action mechanics
@@ -411,6 +406,9 @@ public function parseMechanics
       // Parse mechanic by type
       switch (MechanicTypes(i)) {
         case REDUCE_MANA:
+          // Bypass for persistence
+          if (persistenceCount > 0) break;
+          
           // Subtract mana
           subStats[CURRENT_MANA] -= value;
           break;
@@ -473,14 +471,9 @@ public function parseMechanics
           break;
         case ADD_ATTACK_TIME_PERCENT:
           // Scale attack time with percent
-          atbAmp = (statBoosts[ADD_ATTACK_TIME_PERCENT] + 100) / 100;
+          atbAmp = (statBoosts[ADD_ATTACK_TIME_PERCENT] + 100) / 100; 
           statBoosts[ADD_ATTACK_TIME_PERCENT] = (atbAmp * value) * 100 - 100;
           updateSpeedAmp();
-          if (statBoosts[ADD_ATTACK_TIME_PERCENT] == -100) {
-            violetlog("Current add attack time percent: " $ statBoosts[ADD_ATTACK_TIME_PERCENT]); 
-            
-            violetLog("Problem on " $ self);
-          }
           break;
         case CUT_LIFE_BY_PERCENT:
           // Multiply life by percent (regardless of other stats)
@@ -570,6 +563,119 @@ public function resetStatBoost(int statIndex) {
 }
 
 /*=============================================================================
+ * addTunaAmp()
+ *
+ * Adds an attack time multiplier
+ *===========================================================================*/
+public function addTunaAmp
+(
+  float timeMultiplier,
+  string tag,
+  int lifeSteps
+) 
+{
+  local TimeMod newMod;
+  local int i;
+  
+  // Check for existing tags
+  for (i = 0; i < tunaMultipliers.length; i++) {
+    if (tunaMultipliers[i].tag == tag) {
+      tunaMultipliers[i].lifeSteps += lifeSteps;
+      return;
+    }
+  }
+  // Check for valid life steps
+  if (lifeSteps == 0) {
+    yellowLog("Warning (!) Zero life steps on multiplier.  For infinity, use -1");
+    return;
+  }
+  
+  // Set time mod information
+  newMod.timeMultiplier = timeMultiplier;
+  newMod.tag = tag;
+  newMod.lifeSteps = lifeSteps;
+  
+  // Add time mod to the list
+  tunaMultipliers.addItem(newMod);
+  
+  // Update UI display
+  updateSpeedAmp();
+  
+  // Show persistence status
+  if (newMod.tag == "Persistence") {
+    uiComponent.addManualStatus("Persisting", COMBAT_SMALL_GOLD);
+  }
+}
+
+/*=============================================================================
+ * getTunaAmp()
+ *
+ * Used to find the product of time mods
+ *===========================================================================*/
+public function float getTunaAmp() {
+  local float atbAmp;
+  local int i;
+  
+  // Initialize as product identity element
+  atbAmp = 1.0;
+  
+  // Find product of multipliers
+  for (i = 0; i < tunaMultipliers.length; i++) {
+    atbAmp *= tunaMultipliers[i].timeMultiplier;
+  }
+  
+  /// Multiply on combat mechanics
+  atbAmp *= ((statBoosts[ADD_ATTACK_TIME_PERCENT] + 100) / 100) ** -1;
+  
+  // Check for valid multiplier
+  if (atbAmp == 0.f) {
+    yellowLog("Warning (!) Attack time multiplier must never be zero");
+    return 1.0;
+  }
+  
+  return atbAmp;
+}
+
+/*=============================================================================
+ * checkTunaAmpTag()
+ *
+ * Returns true if the tag is found in the time mod list
+ *===========================================================================*/
+public function bool checkTunaAmpTag(string tag) {
+  local int i;
+  
+  // Scan through time multipliers
+  for (i = 0; i < tunaMultipliers.length; i++) {
+    if (tunaMultipliers[i].tag == tag) return true;
+  }
+  return false;
+}
+
+/*=============================================================================
+ * decrementTunaAmpSteps()
+ *
+ * Used countdown the steps for how long attack time mods apply for.
+ *===========================================================================*/
+public function decrementTunaAmpSteps() {
+  local int i;
+  
+  // Scan through time multipliers
+  for (i = tunaMultipliers.length - 1; i >= 0; i--) {
+    // Check if life steps is not infinite
+    if (tunaMultipliers[i].lifeSteps != -1) {
+      // Count down life steps
+      tunaMultipliers[i].lifeSteps--;
+      
+      // Check if life steps hit zero
+      if (tunaMultipliers[i].lifeSteps == 0) {
+        // Remove multiplifer
+        tunaMultipliers.remove(i, 1);
+      }
+    }
+  }
+}
+
+/*=============================================================================
  * drainMana()
  *
  * Drains mana directly, used for mana over time situations only
@@ -656,7 +762,6 @@ public function queueAction
     
     // Add to queue
     queuedActions.addItem(nextAction);
-    violetLog("Added to queue:" @ skillScript);
   }
 }
 
@@ -789,15 +894,15 @@ public function setLifePercent(float percent) {
  *
  * This is called to directly drain life regardless of armor
  *===========================================================================*/
-public function drainLife(float lifeDrain, optional bool bTrackBhDamage = false) {
+public function drainLife(float lifeDrain, optional bool bTrackBlackHoleDamage = false) {
   // Check resist state
-  if (bTrackBhDamage && bResistingBh) {
+  if (bTrackBlackHoleDamage && bResistingBlackHole) {
     // Cut damage by half
     lifeDrain /= 2;
   }
   
   // Track damage for UI number
-  if (bTrackBhDamage) blackHoleDamage += lifeDrain; 
+  if (bTrackBlackHoleDamage) blackHoleDamage += lifeDrain; 
   
   // Drain life
   subStats[CURRENT_HEALTH] -= lifeDrain;
@@ -931,7 +1036,7 @@ public function trackDamageGlyph(float damage);
  * Displays the speed to the UI
  *===========================================================================*/
 protected function updateSpeedAmp() {
-  if (uiComponent != none) uiComponent.updateSpeedAmp(statBoosts[ADD_ATTACK_TIME_PERCENT]);
+  if (uiComponent != none) uiComponent.updateSpeedAmp(getTunaAmp());
 }
 
 /*=============================================================================
@@ -1007,7 +1112,44 @@ public function bool sendAction(ChosenTargetEnum target);
 public function int getPrimaryStat(StatTypes statType) {
   local int stat;
   
+  if (gameInfo.playerProfile == none) { scripttrace(); return 0; }
+  
   stat = hardStats[statType];
+  
+  // Additive stat boosts
+  switch (statType) {
+    case PRIMARY_VITALITY: 
+      stat += statBoosts[ADD_VITALITY]; 
+      stat -= statBoosts[REDUCE_VITALITY]; 
+      stat += heldItemStat(ITEM_ADD_VITALITY);
+      break;
+    case PRIMARY_STRENGTH: 
+      stat += statBoosts[ADD_STRENGTH]; 
+      stat -= statBoosts[REDUCE_STRENGTH]; 
+      stat += heldItemStat(ITEM_ADD_STRENGTH);
+      break;
+    case PRIMARY_COURAGE:  
+      stat += statBoosts[ADD_COURAGE]; 
+      stat -= statBoosts[REDUCE_COURAGE]; 
+      stat += heldItemStat(ITEM_ADD_COURAGE);
+      break;
+    case PRIMARY_FOCUS:    
+      stat += statBoosts[ADD_FOCUS]; 
+      stat -= statBoosts[REDUCE_FOCUS]; 
+      stat += heldItemStat(ITEM_ADD_FOCUS);
+      break;
+  }
+  
+  // All stats modifier
+  stat += statBoosts[ADD_ALL_STATS];
+  
+  // All stats Enchantment addition
+  if (ROTT_Combat_Hero(self) != none) {
+    stat += gameInfo.playerProfile.getEnchantBoost(INFINITY_JEWEL);
+  }
+  
+  // All stats held item boost
+  stat += heldItemStat(ITEM_ADD_ALL_STATS);
   
   // Multiplicative stat boosts
   switch (statType) {
@@ -1019,38 +1161,19 @@ public function int getPrimaryStat(StatTypes statType) {
       break;
   }
   
-  // Additive stat boosts
-  switch (statType) {
-    case PRIMARY_STRENGTH: 
-      stat += statBoosts[ADD_VITALITY]; 
-      stat -= statBoosts[REDUCE_VITALITY]; 
-      break;
-    case PRIMARY_STRENGTH: 
-      stat += statBoosts[ADD_STRENGTH]; 
-      stat -= statBoosts[REDUCE_STRENGTH]; 
-      break;
-    case PRIMARY_COURAGE:  
-      stat += statBoosts[ADD_COURAGE]; 
-      stat -= statBoosts[REDUCE_COURAGE]; 
-      break;
-    case PRIMARY_FOCUS:    
-      stat += statBoosts[ADD_FOCUS]; 
-      stat -= statBoosts[REDUCE_FOCUS]; 
-      break;
-  }
-  
-  // All stats modifier
-  stat += statBoosts[ADD_ALL_STATS];
-  
-  // All stats Enchantment addition
-  if (ROTT_Combat_Hero(self) != none) {
-    stat += gameInfo.playerProfile.getEnchantBoost(INIFINITY_JEWEL);
-  }
-  
   // Clamp
   if (stat < 1) stat = 1;
   
   return stat;
+}
+
+/*============================================================================= 
+ * heldItemStat()
+ *
+ * Returns an attribute boost value from held item
+ *===========================================================================*/
+public function float heldItemStat(EquipmentAttributes attributeIndex) {
+  return 0;
 }
 
 /*============================================================================= 
@@ -1063,9 +1186,6 @@ public function int getPrimaryStat(StatTypes statType) {
  * whether it be for the menu or for a combat scenario.
  *===========================================================================*/
 public function updateSubStats() {
-  local int vit, crg, foc; /// str
-  local float hpAmp, speedAmp, critChanceAmp, critDmgAmp;
-  local float accAmp, mpAmp, dodgeAmp, moraleAmp;
   local float oldMaxHP, oldMaxMP;
   
   // Ignore dead units except for resurrection display update
@@ -1074,137 +1194,73 @@ public function updateSubStats() {
     return;
   }
   
-  // Get primary stats 
-  vit = getPrimaryStat(PRIMARY_VITALITY);
-  ///str = getPrimaryStat(PRIMARY_STRENGTH);
-  crg = getPrimaryStat(PRIMARY_COURAGE);
-  foc = getPrimaryStat(PRIMARY_FOCUS);
-  
-  // Get vitality affinity amplifiers
-  hpAmp = affinity[MAX_HEALTH].amp[statAffinities[PRIMARY_VITALITY]];
-  
-  // Calculate physical damage
-  updatePhysicalDamage();
-  
-  // Get courage affinity amplifiers
-  speedAmp = affinity[TOTAL_ATK_INTERVAL].amp[statAffinities[PRIMARY_COURAGE]];
-  critChanceAmp = affinity[CRIT_CHANCE].amp[statAffinities[PRIMARY_COURAGE]];
-  critDmgAmp = affinity[CRIT_MULTIPLIER].amp[statAffinities[PRIMARY_COURAGE]];
-  accAmp = affinity[ACCURACY_RATING].amp[statAffinities[PRIMARY_COURAGE]];
-  
-  // Get focus affinity amplifiers
-  mpAmp = affinity[MAX_MANA].amp[statAffinities[PRIMARY_FOCUS]];
-  dodgeAmp = affinity[DODGE_RATING].amp[statAffinities[PRIMARY_FOCUS]];
-  moraleAmp = affinity[MORALE_THRESHOLD].amp[statAffinities[PRIMARY_FOCUS]];
-  
   // Get max health and mana, prior to update
   oldMaxHP = subStats[MAX_HEALTH];
   oldMaxMP = subStats[MAX_MANA];
   
-  // Calculate max health
-  subStats[MAX_HEALTH] = baseHealth + vit * hpAmp;
-  subStats[RESURRECTION_LIMIT] = subStats[MAX_HEALTH]; // Copy max res limit before enhancements
-  subStats[MAX_HEALTH] += statBoosts[ADD_MAX_HEALTH];
-  subStats[MAX_HEALTH] += getPassiveBoost(PASSIVE_HEALTH_BOOST);
-  
-  // Apply enchantment related health increase
-  if (ROTT_Combat_Hero(self) != none) {
-    subStats[MAX_HEALTH] += subStats[MAX_HEALTH] * gameInfo.playerProfile.getEnchantBoost(ARCANE_BLOODPRISM) / 100.f;
-  }
-  
-  // Calculate max mana
-  subStats[MAX_MANA] = baseMana + foc * mpAmp;
-  subStats[MAX_MANA] += statBoosts[ADD_MAX_MANA];
-  subStats[MAX_MANA] += getPassiveBoost(PASSIVE_MANA_BOOST);
-  
-  // Apply enchantment related mana increase
-  if (ROTT_Combat_Hero(self) != none) {
-    subStats[MAX_MANA] += subStats[MAX_MANA] * gameInfo.playerProfile.getEnchantBoost(MYSTIC_MARBLE) / 100.f;
-  }
-  
-  // Calculate attack interval
-  subStats[TOTAL_ATK_INTERVAL] = getAtkInterval(crg, speedAmp);
-  
-  // Calculate critical hit
-  subStats[CRIT_CHANCE] = float(int((crg / critChanceAmp) + baseCritChance));
-  subStats[CRIT_MULTIPLIER] = critDmgAmp;
-  
-  // Calculate accuracy rating
-  subStats[ACCURACY_RATING] = 10 + (crg * accAmp) + (level * 5.0);
-  subStats[ACCURACY_RATING] += statBoosts[ADD_ACCURACY];
-  subStats[ACCURACY_RATING] -= statBoosts[REDUCE_ACCURACY];
-  subStats[ACCURACY_RATING] += getPassiveBoost(PASSIVE_ACCURACY_BOOST);
-  
-  // Add accuracy enchantment
-  subStats[ACCURACY_RATING] += gameInfo.playerProfile.getEnchantBoost(GRIFFINS_TRINKET);
-  
-  // Cap accuracy
-  if (subStats[ACCURACY_RATING] < 5) {
-    subStats[ACCURACY_RATING] = 5;
-  }
-  
-  // Calculate dodge rating
-  subStats[DODGE_RATING] = 5 + (foc * dodgeAmp) + (level * 4); 
-  subStats[DODGE_RATING] += statBoosts[ADD_DODGE];
-  subStats[DODGE_RATING] -= statBoosts[REDUCE_DODGE];
-  subStats[DODGE_RATING] += getPassiveBoost(PASSIVE_DODGE_BOOST);
-  
-  // Add dodge enchantment
-  subStats[DODGE_RATING] += gameInfo.playerProfile.getEnchantBoost(GRIFFINS_TRINKET);
-  
-  // Cap dodge
-  if (subStats[DODGE_RATING] < 5) {
-    subStats[DODGE_RATING] = 5;
-  }
-  
-  // Calculate morale threshold
-  subStats[MORALE_THRESHOLD] = 500 / (5 + 10 ** (4 / (3 + level) + (foc * moraleAmp / 3) / (3 + level)));
-  
-  // Armor
-  subStats[ARMOR_RATING] = armorPerLvl * level; 
-  subStats[ARMOR_RATING] += getPassiveBoost(PASSIVE_ARMOR_BOOST);
-  subStats[ARMOR_RATING] += statBoosts[ADD_ARMOR];
-  subStats[ARMOR_RATING] -= statBoosts[REDUCE_ARMOR];
-  if (ROTT_Combat_Hero(self) != none) {
-    // Apply enchantment related armor increase
-    subStats[ARMOR_RATING] += gameInfo.playerProfile.getEnchantBoost(SERPENTS_ANCHOR);
-  }
-  if (subStats[ARMOR_RATING] < 0) subStats[ARMOR_RATING] = 0;
-  
-  // Add ritual boosts
-  addRitualBoosts();
-
-  // Clamp health, mana, tuna
-  if (subStats[CURRENT_HEALTH] > subStats[MAX_HEALTH]) {
-    subStats[CURRENT_HEALTH] = subStats[MAX_HEALTH];
-  }
-  if (subStats[CURRENT_MANA] > subStats[MAX_MANA]) {
-    subStats[CURRENT_MANA] = subStats[MAX_MANA];
-  }
-  if (subStats[ELAPSED_ATK_TIME] > currentAtkInterval) {
-    subStats[ELAPSED_ATK_TIME] = currentAtkInterval;
-  }
-  if (subStats[CURRENT_HEALTH] <= 0) {
-    // Cap value
-    subStats[CURRENT_HEALTH] = 0;
+  // Call update subroutines for primary stats and corresponding substats
+  updateVitality(
+    // Fetch vitality
+    getPrimaryStat(PRIMARY_VITALITY),
     
-    // Call unit death sequence
-    onDeath();
-  }
-  if (subStats[CURRENT_MANA] < 0) {
-    subStats[CURRENT_MANA] = 0;
-  }
-  if (statBoosts[ADD_MANA_SHIELD] > 100) {
-    statBoosts[ADD_MANA_SHIELD] = 100;
-  }
+    // Fetch affinity amplifier
+    affinity[MAX_HEALTH].amp[statAffinities[PRIMARY_VITALITY]],
+    
+    // Health enchantment from arcane blood prism 
+    gameInfo.playerProfile.getEnchantBoost(ARCANE_BLOODPRISM) / 100.f
+  );
+  updateStrength(
+    // Fetch strength
+    getPrimaryStat(PRIMARY_STRENGTH),
   
-  // Grant health and mana boosts if the max values have increased
-  if (subStats[MAX_HEALTH] - oldMaxHP > 0) {
-    subStats[CURRENT_HEALTH] += subStats[MAX_HEALTH] - oldMaxHP;
-  }
-  if (subStats[MAX_MANA] - oldMaxMP > 0) {
-    subStats[CURRENT_MANA] += subStats[MAX_MANA] - oldMaxMP;
-  }
+    // Fetch affinity damage amplifier
+    affinity[MIN_PHYSICAL_DAMAGE].amp[statAffinities[PRIMARY_STRENGTH]],
+    
+    // Physical damage enchantment
+    gameInfo.playerProfile.getEnchantBoost(SCORPION_TALON) / 100.f
+  );
+  updateCourage(
+    // Fetch courage
+    getPrimaryStat(PRIMARY_COURAGE),
+    
+    // Fetch attack interval amplifier
+    affinity[TOTAL_ATK_INTERVAL].amp[statAffinities[PRIMARY_COURAGE]],
+    
+    // Fetch critical amplifiers
+    affinity[CRIT_MULTIPLIER].amp[statAffinities[PRIMARY_COURAGE]],
+    affinity[CRIT_CHANCE].amp[statAffinities[PRIMARY_COURAGE]],
+    
+    // Fetch accuracy amplifiers
+    affinity[ACCURACY_RATING].amp[statAffinities[PRIMARY_COURAGE]]
+  );
+  updateFocus(
+    // Fetch focus
+    getPrimaryStat(PRIMARY_FOCUS),
+    
+    // Fetch max mana amplifier
+    affinity[MAX_MANA].amp[statAffinities[PRIMARY_FOCUS]],
+    
+    // Fetch dodge amplifier
+    affinity[DODGE_RATING].amp[statAffinities[PRIMARY_FOCUS]],
+    
+    // Fetch spiritual burden amplifier
+    affinity[MORALE_THRESHOLD].amp[statAffinities[PRIMARY_FOCUS]],
+    
+    // Mana enchantment from mystic marble
+    gameInfo.playerProfile.getEnchantBoost(MYSTIC_MARBLE) / 100.f
+  );
+  
+  // Catch all update to various other stats
+  updateMiscStats(
+    // Armor enchantment from mystic marble
+    gameInfo.playerProfile.getEnchantBoost(SERPENTS_ANCHOR)
+  );
+  
+  // Cap minimum and maximum values
+  updateStatCaps(
+    oldMaxHP,
+    oldMaxMP
+  );
   
   // Update display
   if (uiComponent != none) uiComponent.updateDisplay();
@@ -1217,6 +1273,233 @@ public function updateSubStats() {
     setStatusDemoralized(false);
   }
 }
+
+/*============================================================================= 
+ * updateVitality()
+ *
+ * Updates vitality, and related substats
+ *===========================================================================*/
+public function updateVitality(int vit, float hpAmp, float bloodPrism) {
+  local float hpMultiplier;
+  
+  // Calculate max health
+  subStats[MAX_HEALTH] = baseHealth + vit * hpAmp;
+  
+  // Copy max res limit before enhancements
+  subStats[RESURRECTION_LIMIT] = subStats[MAX_HEALTH]; 
+  
+  // Apply boosts
+  subStats[MAX_HEALTH] += statBoosts[ADD_MAX_HEALTH];
+  subStats[MAX_HEALTH] += getPassiveBoost(PASSIVE_HEALTH_BOOST);
+  subStats[MAX_HEALTH] += heldItemStat(ITEM_ADD_HEALTH);
+  
+  // Set up health multiplier
+  hpMultiplier = heldItemStat(ITEM_MULTIPLY_HEALTH) / 100;
+  
+  // Enchantment
+  if (ROTT_Combat_Hero(self) != none) {
+    hpMultiplier += bloodPrism;
+  }
+  
+  // Apply health multiplier
+  subStats[MAX_HEALTH] += subStats[MAX_HEALTH] * hpMultiplier;
+}
+
+/*============================================================================= 
+ * updateStrength()
+ *
+ * Updates Strength, and related substats
+ *===========================================================================*/
+public function updateStrength(int strength, int affinityCut, float scorpionTalon);
+
+/*============================================================================= 
+ * updateCourage()
+ *
+ * Updates courage, and related substats
+ *===========================================================================*/
+public function updateCourage
+(
+  int crg, 
+  float speedAmp, 
+  float critDmgAmp, 
+  float critChanceAmp, 
+  float accAmp
+) 
+{
+  
+  // Calculate attack interval
+  subStats[TOTAL_ATK_INTERVAL] = getAtkInterval(crg, speedAmp);
+  
+  // Calculate critical hit
+  subStats[CRIT_CHANCE] = float(int((crg / critChanceAmp) + baseCritChance));
+  subStats[CRIT_MULTIPLIER] = critDmgAmp;
+  
+  // Calculate accuracy rating
+  subStats[ACCURACY_RATING] = 40 + (crg * accAmp) + (level * 5.0);
+  subStats[ACCURACY_RATING] += statBoosts[ADD_ACCURACY];
+  subStats[ACCURACY_RATING] -= statBoosts[REDUCE_ACCURACY];
+  subStats[ACCURACY_RATING] += getPassiveBoost(PASSIVE_ACCURACY_BOOST);
+  
+  // Add accuracy enchantment
+  if (ROTT_Combat_Hero(self) != none) {
+    subStats[ACCURACY_RATING] += gameInfo.playerProfile.getEnchantBoost(GRIFFINS_TRINKET);
+  }
+  
+  // Add accuracy boost from held item
+  subStats[ACCURACY_RATING] += heldItemStat(ITEM_ADD_ACCURACY);
+  
+}
+
+/*============================================================================= 
+ * updateFocus()
+ *
+ * Updates focus, and related substats
+ *===========================================================================*/
+public function updateFocus
+(
+  int foc, 
+  float mpAmp, 
+  float dodgeAmp,  
+  float moraleAmp,
+  float mysticMarble
+) 
+{
+  // Calculate max mana
+  subStats[MAX_MANA] = baseMana + foc * mpAmp;
+  subStats[MAX_MANA] += statBoosts[ADD_MAX_MANA];
+  subStats[MAX_MANA] += getPassiveBoost(PASSIVE_MANA_BOOST);
+  
+  // Add mana boost from held item
+  subStats[MAX_MANA] += heldItemStat(ITEM_ADD_MANA);
+  
+  // Apply enchantment related mana increase
+  if (ROTT_Combat_Hero(self) != none) {
+    subStats[MAX_MANA] += subStats[MAX_MANA] * mysticMarble;
+  }
+  
+  // Multiply mana boost from held item
+  subStats[MAX_MANA] *= 1 + heldItemStat(ITEM_MULTIPLY_MANA) / 100.f;
+  
+  // Calculate dodge rating
+  subStats[DODGE_RATING] = 5 + (foc * dodgeAmp) + (level * 4); 
+  subStats[DODGE_RATING] += statBoosts[ADD_DODGE];
+  subStats[DODGE_RATING] -= statBoosts[REDUCE_DODGE];
+  subStats[DODGE_RATING] += getPassiveBoost(PASSIVE_DODGE_BOOST);
+  
+  // Add dodge enchantment
+  if (ROTT_Combat_Hero(self) != none) {
+    subStats[DODGE_RATING] += gameInfo.playerProfile.getEnchantBoost(GRIFFINS_TRINKET);
+  }
+  
+  // Add dodge boost from held item
+  subStats[DODGE_RATING] += heldItemStat(ITEM_ADD_DODGE);
+  
+  // Cap dodge
+  if (subStats[DODGE_RATING] < 5) {
+    subStats[DODGE_RATING] = 5;
+  }
+  
+  // Calculate morale threshold
+  subStats[MORALE_THRESHOLD] = 500 / (5 + 10 ** (4 / (3 + level) + (foc * moraleAmp / 3) / (3 + level)));
+  
+}
+
+/*============================================================================= 
+ * updateMiscStats()
+ *
+ * Updates various stats
+ *===========================================================================*/
+public function updateMiscStats
+(
+  float serpentsAnchor
+) 
+{
+  // Baseline armor
+  subStats[ARMOR_RATING] = armorPerLvl * level; 
+  
+  // Add armor boosts
+  subStats[ARMOR_RATING] += getPassiveBoost(PASSIVE_ARMOR_BOOST);
+  subStats[ARMOR_RATING] += statBoosts[ADD_ARMOR];
+  
+  // Add enchantment boosts
+  if (ROTT_Combat_Hero(self) != none) {
+    // Apply enchantment related armor increase
+    subStats[ARMOR_RATING] += serpentsAnchor;
+  }
+  
+  // Add armor boost from held item
+  subStats[ARMOR_RATING] += heldItemStat(ITEM_ADD_ARMOR);
+  
+  // Add ritual boosts
+  addRitualBoosts();
+  
+  // Subtract armor debuffs
+  subStats[ARMOR_RATING] -= statBoosts[REDUCE_ARMOR];
+}
+
+/*============================================================================= 
+ * updateStatCaps()
+ *
+ * Applies a cap to minimum and maximum stat values
+ *===========================================================================*/
+public function updateStatCaps
+(
+  float oldMaxHP, float oldMaxMP
+) 
+{
+  // Cap max health
+  if (subStats[CURRENT_HEALTH] > subStats[MAX_HEALTH]) {
+    subStats[CURRENT_HEALTH] = subStats[MAX_HEALTH];
+  }
+  
+  // Cap max mana
+  if (subStats[CURRENT_MANA] > subStats[MAX_MANA]) {
+    subStats[CURRENT_MANA] = subStats[MAX_MANA];
+  }
+  
+  // Cap attack interval
+  if (subStats[ELAPSED_ATK_TIME] > currentAtkInterval) {
+    subStats[ELAPSED_ATK_TIME] = currentAtkInterval;
+  }
+  
+  // Check for death, and cap minimum health
+  if (subStats[CURRENT_HEALTH] <= 0) {
+    // Cap value
+    subStats[CURRENT_HEALTH] = 0;
+    
+    // Call unit death sequence
+    onDeath();
+  }
+  
+  // Minimum mana cap
+  if (subStats[CURRENT_MANA] < 0) {
+    subStats[CURRENT_MANA] = 0;
+  }
+  
+  // Maximum mana shield cap
+  if (statBoosts[ADD_MANA_SHIELD] > 100) {
+    statBoosts[ADD_MANA_SHIELD] = 100;
+  }
+  
+  // Cap accuracy
+  if (subStats[ACCURACY_RATING] < 5) {
+    subStats[ACCURACY_RATING] = 5;
+  }
+  
+  // Cap minimum armor
+  if (subStats[ARMOR_RATING] < 0) {
+    subStats[ARMOR_RATING] = 0;
+  }
+  
+  // Scale up health and mana if max values have increased
+  if (subStats[MAX_HEALTH] - oldMaxHP > 0) {
+    subStats[CURRENT_HEALTH] += subStats[MAX_HEALTH] - oldMaxHP;
+  }
+  if (subStats[MAX_MANA] - oldMaxMP > 0) {
+    subStats[CURRENT_MANA] += subStats[MAX_MANA] - oldMaxMP;
+  }
+}
+
 /*============================================================================= 
  * addRitualBoosts()
  *
@@ -1254,13 +1537,6 @@ public function setStatusDemoralized(bool bEnabled) {
   
   if (uiComponent != none) uiComponent.setStatusDemoralized(bEnabled);
 }
-
-/*=============================================================================
- * updatePhysicalDamage()
- *
- * This function updates physical damage substats for this unit
- *===========================================================================*/
-protected function updatePhysicalDamage();
 
 /*=============================================================================
  * onDeath()
@@ -1349,22 +1625,20 @@ private function float getAtkInterval(float crg, float affinityAmp, optional boo
   // Initial speed points
   speedPoints = crg * affinityAmp + 10;
   
-  // Add passive speed points
+  // Add skill based speed points
   speedPoints += getPassiveBoost(PASSIVE_SPEED_BOOST);
   
-  // Add enchantment speed points
-  if (ROTT_Combat_Hero(self) != none) {
-    ///speedPoints += gameInfo.playerProfile.getEnchantBoost(GRIFFINS_TRINKET);
-  } /* move to passive mode ... */
-  
-  // Subtract enchantment speed points for enemies
-  if (ROTT_Combat_Enemy(self) != none) {
-    speedPoints -= gameInfo.playerProfile.getEnchantBoost(GHOSTKINGS_BRANCH);
-  }
+  // Add speed points from item
+  speedPoints += heldItemStat(ITEM_ADD_SPEED);
   
   // Speed points modifiers from skills and glyphs
   speedPoints += statBoosts[ADD_SPEED];
   speedPoints -= statBoosts[REDUCE_SPEED];
+  
+  // Subtract enchantment speed points for enemies
+  if (ROTT_Combat_Enemy(self) != none) {
+    speedPoints -= gameInfo.getActiveParty().getEnemySpeedReduction();
+  }
   
   // Demoralized penalty
   if (isDemoralized() && !bSkipCheck) speedPoints = speedPoints * 2 / 3;
@@ -1404,6 +1678,13 @@ public function float getSpeedImprovement() {
 }
 
 /*=============================================================================
+ * onTargeted()
+ *
+ * Called when a combat action is being performed with this unit as target.
+ *===========================================================================*/
+public function onTargeted(ROTT_Combat_Unit caster);
+
+/*=============================================================================
  * getChanceToHit()
  *
  * Given a target, this randomly rolls a hit chance and returns true if hit.
@@ -1412,7 +1693,10 @@ public function bool getChanceToHit(ROTT_Combat_Unit target) {
   local float roll, hitChance;
   local float dodge, accuracy;
   
-  roll = Rand(100);
+  roll = rand(100);
+  
+  // Call targeting trigger
+  target.onTargeted(self);
   
   // Get accuracy and dodge
   accuracy = subStats[ACCURACY_RATING];
@@ -1520,14 +1804,24 @@ public function float getTunaRatio() {
 public function resetTuna() {
   // Check TUNA modifiers from current stance
   updateSubStats();
+
+  // Check for persistence
+  if (!checkTunaAmpTag("Persistence")) {
+    // Remove persistence from UI
+    if (ROTT_UI_Displayer_Combat_Hero(uiComponent) != none) {
+      ROTT_UI_Displayer_Combat_Hero(uiComponent).removeStatusManually("Persisting");
+    }
+  }
   
   // Assign current attack interval from the calculated interval
   if (statBoosts[OVERRIDDEN_ATTACK_TIME] == 0) {
-    
-    currentAtkInterval = subStats[TOTAL_ATK_INTERVAL] / (1 + statBoosts[ADD_ATTACK_TIME_PERCENT] / 100);
+    currentAtkInterval = subStats[TOTAL_ATK_INTERVAL] * getTunaAmp();
   } else {
     currentAtkInterval = statBoosts[OVERRIDDEN_ATTACK_TIME];
   }
+  
+  updateSpeedAmp();
+  decrementTunaAmpSteps();
   
   // Reset TUNA
   subStats[ELAPSED_ATK_TIME] = 0;
@@ -1631,7 +1925,7 @@ public function elapseTime(float deltaTime) {
 
   // Mana regen with no statistics tracking
   recoverMana(
-    statBoosts[ADD_EXTRA_MANA_REGEN] * deltaTime,
+    (statBoosts[ADD_EXTRA_MANA_REGEN] + heldItemStat(ITEM_ADD_MANA_REGEN)) * deltaTime,
     NO_REPORT,
     true /// hacky, true will hide the UI report
   );
@@ -1643,6 +1937,8 @@ public function elapseTime(float deltaTime) {
   h = statBoosts[ADD_HEALTH_REGEN];
   if (timeWithoutDamage > 5) h += statBoosts[MEDITATION_REGEN];
   h += getPassiveBoost(PASSIVE_HEALTH_REGEN);
+  h += heldItemStat(ITEM_ADD_HEALTH_REGEN);
+  h -= getPassiveBoost(HEALTH_LOSS_OVER_TIME);
   h *= deltaTime;
   d = subStats[MAX_HEALTH] - subStats[CURRENT_HEALTH];
   if (h > d) h = d;
@@ -1805,7 +2101,7 @@ defaultProperties
   // Courage Affinity Amplifiers
   affinity(TOTAL_ATK_INTERVAL)=(amp[MINOR]=0.8, amp[AVERAGE]=1, amp[MAJOR]=1.15)
   affinity(CRIT_CHANCE)=(amp[MINOR]=5, amp[AVERAGE]=3, amp[MAJOR]=2)
-  affinity(CRIT_MULTIPLIER)=(amp[MINOR]=1.5, amp[AVERAGE]=1.5, amp[MAJOR]=1.5) 
+  affinity(CRIT_MULTIPLIER)=(amp[MINOR]=1.2, amp[AVERAGE]=1.2, amp[MAJOR]=1.2) 
   affinity(ACCURACY_RATING)=(amp[MINOR]=1.5, amp[AVERAGE]=1.65, amp[MAJOR]=1.9)
   
   // Courage Affinity Amplifiers

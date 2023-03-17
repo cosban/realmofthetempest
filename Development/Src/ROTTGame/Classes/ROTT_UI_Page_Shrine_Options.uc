@@ -119,7 +119,10 @@ protected function navigationRoutineA() {
   switch (shrineOptions.getSelectionIndex()) {
     case COMMENCE_RITUAL:
       // Call kismet event
-      gameInfo.triggerGlobalEventClass(class'ROTT_Kismet_Event_Shrine_Use', gameInfo.tempestPawn);
+      gameInfo.triggerGlobalEventClass(
+        class'ROTT_Kismet_Event_Shrine_Use', 
+        gameInfo.tempestPawn
+      );
       break;
     case CANCEL_RITUAL:
       parentScene.popPage(tag);
@@ -147,6 +150,7 @@ defaultProperties
 {
   bPauseGameWhenUp=true
   bMandatoryScaleToWindow=true
+  bPageForcesCursorOn=true
   
   /** ===== Input ===== **/
   begin object class=ROTT_Input_Handler Name=Input_A

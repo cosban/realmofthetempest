@@ -29,16 +29,16 @@ public function initializeComponent(optional string newTag = "") {
   super.initializeComponent(newTag);
   
   // Internal References
-  activityBox = findSprite("Party_Activity_Box");
   headerLabel = findLabel("Party_Header_Label");
-  activityLabel = findLabel("Party_Activity_Label");
+  partyStatus = findLabel("Party_Status_Label");
+  activityLabel = findLabel("Shrine_Activity_Label");
+  activityBox = findSprite("Party_Activity_Box");
   
   for (i = 0; i < 3; i++) {
     heroClassLabels[i] = findLabel("Party_Hero_Class_Label_" $ i + 1);
     heroLevelLabels[i] = findLabel("Party_Hero_Level_Label_" $ i + 1);
   }
   
-  partyStatus = findLabel("Party_Status_Label");
 }
 
 /*=============================================================================
@@ -90,12 +90,12 @@ public function renderPartyInfo(ROTT_Party displayParty) {
       labelFont = DEFAULT_SMALL_BLUE; 
       break;
     case PARTY_MONSTER_HUNTING:
-      labelText = "Hunting Monsters"; 
+      labelText = "Hunting"; 
       labelFont = DEFAULT_SMALL_ORANGE; 
       break;
     case PARTY_TENDING_GARDENS:
       labelText = "Tending Gardens"; 
-      labelFont = DEFAULT_SMALL_DARK_GREEN; 
+      labelFont = DEFAULT_SMALL_GREEN; 
       break;
   }
   
@@ -106,36 +106,50 @@ public function renderPartyInfo(ROTT_Party displayParty) {
   switch (displayParty.partyActivity) {
     case NO_SHRINE_ACTIVITY: 
       labelText = ""; 
-      labelFont = DEFAULT_SMALL_GREEN; 
       break;
+      
     case CLERICS_SHRINE:
+      labelText = "Clerics Shrine";
+      break;
     case COBALT_SANCTUM:
+      labelText = "Cobalt Sanctum";
+      break;
     case THE_ROSETTE_PILLARS:
+      labelText = "The Rosette Pillars";
+      break;
     case LOCKSPIRE_SHRINE:
-      labelText = "Worshipping";
-      labelFont = DEFAULT_SMALL_BLUE; 
+      labelText = "Lockspire Shrine";
       break;
       
     case THE_UNDEAD:
+      labelText = "The Undead";
+      break;
     case THE_DEMONIC:
+      labelText = "The Demonic";
+      break;
     case THE_SERPENTINE:
+      labelText = "The Serpentine";
+      break;
     case THE_BEASTS:
-      labelText = "Hunting";
-      labelFont = DEFAULT_SMALL_ORANGE; 
+      labelText = "The Beasts";
       break;
       
     case HAWKSPIRE_MEADOW:
+      labelText = "Hawkspire Meadow";
+      break;
     case LACEROOT_SHRINE:
+      labelText = "Laceroot Shrine";
+      break;
     case FATEWOOD_GROVE:
+      labelText = "Fatewood Grove";
+      break;
     case MYRRHIAN_THICKET:
-      labelText = "Gardening";
-      labelFont = DEFAULT_SMALL_GREEN; 
+      labelText = "Myrrhian Thicket";
       break;
       
   }
   
   activityLabel.setText(labelText);
-  activityLabel.setFont(labelFont);
 }
 
 /*=============================================================================
@@ -214,7 +228,7 @@ defaultProperties
     componentTextures.add(Texture2D'GUI.Team_Manager.Team_Info_Window_Background')
   end object
   begin object class=UI_Texture_Info Name=Party_Activity_Component
-    componentTextures.add(Texture2D'GUI.PartyMGR_Raid_Component')
+    componentTextures.add(Texture2D'GUI.Hyper_Shrine_Text_Box')
   end object
   
   // Party info container background
@@ -348,11 +362,11 @@ defaultProperties
   end object
   componentList.add(Party_Activity_Box)
   
-  // Activity Label
-  begin object class=UI_Label Name=Party_Activity_Label
-    tag="Party_Activity_Label"
+  // Shrine Activity Label
+  begin object class=UI_Label Name=Shrine_Activity_Label
+    tag="Shrine_Activity_Label"
     posX=342
-    posY=132
+    posY=133
     posXEnd=637
     posYEnd=182
     alignX=LEFT
@@ -361,34 +375,8 @@ defaultProperties
     fontStyle=DEFAULT_SMALL_TAN
     labelText=""
   end object
-  componentList.add(Party_Activity_Label)
+  componentList.add(Shrine_Activity_Label)
   
-  /* Progress bar
-  begin object class=UI_Sprite Name=Party_Experience_Bar_Back_1
-    tag="Party_Experience_Bar_Back_1" 
-    bEnabled=false
-    posX=1082
-    posY=225
-    images(0)=Experience_Bar_Back_Black
-  end object
-  componentList.add(Party_Experience_Bar_Back_1)
-  
-  begin object class=UI_Sprite Name=Party_Experience_Tube_1
-    tag="Party_Experience_Tube_1" 
-    posX=1100
-    posY=236
-    images(0)=Stat_Tube_EXP
-  end object
-  componentList.add(Party_Experience_Tube_1)
-  
-  begin object class=UI_Sprite Name=Party_Experience_Bar_Frame_1
-    tag="Party_Experience_Bar_Frame_1"  
-    posX=1082
-    posY=225
-    images(0)=Experience_Bar_Frame
-  end object
-  componentList.add(Party_Experience_Bar_Frame_1)
-  */
 }
 
 

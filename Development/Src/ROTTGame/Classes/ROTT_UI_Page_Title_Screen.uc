@@ -16,14 +16,10 @@ enum UISceneStates {
   MENU_HIDDEN,
   GAMEPLAY_MENU_VISIBLE,
   GAMEMODE_MENU_VISIBLE,
-  
-  STOP_ALL_INPUT,
-  
-  RESTART_REQUIRED
-  
 };
 
 var private UISceneStates currentUIScene;
+var public bool bLockControls;
 
 /** ============================== **/
 
@@ -44,14 +40,13 @@ var private UI_Selector menuSelector;
 var private UI_Label gameVersionText;
 var private UI_Sprite titleMenuOptions;
 var private UI_Sprite gameModeMenuOptions;
-var private UI_Sprite restartRequiredNotification;
 
 // Timers
-var private ROTTTimer fadeInTimer;     // Used to ignore inputs until fade in
-var private ROTTTimer newGameTimer;    // Used to fade out before a new game
+var private float fadeInTime;           // Used to ignore inputs until fade in
+var private ROTT_Timer newGameTimer;    // Used to fade out before a new game
 
-// Counts the number of invalid inputs for controller requirement message
-var private int invalidInputs;
+// Tracks if a reset to native resolution is needed for vsync trick
+var private bool bResetRes;
 
 /*=============================================================================
  * initialize Component
@@ -66,7 +61,6 @@ public function initializeComponent(optional string newTag = "") {
   gameVersionText = findLabel("Game_Version_Text");
   gameModeMenuOptions = findSprite("Game_Mode_Menu_Options");
   titleMenuOptions = findSprite("Title_Menu_Options");
-  restartRequiredNotification = findSprite("Restart_Required_Notification");
   
   // Draw version info
   gameVersionText.setText(gameInfo.getVersionInfo()); 
@@ -74,17 +68,18 @@ public function initializeComponent(optional string newTag = "") {
   addEffectToComponent(FADE_OUT, "Title_Fade_Component", 0.8);
   
   // Set scene to no input, until fade in effects complete
-  currentUIScene = STOP_ALL_INPUT;
+  bLockControls = true;
   
-  // Draw "restart required" dialogue, if necessary
+  // Check if resolution vsync trick is needed
   if (checkSystemSettings() == REQUIREMENTS_FAIL) {
-    currentUIScene = RESTART_REQUIRED;
-    restartRequiredNotification.setEnabled(true); 
-  } else {
-    // Time delay until input
-    fadeInTimer = gameInfo.Spawn(class'ROTTTimer');
-    fadeInTimer.makeTimer(1.6, LOOP_OFF, allowInput);
+    // Force VSync via resolution change
+    fixVSync();
+    gameInfo.setResolution(1768, 992);
+    bResetRes = true;
   }
+  
+  // Time delay until input
+  fadeInTime = 1.6;
   
   // Build and version info
   if (!gameInfo.bDevMode) {
@@ -97,11 +92,39 @@ public function initializeComponent(optional string newTag = "") {
   } 
 }
 
+/*=============================================================================
+ * onFocusMenu()
+ *
+ * Called when a menu is given focus.  Assign controls, and enable graphics.
+ *===========================================================================*/
+event onFocusMenu() {
+}
+
+/*=============================================================================
+ * elapseTimers()
+ *
+ * Ticks every frame.  Used to check for joystick navigation.
+ *===========================================================================*/
+public function elapseTimers(float deltaTime) {
+  super.elapseTimers(deltaTime);
+  
+  // Check if fade in time remaining
+  if (fadeInTime > 0) {
+    // Subtract from timer
+    fadeInTime -= deltaTime;
+    
+    // Check if timer completed
+    if (fadeInTime <= 0) {
+      allowInput();
+    }
+  }
+}
+
 /*============================================================================*
  * Controls
  *
  * ControllerId     the controller that generated this input key event
- * Key              the name of the key which an event occured for
+ * inputName        the name of the key which an event occured for
  * EventType        the type of event which occured
  * AmountDepressed  for analog keys, the depression percent.
  *
@@ -110,54 +133,36 @@ public function initializeComponent(optional string newTag = "") {
 function bool onInputKey
 ( 
   int ControllerId, 
-  name Key, 
+  name inputName, 
   EInputEvent Event, 
   float AmountDepressed = 1.f, 
   bool bGamepad = false
 ) 
 {
-  /// Debug input
-  //gameVersionText.setText(gameInfo.getVersionInfo() $ "                        " $ Key $ "  " $ AmountDepressed); 
+  // Check for exit (via escape)
+  if (inputName == 'Escape') gameInfo.consoleCommand("EXIT");
   
-  if (Key == 'Escape') gameInfo.consoleCommand("EXIT");
-  switch (Key) {
-    case 'Spacebar':
-    ///case 'Enter':
-    case 'w':
-    case 'a':
-    case 's':
-    case 'd':
-      invalidInputs++;
-      if (invalidInputs == 2) {
-        showControllerNotification();
-      }
+  // Open options from title page
+  switch (inputName) {
+    case 'Tab':
+    case 'XBoxTypeS_Start':
+      // Change scene for options
+      gameInfo.sceneManager.switchScene(SCENE_GAME_MANAGER);
+      
+      // Push options page to front
+      gameInfo.sceneManager.sceneGameManager.pushPage(
+        gameInfo.sceneManager.sceneGameManager.gameOptionsPage
+      );
+      
+      // Store redirection in memory for navigating back to title page
+      gameInfo.sceneManager.sceneGameManager.bTitleMenuDirection = true;
+      
+      // Play sound
+      sfxBox.playSfx(SFX_MENU_NAVIGATE);
       break;
   }
   
-  return super.onInputKey(ControllerId, Key, Event, AmountDepressed, bGamepad);
-}
-
-/*============================================================================*
- * showControllerNotification()
- *
- * Displays a message to the user that a controller is required.
- *===========================================================================*/
-private function showControllerNotification() {
-  findLabel("Controller_Notification_Label_Shadow").setEnabled(true);
-  findLabel("Controller_Notification_Label").setEnabled(true);
-  
-  addEffectToComponent(DELAY, "Controller_Notification_Label", 3.1);
-  addEffectToComponent(FADE_OUT, "Controller_Notification_Label", 1.35);
-}
-
-/*============================================================================*
- * hideControllerNotification()
- *
- * Hides a message to the user that a controller is required.
- *===========================================================================*/
-private function hideControllerNotification() {
-  findLabel("Controller_Notification_Label_Shadow").setEnabled(false);
-  findLabel("Controller_Notification_Label").setEnabled(false);
+  return super.onInputKey(ControllerId, inputName, Event, AmountDepressed, bGamepad);
 }
 
 /*=============================================================================
@@ -169,7 +174,6 @@ protected function navigationRoutineA() {
     case GAMEPLAY_MENU_VISIBLE:  menuSelect();      break;
     case GAMEMODE_MENU_VISIBLE:  modeMenuSelect();  break;
   }
-  hideControllerNotification();
 }
 
 /*=============================================================================
@@ -179,11 +183,8 @@ protected function navigationRoutineA() {
  * delegated to a button, because each button has different requirements.
  *===========================================================================*/
 protected function bool requirementRoutineA() {
-  // Ignore input when restart required
-  if (currentUIScene == RESTART_REQUIRED) return false;
-  
   // Ignore input when controls are locked (for fade in effects)
-  if (currentUIScene == STOP_ALL_INPUT) return false;
+  if (bLockControls) return false;
   return true;
 }
 
@@ -240,15 +241,15 @@ private function modeMenuSelect() {
   // initiate fade out
   addEffectToComponent(FADE_IN, "Title_Fade_Component", 0.75);
   
-  // Set new scene controls
-  currentUIScene = STOP_ALL_INPUT; 
+  // Block player input
+  bLockControls = true;
   
   // Audio controls
   gameinfo.sfxBox.playSFX(SFX_MENU_ACCEPT);
   jukebox.fadeOut(1);
   
   // Wait to launch new game
-  newGameTimer = gameInfo.Spawn(class'ROTTTimer');
+  newGameTimer = gameInfo.Spawn(class'ROTT_Timer');
   newGameTimer.makeTimer(1.0, LOOP_OFF, showIntroPage);
   
   // Deactivate selector
@@ -284,41 +285,43 @@ private function menuSelect() {
       break;
       
     case CONTINUE_GAME:
-      whitelog("--+ Continue Game +--");
+      whitelog("--+ Save Manager +--");
       
-      gameInfo.sceneManager.sceneTitleScreen.transitionContinue();
+      // Transition effect
+      gameInfo.sceneManager.sceneTitleScreen.transitionOnContinue();
+      clearWidgets();
       
-      // Attempt to load game
-      ///if (gameInfo.loadSavedGame()) {
-      ///  // If loaded successfully, save for transition
-      ///  gameInfo.saveGame(true);
-      ///  
-      ///  // Queue transition
-      ///  gameInfo.sceneManager.sceneTitleScreen.transitionContinue();
-      ///  
-      ///  // Deactivate selector
-      ///  menuSelector.setActive(false);
-      ///} else {
-      ///  // Save file does not exist, play sound
-      ///  gameinfo.sfxBox.playSFX(SFX_MENU_INSUFFICIENT); 
-      ///  redlog("Save file does not exist");
-      ///}
+      // Control lock
+      bLockControls = true;
+      
+      // Sfx
+      gameinfo.sfxBox.playSFX(SFX_MENU_ACCEPT);
       break;
   }
   
 }
 
 /*=============================================================================
- * Check System Settings
+ * fixVSync()
  *
- * Description: This function is a hacky way of forcing changes to some system 
- *              settings, which require a restart of the application. 
+ * Initializes vsync settings to prevent screen tearing
  *===========================================================================*/
-private function bool checkSystemSettings() {
+private function fixVSync() {
   local CustomSystemSettings settings;
-  local ROTT_Cookie_Requirement cookie;
 
   settings = class'WorldInfo'.static.getWorldInfo().spawn(class'CustomSystemSettings');
+  
+  settings.setUseVsync(true);
+}
+
+/*=============================================================================
+ * checkSystemSettings()
+ *
+ * Uses a cookie to check if the vsync resolution trick has been used
+ *===========================================================================*/
+private function bool checkSystemSettings() {
+  local ROTT_Cookie_Requirement cookie;
+
   cookie = new(self) class'ROTT_Cookie_Requirement';
   
   // Hacky! check version info to see if the game has been run before
@@ -328,14 +331,11 @@ private function bool checkSystemSettings() {
     }
   }
   
-  // Force VSync (game looks awful without it)
-  settings.setUseVsync(true);
-  
   // Hacky! Save version info out to allow future requirement checks to pass
   cookie.sVersion = gameInfo.getVersionInfo();
   class'Engine'.static.basicSaveObject(cookie, "Save\\version_cookie.bin", true, 0);
 
-  return REQUIREMENTS_FAIL; // restart required
+  return REQUIREMENTS_FAIL; // resolution change required
 
 }
 
@@ -346,9 +346,6 @@ private function bool checkSystemSettings() {
  *===========================================================================*/
 private function showIntroPage() { 
   parentScene.pushPageByTag("Page_Game_Intro");
-  
-  // Remove timer
-  newGameTimer.destroy();
 } 
 
 /*============================================================================= 
@@ -368,8 +365,15 @@ public function onSceneActivation() {
 private function allowInput() { 
   // Triggered after fade in, control is given to player
   currentUIScene = MENU_HIDDEN; 
-  fadeInTimer.destroy();
-  invalidInputs = 0;
+  bLockControls = false;
+  
+  // Check if resolution vsync trick is needed
+  if (bResetRes) {
+    // Force VSync via resolution change
+    fixVSync();
+    gameInfo.setResolution(1440, 900);
+    bResetRes = false;
+  }
 } 
 
 /*=============================================================================
@@ -379,8 +383,7 @@ private function allowInput() {
  *===========================================================================*/
 event deleteComp() {
   super.deleteComp();
-  
-  if (fadeInTimer != none) fadeInTimer.destroy();     
+    
   if (newGameTimer != none) newGameTimer.destroy();     
 }
 
@@ -467,6 +470,9 @@ defaultProperties
     posY=549
     selectionOffset=(x=0,y=71)
     numberOfMenuOptions=2
+    hoverCoords(0)=(xStart=548,yStart=567,xEnd=888,yEnd=630)
+    hoverCoords(1)=(xStart=548,yStart=637,xEnd=888,yEnd=700)
+    hoverCoords(2)=(xStart=548,yStart=707,xEnd=888,yEnd=770)
     
     // Selection texture
     begin object class=UI_Texture_Info Name=Selection_Box_Texture
@@ -492,18 +498,6 @@ defaultProperties
   end object
   componentList.add(Title_Menu_Selector)
   
-  // Restart info
-  begin object class=UI_Sprite Name=Restart_Required_Notification
-    tag="Restart_Required_Notification"
-    bEnabled=false
-    posX=390
-    posY=540
-    posXEnd=1050
-    posYEnd=660
-    images(0)=Restart_Required_Texture
-  end object
-  componentList.add(Restart_Required_Notification)
-  
   // Version
   begin object class=UI_Label Name=Game_Version_Text
     tag="Game_Version_Text"
@@ -521,7 +515,7 @@ defaultProperties
   // Build info
   begin object class=UI_Label Name=Dev_Build_Warning
     tag="Dev_Build_Warning"
-    posX=95
+    posX=105
     posY=0
     posXEnd=NATIVE_WIDTH
     posYEnd=NATIVE_HEIGHT
@@ -531,6 +525,20 @@ defaultProperties
     labelText="Dev Build"
   end object
   componentList.add(Dev_Build_Warning)
+  
+  // Options info
+  begin object class=UI_Label Name=Options_Info_Label
+    tag="Options_Info_Label"
+    posX=0
+    posY=0
+    posXEnd=NATIVE_WIDTH
+    posYEnd=NATIVE_HEIGHT
+    alignX=CENTER
+    alignY=BOTTOM
+    fontStyle=DEFAULT_SMALL_BEIGE
+    labelText="Press Start for Options"
+  end object
+  componentList.add(Options_Info_Label)
   
   // Fade effects
   begin object class=UI_Sprite Name=Title_Fade_Component
@@ -542,42 +550,6 @@ defaultProperties
     images(0)=Black_Texture
   end object
   componentList.add(Title_Fade_Component)
-  
-  
-  // Notification for Controller requirement
-  begin object class=UI_Label Name=Controller_Notification_Label_Shadow
-    tag="Controller_Notification_Label_Shadow"
-    bEnabled=false
-    posX=0
-    posY=500
-    posXEnd=NATIVE_WIDTH
-    posYEnd=550
-    padding=(top=1, left=13, right=11, bottom=7)
-    fontStyle=DEFAULT_LARGE_ORANGE
-    labelText="A controller is required for play"
-    activeEffects.add((effectType=EFFECT_ALPHA_CYCLE, lifeTime=-1, elapsedTime=0, intervalTime=0.4, min=220, max=255))
-    alignX=CENTER
-    alignY=CENTER
-  end object
-  componentList.add(Controller_Notification_Label_Shadow)
-  
-  // Notification for Controller requirement
-  begin object class=UI_Label Name=Controller_Notification_Label
-    tag="Controller_Notification_Label"
-    bEnabled=false
-    posX=0
-    posY=500
-    posXEnd=NATIVE_WIDTH
-    posYEnd=550
-    fontStyle=DEFAULT_LARGE_ORANGE
-    labelText="A controller is required for play"
-    activeEffects.add((effectType=EFFECT_ALPHA_CYCLE, lifeTime=-1, elapsedTime=0, intervalTime=0.4, min=200, max=255))
-    activeEffects.add((effectType=EFFECT_FLIPBOOK, lifeTime=-1, elapsedTime=0, intervalTime=0.10, min=0, max=255))
-    cycleStyles=(DEFAULT_LARGE_GOLD, DEFAULT_LARGE_ORANGE)
-    alignX=CENTER
-    alignY=CENTER
-  end object
-  componentList.add(Controller_Notification_Label)
   
 }
 

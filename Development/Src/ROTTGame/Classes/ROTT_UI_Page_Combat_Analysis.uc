@@ -23,7 +23,7 @@ var private ControlState menuControl;
 /** ============================== **/
 
 // Input delay timer
-var public ROTTTimer inputDelayTimer; 
+var public ROTT_Timer inputDelayTimer; 
   
 // Internal references
 var private ROTT_UI_Displayer_Battle_Analysis analysisInfo;
@@ -56,8 +56,20 @@ public function initializeComponent(optional string newTag = "") {
  * Description: This event is called every time the page is pushed.
  *===========================================================================*/
 event onPushPageEvent() {
-  // Push transition effect
-  someScene.pushPage(someScene.transitionPageIn);
+  // Execute transition
+  gameInfo.sceneManager.transitioner.setTransition(
+    TRANSITION_IN,                               // Transition direction
+    RIGHT_SWEEP_TRANSITION_IN,                   // Sorting config
+    ,                                            // Pattern reversal
+    ,                                            // Destination scene
+    ,                                            // Destination page
+    ,                                            // Destination world
+    ,                                            // Color
+    20,                                          // Tile speed
+    0.2f,                                        // Delay
+    true,                                        // Input consumption
+    "Page_Transition_In"
+  );
   
   // Ignore input until focused
   menuControl = IGNORE_INPUT;
@@ -70,6 +82,13 @@ event onPushPageEvent() {
   // Display the analysis through refresh
   refresh();
   
+  /// Check for fast defeat bonus for encounter rate reduction 
+  ///if (gameInfo.getActiveParty().getHero(0).battleStatistics[BATTLE_TIME] <= 25) {
+  ///  if (gameInfo.enemyEncounter.averageLevel > 10) {
+  ///    gameInfo.playerProfile.reducedRateEnemyLevel = gameInfo.enemyEncounter.averageLevel - 10;
+  ///    violetLog("Reduced encounter rate for levels under " $ gameInfo.playerProfile.reducedRateEnemyLevel);
+  ///  }
+  ///}
 }
 
 /*============================================================================= 
@@ -105,8 +124,8 @@ public function onSceneActivation() {
  * Called when a menu is given focus.  Assign controls, and enable graphics.
  *===========================================================================*/
 event onFocusMenu() {
-  inputDelayTimer = gameInfo.spawn(class'ROTTTimer');
-  inputDelayTimer.makeTimer(0.2, LOOP_OFF, allowInput);
+  inputDelayTimer = gameInfo.spawn(class'ROTT_Timer');
+  inputDelayTimer.makeTimer(0.8, LOOP_OFF, allowInput);
 }
 
 /*=============================================================================
@@ -121,9 +140,6 @@ public function onNavigateRight() {
   // Update UI
   refresh();
 }
-
-protected function navigateDown();
-protected function navigateUp();
 
 /*=============================================================================
  * Button controls
@@ -152,12 +168,23 @@ private function exitPage() {
     someScene.transitionToHeroStats();
     someScene.bLootPending = true;
   } else {
-    // Push transition effect for over world
-    someScene.pushPage(someScene.transitionPageOverWorld);
+    // Transition effect into over world
+    gameInfo.sceneManager.transitioner.setTransition(
+      TRANSITION_OUT,                              // Transition direction
+      RIGHT_SWEEP_TRANSITION_OUT,                  // Sorting config
+      ,                                            // Pattern reversal
+      SCENE_OVER_WORLD,                            // Destination scene
+      ,                                            // Destination page
+      ,                                            // Destination world
+      ,                                            // Color
+      ,                                            // Tile speed
+      0.2f,                                         // Delay
+      true,
+      "Page_Transition_Out_Over_World"
+    );
+    
     gameInfo.sceneManager.sceneOverWorld.fadeIn();
   }
-  
-  ///playsfx SFX_MENU_ACCEPT SFX_MENU_BACK SFX_MENU_NAVIGATE
   
   // Autosave update
   gameInfo.saveGame(true);
@@ -245,6 +272,9 @@ defaultProperties
     navigationType=SELECTION_HORIZONTAL
     selectionOffset=(x=200,y=0)
     numberOfMenuOptions=3
+    hoverCoords(0)=(xStart=114,yStart=81,xEnd=303,yEnd=371)
+    hoverCoords(1)=(xStart=314,yStart=81,xEnd=503,yEnd=371)
+    hoverCoords(2)=(xStart=514,yStart=81,xEnd=703,yEnd=371)
     
     // Selection texture
     begin object class=UI_Texture_Info Name=Selection_Box_Texture

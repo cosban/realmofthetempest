@@ -13,41 +13,6 @@
  
 class ROTT_UI_Page_Stats_Inspection extends ROTT_UI_Page_Hero_Info;
 
-// Enchantment icon macros
-`DEFINE ENCHANT_ICON(X, Y, N) \
-  begin object class=UI_Sprite Name=Enchant_Boost_Icon_`N                                                             \n \
-    tag="Enchant_Boost_Icon_`N"                                                                                       \n \
-    posX=`X                                                                                                           \n \
-    posY=`Y                                                                                                           \n \
-    images(0)=Enchantment_Boost_Icon_1                                                                              \n \
-  end object                                                                                                          \n \
-  componentList.add(Enchant_Boost_Icon_`N)                                                                            \n \
-  begin object class=UI_Sprite Name=Enchant_Boost_Upper_Icon_`N                                                       \n \
-    tag="Enchant_Boost_Upper_Icon_`N"                                                                                 \n \
-    posX=`X                                                                                                           \n \
-    posY=`Y                                                                                                           \n \
-    images(0)=Enchantment_Boost_Icon_2                                                                              \n \
-    activeEffects.add((effectType=EFFECT_ALPHA_CYCLE, lifeTime=-1, elapsedTime=0, intervalTime=0.8, min=31, max=255)) \n \
-  end object                                                                                                          \n \
-  componentList.add(Enchant_Boost_Upper_Icon_`N)                                                                      \n \
-
-`DEFINE ENCHANT_CHEV_ICON(X, Y, N) \
-  begin object class=UI_Sprite Name=Enchant_Boost_Icon_`N                                                              \n \
-    tag="Enchant_Boost_Icon_`N"                                                                                        \n \
-    posX=`X                                                                                                            \n \
-    posY=`Y                                                                                                            \n \
-    images(0)=Enchantment_Chevron_Icon_1                                                                             \n \
-  end object                                                                                                           \n \
-  componentList.add(Enchant_Boost_Icon_`N)                                                                             \n \
-  begin object class=UI_Sprite Name=Enchant_Boost_Upper_Icon_`N                                                        \n \
-    tag="Enchant_Boost_Upper_Icon_`N"                                                                                  \n \
-    posX=`X                                                                                                            \n \
-    posY=`Y                                                                                                            \n \
-    images(0)=Enchantment_Chevron_Icon_2                                                                             \n \
-    activeEffects.add((effectType=EFFECT_ALPHA_CYCLE, lifeTime=-1, elapsedTime=0, intervalTime=0.8, min=31, max=255))  \n \
-  end object                                                                                                           \n \
-  componentList.add(Enchant_Boost_Upper_Icon_`N)                                                                       \n \
-
 // Internal references
 var private ROTT_UI_Character_Sheet_Header header;
 var private UI_Sprite statsPageBackground;
@@ -56,6 +21,7 @@ var private ROTT_UI_Stats_Selector statsSelector;
 var private ROTT_UI_Statistic_Labels statisticLabels;
 var private ROTT_UI_Statistic_Values statisticValues;
 var private ROTT_UI_Displayer_Experience expInfo;
+var private ROTT_UI_Displayer_Stat_Boosts statBoostDisplayer;
 
 /*============================================================================= 
  * initializeComponent()
@@ -64,6 +30,8 @@ var private ROTT_UI_Displayer_Experience expInfo;
  *===========================================================================*/
 public function initializeComponent(optional string newTag = "") {
   super.initializeComponent(newTag);
+  
+  gameMenuScene = gameInfo.sceneManager.sceneGameMenu;
   
   // Internal references
   header = ROTT_UI_Character_Sheet_Header(findComp("Character_Sheet_Header"));
@@ -74,6 +42,8 @@ public function initializeComponent(optional string newTag = "") {
   statisticLabels = ROTT_UI_Statistic_Labels(findComp("Statistic_Labels"));
   statisticValues = ROTT_UI_Statistic_Values(findComp("Statistic_Values"));
   expInfo = ROTT_UI_Displayer_Experience(findComp("Experience_Bar_UI"));
+  
+  statBoostDisplayer = ROTT_UI_Displayer_Stat_Boosts(findComp("Stat_Boost_Displayer"));
   
   // Initial control state
   controlState = VIEW_MODE;
@@ -125,7 +95,7 @@ event onFocusMenu() {
   // Change display based on control state
   switch (controlState) {
     case VIEW_MODE: 
-      if (someScene != none) someScene.enablePageArrows(true);
+      if (gameMenuScene != none) gameMenuScene.enablePageArrows(true);
       break;
   }
   
@@ -145,6 +115,25 @@ event onFocusMenu() {
   
   // Default stat selection mode
   statsSelector.setSelectorType(SELECTOR_DEFAULT_BOX);
+  
+  // Check if player has already seen navigation tool tip
+  if (!gameInfo.playerProfile.bHideHeroInfoToolTip) {
+    // Show tool tip
+    findComp("Tool_Tip_Container").setEnabled(true);
+  }
+}
+
+/*============================================================================= 
+ * onPopPageEvent()
+ *
+ * This event is called when the page is removed
+ *===========================================================================*/
+event onPopPageEvent() {
+  super.onPopPageEvent();
+  
+  // Hide tool tip (skipping if statement for efficiency)
+  findComp("Tool_Tip_Container").setEnabled(false);
+  gameInfo.playerProfile.bHideHeroInfoToolTip = true;
 }
 
 /*============================================================================= 
@@ -154,7 +143,20 @@ event onFocusMenu() {
  * correctly updated on the UI.
  *===========================================================================*/
 public function refresh() {
+  // Draw info
   renderHeroData(parentScene.getSelectedHero());
+  renderStatData();
+  
+  // Check if preview item window is up
+  if (gameMenuScene.pageIsUp(gameMenuScene.previewWindowItem)) {
+    
+    // Update item replacement preview window
+    gameMenuScene.updateItemWindow(
+      gameMenuScene.getSelectedHero().heldItem.getItemDescriptor(
+        gameMenuScene.getSelectedHero().heldItem
+      )
+    );
+  }
 }
 
 /*=============================================================================
@@ -172,15 +174,26 @@ public function byte getSelectedStat() {
  * Given a hero, this displays all of its information to the screen
  *===========================================================================*/
 private function renderHeroData(ROTT_Combat_Hero hero) {
-  local UI_Container enchantIcon;
-  local int i;
+  local string h3;
+  
+  // Set third header, for extra hero information
+  if (hero.bDead && gameInfo.playerProfile.gameMode == MODE_HARDCORE) {
+    // Show the hero has fallen in hardcore
+    h3 = "R.I.P.";
+  } else if (hero.blessingCount > 0) {
+    // Show blessings
+    h3 = "Blessings: " $ hero.blessingCount;
+  } else {
+    // Blank otherwise
+    h3 = "";
+  }
   
   // Header
   header.setDisplayInfo
   (  
     pCase(hero.myClass), 
     "Level " $ hero.level,
-    (hero.blessingCount > 0) ? "Blessings: " $ hero.blessingCount : "",
+    h3,
     (hero.unspentStatPoints != 0) ? "Stat Points" : "",
     (hero.unspentStatPoints != 0) ? string(hero.unspentStatPoints) : ""
   );
@@ -189,30 +202,8 @@ private function renderHeroData(ROTT_Combat_Hero hero) {
   statisticValues.renderHeroData(hero);
   expInfo.attachDisplayer(hero);
   
-  // Icon boosts for profile wide enchantments
-  for (i = 0; i < class'ROTT_Descriptor_Enchantment_List'.static.countEnchantmentEnum(); i++) {
-    enchantIcon = UI_Container(findComp("Enchant_Icons_" $ string(GetEnum(enum'EnchantmentEnum', i))));
-    // Show or hide each enchantment boost
-    if (enchantIcon != none) {
-      if (gameInfo.playerProfile.enchantmentLevels[i] > 0) {
-        enchantIcon.setEnabled(true);
-      } else {
-        enchantIcon.setEnabled(false);
-      }
-    }
-  }
-  
-  // Check for individual hero ritual boosts
-  if (hero.subStats[MANA_REGEN] > 0)
-    UI_Container(findComp("Enchant_Icons_ETERNAL_SPELLSTONE")).setEnabled(true);
-  if (hero.subStats[HEALTH_REGEN] > 0)
-    UI_Container(findComp("Enchant_Icons_ROSEWOOD_PENDANT")).setEnabled(true);
-  
-  if (hero.getRitualAmp(RITUAL_HEALTH_BOOST) > 0)
-    UI_Container(findComp("Enchant_Icons_ARCANE_BLOODPRISM")).setEnabled(true);
-  if (hero.getRitualAmp(RITUAL_MANA_BOOST) > 0)
-    UI_Container(findComp("Enchant_Icons_MYSTIC_MARBLE")).setEnabled(true);
-  
+  // Boost icons
+  statBoostDisplayer.attachDisplayer(hero);
 }
 
 /*============================================================================= 
@@ -232,7 +223,57 @@ private function renderStatData() {
     hero
   );
   
-  someScene.setMgmtDescriptor(descriptor);
+  // Update descriptor if needed
+  if (gameMenuScene != none) gameMenuScene.setMgmtDescriptor(descriptor);
+}
+
+/*============================================================================*
+ * Controls
+ *
+ * ControllerId     the controller that generated this input key event
+ * Key              the name of the key which an event occured for
+ * EventType        the type of event which occured
+ * AmountDepressed  for analog keys, the depression percent.
+ *
+ * Returns: true to consume the key event, false to pass it on.
+ *===========================================================================*/
+function bool onInputKey
+( 
+  int ControllerId, 
+  name Key, 
+  EInputEvent Event, 
+  float AmountDepressed = 1.f, 
+  bool bGamepad = false
+) 
+{
+  // Check input event
+  if (Event == IE_Pressed) { 
+    // A button press
+    if (Key == 'Z') navigationRoutineLB();
+    if (Key == 'C') navigationRoutineRB();
+    
+    // Check input keys
+    switch (Key) {
+      case 'Tilde': 
+      case 'XBoxTypeS_Y': 
+        // Show item information
+        if (controlState == VIEW_MODE) {
+          // Show held item info
+          gameMenuScene.toggleSideItemWindow(
+            gameMenuScene.getSelectedHero().heldItem.getItemDescriptor(
+              gameMenuScene.getSelectedHero().heldItem
+            ),
+            0
+          );
+          
+          // Play Sound
+          sfxBox.playSfx(SFX_MENU_ACCEPT);
+        }
+        break;
+    }
+  }
+  
+  return super.onInputKey(ControllerId, Key, Event, AmountDepressed, bGamepad);
 }
 
 /*=============================================================================
@@ -275,21 +316,23 @@ public function bool preNavigateDown() {
 }
 
 public function onNavigateLeft() {
-  if (someScene == none) return;
+  if (gameMenuScene == none) return;
   switch (controlState) {
     case VIEW_MODE:
       // Change view to master tree
-      someScene.switchPage(MASTERY_SKILLTREE);
+      parentScene.popPage("Preview_Window_Item");
+      gameMenuScene.switchPage(MASTERY_SKILLTREE);
       break;
   }
 }
 
 public function onNavigateRight() {
-  if (someScene == none) return;
+  if (gameMenuScene == none) return;
   switch (controlState) {
     case VIEW_MODE:
       // Change view to class tree
-      someScene.switchPage(CLASS_SKILLTREE);
+      parentScene.popPage("Preview_Window_Item");
+      gameMenuScene.switchPage(CLASS_SKILLTREE);
       break;
   }
 }
@@ -298,13 +341,24 @@ public function onNavigateRight() {
  * Button controls
  *===========================================================================*/
 protected function navigationRoutineA() {
+  // Check if tool tip info is up
+  if (!gameInfo.playerProfile.bHideHeroInfoToolTip) {
+    // Show tool tip
+    findComp("Tool_Tip_Container").addEffectToQueue(FADE_OUT, 0.6);
+    gameInfo.playerProfile.bHideHeroInfoToolTip = true;
+    return;
+  }
+  
   switch (controlState) {
     case VIEW_MODE:
+      // Hide item preview if up
+      gameMenuScene.popPage("Preview_Window_Item");
+      
       // Switch from page selection, to stat inspection
       controlState = SELECTION_MODE;
-      someScene.enablePageArrows(false);
+      gameMenuScene.enablePageArrows(false);
       statsSelector.setEnabled(true);
-      someScene.pushMenu(MGMT_WINDOW_STATS);
+      gameMenuScene.pushMenu(MGMT_WINDOW_STATS);
       renderStatData();
       
       // Sfx
@@ -341,7 +395,8 @@ protected function navigationRoutineB() {
   switch (controlState) {
     case VIEW_MODE:
       // Close menu
-      parentScene.popPage();
+      parentScene.popPage("Preview_Window_Item");
+      parentScene.popPage(tag);
       break;
     case SELECTION_MODE:
       // Change to view mode
@@ -429,8 +484,13 @@ defaultProperties
   // Stats Selection Component
   begin object class=ROTT_UI_Stats_Selector Name=Stats_Selector
     tag="Stats_Selector"
+    bEnabled=false
     posX=757
     posY=194
+    hoverCoords(0)=(xStart=754,yStart=194,xEnd=1001,yEnd=244)
+    hoverCoords(1)=(xStart=754,yStart=251,xEnd=1001,yEnd=326)
+    hoverCoords(2)=(xStart=754,yStart=338,xEnd=1001,yEnd=557)
+    hoverCoords(3)=(xStart=754,yStart=567,xEnd=1001,yEnd=727)
   end object
   componentList.add(Stats_Selector)
   
@@ -466,77 +526,99 @@ defaultProperties
   
   /** ===================================================================== **/
   
-  // Enchantment boost icons
-  begin object class=UI_Texture_Info Name=Enchantment_Boost_Icon_1
-    componentTextures.add(Texture2D'GUI.Enchantment_Boost_Icon_1')
+  // Stat Boost Icons
+  begin object class=ROTT_UI_Displayer_Stat_Boosts Name=Stat_Boost_Displayer
+    tag="Stat_Boost_Displayer"
+    posX=0
+    posY=0
   end object
-  begin object class=UI_Texture_Info Name=Enchantment_Boost_Icon_2
-    componentTextures.add(Texture2D'GUI.Enchantment_Boost_Icon_2')
+  componentList.add(Stat_Boost_Displayer)
+  
+  /** ===================================================================== **/
+  
+  // Tool tip container
+  begin object class=UI_Container Name=Tool_Tip_Container
+    tag="Tool_Tip_Container"
+    bEnabled=false
+      
+    // Black texture
+    begin object class=UI_Texture_Info Name=Black_Texture
+      componentTextures.add(Texture2D'GUI.Black_Square')
+      drawColor=(R=255,G=255,B=255,A=220)
+    end object
+    
+    // Tool tip fader 
+    begin object class=UI_Sprite Name=Tool_Tip_Fader 
+      tag="Tool_Tip_Fader"
+      posX=720
+      posY=0
+      posXEnd=NATIVE_WIDTH
+      posYEnd=NATIVE_HEIGHT
+      images(0)=Black_Texture
+    end object
+    componentList.add(Tool_Tip_Fader)
+    
+    // Black texture
+    begin object class=UI_Texture_Info Name=Tool_Tip_Box
+      componentTextures.add(Texture2D'GUI.Tool_Tip_Box')
+    end object
+    
+    // Tool Tip Box Sprite
+    begin object class=UI_Sprite Name=Tool_Tip_Box_Sprite
+      tag="Tool_Tip_Box_Sprite"
+      posX=884
+      posY=360
+      images(0)=Tool_Tip_Box
+    end object
+    componentList.add(Tool_Tip_Box_Sprite)
+    
+    // Navigation tooltip
+    begin object class=UI_Label Name=Navigation_Tooltip_h1
+      tag="Navigation_Tooltip_h1"
+      posX=730
+      posY=0
+      posXEnd=NATIVE_WIDTH
+      posYEnd=850
+      AlignX=CENTER
+      AlignY=CENTER
+      fontStyle=DEFAULT_MEDIUM_WHITE
+      labelText="Hero Info Navigation"
+    end object
+    componentList.add(Navigation_Tooltip_h1)
+    
+    // Navigation tooltip
+    begin object class=UI_Label Name=Navigation_Tooltip_h2
+      tag="Navigation_Tooltip_h2"
+      posX=730
+      posY=100
+      posXEnd=NATIVE_WIDTH
+      posYEnd=NATIVE_HEIGHT
+      AlignX=CENTER
+      AlignY=CENTER
+      fontStyle=DEFAULT_SMALL_TAN
+      labelText="Select pages left and right"
+    end object
+    componentList.add(Navigation_Tooltip_h2)
+    
+    // Navigation tooltip
+    begin object class=UI_Label Name=Navigation_Tooltip
+      tag="Navigation_Tooltip"
+      posX=730
+      posY=826
+      posXEnd=NATIVE_WIDTH
+      posYEnd=866
+      AlignX=CENTER
+      AlignY=CENTER
+      fontStyle=DEFAULT_SMALL_TAN
+      labelText="- Left -                                                     - Right -"
+      
+      activeEffects.add((effectType = EFFECT_ALPHA_CYCLE, lifeTime = -1, elapsedTime = 0, intervalTime = 0.6, min = 200, max = 255))
+    end object
+    componentList.add(Navigation_Tooltip)
+    
   end object
-  begin object class=UI_Texture_Info Name=Enchantment_Chevron_Icon_1
-    componentTextures.add(Texture2D'GUI.Enchantment_Chevron_Icon_1')
-  end object
-  begin object class=UI_Texture_Info Name=Enchantment_Chevron_Icon_2
-    componentTextures.add(Texture2D'GUI.Enchantment_Chevron_Icon_2')
-  end object
-  
-  // Infinity jewel enchantment
-  begin object class=UI_Container Name=Enchant_Icons_INIFINITY_JEWEL  
-    tag="Enchant_Icons_INIFINITY_JEWEL"        
-    `ENCHANT_ICON(888, 208, 1) 
-    `ENCHANT_ICON(901, 268, 2) 
-    `ENCHANT_ICON(893, 352, 3) 
-    `ENCHANT_ICON(850, 582, 4)                      
-  end object                                             
-  componentList.add(Enchant_Icons_INIFINITY_JEWEL)                    
-  
-  // Arcane Bloodprism enchantment
-  begin object class=UI_Container Name=Enchant_Icons_ARCANE_BLOODPRISM
-    tag="Enchant_Icons_ARCANE_BLOODPRISM"        
-    `ENCHANT_ICON(1131, 208, 5)
-  end object                                             
-  componentList.add(Enchant_Icons_ARCANE_BLOODPRISM)                    
-  
-  // Rosewood Pendant enchantment
-  begin object class=UI_Container Name=Enchant_Icons_ROSEWOOD_PENDANT
-    tag="Enchant_Icons_ROSEWOOD_PENDANT"        
-    `ENCHANT_CHEV_ICON(1157, 208, 6)
-  end object                                             
-  componentList.add(Enchant_Icons_ROSEWOOD_PENDANT)                    
-  
-  // Scorpion Talon enchantment
-  begin object class=UI_Container Name=Enchant_Icons_SCORPION_TALON
-    tag="Enchant_Icons_SCORPION_TALON"   
-    `ENCHANT_ICON(1148, 268, 7) 
-  end object                                             
-  componentList.add(Enchant_Icons_SCORPION_TALON)                    
-  
-  // Griffins Trinket enchantment
-  begin object class=UI_Container Name=Enchant_Icons_GRIFFINS_TRINKET
-    tag="Enchant_Icons_GRIFFINS_TRINKET"   
-    `ENCHANT_ICON(1170, 526, 8)  
-    `ENCHANT_ICON(1123, 639, 9)  
-  end object                                             
-  componentList.add(Enchant_Icons_GRIFFINS_TRINKET)                    
-  
-  // Mystic Marble enchantment
-  begin object class=UI_Container Name=Enchant_Icons_MYSTIC_MARBLE
-    tag="Enchant_Icons_MYSTIC_MARBLE"   
-    `ENCHANT_ICON(1114, 582, 10)
-  end object                                             
-  componentList.add(Enchant_Icons_MYSTIC_MARBLE)                    
-  
-  // Mystic Marble enchantment
-  begin object class=UI_Container Name=Enchant_Icons_ETERNAL_SPELLSTONE
-    tag="Enchant_Icons_ETERNAL_SPELLSTONE"   
-    `ENCHANT_CHEV_ICON(1140, 582, 11)
-  end object                                             
-  componentList.add(Enchant_Icons_ETERNAL_SPELLSTONE)                    
-  
-  
-  
-  ///`ENCHANT_ICON(1258, 352, 8)          // GRIFFINS_TRINKET
-  
+  componentList.add(Tool_Tip_Container)
+
 }
 
 

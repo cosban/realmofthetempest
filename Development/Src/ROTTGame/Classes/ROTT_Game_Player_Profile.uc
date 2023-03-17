@@ -8,7 +8,7 @@
  *              of a players progress in the game.
  *===========================================================================*/
 
-class ROTT_Game_Player_Profile extends ROTTObject
+class ROTT_Game_Player_Profile extends ROTT_Object
 dependsOn(ROTT_Party)
 dependsOn(ROTT_NPC_Container)
 dependsOn(ROTT_Descriptor_Enchantment_List);
@@ -34,8 +34,8 @@ enum SpeedRunMilestones {
   MILESTONE_AZRA_KOTH,
   MILESTONE_HYRIX,
   MILESTONE_KHOMAT,
-  MILESTONE_VILIROTH,
-  MILESTONE_TYTHIZERUS,
+  MILESTONE_VISCORN,
+  MILESTONE_GINQSU,
 };
 
 // Status for tracking milestone progress
@@ -69,19 +69,24 @@ var privatewrite ROTT_Party_System partySystem;
 // Players items (inventory items)
 var privatewrite ROTT_Inventory_Package_Player playerInventory;   
 var privatewrite int savedItemCount;   
-var privatewrite class<ROTT_Inventory_Item> firstSavedItemType;   /// head of linked list, the rest is in each item
+
+// head of linked list, the rest is in each item
+var privatewrite class<ROTT_Inventory_Item> firstSavedItemType;   
 
 // Portals unlocked by player
 var privatewrite PortalState mapLocks[MapNameEnum];  
 
 // Enchantment levels from minigames
-var public int enchantmentLevels[EnchantmentEnum];  
+var privatewrite int enchantmentLevels[EnchantmentEnum];  
 
 // Profile data
 var public int totalGoldEarned;
 var public int totalGemsEarned;
 var public int encounterCount;
 var public float timeTemporallyAccelerated;
+
+// Tooltip storage
+var public bool bHideHeroInfoToolTip;
 
 // Enchantment data
 ///var privatewrite ROTT_Descriptor_Enchantment_List enchantmentData;
@@ -152,6 +157,21 @@ enum QuestMilestones {
 // Track journal milestones
 var privatewrite QuestMilestones bJournalMiletones[JournalMilestones];
 
+// Quest Marks
+enum QuestMarks {
+  NO_MARK,
+  HAXLYN_BRIDGE,
+};
+
+// Quest Values
+enum QuestValues {
+  QUEST_MARK_INCOMPLETE,
+  QUEST_MARK_COMPLETE,
+};
+
+// Track journal milestones
+var privatewrite QuestValues bQuestMarks[QuestMarks];
+
 // Store the preference of the first Talonovian council member
 var privatewrite bool bFirstCouncilVotesYes;
 
@@ -179,6 +199,13 @@ var public ROTT_Descriptor_List_Hyper_Skills hyperSkills;
 // Activity statuses
 var public bool bPraying;
 var public bool bSinging;
+
+// Monsters under this level will have a reduced encounter rate
+var public int reducedRateEnemyLevel;
+var public int topEnemyLevelsDefeated[10];
+
+// Store tutorial progress for tool tip display 
+var public bool bHasUsedSkill;
 
 // Cheats
 var public bool cheatNoEncounters;
@@ -225,7 +252,7 @@ public function setGameMode(GameModes newGameMode) {
   // Check game mode
   switch (gameMode) {
     case MODE_CASUAL:
-      // No mods
+      // No changes here
       break;
     case MODE_HARDCORE:
       // Add luck boost
@@ -251,6 +278,46 @@ public function pushJournalEntry(string questMsg) {
   journalEntries.addItem(questMsg);
   
   gameInfo.showGameplayNotification("New Journal Entry!");
+}
+
+/*=============================================================================
+ * reportMobLevel()
+ * 
+ * Used to track average monster levels for reducing encounter rates
+ *===========================================================================*/
+public function reportMobLevel(int addLevel) {
+  local int i, j;
+  
+  // Scan top ten levels
+  for (i = 0; i < 10; i++) {
+    // Check if input fits in top ten
+    if (topEnemyLevelsDefeated[i] < addLevel) {
+      // Move the rest down
+      for (j = 9; j > i; j--) {
+        topEnemyLevelsDefeated[j] = topEnemyLevelsDefeated[j - 1];
+      }
+      // Insert the new level
+      topEnemyLevelsDefeated[i] = addLevel;
+      
+      // Set new the reduced enemy encounter level
+      reducedRateEnemyLevel = topEnemyLevelsDefeated[9] / 3;
+      return;
+    }
+  }
+}
+
+/*=============================================================================
+ * debugTopLevels()
+ * 
+ * 
+ *===========================================================================*/
+public function debugTopLevels() {
+  local int i;
+  greenLog("Top levels:");
+  // Scan top ten levels
+  for (i = 0; i < 10; i++) {
+    greenLog(" ~ " @ topEnemyLevelsDefeated[i]);
+  }
 }
 
 /*=============================================================================
@@ -296,7 +363,7 @@ public function questCheck
           bFirstCouncilVotesYes = false;
           break;
         default:
-          violetlog("No obelisk preference found?");
+          yellowLog("Warning (!) No obelisk preference found?");
       }
       
       // Replace valid talonovian council names
@@ -352,7 +419,7 @@ public function questCheck
           questText $= "\n says not to disturb the obelisk.";
           break;
         default:
-          violetlog("No obelisk preference found?");
+          yellowLog("Warning (!) No obelisk preference found?");
       }
       
       // Replace valid talonovian council names
@@ -386,6 +453,15 @@ public function questCheck
   }
 
 };
+
+/*=============================================================================
+ * markQuest()
+ *
+ * This function is called to save a quest checkpoint. (e.g. Haxlyn Bridge)
+ *===========================================================================*/
+public function markQuest(QuestMarks questEntry, QuestValues questValue) {
+  bQuestMarks[questEntry] = questValue;
+}
 
 /*=============================================================================
  * elapseTime()
@@ -509,6 +585,21 @@ public function addCurrency
 /*=============================================================================
  * canDeductItem()
  *
+ * Checks if a list of items can be deducted
+ *===========================================================================*/
+public function bool canDeductItems(array<ItemCost> costs) {
+  local int i;
+  
+  // Scan the cost list
+  for (i = 0; i < costs.length; i++) { 
+    if (!canDeductItem(costs[i])) return false;
+  }
+  return true;
+}
+
+/*=============================================================================
+ * canDeductItem()
+ *
  * Checks if an item can be deducted.  Returns true if sufficient items.
  *===========================================================================*/
 public function bool canDeductItem(ItemCost cost) {
@@ -527,6 +618,25 @@ public function bool canDeductItem(ItemCost cost) {
   return cost.quantity <= findItem(cost.currencyType).quantity;
 }
  
+/*=============================================================================
+ * deductItems()
+ *
+ * Subtracts a list of items from the inventory
+ *===========================================================================*/
+public function bool deductItems(array<ItemCost> costs) {
+  local int i;
+
+  // Check if we can deduct this cost
+  if (!canDeductItems(costs)) return false;
+  
+  // Deduct each of the costs
+  for (i = 0; i < costs.length; i++) {
+    playerInventory.deductItem(costs[i]);
+  }
+  
+  return true;
+}
+
 /*=============================================================================
  * deductItem()
  *
@@ -618,6 +728,17 @@ public function saveGame
       
       // Save hero
       class'Engine'.static.BasicSaveObject(heroUnit, folder $ "\\hero[" $ i $ "][" $ j $ "].bin", true, 0);
+      
+      // Check for held item data
+      if (heroUnit.heldItemType != none) {
+        // Save held item
+        class'Engine'.static.BasicSaveObject(
+          heroUnit.heldItem, 
+          folder $ "\\heldItem[" $ i $ "][" $ j $ "].bin", 
+          true, 
+          0
+        );
+      }
     }
   }
 }
@@ -631,6 +752,7 @@ public function loadProfile(optional bool transitionMode = false) {
   local ROTT_Party party;
   local ROTT_Combat_Hero tempHero;
   local ROTT_Inventory_Item tempItem;
+  local string itemPath;
   local string path;
   local string folder;
   local int i, j; 
@@ -654,7 +776,7 @@ public function loadProfile(optional bool transitionMode = false) {
     tempItem.initialize();
     
     // Store item to inventory
-    playerInventory.loadItem(tempItem);
+    playerInventory.loadItem(tempItem, false);
   }
   
   // Load party system 
@@ -676,14 +798,30 @@ public function loadProfile(optional bool transitionMode = false) {
       // Place party into profile
       partySystem.loadParty(party);
 
-      // Load all party members
+      // Iterate through each hero slot
       for (j = 0; j < party.saveInfoPartySize; j++) { 
-        // Load a hero
+        // Create hero data
         tempHero = new(party) party.heroSaveTypes[j];
+        
+        // Set path for loading
         path = folder $ "\\hero[" $ i $ "][" $ j $ "].bin";
-  
+        itemPath = folder $ "\\heldItem[" $ i $ "][" $ j $ "].bin";
+        
+        // Attempt to load hero
         if (class'Engine'.static.BasicLoadObject(tempHero, path, true, 0)) {
+          // Load initial hero data 
           partySystem.getParty(i).loadHero(tempHero);
+          
+          // Check if held item type info exists
+          if (tempHero.heldItemType != none) {
+            tempItem = new(self) tempHero.heldItemType;
+            
+            // Attempt to load hero item
+            if (class'Engine'.static.BasicLoadObject(tempItem, itemPath, true, 0)) {
+              tempItem.initialize();
+              partySystem.getParty(i).getHero(j).equipItem(tempItem);
+            }
+          }
         }
       }
     }
@@ -697,12 +835,13 @@ public function loadProfile(optional bool transitionMode = false) {
   
   // Set active party
   partySystem.setActiveParty(activePartyIndex);
+  
 }
 
 /*============================================================================= 
  * setEventStatus()
  *
- * This function sets the status for an event
+ * Stores data for when player interacts with monument shrines (quests.)
  *===========================================================================*/
 public function setEventStatus(TopicList topic, ConflictStatus status) {
   local ConflictInfo info;
@@ -713,10 +852,10 @@ public function setEventStatus(TopicList topic, ConflictStatus status) {
     case INTRODUCTION:
     case ETZLAND_HERO:
     case END_OF_ACTIVATED_TOPICS:
-    case INQUERY_MODE:
-    case INQUERY_OBELISK:
-    case INQUERY_TOMB:
-    case INQUERY_GOLEM:
+    case INQUIRY_MODE:
+    case INQUIRY_OBELISK:
+    case INQUIRY_TOMB:
+    case INQUIRY_GOLEM:
     case GREETING:
       yellowLog("Warning (!) Cannot set event info for topic: " $ topic);
       return;
@@ -736,6 +875,9 @@ public function setEventStatus(TopicList topic, ConflictStatus status) {
       } else {
         conflictData[i].status = ACTION_TAKEN;
       }
+      
+      // Sfx
+      gameInfo.sfxBox.playSfx(SFX_WORLD_SHRINE);
       return;
     }
   }
@@ -744,6 +886,9 @@ public function setEventStatus(TopicList topic, ConflictStatus status) {
   info.topicIndex = topic;
   info.status = status;
   conflictData.addItem(info);
+  
+  // Sfx
+  gameInfo.sfxBox.playSfx(SFX_WORLD_SHRINE);
 }
 
 /*============================================================================= 
@@ -766,6 +911,26 @@ public function ConflictStatus getEventStatus(TopicList topic) {
 }
 
 /*============================================================================= 
+ * getLuckBoost()
+ *
+ * Returns the total percent luck boost (e.g. 0.1f is ten percent)
+ *===========================================================================*/
+public function float getLuckBoost() {
+  local float luckBoost;
+  local int i;
+  
+  // Start with enchantment boost (already includes mastery boost...)
+  luckBoost = getEnchantBoost(OMNI_SEEKER) / 100.f;
+  
+  // Sum an additional boost from held items
+  for (i = 0; i < getActiveParty().getPartySize(); i++) {
+    luckBoost += getActiveParty().getHero(i).heldItemStat(ITEM_ADD_LOOT_LUCK) / 100.f;
+  }
+  
+  return luckBoost;
+}
+
+/*============================================================================= 
  * healActiveParty
  *
  * Description: This function heals the active party
@@ -774,7 +939,7 @@ public function ConflictStatus getEventStatus(TopicList topic) {
  *===========================================================================*/
 public function healActiveParty() {
   partySystem.getActiveParty().restoreAll();
-  sfxBox.playSFX(SFX_WORLD_SHRINE);
+  sfxBox.playSFX(SFX_MENU_BLESS_STAT);
   gameInfo.showGameplayNotification("You have been healed");
 }
 
@@ -918,7 +1083,7 @@ public function resetTopic(NPCs npcName, TopicList topic) {
  *===========================================================================*/
 public function completeTopic(NPCs npcName, TopicList topic) {
   // Never save inquiry progress
-  if (topic == INQUERY_MODE) return;
+  if (topic == INQUIRY_MODE) return;
   
   npcRecords[npcName].npcTopicHistory[topic] = COMPLETED;
 }
@@ -956,6 +1121,16 @@ public function bool toggleEventStatus(TopicList targetTopic) {
 }
 
 /*============================================================================= 
+ * addEnchantBoost()
+ *
+ * Increases an enchantment
+ *===========================================================================*/
+public function addEnchantBoost(coerce byte enchantmentIndex, int addValue) {
+  // Add to enchantment
+  enchantmentLevels[enchantmentIndex] += addValue;
+}
+
+/*============================================================================= 
  * getEnchantBoost()
  *
  * Returns the bonus provided by the given enchantment
@@ -974,6 +1149,9 @@ public function int getEnchantBoost(coerce byte enchantmentIndex) {
       }
       break;
   }
+  
+  // Fetch enchantment bonuses from items held from all teams
+  bonus += partySystem.getHeldItemEnchantment(enchantmentIndex);
   
   // Multiply by bonus per level, as stated in the descriptors
   bonus *= class'ROTT_Descriptor_Enchantment_List'.static.getEnchantment(enchantmentIndex).bonusPerLevel;
@@ -1131,8 +1309,8 @@ defaultProperties
   milestoneList(MILESTONE_AZRA_KOTH)=(milestoneDescription="Az'ra Koth defeated")
   milestoneList(MILESTONE_HYRIX)=(milestoneDescription="Hyrix defeated")
   milestoneList(MILESTONE_KHOMAT)=(milestoneDescription="Khomat defeated")
-  milestoneList(MILESTONE_VILIROTH)=(milestoneDescription="Viliroth defeated")
-  milestoneList(MILESTONE_TYTHIZERUS)=(milestoneDescription="Tythizerus defeated")
+  milestoneList(MILESTONE_VISCORN)=(milestoneDescription="Viscorn defeated")
+  milestoneList(MILESTONE_GINQSU)=(milestoneDescription="Ginqsu defeated")
 }
 
 

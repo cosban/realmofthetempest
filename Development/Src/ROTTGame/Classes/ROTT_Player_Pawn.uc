@@ -11,6 +11,7 @@ class ROTT_Player_Pawn extends UDKPawn;
 
 // Definitions for pawn behavior in overworld
 const MAX_Z_SPEED = 800;
+const CROUCH_SPEED = 190;
 
 // A location outside of the map
 `DEFINE NOWHERE_VECTOR vect(120000,120000,0)
@@ -114,6 +115,7 @@ public function setRespawnIndex(int checkpointIndex) {
  *===========================================================================*/
 public function setArrivalCheckpoint(int checkpointIndex) {
   if (!(checkpointIndex < gameInfo.checkPoints.length)) {
+    yellowLog("Warning (!) Checkpoint out of bounds");
     scriptTrace();
     return;
   }
@@ -166,6 +168,23 @@ public function activatePowerJump(int zAcceleration, float xySpeedAmp) {
   bAccelerateJump = true;
   jumpAcceleration = zAcceleration;  
   speedAmp = xySpeedAmp; 
+  
+  // Jump pad sfx when already in mid jump
+  if (velocity.Z > 0) {
+    gameInfo.sfxBox.playSfx(SFX_WORLD_JUMP_PAD);
+  }
+}
+
+/*=============================================================================
+ * doJump()
+ *
+ * Player jump ability
+ *===========================================================================*/
+function bool doJump(bool bUpdating) {
+  // Sfx when on jump pad
+  if (bAccelerateJump) gameInfo.sfxBox.playSfx(SFX_WORLD_JUMP_PAD);
+  
+  return super.doJump(bUpdating);
 }
 
 /*=============================================================================
@@ -267,12 +286,19 @@ simulated event tick(float deltaTime) {
     // Track glide time
     rottController.trackGlideTime(deltaTime);
   }
+  
+  // Lerp crouch
+  if (rottController.bCrouching && baseEyeheight > 34) {
+    baseEyeheight -= CROUCH_SPEED * deltaTime;
+    if (baseEyeHeight < 34) baseEyeheight = 34;
+  }
+  if (!rottController.bCrouching && baseEyeheight < 140) {
+    baseEyeheight += CROUCH_SPEED * deltaTime;
+    if (baseEyeHeight > 140) baseEyeheight = 140;
+  }
 } 
 
-
-
-
-/**=============================================================================
+/*=============================================================================
  * onGlide()
  *
  * 
@@ -284,7 +310,7 @@ public function onGlide() {
   glideParticles.activateSystem();
 }
 
-/**=============================================================================
+/*=============================================================================
  * onGlideRelease()
  *
  * 
@@ -297,7 +323,7 @@ public function onGlideRelease() {
   velocity.z -= 250;
 }
 
-/**=============================================================================
+/*=============================================================================
  * onStomp()
  *
  * 
@@ -309,7 +335,7 @@ public function onStomp() {
   if (rottController.bGliding) rottController.releaseGlide();
 }
 
-/**=============================================================================
+/*=============================================================================
  * onStompRelease()
  *
  *
@@ -332,7 +358,7 @@ public function onCrouch() {
   
   // Set pawn attributes
   groundSpeed = rottController.const.PLAYER_CROUCH_SPEED;
-  baseEyeheight = 34.0;
+  ///baseEyeheight = 34.0;
   airControl = 0.05;
 }
 /*=============================================================================
@@ -343,7 +369,7 @@ public function onCrouch() {
 public function onCrouchRelease() {
   // Set pawn attributes
   groundSpeed = rottController.const.PLAYER_SPRINT_SPEED;
-  baseEyeheight = 140.0; /// 96
+  ///baseEyeheight = 140.0; /// 96
   airControl = 0.45;
 }
 

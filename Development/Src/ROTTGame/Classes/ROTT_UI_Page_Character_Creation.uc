@@ -31,7 +31,7 @@ var private QueuedInput nextInput;
 /** ============================== **/
 
 // Input delay timer
-var public ROTTTimer inputDelayTimer; 
+var public ROTT_Timer inputDelayTimer; 
   
 // Class list data structure
 var private array<HeroClassEnum> characterClasses;
@@ -180,7 +180,7 @@ public function onNavigateLeft() {
   renderClassInfo(false);
   
   // Set scene to no input, until animation effects complete
-  inputDelayTimer = gameInfo.Spawn(class'ROTTTimer');
+  inputDelayTimer = gameInfo.Spawn(class'ROTT_Timer');
   inputDelayTimer.makeTimer(0.5, LOOP_OFF, allowInput);
   
   // Animate current selection to the right
@@ -210,7 +210,7 @@ public function onNavigateRight() {
   renderClassInfo(false);
   
   // Set scene to no input, until animation effects complete
-  inputDelayTimer = gameInfo.Spawn(class'ROTTTimer');
+  inputDelayTimer = gameInfo.Spawn(class'ROTT_Timer');
   inputDelayTimer.makeTimer(0.5, LOOP_ON, allowInput);
   
   // Animate current selection to the right
@@ -226,9 +226,6 @@ public function onNavigateRight() {
   destination.x = 520; destination.y = 150; 
   characterPortraits[availableIndices[selectedIndex]].setLerp(origin, destination, 0.5);
 }
-
-protected function navigateDown();
-protected function navigateUp();
 
 /*=============================================================================
  * Button controls
@@ -420,80 +417,42 @@ defaultProperties
   end object
   componentList.add(Class_Selection_Arrows)
   
+  // Additional info label
+  begin object class=UI_Label Name=Additional_Info_Label
+    tag="Additional_Info_Label"
+    posX=0
+    posY=735
+    posXEnd=NATIVE_WIDTH
+    posYEnd=NATIVE_HEIGHT
+    alignX=CENTER
+    alignY=CENTER
+    fontStyle=DEFAULT_SMALL_ORANGE
+    labelText="Additional information on next page"
+  end object
+  componentList.add(Additional_Info_Label)
+  
+  // Additional info label
+  begin object class=UI_Label Name=Additional_Info_Label_Effect
+    tag="Additional_Info_Label_Effect"
+    posX=0
+    posY=735
+    posXEnd=NATIVE_WIDTH
+    posYEnd=NATIVE_HEIGHT
+    alignX=CENTER
+    alignY=CENTER
+    fontStyle=DEFAULT_SMALL_TAN
+    labelText="Additional information on next page"
+    
+    // Cycle effects
+    activeEffects.add((effectType=EFFECT_ALPHA_CYCLE, lifeTime=-1, elapsedTime=0, intervalTime=1.0, min=20, max=140))
+  end object
+  componentList.add(Additional_Info_Label_Effect)
+  
 }
 
 
 
 
-  /**
-  
-  
-  // Affinity labels
-  begin object class=UI_Label Name=Primary_Stat_Labels
-    tag="Primary_Stat_Labels"
-    posX=106
-    posY=210
-    posXEnd=826
-    posYEnd=255
-    alignX=LEFT
-    alignY=CENTER
-    fontStyle=DEFAULT_MEDIUM_WHITE
-    labelText="Vitality\n \n\nStrength\n \n\nCourage\n \n\nFocus"
-  end object
-  componentList.add(Primary_Stat_Labels)
-
-  
-  
-  // Affinity labels
-  begin object class=UI_Label Name=Vitality_Affinity
-    tag="Vitality_Affinity"
-    posX=136
-    posY=246
-    posXEnd=1366
-    posYEnd=291
-    alignX=LEFT
-    alignY=CENTER
-    fontStyle=DEFAULT_MEDIUM_GREEN
-    labelText="Major Affinity"
-  end object
-  componentList.add(Vitality_Affinity)
-  begin object class=UI_Label Name=Strength_Affinity
-    tag="Strength_Affinity"
-    posX=136
-    posY=352
-    posXEnd=1366
-    posYEnd=397
-    alignX=LEFT
-    alignY=CENTER
-    fontStyle=DEFAULT_MEDIUM_YELLOW
-    labelText="Minor Affinity"
-  end object
-  componentList.add(Strength_Affinity)
-  begin object class=UI_Label Name=Courage_Affinity
-    tag="Courage_Affinity"
-    posX=136
-    posY=458
-    posXEnd=1366
-    posYEnd=503
-    alignX=LEFT
-    alignY=CENTER
-    fontStyle=DEFAULT_MEDIUM_GREEN
-    labelText="Major Affinity"
-  end object
-  componentList.add(Courage_Affinity)
-  begin object class=UI_Label Name=Focus_Affinity
-    tag="Focus_Affinity"
-    posX=136
-    posY=564
-    posXEnd=1366
-    posYEnd=609
-    alignX=LEFT
-    alignY=CENTER
-    fontStyle=DEFAULT_MEDIUM_CYAN
-    labelText="Average Affinity"
-  end object
-  componentList.add(Focus_Affinity)
-**/
 
 
 

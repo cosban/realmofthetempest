@@ -42,6 +42,9 @@ var private StatMenuItems statMenuSelection;
 // Internal references
 var private UI_Sprite_Array statsSelectors[StatMenuItems];
 
+// Hover select
+var editinline instanced array<HoverSelectionCoords> hoverCoords;
+
 /*=============================================================================
  * Initialize Component
  *
@@ -78,6 +81,48 @@ public function setEnabled(bool bNewEnabled) {
 }
 
 /*=============================================================================
+ * elapseTimer()
+ *
+ * Increments time every engine tick.
+ *===========================================================================*/
+public function elapseTimer(float deltaTime, float gameSpeedOverride) {
+  local UI_Player_Input playerInput;
+  local int i;
+  
+  super.elapseTimer(deltaTime, gameSpeedOverride);
+  
+  // Check if component is active
+  if (!bEnabled) return;
+  switch (navigationType) {
+    case SELECTOR_DEFAULT_ARROW:
+    case SELECTOR_UNINVEST_ARROW:
+    case SELECTOR_BLESSING_ARROW:
+      return;
+  }
+  
+  // Get player input data
+  playerInput = UI_Player_Input(getPlayerInput());
+  if (hud.bHideCursor) return;
+  
+  // Scan through coordinate sets
+  for (i = 0; i < hoverCoords.length; i++) {
+    // Check X bounds
+    if (playerInput.getMousePositionX() < hoverCoords[i].xEnd) {
+      if (playerInput.getMousePositionX() > hoverCoords[i].xStart) {
+        // Check Y bounds
+        if (playerInput.getMousePositionY() < hoverCoords[i].yEnd) {
+          if (playerInput.getMousePositionY() > hoverCoords[i].yStart) {
+            // Update selection
+            forceSelection(StatMenuItems(i));
+            return;
+          }
+        }
+      }
+    }
+  }
+}
+
+/*=============================================================================
  * selectPrevious()
  *===========================================================================*/
 public function bool selectPrevious() {
@@ -92,6 +137,25 @@ public function bool selectPrevious() {
     return true;
   }
   return false;
+}
+
+/*=============================================================================
+ * forceSelection()
+ *===========================================================================*/
+public function forceSelection(coerce StatMenuItems newSelection) {
+  local int i;
+  
+  // Hide old selection
+  for (i = 0; i < StatMenuItems.EnumCount; i++) { 
+    statsSelectors[i].setEnabled(false);
+  }
+  
+  // Show selection
+  statMenuSelection = newSelection;
+  statsSelectors[statMenuSelection].setEnabled(true);
+  setSelectorType(navigationType);
+  
+  if (UI_Page(outer) != none) UI_Page(outer).refresh();
 }
 
 /*=============================================================================

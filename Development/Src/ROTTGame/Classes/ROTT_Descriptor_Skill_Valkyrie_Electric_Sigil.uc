@@ -56,11 +56,9 @@ protected function float attributeInfo
   local float attribute; 
   
   switch (type) {
-    // Old mana eq
-    // getManaEquation(level, 1.25, 0.86, 2.7, 20.0, 20.0);
-    
     case PARTY_ELEMENTAL_AMPLIFIER:
       attribute = level * 10;
+      if (level > 10) attribute -= (level - 10) * 5;
       break;
   }
   

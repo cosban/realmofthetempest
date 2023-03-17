@@ -26,55 +26,20 @@ public function initDialogue() {
   
   // Intro
   `NEW_NODE(GREETING, NUETRAL)
-    "I have read the Cipher of Six and Spirit, a forbidden text.",
+    ". . .",
     ""
   `ENDNODE
-  
-  `NEW_NODE(GREETING, NUETRAL)
-    "Now, every time I kneel beside my bed in prayer,",
-    "I lose myself, as if I were asleep."
-  `ENDNODE
-  
-  `NEW_NODE(GREETING, NUETRAL)
-    "I can never remember my prayers.",
-    ""
-  `ENDNODE
-  
-  `NEW_NODE(GREETING, NUETRAL)
-    "When I embrace my loved ones,",
-    "again my mind washes away."
-  `ENDNODE
-  
-  `NEW_NODE(GREETING, NUETRAL)
-    "I can never remember touch.",
-    ""
-  `ENDNODE
-  
-  `NEW_NODE(GREETING, NUETRAL)
-    "My mind has lost its link to heaven and body.",
-    ""
-  `ENDNODE
-  
-  `NEW_NODE(GREETING, NUETRAL)
-    "Memory of hope and affection leak from me.",
-    ""
-  `ENDNODE
-  
-  `NEW_NODE(GREETING, NUETRAL)
-    "Please kill me.",
-    ""
-  `ENDNODE
-  
+	
   // ----------------------------------------------------------------------- //
   
   setInquiry(
-    "I'm sorry.",
-    "",
+    "I'm sorry. . .",
+    "Goodnight",
     "",
     "",
     
     BEHAVIOR_GOODBYE,
-    BEHAVIOR_NONE,
+    BEHAVIOR_GOODBYE,
     BEHAVIOR_NONE,
     BEHAVIOR_NONE
   );

@@ -22,7 +22,7 @@ var privatewrite ROTT_Combat_Hero selectedHero;
   
   
   
-// Parameters used in ROTTTimers:
+// Parameters used in ROTT_Timers:
 const LOOP_OFF = false;
 const LOOP_ON  = true;
 
@@ -281,7 +281,7 @@ public function drawScene(Canvas canvas) {
   for (layer = 0; layer < class'UI_Component'.static.getLayerCount(); layer++) {
     for (i = 0; i < pageStack.length; i++) {
       pageStack[i].drawEvent(canvas, LayerList(layer));
-      pageStack[i].debugHierarchy(1, true);
+      //pageStack[i].debugHierarchy(1, true);
     }
     
     // Draw scene sprites/labels
@@ -290,6 +290,20 @@ public function drawScene(Canvas canvas) {
       //uiComponents[i].debugHierarchy(1, true);
     }
   }
+}
+
+/*=============================================================================
+ * isMouseVisible()
+ *
+ * True if the mouse should be shown
+ *===========================================================================*/
+public function bool isMouseVisible() {
+  // Page overrides
+  if (pageStack[pageStack.length - 1].bPageForcesCursorOff) return false;
+  if (pageStack[pageStack.length - 1].bPageForcesCursorOn)  return true;
+  
+  // Scene setting
+  return (bHideCursorOverride == false);
 }
 
 /*============================================================================= 
@@ -346,7 +360,7 @@ public function refresh() {
 function bool onInputKey
 (
   int ControllerId, 
-  name Key, 
+  name inputName, 
   EInputEvent Event, 
   float AmountDepressed = 1.f, 
   bool bGamepad = false 
@@ -355,12 +369,12 @@ function bool onInputKey
   local bool bConsumeKey;
   
   // Pass input to HUD
-  gameInfo.hud.onInputKey(Key);
+  gameInfo.hud.onInputKey(inputName);
   
   // Pass control to the the appropriate component
   if (inputControlComponent != none && inputControlComponent.bEnabled) {
-    bConsumeKey = inputControlComponent.onInputKey(ControllerID, Key, Event, AmountDepressed, bGamepad);
-    if (bConsumeKey && Key != 'XboxTypeS_RightTrigger')
+    bConsumeKey = inputControlComponent.onInputKey(ControllerId, inputName, Event, AmountDepressed, bGamepad);
+    if (bConsumeKey && inputName != 'XboxTypeS_RightTrigger')
       return true;
   }
 
@@ -746,7 +760,7 @@ public function bool isNotInitialized() {
  *
  * Returns the top page
  *===========================================================================*/
-protected function ROTT_UI_Page topPage() {
+public function ROTT_UI_Page topPage() {
   return pageStack[pageStack.length - 1] ;
 }
 
@@ -784,8 +798,8 @@ public function ROTT_Party getSelectedParty() {
  *===========================================================================*/
 public function ROTT_Combat_Hero getSelectedHero() {
   if (selectedHero == none) {
-    yellowLog("Warning (!) No hero selection found");
-    scriptTrace();
+    ///yellowLog("Warning (!) No hero selection found");
+    ///scriptTrace();
     return none;
   }
   return selectedHero;
