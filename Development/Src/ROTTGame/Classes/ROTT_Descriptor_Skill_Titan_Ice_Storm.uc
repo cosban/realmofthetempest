@@ -135,20 +135,20 @@ defaultProperties
   skillIcon=Skill_Icon_Container
   
   // Skill Animation
-  begin object class=UI_Texture_Info Name=SkillAnim_Lightning_A1
-    componentTextures.add(Texture2D'GUI_Skills.SkillAnim_Lightning_A1')
+  begin object class=UI_Texture_Info Name=Skill_Animation_Lightning_Vertical_F1
+    componentTextures.add(Texture2D'GUI_Skills.Lightning_Vertical.Skill_Animation_Lightning_Vertical_F1')
   end object
-  begin object class=UI_Texture_Info Name=SkillAnim_Lightning_A2
-    componentTextures.add(Texture2D'GUI_Skills.SkillAnim_Lightning_A2')
+  begin object class=UI_Texture_Info Name=Skill_Animation_Lightning_Vertical_F2
+    componentTextures.add(Texture2D'GUI_Skills.Lightning_Vertical.Skill_Animation_Lightning_Vertical_F2')
   end object
-  begin object class=UI_Texture_Info Name=SkillAnim_Lightning_A3
-    componentTextures.add(Texture2D'GUI_Skills.SkillAnim_Lightning_A3')
+  begin object class=UI_Texture_Info Name=Skill_Animation_Lightning_Vertical_F3
+    componentTextures.add(Texture2D'GUI_Skills.Lightning_Vertical.Skill_Animation_Lightning_Vertical_F3')
   end object
-  begin object class=UI_Texture_Info Name=SkillAnim_Lightning_A4
-    componentTextures.add(Texture2D'GUI_Skills.SkillAnim_Lightning_A4')
+  begin object class=UI_Texture_Info Name=Skill_Animation_Lightning_Vertical_F4
+    componentTextures.add(Texture2D'GUI_Skills.Lightning_Vertical.Skill_Animation_Lightning_Vertical_F4')
   end object
-  begin object class=UI_Texture_Info Name=SkillAnim_Lightning_A5
-    componentTextures.add(Texture2D'GUI_Skills.SkillAnim_Lightning_A5')
+  begin object class=UI_Texture_Info Name=Skill_Animation_Lightning_Vertical_F5
+    componentTextures.add(Texture2D'GUI_Skills.Lightning_Vertical.Skill_Animation_Lightning_Vertical_F5')
   end object
   
   // Skill Animation Container
@@ -156,16 +156,15 @@ defaultProperties
     tag="Skill_Animation_Container"
     textureWidth=240
     textureHeight=240
-    images(0)=SkillAnim_Lightning_A1
-    images(1)=SkillAnim_Lightning_A2
-    images(2)=SkillAnim_Lightning_A3
-    images(3)=SkillAnim_Lightning_A4
-    images(4)=SkillAnim_Lightning_A5
+    images(0)=Skill_Animation_Lightning_Vertical_F1
+    images(1)=Skill_Animation_Lightning_Vertical_F2
+    images(2)=Skill_Animation_Lightning_Vertical_F3
+    images(3)=Skill_Animation_Lightning_Vertical_F4
+    images(4)=Skill_Animation_Lightning_Vertical_F5
   end object
   skillAnim=Skill_Animation_Container
   
   // Alt Skill Animation
-  
   begin object class=UI_Texture_Info Name=SkillAnim_Ice_Storm_Intensity_F1
     componentTextures.add(Texture2D'GUI_Skills.SkillAnim_Ice_Storm_Intensity_F1')
   end object

@@ -7,35 +7,7 @@
  * Recipe ingredient.
  *===========================================================================*/
  
-class ROTT_Inventory_Item_Charm_Myroka extends ROTT_Inventory_Item;
-
-/*=============================================================================
- * getDropChance()
- *
- * Implemented in each item subclsas
- *===========================================================================*/
-protected function float getDropChance(int dropLevel) {
-  if (dropLevel < 5) return 1.f - dropLevel * 0.05f;
-  return 1.f;
-}
-
-/*=============================================================================
- * getMinQuantity()
- *
- * Implemented in each item subclsas
- *===========================================================================*/
-protected function float getMinQuantity(int dropLevel) {
-  return 1;
-}
-
-/*=============================================================================
- * getMaxQuantity()
- *
- * Implemented in each item subclsas
- *===========================================================================*/
-protected function float getMaxQuantity(int dropLevel) {
-  return 1;
-}
+class ROTT_Inventory_Item_Charm_Myroka extends ROTT_Inventory_Item_Ritual_Base;
 
 /*============================================================================= 
  * Default Properties
@@ -47,6 +19,10 @@ defaultProperties
   
   // Display name
   itemName="Myroka Charm"
+  
+  // Hard stats
+  itemStats(ITEM_FASTER_AURA_STRIKES)=5
+  itemStats(ITEM_ADD_MANA)=60
   
   // Item texture
   itemTexture=Texture2D'ROTT_Items.Charms.Item_Charm_Blue'

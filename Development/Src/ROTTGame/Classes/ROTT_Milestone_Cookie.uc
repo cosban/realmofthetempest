@@ -7,7 +7,7 @@
  * Description: Stores milestone data separate from profiles.
  *===========================================================================*/
  
-class ROTT_Milestone_Cookie extends ROTTObject
+class ROTT_Milestone_Cookie extends ROTT_Object
 dependsOn(ROTT_Game_Player_Profile);
 
 enum SaveState {

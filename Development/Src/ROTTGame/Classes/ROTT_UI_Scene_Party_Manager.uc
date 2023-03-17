@@ -11,10 +11,11 @@
 class ROTT_UI_Scene_Party_Manager extends ROTT_UI_Scene;
 
 // Internal page references
-var private ROTT_UI_Page_Party_Manager partyManagerPage;
-var private ROTT_UI_Page_Party_Viewer partyViewerPage;
-var private ROTT_UI_Page_Active_Party_Viewer partyActivePage;
-var private ROTT_UI_Page_Party_Conscription partyConscriptionPage;
+var privatewrite ROTT_UI_Page_Party_Manager partyManagerPage;
+var privatewrite ROTT_UI_Page_Party_Viewer partyViewerPage;
+var privatewrite ROTT_UI_Page_Active_Party_Viewer partyActivePage;
+var privatewrite ROTT_UI_Page_Party_Conscription partyConscriptionPage;
+var privatewrite ROTT_UI_Page_Passive_Shrine_Management shrineManagementPage;
 
 /*=============================================================================
  * initScene()
@@ -29,6 +30,7 @@ event initScene() {
   partyViewerPage = ROTT_UI_Page_Party_Viewer(findComp("Page_Party_Viewer"));
   partyConscriptionPage = ROTT_UI_Page_Party_Conscription(findComp("Page_Party_Conscription"));
   partyActivePage = ROTT_UI_Page_Active_Party_Viewer(findComp("Page_Party_Viewer_Active"));
+  shrineManagementPage = ROTT_UI_Page_Passive_Shrine_Management(findComp("Passive_Shrine_Management"));
   
   // Initial stack
   pushPage(partyManagerPage);
@@ -87,7 +89,7 @@ public function conscription() {
  * Returns the party selected by the party manager page
  *===========================================================================*/
 public function ROTT_Party getSelectedParty() {
-  return gameInfo.playerProfile.partySystem.getParty(partyManagerPage.selectionIndex);
+  return gameInfo.playerProfile.partySystem.getParty(partyManagerPage.getSelectionNumber());
 }
 
 /*=============================================================================
@@ -126,6 +128,12 @@ defaultProperties
     tag="Page_Party_Viewer_Active"
   end object
   pageComponents.add(Page_Party_Viewer_Active)
+  
+  // Passive Shrine Management
+  begin object class=ROTT_UI_Page_Passive_Shrine_Management Name=Passive_Shrine_Management
+    tag="Passive_Shrine_Management"
+  end object
+  pageComponents.add(Passive_Shrine_Management)
   
 }
 

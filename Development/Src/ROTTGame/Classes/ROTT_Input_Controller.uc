@@ -25,10 +25,24 @@ delegate bool conditionDelegate();
  * This passes input to input handlers based on key and event type.
  *===========================================================================*/
 public function bool parseInput(Name inputName, EInputEvent inputEvent) {
+  // Remap
+  switch (inputName) {
+    // Mouse and keyboard
+    case 'LeftMouseButton':   inputName = 'XBoxTypeS_A'; break;
+    case 'Q':                 inputName = 'XBoxTypeS_B'; break;
+    case 'SpaceBar':          inputName = 'XBoxTypeS_A'; break;   
+    
+    case 'W': case 'Up':      inputName = 'XBoxTypeS_DPad_Up'; break;   
+    case 'A': case 'Left':    inputName = 'XBoxTypeS_DPad_Left'; break;   
+    case 'S': case 'Down':    inputName = 'XBoxTypeS_DPad_Down'; break;   
+    case 'D': case 'Right':   inputName = 'XBoxTypeS_DPad_Right'; break;
+  }
+  
   // Check input event type
   if (inputEvent == IE_Released) {
     // Button release inputs
     switch (inputName) {
+      // Gamepad
       case 'XBoxTypeS_A':
       case 'XBoxTypeS_B':
       case 'XBoxTypeS_X':
@@ -42,8 +56,8 @@ public function bool parseInput(Name inputName, EInputEvent inputEvent) {
         return false;
     }
   } else if (inputEvent == IE_Pressed) {
-    // Directional press inputs
     switch (inputName) {
+      // Gamepad, directional press inputs      
       case 'XBoxTypeS_DPad_Up':  
       case 'XBoxTypeS_DPad_Down': 
       case 'XBoxTypeS_DPad_Left':

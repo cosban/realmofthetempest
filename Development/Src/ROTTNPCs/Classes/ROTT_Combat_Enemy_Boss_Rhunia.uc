@@ -67,6 +67,13 @@ defaultProperties
   
   expAmp=1
   
+  // Quest items
+  itemDropRates.add((dropType=class'ROTT_Inventory_Item_Quest_Ice_Tome',chanceOverride=100,minOverride=,maxOverride=,chanceAmp=,quantityAmp=))
+  
+  // Drop rate modifiers
+  itemDropRates.add((dropType=class'ROTT_Inventory_Item_Shield_Kite',chanceOverride=,minOverride=,maxOverride=,chanceAmp=15,quantityAmp=))
+  
+  // Currency modifiers
   // Drop rate modifiers
   itemDropRates.add((dropType=class'ROTT_Inventory_Item_Gold',chanceOverride=,minOverride=,maxOverride=,chanceAmp=,quantityAmp=1.35))
   itemDropRates.add((dropType=class'ROTT_Inventory_Item_Gem',chanceOverride=100,minOverride=,maxOverride=,chanceAmp=,quantityAmp=))

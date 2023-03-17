@@ -66,7 +66,7 @@ event onFocusMenu() {
   switch (controlState) {
     case VIEW_MODE: 
     case RESET_VIEW_MODE: 
-      someScene.enablePageArrows(true);
+      gameMenuScene.enablePageArrows(true);
       break;
     case SELECTION_MODE:
     case RESET_SELECTION_MODE:
@@ -83,8 +83,39 @@ event onFocusMenu() {
  * Called to update info after investing skill points
  *===========================================================================*/
 public function refresh() {
-  // Render selected hero
+  // Render selected hero information
   renderHeroData(parentScene.getSelectedHero());
+  
+  // Render selected skill information
+  renderSkillData();
+  
+  // Hacky resolution to hover updates for the mgmt window
+  hoverUpdateFix();
+}
+
+/*============================================================================= 
+ * hoverUpdateFix()
+ *
+ * Refreshes the proper management window
+ *===========================================================================*/
+protected function hoverUpdateFix() {
+  // Switch to proper window ...hacky
+  if (controlState == RESET_SELECTION_MODE) return;
+  if (controlState == VIEW_MODE) return;
+  
+  // Ignore for glyph and mastery page
+  if (ROTT_UI_Page_Glyph_Skilltree(self) != none) return;
+  if (ROTT_UI_Page_Mastery_Skilltree(self) != none) return;
+  
+  // Update for hovering and swapping mgmt pages
+  if (isSkillPassive() && parentScene.topPage().tag != "Mgmt_Window_Passive") {
+    parentScene.popPage("Mgmt_Window_Skills");
+    pushSkillWindow();
+  }
+  if (!isSkillPassive() && parentScene.topPage().tag != "Mgmt_Window_Skills") {
+    parentScene.popPage("Mgmt_Window_Passive");
+    pushSkillWindow();
+  }
 }
 
 /**============================================================================= 
@@ -205,11 +236,11 @@ protected function renderSkillData() {
   switch (controlState) {
     case VIEW_MODE:
     case SELECTION_MODE:
-      someScene.setMgmtDescriptor(descriptor);
+      gameMenuScene.setMgmtDescriptor(descriptor); 
       break;
     case RESET_VIEW_MODE:
     case RESET_SELECTION_MODE:
-      someScene.setMgmtDescriptor(descriptor);
+      gameMenuScene.setMgmtDescriptor(descriptor); 
       break;
   }
 }
@@ -221,11 +252,11 @@ protected function renderSkillData() {
  *===========================================================================*/
 protected function pushSkillWindow() {
   if (ROTT_UI_Page_Glyph_Skilltree(self) != none) {
-    someScene.pushMenu(MGMT_WINDOW_COLLECT);
+    gameMenuScene.pushMenu(MGMT_WINDOW_COLLECT);
   } else if (isSkillPassive()) {
-    someScene.pushMenu(MGMT_WINDOW_PASSIVE);
+    gameMenuScene.pushMenu(MGMT_WINDOW_PASSIVE);
   } else {
-    someScene.pushMenu(MGMT_WINDOW_SKILLS);
+    gameMenuScene.pushMenu(MGMT_WINDOW_SKILLS);
   }
 }
 
@@ -371,6 +402,32 @@ private function byte getMasteryID() {
   }
 }
 
+/*============================================================================*
+ * Controls
+ *
+ * ControllerId     the controller that generated this input key event
+ * Key              the name of the key which an event occured for
+ * EventType        the type of event which occured
+ * AmountDepressed  for analog keys, the depression percent.
+ *
+ * Returns: true to consume the key event, false to pass it on.
+ *===========================================================================*/
+function bool onInputKey
+( 
+  int ControllerId, 
+  name Key, 
+  EInputEvent Event, 
+  float AmountDepressed = 1.f, 
+  bool bGamepad = false
+) 
+{
+  // Remap for keyboard control
+  if (Key == 'Z' && Event == IE_Pressed) navigationRoutineLB();
+  if (Key == 'C' && Event == IE_Pressed) navigationRoutineRB();
+  
+  return super.onInputKey(ControllerId, Key, Event, AmountDepressed, bGamepad);
+}
+
 /*=============================================================================
  * D-Pad controls
  *===========================================================================*/
@@ -448,7 +505,7 @@ protected function navigationRoutineA() {
     case VIEW_MODE:
       // Change view to inspection mode
       controlState = SELECTION_MODE;
-      someScene.enablePageArrows(false);
+      gameMenuScene.enablePageArrows(false);
       setSelector(0);
       pushSkillWindow();
       renderSkillData();
@@ -464,7 +521,7 @@ protected function navigationRoutineA() {
     case RESET_VIEW_MODE:
       // Change view to inspection mode
       controlState = RESET_SELECTION_MODE;
-      someScene.enablePageArrows(false);
+      gameMenuScene.enablePageArrows(false);
       setSelector(1);
       renderSkillData();
       parentScene.pushPageByTag("Reset_Skill_Manager_UI", false); 

@@ -18,8 +18,15 @@ abstract;
 // Next level offset, used for showing next level info on UI 
 const NEXT_LEVEL = 1;
 
+// Maximum chance of persistence per persistence roll
+const PERSISTENCE_LIMIT = 80;
+
+// Maximum chance of lacerations per roll
+const LACERATION_LIMIT = 80;
+
 // Types of trees that this skill may belong to
 enum TreeType {
+  NO_TREE,
   CLASS_TREE,
   GLYPH_TREE,
   MASTERY_TREE,
@@ -32,6 +39,9 @@ var protectedwrite int skillIndex;
 // Tree that this skill belongs to
 var protectedwrite TreeType parentTree;
 
+// Store boost level for display
+var protectedwrite int boostLevel;
+  
 // Classifications for targeting modes, for skill script UI
 enum TargetingClassification {
   PASSIVE_PARTY_BUFF,
@@ -54,171 +64,6 @@ enum TargetingClassification {
 
 var protectedwrite TargetingClassification targetingLabel;
 
-// Combat mechanic types
-enum AttributeTypes {
-  // Mana
-  MANA_COST,
-  MANA_OVERFLOW_COST,
-  MANA_TRANSFER_RATE,
-  
-  // Prime stat mods
-  INCREASE_ALL_STATS,
-  INCREASE_VITALITY,
-  INCREASE_STRENGTH,
-  INCREASE_STRENGTH_PERCENT,
-  INCREASE_COURAGE,
-  INCREASE_COURAGE_PERCENT,
-  
-  DECREASE_STRENGTH_RATING,
-  
-  // Substat mods
-  INCREASE_SPEED_RATING,
-  INCREASE_DODGE_RATING,
-  INCREASE_ACCURACY_RATING,
-  INCREASED_CRIT_CHANCE,
-  
-  INCREASE_MAX_HEALTH_MAX_MANA,
-  
-  DECREASE_SPEED_RATING,
-  DECREASE_DODGE_RATING,
-  DECREASE_ACCURACY_RATING,
-
-  // Armor
-  INCREASE_ARMOR,
-  
-  // Glyph mods
-  GLYPH_ARMOR_BOOST,
-  GLYPH_MIN_HEALTH_BOOST,
-  GLYPH_MAX_HEALTH_BOOST,
-  GLYPH_MIN_MANA_BOOST,
-  GLYPH_MAX_MANA_BOOST,
-  GLYPH_MANA_REGEN,
-  GLYPH_DODGE_BOOST,
-  GLYPH_ACCURACY_BOOST,
-  GLYPH_DAMAGE_BOOST,
-  GLYPH_SPEED_BOOST,
-  GLYPH_SPAWN_CHANCE,
-  
-  // Hyper mods
-  HYPER_SPAWN_CHANCE,
-  PERM_ARMOR_BOOST,
-  PERM_DODGE_BOOST,
-  PERM_ACCURACY_BOOST,
-  PERM_SLOW_ENEMIES,
-  PERM_PHYSICAL_DAMAGE_PERCENT,
-  PERM_ELEMENTAL_DAMAGE_PERCENT,
-  PERM_MAX_HEALTH_BOOST,
-  PERM_MANA_REGEN,
-  PERM_MAX_MANA,
-  HYPER_HEALTH_REGEN,
-  HYPER_MANA_BOOST,
-  HYPER_DAMAGE_REDUCTION,
-  HYPER_DODGE_PERCENT,
-  HYPER_ACCURACY_PERCENT,
-  HYPER_MULTISTRIKE_CHANCE,
-  
-  // Damage
-  PHYSICAL_DAMAGE_MIN,
-  PHYSICAL_DAMAGE_MAX,
-  ELEMENTAL_DAMAGE_MIN,
-  ELEMENTAL_DAMAGE_MAX,
-  ATMOSPHERIC_DAMAGE_MIN,
-  ATMOSPHERIC_DAMAGE_MAX,
-  
-  // Damage amplifiers
-  ELEMENTAL_AMPLIFIER,
-  PHYSICAL_AMPLIFIER,
-  PARTY_ELEMENTAL_AMPLIFIER,
-  PARTY_PHYSICAL_AMPLIFIER,
-  DEMORALIZED_ELEMENTAL_AMP,
-  
-  // Time mods
-  ATTACK_TIME_AMPLIFIER,
-  OVERRIDE_ATTACK_TIME,
-  STUN_RATING,
-  
-  // Over-time mods
-  HEALTH_GAIN_OVER_TIME,
-  HEALTH_LOSS_OVER_TIME,
-  ADD_HEALTH_WHILE_DEFENDING,
-  ADD_MANA_WHILE_DEFENDING,
-  MEDITATION_RATING,
-  ACCELERATED_MANA_DRAIN,
-  MANA_DRAIN_ATMOSPHERIC_DAMAGE,
-  TEMP_MANA_DRAIN_AMOUNT,
-  TEMP_MANA_DRAIN_TIME,
-  FUSION_RATE,
-  
-  // On defend
-  MANA_REGEN_ADDED_ON_DEFEND, /// THIS IS THE BUFF, SENT OUT ON START
-  ADD_MANA_REGENERATION,      /// THIS IS THE PERK, APPLIED EACH DEFEND
-  MANA_REGENERATION,          /// THIS IS THE STAT, APPLIED EACH TICK
-  
-  // Demoralization
-  DEMORALIZE_RATING_NO_STACKING,
-  DEMORALIZE_RATING,
-  SELF_DEMORALIZE_RATING,
-  
-  // Leech
-  HEALTH_LEECH,
-  MANA_LEECH,
-  
-  // Stance mods
-  ADD_STANCE_COUNT,
-  ADD_STANCE_COUNT_PER_GLYPH,
-  
-  // Count based mods
-  CAST_COUNT_AMP,
-  GLYPH_COUNT_AMP,
-  STARBOLT_AMPLIFIER_MIN,
-  STARBOLT_AMPLIFIER_MAX,
-  
-  // Action requirements
-  REQUIRES_GLYPH,
-  REQUIRES_CAST_COUNT,
-  
-  // Misc
-  HIT_CHANCE_OVERRIDE,
-  CUT_CASTER_LIFE_BY_PERCENT,
-  ADD_SELF_AS_TARGET,
-  MANA_SHIELD_PERCENT,
-  PAUSE_TUNA,
-  UNPAUSE_TUNA,
-  AUTO_ATTACK_MODE,
-  TARGET_CASTER,
-  RANDOM_TARGET,
-  ATMOSPHERIC_TAG,
-  QUEUED_MULTISTRIKE_COUNT,
-  QUEUED_MULTISTRIKE_DELAY,
-  QUEUED_SECONDARY_EFFECT,
-  OMNI_SEEKER_HARDCORE,
-  
-  // Misc UI
-  STORM_INTENSITY_NOTIFICATION,
-  ALT_ACTION_ANIMATION,
-  TRACK_ACTION,
-  
-  // Passive Requirements
-  MASTERY_REQ_VITALITY,
-  MASTERY_REQ_STRENGTH,
-  MASTERY_REQ_COURAGE,
-  MASTERY_REQ_FOCUS,
-  
-  // Passive
-  PASSIVE_ARMOR_BOOST,
-  PASSIVE_HEALTH_BOOST,
-  PASSIVE_MANA_BOOST,
-  PASSIVE_SPEED_BOOST,
-  PASSIVE_DODGE_BOOST,
-  PASSIVE_ACCURACY_BOOST,
-  PASSIVE_HEALTH_REGEN,
-  PASSIVE_ADD_PHYSICAL_MIN,
-  PASSIVE_ADD_PHYSICAL_MAX,
-  
-  RESURRECTION_HEALTH,
-  
-};
-
 // Combat mechanic return types (The return value is cast into this type)
 // Using 'union' would have been cool here if this was C code
 enum ReturnTypes {
@@ -236,6 +81,7 @@ enum AttributeSets {
   GLYPH_SET,
   GLYPH_ACTION_SET,
   TAKE_DAMAGE_SET,
+  TARGETED_SET,
   ADD_STANCE_SET,
   REMOVE_STANCE_SET,
   ON_ATTACK_SET,
@@ -375,6 +221,25 @@ public function refresh() {
 }
 
 /*=============================================================================
+ * p2()
+ *
+ * Allows the descriptor to be edited in a clean format
+ *===========================================================================*/
+///protected function p2
+///(
+///  string text1, 
+///  string text2, 
+///  string text3, 
+///  string text4, 
+///  optional FontStyles font = DEFAULT_SMALL_WHITE
+///) 
+///{
+///  super.p2(text1, text2, text3, text4, font);
+///  
+///  
+///}
+///
+/*=============================================================================
  * setShowPrevious()
  *
  * 
@@ -400,11 +265,22 @@ public function formatScript(ROTT_Combat_Hero hero) {
   // Get skill level
   skillLevel = getSkillLevel(hero);
   
+  // Store boost level for display
+  switch (parentTree) {
+    case CLASS_TREE:
+      boostLevel = hero.getClassLevelBoost(skillIndex);
+      break;
+    case GLYPH_TREE:
+      boostLevel = hero.getGlyphLevelBoost(skillIndex);
+      break;
+  }
+  
   // Prepare skill info based on skill level
   skillInfoData[0] = replaceCodes(skillText[0], skillLevel);
   skillInfoData[1] = replaceCodes(skillText[1], skillLevel);
   skillInfoData[2] = replaceCodes(skillText[2], skillLevel);
   
+  // Set hyper text
   switch(parentTree) {
     case HYPER_TREE:
       // Chance info in 2nd paragraph 
@@ -474,7 +350,7 @@ public function formatScript(ROTT_Combat_Hero hero) {
       } else {
         // p2 holds current skill level info
         p2(
-          "Skill Level: " $ skillLevel,
+          "Skill Level: " $ skillLevel + boostLevel,
           skillInfoData[0].currentText,
           skillInfoData[1].currentText,
           skillInfoData[2].currentText
@@ -482,6 +358,7 @@ public function formatScript(ROTT_Combat_Hero hero) {
         
         // p3 holds next (or previous) skill level info
         if (bShowPrevious) {
+          // Show previous level info for skill reset
           if (skillLevel == 1) {
             p3(
               "",
@@ -492,13 +369,14 @@ public function formatScript(ROTT_Combat_Hero hero) {
 
           } else {
             p3(
-              "Skill Level: " $ skillLevel - 1,
+              "Skill Level: " $ skillLevel + boostLevel - 1,
               skillInfoData[0].previousLvlText,
               skillInfoData[1].previousLvlText,
               skillInfoData[2].previousLvlText
             );
           }
         } else {
+          // Show next level preview
           p3(
             "Next Level",
             skillInfoData[0].nextLvlText,
@@ -678,7 +556,8 @@ private function string formatCodes
   // Buffer the mechanic value as a string
   switch (returnType) {
     case INTEGER:
-      mechStr = string(int(attribute));
+      ///mechStr = string(int(attribute));
+      mechStr = class'UI_Label'.static.abbreviate(int(attribute));
       break;
     case DECIMAL:
       // Format to two decimal places
@@ -707,8 +586,8 @@ public function float getAttributeInfo
   optional int level = -1
 ) 
 {
-  // Get actual level with no overide
-  if (level == -1) level = getSkillLevel(hero);
+  // Get hard point level with no boosts
+  if (level == -1) level = getSkillLevel(hero, true);
   
   // Filter stats for level 0
   if (level == 0) return 0;
@@ -720,18 +599,18 @@ public function float getAttributeInfo
     case TEMP_MANA_DRAIN_AMOUNT:
       // Prevent enchantment level boosts from penalizing attributes
       break;
+    case MANA_OVERFLOW_COST:
+      // Slower mana increase for aura
+      level += hero.getClassLevelBoost(skillIndex) / 2;
+      break;
     default:
-      // Enchantment boost
+      // Apply enchantment and item boosts
       switch (parentTree) {
-        case CLASS_TREE:   
-          if (level != 0) {
-            level += gameInfo.playerProfile.getEnchantBoost(OATH_PENDANT); 
-          }
+        case CLASS_TREE:  
+          level += hero.getClassLevelBoost(skillIndex);
           break;
-        case GLYPH_TREE:   
-          if (level != 0) {
-            level += gameInfo.playerProfile.getEnchantBoost(EMPERORS_TALISMAN);
-          }
+        case GLYPH_TREE:  
+          level += hero.getGlyphLevelBoost(skillIndex);
           break;
         case MASTERY_TREE: 
           break;
@@ -787,6 +666,13 @@ public function modifyStanceSteps(ROTT_Combat_Hero hero, int addSteps) {
   local int initialSteps;
   
   if (addSteps == 0) return;
+  
+  // Add steps from persistence
+  ///addSteps += hero.heldItemStat(ITEM_PERSISTENCE) / 80;
+  ///if (hero.heldItemStat(ITEM_PERSISTENCE) / 80 >= 1) {
+  ///  violetLog("Added persistence steps");
+  ///  scriptTrace();
+  ///}
   
   // Store step value before change
   initialSteps = stanceCount;
@@ -849,7 +735,7 @@ public function addManaOverflow(float manaOverflow) {
   
   // Get calculation info
   hero = ROTT_Combat_Hero(outer.outer);
-  level = getSkillLevel(hero);
+  level = getSkillLevel(hero, true);
   overflowCost = getAttributeInfo(MANA_OVERFLOW_COST, hero, level);
   if (overflowCost == 0) return;
   
@@ -877,48 +763,6 @@ public function onTick(ROTT_Combat_Hero hero, float deltaTime);
  *===========================================================================*/
 public function onDeadTick(ROTT_Combat_Hero hero, float deltaTime);
 
-/**
-{
-  local float manaCost, transferTime;
-  local int level;
-  local int i;
-  
-  // Get skill level
-  level = getSkillLevel(hero);
-  if (level == 0) return;
-  
-  // Make mechanics from skill attributes
-  for (i = 0; i < skillAttributes.length; i++) {
-    if (skillAttributes[i].attributeSet == ON_TICK_SET) {
-      switch (skillAttributes[i].mechanicType) {
-        // Aura mechanics
-        case MANA_TRANSFER_RATE:
-          manaCost = getAttributeInfo(MANA_COST, hero, level);
-          transferTime = getAttributeInfo(MANA_TRANSFER_RATE, hero, level);
-          manaPool += hero.transferMana(manaCost * deltaTime / transferTime);
-          if (manaPool > manaCost) {
-            manaPool = manaPool % manaCost;
-            onPoolOverflow(hero);
-          }
-          break;
-        
-        // Note: these aura mechanics are implemented here because they apply 
-        // to multiple skills
-        
-        // Black hole mechanics, implemented in black hole skill
-        case ACCELERATED_MANA_DRAIN:
-          break;
-          
-        // Unhandled cases
-        default:
-          yellowLog("Warning (!) Unhandled tick mechanic " 
-          $ string(GetEnum(enum'AttributeTypes', skillAttributes[i].mechanicType)));
-          break;
-      }
-    }
-  }
-}**/
-
 /*============================================================================= 
  * onBattlePrep()
  *
@@ -930,6 +774,9 @@ public function onBattlePrep(ROTT_Combat_Hero hero) {
   
   // Skip level zero skills
   if (getSkillLevel(hero) == 0) return;
+  
+  // Reset mana overflow tracking
+  manaPool = 0;
   
   // Set heroes as targets
   for (i = 0; i < gameInfo.getActiveParty().getPartySize(); i++) {
@@ -1032,7 +879,7 @@ public function bool skillAction
         case MANA_COST:
           casterMechanics.addMechanic(
             REDUCE_MANA, 
-            getAttributeInfo(MANA_COST, caster, level)
+            getAttributeInfo(MANA_COST, caster, getSkillLevel(caster, true))
           );
           break;
           
@@ -1241,8 +1088,6 @@ public function bool skillAction
           break;
           
         case PARTY_ELEMENTAL_AMPLIFIER:
-        cyanLog("Party elemental amp");
-          scripttrace();
           targetMechanics.addMechanic(
             ELEMENTAL_MULTIPLIER, 
             getAttributeInfo(PARTY_ELEMENTAL_AMPLIFIER, caster, level)
@@ -1272,6 +1117,14 @@ public function bool skillAction
           
         // Time mods
         case ATTACK_TIME_AMPLIFIER: 
+          violetLog("Using ATTACK_TIME_AMPLIFIER" @self);
+          //scriptTrace();
+                
+          ///caster.addTunaAmp(
+          ///  getAttributeInfo(ATTACK_TIME_AMPLIFIER, caster, level),
+          ///  statusTag,
+          ///  getAttributeInfo(ADD_STANCE_COUNT, caster, level)
+          ///);
           casterMechanics.addMechanic(
             ADD_ATTACK_TIME_PERCENT, 
             getAttributeInfo(ATTACK_TIME_AMPLIFIER, caster, level)
@@ -1293,10 +1146,10 @@ public function bool skillAction
           break;
         
         case HEALTH_LOSS_OVER_TIME: // Caster version... do we need a target version?
-          casterMechanics.addMechanic(
-            ADD_HEALTH_DRAIN, 
-            getAttributeInfo(HEALTH_LOSS_OVER_TIME, caster, level)
-          );
+          ///casterMechanics.addMechanic(
+          ///  ADD_HEALTH_DRAIN, 
+          ///  getAttributeInfo(HEALTH_LOSS_OVER_TIME, caster, level)
+          ///);
           break;
           
         case ADD_HEALTH_WHILE_DEFENDING: 
@@ -1348,9 +1201,6 @@ public function bool skillAction
             ADD_ARMOR, 
             getAttributeInfo(INCREASE_ARMOR, caster, level)
           );
-          
-        violetLog("Armor amp");
-          scripttrace();
           break;
           
         // Demoralization
@@ -1396,7 +1246,14 @@ public function bool skillAction
           break;
           
         case ADD_STANCE_COUNT_PER_GLYPH:
-          modifyStanceSteps(caster, getAttributeInfo(ADD_STANCE_COUNT_PER_GLYPH, caster, level) * glyphCount);
+          modifyStanceSteps(
+            caster, 
+            getAttributeInfo(
+              ADD_STANCE_COUNT_PER_GLYPH, 
+              caster, 
+              level
+            ) * glyphCount + rollPersistCount(caster)
+          );
           break;
         
         // Count based mods
@@ -1486,7 +1343,6 @@ public function bool skillAction
           ///  break;
           ///}
           // Queue up secondary effects
-          violetLog("Queue secondary effect");
           caster.queueAction(
             targets,
             1,   // strike count
@@ -1562,6 +1418,7 @@ public function bool skillAction
   // Get post processing mechanics
   dmgAmpElemental += caster.statBoosts[AMPLIFY_NEXT_DAMAGE] / 100.0;
   dmgAmpElemental += caster.statBoosts[ELEMENTAL_MULTIPLIER] / 100.0;
+  dmgAmpElemental += caster.heldItemStat(ITEM_MULTIPLY_ELEMENTAL) / 100.0;
   dmgAmpPhysical += caster.statBoosts[AMPLIFY_NEXT_DAMAGE] / 100.0;
   dmgAmpPhysical += caster.statBoosts[PHYSICAL_MULTIPLIER] / 100.0;
   if (bNegateValues) {
@@ -1573,11 +1430,26 @@ public function bool skillAction
   targetMechanics.multiplyMechanic(PHYSICAL_DAMAGE, dmgAmpPhysical * dmgAmp);
   targetMechanics.multiplyMechanic(ELEMENTAL_DAMAGE, dmgAmpElemental * dmgAmp);
   
+  // Check for laceration, item ability
+  handleLacerations(caster);
+  
+  // Add laceration DPS
+  /// to do...
+  
+  // Check for persistence, item ability
+  if (attributeSet == COMBAT_ACTION_SET) {
+    if (ROTT_Descriptor_Skill_Valkyrie_Volt_Retaliation(self) != none || caster.bForceAttack) {
+      
+    } else {
+      handlePersistence(caster);
+    }
+  }
+  
   // Apply skill mechanics to caster 
   caster.parseMechanics(casterMechanics, caster);
   
   // Reset time until next attack
-  switch (AttributeSet) {
+  switch (attributeSet) {
     case COMBAT_ACTION_SET:  
       caster.resetTuna();
       break;
@@ -1627,6 +1499,114 @@ public function bool skillAction
   
   // Report false if no targets hit, true if one or more are hit
   return bHit;
+}
+
+/*============================================================================= 
+ * handleLacerations()
+ *
+ * Implements lacerations, 25% damage dealt as dps
+ *===========================================================================*/
+protected function handleLacerations(ROTT_Combat_Hero heroCaster) {
+  local int lacerationChance;
+  
+  // Prevent laceration stacking
+  if (heroCaster.lacerationCount > 0) return;
+  
+  // Set chance from item
+  lacerationChance = heroCaster.heldItemStat(ITEM_LACERATIONS);
+  
+  // Iterate through percent chance to persist
+  while (lacerationChance > 0) {
+    // Check chance to persist up to 80 at a time
+    if (lacerationChance > LACERATION_LIMIT) {
+      if (rand(100) < LACERATION_LIMIT) {
+        // Enable laceration
+        heroCaster.lacerationCount++;
+        lacerationChance -= LACERATION_LIMIT;
+      }
+    } else {
+      if (rand(100) < lacerationChance) {
+        // Enable laceration
+        heroCaster.lacerationCount++;
+        lacerationChance = 0;
+      }
+    }
+  }
+  
+}
+
+/*============================================================================= 
+ * handlePersistence()
+ *
+ * Implements persistence, repeats actions with half attack time
+ *===========================================================================*/
+protected function handlePersistence
+(
+  ROTT_Combat_Hero heroCaster
+) 
+{
+  // Prevent stacking
+  if (heroCaster.bPersisting) return;
+  
+  // Roll to count number of persisted actions
+  heroCaster.persistenceCount = rollPersistCount(heroCaster);
+  
+  // Exit if no actions rolled
+  if (heroCaster.persistenceCount == 0) return;
+  
+  // Change state to persisting on hero
+  heroCaster.bPersisting = true;
+  
+  // Apply time mod for faster persisting strikes
+  if (heroCaster.persistenceCount != 0) {
+    heroCaster.addTunaAmp(
+      0.5,
+      "Persistence",
+      heroCaster.persistenceCount
+    );
+  }
+}
+
+/*============================================================================= 
+ * rollPersistCount()
+ *
+ * Returns the number of persisted actions.  Uses 80% Roll cap.
+ *===========================================================================*/
+protected function int rollPersistCount
+(
+  ROTT_Combat_Hero heroCaster
+) 
+{
+  local int persistenceChance;
+  local int count;
+  local int roll;
+  
+  // Set chance from item
+  persistenceChance = heroCaster.heldItemStat(ITEM_PERSISTENCE);
+  if (persistenceChance == 0) return 0;
+  
+  // Iterate through percent chance to persist
+  while (persistenceChance > 0) {
+    roll = rand(100);
+    
+    // Check chance to persist up to 80 at a time
+    if (persistenceChance >= PERSISTENCE_LIMIT) {
+      if (roll < PERSISTENCE_LIMIT) {
+        // Add to persistence
+        count++;
+      }
+      // Consume chance per roll
+      persistenceChance -= PERSISTENCE_LIMIT;
+    } else {
+      if (roll < persistenceChance) {
+        // Add to persistence
+        count++;
+      }
+      // Roll chance depleted
+      persistenceChance = 0;
+    }
+  }
+  return count;
 }
 
 /*============================================================================= 
@@ -1695,9 +1675,14 @@ public function bool statReqCheck(ROTT_Combat_Hero hero) {
 /*============================================================================= 
  * getSkillLevel()
  *
- * This fetches the skill level from the hero provided, including bonuses
+ * This fetches the skill level from the hero provided, including(?) bonuses
  *===========================================================================*/
-public function int getSkillLevel(ROTT_Combat_Hero hero) {
+public function int getSkillLevel
+(
+  ROTT_Combat_Hero hero, 
+  optional bool bIgnoreBoost = false
+) 
+{
   // Check for valid skill index
   if (skillIndex == -1) {
     yellowLog("Warning (!) skill index not set for skill");
@@ -1712,8 +1697,8 @@ public function int getSkillLevel(ROTT_Combat_Hero hero) {
   
   // Get skill info from skill trees
   switch (parentTree) {
-    case CLASS_TREE:   return hero.getClassLevel(skillIndex);
-    case GLYPH_TREE:   return hero.getGlyphLevel(skillIndex);
+    case CLASS_TREE:   return hero.getClassLevel(skillIndex); ///+ boost;
+    case GLYPH_TREE:   return hero.getGlyphLevel(skillIndex); ///+ boost;
     case MASTERY_TREE: return hero.getMasteryLevel(skillIndex);
     case HYPER_TREE:   return gameInfo.playerProfile.getHyperGlyphLevel(skillIndex);
   }
@@ -1742,56 +1727,6 @@ defaultProperties
   // Default status color
   statusColor=COMBAT_SMALL_TAN
 }
-
-
-
-
-/** old code ideas **/
-
-// Hack to get around UCC complaining about boolean arrays
-//struct BoolStruct {
-//  var bool value;
-//};
-
-// Combat mechanics to be executed when the "on strike" event occurs in combat
-// (Lets not do it this way?)
-//var protectedwrite BoolStruct onStrikeMechanics[AttributeTypes];
-
-// Combat mechanics to be executed when this skill's glyph is collected
-// (Lets not do it this way?)
-///var protectedwrite BoolStruct onCollectMechanics[AttributeTypes];
-
-// Colors associated with each mechanic?
-// (Lets not do it this way?)
-///var protectedwrite LabelFont mechanicColors[AttributeTypes];
-
-
-
-/**=============================================================================
- * Skill Mechanics
- *
- * These stubs are defined by the children of this class to define combat
- * behavior.  They also correspond to UI replacement codes
- *===========================================================================
-protected function float manaCost(int level);
-*/
-
-/**=============================================================================
- * addOnStrikeMechanic()
- *
- * The mechanic specified will be executed during the "on strike" event
- *===========================================================================
-protected function addOnStrikeMechanic(AttributeTypes mechType) {
-  // Duplicate check, for robustness
-  if (onStrikeMechanics[mechType].value == true) {
-    yellowLog("Warning (!) Duplicate mechanic detected");
-    return;
-  }
-  
-  onStrikeMechanics[mechType].value = true;
-}
-*/
-
 
 
 

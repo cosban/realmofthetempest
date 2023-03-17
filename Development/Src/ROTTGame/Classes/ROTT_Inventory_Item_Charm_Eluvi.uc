@@ -7,35 +7,7 @@
  * 
  *===========================================================================*/
  
-class ROTT_Inventory_Item_Charm_Eluvi extends ROTT_Inventory_Item;
-
-/*=============================================================================
- * getDropChance()
- *
- * Implemented in each item subclsas
- *===========================================================================*/
-protected function float getDropChance(int dropLevel) {
-  if (dropLevel < 5) return 1.f - dropLevel * 0.05f;
-  return 1.f;
-}
-
-/*=============================================================================
- * getMinQuantity()
- *
- * Implemented in each item subclsas
- *===========================================================================*/
-protected function float getMinQuantity(int dropLevel) {
-  return 1;
-}
-
-/*=============================================================================
- * getMaxQuantity()
- *
- * Implemented in each item subclsas
- *===========================================================================*/
-protected function float getMaxQuantity(int dropLevel) {
-  return 1;
-}
+class ROTT_Inventory_Item_Charm_Eluvi extends ROTT_Inventory_Item_Ritual_Base;
 
 /*============================================================================= 
  * Default Properties
@@ -47,6 +19,10 @@ defaultProperties
   
   // Display name
   itemName="Eluvi Charm"
+  
+  // Hard stats
+  itemStats(ITEM_ADD_STRENGTH)=10
+  itemStats(ITEM_ADD_PHYSICAL_MAX)=10
   
   // Item texture
   itemTexture=Texture2D'ROTT_Items.Charms.Item_Charm_Orange'

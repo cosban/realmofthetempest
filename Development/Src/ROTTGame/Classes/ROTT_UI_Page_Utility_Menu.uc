@@ -26,7 +26,7 @@ var private UI_Selector utilitySelector;
 var private UI_Sprite hyperGlyphLabelGraphic;
 
 // External UI references
-var public ROTT_UI_Scene_Game_Menu gameMenuPage;
+///var public ROTT_UI_Scene_Game_Menu gameMenuPage;
 
 /*=============================================================================
  * Initialize Component
@@ -96,6 +96,8 @@ protected function navigationRoutineA() {
     case UTILITY_INVENTORY:
       /** delegate me **/
       ROTT_UI_Scene_Game_Menu(parentScene).pushMenu(INVENTORY_MENU);
+      ROTT_UI_Scene_Game_Menu(parentScene).pushMenu(MGMT_WINDOW_ITEM);
+      
       // Sfx
       gameInfo.sfxBox.playSfx(SFX_MENU_ACCEPT);
       break;
@@ -193,6 +195,13 @@ defaultProperties
     posY=50
     selectionOffset=(x=0,y=100)
     numberOfMenuOptions=7
+    hoverCoords(0)=(xStart=737,yStart=50,xEnd=1423,yEnd=140)
+    hoverCoords(1)=(xStart=737,yStart=150,xEnd=1423,yEnd=240)
+    hoverCoords(2)=(xStart=737,yStart=250,xEnd=1423,yEnd=340)
+    hoverCoords(3)=(xStart=737,yStart=350,xEnd=1423,yEnd=440)
+    hoverCoords(4)=(xStart=737,yStart=450,xEnd=1423,yEnd=540)
+    hoverCoords(5)=(xStart=737,yStart=550,xEnd=1423,yEnd=640)
+    hoverCoords(6)=(xStart=737,yStart=650,xEnd=1423,yEnd=740)
     
     // Selection texture
     begin object class=UI_Texture_Info Name=Selection_Box_Texture

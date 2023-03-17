@@ -114,14 +114,21 @@ function bool onInputKey
   bool bGamepad = false
 ) 
 {
+  // Remap each key set
+  switch (Key) {
+    // Mouse and keyboard remapping
+    case 'LeftMouseButton': Key = 'XBoxTypeS_X'; break;
+  }
+  
   // Pass input to input controller
   if (inputController != none) {
     inputController.parseInput(Key, Event);
   }
   
   switch (Key) {
+    case 'LeftShift': 
     case 'XboxTypeS_LeftTrigger': 
-      if (Event == IE_Pressed) gameinfo.SetGameSpeed(4);
+      if (Event == IE_Pressed) gameinfo.setTemporalBoost();
       if (Event == IE_Released) gameinfo.SetGameSpeed(1);
       break;
   }
@@ -134,8 +141,6 @@ function bool onInputKey
  *===========================================================================*/
 public function onNavigateLeft();
 public function onNavigateRight();
-protected function navigateUp();
-protected function navigateDown();
 
 /*============================================================================*
  * Button inputs
@@ -198,7 +203,7 @@ defaultProperties
     posYEnd=612
     alignX=CENTER
     alignY=TOP
-    fontStyle=DEFAULT_MEDIUM_ORANGE
+    fontStyle=DEFAULT_MEDIUM_PEACH
     labelText="The Obelisk shrine awaits your prayers."
   end object
   componentList.add(Interface_Text_Line_1)
@@ -211,7 +216,7 @@ defaultProperties
     posYEnd=621
     alignX=CENTER
     alignY=TOP
-    fontStyle=DEFAULT_MEDIUM_ORANGE
+    fontStyle=DEFAULT_MEDIUM_PEACH
     labelText="The Obelisk shrine awaits your prayers."
   end object
   componentList.add(Interface_Text_Line_2)

@@ -9,11 +9,40 @@
  
 class ROTT_UI_Page_Mgmt_Window_Collectible extends ROTT_UI_Page_Mgmt_Window;
 
+/*============================================================================= 
+ * setDescriptor()
+ *
+ * This parses a descriptor to update the text displayed in this window
+ *===========================================================================*/
+public function setDescriptor(ROTT_Descriptor descriptor) {
+  local ROTT_Descriptor_Hero_Skill heroScript;
+  
+  if (descriptor == none) {
+    yellowLog("Warning (!) A descriptor still needs to be implemented.");
+    return;
+  }
+  
+  super.setDescriptor(descriptor);
+  
+  // Convert to hero skill script
+  heroScript = ROTT_Descriptor_Hero_Skill(descriptor);
+  if (heroScript == none) {
+    yellowLog("Warning (!) Foreign descriptor provided to skills window. " $ descriptor);
+    return;
+  }
+  
+  // Show skill level boost
+  if (heroScript.boostLevel != 0) {
+    findLabel("Skill_Boost_Label").setText(" ( +" $ heroScript.boostLevel $ " )");
+    findLabel("Skill_Boost_Label").setFont(DEFAULT_SMALL_GREEN);
+  } else {
+    findLabel("Skill_Boost_Label").setText("");
+  }
+}
+
 /*=============================================================================
  * D-Pad controls
  *===========================================================================*/
-protected function navigateUp();
-protected function navigateDown();
 public function onNavigateLeft();
 public function onNavigateRight();
 
@@ -78,6 +107,21 @@ defaultProperties
     images(0)=Info_Button_Collectible
   end object
   componentList.add(Info_Button_Sprite)
+  
+  // Skill boost display
+  begin object class=UI_Label Name=Skill_Boost_Label
+    tag="Skill_Boost_Label"
+    posX=450
+    posY=297
+    posXEnd=720
+    posYEnd=NATIVE_HEIGHT
+    fontStyle=DEFAULT_SMALL_GREEN
+    AlignX=LEFT
+    AlignY=TOP
+    labelText="(+1)"
+  end object
+  componentList.add(Skill_Boost_Label)
+  
 }
   
   

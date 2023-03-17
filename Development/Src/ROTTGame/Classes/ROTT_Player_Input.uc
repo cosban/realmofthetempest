@@ -34,8 +34,11 @@ event playerInput(float deltaTime) {
   if (ROTT_UI_Hud(myHUD) != none) {
     if (int(aMouseX * cursorSpeed) != 0 || int(aMouseY * cursorSpeed) != 0) {
       // Unhide mouse
-      if (gameInfo.sceneManager.scene.bHideCursorOverride == false) 
+      if (gameInfo.sceneManager.scene.isMouseVisible()) {
         ROTT_UI_Hud(myHUD).unlockCursorHidden();
+      } else {
+        ROTT_UI_Hud(myHUD).lockCursorHidden();
+      }
     }
   }
 

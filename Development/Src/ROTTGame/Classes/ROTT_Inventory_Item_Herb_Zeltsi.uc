@@ -7,35 +7,7 @@
  * Consumed at the Etzland shrine for experience
  *===========================================================================*/
  
-class ROTT_Inventory_Item_Herb_Zeltsi extends ROTT_Inventory_Item;
-
-/*=============================================================================
- * getDropChance()
- *
- * Implemented in each item subclsas
- *===========================================================================*/
-protected function float getDropChance(int dropLevel) {
-  if (dropLevel < 5) return 0.25f - dropLevel * 0.05f;
-  return 0.25f;
-}
-
-/*=============================================================================
- * getMinQuantity()
- *
- * Implemented in each item subclsas
- *===========================================================================*/
-protected function float getMinQuantity(int dropLevel) {
-  return 1;
-}
-
-/*=============================================================================
- * getMaxQuantity()
- *
- * Implemented in each item subclsas
- *===========================================================================*/
-protected function float getMaxQuantity(int dropLevel) {
-  return 1;
-}
+class ROTT_Inventory_Item_Herb_Zeltsi extends ROTT_Inventory_Item_Ritual_Base;
 
 /*============================================================================= 
  * Default Properties
@@ -47,6 +19,10 @@ defaultProperties
   
   // Display name
   itemName="Zeltsi Leaf"
+  
+  // Hard attributes
+  itemStats(ITEM_ADD_ALL_STATS)=1
+  itemStats(ITEM_ADD_GLYPH_LUCK)=5
   
   // Item texture
   itemTexture=Texture2D'ROTT_Items.Herbs.Item_Herb_Gold'

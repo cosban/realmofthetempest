@@ -16,8 +16,11 @@ enum FontStyles {
   DEFAULT_SMALL_BEIGE,
   DEFAULT_SMALL_GREEN,
   DEFAULT_SMALL_RED,
+  DEFAULT_SMALL_PEACH,
   DEFAULT_SMALL_BLUE,
   DEFAULT_SMALL_PURPLE,
+  DEFAULT_SMALL_TEAL,
+  DEFAULT_SMALL_PINK,
   DEFAULT_SMALL_ORANGE,
   DEFAULT_SMALL_DARK_ORANGE,
   DEFAULT_SMALL_CYAN,
@@ -29,8 +32,12 @@ enum FontStyles {
   
   DEFAULT_MEDIUM_WHITE,
   DEFAULT_MEDIUM_GOLD,
+  DEFAULT_MEDIUM_PURPLE,
+  DEFAULT_MEDIUM_TEAL,
+  DEFAULT_MEDIUM_PINK,
   DEFAULT_MEDIUM_YELLOW,
   DEFAULT_MEDIUM_ORANGE,
+  DEFAULT_MEDIUM_PEACH,
   DEFAULT_MEDIUM_GREEN,
   DEFAULT_MEDIUM_RED,
   DEFAULT_MEDIUM_CYAN,
@@ -43,6 +50,7 @@ enum FontStyles {
   DEFAULT_LARGE_RED, 
   DEFAULT_LARGE_TAN,
   DEFAULT_LARGE_CYAN,
+  DEFAULT_LARGE_BLUE,
   DEFAULT_LARGE_GREEN,
   
   COMBAT_SMALL_DARK_GRAY,
@@ -66,6 +74,9 @@ var protectedwrite FontStyles fontStyle;
 
 // Text to display on screen
 var protectedwrite string labelText;
+
+// When this label converts text to a number, the numbers stored here
+var protectedwrite int numericStorage;
 
 // Style cycler settings
 ///var protected bool bCycleStyles;
@@ -99,6 +110,9 @@ enum alignEnum {
 
 var public alignEnum alignY;
 var public alignEnum alignX;
+
+// Stores whether or not to abbreviate numeric values
+var public bool bFormatAbbreviations;
 
 /*============================================================================= 
  * drawCanvas()
@@ -322,27 +336,6 @@ public function setAlpha(byte alpha) {
 }
 
 /*=============================================================================
- * cycleStyleEffect()
- *
- * This will cycle (or alternate) between font styles.  Used for flashing
- * between different font colors.
- *===========================================================================*/
-///protected function cycleStyleEffect(float deltaTime) {
-///  // Track elapsed time
-///  elapsedCycleTime += deltaTime;
-///  
-///  // Check elapsed cycle time
-///  if (elapsedCycleTime >= cycleStyleLength) {
-///    // Keep time in loop
-///    elapsedCycleTime = elapsedCycleTime % cycleStyleLength;
-///    
-///    // Select next font
-///    cycleIndex = ++cycleIndex % cycleStyles.length;
-///    fontStyle = cycleStyles[cycleIndex];
-///  }
-///}
-
-/*=============================================================================
  * resetEffects()
  *
  * Clears the effect queue
@@ -383,6 +376,12 @@ public function int getLength() {
 public function setText(coerce string newText) {
   // Update text
   labelText = newText;
+  
+  // Store text as numeric value
+  numericStorage = int(labelText);
+  
+  // Check for abbreviated formatting
+  if (bFormatAbbreviations) formatNumericAbbreviations();
 }
 
 /*=============================================================================
@@ -451,6 +450,79 @@ public function int getDrawOptionCount() {
 }
 
 /*=============================================================================
+ * formatNumericAbbreviations()
+ *
+ * Modifies the text with numeric abbreviations.  (e.g. K, M, B, T)
+ *===========================================================================*/
+public function formatNumericAbbreviations() {
+  // Set display text
+  labelText = abbreviate(labelText);
+}
+
+/*=============================================================================
+ * abbreviate()
+ *
+ * Formats numeric abbreviations.  (e.g. K, M, B, T)
+ *===========================================================================*/
+public static function string abbreviate
+(
+  coerce string numericString,
+  optional int thresholdK = 25000
+) 
+{
+  local string abbreviatedText;
+  
+  // Ignore under threshold
+  if (int(numericString) < thresholdK) return numericString;
+  
+  switch (len(numericString)) {
+    case 5:
+      abbreviatedText = left(numericString, 2);
+      abbreviatedText $= ".";
+      abbreviatedText $= mid(numericString, 3, 1);
+      abbreviatedText $= "K";
+      break;
+    case 6:
+      abbreviatedText = left(numericString, 3);
+      abbreviatedText $= "K";
+      break;
+    case 7:
+      abbreviatedText = left(numericString, 1);
+      abbreviatedText $= ".";
+      abbreviatedText $= mid(numericString, 2, 2);
+      abbreviatedText $= "M";
+      break;
+    case 8:
+      abbreviatedText = left(numericString, 2);
+      abbreviatedText $= ".";
+      abbreviatedText $= mid(numericString, 3, 1);
+      abbreviatedText $= "M";
+      break;
+    case 9:
+      abbreviatedText = left(numericString, 3);
+      abbreviatedText $= "M";
+      break;
+    case 10:
+      abbreviatedText = left(numericString, 1);
+      abbreviatedText $= ".";
+      abbreviatedText $= mid(numericString, 2, 2);
+      abbreviatedText $= "B";
+      break;
+    /// Max value 2B, temporary until new data structures implemented
+    //case 11:
+    //  abbreviatedText = left(numericString, 2);
+    //  abbreviatedText $= ".";
+    //  abbreviatedText $= mid(numericString, 3, 1);
+    //  abbreviatedText $= "B";
+    //  break;
+      
+  }
+  
+  // Send the abreviated result
+  return abbreviatedText;
+}
+
+/*=============================================================================
  * deleteComp
  *===========================================================================*/
 event deleteComp() {
@@ -506,6 +578,13 @@ defaultProperties
   end object
   uiFonts[DEFAULT_SMALL_RED]=Cinzel_Small_Red
   
+  // Cinzel: Small, Peach
+  begin object class=UI_String_Style Name=Cinzel_Small_Peach
+    drawColor=(R=235,G=103,B=103,A=255) 
+    font=Font'GUI.Fonts.Cinzel_18'
+  end object
+  uiFonts[DEFAULT_SMALL_PEACH]=Cinzel_Small_Peach
+  
   // Cinzel: Small, Blue
   begin object class=UI_String_Style Name=Cinzel_Small_Blue
     drawColor=(R=30,G=120,B=255,A=255) 
@@ -519,6 +598,20 @@ defaultProperties
     font=Font'GUI.Fonts.Cinzel_18'
   end object
   uiFonts[DEFAULT_SMALL_PURPLE]=Cinzel_Small_Purple
+  
+  // Cinzel: Small, Teal
+  begin object class=UI_String_Style Name=Cinzel_Small_Teal
+    drawColor=(R=72,G=252,B=177,A=255) 
+    font=Font'GUI.Fonts.Cinzel_18'
+  end object
+  uiFonts[DEFAULT_SMALL_TEAL]=Cinzel_Small_Teal
+  
+  // Cinzel: Small, Pink
+  begin object class=UI_String_Style Name=Cinzel_Small_Pink
+    drawColor=(R=255,G=83,B=140,A=255) 
+    font=Font'GUI.Fonts.Cinzel_18'
+  end object
+  uiFonts[DEFAULT_SMALL_PINK]=Cinzel_Small_Pink
   
   // Cinzel: Small, Orange
   begin object class=UI_String_Style Name=Cinzel_Small_Orange
@@ -590,6 +683,27 @@ defaultProperties
   end object
   uiFonts[DEFAULT_MEDIUM_GOLD]=Cinzel_Medium_Gold
   
+  // Cinzel: Medium, Teal
+  begin object class=UI_String_Style Name=Cinzel_Medium_Teal
+    drawColor=(R=72,G=252,B=177,A=255) 
+    font=Font'GUI.Fonts.Cinzel_22'
+  end object
+  uiFonts[DEFAULT_MEDIUM_TEAL]=Cinzel_Medium_Teal
+  
+  // Cinzel: Medium, Pink
+  begin object class=UI_String_Style Name=Cinzel_Medium_Pink
+    drawColor=(R=255,G=83,B=140,A=255) 
+    font=Font'GUI.Fonts.Cinzel_22'
+  end object
+  uiFonts[DEFAULT_MEDIUM_PINK]=Cinzel_Medium_Pink
+  
+  // Cinzel: Medium, Purple
+  begin object class=UI_String_Style Name=Cinzel_Medium_Purple
+    drawColor=(R=175,G=30,B=255,A=255) 
+    font=Font'GUI.Fonts.Cinzel_22'
+  end object
+  uiFonts[DEFAULT_MEDIUM_PURPLE]=Cinzel_Medium_Purple
+  
   // Cinzel: Medium, Yellow
   begin object class=UI_String_Style Name=Cinzel_Medium_Yellow
     drawColor=(R=255,G=255,B=102,A=255)
@@ -599,10 +713,17 @@ defaultProperties
   
   // Cinzel: Medium, Orange
   begin object class=UI_String_Style Name=Cinzel_Medium_Orange
-    drawColor=(R=255,G=170,B=88,A=255)
+    drawColor=(R=255,G=145,B=0,A=255) 
     font=Font'GUI.Fonts.Cinzel_22'
   end object
   uiFonts[DEFAULT_MEDIUM_ORANGE]=Cinzel_Medium_Orange
+  
+  // Cinzel: Medium, Orange
+  begin object class=UI_String_Style Name=Cinzel_Medium_Peach
+    drawColor=(R=255,G=170,B=88,A=255)
+    font=Font'GUI.Fonts.Cinzel_22'
+  end object
+  uiFonts[DEFAULT_MEDIUM_PEACH]=Cinzel_Medium_Peach
   
   // Cinzel: Medium, Gray
   begin object class=UI_String_Style Name=Cinzel_Medium_Gray
@@ -673,6 +794,13 @@ defaultProperties
     font=Font'GUI.Fonts.Cinzel_28'
   end object
   uiFonts[DEFAULT_LARGE_CYAN]=Cinzel_Large_Cyan
+  
+  // Cinzel: Large, Blue
+  begin object class=UI_String_Style Name=Cinzel_Large_Blue
+    drawColor=(R=30,G=120,B=255,A=255) 
+    font=Font'GUI.Fonts.Cinzel_28'
+  end object
+  uiFonts[DEFAULT_LARGE_BLUE]=Cinzel_Large_Blue
   
   // Cinzel: Large, Green
   begin object class=UI_String_Style Name=Cinzel_Large_Green

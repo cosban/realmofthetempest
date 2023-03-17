@@ -66,7 +66,8 @@ event onPushPageEvent() {
  * This event is called when the page is removed
  *===========================================================================*/
 event onPopPageEvent() {
-  
+  // Graphic update
+  selectionBox.clearSelection();
 }
 
 /*=============================================================================
@@ -95,6 +96,36 @@ event onUnfocusMenu() {
   
   // Graphic update
   selectionBox.clearSelection();
+}
+
+/*============================================================================= 
+ * closeParagraphGaps()
+ *
+ * Used to remove the gaps between paragraphs
+ *===========================================================================*/
+public function closeParagraphGaps() {
+  local int i;
+  
+  for (i = 5; i < LINE_COUNT; i++) {
+    descriptionLabels[i].shiftY(-27);
+  }
+  for (i = 9; i < LINE_COUNT; i++) {
+    descriptionLabels[i].shiftY(-18);
+  }
+}
+
+/*============================================================================= 
+ * clearDescriptor()
+ *
+ * Erases display info
+ *===========================================================================*/
+public function clearDescriptor() {
+  local int i;
+  
+  // Iterate through lines
+  for (i = 0; i < LINE_COUNT; i++) {
+    descriptionLabels[i].setText("");
+  }
 }
 
 /*============================================================================= 
@@ -239,6 +270,9 @@ defaultProperties
   begin object class=UI_Texture_Info Name=Mgmt_Window_Default
     componentTextures.add(Texture2D'GUI.Mgmt_Window_Default')
   end object
+  begin object class=UI_Texture_Info Name=Mgmt_Window_Shadowless
+    componentTextures.add(Texture2D'GUI.Party_Mgmt_Window')
+  end object
   
   /** ===== UI Components ===== **/
   // Window mgmt background
@@ -247,6 +281,7 @@ defaultProperties
     posX=0
     posY=0
     images(0)=Mgmt_Window_Default
+    images(1)=Mgmt_Window_Shadowless
   end object
   componentList.add(Mgmt_Window_Background)
   
@@ -416,6 +451,9 @@ defaultProperties
     posY=552
     selectionOffset=(x=0,y=80)
     numberOfMenuOptions=3
+    hoverCoords(0)=(xStart=146,yStart=555,xEnd=580,yEnd=625)
+    hoverCoords(1)=(xStart=146,yStart=635,xEnd=580,yEnd=705)
+    hoverCoords(2)=(xStart=146,yStart=715,xEnd=580,yEnd=785)
     
     // Selection texture
     begin object class=UI_Texture_Info Name=Selection_Box_Texture

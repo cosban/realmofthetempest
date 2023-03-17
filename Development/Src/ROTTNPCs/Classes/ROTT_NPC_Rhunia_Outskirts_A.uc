@@ -26,7 +26,7 @@ public function initDialogue() {
   
   // Intro
   `NEW_NODE(GREETING, NUETRAL)
-    "You did not get lost, did you?",
+    "Are you lost or exploring?",
     ""
   `ENDNODE
   
@@ -68,6 +68,7 @@ defaultProperties
 {
   // NPC identity
   npcName=GENERIC
+  serviceType=SERVICE_BARTERING
   
   // Background
   begin object class=UI_Texture_Info Name=NPC_Background_Texture

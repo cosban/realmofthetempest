@@ -114,20 +114,20 @@ defaultProperties
   
   
   // Skill Animation
-  begin object class=UI_Texture_Info Name=SkillAnim_Lightning_B1
-    componentTextures.add(Texture2D'GUI_Skills.SkillAnim_Lightning_B1')
+  begin object class=UI_Texture_Info Name=Skill_Animation_Lightning_Diagonal_F1
+    componentTextures.add(Texture2D'GUI_Skills.Lightning_Diagonal.Skill_Animation_Lightning_Diagonal_F1')
   end object
-  begin object class=UI_Texture_Info Name=SkillAnim_Lightning_B2
-    componentTextures.add(Texture2D'GUI_Skills.SkillAnim_Lightning_B2')
+  begin object class=UI_Texture_Info Name=Skill_Animation_Lightning_Diagonal_F2
+    componentTextures.add(Texture2D'GUI_Skills.Lightning_Diagonal.Skill_Animation_Lightning_Diagonal_F2')
   end object
-  begin object class=UI_Texture_Info Name=SkillAnim_Lightning_B3
-    componentTextures.add(Texture2D'GUI_Skills.SkillAnim_Lightning_B3')
+  begin object class=UI_Texture_Info Name=Skill_Animation_Lightning_Diagonal_F3
+    componentTextures.add(Texture2D'GUI_Skills.Lightning_Diagonal.Skill_Animation_Lightning_Diagonal_F3')
   end object
-  begin object class=UI_Texture_Info Name=SkillAnim_Lightning_B4
-    componentTextures.add(Texture2D'GUI_Skills.SkillAnim_Lightning_B4')
+  begin object class=UI_Texture_Info Name=Skill_Animation_Lightning_Diagonal_F4
+    componentTextures.add(Texture2D'GUI_Skills.Lightning_Diagonal.Skill_Animation_Lightning_Diagonal_F4')
   end object
-  begin object class=UI_Texture_Info Name=SkillAnim_Lightning_B5
-    componentTextures.add(Texture2D'GUI_Skills.SkillAnim_Lightning_B5')
+  begin object class=UI_Texture_Info Name=Skill_Animation_Lightning_Diagonal_F5
+    componentTextures.add(Texture2D'GUI_Skills.Lightning_Diagonal.Skill_Animation_Lightning_Diagonal_F5')
   end object
   
   // Skill Animation Container
@@ -135,11 +135,11 @@ defaultProperties
     tag="Skill_Bnimation_Container"
     textureWidth=240
     textureHeight=240
-    images(0)=SkillAnim_Lightning_B1
-    images(1)=SkillAnim_Lightning_B2
-    images(2)=SkillAnim_Lightning_B3
-    images(3)=SkillAnim_Lightning_B4
-    images(4)=SkillAnim_Lightning_B5
+    images(0)=Skill_Animation_Lightning_Diagonal_F1
+    images(1)=Skill_Animation_Lightning_Diagonal_F2
+    images(2)=Skill_Animation_Lightning_Diagonal_F3
+    images(3)=Skill_Animation_Lightning_Diagonal_F4
+    images(4)=Skill_Animation_Lightning_Diagonal_F5
   end object
   skillAnim=Skill_Bnimation_Container
   

@@ -11,7 +11,7 @@
 class UI_String_Style extends object;
 
 // If true, start in a new line if string exceeds clipping limit.
-const CARRIAGE_RETURN = true; 
+const CARRIAGE_RETURN = false; 
 
 // Scaling for text size
 var public float scaleX, scaleY;
@@ -41,6 +41,9 @@ public function drawString
   if (boundScale.X ~= 0.f) boundScale.X = 1.f;
   if (boundScale.Y ~= 0.f) boundScale.Y = 1.f;
   
+  // Prevent clipping from carriage returning...
+  C.SetClip(14400, 9000);
+  
   // Text outlining (lower shadow)
   C.SetPos(posX + 2, posY + 2);
   C.SetDrawColor(0,0,0, textColor.A);
@@ -62,7 +65,6 @@ public function drawString
 
   // Draw the text to the screen
   C.DrawText(drawString, CARRIAGE_RETURN, scaleX * boundScale.X, scaleY * boundScale.Y);
-  //C.SetClip(1440, 900);
 }
 
 /*============================================================================= 

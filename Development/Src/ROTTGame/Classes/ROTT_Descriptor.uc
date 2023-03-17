@@ -12,7 +12,7 @@
  *
  *===========================================================================*/
   
-class ROTT_Descriptor extends ROTTObject
+class ROTT_Descriptor extends ROTT_Object
 abstract;
 
 // This is the general format for descriptors

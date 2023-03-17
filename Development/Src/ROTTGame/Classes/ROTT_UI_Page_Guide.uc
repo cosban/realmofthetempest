@@ -112,73 +112,148 @@ defaultProperties
   componentList.add(Background)
 
   // Info
-  begin object class=UI_Label Name=Guide_Info_Labels1
-    tag="Guide_Info_Labels1"
-    posX=60
-    posY=201
-    AlignX=Left
-    AlignY=Top
-    fontStyle=DEFAULT_SMALL_TAN
-    labelText="Press LB to activate singing, resulting in \nmore elite monster encounters."
+  begin object class=UI_Container Name=Guide_Container
+    tag="Guide_Container"
+    posX=0
+    posY=-32
+    bDrawRelative=true
+    
+    // Info
+    begin object class=UI_Label Name=Guide_Info_Labels1A
+      tag="Guide_Info_Labels1A"
+      posX=40
+      posY=201
+      AlignX=Left
+      AlignY=Top
+      fontStyle=DEFAULT_SMALL_RED
+      labelText="Recommended Strategy:"
+    end object
+    componentList.add(Guide_Info_Labels1A)
+    
+    begin object class=UI_Label Name=Guide_Info_Labels1B
+      tag="Guide_Info_Labels1B"
+      posX=40
+      posY=233
+      AlignX=Left
+      AlignY=Top
+      fontStyle=DEFAULT_SMALL_TAN
+      labelText="    Pick your lead skill, note whether damage\n    is physical or elemental."
+    end object
+    componentList.add(Guide_Info_Labels1B)
+    
+    begin object class=UI_Label Name=Guide_Info_Labels2A
+      tag="Guide_Info_Labels2A"
+      posX=40
+      posY=301
+      AlignX=Left
+      AlignY=Top
+      fontStyle=DEFAULT_SMALL_GREEN
+      labelText="Glyph Recipes"
+    end object
+    componentList.add(Guide_Info_Labels2A)
+    
+    begin object class=UI_Label Name=Guide_Info_Labels2B
+      tag="Guide_Info_Labels2B"
+      posX=40
+      posY=333
+      AlignX=Left
+      AlignY=Top
+      fontStyle=DEFAULT_SMALL_TAN
+      labelText="    When glyph work becomes a chore,\n    compensate with higher skill levels."
+    end object
+    componentList.add(Guide_Info_Labels2B)
+    
+    begin object class=UI_Label Name=Guide_Info_Labels3A
+      tag="Guide_Info_Labels3A"
+      posX=40
+      posY=401
+      AlignX=Left
+      AlignY=Top
+      fontStyle=DEFAULT_SMALL_BLUE
+      labelText="Encounter rates:"
+    end object
+    componentList.add(Guide_Info_Labels3A)
+    
+    begin object class=UI_Label Name=Guide_Info_Labels3B
+      tag="Guide_Info_Labels3B"
+      posX=40
+      posY=433
+      AlignX=Left
+      AlignY=Top
+      fontStyle=DEFAULT_SMALL_TAN
+      labelText="    If troubled by frequent encounters, be sure to\n    enable prayer, and try temporal magick."
+    end object
+    componentList.add(Guide_Info_Labels3B)
+    
+    
+    begin object class=UI_Label Name=Guide_Info_Labels4A
+      tag="Guide_Info_Labels4A"
+      posX=40
+      posY=501
+      AlignX=Left
+      AlignY=Top
+      fontStyle=DEFAULT_SMALL_PURPLE
+      labelText="Teammates:"
+    end object
+    componentList.add(Guide_Info_Labels4A)
+    
+    begin object class=UI_Label Name=Guide_Info_Labels4B
+      tag="Guide_Info_Labels4B"
+      posX=40
+      posY=533
+      AlignX=Left
+      AlignY=Top
+      fontStyle=DEFAULT_SMALL_TAN
+      labelText="    Complement your lead skill with matching\n    buffs.  (Try Arcane Sigil, Electric Sigil, Fusion,\n    Marble Spirit.)"
+    end object
+    componentList.add(Guide_Info_Labels4B)
+    
+    begin object class=UI_Label Name=Guide_Info_Labels5A
+      tag="Guide_Info_Labels5A"
+      posX=40
+      posY=631
+      AlignX=Left
+      AlignY=Top
+      fontStyle=DEFAULT_SMALL_CYAN
+      labelText="Enchantments"
+    end object
+    componentList.add(Guide_Info_Labels5A)
+    
+    begin object class=UI_Label Name=Guide_Info_Labels5B
+      tag="Guide_Info_Labels5B"
+      posX=40
+      posY=663
+      AlignX=Left
+      AlignY=Top
+      fontStyle=DEFAULT_SMALL_TAN
+      labelText="    Be sure to visit the alchemist for a minigame\n    that boosts stat and skill levels."
+    end object
+    componentList.add(Guide_Info_Labels5B)
+    
+    begin object class=UI_Label Name=Guide_Info_Labels6A
+      tag="Guide_Info_Labels6A"
+      posX=40
+      posY=733
+      AlignX=Left
+      AlignY=Top
+      fontStyle=DEFAULT_SMALL_WHITE
+      labelText="Equipment & Rituals"
+    end object
+    componentList.add(Guide_Info_Labels6A)
+    
+    begin object class=UI_Label Name=Guide_Info_Labels6B
+      tag="Guide_Info_Labels6B"
+      posX=40
+      posY=765
+      AlignX=Left
+      AlignY=Top
+      fontStyle=DEFAULT_SMALL_TAN
+      labelText="    Items may be given to team members as\n    equipment, or offered at shrines for\n    various stat boosts."
+    end object
+    componentList.add(Guide_Info_Labels6B)
+    
   end object
-  componentList.add(Guide_Info_Labels1)
-  
-  begin object class=UI_Label Name=Guide_Info_Labels2
-    tag="Guide_Info_Labels2"
-    posX=60
-    posY=301
-    AlignX=Left
-    AlignY=Top
-    fontStyle=DEFAULT_SMALL_TAN
-    labelText="Press RB to activate Prayer to encounter \nenemies less frequently."
-  end object
-  componentList.add(Guide_Info_Labels2)
-  
-  begin object class=UI_Label Name=Guide_Info_Labels3
-    tag="Guide_Info_Labels3"
-    posX=60
-    posY=401
-    AlignX=Left
-    AlignY=Top
-    fontStyle=DEFAULT_SMALL_TAN
-    labelText="Press B to crouch to encounter enemies \nmore frequently."
-  end object
-  componentList.add(Guide_Info_Labels3)
-  
-  
-  begin object class=UI_Label Name=Guide_Info_Labels4
-    tag="Guide_Info_Labels4"
-    posX=60
-    posY=501
-    AlignX=Left
-    AlignY=Top
-    fontStyle=DEFAULT_SMALL_TAN
-    labelText="Press Y in combat to show / hide stats."
-  end object
-  componentList.add(Guide_Info_Labels4)
-  
-  begin object class=UI_Label Name=Guide_Info_Labels5
-    tag="Guide_Info_Labels5"
-    posX=60
-    posY=601
-    AlignX=Left
-    AlignY=Top
-    fontStyle=DEFAULT_SMALL_TAN
-    labelText="Press LT to increase gamespeed with \ntemporal magic."
-  end object
-  componentList.add(Guide_Info_Labels5)
-  
-  begin object class=UI_Label Name=Guide_Info_Labels6
-    tag="Guide_Info_Labels6"
-    posX=60
-    posY=701
-    AlignX=Left
-    AlignY=Top
-    fontStyle=DEFAULT_SMALL_RED
-    labelText="Quests are a work in progress.  Explore or \nspeedrun bosses for extra challenge."
-  end object
-  componentList.add(Guide_Info_Labels6)
-  
+  componentList.add(Guide_Container)
   
 }
 

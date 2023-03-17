@@ -10,6 +10,7 @@
  
 class ROTT_UI_Page_Combat_Targeting extends ROTT_UI_Page;
 
+// Define alpha cycling UI effect
 `define ALPHA_EFFECT() activeEffects.add((effectType = EFFECT_ALPHA_CYCLE, lifeTime = -1, elapsedTime = 0, intervalTime = 1.6, min = 215, max = 255))
 
 // Internal References
@@ -22,7 +23,7 @@ var privatewrite UI_Container allEnemySelector;
 var private ROTT_UI_Scene_Combat_Encounter someScene;
 
 // Delay before auto selection if using turbo
-var public ROTTTimer turboDelay;    
+var public ROTT_Timer turboDelay;    
 
 // Target selection mode, passed in from invoking action panel
 var public TargetingClassification targetClassification;
@@ -66,8 +67,8 @@ event onPushPageEvent() {
   allEnemySelector.setEnabled(false);
   
   // Start turbo auto selection timer
-  turboDelay = gameInfo.spawn(class'ROTTTimer');
-  turboDelay.makeTimer(0.4, LOOP_OFF, autoSelect);
+  turboDelay = gameInfo.spawn(class'ROTT_Timer');
+  turboDelay.makeTimer(0.35, LOOP_OFF, autoSelect); /// was 0.4
 }
 
 /*============================================================================= 
@@ -347,9 +348,6 @@ public function onNavigateRight() {
   }
 }
 
-protected function navigateUp();
-protected function navigateDown();
-
 /*============================================================================= 
  * Button Input
  *===========================================================================*/
@@ -378,7 +376,6 @@ protected function navigationRoutineA() {
       }
       // Store last enemy selection
       hero.lastEnemySelection = enemySelector.getSelection();
-      violetLog("Target saved on hero "$hero$": " $ enemySelector.getSelection());
       break;
     case MULTI_TARGET_ATTACK:
     case MULTI_TARGET_DEBUFF:
@@ -437,6 +434,8 @@ event deleteComp() {
  *===========================================================================*/
 defaultProperties
 {
+  bPageForcesCursorOff=true
+  
   /** ===== Input ===== **/
   begin object class=ROTT_Input_Handler Name=Input_A
     inputName="XBoxTypeS_A"

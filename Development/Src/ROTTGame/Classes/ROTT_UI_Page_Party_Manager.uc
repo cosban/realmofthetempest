@@ -14,6 +14,7 @@ var privatewrite ROTT_UI_Scene_Party_Manager someScene;
 
 // This tracks which party is actually targetted by the selector
 var privatewrite int selectionIndex;
+///var privatewrite int selectorOffset;
 
 // This is the cap for selectionIndex, based on the number of parties
 var private int maxIndex;
@@ -44,7 +45,11 @@ public function initializeComponent(optional string newTag = "") {
  * Called when a menu is given focus.  Assign controls, and enable graphics.
  *===========================================================================*/
 event onFocusMenu() {
+  // Show selector
   selector.setActive(true);
+  
+  // Update party display
+  refresh();
 }
 
 /*============================================================================= 
@@ -56,6 +61,7 @@ public function onSceneActivation() {
   // Reset selector
   selectionIndex = 0;
   selector.resetSelection();
+  selector.setNumberOfMenuOptions((partySystem.getNumberOfParties() == 1) ? 2 : 3);
   
   // Render the party system
   containerList.displayParties(partySystem);
@@ -71,11 +77,13 @@ public function onSceneActivation() {
  * correctly updated on the UI.
  *===========================================================================*/
 public function refresh() {
-  // Render the party system
-  containerList.refreshParties();
-  
-  // Selection data is based on number of parties, plus conscription option
-  maxIndex = partySystem.getNumberOfParties();
+  if (partySystem != none) {
+    // Render the party system
+    containerList.refreshParties();
+    
+    // Selection data is based on number of parties, plus conscription option
+    maxIndex = partySystem.getNumberOfParties();
+  }
 }
 
 /*=============================================================================
@@ -98,14 +106,22 @@ public function conscription() {
 }
 
 /*=============================================================================
+ * getSelectionNumber()
+ *
+ * Calculates the invisible selection tracking with the actual selection offset
+ *===========================================================================*/
+public function int getSelectionNumber() {
+  return selectionIndex + selector.getSelection();
+}
+
+/*=============================================================================
  * Button inputs
  *===========================================================================*/
 protected function navigationRoutineA() {
-  // Check if conscription is selected
-  if (selectionIndex == maxIndex) {
+  // Check if conscription is selected (slot 2 or 3... selection value 2+)
+  if (getSelectionNumber() == maxIndex) {
     // push conscription page
     someScene.pushPartyConscriptionPage();
-    
   } else {
     // push party viewer page
     someScene.pushPartyViewerPage();
@@ -124,12 +140,23 @@ protected function navigationRoutineB() {
  * D-Pad controls
  *===========================================================================*/
 public function bool preNavigateDown() {
-  if (selectionIndex == 0 || selectionIndex == maxIndex - 1) {
-    selectionIndex++;
+  // Check if selection is at top or one away from conscription (max)
+  if (
+    selector.getSelection() == 0 || 
+    (getSelectionNumber() == maxIndex - 1 && selector.getSelection() == 1)
+  ) {
+    // Selection change with no container animations
+    ///selectionIndex++;
+    
+    // Allow selector to move down
     return true;
-  } else if (selectionIndex < maxIndex) {
+  } else if (getSelectionNumber() < maxIndex) {
+    // Attempt to animate containers up
     if (containerList.lerpUp()) {
+      // Selection change if animation request went through
       selectionIndex++;
+      
+      // Selector does not move down, containers animation up instead
       return false;
     }
   }
@@ -137,15 +164,24 @@ public function bool preNavigateDown() {
 }
 
 public function bool preNavigateUp() {
-  if (selectionIndex == maxIndex || selectionIndex == 1) {
-    selectionIndex--;
+  // Check if selection is at max or one away from top, both acceptable with no animation
+  if (selector.getSelection() == 2 || getSelectionNumber() == 1) {
+    // Selection change with no container animations
+    ///selectionIndex--;
+    
+    // Allow selector to move up
     return true;
-  } else if (selectionIndex > 0) {
+  } else if (getSelectionNumber() > 0) {
+    // Attempt to animate containers down
     if (containerList.lerpDown()) {
+      // Selection change if animation request went through
       selectionIndex--;
+      
+      // Selector does not move up, containers animation down instead
       return false;
     }
   }
+  // Selector does not move
   return false;
 }
 
@@ -212,16 +248,20 @@ defaultProperties
     posX=53
     posY=39
     selectionOffset=(x=0,y=280)
-    numberOfMenuOptions=3
+    numberOfMenuOptions=2
+    hoverCoords(0)=(xStart=60,yStart=45,xEnd=1400,yEnd=300)
+    hoverCoords(1)=(xStart=60,yStart=330,xEnd=1400,yEnd=565)
+    hoverCoords(2)=(xStart=60,yStart=595,xEnd=1400,yEnd=830)
     
     // Selection texture
     begin object class=UI_Texture_Info Name=Selection_Box_Texture
       componentTextures.add(Texture2D'GUI.PartyMGR_Selection_Box')
     end object
-
+    
     // Selector sprite
     begin object class=UI_Sprite Name=Selector_Sprite
       tag="Selector_Sprite"
+      
       images(0)=Selection_Box_Texture
       activeEffects.add((effectType = EFFECT_ALPHA_CYCLE, lifeTime = -1, elapsedTime = 0, intervalTime = 0.4, min = 170, max = 255))
     end object

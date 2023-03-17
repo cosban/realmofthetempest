@@ -14,7 +14,8 @@ class UI_Fade_System extends object;
 enum EffectStates {
   DELAY,
   FADE_IN,
-  FADE_OUT
+  FADE_OUT,
+  FADE_BLACK,
 };
 
 // Fade effect information
@@ -27,8 +28,11 @@ struct EffectStruct {
 // A queue to store fade effects
 var privatewrite array<EffectStruct> effects;  
 
-// True of the last effect was a fade out, false if fade in, unchanged otherwise
+// True if the last effect was a fade out, false if fade in, unchanged otherwise
 var privatewrite bool bFadedOut;
+
+// True if faded black effect was used
+var privatewrite bool bFadedBlack;
 
 // Colors
 `include(ROTTColorLogs.h)
@@ -47,6 +51,7 @@ public function updateFadeTime(float deltaTime) {
     // Track last fade state
     if (effects[0].state == FADE_OUT) bFadedOut = true;
     if (effects[0].state == FADE_IN) bFadedOut = false;
+    if (effects[0].state == FADE_BLACK) bFadedBlack = true;
     
     // Remove effect on completion
     effects.remove(0, 1);
@@ -70,6 +75,23 @@ public function bool isFadingIn() {
 }
 
 /*=============================================================================
+ * getFadeToBlackScalar()
+ *
+ * Returns the current fade to black scalar
+ *===========================================================================*/
+public function float getFadeToBlackScalar() {
+  if (bFadedBlack) return 0.f;
+  
+  // Return multiplicative identity by default
+  if (effects.length == 0) return 1.f; 
+  
+  switch (effects[0].state) {
+    case FADE_BLACK:  return (1 - effects[0].elapsedTime / effects[0].totalTime);
+    default: return 1.f;
+  }
+}
+
+/*=============================================================================
  * getFadeScalar()
  *
  * Returns the current fade scalar
@@ -81,7 +103,7 @@ public function float getFadeScalar() {
   switch (effects[0].state) {
     case FADE_IN:  return (effects[0].elapsedTime / effects[0].totalTime);
     case FADE_OUT: return ((effects[0].totalTime - effects[0].elapsedTime) / effects[0].totalTime);
-    default: return (bFadedOut || isFadingIn()) ? 0.f : 1.f; ;
+    default: return (bFadedOut || isFadingIn()) ? 0.f : 1.f;
   }
 }
 

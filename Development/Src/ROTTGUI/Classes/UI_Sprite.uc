@@ -24,14 +24,14 @@ var protectedwrite byte drawIndex;
  * Description: This event is called as the UI is loaded.
  *===========================================================================*/
 public function initializeComponent(optional string newTag = "") {
-  local UI_Texture_Info texture;
+  local int i;
   
   super.initializeComponent(newTag);
   
   // Initialize textures
-  forEach images(texture) {
-    if (texture != none) {
-      texture.initializeInfo();
+  for (i = 0; i < images.length; i++) {
+    if (images[i] != none) {
+      images[i].initializeInfo();
     }
   }
   
@@ -90,6 +90,7 @@ protected function drawCanvas(Canvas canvas) {
  * Returns true if this component should be drawn
  *===========================================================================*/
 protected function bool isVisible() { 
+  if (images.length == 0) return false;
   return super.isVisible() && images[drawIndex] != none;
 }
 
@@ -181,9 +182,6 @@ public function anchoredResize() {
   local int w, h;
   bAnchor = true;
   
-  // Track anchor
-  ///violetlog("Anchors: " $ anchorX @ anchorY);
-  
   w = images[drawIndex].getSizeX();
   h = images[drawIndex].getSizeY();
   updatePosition(
@@ -193,8 +191,6 @@ public function anchoredResize() {
     anchorY + h / 2
   );
   
-  // Track anchor
-  ///violetlog("Dimensions: " $ w @ h);
 }
 /*=============================================================================
  * drawNextFrame()
@@ -522,11 +518,11 @@ public function clearSprite() {
   images[drawIndex] = none;
 }
 
-/// /*=============================================================================
-///  * copySprite()
-///  *
-///  * Copies over a sprite from a UI_Texture_Storage
-///  *===========================================================================*/
+/*=============================================================================
+ * copySprite()
+ *
+ * Copies over a sprite from a UI_Texture_Storage
+ *===========================================================================*/
 public function bool copySprite
 (
   UI_Texture_Storage spriteInfo, 
@@ -538,9 +534,7 @@ public function bool copySprite
   
   // Get draw info if it exists
   if (spriteInfo == none || index >= spriteInfo.images.length) {
-    yellowLog("Warning (!) Copy sprite failed, bad info.");
     images[drawIndex] = none;
-    scriptTrace();
     return false;
   }
   images[drawIndex] = spriteInfo.images[index];

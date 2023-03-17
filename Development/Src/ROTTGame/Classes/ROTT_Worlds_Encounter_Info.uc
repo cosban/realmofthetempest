@@ -8,7 +8,8 @@
  * inside it.
  *===========================================================================*/
 
-class ROTT_Worlds_Encounter_Info extends Volume;
+class ROTT_Worlds_Encounter_Info extends Volume
+dependsOn(ROTT_Combat_Enumerations);
 
 // References
 var privatewrite ROTT_Game_Info gameInfo;
@@ -36,21 +37,6 @@ enum SpawnTypes {
   SPAWN_CHAMPION,
   SPAWN_MINIBOSS,
   SPAWN_BOSS
-};
-
-// Color selection by 'clan'
-enum ClanColors {
-  CLAN_BLACK,
-  CLAN_BLUE,
-  CLAN_CYAN,
-  CLAN_GOLD,
-  CLAN_GREEN,
-  CLAN_ORANGE, // May contain brown variations
-  CLAN_PURPLE,
-  CLAN_RED,
-  CLAN_VIOLET,
-  CLAN_WHITE,
-  
 };
 
 // Enemy Types
@@ -140,7 +126,7 @@ simulated event postBeginPlay() {
   }
   
   // Link game info for convenience
-  gameInfo = ROTT_Game_Info(class'WorldInfo'.static.GetWorldInfo().Game);
+  gameInfo = ROTT_Game_Info(class'WorldInfo'.static.getWorldInfo().game);
   gameInfo.addEncounterZone(self);
   grayLog("Added encounter zone: " $ self);
 }
@@ -164,6 +150,9 @@ simulated event touch
   
   // Add enemies to spawn list
   bActiveZone = true;
+  
+  // Call event for player touching zone
+  gameInfo.zoneTouchUpdate();
 }
 
 /*=============================================================================

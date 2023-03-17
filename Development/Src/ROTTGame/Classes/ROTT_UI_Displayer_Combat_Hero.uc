@@ -208,11 +208,24 @@ public function elapseTimer(float deltaTime, float gameSpeedOverride) {
  * Called to add a status to be displayed in by this label
  *===========================================================================*/
 public function addStatus(ROTT_Descriptor_Hero_Skill skillInfo) {
+  // Separate tag for demoralize label
   if (skillInfo.statusTag == "Demoralized") {
-    demoralizeLabel.addStatus(skillInfo);
+    // Set demoralize label here
+    demoralizeLabel.addStatus(skillInfo.statusTag, skillInfo.statusColor);
   } else {
-    statusLabel.addStatus(skillInfo);
+    // Set all other status labels here
+    statusLabel.addStatus(skillInfo.statusTag, skillInfo.statusColor);
   }
+}
+
+/*=============================================================================
+ * addManualStatus()
+ *
+ * A manual status has no hero skill descriptor, e.g. Persistence
+ *===========================================================================*/
+public function addManualStatus(string statusTag, FontStyles statusColor) {
+  // Set all other status labels here
+  statusLabel.addStatus(statusTag, statusColor);
 }
 
 /*=============================================================================
@@ -226,6 +239,15 @@ public function removeStatus(ROTT_Descriptor_Hero_Skill skillInfo) {
   } else {
     statusLabel.removeStatus(skillInfo);
   }
+}
+
+/*=============================================================================
+ * removeStatusManually()
+ *
+ * Given a tag, removes the correponding status
+ *===========================================================================*/
+public function removeStatusManually(string statusTag) {
+  statusLabel.removeStatusManually(statusTag);
 }
 
 /*=============================================================================
@@ -245,7 +267,7 @@ public function removeAllStatus() {
  *===========================================================================*/
 public function showDamage(int damage, bool bCrit) {
   makeLabel(
-    "-" $ damage, 
+    "-" $ class'UI_Label'.static.abbreviate(damage), 
     FONT_LARGE, 
     (bCrit) ? COLOR_GOLD : COLOR_GRAY, 
     LABEL_TYPE_DAMAGE
@@ -258,7 +280,12 @@ public function showDamage(int damage, bool bCrit) {
  * Called when the unit takes damage to their mana
  *===========================================================================*/
 public function showDamageToMana(int damage, bool bCrit) {
-  makeLabel("-" $ damage, FONT_MEDIUM, COLOR_GRAY, LABEL_TYPE_MANA_DAMAGE);
+  makeLabel(
+    "-" $ class'UI_Label'.static.abbreviate(damage), 
+    FONT_MEDIUM, 
+    COLOR_GRAY, 
+    LABEL_TYPE_MANA_DAMAGE
+  );
 }
 
 /*=============================================================================
@@ -279,8 +306,8 @@ public function onResisted() {
  *===========================================================================*/
 public function improveStat(float value, float total, MechanicTypes targetStat) {
   local ColorStyles msgColor;
-  local string totalMsg;
-  local string addedMsg;
+  local string totalMsg, totalValue;
+  local string addedMsg, addedValue;
   local float overlapDelay;
   
   // Fetch delay time from parent
@@ -313,16 +340,19 @@ public function improveStat(float value, float total, MechanicTypes targetStat) 
       break;
   }
   
+  // Abbreviate total
+  totalValue = class'UI_Label'.static.abbreviate(int(total));
+  
   // Total stat boost feedback
   switch (targetStat) {
-    case ADD_ALL_STATS:   totalMsg = "+" $ int(total) $ " all stats"; break;
-    case ADD_STRENGTH:    totalMsg = "+" $ int(total) $ " strength"; break;
-    case ADD_COURAGE:     totalMsg = "+" $ int(total) $ " courage";  break;
-    case ADD_FOCUS:       totalMsg = "+" $ int(total) $ " focus";    break;
-    case ADD_SPEED:       totalMsg = "+" $ int(total) $ " speed";    break;
-    case ADD_ACCURACY:    totalMsg = "+" $ int(total) $ " accuracy"; break;
-    case ADD_DODGE:       totalMsg = "+" $ int(total) $ " dodge";    break;
-    case ADD_ARMOR:       totalMsg = "+" $ int(total) $ " armor";    break;
+    case ADD_ALL_STATS:   totalMsg = "+" $ totalValue $ " all stats"; break;
+    case ADD_STRENGTH:    totalMsg = "+" $ totalValue $ " strength";  break;
+    case ADD_COURAGE:     totalMsg = "+" $ totalValue $ " courage";   break;
+    case ADD_FOCUS:       totalMsg = "+" $ totalValue $ " focus";     break;
+    case ADD_SPEED:       totalMsg = "+" $ totalValue $ " speed";     break;
+    case ADD_ACCURACY:    totalMsg = "+" $ totalValue $ " accuracy";  break;
+    case ADD_DODGE:       totalMsg = "+" $ totalValue $ " dodge";     break;
+    case ADD_ARMOR:       totalMsg = "+" $ totalValue $ " armor";     break;
     case ADD_STRENGTH_PERCENT:       
       totalMsg = "+" $ int(total) $ "% strength";    
       break;
@@ -349,6 +379,9 @@ public function improveStat(float value, float total, MechanicTypes targetStat) 
   // Skip next message for when stance is reverting attributes
   if (value < 0) return;
   
+  // Abbreviate total
+  addedValue = class'UI_Label'.static.abbreviate(int(value));
+  
   // Total stat message
   makeLabel(
     totalMsg, 
@@ -360,19 +393,19 @@ public function improveStat(float value, float total, MechanicTypes targetStat) 
   
   // Set hero add message
   switch (targetStat) {
-    case ADD_ALL_STATS:        addedMsg = "+" $ int(value); break;
-    case ADD_STRENGTH:         addedMsg = "+" $ int(value); break;
-    case ADD_COURAGE:          addedMsg = "+" $ int(value); break;
-    case ADD_FOCUS:            addedMsg = "+" $ int(value); break;
-    case ADD_SPEED:            addedMsg = "+" $ int(value); break;
-    case ADD_ACCURACY:         addedMsg = "+" $ int(value); break;
-    case ADD_DODGE:            addedMsg = "+" $ int(value); break;
-    case ADD_ARMOR:            addedMsg = "+" $ int(value); break;
-    case PHYSICAL_MULTIPLIER:  addedMsg = "+" $ int(value) $ "%"; break;
-    case ELEMENTAL_MULTIPLIER: addedMsg = "+" $ int(value) $ "%"; break;
-    case AMPLIFY_NEXT_DAMAGE:  addedMsg = "+" $ int(value) $ "%"; break;
-    case ADD_STRENGTH_PERCENT: addedMsg = "+" $ int(value) $ "%"; break;
-    case ADD_COURAGE_PERCENT:  addedMsg = "+" $ int(value) $ "%"; break;
+    case ADD_ALL_STATS:        addedMsg = "+" $ addedValue; break;
+    case ADD_STRENGTH:         addedMsg = "+" $ addedValue; break;
+    case ADD_COURAGE:          addedMsg = "+" $ addedValue; break;
+    case ADD_FOCUS:            addedMsg = "+" $ addedValue; break;
+    case ADD_SPEED:            addedMsg = "+" $ addedValue; break;
+    case ADD_ACCURACY:         addedMsg = "+" $ addedValue; break;
+    case ADD_DODGE:            addedMsg = "+" $ addedValue; break;
+    case ADD_ARMOR:            addedMsg = "+" $ addedValue; break;
+    case PHYSICAL_MULTIPLIER:  addedMsg = "+" $ addedValue $ "%"; break;
+    case ELEMENTAL_MULTIPLIER: addedMsg = "+" $ addedValue $ "%"; break;
+    case AMPLIFY_NEXT_DAMAGE:  addedMsg = "+" $ addedValue $ "%"; break;
+    case ADD_STRENGTH_PERCENT: addedMsg = "+" $ addedValue $ "%"; break;
+    case ADD_COURAGE_PERCENT:  addedMsg = "+" $ addedValue $ "%"; break;
     case ADD_EXTRA_MANA_REGEN: addedMsg = "+" $ class'UI_Container'.static.decimal(value, 1); break;
     case ADD_MANA_REGEN:       addedMsg = "+" $ class'UI_Container'.static.decimal(value, 1); break;
     case ADD_HEALTH_REGEN:     addedMsg = "+" $ class'UI_Container'.static.decimal(value, 1); break;
@@ -403,13 +436,14 @@ public function updateSpeedAmp(float speedAmp) {
   local string speedText;
   
   // Hide for zero amp
-  if (speedAmp == 0) {
+  if (speedAmp == 1) {
     speedAmpLabel.setText("");
     return;
   }
   
   // Formatting
-  speedText = string(((100 + speedAmp) / 100) ** -1);
+  speedText = string(speedAmp);
+  //speedText = string(((100 + speedAmp) / 100) ** -1);
   speedText = class'UI_Container'.static.decimal(speedText, 2) $ "x";
   
   // Set text
@@ -435,7 +469,7 @@ protected function attachmentUpdate() {
   super.attachmentUpdate();
   
   // Initially clear
-  updateSpeedAmp(0);
+  updateSpeedAmp(1);
 }
   
 /*=============================================================================

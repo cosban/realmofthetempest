@@ -26,40 +26,10 @@ public function initDialogue() {
   
   // Intro
   `NEW_NODE(GREETING, NUETRAL)
-    "Welcome to Rhunia.  This land and its people are corrupt",
-    "from black magic, and alchemical witchcraft."
-  `ENDNODE
-  
-  `NEW_NODE(GREETING, NUETRAL)
-    "Heavy hatred hangs from the abandoned kingdom above us.",
+    ". . .",
     ""
   `ENDNODE
-  
-  `NEW_NODE(GREETING, NUETRAL)
-    "By praying, you will encounter enemies less, but",
-    "they will be stronger."
-  `ENDNODE
-  
-  `NEW_NODE(GREETING, NUETRAL)
-    "By singing, you will attract more elite enemies.",
-    ""
-  `ENDNODE
-  
-  `NEW_NODE(GREETING, NUETRAL)
-    "By crawling, you will taunt enemies for more frequent encounters.",
-    ""
-  `ENDNODE
-  
-  `NEW_NODE(GREETING, NUETRAL)
-    "You have temporal magic that controls the pace of time, and",
-    "you are encouraged to use it liberally."
-  `ENDNODE
-  
-  `NEW_NODE(GREETING, NUETRAL)
-    "Good luck.",
-    ""
-  `ENDNODE
-  
+	
   // ----------------------------------------------------------------------- //
   
   setInquiry(

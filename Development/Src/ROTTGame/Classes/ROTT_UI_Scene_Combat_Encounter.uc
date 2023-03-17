@@ -14,12 +14,10 @@ var privatewrite ROTT_UI_Page_Combat_Encounter combatPage;
 var privatewrite ROTT_UI_Page_Combat_Glyph_Grid glyphPage;
 var privatewrite ROTT_UI_Page_Combat_Action_Panel actionsPanel;
 var privatewrite ROTT_UI_Page_Combat_Targeting targetingPage;
-var privatewrite ROTT_UI_Page_Transition transitionPage;
-var privatewrite ROTT_UI_Page_Transition transitionPageOut;
 
 // begin battle delay
-var private ROTTTimer combatDelay;  // Delay before combat starts
-var private ROTTTimer outDelay;     // Delay during victory transition
+var private ROTT_Timer combatDelay;  // Delay before combat starts
+var private ROTT_Timer outDelay;     // Delay during victory transition
 var privatewrite bool bPaused;
 
 /*=============================================================================
@@ -33,8 +31,6 @@ event initScene() {
   glyphPage = ROTT_UI_Page_Combat_Glyph_Grid(findComp("Page_Glyph_Grid"));
   actionsPanel = ROTT_UI_Page_Combat_Action_Panel(findComp("Page_Action_Panel"));
   targetingPage = ROTT_UI_Page_Combat_Targeting(findComp("Page_Targeting"));
-  transitionPage = ROTT_UI_Page_Transition(findComp("Page_Transition_In"));
-  transitionPageOut = ROTT_UI_Page_Transition(findComp("Page_Transition_Out"));
   
   super.initScene();
   pushPage(combatPage); /// ? 
@@ -61,7 +57,21 @@ event loadScene() {
   
   // Initial page stack
   pushPage(glyphPage);
-  pushPage(transitionPage);
+  
+  // Execute transition
+  gameInfo.sceneManager.transitioner.setTransition(
+    TRANSITION_IN,                               // Transition direction
+    INTO_COMBAT_TRANSITION,                      // Sorting config
+    ,                                            // Pattern reversal
+    ,                                            // Destination scene
+    ,                                            // Destination page
+    ,                                            // Destination world
+    ,                                            // Color
+    14,                                          // Tile speed
+    0.f,                                         // Delay
+    ,
+    "Page_Transition_In"
+  );
   
   // Link enemies to UI components
   gameInfo.enemyEncounter.setUIComponents();
@@ -92,7 +102,7 @@ event loadScene() {
   
   // Start paused and transition in
   pauseScene(); 
-  combatDelay = gameInfo.spawn(class'ROTTTimer');
+  combatDelay = gameInfo.spawn(class'ROTT_Timer');
   combatDelay.makeTimer(1.15, LOOP_OFF, beginBattle);
 }
 
@@ -148,11 +158,13 @@ function bool onInputKey
 {
   // Scene wide controls
   switch (Key) {
+    case 'LeftShift': 
     case 'XboxTypeS_LeftTrigger': 
       /// this would be tricky to move to new input system
-      if (Event == IE_Pressed) gameinfo.SetGameSpeed(4);
-      if (Event == IE_Released) gameinfo.SetGameSpeed(1);
+      if (Event == IE_Pressed) gameinfo.setTemporalBoost();
+      if (Event == IE_Released) gameinfo.setGameSpeed(1);
       break;
+    case 'Tilde': 
     case 'XBoxTypeS_Y': 
       /// this should be moved to new input system
       if (Event == IE_Pressed) {
@@ -290,8 +302,20 @@ public function endBattle() {
     popPage("Page_Targeting");
   }
   
-  // Transition out
-  pushPage(transitionPageOut);
+  // Execute transition to victory screen
+  gameInfo.sceneManager.transitioner.setTransition(
+    TRANSITION_OUT,                              // Transition direction
+    RIGHT_SWEEP_TRANSITION_OUT,                  // Sorting config
+    ,                                            // Pattern reversal
+    SCENE_COMBAT_RESULTS,                        // Destination scene
+    ,                                            // Destination page
+    ,                                            // Destination world
+    ,                                            // Color
+    20,                                          // Tile speed
+    0.4f,                                         // Delay
+    ,
+    "Page_Transition_Out"
+  );
 }
 
 /*=============================================================================
@@ -310,6 +334,7 @@ public function toggleCombatDetail() {
   for (i = 0; i < 3; i++) {
     if (gameInfo.enemyEncounter.getEnemy(i) != none) {
       gameInfo.getEnemyUI(i).showDetail(gameInfo.optionsCookie.showCombatDetail);
+  greenlog("gameInfo.optionsCookie.showCombatDetail " $ gameInfo.optionsCookie.showCombatDetail);
     }
   }
 }
@@ -380,33 +405,6 @@ defaultProperties
     bEnabled=false
   end object
   pageComponents.add(Page_Targeting)
-  
-  // Transition Page (in)
-  begin object class=ROTT_UI_Page_Transition Name=Page_Transition_In
-    tag="Page_Transition_In"
-    bEnabled=false
-    
-    // Sorter effect config
-    effectConfig=INTO_COMBAT_TRANSITION
-    
-    // Destination
-    destinationScene=NO_SCENE
-  end object
-  pageComponents.add(Page_Transition_In)
-
-  // Transition Page (out)
-  begin object class=ROTT_UI_Page_Transition Name=Page_Transition_Out
-    tag="Page_Transition_Out"
-    bEnabled=false
-    
-    // Sorter effect config
-    effectConfig=RIGHT_SWEEP_TRANSITION_OUT
-    
-    // Destination
-    destinationScene=SCENE_COMBAT_RESULTS
-  end object
-  pageComponents.add(Page_Transition_Out)
-
   
 }
 

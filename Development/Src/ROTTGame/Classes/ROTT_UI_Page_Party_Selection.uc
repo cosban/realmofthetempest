@@ -241,6 +241,9 @@ defaultProperties
     navigationType=SELECTION_HORIZONTAL
     selectionOffset=(x=200,y=0)
     numberOfMenuOptions=3
+    hoverCoords(0)=(xStart=64,yStart=546,xEnd=254,yEnd=837)
+    hoverCoords(1)=(xStart=264,yStart=546,xEnd=454,yEnd=837)
+    hoverCoords(2)=(xStart=464,yStart=546,xEnd=654,yEnd=837)
     
     // Selection texture
     begin object class=UI_Texture_Info Name=Selection_Box_Texture

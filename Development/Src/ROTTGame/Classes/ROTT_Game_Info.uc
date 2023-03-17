@@ -13,14 +13,14 @@ dependsOn(ROTT_UI_Scene_Manager)
 dependsOn(ROTT_NPC_Container);
  
 // Version info
-const MAJOR = 1;  const MINOR = 5;  const REVISION = 3;  const PATCH = 'M';  
+const MAJOR = 1;  const MINOR = 5;  const REVISION = 4;  const PATCH = 'F';  
 const PHASE_INFO = "";
 
 // Publishing settings
-const bDevMode = false;      
+const bDevMode = true;      
 const bQaMode = false;     
 
-// Parameters used in ROTTTimers:
+// Parameters used in ROTT_Timers:
 const LOOP_OFF = false;     
 const LOOP_ON  = true;
 
@@ -106,6 +106,7 @@ enum MapNameEnum {
   // Caves
   MAP_KYRIN_CAVERN,
   MAP_KAUFINAZ_CAVERN,
+  MAP_KORUMS_CAVERN,
   
   // Misc: The land between the tempests
   MAP_AKSALOM_SKYGATE,
@@ -126,6 +127,7 @@ enum PortalState {
 var private bool safetyMode;    // True if player is in a safety zone
 var private int encounterTicks; // Tracks progress toward encounter
 var public int encounterLimit;  // Triggers encounter when reached by ticks
+var public int encounterMod;    // Modified by game mode, added to limit
 
 // Encounter zones
 var private array<ROTT_Worlds_Encounter_Info> encounterZones; 
@@ -141,7 +143,7 @@ var private bool bDelayedCombat;
 var private array<SpawnerInfo> delayedMobInfo;
 
 // Combat trigger delay for traps and falling
-var private ROTTTimer combatTriggerDelay;
+var private ROTT_Timer combatTriggerDelay;
 
 // NPC dialog delegate to display after NPC transition
 var public delegate<npcDelegate> queuedNPC;
@@ -159,6 +161,7 @@ var privatewrite ROTT_Milestone_Cookie milestoneCookie;
 
 // Store all possible items that may drop in the game
 var public array<class<ROTT_Inventory_Item> > lootTypes;
+var public array<class<ROTT_Inventory_Item> > equipTypes;
 
 // Item drop rate modifier
 struct ItemDropMod {
@@ -185,6 +188,18 @@ struct ItemDropMod {
 };
 
 var public byte queuedRitual;
+
+enum EncounterRateMods {
+  ENCOUNTER_RATE_STANDARD,
+  ENCOUNTER_RATE_REDUCED,
+  ENCOUNTER_RATE_WARNING,
+};
+
+// Store encounter rate modifier rate
+var privatewrite EncounterRateMods encounterRateMod;
+
+// Store encounter rate modifier pending
+var privatewrite bool bPendingZoneCheck;
 
 // Plain stub for a function that will launch an npc dialog
 delegate npcDelegate();
@@ -275,6 +290,35 @@ public function postLogin(PlayerController newPlayer) {
   
   // Set initial UI scene
   hud.sceneManager.setInitScene();
+  
+  // Set up transitioner
+  ROTT_UI_Scene_Manager(hud.sceneManager).transitioner = new(self) class'ROTT_UI_Transitioner';
+  ROTT_UI_Scene_Manager(hud.sceneManager).transitioner.setGameInfo();
+  ROTT_UI_Scene_Manager(hud.sceneManager).transitioner.initializeComponent();
+  ROTT_UI_Scene_Manager(hud.sceneManager).transitioner.startEvent();
+  
+  // Queue kismit quest marks
+  if (playerProfile == none) return;
+  if (playerProfile.bQuestMarks[HAXLYN_BRIDGE] == QUEST_MARK_COMPLETE) {
+    // Open Haxlyn Bridge
+    triggerGlobalEventClass(
+      class'ROTT_Kismet_Event_Open_Bridge', 
+      tempestPawn
+    );
+  }
+  
+  // Increase freedom of movement for casual
+  if (playerProfile.gameMode == MODE_CASUAL) encounterMod = 250;
+  
+  // Default encounter rate
+  encounterRateMod = ENCOUNTER_RATE_STANDARD;
+  
+  /// Load essential scenes...?
+  sceneManager.sceneBestiary.initScene();
+  sceneManager.sceneBarter.initScene();
+  sceneManager.sceneGameMenu.initScene();
+  
+  saveVsync();
 }
 
 /*=============================================================================
@@ -317,7 +361,6 @@ public function bool saveFileExist(optional int saveIndex = -1) {
       if (getSaveFile("save") != none) return true;
       break;
   }
-  ///violetLog("Checked path: " $ saveIndex @ "DNE");
   return false;
 }
 
@@ -377,13 +420,15 @@ public function newGameSetup(byte gameMode) {
   playerProfile = new class'ROTT_Game_Player_Profile';
   playerProfile.linkReferences();
   
-  // Start timer
-  ///whiteLog("--- Starting Timer ---");
-  ///playerProfile.bTrackTime = true;
+  // Reset defend options
+  optionsCookie.bAlwaysDefendHero1 = false;
+  optionsCookie.bAlwaysDefendHero2 = false;
+  optionsCookie.bAlwaysDefendHero3 = false;
+  saveOptions();
   
-  // Set up a new game
+  // Set up a new gamewould recommend trying the time boost in combat early
   playerProfile.newGameSetup(gameMode);
-  saveGame(TRANSITION_SAVE);    
+  saveGame(TRANSITION_SAVE);
 }
 
 /*=============================================================================
@@ -407,8 +452,9 @@ public function saveGame
     darkcyanlog("Hard save", DEBUG_DATA_STRUCTURE);
   }
   
-  // Save game options
+  // Save game options & milestones
   saveOptions();
+  saveMilestones();
   
   // Save the profile's children
   playerProfile.saveGame(transitionMode, arrivalIndex);
@@ -448,6 +494,20 @@ public function saveMilestones() {
     true, 
     0
   );
+}
+
+/*=============================================================================
+ * saveVsync()
+ * 
+ * Used to set system setting for resolving vertical tearing issue
+ *===========================================================================*/
+public function saveVsync() {
+	local CustomSystemSettings vsyncSetting;
+
+  vsyncSetting = class'WorldInfo'.static.GetWorldInfo().Spawn(class'CustomSystemSettings');
+  
+	// Force VSync (game looks awful without it)
+	vsyncSetting.setUseVsync(true);
 }
 
 /*=============================================================================
@@ -563,7 +623,12 @@ public function startCombatTransition(optional float delay = 0.f) {
   enemyEncounter.battlePrep();
   getActiveParty().battlePrep();
   
-  // Check for mob failure
+  // Load skill graphics in cache
+  if (sceneManager.sceneCombatEncounter.combatPage != none) {
+    sceneManager.sceneCombatEncounter.combatPage.cacheSkills();
+  }
+  
+  // Check for mob failure to load
   if (enemyEncounter.getMobSize() == 0) {
     yellowLog("Warning (!) Enemy mob is empty");
     return;
@@ -573,7 +638,7 @@ public function startCombatTransition(optional float delay = 0.f) {
   if (delay == 0) {
     combatTransition();
   } else {
-    combatTriggerDelay = spawn(class'ROTTTimer');
+    combatTriggerDelay = spawn(class'ROTT_Timer');
     combatTriggerDelay.makeTimer(delay, LOOP_OFF, combatTransition);
   }
 }
@@ -597,6 +662,10 @@ public function combatTransition() {
       // Transition from NPC
       sceneManager.sceneNpcDialog.combatTransition();
       break;
+    case sceneManager.sceneBestiary:
+      // Transition from Bestiary NPC service
+      sceneManager.sceneBestiary.combatTransition();
+      break;
     
   }
 }
@@ -611,9 +680,13 @@ public function forceEncounterDelay(
   float delayTime
 ) 
 {
+  // Set up delay until combat
   encounterDelay = delayTime;
   bDelayedCombat = true;
   delayedMobInfo = mobInfo;
+  
+  // Stop player movement
+  setPlayerControl(false);
 }
 
 /*=============================================================================
@@ -700,7 +773,33 @@ public function unpauseGame(optional bool bKeepVelocity = true) {
   
   setPlayerControl(true);
   
-  SetGameSpeed(1);
+  setGameSpeed(1);
+}
+
+/*=============================================================================
+ * setTemporalBoost()
+ * 
+ * Increases the pace of time for the game
+ *===========================================================================*/
+public function setTemporalBoost() {
+  // Skip if transition is up
+  if (
+    ROTT_UI_Scene_Manager(hud.sceneManager).transitioner.bRenderingEnabled && 
+    ROTT_UI_Scene_Manager(hud.sceneManager).transitioner.bConsumeInput
+  ) return;
+  
+  // Check game mode
+  if (playerProfile.gameMode == MODE_CASUAL) {
+    // Softcore speed
+    setGameSpeed(3.f);
+  } else {
+    // Hardcore and tour mode speed
+    setGameSpeed(4.f);
+  }
+  
+  // Sfx
+  sfxBox.playSfx(SFX_WORLD_TEMPORAL);
+  
 }
 
 /*=============================================================================
@@ -875,6 +974,9 @@ public function ROTT_UI_Scene_Combat_Encounter getCombatScene() {
  * Accessor for the over world page in the over world scene
  *===========================================================================*/
 public function ROTT_UI_Page_Over_World getOverWorldPage() {
+  if (sceneManager == none) return none;
+  if (sceneManager.sceneOverWorld == none) return none;
+  if (sceneManager.sceneOverWorld.overWorldPage == none) return none;
   return sceneManager.sceneOverWorld.overWorldPage;
 }
 
@@ -884,6 +986,7 @@ public function ROTT_UI_Page_Over_World getOverWorldPage() {
  * Displays a message at the bottom-center of the over world screen
  *===========================================================================*/
 public function showGameplayNotification(string message) {
+  if (getOverWorldPage() == none) return;
   // Pass to the over world page
   getOverWorldPage().showGameplayNotification(message);
 }
@@ -924,6 +1027,9 @@ public function updateHeroesStatus() {
  * Returns true if the menu can be opened.
  *===========================================================================*/
 public function bool canOpenMenu() {
+  // Ignore while transitioning
+  if (ROTT_UI_Scene_Manager(hud.sceneManager).transitioner.bRenderingEnabled) return false;
+  
   // Ignore if we arent in the 3D world
   if (sceneManager.scene != sceneManager.sceneOverWorld) return false;
   if (bEncounterPending) return false;
@@ -943,7 +1049,7 @@ public function openWorldMap() {
   if (canOpenMenu()) sceneManager.switchScene(SCENE_WORLD_MAP);
   
   // Sfx
-  ///sfxBox.playSFX(SFX_MENU_NAVIGATE);
+  sfxBox.playSFX(SFX_OPEN_WORLD_MAP);
 }
 
 /*=============================================================================
@@ -965,7 +1071,7 @@ public function openGameMenu() {
  * Switches from game menu to over world
  *===========================================================================*/
 public function closeGameMenu() {
-  sceneManager.switchscene(SCENE_OVER_WORLD);
+  sceneManager.switchScene(SCENE_OVER_WORLD);
   sceneManager.closeGameMenu();
   hud.closeGameMenu();
   
@@ -983,7 +1089,7 @@ public function closeGameMenu() {
 public function openNPCDialog(class<ROTT_NPC_Container> npcType) {
   local UI_Scene activeScene;
   
-  sceneManager.switchscene(SCENE_NPC_DIALOG);
+  sceneManager.switchScene(SCENE_NPC_DIALOG);
   activeScene = sceneManager.scene;
   ROTT_UI_Scene_Npc_Dialog(activeScene).openNPCDialog(npcType);
 }
@@ -1043,6 +1149,9 @@ public function tick(float deltaTime) {
       forceEncounter(delayedMobInfo);
     }
   }
+  
+  // Give time to transitioner
+  ROTT_UI_Scene_Manager(hud.sceneManager).transitioner.elapseTimers(deltaTime);
 }
 
 /*=============================================================================
@@ -1059,11 +1168,22 @@ public function addEncounterTick() {
   if (safetyMode) return;
   if (!isHostileArea()) return;
   
+  // Check for pending encounter rate mods
+  if (bPendingZoneCheck) {
+    yellowLog("Pending zone check!");
+    if (checkZoneRate()) bPendingZoneCheck = false;
+  }
+  
   // Default frequency
   frequencyAmp = 2;
   
   // Prayer frequency modifier
   if (playerProfile.bPraying) {
+    frequencyAmp /= 2;
+  }
+  
+  // Prayer frequency modifier
+  if (encounterRateMod == ENCOUNTER_RATE_REDUCED) {
     frequencyAmp /= 2;
   }
   
@@ -1076,7 +1196,7 @@ public function addEncounterTick() {
   encounterTicks += (2 + rand(4)) * frequencyAmp * gameSpeed;
   
   // Check if time has elapsed enough for an encounter
-  if (encounterTicks >= encounterLimit) {
+  if (encounterTicks >= encounterLimit + encounterMod) {
     // Roll a random mob
     if (rollRandomMob()) {
       startCombatTransition();
@@ -1335,6 +1455,59 @@ public function addEncounterZone(ROTT_Worlds_Encounter_Info zone) {
 }
 
 /*=============================================================================
+ * zoneTouchUpdate()
+ * 
+ * Called when the player touches an encounter zone
+ *===========================================================================*/
+public function zoneTouchUpdate() {
+  if (getOverWorldPage() != none) {
+    checkZoneRate();
+  } else {
+    bPendingZoneCheck = true;
+  }
+}
+
+/*=============================================================================
+ * checkZoneRate()
+ * 
+ * Called to compare the culled enemy level to the current mobs
+ *===========================================================================*/
+public function bool checkZoneRate() {
+  local int i, j;
+  local int max;
+  
+  if (getOverWorldPage() == none) return false;
+  
+  // Scan alternative prayer list
+  for (i = 0; i < encounterZones.length; i++) {
+    for (j = 0; j < encounterZones[i].altSpawnList.length; j++) {
+      if (encounterZones[i].bActiveZone) {
+        if (max < encounterZones[i].altSpawnList[j].levelRange.max) {
+          max = encounterZones[i].altSpawnList[j].levelRange.max;
+        }
+      }
+    }
+  }
+  
+  // Check if max level is within reduced rate range
+  if (max <= playerProfile.reducedRateEnemyLevel) {
+    // Check if enemy rate is not already reduced
+    if (encounterRateMod != ENCOUNTER_RATE_REDUCED) {
+      // Display message
+      getOverWorldPage().showReducedRate();
+      
+      // Change encounter rate mod
+      encounterRateMod = ENCOUNTER_RATE_REDUCED;
+    }
+  } else {
+    // Change encounter rate mod
+    encounterRateMod = ENCOUNTER_RATE_STANDARD;
+  }
+  
+  return true;
+}
+
+/*=============================================================================
  * setCheckpointInfo()
  *
  * This function sets the checkpoint info for the given index
@@ -1412,6 +1585,26 @@ public function launchNPCService(NpcServices serviceType) {
     case SERVICE_ALCHEMY: 
       // Switch to alchemy minigame for enchantments
       sceneManager.switchScene(SCENE_SERVICE_ALCHEMY);
+      break;
+    case SERVICE_BESTIARY: 
+      // Switch to bestiary combat
+      sceneManager.switchScene(SCENE_SERVICE_BESTIARY);
+      break;
+    case SERVICE_INFORMATION: 
+      // Switch to information booklet
+      sceneManager.switchScene(SCENE_SERVICE_INFORMATION);
+      break;
+    case SERVICE_LOTTERY: 
+      // Switch to witch's lottery minigame
+      sceneManager.switchScene(SCENE_SERVICE_LOTTERY);
+      break;
+    case SERVICE_NECROMANCY: 
+      // Switch to necromancy minigame
+      sceneManager.switchScene(SCENE_SERVICE_NECROMANCY);
+      break;
+    case SERVICE_BARTERING: 
+      // Switch to merchant's bartering service
+      sceneManager.switchScene(SCENE_SERVICE_BARTERING);
       break;
     default:
       yellowLog("Warning (!) Unhandled service type.");
@@ -1590,10 +1783,13 @@ public function int getInventoryCount(class<ROTT_Inventory_Item> itemType) {
  * generateLoot()
  *
  * Given a monster/chest level, and a list of loot modifiers, generates items.
+ * - itemLevel: Impacts equipment attributes
+ * - amplifier: Impacts quantities, and increases itemLevels
+ * - dropMods:  Specific loot modifiers for quantity, chance, etc. 
  *===========================================================================*/
 public function ROTT_Inventory_Package generateLoot
 (
-  int level,
+  int itemLevel,
   float amplifier,
   array<ItemDropMod> dropMods
 ) 
@@ -1601,28 +1797,40 @@ public function ROTT_Inventory_Package generateLoot
   local ROTT_Inventory_Package lootPackage;
   local ROTT_Inventory_Item newItem;
   local ItemDropMod dropMod;
-  local int i, j;
+  local int i, j, k;
   
   lootPackage = new class'ROTT_Inventory_Package';
   lootPackage.linkReferences();
   
-  // Iterate through all possible item drops
+  // Add enchantment power to amplifier
+  amplifier += playerProfile.getLuckBoost();
+  
+  // Iterate through currencies and ritual drops
   for (i = 0; i < lootTypes.length && lootPackage.count() < 8; i++) {
     // Find drop modifications
     dropMod = getDropMod(dropMods, lootTypes[i]);
     
-    // Add enchantment power to amplifier
-    amplifier += playerProfile.getEnchantBoost(OMNI_SEEKER) / 100.f;
+    // Reset item drop count
+    k = 0;
     
-    // Apply full level amplifiers
+    // Apply full level quantity amplifiers
     for (j = 0; j < int(amplifier); j++) {
-      
       // Try to generate an item
-      newItem = lootTypes[i].static.generateItem(lootTypes[i], level, dropMod);
-    
+      newItem = lootTypes[i].static.generateItem(
+        lootTypes[i], itemLevel + amplifier, dropMod,
+        enemyEncounter.bBestiarySummon
+      );
+      
       // Check if item dropped
       if (newItem != none) {
+        newItem.initializeAttributes();
         lootPackage.addItem(newItem);
+        
+        // Count item drops per item type
+        k++;
+        
+        // Cap for gem drops...
+        if (k >= 3 && lootTypes[i] == class'ROTT_Inventory_Item_Gem') break;
       }
     }
     
@@ -1632,14 +1840,40 @@ public function ROTT_Inventory_Package generateLoot
       dropMod.chanceAmp *= amplifier - int(amplifier);
       
       // Try to generate an item
-      newItem = lootTypes[i].static.generateItem(lootTypes[i], level, dropMod);
+      newItem = lootTypes[i].static.generateItem(
+        lootTypes[i], itemLevel + amplifier, dropMod,
+        enemyEncounter.bBestiarySummon
+      );
     
       // Check if item dropped
       if (newItem != none) {
+        newItem.initializeAttributes();
         lootPackage.addItem(newItem);
       }
     }
+  }
+  
+  // Cull item count, removes extra ritual items
+  lootPackage.cullInventory();
+  
+  /// Strongly recommend randomizing the order of iteration through equipment, otherwise
+  /// the items near the end of the list are more likely to be culled
+  // Iterate through all possible equipment drops
+  for (i = 0; i < equipTypes.length && lootPackage.count() < 8; i++) {
+    // Find drop modifications
+    dropMod = getDropMod(dropMods, equipTypes[i]);
     
+    // Try to generate an item
+    newItem = equipTypes[i].static.generateItem(
+      equipTypes[i], itemLevel + amplifier, dropMod,
+        enemyEncounter.bBestiarySummon
+    );
+    
+    // Check if item dropped
+    if (newItem != none) {
+      newItem.initializeAttributes();
+      lootPackage.addItem(newItem);
+    }
   }
   
   // Cull item count, removes items for 8 slot limit
@@ -1662,6 +1896,13 @@ public function ItemDropMod getDropMod
   local ItemDropMod dropMod;
   local int i;
   
+  // Skip gems for bestiary summons
+  if (enemyEncounter != none) {
+    if (enemyEncounter.bBestiarySummon) {
+      if (lootType == class'ROTT_Inventory_Item_Gem') return dropMod;
+    }
+  }
+  
   // Look through drop mods
   for (i = 0; i < dropMods.length; i++) {
     // Check if item types match
@@ -1674,6 +1915,44 @@ public function ItemDropMod getDropMod
   return dropMod;
 }
 
+/*=============================================================================
+ * generateBarterItem()
+ *
+ * Generates an item for barter menu 
+ *===========================================================================*/
+public function ROTT_Inventory_Item generateBarterItem
+(
+  int itemLevel,
+  array<class<ROTT_Inventory_Item> > itemTypes
+) 
+{
+  local ROTT_Inventory_Item newItem;
+  local ItemDropMod dropMod;
+  local int randomIndex;
+  
+  // Randomly select an item class
+  randomIndex = rand(itemTypes.length);
+  
+  // Force 100% chance to generate
+  dropMod.dropType = itemTypes[randomIndex];
+  dropMod.chanceOverride = 100;
+  
+  // Generate the item
+  newItem = itemTypes[randomIndex].static.generateItem(
+    itemTypes[randomIndex], 
+    itemLevel, 
+    dropMod
+  );
+  
+  if (newItem == none) {
+    yellowLog("Warning (!) Failed to generate barter item, index " $ randomIndex);
+    scriptTrace();
+  }
+  
+  newItem.initializeAttributes();
+  return newItem;
+}
+  
 /*=============================================================================
  * Party accessors
  *===========================================================================*/
@@ -1749,6 +2028,10 @@ defaultProperties
   lootTypes.add(class'ROTT_Inventory_Item_Gold')
   lootTypes.add(class'ROTT_Inventory_Item_Gem')
   
+  equipTypes.add(class'ROTT_Inventory_Item_Quest_Ice_Tome')
+  equipTypes.add(class'ROTT_Inventory_Item_Quest_Amulet')
+  equipTypes.add(class'ROTT_Inventory_Item_Quest_Goblet')
+  
   lootTypes.add(class'ROTT_Inventory_Item_Herb')
   lootTypes.add(class'ROTT_Inventory_Item_Herb_Unjah')
   lootTypes.add(class'ROTT_Inventory_Item_Herb_Saripine')
@@ -1765,13 +2048,35 @@ defaultProperties
   lootTypes.add(class'ROTT_Inventory_Item_Charm_Shukisu')
   lootTypes.add(class'ROTT_Inventory_Item_Charm_Erazi')
   lootTypes.add(class'ROTT_Inventory_Item_Charm_Cerok')
-  lootTypes.add(class'ROTT_Inventory_Item_Charm_Zogis_Anchor')
+  equipTypes.add(class'ROTT_Inventory_Item_Charm_Zogis_Anchor')
   
   lootTypes.add(class'ROTT_Inventory_Item_Bottle_Swamp_Husks')
   lootTypes.add(class'ROTT_Inventory_Item_Bottle_Harrier_Claws')
   lootTypes.add(class'ROTT_Inventory_Item_Bottle_Nettle_Roots')
   lootTypes.add(class'ROTT_Inventory_Item_Bottle_Faerie_Bones')
+  lootTypes.add(class'ROTT_Inventory_Item_Bottle_Norkiva_Chips')
   lootTypes.add(class'ROTT_Inventory_Item_Bottle_Yinras_Ore')
+  
+  equipTypes.add(class'ROTT_Inventory_Item_Lustrous_Baton')
+  equipTypes.add(class'ROTT_Inventory_Item_Lustrous_Baton_Chroma_Conductor')
+  
+  equipTypes.add(class'ROTT_Inventory_Item_Shield_Kite')
+  equipTypes.add(class'ROTT_Inventory_Item_Shield_Kite_Crimson_Heater')
+  
+  equipTypes.add(class'ROTT_Inventory_Item_Shield_Buckler')
+  equipTypes.add(class'ROTT_Inventory_Item_Buckler_Smoke_Shell')
+  equipTypes.add(class'ROTT_Inventory_Item_Buckler_Oak_Wilters_Crest')
+  
+  equipTypes.add(class'ROTT_Inventory_Item_Flat_Brush')
+  
+  equipTypes.add(class'ROTT_Inventory_Item_Paintbrush')
+  equipTypes.add(class'ROTT_Inventory_Item_Paintbrush_Zephyrs_Whisper')
+  
+  equipTypes.add(class'ROTT_Inventory_Item_Flail')
+  equipTypes.add(class'ROTT_Inventory_Item_Flail_Ultimatum')
+  
+  equipTypes.add(class'ROTT_Inventory_Item_Ceremonial_Dagger')
+  equipTypes.add(class'ROTT_Inventory_Item_Ceremonial_Dagger_Whirlwind_Spike')
   
 }
 

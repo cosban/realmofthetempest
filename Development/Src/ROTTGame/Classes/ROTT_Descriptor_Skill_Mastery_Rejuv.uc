@@ -58,18 +58,26 @@ protected function float attributeInfo
   
   switch (type) {
     case MASTERY_REQ_STRENGTH:
-      attribute = (level * 18) + (level * (level - 1));
+      attribute = 3 + (level * 15) + (level * (level - 1));
       break;
     case MASTERY_REQ_FOCUS:
-      attribute = (level * 18) + (level * (level - 1));
+      attribute = 3 + (level * 15) + (level * (level - 1));
       break;
     case PASSIVE_HEALTH_REGEN:
       attribute = (level * 2) + (level / 2 * (level - 2));
+      if (level >= 3) attribute += (level-2) * 3;
       break;
   }
   
   return attribute;
 }
+
+/*=============================================================================
+ * addManaOverflow()
+ *
+ * Called to track mana that overflows beyond a combat unit's max mana value
+ *===========================================================================*/
+public function addManaOverflow(float manaOverflow);
 
 /*=============================================================================
  * Default Properties

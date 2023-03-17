@@ -26,8 +26,14 @@ public function initDialogue() {
   
   // Intro
   `NEW_NODE(GREETING, NUETRAL)
-    "Unfathomable crimes.",
-    ""
+    "An old sage scours through",
+    "a forbidden library of texts here."
+  `ENDNODE
+  setColor(DEFAULT_MEDIUM_GOLD);
+  
+  `NEW_NODE(GREETING, NUETRAL)
+    "When the petals rise from the ground, that's nether", 
+    "magic escaping from the core of the ethereal stream."
   `ENDNODE
   
   // ----------------------------------------------------------------------- //

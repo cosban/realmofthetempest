@@ -13,6 +13,7 @@ class ROTT_UI_Displayer_Cost extends ROTT_UI_Displayer;
 var privatewrite class<ROTT_Inventory_Item> currencyType;
 var privatewrite string costDescriptionText;
 var public int costValue;
+var public bool bAlwaysShow;
 
 // Item graphics
 var private ROTT_UI_Displayer_Item itemGraphics;
@@ -42,8 +43,6 @@ public function initializeComponent(optional string newTag = "") {
  *===========================================================================*/
 public function elapseTimer(float deltaTime, float gameSpeedOverride) {
   super.elapseTimer(deltaTime, gameSpeedOverride);
-  
-  
 }
 
 /*=============================================================================
@@ -105,7 +104,11 @@ public function setDonationCost(ItemCost costInfo) {
  *===========================================================================*/
 public function refresh() {
   // Hide or show based on existing cost value
-  setEnabled(!(costValue == 0));
+  if (bAlwaysShow) { 
+    setEnabled(true);
+  } else {
+    setEnabled(!(costValue == 0));
+  }
   
   // Set the cost description
   costDescription.setText(costDescriptionText);
@@ -153,7 +156,7 @@ defaultProperties
   
   // Displayer info
   currencyType=class'ROTT_Inventory_Item_Gold'
-  costDescriptionText="Gold cost per point:"
+  ///costDescriptionText="Gold cost per point:"
   costValue=100
   
   // Textures
@@ -188,7 +191,7 @@ defaultProperties
     fontStyle=DEFAULT_SMALL_TAN
     AlignX=LEFT
     AlignY=CENTER
-    labelText="Gold cost per point:"
+    labelText="-Init-"
   end object
   componentList.add(Cost_Description_Label)
   

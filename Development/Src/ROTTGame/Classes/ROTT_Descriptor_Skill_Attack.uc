@@ -55,7 +55,12 @@ protected function float attributeInfo
  *
  * This fetches the skill level from the hero provided
  *===========================================================================*/
-public function int getSkillLevel(ROTT_Combat_Hero hero) {
+public function int getSkillLevel
+(
+  ROTT_Combat_Hero hero, 
+  optional bool bIgnoreBoost = false
+) 
+{
   return 1;
 }
 
@@ -64,6 +69,8 @@ public function int getSkillLevel(ROTT_Combat_Hero hero) {
  *===========================================================================*/
 defaultProperties 
 {
+  parentTree=NO_TREE
+  
   // Targeting
   targetingLabel=SINGLE_TARGET_ATTACK
   

@@ -84,6 +84,13 @@ public function onDeadTick(ROTT_Combat_Hero hero, float deltaTime) {
 }
 
 /*=============================================================================
+ * addManaOverflow()
+ *
+ * Called to track mana that overflows beyond a combat unit's max mana value
+ *===========================================================================*/
+public function addManaOverflow(float manaOverflow);
+
+/*=============================================================================
  * Default Properties
  *===========================================================================*/
 defaultProperties 

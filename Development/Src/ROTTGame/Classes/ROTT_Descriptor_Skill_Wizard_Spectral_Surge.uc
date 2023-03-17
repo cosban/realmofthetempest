@@ -108,7 +108,7 @@ defaultProperties
   
   // Skill Icon
   begin object class=UI_Texture_Info Name=Encounter_Skill_Icon_Spectral_Surge
-    componentTextures.add(Texture2D'GUI_Skills.Encounter_Skill_Icon_Mindsurge')
+    componentTextures.add(Texture2D'GUI_Skills.Encounter_Skill_Icon_Spectral_Surge')
   end object
   
   // Skill Icon Container
@@ -121,17 +121,17 @@ defaultProperties
   skillIcon=Skill_Icon_Container
   
   // Skill Animation
-  begin object class=UI_Texture_Info Name=SkillAnim_Spectral_Surge_F1
-    componentTextures.add(Texture2D'GUI_Skills.SkillAnim_Mindsurge_F1')
+  begin object class=UI_Texture_Info Name=Skill_Animation_Spectral_Surge_F1
+    componentTextures.add(Texture2D'GUI_Skills.Skill_Animation_Spectral_Surge_F1')
   end object
-  begin object class=UI_Texture_Info Name=SkillAnim_Spectral_Surge_F2
-    componentTextures.add(Texture2D'GUI_Skills.SkillAnim_Mindsurge_F2')
+  begin object class=UI_Texture_Info Name=Skill_Animation_Spectral_Surge_F2
+    componentTextures.add(Texture2D'GUI_Skills.Skill_Animation_Spectral_Surge_F2')
   end object
-  begin object class=UI_Texture_Info Name=SkillAnim_Spectral_Surge_F3
-    componentTextures.add(Texture2D'GUI_Skills.SkillAnim_Mindsurge_F3')
+  begin object class=UI_Texture_Info Name=Skill_Animation_Spectral_Surge_F3
+    componentTextures.add(Texture2D'GUI_Skills.Skill_Animation_Spectral_Surge_F3')
   end object
-  begin object class=UI_Texture_Info Name=SkillAnim_Spectral_Surge_F4
-    componentTextures.add(Texture2D'GUI_Skills.SkillAnim_Mindsurge_F4')
+  begin object class=UI_Texture_Info Name=Skill_Animation_Spectral_Surge_F4
+    componentTextures.add(Texture2D'GUI_Skills.Skill_Animation_Spectral_Surge_F4')
   end object
   
   // Skill Animation Container
@@ -139,11 +139,11 @@ defaultProperties
     tag="Skill_Animation_Container"
     textureWidth=240
     textureHeight=240
-    images(0)=SkillAnim_Spectral_Surge_F1
-    images(1)=SkillAnim_Spectral_Surge_F2
-    images(2)=SkillAnim_Spectral_Surge_F3
-    images(3)=SkillAnim_Spectral_Surge_F4
-  end object
+    images(0)=Skill_Animation_Spectral_Surge_F1
+    images(1)=Skill_Animation_Spectral_Surge_F2
+    images(2)=Skill_Animation_Spectral_Surge_F3
+    images(3)=Skill_Animation_Spectral_Surge_F4
+  end object 
   skillAnim=Skill_Animation_Container
   
 }

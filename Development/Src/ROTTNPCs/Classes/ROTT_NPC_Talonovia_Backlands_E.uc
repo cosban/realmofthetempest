@@ -26,20 +26,25 @@ public function initDialogue() {
   
   // Greeting
   `NEW_NODE(GREETING, NUETRAL)
-    "In the dark. . . The east winds howls. . .",
-    "Sick moon does not create us."
+    "In the dark, the east wind calls to us.",
+		""
   `ENDNODE
   
   `NEW_NODE(GREETING, NUETRAL)
-    "It was my do loop, as it was yours. . .",
-    ""
+    "There are no beasts.",
+		""
   `ENDNODE
   
-  `NEW_NODE(GREETING, NUETRAL)
-    "Howling wind surrounds us.",
-    ""
-  `ENDNODE
-  
+    `ADD_OPTIONS(GREETING, NUETRAL)
+      "Bestiary",
+      "Goodnight",
+      "",
+      "",
+      
+      BEHAVIOR_LAUNCH_SERVICE,
+      BEHAVIOR_GOODBYE
+    `ENDNODE
+      
   // ----------------------------------------------------------------------- //
   
   setInquiry(
@@ -63,6 +68,7 @@ defaultProperties
 {
   // NPC identity
   npcName=GENERIC
+  serviceType=SERVICE_BESTIARY
   
   // Background
   begin object class=UI_Texture_Info Name=NPC_Background_Texture

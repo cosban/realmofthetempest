@@ -8,7 +8,7 @@
  *              DO NOT store save info here, because its exploitable.
  *===========================================================================*/
 
-class ROTT_NPC_Container extends ROTTObject
+class ROTT_NPC_Container extends ROTT_Object
 abstract;
 
 // Making a regular function to fetch this somehow failed
@@ -26,7 +26,7 @@ abstract;
 // Macro for scene
 `DEFINE NPC_SCENE gameInfo.sceneManager.sceneNpcDialog
 
-// A list of all NPC names
+// A list of core NPC names
 enum NPCs {
   // Intro NPC
   ALISKUS,
@@ -39,6 +39,10 @@ enum NPCs {
   LUCROSUS,
   MIGMAS,
   KALEV,
+  
+  // Main quest line characters
+  DRUJIVA,
+  DOMINUS,
   
   // Generic NPCs (with no save feature)
   GENERIC
@@ -77,12 +81,12 @@ enum TopicList {
   END_OF_ACTIVATED_TOPICS,
   
   // Allows player to ask about topics
-  INQUERY_MODE,
+  INQUIRY_MODE,
   
   // Conflict inquiry
-  INQUERY_OBELISK,
-  INQUERY_TOMB,
-  INQUERY_GOLEM,
+  INQUIRY_OBELISK,
+  INQUIRY_TOMB,
+  INQUIRY_GOLEM,
   
   // This is called only when the npc launches with no topics to discuss
   GREETING
@@ -102,9 +106,9 @@ var public TopicPreference preferences[TopicList];
 enum OptionBehavior {
   BEHAVIOR_NONE,
   
-  BEHAVIOR_INQUERY_OBELISK,
-  BEHAVIOR_INQUERY_TOMB,
-  BEHAVIOR_INQUERY_GOLEM,
+  BEHAVIOR_INQUIRY_OBELISK,
+  BEHAVIOR_INQUIRY_TOMB,
+  BEHAVIOR_INQUIRY_GOLEM,
   
   BEHAVIOR_FORCE_ENCOUNTER,
   
@@ -117,15 +121,18 @@ enum OptionBehavior {
 enum NpcServices {
   NO_SERVICES,
   SERVICE_BLESSINGS,
-  SERVICE_TRADING,
+  SERVICE_ALCHEMY,
+  SERVICE_BARTERING,
   SERVICE_NECROMANCY,
   SERVICE_BESTIARY,
   SERVICE_LOTTERY,
-  SERVICE_ALCHEMY,
   SERVICE_INFORMATION,
 };
 
 var privatewrite NpcServices serviceType;
+
+// Store types of inventory items for bartering service
+///var() privatewrite array<ROTT_Inventory_Item> barterInventory;
 
 // Display text
 struct OptionText {
@@ -172,6 +179,7 @@ struct DialogNode {
   var bool bNameCreation;
   var bool bWorldTransfer;
   var bool bOverrideMusic; 
+  var bool bShowControls; 
   
   // Stores destination for world transfer
   var byte destination;
@@ -215,7 +223,7 @@ var protected ReplyModes lastMode;
 var protected int lastIndex;
 
 // Inquiry options
-var protected OptionText inqueryOptions;
+var protected OptionText inquiryOptions;
 var protected bool bInquiryUp;
 
 /*===========================================================================*/
@@ -282,14 +290,14 @@ public function bool behaviorInput(OptionBehavior behaviorType) {
       return true;
       
     // Inquiry topics
-    case BEHAVIOR_INQUERY_OBELISK:    
-      changeTopic(INQUERY_OBELISK);  
+    case BEHAVIOR_INQUIRY_OBELISK:    
+      changeTopic(INQUIRY_OBELISK);  
       return true;
-    case BEHAVIOR_INQUERY_TOMB:       
-      changeTopic(INQUERY_TOMB);   
+    case BEHAVIOR_INQUIRY_TOMB:       
+      changeTopic(INQUIRY_TOMB);   
       return true;
-    case BEHAVIOR_INQUERY_GOLEM:      
-      changeTopic(INQUERY_GOLEM);    
+    case BEHAVIOR_INQUIRY_GOLEM:      
+      changeTopic(INQUIRY_GOLEM);    
       return true;
       
     // Encounter
@@ -346,7 +354,7 @@ public function dialogTraversal(optional bool skipMode = false) {
     bInquiryUp = false;
     
     // Execute selected option behavior
-    behaviorInput(inqueryOptions.behaviors[dialogPage.getOptionSelection()]);
+    behaviorInput(inquiryOptions.behaviors[dialogPage.getOptionSelection()]);
     return;
   }
   
@@ -374,14 +382,48 @@ public function dialogTraversal(optional bool skipMode = false) {
       dialogPage.exitDialog();
     } 
     
+    // Control sheet transfer flag
+    if (`CURRENT_NODE.bShowControls) {
+      // Save
+      gameInfo.saveGame(gameInfo.const.TRANSITION_SAVE);
+      
+      // Execute transition
+      gameInfo.sceneManager.transitioner.setTransition(
+        TRANSITION_OUT,                              // Transition direction
+        RANDOM_SORT_TRANSITION,                      // Sorting config
+        ,                                            // Pattern reversal
+        ,                                            // Destination scene
+        gameInfo.sceneManager.sceneNpcDialog.controlSheet,                                            
+        // Destination page
+        ,                                            // Destination world
+        ,                                            // Color
+        10,                                          // Tile speed
+        0.f,                                         // Delay
+        false,
+        "Page_New_World_Transition"
+      );
+      dialogPage.menuControl = IGNORE_INPUT;
+      return;
+    } 
+    
     // World transfer flag
     if (`CURRENT_NODE.bWorldTransfer) {
       // Save
       gameInfo.saveGame(gameInfo.const.TRANSITION_SAVE);
       
-      // Transition
-      `NPC_SCENE.transitionNewWorld.destinationWorld = gameInfo.getMapFileName(`CURRENT_NODE.destination);
-      `NPC_SCENE.pushPage(`NPC_SCENE.transitionNewWorld);
+      // Execute transition
+      gameInfo.sceneManager.transitioner.setTransition(
+        TRANSITION_IN,                               // Transition direction
+        RANDOM_SORT_TRANSITION,                      // Sorting config
+        ,                                            // Pattern reversal
+        ,                                            // Destination scene
+        ,                                            // Destination page
+        gameInfo.getMapFileName(`CURRENT_NODE.destination),
+        // Destination world
+        ,                                            // Color
+        10,                                          // Tile speed
+        0.f                                          // Delay
+      );
       
       // Lock controls
       dialogPage.menuControl = IGNORE_INPUT;
@@ -490,11 +532,11 @@ protected function incrementNode() {
     }
     
     // Try finding next topic
-    if (getTopic() != INQUERY_MODE) {
+    if (getTopic() != INQUIRY_MODE) {
       currentTopic = getTopic();
       currentNode = 0;
     } else {
-      dialogPage.renderOptions(inqueryOptions);
+      dialogPage.renderOptions(inquiryOptions);
       bInquiryUp = true;
       return;
     }
@@ -576,15 +618,15 @@ protected function setInquiry
   optional OptionBehavior behavior4 = BEHAVIOR_NONE
 ) 
 {
-  inqueryOptions.options[0] = option1;
-  inqueryOptions.options[1] = option2;
-  inqueryOptions.options[2] = option3;
-  inqueryOptions.options[3] = option4;
+  inquiryOptions.options[0] = option1;
+  inquiryOptions.options[1] = option2;
+  inquiryOptions.options[2] = option3;
+  inquiryOptions.options[3] = option4;
   
-  inqueryOptions.behaviors[0] = behavior1;
-  inqueryOptions.behaviors[1] = behavior2;
-  inqueryOptions.behaviors[2] = behavior3;
-  inqueryOptions.behaviors[3] = behavior4;
+  inquiryOptions.behaviors[0] = behavior1;
+  inquiryOptions.behaviors[1] = behavior2;
+  inquiryOptions.behaviors[2] = behavior3;
+  inquiryOptions.behaviors[3] = behavior4;
 }
 
 /*=============================================================================
@@ -704,6 +746,21 @@ protected function worldTransfer
 }
 
 /*=============================================================================
+ * showControls()
+ * 
+ * Transfers to control sheet
+ *===========================================================================*/
+protected function showControls
+(
+  TopicList topic,
+  ReplyModes mode
+) 
+{
+  // Set transfer to control sheet info
+  `NODE.bShowControls = true;
+}
+
+/*=============================================================================
  * getTopic()
  * 
  * Returns the topic that this npc wants to discuss.  Should be accurate no 
@@ -762,7 +819,7 @@ protected function TopicList getTopic(optional bool bFirstTopic = false) {
   //if (topicNodes[SERVICE_MODE].topicChains[NUETRAL].dialogNodes.length != 0) return SERVICE_MODE;
   
   // Return inquiry mode as last resort
-  return INQUERY_MODE;
+  return INQUIRY_MODE;
 }
 
 /*=============================================================================
@@ -935,11 +992,11 @@ enum InquiryTopics {
 
 // This node holds first time introduction and conflict completion responses 
 struct InquiryNodeList  {
-  var array<DialogNode> inqueryNodes; 
+  var array<DialogNode> inquiryNodes; 
 };
 
 // These store replies to inqueries (the obelisk, the tomb, the golem)
-var public InquiryNodeList inqueryReplies[3];
+var public InquiryNodeList inquiryReplies[3];
 **/
 // Seconds between animation frames
 //var private float animTime;   

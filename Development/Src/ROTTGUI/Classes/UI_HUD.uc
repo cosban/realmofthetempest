@@ -9,11 +9,15 @@
 
 class UI_HUD extends HUD;
 
+// Default dimensions, same size as our mock up UI designs
+const NATIVE_WIDTH  = 1440; 
+const NATIVE_HEIGHT = 900;
+
 // Window scaling options
 enum ScaleModes {
   FIXED_SCALE,
   NO_STRETCH_SCALE,
-  STRETCH_SCALE
+  STRETCH_SCALE,
 };
 
 // Selected scaling mode
@@ -38,7 +42,7 @@ var const Texture2D cursorGraphics[CursorTypes];
 var const Color cursorColor;
 
 // The color of the cursor
-var private bool bHideCursor;
+var privatewrite bool bHideCursor;
 
 // If set false, the cursor is always hidden
 var protectedwrite bool bCursorActive;
@@ -191,6 +195,48 @@ function onInputKey(name Key) {
 }
 
 /*============================================================================= 
+ * getScaleX()
+ *
+ * 
+ *===========================================================================*/
+///public function float getScaleX() { 
+///  local float scaleX, scaleY;
+///
+///  // Get window scale
+///  scaleX = sizeX;
+///  scaleY = sizeY;
+///  
+///  // Scaling mode
+///  switch (scaleMode) {
+///    case NO_STRETCH_SCALE:
+///      // Return smallest scaler
+///      return (scaleX < scaleY) ? scaleX : scaleY;
+///  }
+///  return scaleX;
+///}
+///
+////*============================================================================= 
+/// * getScaleY()
+/// *
+/// * 
+/// *===========================================================================*/
+///public function float getScaleY() { 
+///  local float scaleX, scaleY;
+///
+///  // Get window scale
+///  scaleX = sizeX;
+///  scaleY = sizeY;
+///  
+///  // Scaling mode
+///  switch (scaleMode) {
+///    case NO_STRETCH_SCALE:
+///      // Return smallest scaler
+///      return (scaleX < scaleY) ? scaleX : scaleY;
+///  }
+///  return scaleY;
+///}
+
+/*============================================================================= 
  * lockCursorHidden()
  *
  * 
@@ -253,7 +299,7 @@ defaultProperties
   sceneManagerClass=class'UI_Scene_Manager'
   
   // Scale mode
-  scaleMode=STRETCH_SCALE
+  scaleMode=NO_STRETCH_SCALE
   
   // Cursor settings
   cursorColor=(R=255,G=255,B=255,A=255)

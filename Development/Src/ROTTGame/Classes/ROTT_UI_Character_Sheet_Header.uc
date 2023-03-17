@@ -46,12 +46,21 @@ public function setDisplayInfo
   coerce string rightBottom
 ) 
 {
+  // Set top left information
   mainLeftLabel.setText(leftTop);
   subLeftLabel.setText(leftMiddle);
   bottomLeftLabel.setText(leftBottom);
   
+  // Set top right information
   mainRightLabel.setText(rightTop);
   subRightLabel.setText(rightBottom);
+  
+  // Set colors
+  if (bottomLeftLabel.labelText == "R.I.P.") {
+    bottomLeftLabel.setFont(DEFAULT_SMALL_RED);
+  } else {
+    bottomLeftLabel.setFont(DEFAULT_SMALL_BLUE);
+  }
 }
 
 /*============================================================================*
@@ -119,7 +128,7 @@ defaultProperties
     
     // Cycle effects
     activeEffects.add((effectType=EFFECT_FLIPBOOK, lifeTime=-1, elapsedTime=0, intervalTime=0.1, min=0, max=255))
-    cycleStyles=(DEFAULT_MEDIUM_GOLD, DEFAULT_MEDIUM_ORANGE)
+    cycleStyles=(DEFAULT_MEDIUM_GOLD, DEFAULT_MEDIUM_PEACH)
   end object
   componentList.add(Main_Label_Right_Side)
   
@@ -137,7 +146,7 @@ defaultProperties
     
     // Cycle effects
     activeEffects.add((effectType=EFFECT_FLIPBOOK, lifeTime=-1, elapsedTime=0, intervalTime=0.1, min=0, max=255))
-    cycleStyles=(DEFAULT_MEDIUM_GOLD, DEFAULT_MEDIUM_ORANGE)
+    cycleStyles=(DEFAULT_MEDIUM_GOLD, DEFAULT_MEDIUM_PEACH)
   end object
   componentList.add(Sub_Label_Right_Side)
   

@@ -31,8 +31,8 @@ var private ControlState menuControl;
 /** ============================== **/
 
 // Input delay timer
-var public ROTTTimer inputDelayTimer; 
-var public ROTTTimer expLerpTimer; 
+var public ROTT_Timer inputDelayTimer; 
+var public ROTT_Timer expLerpTimer; 
   
 // Internal references
 var private ROTT_UI_Party_Display partyDisplay;
@@ -72,10 +72,25 @@ public function initializeComponent(optional string newTag = "") {
 event onPushPageEvent() {
   local int i;
   
+  // Execute transition
+  gameInfo.sceneManager.transitioner.setTransition(
+    TRANSITION_IN,                               // Transition direction
+    RIGHT_SWEEP_TRANSITION_IN,                   // Sorting config
+    ,                                            // Pattern reversal
+    ,                                            // Destination scene
+    ,                                            // Destination page
+    ,                                            // Destination world
+    ,                                            // Color
+    20,                                          // Tile speed
+    0.2f,                                        // Delay
+    false,                                       // Input consumption
+    "Page_Transition_In"
+  );
+  
   // Input delay
   menuState = EXP_PENDING;
   menuControl = IGNORE_INPUT;
-  inputDelayTimer = gameInfo.spawn(class'ROTTTimer');
+  inputDelayTimer = gameInfo.spawn(class'ROTT_Timer');
   inputDelayTimer.makeTimer(0.4, LOOP_OFF, allowInput);
   
   // Attach unit info
@@ -146,8 +161,6 @@ public function elapseTimers(float deltaTime) {
  *===========================================================================*/
 public function onNavigateLeft();
 public function onNavigateRight();
-protected function navigateDown();
-protected function navigateUp();
 
 /*=============================================================================
  * Button controls
@@ -173,7 +186,7 @@ protected function navigateNext() {
       
       // Animate exp
       gameInfo.getActiveParty().startExpAnim();
-      expLerpTimer = gameInfo.spawn(class'ROTTTimer');
+      expLerpTimer = gameInfo.spawn(class'ROTT_Timer');
       expLerpTimer.makeTimer(1, LOOP_OFF, finishedExpAnim);
       break;
     case EXP_ANIMATING: 
@@ -189,24 +202,32 @@ protected function navigateNext() {
         sfxBox.playSfx(SFX_MENU_LEVEL_UP);
         playLvlUpSfx = false;
         someScene.bLevelUpTransfer = true;
-        violetLog("------------ Level up transfer true --------------");
       } else {
         someScene.bLevelUpTransfer = false;
-        cyanLog("------------ Level up transfer false --------------");
       }
       
       break;
     case EXP_GRANTED: 
-      // Transition to analysis page
-      someScene.transitionToAnalysis();
+      // Ignore input
+      menuControl = IGNORE_INPUT;
       
-  whitelog("---");
-  greenlog("someScene.bLevelUpTransfer " $ someScene.bLevelUpTransfer);
-  graylog("playLvlUpSfx " $ playLvlUpSfx);
+      // Execute transition to combat analysis
+      gameInfo.sceneManager.transitioner.setTransition(
+        TRANSITION_OUT,                              // Transition direction
+        RIGHT_SWEEP_TRANSITION_OUT,                  // Sorting config
+        ,                                            // Pattern reversal
+        ,                                            // Destination scene
+        gameInfo.sceneManager.sceneCombatResults.pageCombatAnalysis,
+        // Destination page
+        ,                                            // Destination world
+        ,                                            // Color
+        ,                                            // Tile speed
+        0.2f,                                         // Delay
+        true,                                        // Input consumption
+        "Page_Transition_Out_Over_World"
+      );
       break;
   }
-  
-  ///playsfx SFX_MENU_ACCEPT SFX_MENU_BACK SFX_MENU_NAVIGATE
 }
 
 /*============================================================================= 
@@ -234,10 +255,8 @@ private function finishedExpAnim() {
     sfxBox.playSfx(SFX_MENU_LEVEL_UP);
     playLvlUpSfx = false;
     someScene.bLevelUpTransfer = true;
-    violetLog("------------ Level up transfer true --------------");
   } else {
     someScene.bLevelUpTransfer = false;
-    violetLog("------------ Level up transfer FALSE --------------");
   }
   
   expLerpTimer.destroy();

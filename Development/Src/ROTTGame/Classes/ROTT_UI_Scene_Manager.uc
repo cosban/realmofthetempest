@@ -29,6 +29,11 @@ enum DisplayScenes {
   SCENE_NPC_DIALOG,
   SCENE_SERVICE_BLESSINGS,
   SCENE_SERVICE_ALCHEMY,
+  SCENE_SERVICE_BESTIARY,
+  SCENE_SERVICE_BARTERING,
+  SCENE_SERVICE_INFORMATION,
+  SCENE_SERVICE_NECROMANCY,
+  SCENE_SERVICE_LOTTERY,
   SCENE_SERVICE_SHRINE,
   SCENE_COMBAT_ENCOUNTER,
   SCENE_COMBAT_RESULTS,
@@ -81,8 +86,23 @@ var privatewrite ROTT_UI_Scene_Service_Blessings sceneServiceBlessing;
 // Shrine services
 var privatewrite ROTT_UI_Scene_Service_Shrine sceneServiceShrine;
 
-// Mini Game
+// Alchemy Mini Game
 var privatewrite ROTT_UI_Scene_Service_Alchemy sceneMiniGame;
+
+// Barter Service (Merchant)
+var privatewrite ROTT_UI_Scene_Service_Barter sceneBarter;
+
+// Bestiary Service (Dragon Tamer)
+var privatewrite ROTT_UI_Scene_Service_Bestiary sceneBestiary;
+
+// Information Service (Prince)
+var privatewrite ROTT_UI_Scene_Service_Information sceneInformation;
+
+// Lottery Service (Witch)
+var privatewrite ROTT_UI_Scene_Service_Lottery sceneLottery;
+
+// Necromancy Service
+var privatewrite ROTT_UI_Scene_Service_Necromancy sceneNecromancy;
 
 // Combat
 var privatewrite ROTT_UI_Scene_Combat_Encounter sceneCombatEncounter;
@@ -95,6 +115,9 @@ var privatewrite ROTT_UI_Scene_Game_Over sceneGameOver;
 
 // scene Credits
 var privatewrite ROTT_UI_Scene_Credits sceneCredits;
+
+// Transitioner
+var public ROTT_UI_Transitioner transitioner;
 
 /*=============================================================================
  * initSceneManager()
@@ -115,15 +138,23 @@ event initSceneManager() {
   sceneTitleScreen = ROTT_UI_Scene_Title_Screen(uiScenes[SCENE_TITLE_SCREEN]);
   sceneSaveManager = ROTT_UI_Scene_Save_Manager(uiScenes[SCENE_SAVE_MANAGER]);
   sceneCharacterCreation = ROTT_UI_Scene_Character_Creation(uiScenes[SCENE_CHARACTER_CREATION]);
+  
   sceneOverWorld = ROTT_UI_Scene_Over_World(uiScenes[SCENE_OVER_WORLD]);
   sceneWorldMap = ROTT_UI_Scene_World_Map(uiScenes[SCENE_WORLD_MAP]);
   sceneGameMenu = ROTT_UI_Scene_Game_Menu(uiScenes[SCENE_GAME_MENU]);
   sceneGameManager = ROTT_UI_Scene_Game_Manager(uiScenes[SCENE_GAME_MANAGER]);
   scenePartyManager = ROTT_UI_Scene_Party_Manager(uiScenes[SCENE_PARTY_MANAGER]);
+  
   sceneNpcDialog = ROTT_UI_Scene_Npc_Dialog(uiScenes[SCENE_NPC_DIALOG]);
   sceneServiceBlessing = ROTT_UI_Scene_Service_Blessings(uiScenes[SCENE_SERVICE_BLESSINGS]);
   sceneServiceShrine = ROTT_UI_Scene_Service_Shrine(uiScenes[SCENE_SERVICE_SHRINE]);
   sceneMiniGame = ROTT_UI_Scene_Service_Alchemy(uiScenes[SCENE_SERVICE_ALCHEMY]);
+  sceneBarter = ROTT_UI_Scene_Service_Barter(uiScenes[SCENE_SERVICE_BARTERING]);
+  sceneBestiary = ROTT_UI_Scene_Service_Bestiary(uiScenes[SCENE_SERVICE_BESTIARY]);
+  sceneLottery = ROTT_UI_Scene_Service_Lottery(uiScenes[SCENE_SERVICE_LOTTERY]);
+  sceneNecromancy = ROTT_UI_Scene_Service_Necromancy(uiScenes[SCENE_SERVICE_NECROMANCY]);
+  sceneInformation = ROTT_UI_Scene_Service_Information(uiScenes[SCENE_SERVICE_INFORMATION]);
+  
   sceneCombatEncounter = ROTT_UI_Scene_Combat_Encounter(uiScenes[SCENE_COMBAT_ENCOUNTER]);
   sceneCombatResults = ROTT_UI_Scene_Combat_Results(uiScenes[SCENE_COMBAT_RESULTS]);
   sceneGameOver = ROTT_UI_Scene_Game_Over(uiScenes[SCENE_GAME_OVER]);
@@ -190,8 +221,8 @@ public function switchScene(DisplayScenes newScene) {
  * Called every frame to render the scene.
  *===========================================================================*/
 public function renderScene(Canvas canvas) {
-  ///uiScenes[currentSceneType].renderScene(C);
   uiScenes[currentSceneType].drawScene(canvas);
+  transitioner.drawEvent(canvas, TOP_LAYER);
 }
 
 /*=============================================================================
@@ -242,6 +273,10 @@ public function deleteSceneManager() {
     }
   }
   
+  // Delete transitioner
+  transitioner.deleteComp();
+  transitioner = none;
+  
   gameInfo = none;
 }
 
@@ -256,7 +291,7 @@ public function raveSelectors() {
   
   for (i = 0; i < uiScenes.length; i++) {
     if (uiScenes[i] != none) {
-      if (uiScenes[i].isNotInitialized()) uiScenes[i].initScene();
+      if (uiScenes[i].isNotInitialized()) uiScenes[i].initScene(); /// this causes problems...
       for (j = 0; j < uiScenes[i].pageComponents.length; j++) {
         page = uiScenes[i].pageComponents[j];
         page.raveHighwindCall();
@@ -379,6 +414,31 @@ defaultProperties
   end object
   uiScenes[SCENE_SERVICE_ALCHEMY]=UI_Scene_Mini_Game
   
+  // Bestiary Service
+  begin object class=ROTT_UI_Scene_Service_Bestiary Name=UI_Scene_Bestiary
+  end object
+  uiScenes[SCENE_SERVICE_BESTIARY]=UI_Scene_Bestiary
+  
+  // Bartering Service
+  begin object class=ROTT_UI_Scene_Service_Barter Name=UI_Scene_Bartering
+  end object
+  uiScenes[SCENE_SERVICE_BARTERING]=UI_Scene_Bartering
+  
+  // Information Service
+  begin object class=ROTT_UI_Scene_Service_Information Name=UI_Scene_Information
+  end object
+  uiScenes[SCENE_SERVICE_INFORMATION]=UI_Scene_Information
+  
+  // Lottery Service
+  begin object class=ROTT_UI_Scene_Service_Lottery Name=UI_Scene_Lottery
+  end object
+  uiScenes[SCENE_SERVICE_LOTTERY]=UI_Scene_Lottery
+  
+  // Necromancy Service
+  begin object class=ROTT_UI_Scene_Service_Necromancy Name=UI_Scene_Necromancy
+  end object
+  uiScenes[SCENE_SERVICE_NECROMANCY]=UI_Scene_Necromancy
+  
   // Shrine Service
   begin object class=ROTT_UI_Scene_Service_Shrine Name=UI_Scene_Service_Shrine
   end object
@@ -403,7 +463,7 @@ defaultProperties
   begin object class=ROTT_UI_Scene_Credits Name=UI_Scene_Credits
   end object
   uiScenes[SCENE_CREDITS]=UI_Scene_Credits
-  
+    
   /**
   // Title Screen
   begin object class=ROTT_UI_Scene_Title_Screen Name=UI_Scene_Title_Screen

@@ -20,6 +20,7 @@ enum GameOptionList {
   OPTION_TARGET_MEMORY,
   OPTION_ACTION_MEMORY,
   OPTION_SCALE_MODE,
+  OPTION_NEXT_PAGE,
 };
 
 // Resolution options
@@ -204,6 +205,31 @@ public function bool isFixedScaleValid() {
   return true;
 }
 
+/*============================================================================*
+ * Controls
+ *
+ * ControllerId     the controller that generated this input key event
+ * Key              the name of the key which an event occured for
+ * EventType        the type of event which occured
+ * AmountDepressed  for analog keys, the depression percent.
+ *
+ * Returns: true to consume the key event, false to pass it on.
+ *===========================================================================*/
+function bool onInputKey
+( 
+  int ControllerId, 
+  name Key, 
+  EInputEvent Event, 
+  float AmountDepressed = 1.f, 
+  bool bGamepad = false
+) 
+{
+  // Remap for keyboard control
+  if (Key == 'C' && Event == IE_Pressed) navigationRoutineRB();
+  
+  return super.onInputKey(ControllerId, Key, Event, AmountDepressed, bGamepad);
+}
+
 /*=============================================================================
  * Option selector input delegates
  *===========================================================================*/
@@ -253,12 +279,38 @@ public function optionSelectorInputA() {
       // Special effects
       scaleModeSelector.graphicalSelections.addAlphaEffect(,0.6,,100,170);
       break;
+    case OPTION_NEXT_PAGE:
+      // Navigate to next page
+      parentScene.popPage();
+      parentScene.pushPage(ROTT_UI_Scene_Game_Manager(parentScene).gameOptionsExtendedPage);
+      
+      // Sound
+      sfxBox.playSfx(SFX_MENU_ACCEPT);
+      break;
   }
 }
 
 public function optionSelectorInputB() {
+  // Check for redirection to title menu
+  if (ROTT_UI_Scene_Game_Manager(parentScene).bTitleMenuDirection) {
+    gameInfo.sceneManager.switchScene(SCENE_TITLE_SCREEN);
+  }
+  
+  // Navigate back to game management options
   parentScene.popPage();
   sfxBox.playSfx(SFX_MENU_BACK);
+}
+
+/*=============================================================================
+ * Bumper inputs
+ *===========================================================================*/
+protected function navigationRoutineRB() {
+  // Navigate to next page
+  parentScene.popPage();
+  parentScene.pushPage(ROTT_UI_Scene_Game_Manager(parentScene).gameOptionsExtendedPage);
+  
+  // Sound
+  sfxBox.playSfx(SFX_MENU_ACCEPT);
 }
 
 /*=============================================================================
@@ -363,6 +415,12 @@ defaultProperties
   end object
   inputList.add(Input_B)
   
+  begin object class=ROTT_Input_Handler Name=Input_RB
+    inputName="XboxTypeS_RightShoulder"
+    buttonComponent=none
+  end object
+  inputList.add(Input_RB)
+  
   // Scene frame
   begin object class=ROTT_UI_Screen_Frame Name=Screen_Frame
     tag="Screen_Frame"
@@ -394,9 +452,17 @@ defaultProperties
     tag="Menu_Selector"
     bEnabled=true
     posX=76
-    posY=178
+    posY=158
     selectionOffset=(x=0,y=100)
-    numberOfMenuOptions=6
+    numberOfMenuOptions=7
+    
+    hoverCoords(0)=(xStart=136,yStart=153,xEnd=1329,yEnd=241)
+    hoverCoords(1)=(xStart=136,yStart=253,xEnd=1329,yEnd=341)
+    hoverCoords(2)=(xStart=136,yStart=353,xEnd=1329,yEnd=441)
+    hoverCoords(3)=(xStart=136,yStart=453,xEnd=1329,yEnd=541)
+    hoverCoords(4)=(xStart=136,yStart=553,xEnd=1329,yEnd=641)
+    hoverCoords(5)=(xStart=136,yStart=653,xEnd=1329,yEnd=741)
+    hoverCoords(6)=(xStart=136,yStart=753,xEnd=1329,yEnd=841)
     
     // Selection texture
     begin object class=UI_Texture_Info Name=Selection_Arrow_Texture
@@ -462,7 +528,7 @@ defaultProperties
       tag="Graphical_Selections"
       bEnabled=true
       posX=811
-      posY=192
+      posY=172
       images(RESOLUTION_1280_X_720)=Resolution_Option_1280_x_720
       images(RESOLUTION_1366_X_768)=Resolution_Option_1366_x_768
       images(RESOLUTION_1440_X_900)=Resolution_Option_1440_x_900
@@ -484,7 +550,7 @@ defaultProperties
     bEnabled=true
     bActive=false
     posX=656
-    posY=273
+    posY=253
   end object
   componentList.add(Slider_Music_Volume)
   
@@ -494,7 +560,7 @@ defaultProperties
     bEnabled=true
     bActive=false
     posX=656
-    posY=373
+    posY=353
   end object
   componentList.add(Slider_Effect_Volume)
   
@@ -504,7 +570,7 @@ defaultProperties
     bEnabled=true
     bDrawRelative=true
     posX=721
-    posY=484
+    posY=464
   end object
   componentList.add(Target_Memory_Checkbox)
   
@@ -514,7 +580,7 @@ defaultProperties
     bEnabled=true
     bDrawRelative=true
     posX=721
-    posY=584
+    posY=564
   end object
   componentList.add(Action_Memory_Checkbox)
   
@@ -540,7 +606,7 @@ defaultProperties
       tag="Graphical_Selections"
       bEnabled=true
       posX=673
-      posY=695
+      posY=675
       images(FIXED_SCALE)=Scale_Option_Fixed_Scale
       images(NO_STRETCH_SCALE)=Scale_Option_No_Stretch_Scale
       images(STRETCH_SCALE)=Scale_Option_Stretch_Scale
@@ -561,7 +627,7 @@ defaultProperties
     alignX=RIGHT
     alignY=BOTTOM
     fontStyle=DEFAULT_MEDIUM_TAN
-    labelText="Work in progress"
+    labelText=""
   end object
   componentList.add(WIP_Label)
 }

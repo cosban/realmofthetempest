@@ -82,6 +82,12 @@ public function initializeComponent(optional string newTag = "") {
   inputController.setInputDelegates('XboxTypeS_LeftShoulder', navigationRoutineLB, requirementRoutineLB);
   inputController.setInputDelegates('XboxTypeS_RightShoulder', navigationRoutineRB, requirementRoutineRB);
   
+  // Mouse and keyboard delegates
+  inputController.setInputDelegates('LeftMouseButton', navigationRoutineA, requirementRoutineA);
+  inputController.setInputDelegates('SpaceBar', navigationRoutineA, requirementRoutineA);
+  
+  inputController.setInputDelegates('Q', navigationRoutineB, requirementRoutineB);
+  
   /// inputController.setInputDelegates('XBoxTypeS_DPad_Left', navigateLeft, noRequirement);
   /// inputController.setInputDelegates('XBoxTypeS_DPad_Right', navigateRight, noRequirement);
   /// inputController.setInputDelegates('XBoxTypeS_DPad_Up', navigateUp, noRequirement);
@@ -102,7 +108,7 @@ public function refresh();
  * Controls
  *
  * ControllerId     the controller that generated this input key event
- * Key              the name of the key which an event occured for
+ * inputName        the name of the key which an event occured for
  * EventType        the type of event which occured
  * AmountDepressed  for analog keys, the depression percent.
  *
@@ -111,7 +117,7 @@ public function refresh();
 function bool onInputKey
 ( 
   int ControllerId, 
-  name Key, 
+  name inputName, 
   EInputEvent Event, 
   float AmountDepressed = 1.f, 
   bool bGamepad = false
@@ -131,30 +137,16 @@ function bool onInputKey
   
   // Pass input to widgets
   for (i = 0; i < activeWidgets.length; i++) {
-    activeWidgets[i].parseInput(Key, Event);
+    activeWidgets[i].parseInput(inputName, Event);
   }
   
   // Pass input to input controller 
   if (inputController != none) {
-    inputController.parseInput(Key, Event);
+    inputController.parseInput(inputName, Event);
   }
   
   return true;
 }
-
-// Pressed button stubs
-/// protected function navigateUp() {
-///   gameinfo.sfxBox.playSFX(SFX_MENU_NAVIGATE);
-/// }
-/// protected function navigateDown() {
-///   gameinfo.sfxBox.playSFX(SFX_MENU_NAVIGATE);
-/// }
-/// protected function navigateLeft() {
-///   gameinfo.sfxBox.playSFX(SFX_MENU_NAVIGATE);
-/// }
-/// protected function navigateRight() {
-///   gameinfo.sfxBox.playSFX(SFX_MENU_NAVIGATE);
-/// }
 
 /*============================================================================= 
  * updateSelection()
@@ -307,6 +299,9 @@ public function setCostValues(array<ItemCost> costList) {
           // Set cost value
           costDisplayer.costValue = costList[i].quantity;
         }
+        
+        // Refresh displayer
+        costDisplayer.refresh();
       }
     }
     
@@ -323,27 +318,29 @@ public function setCostValues(array<ItemCost> costList) {
  * Description: This function cycles through digits for visual effects
  *===========================================================================*/
 static function digitCycleTrick(int trueValue, out int displayValue) { 
-  local int onesTrick;    // Used to visually cycle up the digits
-  local int difference;   // The difference between displayed and true currency
+  local int onesTrick;    
+  local int difference;
   
+  // Set up the desired change for visually cycling through the digits
   onesTrick = 111111111;
+  
+  // Store the difference between displayed value and actual value
   difference = trueValue - displayValue;
   
   if (difference == 0) return;
-
-  if (difference < onesTrick) {
-    // Here, we are spinning digits upward
+  if (difference > 0) {
+    // Spin the digits upward
     do {
-      onesTrick -= 10 ** (Len(onesTrick) - 1);  /* to do ... improve this? */
-    } until (difference >= onesTrick);
+      onesTrick -= 10 ** (Len(onesTrick) - 1); 
+    } until (onesTrick <= difference);
     
     displayValue += onesTrick;
     
-  } else if (difference *(-1) < onesTrick) {
-    // Here, we are spinning digits downward (difference is negative)
+  } else {
+    // Spin the digits downward
     do {
       onesTrick -= 10 ** (Len(onesTrick) - 1);
-    } until (difference *(-1) <= onesTrick);
+    } until (onesTrick <= abs(difference));
     
     displayValue -= onesTrick;
   }

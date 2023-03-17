@@ -22,7 +22,7 @@ var private UI_Selector_2D enchantmentSelector;
 var private UI_Label descriptorLabels[4];
 
 // Timers
-var private ROTTTimer enchantmentAnimationTimer; // Used to animate enchantments
+var private ROTT_Timer enchantmentAnimationTimer; // Used to animate enchantments
 
 /*============================================================================= 
  * Initialize Component
@@ -60,6 +60,16 @@ event onPushPageEvent() {
   enchantmentSelector.resetSelection();
   renderEnchantmentInfo();
   enableEnchantmentHighlights();
+}
+
+/*============================================================================= 
+ * refresh()
+ *
+ * This function should ensure that any data thats been changed will be 
+ * correctly updated on the UI.
+ *===========================================================================*/
+public function refresh() {
+  renderEnchantmentInfo();
 }
 
 /*============================================================================*
@@ -112,7 +122,7 @@ private function renderEnchantmentInfo() {
   enchantmentStat = gameInfo.playerProfile.getEnchantBoost(EnchantmentEnum(enchantmentIndex));
   
   // buffer stat information
-  if (gameInfo.playerProfile.enchantmentLevels[enchantmentIndex] == 0) {
+  if (gameInfo.playerProfile.getEnchantBoost(enchantmentIndex) == 0) {
     buffer = "";
   } else {
     buffer = descriptor.displayText[ENCHANTMENT_STATS];
@@ -138,7 +148,7 @@ private function enableEnchantmentHighlights() {
   local int i;
   
   for (i = 0; i < class'ROTT_Descriptor_Enchantment_List'.static.countEnchantmentEnum(); i++) {
-    level = gameInfo.playerProfile.enchantmentLevels[i];
+    level = gameInfo.playerProfile.getEnchantBoost(i);
     comp = findSprite("Enchantment_Highlight_" $ i+1);
     comp.setEnabled(level != 0);
     comp = findSprite("Enchantment_Highlight_" $ i+1 $ "_White");
@@ -175,7 +185,7 @@ private function int convertEnchantmentIndex(int index) {
       return ROSEWOOD_PENDANT;
     case 4:
     case 10:
-      return INIFINITY_JEWEL;
+      return INFINITY_JEWEL;
     case 15:
       return EMPERORS_TALISMAN;
     case 16:
@@ -520,7 +530,7 @@ defaultProperties
   end object
   componentList.add(Enchantment_Highlight_9_White)
   
-  // INIFINITY_JEWEL
+  // INFINITY_JEWEL
   begin object class=UI_Sprite Name=Enchantment_Highlight_10
     tag="Enchantment_Highlight_10"
     posX=950
@@ -694,6 +704,28 @@ defaultProperties
     navSkips(7)=(xCoord=4,yCoord=2,skipDirection=NAV_UP)
     
     images(0)=Craft_Selection_Box
+    
+    // Alpha Effects
+    activeEffects.add((effectType = EFFECT_ALPHA_CYCLE, lifeTime = -1, elapsedTime = 0, intervalTime = 0.4, min = 170, max = 255))
+    
+    // Hover coordinates
+    hoverCoords(0)=(xStart=135,yStart=64,xEnd=224,yEnd=152)
+    hoverCoords(1)=(xStart=351,yStart=172,xEnd=440,yEnd=260)
+    hoverCoords(2)=(xStart=568,yStart=64,xEnd=656,yEnd=152)
+    hoverCoords(3)=(xStart=784,yStart=64,xEnd=872,yEnd=152)
+    hoverCoords(4)=(xStart=1000,yStart=172,xEnd=1088,yEnd=260)
+    hoverCoords(5)=(xStart=1216,yStart=64,xEnd=1304,yEnd=152)
+    
+    hoverCoords(8)=(xStart=568,yStart=280,xEnd=656,yEnd=368)
+    hoverCoords(9)=(xStart=784,yStart=280,xEnd=872,yEnd=368)
+    
+    hoverCoords(12)=(xStart=135,yStart=496,xEnd=224,yEnd=584)
+    hoverCoords(13)=(xStart=351,yStart=388,xEnd=440,yEnd=475)
+    hoverCoords(14)=(xStart=568,yStart=496,xEnd=656,yEnd=584)
+    hoverCoords(15)=(xStart=784,yStart=496,xEnd=872,yEnd=584)
+    hoverCoords(16)=(xStart=1000,yStart=388,xEnd=1088,yEnd=475)
+    hoverCoords(17)=(xStart=1216,yStart=496,xEnd=1304,yEnd=584)
+    
   end object
   componentList.add(Enchantment_Selection_Box)
   

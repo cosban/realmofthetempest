@@ -14,8 +14,8 @@ class ROTT_Conflict_Emitter extends InterpActor
 var() private TopicList eventTopic;
 
 // Event actor appearance information
-var()  const  ParticleSystemComponent activeParticles;
-var()  const  ParticleSystemComponent inactiveParticles;
+var() const ParticleSystemComponent activeParticles;
+var() const ParticleSystemComponent inactiveParticles;
 
 // References
 var private ROTT_Game_Info gameInfo;

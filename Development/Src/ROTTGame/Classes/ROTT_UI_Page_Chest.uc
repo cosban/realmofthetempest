@@ -15,15 +15,15 @@ var private ROTT_UI_Scene_Over_World someScene;
 // Internal references
 var private UI_Selector chestSelector;
 var private UI_Sprite chestBackground;
+var private UI_Sprite selectGoToInventory;
 var private UI_Sprite selectTakeAll;
-var private UI_Sprite selectClose;
 var private UI_Label itemNameLabel;
 
 // Selection types
 enum ChestSelections {
   CHEST_SLOT,
-  CHEST_TAKE_ALL,
-  CHEST_CLOSE
+  CHEST_TO_INVENTORY,
+  CHEST_TAKE_ALL
 };
 
 // Inventory items
@@ -56,8 +56,8 @@ public function initializeComponent(optional string newTag = "") {
   // UI references
   chestBackground = findSprite("Chest_Background");
   chestSelector = UI_Selector(findComp("Chest_Selection_Box"));
+  selectGoToInventory = findSprite("Chest_Selection_Go_To_Inventory");
   selectTakeAll = findSprite("Chest_Selection_Take");
-  selectClose = findSprite("Chest_Selection_Close");
   itemNameLabel = findLabel("Item_Name_Label");
   
   // Setup inventory slots
@@ -128,8 +128,8 @@ public function refresh() {
   }
   
   // Initialize as hidden
+  selectGoToInventory.setEnabled(false);
   selectTakeAll.setEnabled(false);
-  selectClose.setEnabled(false);
   
   // Skip drawing if delay is present
   if (showItemsDelay > 0) return;
@@ -140,13 +140,13 @@ public function refresh() {
       chestSelector.setDrawIndex(0);
       break;
       
-    case CHEST_TAKE_ALL:
-      selectTakeAll.setEnabled(true);
+    case CHEST_TO_INVENTORY:
+      selectGoToInventory.setEnabled(true);
       chestSelector.setDrawIndex(1);
       break;
       
-    case CHEST_CLOSE:
-      selectClose.setEnabled(true);
+    case CHEST_TAKE_ALL:
+      selectTakeAll.setEnabled(true);
       chestSelector.setDrawIndex(1);
       break;
   }
@@ -201,7 +201,7 @@ public function showInterface() {
   itemNameLabel.setEnabled(true);
   
   // Change UI to select 'Take all' by default
-  chestSelector.forceSelection(0, 2);
+  chestSelector.forceSelection(11);
   chestSelector.setEnabled(true);
 
   // Draw inventory
@@ -257,40 +257,6 @@ public function elapseTimers(float deltaTime) {
   }
 }
 
-/**=============================================================================
- * Controls
- *
- * ControllerId     the controller that generated this input key event
- * Key              the name of the key which an event occured for
- * EventType        the type of event which occured
- * AmountDepressed  for analog keys, the depression percent.
- *
- * Returns: true to consume the key event, false to pass it on.
- *===========================================================================
-function bool onInputKey( 
-  int ControllerId, 
-  name Key, 
-  EInputEvent Event, 
-  float AmountDepressed = 1.f, 
-  bool bGamepad = false) 
-{
-  // Ignore input when hidden
-  if (showItemsDelay > 0) return true;
-  
-  switch (Key) {
-    // Button inputs
-    case 'XBoxTypeS_A':          
-      if (Event == IE_Released) {
-        navigationRoutineA(); 
-      }
-      return false;
-  }
-  
-  // Default input routine
-  return super.onInputKey(ControllerId, Key, Event, AmountDepressed, bGamepad);
-  
-}
-*/
 public function onNavigateLeft() {
   refresh();
 }
@@ -319,22 +285,33 @@ protected function navigationRoutineA() {
       /// Here we could have a takeItem() call
       break;
       
+    case CHEST_TO_INVENTORY:
+      // Take all from chest inventory to player inventory
+      gameInfo.playerProfile.playerInventory.takeInventory(chestInventory);
+      
+      // Sfx
+      sfxBox.playSfx(SFX_WORLD_GAIN_LOOT);
+      
+      // Close window
+      parentScene.popPage();
+      
+      // Move to inventory view
+      gameInfo.sceneManager.switchScene(SCENE_GAME_MENU);
+      gameInfo.sceneManager.sceneGameMenu.pushMenu(UTILITY_MENU);
+      gameInfo.sceneManager.sceneGameMenu.pushMenu(INVENTORY_MENU);
+      gameInfo.sceneManager.sceneGameMenu.pushMenu(MGMT_WINDOW_ITEM);
+      gameInfo.sceneManager.sceneGameMenu.inventoryPage.goToLastPageWithItems();
+      break;
+      
     case CHEST_TAKE_ALL:
       // Take all from chest inventory to player inventory
       gameInfo.playerProfile.playerInventory.takeInventory(chestInventory);
       
+      // Sfx
       sfxBox.playSfx(SFX_WORLD_GAIN_LOOT);
       
-      // Move selector to close
-      chestSelector.forceSelection(3, 2);
-      refresh();
-      break;
-      
-    case CHEST_CLOSE:
       // Close window
       parentScene.popPage();
-      
-      ///sfxBox.playSfx(SFX_MENU_BACK);
       break;
   }
 }
@@ -364,10 +341,10 @@ public function ChestSelections getSelectionType() {
   switch (chestSelector.getSelection()) {
     case 8:
     case 9:
-      return CHEST_TAKE_ALL;
+      return CHEST_TO_INVENTORY;
     case 10:
     case 11:
-      return CHEST_CLOSE;
+      return CHEST_TAKE_ALL;
     default:
       return CHEST_SLOT;
   }
@@ -404,6 +381,9 @@ event deleteComp() {
 defaultProperties
 {
   bPauseGameWhenUp=true
+  
+  // Force mouse as visible, if keyboard is active
+  bPageForcesCursorOn=true
   
   /** ===== Input ===== **/
   begin object class=ROTT_Input_Handler Name=Input_A
@@ -453,6 +433,20 @@ defaultProperties
     navigationType=SELECTION_2D
     selectionOffset=(x=157,y=157)  // Distance from neighboring spaces
     gridSize=(x=4,y=3)             // Total size of 2d selection space
+    hoverCoords(0)=(xStart=417,yStart=265,xEnd=561,yEnd=408)
+    hoverCoords(1)=(xStart=574,yStart=265,xEnd=718,yEnd=408)
+    hoverCoords(2)=(xStart=731,yStart=265,xEnd=875,yEnd=408)
+    hoverCoords(3)=(xStart=888,yStart=265,xEnd=1032,yEnd=408)
+    
+    hoverCoords(4)=(xStart=417,yStart=422,xEnd=561,yEnd=565)
+    hoverCoords(5)=(xStart=574,yStart=422,xEnd=718,yEnd=565)
+    hoverCoords(6)=(xStart=731,yStart=422,xEnd=875,yEnd=565)
+    hoverCoords(7)=(xStart=888,yStart=422,xEnd=1032,yEnd=565)
+    
+    hoverCoords(8)=(xStart=417,yStart=579,xEnd=718,yEnd=722)
+    ///hoverCoords(9)=(xStart=417,yStart=579,xEnd=718,yEnd=722)
+    hoverCoords(10)=(xStart=731,yStart=579,xEnd=1032,yEnd=722)
+    ///hoverCoords(9)=(xStart=731,yStart=579,xEnd=1032,yEnd=722)
     
     // Navigation skips
     navSkips(0)=(xCoord=0,yCoord=2,skipDirection=NAV_RIGHT)
@@ -483,8 +477,8 @@ defaultProperties
   end object
   
   // Take all selector 
-  begin object class=UI_Sprite Name=Chest_Selection_Take
-    tag="Chest_Selection_Take"
+  begin object class=UI_Sprite Name=Chest_Selection_Go_To_Inventory
+    tag="Chest_Selection_Go_To_Inventory"
     posX=420
     posY=582
     images(0)=Chest_Selector_Large
@@ -492,11 +486,11 @@ defaultProperties
     // Alpha Effects
     activeEffects.add((effectType = EFFECT_ALPHA_CYCLE, lifeTime = -1, elapsedTime = 0, intervalTime = 0.4, min = 170, max = 255))
   end object
-  componentList.add(Chest_Selection_Take)
+  componentList.add(Chest_Selection_Go_To_Inventory)
   
   // Take all selector 
-  begin object class=UI_Sprite Name=Chest_Selection_Close
-    tag="Chest_Selection_Close"
+  begin object class=UI_Sprite Name=Chest_Selection_Take
+    tag="Chest_Selection_Take"
     posX=734
     posY=582
     images(0)=Chest_Selector_Large
@@ -504,7 +498,7 @@ defaultProperties
     // Alpha Effects
     activeEffects.add((effectType = EFFECT_ALPHA_CYCLE, lifeTime = -1, elapsedTime = 0, intervalTime = 0.4, min = 170, max = 255))
   end object
-  componentList.add(Chest_Selection_Close)
+  componentList.add(Chest_Selection_Take)
   
   
 }

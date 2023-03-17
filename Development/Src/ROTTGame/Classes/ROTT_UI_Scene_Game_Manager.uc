@@ -14,7 +14,13 @@ class ROTT_UI_Scene_Game_Manager extends ROTT_UI_Scene;
 var privatewrite ROTT_UI_Page_Game_Manager gameManagerPage;
 var privatewrite ROTT_UI_Page_Warning_Window gameMgmtWarningWindow;
 var privatewrite ROTT_UI_Page_Game_Options gameOptionsPage;
+var privatewrite ROTT_UI_Page_Game_Options_Extended gameOptionsExtendedPage;
 var privatewrite ROTT_UI_Page_Journal journalPage;
+var privatewrite ROTT_UI_Page_Control_Sheet controlSheet;
+var privatewrite ROTT_UI_Page_Game_Intro contentsPage;
+
+// If true, the options page has been accessed from the title menu
+var public bool bTitleMenuDirection;
 
 /*=============================================================================
  * initScene()
@@ -28,7 +34,10 @@ event initScene() {
   gameManagerPage = ROTT_UI_Page_Game_Manager(findComp("Page_Game_Manager"));
   gameMgmtWarningWindow = ROTT_UI_Page_Warning_Window(findComp("Game_Mgmt_Warning_Window"));
   gameOptionsPage = ROTT_UI_Page_Game_Options(findComp("Page_Game_Options"));
+  gameOptionsExtendedPage = ROTT_UI_Page_Game_Options_Extended(findComp("Page_Game_Options_Extended"));
   journalPage = ROTT_UI_Page_Journal(findComp("Page_Journal"));
+  controlSheet = ROTT_UI_Page_Control_Sheet(findComp("Page_Control_Sheet"));
+  contentsPage = ROTT_UI_Page_Game_Intro(findComp("Page_Table_Of_Contents"));
   
   // Initial stack
   pushPage(gameManagerPage);
@@ -111,12 +120,35 @@ defaultProperties
   end object
   pageComponents.add(Page_Game_Options)
   
+  // Game Options Page 2
+  begin object class=ROTT_UI_Page_Game_Options_Extended Name=Page_Game_Options_Extended
+    tag="Page_Game_Options_Extended"
+    bEnabled=false
+  end object
+  pageComponents.add(Page_Game_Options_Extended)
+  
   // Quest journal
   begin object class=ROTT_UI_Page_Journal Name=Page_Journal
     tag="Page_Journal"
     bEnabled=false
   end object
   pageComponents.add(Page_Journal)
+  
+  // Control Sheet
+  begin object class=ROTT_UI_Page_Control_Sheet Name=Page_Control_Sheet
+    tag="Page_Control_Sheet"
+    bRedirectToMenu=true
+    bEnabled=false
+  end object
+  pageComponents.add(Page_Control_Sheet)
+  
+  // Contents Page
+  begin object class=ROTT_UI_Page_Game_Intro Name=Page_Table_Of_Contents
+    tag="Page_Table_Of_Contents"
+    bRedirectToMenu=true
+    bEnabled=false
+  end object
+  pageComponents.add(Page_Table_Of_Contents)
   
 }
 

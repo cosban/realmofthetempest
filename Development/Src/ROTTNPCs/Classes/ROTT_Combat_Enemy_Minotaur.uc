@@ -76,6 +76,7 @@ defaultProperties
   monsterName="Minotaur"
   
   // Positive drop rate modifiers
+  itemDropRates.add((dropType=class'ROTT_Inventory_Item_Flail',chanceOverride=,minOverride=,maxOverride=,chanceAmp=8,quantityAmp=))
   itemDropRates.add((dropType=class'ROTT_Inventory_Item_Herb',chanceOverride=,minOverride=,maxOverride=,chanceAmp=3,quantityAmp=))
   itemDropRates.add((dropType=class'ROTT_Inventory_Item_Charm_Eluvi',chanceOverride=,minOverride=,maxOverride=,chanceAmp=3,quantityAmp=))
   

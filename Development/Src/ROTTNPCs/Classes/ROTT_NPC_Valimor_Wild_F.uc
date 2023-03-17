@@ -26,7 +26,13 @@ public function initDialogue() {
   
   // Intro
   `NEW_NODE(GREETING, NUETRAL)
-    "Fuel me with neglect, and I will devour your soul.",
+    "In a dusty library, a solemn",
+    "child reads a dusty tome."
+  `ENDNODE
+  setColor(DEFAULT_MEDIUM_GOLD);
+  
+  `NEW_NODE(GREETING, NUETRAL)
+    "I'm writing in a diary about my life.",
     ""
   `ENDNODE
   
@@ -68,7 +74,7 @@ defaultProperties
   
   // NPC Texture
   begin object class=UI_Texture_Info Name=NPC_Sprite_Texture
-    componentTextures.add(Texture2D'Monsters.Enemy_Portrait_Corrupter_Purple_360')
+    componentTextures.add(Texture2D'NPCs.Princes.NPC_Portrait_Prince_Black_360')
   end object
   
   // Sprite container for transfer

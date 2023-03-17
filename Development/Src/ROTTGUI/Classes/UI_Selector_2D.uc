@@ -9,7 +9,7 @@
   
 class UI_Selector_2D extends UI_Sprite;
  
-struct intPair {
+struct IntPair {
   var int x, y;
 };
 
@@ -18,22 +18,22 @@ var private int homeY;              // Position for home index
 var private int selectorWidth;      // Sprite width
 var private int selectorHeight;     // Sprite height
 
-var public intPair selectOffset;    // Distance from neighboring spaces
-var public intPair selectionCoords; // The space which this selector occupies
-var public intPair homeCoords;      // The default space for selector to start
-var public intPair gridSize;        // Total size of 2d selection space
+var public IntPair selectOffset;    // Distance from neighboring spaces
+var public IntPair selectionCoords; // The space which this selector occupies
+var public IntPair homeCoords;      // The default space for selector to start
+var public IntPair gridSize;        // Total size of 2d selection space
 
 var private bool wrapSelection;
 
 // Render offsets
-struct offsetNode {
+struct OffsetNode {
   var int xCoord;
   var int yCoord;
   
   var int xOffset;
   var int yOffset;
 };
-var editinline instanced array<offsetNode> renderOffsets;
+var editinline instanced array<OffsetNode> renderOffsets;
 
 // Navigation skips
 enum NavDirections {
@@ -43,13 +43,24 @@ enum NavDirections {
   NAV_DOWN
 };
 
-struct navNode {
+struct NavNode {
   var int xCoord;
   var int yCoord;
   
   var NavDirections skipDirection;
 };
-var editinline instanced array<navNode> navSkips;
+var editinline instanced array<NavNode> navSkips;
+
+// Store coordinates for mouse hover selection
+struct HoverSelectionCoords {
+  var int xStart;
+  var int xEnd;
+  var int yStart;
+  var int yEnd;
+};
+
+// Hover coordinates
+var editinline instanced array<HoverSelectionCoords> hoverCoords;
 
 /*=============================================================================
  * initializeComponent
@@ -71,7 +82,7 @@ public function initializeComponent(optional string newTag = "") {
  *
  * Description: Accessor for selection coordinates (x,y)
  *===========================================================================*/
-public function intPair getCoordinates() {
+public function IntPair getCoordinates() {
   return selectionCoords;
 }
 
@@ -115,6 +126,19 @@ public function forceSelect(int xIndex, int yIndex) {
   selectionCoords.y = yIndex;
   
   renderUpdate();
+}
+
+/*=============================================================================
+ * forceSelect1D()
+ *
+ * Moves selector to an index
+ *===========================================================================*/
+public function forceSelect1D(int index) {
+  selectionCoords.x = index % gridSize.x;
+  selectionCoords.y = index / gridSize.x;
+  
+  renderUpdate();
+  if (UI_Page(outer) != none) UI_Page(outer).refresh();
 }
 
 /*=============================================================================
@@ -179,6 +203,43 @@ public function moveDown() {
   }
   
   renderUpdate();
+}
+
+/*=============================================================================
+ * elapseTimer()
+ *
+ * Increments time every engine tick.
+ *===========================================================================*/
+public function elapseTimer(float deltaTime, float gameSpeedOverride) {
+  local UI_Player_Input playerInput;
+  local int i;
+  
+  super.elapseTimer(deltaTime, gameSpeedOverride);
+  
+  // Check if component is active
+  if (!bEnabled) return;
+  if (activeEffects.length != 1) return;
+  
+  // Get player input data
+  playerInput = UI_Player_Input(getPlayerInput());
+  if (hud.bHideCursor) return;
+  
+  // Scan through coordinate sets
+  for (i = 0; i < hoverCoords.length; i++) {
+    // Check X bounds
+    if (playerInput.getMousePositionX() < hoverCoords[i].xEnd) {
+      if (playerInput.getMousePositionX() > hoverCoords[i].xStart) {
+        // Check Y bounds
+        if (playerInput.getMousePositionY() < hoverCoords[i].yEnd) {
+          if (playerInput.getMousePositionY() > hoverCoords[i].yStart) {
+            // Update selection
+            forceSelect1D(i);
+            return;
+          }
+        }
+      }
+    }
+  }
 }
 
 /*=============================================================================

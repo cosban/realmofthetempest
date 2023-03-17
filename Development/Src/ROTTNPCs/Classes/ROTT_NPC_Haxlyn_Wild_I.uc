@@ -26,7 +26,7 @@ public function initDialogue() {
   
   // Intro
   `NEW_NODE(GREETING, NUETRAL)
-    "Do I hear the tempest, or do I hear an ocean?",
+    "Am I dreaming of a tempest?",
     ""
   `ENDNODE
   
@@ -68,6 +68,7 @@ defaultProperties
 {
   // NPC identity
   npcName=GENERIC
+  serviceType=SERVICE_BARTERING
   
   // Background
   begin object class=UI_Texture_Info Name=NPC_Background_Texture

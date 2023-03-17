@@ -142,6 +142,9 @@ exec function setGlide() {
   
   // Call event on pawn
   tempestPawn.onGlide();
+  
+  // Sfx
+  gameInfo.sfxBox.playSfx(SFX_WORLD_GLIDEWALK);
 }
 
 /*=============================================================================
@@ -193,8 +196,16 @@ public function releaseStomp() {
  * Swaps in and out of singing state, which changes monster spawn settings
  *===========================================================================*/
 exec function playerSing() {
+  // Change game state
   gameInfo.playerProfile.bSinging = !gameInfo.playerProfile.bSinging;
+  
+  // Update display info
   gameInfo.getOverWorldPage().updateSingingStatus(gameInfo.playerProfile.bSinging);
+  
+  // Sfx
+  if (gameInfo.playerProfile.bSinging) {
+    gameInfo.sfxBox.playSfx(SFX_WORLD_SINGING);
+  }
 }
 
 /*=============================================================================
@@ -203,8 +214,16 @@ exec function playerSing() {
  * Swaps in and out of praying state, which changes monster spawn settings
  *===========================================================================*/
 exec function playerPray() {
+  // Change game state
   gameInfo.playerProfile.bPraying = !gameInfo.playerProfile.bPraying;
+  
+  // Update display info
   gameInfo.getOverWorldPage().updatePrayerStatus(gameInfo.playerProfile.bPraying);
+  
+  // Sfx
+  if (gameInfo.playerProfile.bPraying) {
+    gameInfo.sfxBox.playSfx(SFX_WORLD_PRAYER);
+  }
 }
 
 /*=============================================================================
@@ -256,33 +275,44 @@ public function enablePlayerControls(bool bEnabled) {
  * Player controller function for rotating the pawn camera 
  *===========================================================================*/
 public function updateRotation(float deltaTime) {
-  local Rotator  deltaRot, newRotation, viewRotation;
+  local Rotator deltaRot, newRotation, viewRotation;
+  local float turnSpeed;
   
   // Rotation control lock
   if (bRotationLock == LOCKED) return;
+  if (tempestPawn == none) return;
   
-  super.updateRotation(deltaTime);
-  
+  // Copy current pawn rotation
   viewRotation = rotation;
-  if (tempestPawn != none)  {
-    tempestPawn.setDesiredRotation(viewRotation);
+  
+  // Set desired rotation on pawn
+  tempestPawn.setDesiredRotation(viewRotation);
+  
+  // Get turn speed from options
+  turnSpeed = 0.25 + gameInfo.optionsCookie.turnSpeed;
+  
+  // Calculate change based on turn speed
+  deltaRot.Pitch = PlayerInput.aLookUp * 1.75 * turnSpeed;
+  deltaRot.Yaw = PlayerInput.aTurn * 1.5 * turnSpeed;
+  
+  // Check options for inverted Y axis
+  if (gameInfo.optionsCookie.bInvertY) {
+    deltaRot.Pitch *= -1;
   }
   
-  // Calculate Delta to be applied on viewRotation
-  deltaRot.Pitch = PlayerInput.aLookUp;
-  deltaRot.Yaw = PlayerInput.aTurn / 2;
-  
-  processviewRotation(deltaTime, viewRotation, deltaRot);
+  // Rotate view of pawn
+  processViewRotation(deltaTime, viewRotation, deltaRot);
   setRotation(viewRotation);
-
+  
+  // Special effects
   viewShake(deltaTime);
 
+  // Store rotation info
   newRotation = viewRotation;
   newRotation.roll = rotation.roll;
   
-  if (tempestPawn != none) {
-    tempestPawn.faceRotation(NewRotation, deltatime);
-  }
+  tempestPawn.faceRotation(newRotation, deltatime);
+
 }
 
 /*=============================================================================

@@ -26,13 +26,29 @@ public function initDialogue() {
   
   // Intro
   `NEW_NODE(GREETING, NUETRAL)
-    "Even as my biological parts die, I still feel alive.",
+    "Bubbles quietly rustle to the surface of",
+    "a boiling stew outside the ragged house."
+  `ENDNODE
+  setColor(DEFAULT_MEDIUM_GOLD);
+  
+  `NEW_NODE(GREETING, NUETRAL)
+    "With limbs like a ghost, I'm fearful of most.",
     ""
   `ENDNODE
   
   `NEW_NODE(GREETING, NUETRAL)
-    "I am a puppet whose strings come from below.",
-    ""
+    "Twist not the door knob, dare not leave",
+    "the outpost."
+  `ENDNODE
+  
+  `NEW_NODE(GREETING, NUETRAL)
+    "Chimes in the distance, the caw of",
+    "the crows."
+  `ENDNODE
+  
+  `NEW_NODE(GREETING, NUETRAL)
+    "I am a puppet whose strings",
+    "come from the nether below."
   `ENDNODE
   
   // ----------------------------------------------------------------------- //

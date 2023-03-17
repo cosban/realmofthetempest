@@ -80,6 +80,7 @@ defaultProperties
   itemDropRates.add((dropType=class'ROTT_Inventory_Item_Bottle_Faerie_Bones',chanceOverride=,minOverride=,maxOverride=,chanceAmp=2,quantityAmp=))
   itemDropRates.add((dropType=class'ROTT_Inventory_Item_Charm_Bayuta',chanceOverride=,minOverride=,maxOverride=,chanceAmp=2,quantityAmp=))
   itemDropRates.add((dropType=class'ROTT_Inventory_Item_Bottle_Swamp_Husks',chanceOverride=,minOverride=,maxOverride=,chanceAmp=2,quantityAmp=))
+  itemDropRates.add((dropType=class'ROTT_Inventory_Item_Ceremonial_Dagger',chanceOverride=,minOverride=,maxOverride=,chanceAmp=5,quantityAmp=))
   
   // Negative drop rate modifiers
   itemDropRates.add((dropType=class'ROTT_Inventory_Item_Charm_Eluvi',chanceOverride=,minOverride=,maxOverride=,chanceAmp=0,quantityAmp=))

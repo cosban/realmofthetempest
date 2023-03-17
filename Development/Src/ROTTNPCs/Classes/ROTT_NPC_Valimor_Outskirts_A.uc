@@ -26,18 +26,8 @@ public function initDialogue() {
   
   // Intro
   `NEW_NODE(GREETING, NUETRAL)
-    "Light blinds us so we hate the colors of your clans.",
+    "Sunshine never reaches our rotting roots.",
     ""
-  `ENDNODE
-  
-  `NEW_NODE(GREETING, NUETRAL)
-    "Touch hurts us so we hate the feeling of your skin.",
-    ""
-  `ENDNODE
-  
-  `NEW_NODE(GREETING, NUETRAL)
-    "Get away from me.  Who are you",
-    "and why are you in my house?"
   `ENDNODE
   
   // ----------------------------------------------------------------------- //

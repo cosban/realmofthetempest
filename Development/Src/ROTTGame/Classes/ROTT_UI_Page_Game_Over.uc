@@ -16,7 +16,7 @@ enum UISceneStates {
 };
 
 var private UISceneStates inputState;
-var private ROTTTimer inputTimer;
+var private ROTT_Timer inputTimer;
 
 /*=============================================================================
  * initialize Component
@@ -37,7 +37,7 @@ event onPushPageEvent() {
   // Ignore Controls
   inputState = STOP_ALL_INPUT;
   
-  inputTimer = gameInfo.spawn(class'ROTTTimer');
+  inputTimer = gameInfo.spawn(class'ROTT_Timer');
   inputTimer.makeTimer(4.0, LOOP_OFF, allowInput);
   
   // UI Effects
@@ -47,8 +47,6 @@ event onPushPageEvent() {
 /*=============================================================================
  * D-Pad controls
  *===========================================================================*/
-protected function navigateDown();
-protected function navigateUp();
 public function onNavigateLeft();
 public function onNavigateRight();
 

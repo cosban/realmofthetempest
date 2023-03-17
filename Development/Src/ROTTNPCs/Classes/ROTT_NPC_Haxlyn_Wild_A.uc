@@ -26,13 +26,19 @@ public function initDialogue() {
   
   // Intro
   `NEW_NODE(GREETING, NUETRAL)
+    "A scared woman is fighting the possession of",
+    "an evil ghost's unholy hand."
+  `ENDNODE
+  setColor(DEFAULT_MEDIUM_GOLD);
+  
+  `NEW_NODE(GREETING, NUETRAL)
     "We are the timid prey of the temporal river.",
     ""
   `ENDNODE
   
   `NEW_NODE(GREETING, NUETRAL)
-    "It is watching and its reading.",
-    ""
+    "It is watching and its reading while its",
+    "hands stay seeking."
   `ENDNODE
   
   `NEW_NODE(GREETING, NUETRAL)
@@ -41,13 +47,18 @@ public function initDialogue() {
   `ENDNODE
   
   `NEW_NODE(GREETING, NUETRAL)
-    "And the structure echoes as it flows beneath me.",
-    ""
+    "And this structure echoes as it flows",
+    "its waves beneath me."
   `ENDNODE
   
   `NEW_NODE(GREETING, NUETRAL)
-    "The stream ripples and reflects the prey,",
-    "and our timid prey is swimming."
+    "The stream ripples and reflects the prey",
+    "with water dark and shimmering."
+  `ENDNODE
+  
+  `NEW_NODE(GREETING, NUETRAL)
+    "Forever swimming, deaf but listening.",
+    ""
   `ENDNODE
   
   // ----------------------------------------------------------------------- //
@@ -76,7 +87,7 @@ defaultProperties
   
   // Background
   begin object class=UI_Texture_Info Name=NPC_Background_Texture
-    componentTextures.add(Texture2D'GUI_NPC_Dialog.NPC_Background_Dark_Gray'
+    componentTextures.add(Texture2D'GUI_NPC_Dialog.NPC_Background_Blue'
   end object
   
   // Sprite container for transfer
@@ -88,7 +99,7 @@ defaultProperties
   
   // NPC Texture
   begin object class=UI_Texture_Info Name=NPC_Sprite_Texture
-    componentTextures.add(Texture2D'Monsters.Enemy_Portrait_Ash_Reaper_Blue_Black_360')
+    componentTextures.add(Texture2D'Monsters.Enemy_Portrait_Ash_Reaper_Blue_Pale_360')
   end object
   
   // Sprite container for transfer

@@ -31,6 +31,7 @@ public function addMechanic
   
   switch (index) {
     case ADD_ATTACK_TIME_PERCENT:
+      // Set value to inverse... to the power of -1
       list[index].min = min ** -1;
       list[index].max = max ** -1;
       break;

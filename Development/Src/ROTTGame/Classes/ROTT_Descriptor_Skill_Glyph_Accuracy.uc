@@ -69,6 +69,13 @@ protected function float attributeInfo
   return attribute;
 }
 
+/*=============================================================================
+ * addManaOverflow()
+ *
+ * Called to track mana that overflows beyond a combat unit's max mana value
+ *===========================================================================*/
+public function addManaOverflow(float manaOverflow);
+
 /*============================================================================= 
  * Default Properties
  *===========================================================================*/

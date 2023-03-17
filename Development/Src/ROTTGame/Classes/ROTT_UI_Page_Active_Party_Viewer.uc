@@ -32,7 +32,7 @@ public function initializeComponent(optional string newTag = "") {
  * This event is called every time the page is pushed.
  *===========================================================================*/
 event onPushPageEvent() {
-  teamInfo.attachDisplayer(parentScene.selectedParty);
+  teamInfo.attachDisplayer(ROTT_UI_Scene_Party_Manager(outer).getSelectedParty());
 }
 
 /*=============================================================================
@@ -49,8 +49,6 @@ protected function navigationRoutineB() {
 /*=============================================================================
  * D-Pad controls
  *===========================================================================*/
-protected function navigateDown();
-protected function navigateUp();
 public function onNavigateLeft();
 public function onNavigateRight();
 

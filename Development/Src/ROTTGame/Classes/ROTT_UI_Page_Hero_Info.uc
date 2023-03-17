@@ -27,7 +27,7 @@ enum MenuControlStates {
 var protected MenuControlStates controlState;
 
 // Parent scene information
-var protected ROTT_UI_Scene_Game_Menu someScene;
+var protected ROTT_UI_Scene_Game_Menu gameMenuScene;
 
 /*=============================================================================
  * Initialize Component
@@ -39,7 +39,7 @@ public function initializeComponent(optional string newTag = "") {
   super.initializeComponent(newTag);
   
   // Parent scene
-  someScene = ROTT_UI_Scene_Game_Menu(Outer);
+  gameMenuScene = ROTT_UI_Scene_Game_Menu(outer);
   
 }
 
@@ -51,6 +51,7 @@ public function initializeComponent(optional string newTag = "") {
 event onFocusMenu() {
   UI_Selector(findComp("Input_Listener")).setActive(true);
   UI_Selector(findComp("Input_Listener")).initJoyStick();
+  
 }
 
 /*=============================================================================
@@ -61,7 +62,16 @@ event onFocusMenu() {
 event onPopPageEvent() {
   /// The page arrows will need to be placed separaetly into the 4 hero info pages
   /// when we turn them into buttons.  So we should hide the tag they share in common here.
-  if (someScene != none) someScene.enablePageArrows(false);
+  if (gameMenuScene != none) gameMenuScene.enablePageArrows(false);
+}
+
+/*============================================================================= 
+ * refresh()
+ *
+ * This function should ensure that any data thats been changed will be 
+ * correctly updated on the UI.
+ *===========================================================================*/
+public function refresh() {
 }
 
 /*=============================================================================
@@ -125,6 +135,7 @@ defaultProperties
     bActive=true
   end object
   componentList.add(Input_Listener)
+  
 }
 
 

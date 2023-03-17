@@ -36,9 +36,11 @@ var private ActionMenuOptions actionSelection;
 var private UI_Sprite buttons[4];
 var private UI_Sprite icons[4];
 
+var private UI_Selector actionSelector;
+
 // Delay before selection display (and control)
-var private ROTTTimer menuDelay;    
-var public ROTTTimer turboDelay;    
+var private ROTT_Timer menuDelay;    
+var public ROTT_Timer turboDelay;    
 
 // Parent scene
 var private ROTT_UI_Scene_Combat_Encounter someScene;
@@ -67,6 +69,7 @@ public function initializeComponent(optional string newTag = "") {
   icons[ACTION_SKILL_PRIMARY] = findSprite("Action_Skill_Icon_Primary");
   icons[ACTION_SKILL_SECONDARY] = findSprite("Action_Skill_Icon_Secondary");
   
+  actionSelector = UI_Selector(findComp("Action_Selector"));
 }
 
 /*============================================================================= 
@@ -98,8 +101,8 @@ event onPushPageEvent() {
   }
   
   // Delay selection graphic
-  menuDelay = gameInfo.spawn(class'ROTTTimer');
-  menuDelay.makeTimer(0.4, LOOP_OFF, allowInput);
+  menuDelay = gameInfo.spawn(class'ROTT_Timer');
+  menuDelay.makeTimer(0.35, LOOP_OFF, allowInput); /// was 0.4
 }
 
 /*============================================================================= 
@@ -197,20 +200,23 @@ public function readyHeroHasDied() {
  * Controls
  *
  * ControllerId     the controller that generated this input key event
- * Key              the name of the key which an event occured for
+ * inputName        the name of the key which an event occured for
  * EventType        the type of event which occured
  * AmountDepressed  for analog keys, the depression percent.
  *
  * Returns: true to consume the key event, false to pass it on.
  *===========================================================================*/
-function bool onInputKey( 
+function bool onInputKey
+( 
   int ControllerId, 
-  name Key, 
+  name inputName, 
   EInputEvent Event, 
   float AmountDepressed = 1.f, 
-  bool bGamepad = false) 
+  bool bGamepad = false
+)
 {
-  switch (Key) {
+  switch (inputName) {
+    case 'LeftMouseButton': 
     case 'XboxTypeS_A': 
       // Button graphics
       if (menuControl == ACCEPT_INPUT) {
@@ -220,7 +226,7 @@ function bool onInputKey(
       break;
   }
   
-  return super.onInputKey(ControllerId, Key, Event, AmountDepressed, bGamepad);
+  return super.onInputKey(ControllerId, inputName, Event, AmountDepressed, bGamepad);
 }
 
 /*=============================================================================
@@ -363,7 +369,7 @@ protected function navigationRoutineA() {
  * Hides all selectors from the action panel menu
  *===========================================================================*/
 private function hideSelectors() {
-  UI_Selector(findComp("Action_Selector")).clearSelection();
+  actionSelector.clearSelection();
 }
 
 /*============================================================================= 
@@ -397,7 +403,7 @@ private function allowInput() {
   
   
   // Start turbo auto selection timer
-  turboDelay = gameInfo.spawn(class'ROTTTimer');
+  turboDelay = gameInfo.spawn(class'ROTT_Timer');
   turboDelay.makeTimer(0.4, LOOP_OFF, autoSelect);
 }
 
@@ -407,11 +413,21 @@ private function allowInput() {
  * Displays the action selector.
  *===========================================================================*/
 public function showSelector() {
-  UI_Selector(findComp("Action_Selector")).setEnabled(true);
-  UI_Selector(findComp("Action_Selector")).setActive(true);
-  UI_Selector(findComp("Action_Selector")).forceSelection(actionSelection);
+  local bool bToolTip;
+  
+  actionSelector.setEnabled(true);
+  actionSelector.setActive(true);
+  actionSelector.forceSelection(actionSelection);
   
   updateSelector();
+  
+  // Show tool tip
+  bToolTip = !gameInfo.playerProfile.bHasUsedSkill;
+  findLabel("Skill_Tip_Label_Shadow").setEnabled(bToolTip);
+  findLabel("Skill_Tip_Label").setEnabled(bToolTip);
+  findLabel("Skill_Tip_Label_Shadow_2").setEnabled(bToolTip);
+  findLabel("Skill_Tip_Label_2").setEnabled(bToolTip);
+  findSprite("Tool_Tip_Sprite").setEnabled(bToolTip);
 }
 
 /*============================================================================= 
@@ -423,11 +439,11 @@ public function updateSelector() {
   switch (actionSelection) {
     case ACTION_ATTACK: 
     case ACTION_DEFEND: 
-      UI_Selector(findComp("Action_Selector")).setDrawIndex(0);
+      actionSelector.setDrawIndex(0);
       break;
     case ACTION_SKILL_PRIMARY:
     case ACTION_SKILL_SECONDARY: 
-      UI_Selector(findComp("Action_Selector")).setDrawIndex(1);
+      actionSelector.setDrawIndex(1);
       break;
   }
 }
@@ -490,6 +506,8 @@ event deleteComp() {
  *===========================================================================*/
 defaultProperties
 {
+  bPageForcesCursorOff=true
+  
   /** ===== Input ===== **/
   begin object class=ROTT_Input_Handler Name=Input_A
     inputName="XBoxTypeS_A"
@@ -601,63 +619,91 @@ defaultProperties
   end object
   componentList.add(Action_Skill_Icon_Secondary)
   
-  
-  /**
-  // Large Selector
-  begin object class=UI_Selector Name=Selector_Large
-    tag="Selector_Large"
-    bDrawRelative=true
-    posX=46
-    posY=617
-    selectionOffset=(x=0,y=117)
-    numberOfMenuOptions=2
-    
-    // Selector texture
-    begin object class=UI_Texture_Info Name=Action_Selector_Large
-      componentTextures.add(Texture2D'GUI.Combat_Action_Selector_Large'
-    end object
-    
-    // Selector sprite
-    begin object class=UI_Sprite Name=Selector_Sprite
-      tag="Selector_Sprite"
-      images(0)=Action_Selector_Large
-      
-      // Mild glow
-      activeEffects.add((effectType=EFFECT_ALPHA_CYCLE, lifeTime=-1, elapsedTime=0, intervalTime=0.8, min=205, max=255))
-    end object
-    componentList.add(Selector_Sprite)
-    
+  // Notification for skill tip
+  begin object class=UI_Label Name=Skill_Tip_Label_Shadow
+    tag="Skill_Tip_Label_Shadow"
+    bEnabled=false
+    posX=216
+    posY=457
+    posXEnd=384
+    posYEnd=750
+    padding=(top=1, left=13, right=11, bottom=7)
+    fontStyle=DEFAULT_LARGE_ORANGE
+    labelText="Select a"
+    activeEffects.add((effectType=EFFECT_ALPHA_CYCLE, lifeTime=-1, elapsedTime=0, intervalTime=0.8, min=220, max=255))
+    alignX=CENTER
+    alignY=TOP
   end object
-  componentList.add(Selector_Large)
+  componentList.add(Skill_Tip_Label_Shadow)
   
-  // Small Selector
-  begin object class=UI_Selector Name=Selector_Small
-    tag="Selector_Small"
-    bDrawRelative=true
-    posX=236
-    posY=617
-    selectionOffset=(x=0,y=117)
-    numberOfMenuOptions=2
-    
-    // Selection texture
-    begin object class=UI_Texture_Info Name=Selection_Box_Texture
-      componentTextures.add(Texture2D'GUI.Combat_Action_Selector_Small'
-    end object
+  // Notification for skill tip
+  begin object class=UI_Label Name=Skill_Tip_Label
+    tag="Skill_Tip_Label"
+    bEnabled=false
+    posX=216
+    posY=457
+    posXEnd=384
+    posYEnd=750
+    fontStyle=DEFAULT_LARGE_CYAN
+    labelText="Select a"
+    activeEffects.add((effectType=EFFECT_ALPHA_CYCLE, lifeTime=-1, elapsedTime=0, intervalTime=0.8, min=200, max=255))
+    activeEffects.add((effectType=EFFECT_FLIPBOOK, lifeTime=-1, elapsedTime=0, intervalTime=0.10, min=0, max=255))
+    cycleStyles=(DEFAULT_LARGE_GOLD, DEFAULT_LARGE_ORANGE)
+    alignX=CENTER
+    alignY=TOP
+  end object
+  componentList.add(Skill_Tip_Label)
+  
+  // Notification for skill tip
+  begin object class=UI_Label Name=Skill_Tip_Label_Shadow_2
+    tag="Skill_Tip_Label_Shadow_2"
+    bEnabled=false
+    posX=216
+    posY=497
+    posXEnd=384
+    posYEnd=790
+    padding=(top=1, left=13, right=11, bottom=7)
+    fontStyle=DEFAULT_LARGE_ORANGE
+    labelText="Skill"
+    activeEffects.add((effectType=EFFECT_ALPHA_CYCLE, lifeTime=-1, elapsedTime=0, intervalTime=0.8, min=220, max=255))
+    alignX=CENTER
+    alignY=TOP
+  end object
+  componentList.add(Skill_Tip_Label_Shadow_2)
+  
+  // Notification for skill tip
+  begin object class=UI_Label Name=Skill_Tip_Label_2
+    tag="Skill_Tip_Label_2"
+    bEnabled=false
+    posX=216
+    posY=497
+    posXEnd=384
+    posYEnd=790
+    fontStyle=DEFAULT_LARGE_CYAN
+    labelText="Skill"
+    activeEffects.add((effectType=EFFECT_ALPHA_CYCLE, lifeTime=-1, elapsedTime=0, intervalTime=0.8, min=200, max=255))
+    activeEffects.add((effectType=EFFECT_FLIPBOOK, lifeTime=-1, elapsedTime=0, intervalTime=0.10, min=0, max=255))
+    cycleStyles=(DEFAULT_LARGE_GOLD, DEFAULT_LARGE_ORANGE)
+    alignX=CENTER
+    alignY=TOP
+  end object
+  componentList.add(Skill_Tip_Label_2)
 
-    // Selector sprite
-    begin object class=UI_Sprite Name=Selector_Sprite
-      tag="Selector_Sprite"
-      images(0)=Selection_Box_Texture
-      
-      // Mild glow
-      activeEffects.add((effectType=EFFECT_ALPHA_CYCLE, lifeTime=-1, elapsedTime=0, intervalTime=0.8, min=205, max=255))
-    end object
-    componentList.add(Selector_Sprite)
-    
+  // Tool tip arrow
+  begin object class=UI_Texture_Info Name=Tool_Tip_Arrow
+    componentTextures.add(Texture2D'GUI.Party_Selection_Nav_Marker')
   end object
-  componentList.add(Selector_Small)
   
-  **/
+  // Inactive sprite
+  begin object class=UI_Sprite Name=Tool_Tip_Sprite
+    tag="Tool_Tip_Sprite"
+    bEnabled=false
+    posX=275
+    posY=543
+    images(0)=Tool_Tip_Arrow
+    activeEffects.add((effectType=EFFECT_ALPHA_CYCLE, lifeTime=-1, elapsedTime=0, intervalTime=0.8, min=220, max=255))
+  end object
+  componentList.add(Tool_Tip_Sprite)
   
   // Large Selector
   begin object class=UI_Selector Name=Action_Selector

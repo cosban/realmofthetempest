@@ -10,7 +10,7 @@
  * The mgmt window uses this to render the info. 
  *===========================================================================*/
   
-class ROTT_Descriptor_List extends ROTTObject
+class ROTT_Descriptor_List extends ROTT_Object
 abstract;
 
 // A list of all skills in this set
@@ -188,6 +188,36 @@ public function onTakeDamage(ROTT_Combat_Unit target, ROTT_Combat_Hero caster) {
           targets,
           caster,
           TAKE_DAMAGE_SET
+        )
+      ) gameInfo.sfxBox.playSfx(heroScript.secondarySfx);
+    }
+  }
+}
+
+/*=============================================================================
+ * onTargeted()
+ *
+ * Called when the combat unit has been targeted by an action, even if miss
+ *===========================================================================*/
+public function onTargeted(ROTT_Combat_Unit target, ROTT_Combat_Hero caster) {
+  local ROTT_Descriptor_Hero_Skill heroScript;
+  local array<ROTT_Combat_Unit> targets;
+  local int i;
+  
+  targets.addItem(target);
+  
+  for (i = 0; i < scriptList.length; i++) {
+    heroScript = ROTT_Descriptor_Hero_Skill(scriptList[i]);
+    if (heroScript.getSkillLevel(caster) != 0) {
+      // Call damage event
+      ///heroScript.onDodge();
+      
+      // Activate 'take damage' attribute set
+      if (
+        heroScript.skillAction(
+          targets,
+          caster,
+          TARGETED_SET
         )
       ) gameInfo.sfxBox.playSfx(heroScript.secondarySfx);
     }

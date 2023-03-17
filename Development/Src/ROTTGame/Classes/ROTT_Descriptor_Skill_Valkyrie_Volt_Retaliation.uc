@@ -58,7 +58,7 @@ protected function float attributeInfo
   switch (type) {
     // Casting requirements
     case MANA_COST:
-      attribute = getManaEquation(level, 1.15, 0.8, 2.42, 8.0, 34.0);
+      attribute = getManaEquation(level, 1.15, 0.8, 2.0, 8.0, 34.0);
       break;
     case REQUIRES_GLYPH:
       attribute = 1;
@@ -81,6 +81,15 @@ protected function float attributeInfo
   }
   
   return attribute;
+}
+
+/*=============================================================================
+ * onTick()
+ *
+ * Called each tick
+ *===========================================================================*/
+public function onTick(ROTT_Combat_Hero hero, float deltaTime) {
+  super.onTick(hero, deltaTime);
 }
 
 /*=============================================================================
@@ -111,8 +120,8 @@ defaultProperties
   skillAttributes.add((attributeSet=ADD_STANCE_SET,mechanicType=AUTO_ATTACK_MODE,tag="%auto",font=DEFAULT_SMALL_WHITE,returnType=DECIMAL));
   
   // Take damage attributes
-  skillAttributes.add((attributeSet=TAKE_DAMAGE_SET,mechanicType=UNPAUSE_TUNA,tag="%unpause",font=DEFAULT_SMALL_WHITE,returnType=DECIMAL));
-  skillAttributes.add((attributeSet=TAKE_DAMAGE_SET,mechanicType=TARGET_CASTER,tag="%target",font=DEFAULT_SMALL_WHITE,returnType=DECIMAL));
+  skillAttributes.add((attributeSet=TARGETED_SET,mechanicType=UNPAUSE_TUNA,tag="%unpause",font=DEFAULT_SMALL_WHITE,returnType=DECIMAL));
+  skillAttributes.add((attributeSet=TARGETED_SET,mechanicType=TARGET_CASTER,tag="%target",font=DEFAULT_SMALL_WHITE,returnType=DECIMAL));
   
   // Skill Icon
   begin object class=UI_Texture_Info Name=Encounter_Skill_Icon_Retaliation

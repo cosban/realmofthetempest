@@ -54,6 +54,9 @@ event initGame(string options, out string errorMessage) {
     optionsCookie.bTickActionMemory = true;
     optionsCookie.bTickTargetMemory = true;
   
+    // Default extended options
+    optionsCookie.turnSpeed = 0.75;
+  
     // Default resolution
     setResolution(1440, 900);
   }

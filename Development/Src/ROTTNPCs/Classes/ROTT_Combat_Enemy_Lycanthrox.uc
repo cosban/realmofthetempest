@@ -76,7 +76,10 @@ defaultProperties
   expAmp=4
   
   // Positive drop rate modifiers
-  ///itemDropRates.add((dropType=class'ROTT_Inventory_Item_Charm_Kamita',chanceOverride=,minOverride=,maxOverride=,chanceAmp=2,quantityAmp=))
+  itemDropRates.add((dropType=class'ROTT_Inventory_Item_Herb_Xuvi',chanceOverride=,minOverride=,maxOverride=,chanceAmp=15,quantityAmp=))
+  itemDropRates.add((dropType=class'ROTT_Inventory_Item_Herb_Jengsu',chanceOverride=,minOverride=,maxOverride=,chanceAmp=2,quantityAmp=))
+  itemDropRates.add((dropType=class'ROTT_Inventory_Item_Paintbrush',chanceOverride=,minOverride=,maxOverride=,chanceAmp=5,quantityAmp=))
+  itemDropRates.add((dropType=class'ROTT_Inventory_Item_Flat_Brush',chanceOverride=,minOverride=,maxOverride=,chanceAmp=5,quantityAmp=))
   
   // Negative drop rate modifiers
   ///itemDropRates.add((dropType=class'ROTT_Inventory_Item_Charm_Eluvi',chanceOverride=,minOverride=,maxOverride=,chanceAmp=0,quantityAmp=))

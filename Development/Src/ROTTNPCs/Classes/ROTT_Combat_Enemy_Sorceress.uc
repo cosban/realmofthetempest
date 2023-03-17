@@ -39,7 +39,7 @@ public function initStats
       // Fixed stat points per level
       armorPerLvl = 0;
       baseStatsPerLvl[PRIMARY_VITALITY] = 4;
-      baseStatsPerLvl[PRIMARY_STRENGTH] = 4;
+      baseStatsPerLvl[PRIMARY_STRENGTH] = 3;
       baseStatsPerLvl[PRIMARY_COURAGE] = 3;
       baseStatsPerLvl[PRIMARY_FOCUS] = 3;
       
@@ -54,7 +54,7 @@ public function initStats
 
       // Affinities
       statAffinities[PRIMARY_VITALITY] = AVERAGE;
-      statAffinities[PRIMARY_STRENGTH] = AVERAGE;
+      statAffinities[PRIMARY_STRENGTH] = MINOR;
       statAffinities[PRIMARY_COURAGE] = AVERAGE;
       statAffinities[PRIMARY_FOCUS] = MINOR;
       
@@ -76,6 +76,7 @@ defaultProperties
   expAmp=1.5
   
   // Positive drop rate modifiers
+  itemDropRates.add((dropType=class'ROTT_Inventory_Item_Lustrous_Baton',chanceOverride=,minOverride=,maxOverride=,chanceAmp=5,quantityAmp=))
   itemDropRates.add((dropType=class'ROTT_Inventory_Item_Charm_Kamita',chanceOverride=,minOverride=,maxOverride=,chanceAmp=2,quantityAmp=))
   
   // Negative drop rate modifiers

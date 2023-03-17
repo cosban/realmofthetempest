@@ -200,6 +200,8 @@ defaultProperties
     posY=540
     selectionOffset=(x=0,y=70)
     numberOfMenuOptions=2
+    hoverCoords(0)=(xStart=507,yStart=545,xEnd=939,yEnd=614)
+    hoverCoords(1)=(xStart=507,yStart=615,xEnd=939,yEnd=684)
     
     // Selection texture
     begin object class=UI_Texture_Info Name=Selection_Box_Texture

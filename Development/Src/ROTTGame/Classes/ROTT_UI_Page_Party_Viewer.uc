@@ -15,7 +15,7 @@ enum MenuOptions {
   TAKE_CONTROL
 };
 
-var privatewrite ROTT_UI_Scene_Party_Manager someScene;
+var privatewrite ROTT_UI_Scene_Party_Manager teamManagerScene;
 
 // Internal references
 var privatewrite ROTT_UI_Displayer_Team_Info teamInfo;
@@ -30,7 +30,7 @@ var privatewrite UI_Selector selector;
 public function initializeComponent(optional string newTag = "") {
   super.initializeComponent(newTag);
   
-  someScene = ROTT_UI_Scene_Party_Manager(outer);
+  teamManagerScene = ROTT_UI_Scene_Party_Manager(outer);
   
   // Internal references
   selector = UI_Selector(findComp("Selection_Box"));
@@ -45,11 +45,22 @@ public function initializeComponent(optional string newTag = "") {
 event onPushPageEvent() {
   local ROTT_Party party;
   
-  party = someScene.getSelectedParty();
+  // Get party info
+  party = teamManagerScene.getSelectedParty();
   
+  // Team information
   teamInfo.attachDisplayer(party);
-  
+}
+
+/*=============================================================================
+ * onFocusMenu()
+ *
+ * Called when a menu is given focus.  Assign controls, and enable graphics.
+ *===========================================================================*/
+event onFocusMenu() {
+  // Selector settings
   selector.resetSelection();
+  selector.setActive(true);
 }
 
 /*=============================================================================
@@ -59,15 +70,19 @@ protected function navigationRoutineA() {
   switch (selector.getSelection()) {
     case SET_ACTIVITY:
       // Push activity scene
-      /** delegate me **/
+      teamManagerScene.shrineManagementPage.targetParty = teamManagerScene.getSelectedParty();
+      teamManagerScene.pushPage(teamManagerScene.shrineManagementPage);
       
       // Sfx
       gameInfo.sfxBox.playSfx(SFX_MENU_ACCEPT);
       break;
     case TAKE_CONTROL:
-      gameInfo.playerProfile.partySystem.setActiveParty(someScene.getSelectedParty().partyIndex);
-      parentScene.popPage();
-      parentScene.refresh();
+      // Set the party under active player control
+      gameInfo.playerProfile.partySystem.setActiveParty(teamManagerScene.getSelectedParty().partyIndex);
+      
+      // Navigate back
+      teamManagerScene.popPage();
+      teamManagerScene.refresh();
       
       // Sfx
       gameInfo.sfxBox.playSfx(SFX_MENU_ACCEPT);
@@ -76,7 +91,7 @@ protected function navigationRoutineA() {
 }
 
 protected function navigationRoutineB() {
-  parentScene.popPage(tag);
+  teamManagerScene.popPage(tag);
   
   // Sfx
   gameInfo.sfxBox.playSfx(SFX_MENU_BACK);
@@ -185,6 +200,8 @@ defaultProperties
     posY=552
     selectionOffset=(x=0,y=80)
     numberOfMenuOptions=2
+    hoverCoords(0)=(xStart=863,yStart=554,xEnd=1301,yEnd=620)
+    hoverCoords(1)=(xStart=863,yStart=624,xEnd=1301,yEnd=700)
     
     // Selection texture
     begin object class=UI_Texture_Info Name=Selection_Box_Texture

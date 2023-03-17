@@ -16,22 +16,8 @@ var protectedwrite string monsterName;
 // Monster type from enumeration, for assigning sprite index
 var protectedwrite EnemyTypes monsterType;
   
-// Clan Colors
-enum MyColors {
-  CLAN_BLACK,
-  CLAN_BLUE,
-  CLAN_CYAN,
-  CLAN_GOLD,
-  CLAN_GREEN,
-  CLAN_ORANGE, // May contain brown variations
-  CLAN_PURPLE,
-  CLAN_RED,
-  CLAN_VIOLET,
-  CLAN_WHITE,
-};
-
 // Clan color
-var protectedwrite MyColors clanColor;
+var protectedwrite ClanColors clanColor;
 
 // Graphics
 var public instanced UI_Texture_Storage enemySprites;
@@ -68,9 +54,6 @@ enum SuffixEnum {
   Fist, Heart, Skull, Claw, Bolt, Throat, Grip, Prince, Star, Bite, Spell, 
   Fever, Fiend, Crawler, Stalker, Scowl, Zealot, Mauler, Caster, Cleaver,
   Nemesis, Lurker, Reaver, Tyrant, Crusader
-  
-  // Why were some of these lower case?
-  //fist, heart, skull, claw, bolt, throat, Grip, Prince, Star, bite, spell, Fever, Fiend, Crawler, Stalker, Scowl
 };
 
 // Elite status, true for champions, minibosses, bosses
@@ -88,7 +71,7 @@ var private delegate<actionRoutine> combatActions;
 var public int mobIndex;
 
 // Animation timer
-var private ROTTTimer animationTimer;
+var private ROTT_Timer animationTimer;
 ///var public ROTT_UI_Displayer_Combat_Enemy uiComponent;
 
 // Experience modifier
@@ -99,6 +82,13 @@ var public float lootAmplifier;
 
 // Action delay
 var private float actionDelay;
+
+// Store gem price for bestiary summoning
+var privatewrite int bestiaryCost;
+
+// Store a randomized portrait for champions
+var privatewrite UI_Texture_Info portraitInfo;
+var privatewrite bool bPortraitInitialized;
 
 // Action delegate stub
 delegate bool actionRoutine
@@ -138,6 +128,10 @@ public static function ROTT_Combat_Enemy generateMonster
 public function UI_Texture_Info getPortrait() {
   local UI_Texture_Info info;
   
+  // Cache portrait
+  if (bPortraitInitialized) return portraitInfo;
+  bPortraitInitialized = true;
+  
   // Access texture-set
   switch (spawnType) {
     case SPAWN_CHAMPION:
@@ -158,6 +152,9 @@ public function UI_Texture_Info getPortrait() {
   // Randomize texture orientation
   info.randomizeOrientation();
   
+  // Cache portrait
+  portraitInfo = info;
+  
   return info;
 }
 
@@ -172,8 +169,8 @@ public function initEnemy
   SpawnTypes spawnMode
 ) 
 {
-  local byte stat;
-  local int chance;
+  local int randStatCount;
+  local int investMultiplier;
   local int i;
   
   // Setup link to gameInfo
@@ -181,7 +178,7 @@ public function initEnemy
   
   // Assign type
   monsterType = spawnRecord.enemyType;
-  clanColor = MyColors(spawnRecord.clanColor);
+  clanColor = ClanColors(spawnRecord.clanColor);
   spawnType = spawnMode;
   
   // Assign reward amplifiers for each spawn type
@@ -233,12 +230,22 @@ public function initEnemy
   hardStats[PRIMARY_COURAGE] += baseStatsPerLvl[PRIMARY_COURAGE] * (level - 1);
   hardStats[PRIMARY_FOCUS] += baseStatsPerLvl[PRIMARY_FOCUS] * (level - 1);
   
-  // Distribute random stat investments
+  // Increase stat per level for champs
   if (spawnType == SPAWN_CHAMPION) randStatsPerLvl++;
-  for (i = 0; i < randStatsPerLvl * (level - 1); i++) {
-    chance = 100;
-    stat = PRIMARY_VITALITY;
-    rollRandom(chance, stat);
+  
+  // Set random stat total
+  randStatCount = randStatsPerLvl * (level - 1);
+  
+  // Set multiplier and reduce loop iterations
+  investMultiplier = 1;
+  while (randStatCount > 250) {
+    randStatCount /= 5;
+    investMultiplier *= 5;
+  }
+  
+  // Distribute random stat investments
+  for (i = 0; i < randStatCount; i++) {
+    rollRandom(investMultiplier);
   }
   
   // Add abilities to unit
@@ -251,7 +258,7 @@ public function initEnemy
   restore();
   
   // Populate active mods
-  populateActiveMods();
+  populateSkillMods();
   
   // Set Elite status for UI scale
   switch (spawnType) {
@@ -268,14 +275,14 @@ public function initEnemy
     case SPAWN_CHAMPION:
       // Randomized name and sprite
       monsterName = generateMonsterName();
-      ///randomizeSprite();
       break;
     default:
       // Assign a fixed sprite
-      ///enemySprites[clanColor].moveIndexToZero(monsterType);
-      ///champSprites[clanColor].moveIndexToZero(monsterType);
       break;
   }
+  
+  // Set bestiary gem cost
+  bestiaryCost = level / 10 + rand(3);
   
   // Setup UI
   enemySprites.initializeComponent();
@@ -294,28 +301,7 @@ public function initStats
 (
   EnemyTypes enemyType, 
   SpawnTypes spawnerType
-)
-{
-}
-
-/*============================================================================= 
- * randomizeSprite()
- *
- * 
- *===========================================================================*/
-///public function randomizeSprite() {
-///  local array<byte> spriteIndices;
-///  local int i;
-///  
-///  // Make list of valid sprite indices
-///  for (i = 0; i < enemySprites[clanColor].images.length; i++) {
-///    if (enemySprites[clanColor].images[i] != none) spriteIndices.addItem(i);
-///  }
-///  
-///  // Assign a random sprite
-///  enemySprites[clanColor].moveIndexToZero(spriteIndices[rand(spriteIndices.length)]);
-///  champSprites[clanColor].moveIndexToZero(spriteIndices[rand(spriteIndices.length)]);
-///}
+);
 
 /*============================================================================= 
  * amplifyCurrencies()
@@ -450,8 +436,8 @@ public function int getMonsterExp() {
   }
   
   // Amplify enchantment boost
-  enchantmentAmp = gameInfo.playerProfile.getEnchantBoost(SOLAR_CHARM);
-  exp *= 1.f + (enchantmentAmp / 100.f);
+  enchantmentAmp = gameInfo.getActiveParty().getExpMultiplier();
+  exp += exp * enchantmentAmp;
   
   // Final balancing
   return exp * expAmp / 6.f;
@@ -550,7 +536,7 @@ protected function onDeath() {
   super.onDeath();
   
   // Animation delay before unit destroyed
-  animationTimer = gameInfo.spawn(class'ROTTTimer');
+  animationTimer = gameInfo.spawn(class'ROTT_Timer');
   animationTimer.makeTimer(1.00, LOOP_OFF, destroyUnit);
   
   // Sound
@@ -593,16 +579,37 @@ private function string generateMonsterName() {
  *
  * Rolls a random stat using weighted preferences
  *===========================================================================*/
-private function rollRandom(out int chance, out byte index) {
-  if (rand(chance) < statPreferences[index]) {
+private function rollRandom(optional int amp = 1) {
+  local int randRoll;
+  
+  // Roll random value out of 100%
+  randRoll = rand(100);
+  
+  // Vitality roll
+  if (randRoll < statPreferences[PRIMARY_VITALITY]) {
     // Stat increase
-    hardStats[index]++;
-  } else {
-    // Adjust weights for next roll
-    chance -= statPreferences[index];
-    index++;
-    rollRandom(chance, index);
-  }
+    hardStats[PRIMARY_VITALITY] += amp;
+    return;
+  } 
+  
+  // Strength roll
+  randRoll -= statPreferences[PRIMARY_VITALITY];
+  if (randRoll < statPreferences[PRIMARY_STRENGTH]) {
+    // Stat increase
+    hardStats[PRIMARY_STRENGTH] += amp;
+    return;
+  } 
+  
+  // Courage roll
+  randRoll -= statPreferences[PRIMARY_STRENGTH];
+  if (randRoll < statPreferences[PRIMARY_COURAGE]) {
+    // Stat increase
+    hardStats[PRIMARY_COURAGE] += amp;
+    return;
+  } 
+  
+  // Focus stat increase
+  hardStats[PRIMARY_FOCUS] += amp;
 }
 
 /*=============================================================================
@@ -611,7 +618,6 @@ private function rollRandom(out int chance, out byte index) {
  * Shows results of stat generation
  *===========================================================================*/
 public function debugStatGeneration() {
-  return;
   whiteLog("", DEBUG_COMBAT);
   whiteLog("Level " $ level @ monsterName @ "spawned with:", DEBUG_COMBAT);
   cyanlog("Spawn mode " $ spawnType, DEBUG_COMBAT);
@@ -635,7 +641,7 @@ defaultProperties
   
   armorPerLvl=0.f
   
-  affinity(CRIT_MULTIPLIER)=(amp[MINOR]=1.2, amp[AVERAGE]=1.2, amp[MAJOR]=1.2) 
+  affinity(CRIT_MULTIPLIER)=(amp[MINOR]=1.1, amp[AVERAGE]=1.1, amp[MAJOR]=1.1) 
   
   // Reward info
   expAmp=1.f

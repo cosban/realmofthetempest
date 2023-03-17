@@ -26,8 +26,8 @@ public function initDialogue() {
   
   // Intro
   `NEW_NODE(GREETING, NUETRAL)
-    "We aren't here, so you look away. . .",
-    "But we'll wait for you."
+    ". . .",
+    ""
   `ENDNODE
   
   // ----------------------------------------------------------------------- //
@@ -68,7 +68,7 @@ defaultProperties
   
   // NPC Texture
   begin object class=UI_Texture_Info Name=NPC_Sprite_Texture
-    componentTextures.add(Texture2D'Monsters_Disc_2.Enemy_Portrait_Watcher_Purple_360')
+    componentTextures.add(Texture2D'NPCs.Necromancers.NPC_Portrait_Necromancer_Purple_360')
   end object
   
   // Sprite container for transfer

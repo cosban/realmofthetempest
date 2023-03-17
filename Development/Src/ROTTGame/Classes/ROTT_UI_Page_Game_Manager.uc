@@ -13,6 +13,8 @@ class ROTT_UI_Page_Game_Manager extends ROTT_UI_Page;
 enum GameMgmtOptions {
   GAME_MGMT_JOURNAL,
   GAME_MGMT_OPTIONS,
+  GAME_MGMT_CONTROLS,
+  GAME_MGMT_CONTENT,
   GAME_MGMT_SAVE,
   GAME_MGMT_EXIT
 };
@@ -71,13 +73,22 @@ protected function navigationRoutineA() {
   switch (selection) {
     case GAME_MGMT_JOURNAL:
       // Show Journal
-      parentScene.popPage();
       parentScene.pushPageByTag("Page_Journal");
       sfxBox.playSfx(SFX_MENU_ACCEPT);
       break;
     case GAME_MGMT_OPTIONS:
       // Show options page
       parentScene.pushPageByTag("Page_Game_Options");
+      sfxBox.playSfx(SFX_MENU_ACCEPT);
+      break;
+    case GAME_MGMT_CONTROLS:
+      // Show control sheet
+      parentScene.pushPageByTag("Page_Control_Sheet");
+      sfxBox.playSfx(SFX_MENU_ACCEPT);
+      break;
+    case GAME_MGMT_CONTENT:
+      // Show table of contents
+      parentScene.pushPageByTag("Page_Table_Of_Contents");
       sfxBox.playSfx(SFX_MENU_ACCEPT);
       break;
     case GAME_MGMT_SAVE:
@@ -91,10 +102,7 @@ protected function navigationRoutineA() {
       break;
     case GAME_MGMT_EXIT:  
       // Default sfx
-      /** delegate me **/
-      
-      // Show warning window
-      ///gameMgmtWarningWindow.launchWindow();
+      sfxBox.playSfx(SFX_MENU_ACCEPT);
       
       // Give player controls to warning window
       parentScene.pushPageByTag("Game_Mgmt_Warning_Window");
@@ -159,7 +167,13 @@ defaultProperties
     posX=444
     posY=54
     selectionOffset=(x=0,y=96)
-    numberOfMenuOptions=4
+    numberOfMenuOptions=6
+    hoverCoords(0)=(xStart=486,yStart=62,xEnd=944,yEnd=141)
+    hoverCoords(1)=(xStart=486,yStart=158,xEnd=944,yEnd=237)
+    hoverCoords(2)=(xStart=486,yStart=254,xEnd=944,yEnd=333)
+    hoverCoords(3)=(xStart=486,yStart=350,xEnd=944,yEnd=429)
+    hoverCoords(4)=(xStart=486,yStart=446,xEnd=944,yEnd=525)
+    hoverCoords(5)=(xStart=486,yStart=542,xEnd=944,yEnd=621)
     
     // Selection texture
     begin object class=UI_Texture_Info Name=Selection_Box_Texture

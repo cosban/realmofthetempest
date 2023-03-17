@@ -58,6 +58,7 @@ protected function float attributeInfo
   switch (type) {
     case PARTY_PHYSICAL_AMPLIFIER:
       attribute = level * 10;
+      if (level > 10) attribute -= (level - 10) * 5;
       break;
   }
   

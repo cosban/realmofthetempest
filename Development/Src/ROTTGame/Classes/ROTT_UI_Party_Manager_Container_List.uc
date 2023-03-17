@@ -68,6 +68,8 @@ public function initializeComponent(optional string newTag = "") {
 public function refreshParties() {
   local int i;
   
+  if (partySys == none) return;
+  
   // Refresh each party displayer
   for (i = 0; i < 4; i++) {
     if (i < partySys.getNumberOfParties()) {

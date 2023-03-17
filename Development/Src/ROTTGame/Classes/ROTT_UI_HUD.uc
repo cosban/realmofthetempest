@@ -27,7 +27,7 @@ var privatewrite bool bGameMenuIsOpen;
  *===========================================================================*/
 simulated event postBeginPlay() {
   super.PostBeginPlay();
-  gameInfo = ROTT_Game_Info(worldInfo.game); /// this should probably be where we pass game info down from?
+  gameInfo = ROTT_Game_Info(worldInfo.game); 
   
   // Setup over world gameplay variables
   tempestPawn = ROTT_Player_Pawn(playerOwner.Pawn);

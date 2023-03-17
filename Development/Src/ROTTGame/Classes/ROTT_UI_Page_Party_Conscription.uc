@@ -10,13 +10,6 @@
  
 class ROTT_UI_Page_Party_Conscription extends ROTT_UI_Page;
 
-/**
-var private UI_Label goldCost;
-var private UI_Label gemCost;
-var private UI_Label goldInventory;
-var private UI_Label gemInventory;
-**/
-
 /*============================================================================= 
  * Initialize Component
  *
@@ -25,11 +18,6 @@ var private UI_Label gemInventory;
  *===========================================================================*/
 public function initializeComponent(optional string newTag = "") {
   super.initializeComponent(newTag);
-  
-  ///goldCost = findLabel("Gold_Cost");
-  ///gemCost = findLabel("Gem_Cost");
-  ///goldInventory = findLabel("Gold_Inventory");
-  ///gemInventory = findLabel("Gem_Inventory");
 }
 
 /*============================================================================= 
@@ -47,16 +35,8 @@ event onPushPageEvent() {
  * Called to update the gold and gems
  *===========================================================================*/
 public function refresh() {
-  local int i;
-  // Set Blessing price tag
+  // Set conscription price tag
   setCostValues(gameInfo.getConscriptionCost());
-  
-  // Refresh costs
-  for (i = 0; i < componentList.length; i++) {
-    if (ROTT_UI_Displayer_Cost(componentList[i]) != none) {
-      ROTT_UI_Displayer_Cost(componentList[i]).refresh();
-    }
-  }
 }
 
 /*=============================================================================
@@ -70,7 +50,7 @@ protected function navigationRoutineA() {
     
     // Sfx
     gameInfo.sfxBox.playSfx(SFX_WORLD_DOOR);
-    gameInfo.sfxBox.playSfx(SFX_WORLD_SHRINE);
+    gameInfo.sfxBox.playSfx(SFX_MENU_BLESS_STAT);
   } else {
     // Sfx
     gameInfo.sfxBox.playSfx(SFX_MENU_INSUFFICIENT);
@@ -87,8 +67,6 @@ protected function navigationRoutineB() {
 /*=============================================================================
  * D-Pad controls
  *===========================================================================*/
-protected function navigateDown();
-protected function navigateUp();
 public function onNavigateLeft();
 public function onNavigateRight();
 
@@ -183,158 +161,6 @@ defaultProperties
   end object
   componentList.add(Gem_Cost)
   
-  /**
-  // Mgmt Window - Description Labels
-  begin object class=UI_Label Name=Mgmt_Window_Label_1
-    tag="Mgmt_Window_Label_1"
-    posX=720
-    posY=151
-    posXEnd=NATIVE_WIDTH
-    posYEnd=NATIVE_HEIGHT
-    AlignX=CENTER
-    AlignY=TOP
-    labelText=""
-  end object
-  componentList.add(Mgmt_Window_Label_1)
-  
-  begin object class=UI_Label Name=Mgmt_Window_Label_2
-    tag="Mgmt_Window_Label_2"
-    posX=720
-    posY=189
-    posXEnd=NATIVE_WIDTH
-    posYEnd=NATIVE_HEIGHT
-    AlignX=CENTER
-    AlignY=TOP
-    labelText="Creates a new team of adventurers."
-  end object
-  componentList.add(Mgmt_Window_Label_2)
-  
-  begin object class=UI_Label Name=Mgmt_Window_Label_3
-    tag="Mgmt_Window_Label_3"
-    posX=720
-    posY=216
-    posXEnd=NATIVE_WIDTH
-    posYEnd=NATIVE_HEIGHT
-    AlignX=CENTER
-    AlignY=TOP
-    labelText="Other teams may be assigned passive"
-  end object
-  componentList.add(Mgmt_Window_Label_3)
-  
-  begin object class=UI_Label Name=Mgmt_Window_Label_4
-    tag="Mgmt_Window_Label_4"
-    posX=720
-    posY=243
-    posXEnd=NATIVE_WIDTH
-    posYEnd=NATIVE_HEIGHT
-    AlignX=CENTER
-    AlignY=TOP
-    labelText="activities to provide bonuses."
-  end object
-  componentList.add(Mgmt_Window_Label_4)
-  
-  // Gold cost
-  begin object class=UI_Label Name=Gold_Cost_Label
-    tag="Gold_Cost_Label"
-    posX=973
-    posY=358
-    posXEnd=1163
-    posYEnd=388
-    fontStyle=DEFAULT_SMALL_TAN
-    AlignX=CENTER
-    AlignY=CENTER
-    labelText="Gold cost"
-  end object
-  componentList.add(Gold_Cost_Label)
-  
-  begin object class=UI_Label Name=Gold_Inventory_Label
-    tag="Gold_Inventory_Label"
-    posX=1163
-    posY=358
-    posXEnd=1317
-    posYEnd=388
-    fontStyle=DEFAULT_SMALL_TAN
-    AlignX=CENTER
-    AlignY=CENTER
-    labelText="You have"
-  end object
-  componentList.add(Gold_Inventory_Label)
-  
-  begin object class=UI_Label Name=Gold_Cost
-    tag="Gold_Cost"
-    posX=973
-    posY=388
-    posXEnd=1163
-    posYEnd=418
-    AlignX=CENTER
-    AlignY=CENTER
-    labelText="1520"
-  end object
-  componentList.add(Gold_Cost)
-  
-  begin object class=UI_Label Name=Gold_Inventory
-    tag="Gold_Inventory"
-    posX=1163
-    posY=388
-    posXEnd=1317
-    posYEnd=418
-    AlignX=CENTER
-    AlignY=CENTER
-    labelText="780"
-  end object
-  componentList.add(Gold_Inventory)
-  
-  // Gem cost labels
-  begin object class=UI_Label Name=Gem_Cost_Label
-    tag="Gem_Cost_Label"
-    posX=973
-    posY=483
-    posXEnd=1163
-    posYEnd=513
-    fontStyle=DEFAULT_SMALL_TAN
-    AlignX=CENTER
-    AlignY=CENTER
-    labelText="Gem cost"
-  end object
-  componentList.add(Gem_Cost_Label)
-  
-  begin object class=UI_Label Name=Gem_Inventory_Label
-    tag="Gem_Inventory_Label"
-    posX=1163
-    posY=483
-    posXEnd=1317
-    posYEnd=513
-    fontStyle=DEFAULT_SMALL_TAN
-    AlignX=CENTER
-    AlignY=CENTER
-    labelText="You have"
-  end object
-  componentList.add(Gem_Inventory_Label)
-  
-  begin object class=UI_Label Name=Gem_Cost
-    tag="Gem_Cost"
-    posX=973
-    posY=513
-    posXEnd=1163
-    posYEnd=543
-    AlignX=CENTER
-    AlignY=CENTER
-    labelText="165"
-  end object
-  componentList.add(Gem_Cost)
-  
-  begin object class=UI_Label Name=Gem_Inventory
-    tag="Gem_Inventory"
-    posX=1163
-    posY=513
-    posXEnd=1317
-    posYEnd=543
-    AlignX=CENTER
-    AlignY=CENTER
-    labelText="1899"
-  end object
-  componentList.add(Gem_Inventory)
-  **/
   // Mgmt Window Selection Box
   begin object class=UI_Selector Name=Selection_Box
     tag="Selection_Box"

@@ -70,6 +70,13 @@ protected function float attributeInfo
   return attribute;
 }
 
+/*=============================================================================
+ * addManaOverflow()
+ *
+ * Called to track mana that overflows beyond a combat unit's max mana value
+ *===========================================================================*/
+public function addManaOverflow(float manaOverflow);
+
 /*============================================================================= 
  * Default Properties
  *===========================================================================*/
@@ -84,29 +91,6 @@ defaultProperties
   skillAttributes.add((attributeSet=GLYPH_SET,mechanicType=GLYPH_MANA_REGEN,tag="%regen",font=DEFAULT_SMALL_GREEN,returnType=DECIMAL));
   
 }
-
-/**
-
-function float GetMPRegen(string StatType, int SkillLevel)
-{
-  local float iChance, iMPRegen;
-  
-  // MP Regen
-  iMPRegen = (1.2 ** (SkillLevel ** 0.24) + (SkillLevel ** 1.08) + (1.4 * SkillLevel) + 0.2);
-  
-  // Chance
-  iChance = 60;
-  
-  // Return type
-  switch (StatType)
-  {
-    case "Mana":
-      return iMPRegen;
-    case "Chance":
-      return iChance;
-  }
-}
-**/
 
 
 

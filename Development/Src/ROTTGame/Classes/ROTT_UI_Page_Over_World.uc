@@ -16,7 +16,7 @@ const NOTIFY_GAMEPLAY_DURATION = 0.25;     // Time in seconds for lerp
 var private ROTT_UI_Scene_Over_World someScene;
 
 // Time controls
-var public ROTTTimer startGameDelayTimer;  // Used to animate area title and screen fade
+var public ROTT_Timer startGameDelayTimer;  // Used to animate area title and screen fade
 var public float introInputDelay;          // Used to ignore inputs until fade in
 var public float hideNotificationDelay;    // Resets direction of gameplay notification
 
@@ -33,7 +33,7 @@ var privatewrite ROTT_UI_Displayer_Currencies currencyPanel;
 var privatewrite UI_Sprite worldFade;
 
 // Timer Effects
-var private ROTTTimer digitCycleTimer;      // Used for digit cycle effect
+var private ROTT_Timer digitCycleTimer;      // Used for digit cycle effect
 
 // Gameplay variables
 struct PlayerCurrency {
@@ -68,7 +68,7 @@ public function initializeComponent(optional string newTag = "") {
   
   if (gameInfo.playerProfile != none) {
     // Fade the player into the world, by fading out the black cover
-    addEffectToComponent(DELAY,      "World_Fade_Component", 1.7);
+    addEffectToComponent(DELAY,    "World_Fade_Component", 1.7);
     addEffectToComponent(FADE_OUT, "World_Fade_Component", 2);
     
     // Initial currency
@@ -76,7 +76,7 @@ public function initializeComponent(optional string newTag = "") {
     displayCurrency.gems = gameInfo.getInventoryCount(class'ROTT_Inventory_Item_Gem');
     
     // Set scene to no input, until fade in effects complete
-    /// startGameDelayTimer = gameInfo.Spawn(class'ROTTTimer');
+    /// startGameDelayTimer = gameInfo.Spawn(class'ROTT_Timer');
     /// startGameDelayTimer.makeTimer(1.2, LOOP_OFF, startGameplay);
     
     // Delay input controls when entering a new world
@@ -119,7 +119,7 @@ public function refresh() {
  *===========================================================================*/
 public function onSceneActivation() {
   // Enable currency effects through timer
-  digitCycleTimer = gameInfo.spawn(class'ROTTTimer');
+  digitCycleTimer = gameInfo.spawn(class'ROTT_Timer');
   digitCycleTimer.makeTimer(0.05, LOOP_ON, updateDisplayedCurrency);
   
   // Update hero display info
@@ -142,20 +142,23 @@ public function onSceneDeactivation() {
  * Controls
  *
  * ControllerId     the controller that generated this input key event
- * Key              the name of the key which an event occured for
+ * inputName        the name of the key which an event occured for
  * EventType        the type of event which occured
  * AmountDepressed  for analog keys, the depression percent.
  *
  * Returns: true to consume the key event, false to pass it on.
  *===========================================================================*/
-function bool onInputKey( 
+function bool onInputKey
+( 
   int ControllerId, 
-  name Key, 
+  name inputName, 
   EInputEvent Event, 
   float AmountDepressed = 1.f, 
-  bool bGamepad = false) 
+  bool bGamepad = false
+) 
 {
-  switch (Key) {
+  switch (inputName) {
+    case 'Tilde':
     case 'XBoxTypeS_Y':
       // Toggle hero status
       if (Event == IE_Released) {
@@ -174,14 +177,26 @@ function bool onInputKey(
       }
       break;
       
+    case 'LeftShift': 
     case 'XboxTypeS_LeftTrigger': 
       // Turbo speed
-      if (Event == IE_Pressed) gameinfo.SetGameSpeed(4);
-      if (Event == IE_Released) gameinfo.SetGameSpeed(1);
+      if (Event == IE_Pressed) gameinfo.setTemporalBoost();
+      if (Event == IE_Released) gameinfo.setGameSpeed(1);
       break;
+    case 'M': 
     case 'XboxTypeS_Back': 
       // World map
       if (Event == IE_Pressed) gameinfo.openWorldMap();
+      break;
+    case 'I':
+      // Move to inventory view
+      gameInfo.sceneManager.switchScene(SCENE_GAME_MENU);
+      gameInfo.sceneManager.sceneGameMenu.pushMenu(UTILITY_MENU);
+      gameInfo.sceneManager.sceneGameMenu.pushMenu(INVENTORY_MENU);
+      gameInfo.sceneManager.sceneGameMenu.pushMenu(MGMT_WINDOW_ITEM);
+      
+      // Play sound
+      sfxBox.playSFX(SFX_MENU_NAVIGATE);
       break;
   }
   
@@ -193,8 +208,6 @@ function bool onInputKey(
  *===========================================================================*/
 public function onNavigateLeft();
 public function onNavigateRight();
-protected function navigateUp();
-protected function navigateDown();
 
 /*=============================================================================
  * elapseTimers()
@@ -280,67 +293,6 @@ public function updateDisplayedCurrency() {
   updateCurrency(displayCurrency.Gold, displayCurrency.Gems);
 }
 
-/// /*=============================================================================
-///  * Display Welcome Message
-///  *
-///  * Description: Displays a welcome message upon loading a level
-///  *===========================================================================*/
-/// private function displayWelcomeMsg() {
-///   
-///   // Area title
-///   switch (gameInfo.getCurrentMap()) {
-///     case MAP_UI_TITLE_MENU:
-///     case MAP_UI_CREDITS:
-///     case MAP_UI_GAME_OVER:
-///       // No area title
-///       break;
-///     case MAP_TALONOVIA_TOWN:
-///     case MAP_TALONOVIA_OUTSKIRTS:
-///     case MAP_TALONOVIA_BACKLANDS:
-///     case MAP_TALONOVIA_SHRINE:
-///       mapTitle.setDrawIndex(MAP_TALONOVIA_TOWN); 
-///       break;
-///     case MAP_RHUNIA_CITADEL:
-///     case MAP_RHUNIA_WILDERNESS:
-///     case MAP_RHUNIA_BACKLANDS:
-///     case MAP_RHUNIA_OUTSKIRTS:
-///       mapTitle.setDrawIndex(MAP_RHUNIA_CITADEL); 
-///       break;
-///     case MAP_ETZLAND_CITADEL:
-///     case MAP_ETZLAND_WILDERNESS:
-///     case MAP_ETZLAND_BACKLANDS:
-///     case MAP_ETZLAND_OUTSKIRTS:
-///       mapTitle.setDrawIndex(MAP_ETZLAND_CITADEL);  
-///       break;
-///     case MAP_HAXLYN_CITADEL:
-///     case MAP_HAXLYN_WILDERNESS:
-///     case MAP_HAXLYN_BACKLANDS:
-///     case MAP_HAXLYN_OUTSKIRTS:
-///       mapTitle.setDrawIndex(MAP_HAXLYN_CITADEL);  
-///       break;
-///     case MAP_VALIMOR_CITADEL:
-///     case MAP_VALIMOR_WILDERNESS:
-///     case MAP_VALIMOR_BACKLANDS:
-///     case MAP_VALIMOR_OUTSKIRTS:
-///       mapTitle.setDrawIndex(MAP_VALIMOR_CITADEL);  
-///       break;
-///     case MAP_KALROTH_CITADEL:
-///     case MAP_KALROTH_WILDERNESS:
-///     case MAP_KALROTH_BACKLANDS:
-///     case MAP_KALROTH_OUTSKIRTS:
-///       mapTitle.setDrawIndex(MAP_KALROTH_CITADEL);  
-///       break;
-///     
-///     default:
-///       mapTitle.setEnabled(false); /// put "Unknown" here instead
-///       break;
-///     
-///   }
-///   
-///   // Check for milestone progress, and display it if found
-///   checkMilestoneProgress();
-/// }
-/// 
 /*=============================================================================
  * checkMilestoneProgress()
  *
@@ -368,6 +320,26 @@ public function checkMilestoneProgress() {
       addEffectToComponent(FADE_OUT, "Personal_Best_Label", 1.7);
     }
   }
+}
+
+/*=============================================================================
+ * showReducedRate()
+ *
+ * Displays text for reduced encounter rate
+ *===========================================================================*/
+public function showReducedRate() {
+  // Set the display text
+  findLabel("Encounter_Mod_Notification_Label_Shadow").setEnabled(true);
+  findLabel("Encounter_Mod_Notification_Label").setEnabled(true);
+  
+  // Set effects for displaying milestone text
+  addEffectToComponent(FADE_IN, "Encounter_Mod_Notification_Label_Shadow", 0.8);
+  addEffectToComponent(DELAY, "Encounter_Mod_Notification_Label_Shadow", 3.1);
+  addEffectToComponent(FADE_OUT, "Encounter_Mod_Notification_Label_Shadow", 1.35);
+  
+  addEffectToComponent(FADE_IN, "Encounter_Mod_Notification_Label", 0.8);
+  addEffectToComponent(DELAY, "Encounter_Mod_Notification_Label", 1.0);
+  addEffectToComponent(FADE_OUT, "Encounter_Mod_Notification_Label", 1.4);
 }
 
 /*=============================================================================
@@ -716,6 +688,43 @@ defaultProperties
     alignY=CENTER
   end object
   componentList.add(Personal_Best_Label)
+  
+  // Notification for encounter rate mod
+  begin object class=UI_Label Name=Encounter_Mod_Notification_Label_Shadow
+    tag="Encounter_Mod_Notification_Label_Shadow"
+    bEnabled=false
+    posX=0
+    posY=700
+    posXEnd=NATIVE_WIDTH
+    posYEnd=750
+    padding=(top=1, left=13, right=11, bottom=7)
+    fontStyle=DEFAULT_LARGE_BLUE
+    labelText="You feel an underwhelming presence"
+    activeEffects.add((effectType=EFFECT_ALPHA_CYCLE, lifeTime=-1, elapsedTime=0, intervalTime=0.8, min=220, max=255))
+    alignX=CENTER
+    alignY=CENTER
+  end object
+  componentList.add(Encounter_Mod_Notification_Label_Shadow)
+  
+  // Notification for encounter rate mod
+  begin object class=UI_Label Name=Encounter_Mod_Notification_Label
+    tag="Encounter_Mod_Notification_Label"
+    bEnabled=false
+    posX=0
+    posY=700
+    posXEnd=NATIVE_WIDTH
+    posYEnd=750
+    fontStyle=DEFAULT_LARGE_GREEN
+    labelText="You feel an underwhelming presence"
+    activeEffects.add((effectType=EFFECT_ALPHA_CYCLE, lifeTime=-1, elapsedTime=0, intervalTime=0.8, min=200, max=255))
+    activeEffects.add((effectType=EFFECT_FLIPBOOK, lifeTime=-1, elapsedTime=0, intervalTime=0.10, min=0, max=255))
+    cycleStyles=(DEFAULT_LARGE_GREEN, DEFAULT_LARGE_BLUE)
+    ///activeEffects.add((effectType=EFFECT_FLICKER, lifeTime=-1, elapsedTime=0, intervalTime=0.30, min=127, max=255))
+    ///activeEffects.add((effectType=EFFECT_HUE_SHIFT, lifeTime=-1, elapsedTime=0, intervalTime=1.0, min=0, max=255))
+    alignX=CENTER
+    alignY=CENTER
+  end object
+  componentList.add(Encounter_Mod_Notification_Label)
   
 }
 

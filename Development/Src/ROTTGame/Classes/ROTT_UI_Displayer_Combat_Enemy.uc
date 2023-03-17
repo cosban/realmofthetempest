@@ -27,14 +27,20 @@ var privatewrite UI_Sprite hpBar;
 var privatewrite UI_Sprite demoralizationMark;
 var privatewrite UI_Sprite portrait;
 var privatewrite UI_Sprite skillAnimation;
+var privatewrite UI_Sprite blackHoleAnimation;
 var privatewrite UI_Label monsterLabel;
 
 var privatewrite ROTT_UI_Status_Label statusLabel;
 
 // Animation settings
-var private ROTTTimer animationTimer;
+var private bool bAnimateSkill;
+var private bool bBlackHoleSkill;
+var private float elapsedAnimationTime;
+var private float elapsedBlackHoleTime;
+const ANIMATION_INTERVAL = 0.05;
 var private UI_Texture_Storage spriteSheet;
 var private int animatorIndex;
+var private int blackHoleAnimatorIndex;
 
 /*============================================================================= 
  * initializeComponent()
@@ -63,6 +69,10 @@ protected function bool validAttachment() {
 protected function attachmentUpdate() {
   local int i;
   
+  // Animation timer reset
+  elapsedAnimationTime = 0;
+  elapsedBlackHoleTime = 0;
+  
   // Clear all visibility
   for (i = 0; i < componentList.length; i++) {
     if (UI_Label_Combat(componentList[i]) == none) componentList[i].setEnabled(false);
@@ -82,6 +92,7 @@ protected function attachmentUpdate() {
     hpBar = findSprite("Elite_UI_HP_Bar_Sprite");
     tunaBar = findSprite("Elite_UI_TUNA_Bar_Sprite");
     skillAnimation = findSprite("Elite_Skill_Animation");
+    blackHoleAnimation = findSprite("Elite_Black_Hole_Animation");
     monsterLabel = findLabel("Elite_Name_Label");
     statusLabel = ROTT_UI_Status_Label(findComp("Elite_Status_Label"));
   } else {
@@ -92,15 +103,21 @@ protected function attachmentUpdate() {
     hpBar = findSprite("Enemy_UI_HP_Bar_Sprite");
     tunaBar = findSprite("Enemy_UI_TUNA_Bar_Sprite");
     skillAnimation = findSprite("Skill_Animation");
+    blackHoleAnimation = findSprite("Black_Hole_Animation");
     monsterLabel = findLabel("Enemy_Name_Label");
     statusLabel = ROTT_UI_Status_Label(findComp("Enemy_Status_Label"));
   }
+  
+  // Initialize black hole
+  blackHoleAnimation.setDrawIndex(0);
+  bBlackHoleSkill = false;
   
   // Enemy portrait
   portrait.modifyTexture(enemy.getPortrait()); 
   
   // Demoralization marker
   demoralizationMark = findSprite("Enemy_Demoralization_Marker");
+  demoralizationMark.setEnabled(true);
   
   // Show unit info
   updateDisplay();
@@ -116,7 +133,7 @@ public function showDetail(bool bShow) {
   local string detailText;
   
   // Threshold marker
-  demoralizationMark.setEnabled(bShow);
+  ///demoralizationMark.setEnabled(bShow);
   statusLabel.setEnabled(bShow);
   
   // Text
@@ -146,7 +163,10 @@ public function bool updateDisplay() {
   hpBar.setEnabled(enemy != none);
   tunaBar.setEnabled(enemy != none);
   portrait.setEnabled(enemy != none);
+  skillAnimation.drawLayer = TOP_LAYER;
   skillAnimation.setEnabled(enemy != none);
+  blackHoleAnimation.drawLayer = TOP_LAYER;
+  blackHoleAnimation.setEnabled(enemy != none);
   monsterLabel.setEnabled(enemy != none);
   statusLabel.setEnabled(enemy != none);
 
@@ -167,18 +187,8 @@ public function bool updateDisplay() {
     );
   }
   
-  // Successfully drew hero information
+  // Report successfully drawing enemy information
   return true;
-}
-
-/*=============================================================================
- * elapseTimer()
- *
- * Time is passed to non-actors through the scene that contains them
- *===========================================================================*/
-public function elapseTimer(float deltaTime, float gameSpeedOverride) {
-  // The parent will erase temporary combat labels over time
-  super.elapseTimer(deltaTime, gameSpeedOverride);
 }
 
 /*=============================================================================
@@ -187,7 +197,7 @@ public function elapseTimer(float deltaTime, float gameSpeedOverride) {
  * Called to add a status to be displayed in by this label
  *===========================================================================*/
 public function addStatus(ROTT_Descriptor_Hero_Skill skillInfo) {
-  statusLabel.addStatus(skillInfo);
+  statusLabel.addStatus(skillInfo.statusTag, skillInfo.statusColor);
 }
 
 /*=============================================================================
@@ -214,7 +224,7 @@ public function debuffEffect() {
  * This is called when a unit takes damage
  *===========================================================================*/
 public function takeDamageEffect() {
-  portrait.addFlickerEffect(0.7, 0.150);
+  portrait.addFlickerEffect(0.7, 0.150, , 190);
 }
 
 /*=============================================================================
@@ -226,14 +236,11 @@ public function showSkillEffects(UI_Texture_Storage sprites) {
   // Allocate sprite reference
   spriteSheet = sprites;
   
-  // Remove timer (temporary hack)
+  // Reset animation index
   animatorIndex = 0;
-  if (animationTimer != none) animationTimer.destroy();
   
-  // Create animation timer
-  animationTimer = gameInfo.spawn(class'ROTTTimer');
-  animationTimer.makeTimer(0.05, LOOP_ON, nextSkillFrame);
-  
+  // Start animation
+  bAnimateSkill = true;
 }
 
 /*=============================================================================
@@ -242,10 +249,10 @@ public function showSkillEffects(UI_Texture_Storage sprites) {
  * This is called when the unit's life hits zero
  *===========================================================================*/
 public function onDeath() {
-  // Extended flicker effect (usually 0.7 sec)
+  // Set flicker effect with extra flicker
   portrait.addFlickerEffect(1.0, 0.150);
   
-  // Quickly clear out the queues
+  // Clear out the queues
   bClearQueues = true;
 }
 
@@ -256,11 +263,12 @@ public function onDeath() {
  * persist.
  *===========================================================================*/
 public function unitDestroyed() {
-  // Delete skill animation timer
-  if (animationTimer != none) animationTimer.destroy();
+  // Disable animation
+  bAnimateSkill = false;
   
   // Clear effects
   skillAnimation.clearSprite();
+  blackHoleAnimation.clearSprite();
   portrait.clearEffects();
   
   // Reset
@@ -284,7 +292,7 @@ public function onAnalysisComplete() {
  *===========================================================================*/
 public function showDamage(int damage, bool bCrit) {
   makeLabel(
-    "-" $ damage, 
+    "-" $ class'UI_Label'.static.abbreviate(damage), 
     FONT_LARGE, 
     (bCrit) ? COLOR_GOLD : COLOR_GRAY, 
     LABEL_TYPE_DAMAGE
@@ -326,18 +334,21 @@ public function onMissed() {
  *===========================================================================*/
 public function onStatDiminished(float value, MechanicTypes targetStat) {
   local ColorStyles msgColor;
-  local string msg;
+  local string msg, abbreviation;
+  
+  // Abbreviate value (K, M, B, ...)
+  abbreviation = class'UI_Label'.static.abbreviate(int(value));
   
   // Set UI message
   switch (targetStat) {
-    case REDUCE_STRENGTH:  msg = "-" $ int(value) $ " strength";     break;
-    case REDUCE_COURAGE:   msg = "-" $ int(value) $ " courage";      break;
-    case REDUCE_FOCUS:     msg = "-" $ int(value) $ " focus";        break;
-    case REDUCE_SPEED:     msg = "-" $ int(value) $ " speed";        break;
-    case REDUCE_ACCURACY:  msg = "-" $ int(value) $ " accuracy";     break;
-    case REDUCE_DODGE:     msg = "-" $ int(value) $ " dodge";        break;
-    case REDUCE_ARMOR:     msg = "-" $ int(value) $ " armor";        break;
-    case ADD_HEALTH_DRAIN: msg = "-" $ int(value) $ " health / s";   break;
+    case REDUCE_STRENGTH:  msg = "-" $ abbreviation $ " strength";   break;
+    case REDUCE_COURAGE:   msg = "-" $ abbreviation $ " courage";    break;
+    case REDUCE_FOCUS:     msg = "-" $ abbreviation $ " focus";      break;
+    case REDUCE_SPEED:     msg = "-" $ abbreviation $ " speed";      break;
+    case REDUCE_ACCURACY:  msg = "-" $ abbreviation $ " accuracy";   break;
+    case REDUCE_DODGE:     msg = "-" $ abbreviation $ " dodge";      break;
+    case REDUCE_ARMOR:     msg = "-" $ abbreviation $ " armor";      break;
+    case ADD_HEALTH_DRAIN: msg = "-" $ abbreviation $ " health / s"; break;
   }
   
   // Set UI color
@@ -366,22 +377,25 @@ public function onStatDiminished(float value, MechanicTypes targetStat) {
  *===========================================================================*/
 public function improveStat(float value, float total, MechanicTypes targetStat) {
   local ColorStyles msgColor;
-  local string fullMsg;
+  local string fullMsg, abbreviation;
+  
+  // Abbreviate value (K, M, B, ...)
+  abbreviation = class'UI_Label'.static.abbreviate(int(value));
   
   // Set enemy UI message
   switch (targetStat) {
-    case ADD_STRENGTH:         fullMsg = "+" $ int(value) $ " strength";  break;
-    case ADD_COURAGE:          fullMsg = "+" $ int(value) $ " courage";   break;
-    case ADD_FOCUS:            fullMsg = "+" $ int(value) $ " focus";     break;
-    case ADD_SPEED:            fullMsg = "+" $ int(value) $ " speed";     break;
-    case ADD_ACCURACY:         fullMsg = "+" $ int(value) $ " accuracy";  break;
-    case ADD_DODGE:            fullMsg = "+" $ int(value) $ " dodge";     break;
-    case ADD_ARMOR:            fullMsg = "+" $ int(value) $ " armor";     break;
-    case AMPLIFY_NEXT_DAMAGE:  fullMsg = "+" $ int(value) $ "% damage";   break;
-    case ELEMENTAL_MULTIPLIER: fullMsg = "+" $ int(value) $ "% damage";   break;
-    case PHYSICAL_MULTIPLIER:  fullMsg = "+" $ int(value) $ "% damage";   break;
-    case ADD_STRENGTH_PERCENT: fullMsg = "+" $ int(value) $ "% strength"; break;
-    case ADD_COURAGE_PERCENT:  fullMsg = "+" $ int(value) $ "% courage";  break;
+    case ADD_STRENGTH:         fullMsg = "+" $ abbreviation $ " strength";  break;
+    case ADD_COURAGE:          fullMsg = "+" $ abbreviation $ " courage";   break;
+    case ADD_FOCUS:            fullMsg = "+" $ abbreviation $ " focus";     break;
+    case ADD_SPEED:            fullMsg = "+" $ abbreviation $ " speed";     break;
+    case ADD_ACCURACY:         fullMsg = "+" $ abbreviation $ " accuracy";  break;
+    case ADD_DODGE:            fullMsg = "+" $ abbreviation $ " dodge";     break;
+    case ADD_ARMOR:            fullMsg = "+" $ abbreviation $ " armor";     break;
+    case AMPLIFY_NEXT_DAMAGE:  fullMsg = "+" $ abbreviation $ "% damage";   break;
+    case ELEMENTAL_MULTIPLIER: fullMsg = "+" $ abbreviation $ "% damage";   break;
+    case PHYSICAL_MULTIPLIER:  fullMsg = "+" $ abbreviation $ "% damage";   break;
+    case ADD_STRENGTH_PERCENT: fullMsg = "+" $ abbreviation $ "% strength"; break;
+    case ADD_COURAGE_PERCENT:  fullMsg = "+" $ abbreviation $ "% courage";  break;
   }
   
   // Set UI color
@@ -409,20 +423,6 @@ public function improveStat(float value, float total, MechanicTypes targetStat) 
   makeLabel(fullMsg, FONT_MEDIUM_ITALICS, msgColor, LABEL_TYPE_STAT_REPORT);
   
 }
-  
-
-
-
-
-
-
-
-
-
-
-
-
-
 
 /*=============================================================================
  * makeLabel()
@@ -472,22 +472,63 @@ protected function UI_Label makeLabel
 }
 
 /*=============================================================================
+ * elapseTimer()
+ *
+ * Time is passed to non-actors through the scene that contains them
+ *===========================================================================*/
+public function elapseTimer(float deltaTime, float gameSpeedOverride) {
+  super.elapseTimer(deltaTime, gameSpeedOverride);
+  
+  if (enemy == none) return;
+  
+  // Check for skill animations
+  if (bAnimateSkill) {
+    // Track skill animation time
+    elapsedAnimationTime += deltaTime * gameSpeedOverride;
+    
+    // Check if interval has been reached
+    if (elapsedAnimationTime > ANIMATION_INTERVAL) {
+      elapsedAnimationTime -= ANIMATION_INTERVAL;
+      nextSkillFrame();
+    }
+  }
+  
+  // Black hole animation
+  if (gameInfo.enemyEncounter.bBlackHoleActive) {
+    bBlackHoleSkill = true;
+  }
+  
+  // Black hole animation
+  if (bBlackHoleSkill) {
+    // Track skill animation time
+    elapsedBlackHoleTime += deltaTime * gameSpeedOverride;
+    
+    // Check if interval has been reached
+    if (elapsedBlackHoleTime > ANIMATION_INTERVAL) {
+      elapsedBlackHoleTime -= ANIMATION_INTERVAL;
+      
+      if (!blackHoleAnimation.drawNextFrame()) {
+        blackHoleAnimation.setDrawIndex(0);
+        bBlackHoleSkill = false;
+        elapsedBlackHoleTime = 0;
+      }
+    }
+  }
+}
+
+/*=============================================================================
  * nextSkillFrame()
  * 
  * Called from a timer to animate a skill
  *===========================================================================*/
 public function nextSkillFrame() {
   if (skillAnimation.copySprite(spriteSheet, animatorIndex, NO_RESIZE)) {
-    //if (skillAnimation.drawNextFrame()) {
-      animatorIndex++;
-    //} else {
-    //  animatorIndex = 0;
-    //  animationTimer.destroy();
-    //}
+    animatorIndex++;
   } else {
     animatorIndex = 0;
-    animationTimer.destroy();
+    bAnimateSkill = false;
   }
+  
 }
 
 /*=============================================================================
@@ -574,6 +615,59 @@ defaultProperties
     images(0)=Place_Holder_360
   end object
   componentList.add(Enemy_Portrait)
+  
+  // Black hole textures
+  begin object class=UI_Texture_Info Name=Skill_Animation_Black_Hole_1
+    componentTextures.add(Texture2D'GUI_Skills.Black_Hole.Skill_Animation_Black_Hole_1')
+  end object
+  begin object class=UI_Texture_Info Name=Skill_Animation_Black_Hole_2
+    componentTextures.add(Texture2D'GUI_Skills.Black_Hole.Skill_Animation_Black_Hole_2')
+  end object
+  begin object class=UI_Texture_Info Name=Skill_Animation_Black_Hole_3
+    componentTextures.add(Texture2D'GUI_Skills.Black_Hole.Skill_Animation_Black_Hole_3')
+  end object
+  begin object class=UI_Texture_Info Name=Skill_Animation_Black_Hole_4
+    componentTextures.add(Texture2D'GUI_Skills.Black_Hole.Skill_Animation_Black_Hole_4')
+  end object
+  begin object class=UI_Texture_Info Name=Skill_Animation_Black_Hole_5
+    componentTextures.add(Texture2D'GUI_Skills.Black_Hole.Skill_Animation_Black_Hole_5')
+  end object
+  begin object class=UI_Texture_Info Name=Skill_Animation_Black_Hole_6
+    componentTextures.add(Texture2D'GUI_Skills.Black_Hole.Skill_Animation_Black_Hole_6')
+  end object
+  begin object class=UI_Texture_Info Name=Skill_Animation_Black_Hole_7
+    componentTextures.add(Texture2D'GUI_Skills.Black_Hole.Skill_Animation_Black_Hole_7')
+  end object
+  begin object class=UI_Texture_Info Name=Skill_Animation_Black_Hole_8
+    componentTextures.add(Texture2D'GUI_Skills.Black_Hole.Skill_Animation_Black_Hole_8')
+  end object
+  begin object class=UI_Texture_Info Name=Skill_Animation_Black_Hole_9
+    componentTextures.add(Texture2D'GUI_Skills.Black_Hole.Skill_Animation_Black_Hole_9')
+  end object
+  begin object class=UI_Texture_Info Name=Skill_Animation_Black_Hole_10
+    componentTextures.add(Texture2D'GUI_Skills.Black_Hole.Skill_Animation_Black_Hole_10')
+  end object
+  
+  // Black Hole animation sprite
+  begin object class=UI_Sprite Name=Black_Hole_Animation
+    tag="Black_Hole_Animation"
+    posX=-14
+    posY=75
+    posXEnd=226
+    posYEnd=315
+    images(0)=none
+    images(1)=Skill_Animation_Black_Hole_1
+    images(2)=Skill_Animation_Black_Hole_2
+    images(3)=Skill_Animation_Black_Hole_3
+    images(4)=Skill_Animation_Black_Hole_4
+    images(5)=Skill_Animation_Black_Hole_5
+    images(6)=Skill_Animation_Black_Hole_6
+    images(7)=Skill_Animation_Black_Hole_7
+    images(8)=Skill_Animation_Black_Hole_8
+    images(9)=Skill_Animation_Black_Hole_9
+    images(10)=Skill_Animation_Black_Hole_10
+  end object
+  componentList.add(Black_Hole_Animation)
   
   // Skill animation sprite
   begin object class=UI_Sprite Name=Skill_Animation
@@ -677,6 +771,28 @@ defaultProperties
     images(0)=Place_Holder_360
   end object
   componentList.add(Elite_Portrait)
+  
+  // Black Hole animation sprite
+  begin object class=UI_Sprite Name=Elite_Black_Hole_Animation
+    tag="Elite_Black_Hole_Animation"
+    bEnabled=false
+    posX=-74
+    posY=-4
+    posXend=286
+    posYend=356
+    images(0)=none
+    images(1)=Skill_Animation_Black_Hole_1
+    images(2)=Skill_Animation_Black_Hole_2
+    images(3)=Skill_Animation_Black_Hole_3
+    images(4)=Skill_Animation_Black_Hole_4
+    images(5)=Skill_Animation_Black_Hole_5
+    images(6)=Skill_Animation_Black_Hole_6
+    images(7)=Skill_Animation_Black_Hole_7
+    images(8)=Skill_Animation_Black_Hole_8
+    images(9)=Skill_Animation_Black_Hole_9
+    images(10)=Skill_Animation_Black_Hole_10
+  end object
+  componentList.add(Elite_Black_Hole_Animation)
   
   // Skill animation sprite
   begin object class=UI_Sprite Name=Elite_Skill_Animation

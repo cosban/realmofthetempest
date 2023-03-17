@@ -131,13 +131,18 @@ enum PersistentHeroEnum {
 var public float persistentStatistics[PersistentHeroEnum];
 
 // Held Item reference
-/* to do ... */
+var privatewrite ROTT_Inventory_Item heldItem;
+var privatewrite class<ROTT_Inventory_Item> heldItemType;
 
-// Stores last enemy index selected
+// Store enemy selection
 var public int lastEnemySelection;
 
+// Stores persistence parameters
+///var privatewrite CombActEnum lastActionType;
+var privatewrite ChosenTargetEnum lastTarget;
+
 // Combat action delegates
-var private delegate<actionRoutine> selectedAction;
+var privatewrite delegate<actionRoutine> selectedAction;
 
 var privatewrite delegate<actionRoutine> attackAction;
 var privatewrite delegate<actionRoutine> defendAction;
@@ -173,7 +178,7 @@ public function initialize() {
   initializeSkills();
   
   // Populate active mods
-  populateActiveMods();
+  populateSkillMods();
   
   // Link skills, if weve loaded skills
   updateSkillScripts();
@@ -217,6 +222,92 @@ protected function initializeSkills() {
 }
 
 /*=============================================================================
+ * equipItem()
+ *
+ * Attaches an item to this character, returns previous item if swapping out.
+ *===========================================================================*/
+public function ROTT_Inventory_Item equipItem(ROTT_Inventory_Item newItem) { 
+  local ROTT_Inventory_Item currentItem;
+  
+  // Check if hero is alive
+  if (bDead && gameInfo.playerProfile.gameMode == MODE_HARDCORE) {
+    sfxBox.playSFX(SFX_MENU_INSUFFICIENT); 
+    return none;
+  }
+  
+  // Check for valid quantity
+  if (newItem.quantity != 1) {
+    yellowLog("Warning (!) Equipment quantity must be one: " $ newItem.quantity);
+    return none;
+  }
+  
+  // Store previous item reference
+  currentItem = heldItem;
+  
+  // Swap in new item reference
+  heldItem = newItem;
+  
+  // Store held item type info for save data
+  heldItemType = newItem.class;
+  
+  // Check for profile loaded before updating stats
+  if (gameInfo.playerProfile == none) {
+    return none;
+  }
+  
+  // Update stat info
+  updateSubStats();
+  
+  // Update UI
+  if (gameInfo.sceneManager != none) {
+    if (gameInfo.sceneManager.sceneGameMenu.leftGameMenu != none) {
+      gameInfo.sceneManager.sceneGameMenu.leftGameMenu.refresh();
+    }
+  }
+  
+  // Return previously held item
+  return currentItem;
+}
+
+/*=============================================================================
+ * unequipItem()
+ *
+ * Removes equiped item, returns the item as output
+ *===========================================================================*/
+public function ROTT_Inventory_Item unequipItem() { 
+  local ROTT_Inventory_Item previousItem;
+  
+  // Store previous item reference
+  previousItem = heldItem;
+  
+  // Remove item reference
+  heldItem = none;
+  
+  // Reset held item type info for save data
+  heldItemType = none;
+  
+  // Update stat info
+  updateSubStats();
+  
+  // Update UI
+  gameInfo.sceneManager.sceneGameMenu.leftGameMenu.refresh();
+  
+  // Return previously held item
+  return previousItem;
+}
+
+/*============================================================================= 
+ * heldItemStat()
+ *
+ * Returns an attribute boost value from held item
+ *===========================================================================*/
+public function float heldItemStat(EquipmentAttributes attributeIndex) {
+  if (heldItem == none) return 0;
+  
+  return heldItem.itemStats[attributeIndex];
+}
+
+/*=============================================================================
  * getSpiritualProwess()
  *
  * Returns spiritual prowess rating
@@ -224,14 +315,14 @@ protected function initializeSkills() {
 public function int getSpiritualProwess() {
   local int prowess;
   
-  prowess += 20 * glyphSkillPts[GLYPH_TREE_MANA];
-  prowess += 20 * glyphSkillPts[GLYPH_TREE_MP_REGEN];
-  prowess += 20 * glyphSkillPts[GLYPH_TREE_DODGE];
+  prowess += 250 * glyphSkillPts[GLYPH_TREE_MANA];
+  prowess += 250 * glyphSkillPts[GLYPH_TREE_MP_REGEN];
+  prowess += 250 * glyphSkillPts[GLYPH_TREE_DODGE];
   
-  prowess += 0.1 * persistentStatistics[TRACK_ATMOSPHERIC_DAMAGE];
+  prowess += 0.01 * persistentStatistics[TRACK_ATMOSPHERIC_DAMAGE];
   
-  prowess += 1 * hardStats[PRIMARY_COURAGE];
-  prowess += 1 * hardStats[PRIMARY_FOCUS];
+  prowess += 100 * hardStats[PRIMARY_COURAGE];
+  prowess += 100 * hardStats[PRIMARY_FOCUS];
   
   return prowess;
 }
@@ -244,14 +335,14 @@ public function int getSpiritualProwess() {
 public function int getHuntingProwess() {
   local int prowess;
   
-  prowess += 25 * glyphSkillPts[GLYPH_TREE_ARMOR];
-  prowess += 25 * glyphSkillPts[GLYPH_TREE_DAMAGE];
+  prowess += 250 * glyphSkillPts[GLYPH_TREE_ARMOR];
+  prowess += 250 * glyphSkillPts[GLYPH_TREE_DAMAGE];
   
-  prowess += 0.02 * persistentStatistics[TRACK_PHYSICAL_DAMAGE];
+  prowess += 0.001 * persistentStatistics[TRACK_PHYSICAL_DAMAGE];
   prowess += 1 * ROTT_Party(outer).persistentStatistics[TRACK_MONSTERS_SLAIN];
-  prowess += 100 * ROTT_Party(outer).persistentStatistics[TRACK_BOSSES_SLAIN];
+  prowess += 1000 * ROTT_Party(outer).persistentStatistics[TRACK_BOSSES_SLAIN];
   
-  prowess += 2 * hardStats[PRIMARY_STRENGTH];
+  prowess += 25 * hardStats[PRIMARY_STRENGTH];
   
   return prowess;
 }
@@ -264,24 +355,24 @@ public function int getHuntingProwess() {
 public function int getBotanicalProwess() {
   local int prowess;
   
-  prowess += 20 * glyphSkillPts[GLYPH_TREE_HEALTH];
-  prowess += 20 * glyphSkillPts[GLYPH_TREE_SPEED];
-  prowess += 20 * glyphSkillPts[GLYPH_TREE_ACCURACY];
+  prowess += 100 * glyphSkillPts[GLYPH_TREE_HEALTH];
+  prowess += 100 * glyphSkillPts[GLYPH_TREE_SPEED];
+  prowess += 100 * glyphSkillPts[GLYPH_TREE_ACCURACY];
   
-  prowess += 0.025 * persistentStatistics[TRACK_ELEMENTAL_DAMAGE];
+  prowess += 0.002 * persistentStatistics[TRACK_ELEMENTAL_DAMAGE];
   
-  prowess += 3 * hardStats[PRIMARY_VITALITY];
+  prowess += 100 * hardStats[PRIMARY_VITALITY];
   
   return prowess;
 }
 
 /*=============================================================================
- * populateActiveMods()
+ * populateSkillMods()
  *
  * This function initializes the list of all active stat modifying skills,
  * items, enchantments. 
  *===========================================================================*/
-protected function populateActiveMods() {
+protected function populateSkillMods() {
   local int i;
   
   activeMods.length = 0;
@@ -299,9 +390,11 @@ protected function populateActiveMods() {
   
   // Populate item mods
   /* to do ... */
+  /// Moved to updateSubStats  sub routines
   
   // Populate enchantment mods
   /* to do ... */
+  /// Moved to updateSubStats  sub routines
 }
 
 /*=============================================================================
@@ -476,8 +569,7 @@ public function ROTT_Descriptor getMasteryScript(int skillID) {
 /*=============================================================================
  * Skill level accessors
  *
- * These functions are used to access skill levels with boosts from 
- * enchantments or items, etc.
+ * These functions are used to access baseline hard skillpoints
  *===========================================================================*/
 public function int getClassLevel(int index) {
   return classSkillPts[index];
@@ -489,6 +581,72 @@ public function int getGlyphLevel(int index) {
 
 public function int getMasteryLevel(int index) {
   return masterySkillPts[index];
+}
+
+/*=============================================================================
+ * Skill level boosters
+ *
+ * Returns the held item boost for an enchantment
+ *===========================================================================*/
+public function int getHeldItemEnchantment(byte enchantIndex) {
+  // Check if held item exists
+  if (heldItem == none) return 0;
+  
+  // Check if enchantment boost type matches this item
+  if (enchantIndex == heldItem.enchantmentType) {
+    // Return enchantment boost level
+    return heldItemStat(ITEM_ADD_ENCHANTMENT_LEVEL);
+  }
+  return 0;
+}
+
+/*=============================================================================
+ * Skill level boosters
+ *
+ * These functions are used to access skillpoints boosts
+ *===========================================================================*/
+public function int getClassLevelBoost(int index) {
+  local int boostLevel;
+  
+  if (getClassLevel(index) != 0) {
+    // Add enchantment
+    boostLevel = gameInfo.playerProfile.getEnchantBoost(OATH_PENDANT);
+    
+    // Add held item boosts
+    if (heldItem != none) {
+      // All class skill boost
+      boostLevel += heldItem.itemStats[ITEM_ADD_CLASS_SKILLS];
+      
+      // Check class for specific skill boost
+      if (heldItem.heroSkillType == myClass) {
+        // Check specific skill boost index
+        if (heldItem.heroSkillID == index) {
+          // Specific skill boost
+          boostLevel += heldItem.itemStats[ITEM_ADD_SKILL_POINTS];
+        }
+      }
+    }
+  
+    return boostLevel;
+  }
+  return 0;
+}
+
+public function int getGlyphLevelBoost(int index) {
+  local int boostLevel;
+  
+  if (getGlyphLevel(index) != 0) {
+    // Add enchantment
+    boostLevel = gameInfo.playerProfile.getEnchantBoost(EMPERORS_TALISMAN);
+    
+    // Add held item boosts
+    if (heldItem != none) {
+      boostLevel += heldItem.itemStats[ITEM_ADD_GLYPH_SKILLS];
+    }
+    
+    return boostLevel;
+  }
+  return 0;
 }
 
 /*============================================================================= 
@@ -537,37 +695,15 @@ public function float getRitualAmp(RitualTypes ritualType) {
   return lvl * class'ROTT_Descriptor_Rituals'.static.getRitualBoost(ritualType);
 }
 
-/**============================================================================= 
- * updateSubStats()
+/*============================================================================= 
+ * updateStrength()
  *
- * This needs to be called every time this unit is targeted by a skill, or uses
- * a skill, or changes levels of skill, enchantments, or changes item
- *
- * The post condition for this function is that all substats are accurate,
- * whether it be for the menu or for a combat scenario.
- *===========================================================================
-public function updateSubStats() {
-  // Calculate base combat unit statistics
-  super.updateSubStats();
-  
-}
-*/
-
-/*=============================================================================
- * updatePhysicalDamage()
- *
- * This function updates physical damage substats for this unit
+ * Updates Strength, and related substats
  *===========================================================================*/
-protected function updatePhysicalDamage() {
+public function updateStrength(int strength, int affinityCut, float scorpionTalon) {
   local float dmgAmp;
-  local int affinityCut;
-  local int strength;
   
-  // Get strength affinity amplifiers
-  affinityCut = affinity[MIN_PHYSICAL_DAMAGE].amp[statAffinities[PRIMARY_STRENGTH]];
-  
-  // Get strength 
-  strength = getPrimaryStat(PRIMARY_STRENGTH);
+  // Apply affinity cut to strength 
   strength += strength / affinityCut;
   
   // Calculate base damages
@@ -583,12 +719,17 @@ protected function updatePhysicalDamage() {
   subStats[MIN_PHYSICAL_DAMAGE] += getPassiveBoost(PASSIVE_ADD_PHYSICAL_MIN);
   subStats[MAX_PHYSICAL_DAMAGE] += getPassiveBoost(PASSIVE_ADD_PHYSICAL_MAX);
   
+  // Add held item boosts
+  if (heldItem != none) {
+    subStats[MIN_PHYSICAL_DAMAGE] += heldItem.itemStats[ITEM_ADD_PHYSICAL_MIN];
+    subStats[MAX_PHYSICAL_DAMAGE] += heldItem.itemStats[ITEM_ADD_PHYSICAL_MAX];
+  }
+  
   // Multipliers for physical damage
   dmgAmp = 1;
-  dmgAmp += gameInfo.playerProfile.getEnchantBoost(SCORPION_TALON) / 100.f;
+  dmgAmp += scorpionTalon;
   subStats[MIN_PHYSICAL_DAMAGE] *= dmgAmp;
   subStats[MAX_PHYSICAL_DAMAGE] *= dmgAmp;
-  
 }
 
 /*=============================================================================
@@ -610,6 +751,11 @@ protected function onDeath() {
   uiComponent.removeAllStatus();
   if (getMasteryLevel(MASTERY_RESURRECT) > 0) {
     uiComponent.addStatus(ROTT_Descriptor_Hero_Skill(getMasteryScript(MASTERY_RESURRECT)));
+  }
+  
+  // Remove equipment and move to inventory
+  if (gameInfo.playerProfile.gameMode == MODE_HARDCORE) {
+    gameInfo.playerProfile.playerInventory.addItem(unequipItem());
   }
   
   // Sfx
@@ -646,6 +792,9 @@ public function bool manaSufficient() {
   
   // Bypass mana cheat
   if (gameInfo.playerProfile.cheatManaSkip) return true;
+  
+  // Bypass for persistence
+  if (persistenceCount > 0) return true;
   
   // Get script
   switch (actionType) {
@@ -731,7 +880,7 @@ public function TargetingClassification getTargetingStyle() {
 /*=============================================================================
  * getActionLevel()
  *
- * Returns a skill level for a selected action type
+ * Returns a hardpoint skill level for a selected action type
  *===========================================================================*/
 public function int getActionLevel(CombActEnum actType) {
   switch (actType) {
@@ -771,6 +920,9 @@ public function bool sendAction(ChosenTargetEnum target) {
     case PRIMARY_SKILL:     selectedAction = primaryAction;      break;
     case SECONDARY_SKILL:   selectedAction = secondaryAction;    break;
   }
+  
+  // Store targets for persistence
+  lastTarget = target;
   
   // Create target list
   switch (target) {
@@ -844,6 +996,14 @@ public function bool sendAction(ChosenTargetEnum target) {
     sfxBox.playSFX(SFX_COMBAT_MISS);
   }
   
+  // Store tool tip progress info
+  switch (actionType) {
+    case PRIMARY_SKILL:   
+    case SECONDARY_SKILL: 
+      gameInfo.playerProfile.bHasUsedSkill = true;
+  }
+  
+  // Report action sent successfully
   return true;
 }
 
@@ -868,6 +1028,15 @@ public function takeDamage
   classSkillSet.onTakeDamage(caster, self);
   glyphSkillSet.onTakeDamage(caster, self);
   masterySkillSet.onTakeDamage(caster, self);
+}
+
+/*=============================================================================
+ * onTargeted()
+ *
+ * Called when a combat action is being performed with this unit as target.
+ *===========================================================================*/
+public function onTargeted(ROTT_Combat_Unit caster) {
+  classSkillSet.onTargeted(caster, self);
 }
 
 /*=============================================================================
@@ -976,6 +1145,9 @@ public function deathPenaltyExp() {
  * Starts an exp lerp
  *===========================================================================*/
 public function startExpAnim() {
+  // Ignore on  hardcore mode
+  if (bDead && gameInfo.playerProfile.gameMode == MODE_HARDCORE) return;
+  
   // Exp animation
   elapsedExpTime = 0;
   bAnimateExp = true;
@@ -1062,7 +1234,11 @@ public function int investSkill(byte treeIndex, byte skillIndex) {
       script = ROTT_Descriptor_Hero_Skill(getMasteryScript(skillIndex)); 
       break;
   }
-  mana = script.getAttributeInfo(MANA_COST, self, script.getSkillLevel(self) + 1);
+  
+  // Store mana for next level use
+  mana = script.getAttributeInfo(MANA_COST, self, script.getSkillLevel(self, true) + 1);
+  
+  // Check if next level uses too much mana
   if (subStats[MAX_MANA] < mana) {
     return -2;
   }
@@ -1115,13 +1291,26 @@ public function bool removeStat(StatTypes statType) {
 }
 
 /*=============================================================================
+ * checkBlessingCap()
+ *
+ * Returns true if room for more blessings
+ *===========================================================================*/
+public function bool checkBlessingCap() {
+  // Ignore cap after 20
+  if (level >= 20) return true;
+  
+  // One per level cap
+  return (blessingCount < level);
+}
+
+/*=============================================================================
  * blessStat()
  *
  * Attempts to add a blessed stat point.  Returns false on failure.
  *===========================================================================*/
 public function int blessStat(StatTypes statType) {
   // Exit if blessings are maxed
-  if (blessingCount >= level) return -2;
+  if (!checkBlessingCap()) return -2;
 
   // Check for sufficient currency
   if (gameInfo.canDeductCosts(gameInfo.getBlessingCost())) {
@@ -1168,7 +1357,7 @@ public function bool shrineRitual(RitualTypes ritualType) {
   // Provide permanent boost
   switch (ritualType) {
     case RITUAL_EXPERIENCE_BOOST:
-      addExpByPercent(1 / 16.f);
+      addExpByPercent(1 / 8.f);
       break;
     case RITUAL_SKILL_POINT:
       unspentSkillPoints++;
@@ -1667,6 +1856,22 @@ public function transferMp(float changeValue) {
 }
 
 /*=============================================================================
+ * alwaysDefendMode
+ *
+ * Returns true if option to always defend has been set.
+ *===========================================================================*/
+protected function bool alwaysDefendMode() {
+  // Check options cookie based on what slot the hero is in
+  switch (partyIndex) {
+    case 0: return gameInfo.optionsCookie.bAlwaysDefendHero1;
+    case 1: return gameInfo.optionsCookie.bAlwaysDefendHero2;
+    case 2: return gameInfo.optionsCookie.bAlwaysDefendHero3;
+  }
+  yellowLog("Warning (!) Always defend has unhandled party index");
+  return false;
+}
+
+/*=============================================================================
  * attackTimeComplete
  *
  * Called when the attack time bar reaches its maximum
@@ -1674,6 +1879,29 @@ public function transferMp(float changeValue) {
 protected function attackTimeComplete() {
   local CombActEnum temp;
   
+  // Execute persistence
+  if (bPersisting && persistenceCount == 0) bPersisting = false;
+  if (persistenceCount > 0) {
+    // Track number of pending persistence actions 
+    persistenceCount--;
+    
+    // Repeat last action on same targets
+    sendAction(getLastTarget());
+    return;
+  }
+  
+  // Check if in force defend mode
+  if (alwaysDefendMode()) {
+    actionType = DEFEND;
+    switch (partyIndex) {
+      case 0: sendAction(TARGET_HERO_1); break;
+      case 1: sendAction(TARGET_HERO_2); break;
+      case 2: sendAction(TARGET_HERO_3); break;
+    }
+    return;
+  }
+  
+  // Check if in force attack mode
   if (bForceAttack) {
     // Look for a target if empty
     if (autoTargetedUnit == none || autoTargetedUnit.bDead) {
@@ -1701,13 +1929,71 @@ protected function attackTimeComplete() {
 }
 
 /*=============================================================================
+ * getLastTarget()
+ *
+ * Returns the last target or another suitable target if not found
+ *===========================================================================*/
+public function ChosenTargetEnum getLastTarget() {
+  local ROTT_Mob mob;
+  mob = gameInfo.enemyEncounter;
+  
+  // Check last target exists
+  switch (lastTarget) {
+    case TARGET_ENEMY_1: 
+      // Check if target 1 exists
+      if (mob.getEnemy(0) != none) {  
+        return TARGET_ENEMY_1;
+      } else {  
+        // Try to switch target
+        if (mob.getEnemy(1) != none) return TARGET_ENEMY_2; 
+        if (mob.getEnemy(2) != none) return TARGET_ENEMY_3; 
+        yellowLog("Warning (!) No enemy target found");
+      }
+      break;
+    case TARGET_ENEMY_2: 
+      // Check if target 1 exists
+      if (mob.getEnemy(1) != none) {  
+        return TARGET_ENEMY_2;
+      } else {  
+        // Try to switch target
+        if (mob.getEnemy(0) != none) return TARGET_ENEMY_1; 
+        if (mob.getEnemy(2) != none) return TARGET_ENEMY_3; 
+        yellowLog("Warning (!) No enemy target found");
+      }
+      break;
+    case TARGET_ENEMY_3: 
+      // Check if target 1 exists
+      if (mob.getEnemy(2) != none) {  
+        return TARGET_ENEMY_3;
+      } else {  
+        // Try to switch target
+        if (mob.getEnemy(1) != none) return TARGET_ENEMY_2; 
+        if (mob.getEnemy(0) != none) return TARGET_ENEMY_1; 
+        yellowLog("Warning (!) No enemy target found");
+      }
+      break;
+  }
+  
+  yellowLog("Warning (!) Last target was not an enemy, filter misused?");
+  return lastTarget;
+}
+
+/*=============================================================================
  * getBlessingCost()
  *
  * Returns the cost for a stat blessing.  Each blessing costs 100 more than
  * the last.
  *===========================================================================*/
 public function int getBlessingCost() {
-  return blessingCount * 250 + 250;
+  local float cost;
+  
+  // Per level cost
+  cost = blessingCount * 250 + 250;
+  
+  // Cap blessing cost
+  if (cost > 5000) return 5000;
+  
+  return cost;
 }
 
 /*=============================================================================
@@ -1717,9 +2003,9 @@ public function int getBlessingCost() {
  *===========================================================================*/
 public function string uiFormat(SubStatTypes targetStat) {
   // Abbreviate K = 1000, M = 1,000,000, etc
-  /* to do ... */
-  
-  return string(int(subStats[targetStat]));
+  return class'UI_Label'.static.abbreviate(
+    string(int(subStats[targetStat]))
+  );
 }
 
 /*=============================================================================
