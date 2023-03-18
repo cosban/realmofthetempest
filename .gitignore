@@ -42,6 +42,9 @@ Development/Src/Substance*
 Development/Src/UDK*
 Development/Src/UnrealEd
 Development/Src/WinDrv
+Development/Src/UTEditor/
+Development/Src/UTGame/
+Development/Src/UTGameContent/
 
 # Ignore links to legacy installers
 *.lnk
