@@ -49,6 +49,7 @@ Development/Src/UTGameContent/
 UDKGame/*
 !UDKGame/Config/
 !UDKGame/Splash/
+!UDKGame/Content/
 
 # Ignore links to legacy installers
 *.lnk

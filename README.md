@@ -18,14 +18,7 @@ Please see [Development/ROTT_Source_Guidelines.md](./Development/ROTT_Source_Gui
 cosban@baphomet MINGW64 realmofthetempest/
 $ cp -R /c/UDK/UDK-2015-01/* .
 ```
-5. Open `realmofthetempest/UDKGame/Config/GameEngine.ini` and add the following lines to the `[UnrealEd.EditorEngine]` section
-```ini
-ModEditPackages=ROTTGUI
-ModEditPackages=ROTTGame
-ModEditPackages=ROTTNPCs
-ModEditPackages=TSGame
-```
-6. Run the `Unreal Frontend` located at `/realmofthetempest/Binaries/UnrealFrontend.exe`
+5. Run the `Unreal Frontend` located at `/realmofthetempest/Binaries/UnrealFrontend.exe`
 
 # Learn Here #
 All the code we write and art we draw can be found here. For educational purposes only please.
