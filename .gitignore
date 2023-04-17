@@ -29,7 +29,6 @@ __Sprites/Wiki
 # Ignore standard dev kit files
 Binaries
 Engine
-UDKGame
 Development/Flash
 Development/Src/Core
 Development/Src/Engine
@@ -45,6 +44,12 @@ Development/Src/WinDrv
 Development/Src/UTEditor/
 Development/Src/UTGame/
 Development/Src/UTGameContent/
+
+# Ignore most of UDKGame, but make sure to include things which we modified
+UDKGame/*
+!UDKGame/Config/
+!UDKGame/Splash/
+!UDKGame/Content/
 
 # Ignore links to legacy installers
 *.lnk
